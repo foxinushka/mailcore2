@@ -15,7 +15,7 @@ void NetService::init()
     mHostname = NULL;
     mPort = 0;
     mConnectionType = ConnectionTypeClear;
-    mSuggestedAuthType = AuthTypeSASLPlain;
+    mSuggestedAuthType = AuthTypeSASLNone;
 }
 
 NetService::NetService()
@@ -82,8 +82,6 @@ void NetService::fillWithInfo(HashMap * info)
             mSuggestedAuthType = AuthTypeSASLSRP;
         } else if (authStr->isEqualCaseInsensitive(MCSTR("ntlm"))) {
             mSuggestedAuthType = AuthTypeSASLNTLM;
-        } else if (authStr->isEqualCaseInsensitive(MCSTR("crammd5"))) {
-            mSuggestedAuthType = AuthTypeSASLCRAMMD5;
         } else if (authStr->isEqualCaseInsensitive(MCSTR("kerberosv4"))) {
             mSuggestedAuthType = AuthTypeSASLKerberosV4;
         } else if (authStr->isEqualCaseInsensitive(MCSTR("oauth2"))) {
