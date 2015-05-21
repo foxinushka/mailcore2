@@ -15,6 +15,7 @@ void NetService::init()
     mHostname = NULL;
     mPort = 0;
     mConnectionType = ConnectionTypeClear;
+    mSuggestedAuthType = AuthTypeSASLPlain;
 }
 
 NetService::NetService()
@@ -28,6 +29,7 @@ NetService::NetService(NetService * other)
     MC_SAFE_REPLACE_COPY(String, mHostname, other->mHostname);
     mPort = other->mPort;
     mConnectionType = other->mConnectionType;
+    mSuggestedAuthType = other->mSuggestedAuthType;
 }
 
 NetService::~NetService()
@@ -47,6 +49,7 @@ void NetService::fillWithInfo(HashMap * info)
 {
     bool ssl = false;
     bool starttls = false;
+    
     	
     setHostname((String *) info->objectForKey(MCSTR("hostname")));
     if (info->objectForKey(MCSTR("port")) != NULL) {
@@ -58,6 +61,38 @@ void NetService::fillWithInfo(HashMap * info)
     if (info->objectForKey(MCSTR("starttls")) != NULL) {
         starttls = ((Value *) info->objectForKey(MCSTR("starttls")))->boolValue();
     }
+    
+    if (info->objectForKey(MCSTR("suggested_auth_type")) != NULL) {
+        String *authStr;
+        authStr = ((String *) info->objectForKey(MCSTR("suggested_auth_type")));
+        
+        if (authStr->isEqualCaseInsensitive(MCSTR("none"))) {
+            mSuggestedAuthType = AuthTypeSASLNone;
+        } if (authStr->isEqualCaseInsensitive(MCSTR("crammd5"))) {
+            mSuggestedAuthType = AuthTypeSASLCRAMMD5;
+        } else if (authStr->isEqualCaseInsensitive(MCSTR("plain"))) {
+            mSuggestedAuthType = AuthTypeSASLPlain;
+        } else if (authStr->isEqualCaseInsensitive(MCSTR("gssapi"))) {
+            mSuggestedAuthType = AuthTypeSASLGSSAPI;
+        } else if (authStr->isEqualCaseInsensitive(MCSTR("digestmd5"))) {
+            mSuggestedAuthType = AuthTypeSASLDIGESTMD5;
+        } else if (authStr->isEqualCaseInsensitive(MCSTR("login"))) {
+            mSuggestedAuthType = AuthTypeSASLLogin;
+        } else if (authStr->isEqualCaseInsensitive(MCSTR("srp"))) {
+            mSuggestedAuthType = AuthTypeSASLSRP;
+        } else if (authStr->isEqualCaseInsensitive(MCSTR("ntlm"))) {
+            mSuggestedAuthType = AuthTypeSASLNTLM;
+        } else if (authStr->isEqualCaseInsensitive(MCSTR("crammd5"))) {
+            mSuggestedAuthType = AuthTypeSASLCRAMMD5;
+        } else if (authStr->isEqualCaseInsensitive(MCSTR("kerberosv4"))) {
+            mSuggestedAuthType = AuthTypeSASLKerberosV4;
+        } else if (authStr->isEqualCaseInsensitive(MCSTR("oauth2"))) {
+            mSuggestedAuthType = AuthTypeXOAuth2;
+        } else if (authStr->isEqualCaseInsensitive(MCSTR("oauth2outlook"))) {
+            mSuggestedAuthType = AuthTypeXOAuth2Outlook;
+        }
+    }
+    
     if (ssl) {
         mConnectionType = ConnectionTypeTLS;
     }
@@ -99,6 +134,16 @@ ConnectionType NetService::connectionType()
     return mConnectionType;
 }
 
+void NetService::setSuggestedAuthType(AuthType authType)
+{
+    mSuggestedAuthType = authType;
+}
+
+AuthType NetService::suggestedAuthType()
+{
+    return mSuggestedAuthType;
+}
+
 String * NetService::normalizedHostnameWithEmail(String * email)
 {
     Array *components = email->componentsSeparatedByString(MCSTR("@"));
@@ -121,6 +166,7 @@ HashMap * NetService::info()
     if (mPort != 0) {
         result->setObjectForKey(MCSTR("port"), Value::valueWithIntValue(mPort));
     }
+    
     switch (mConnectionType) {
         case ConnectionTypeTLS:
             result->setObjectForKey(MCSTR("ssl"), Value::valueWithBoolValue(true));
@@ -129,6 +175,43 @@ HashMap * NetService::info()
             result->setObjectForKey(MCSTR("starttls"), Value::valueWithBoolValue(true));
             break;
         default:
+            break;
+    }
+    
+    String *key = MCSTR("suggested_auth_type");
+    switch (mSuggestedAuthType) {
+        case AuthTypeSASLCRAMMD5:
+            result->setObjectForKey(key, MCSTR("crammd5"));
+            break;
+        case AuthTypeSASLPlain:
+            result->setObjectForKey(key, MCSTR("plain"));
+            break;
+        case AuthTypeSASLGSSAPI:
+            result->setObjectForKey(key, MCSTR("gssapi"));
+            break;
+        case AuthTypeSASLDIGESTMD5:
+            result->setObjectForKey(key, MCSTR("digestmd5"));
+            break;
+        case AuthTypeSASLLogin:
+            result->setObjectForKey(key, MCSTR("login"));
+            break;
+        case AuthTypeSASLSRP:
+            result->setObjectForKey(key, MCSTR("srp"));
+            break;
+        case AuthTypeSASLNTLM:
+            result->setObjectForKey(key, MCSTR("ntlm"));
+            break;
+        case AuthTypeSASLKerberosV4:
+            result->setObjectForKey(key, MCSTR("kerberosv4"));
+            break;
+        case AuthTypeXOAuth2:
+            result->setObjectForKey(key, MCSTR("oauth2"));
+            break;
+        case AuthTypeXOAuth2Outlook:
+            result->setObjectForKey(key, MCSTR("oauth2outlook"));
+            break;
+        default:
+            result->setObjectForKey(key, MCSTR("none"));
             break;
     }
     

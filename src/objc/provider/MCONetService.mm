@@ -71,6 +71,7 @@
 MCO_OBJC_SYNTHESIZE_STRING(setHostname, hostname)
 MCO_OBJC_SYNTHESIZE_SCALAR(unsigned int, unsigned int, setPort, port)
 MCO_OBJC_SYNTHESIZE_SCALAR(MCOConnectionType, mailcore::ConnectionType, setConnectionType, connectionType)
+MCO_OBJC_SYNTHESIZE_SCALAR(MCOAuthType, mailcore::AuthType, setSuggestedAuthType, suggestedAuthType)
 
 - (NSDictionary *) info
 {
@@ -80,6 +81,11 @@ MCO_OBJC_SYNTHESIZE_SCALAR(MCOConnectionType, mailcore::ConnectionType, setConne
 - (NSString *) hostnameWithEmail:(NSString *)email
 {
     return [NSString mco_stringWithMCString:_netService->normalizedHostnameWithEmail(email.mco_mcString)];
+}
+
+- (NSString *)description {
+    NSDictionary *ctypes = @{@(MCOConnectionTypeClear):@"C", @(MCOConnectionTypeStartTLS):@"S", @(MCOConnectionTypeTLS):@"T"};
+    return [NSString stringWithFormat:@"<%@:%@/%@>", self.hostname, @(self.port), ctypes[@(self.connectionType)]];
 }
 
 @end
