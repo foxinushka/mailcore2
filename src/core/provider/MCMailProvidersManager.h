@@ -26,7 +26,7 @@ namespace mailcore {
         virtual MailProvider * providerForMX(String * hostname);
         virtual MailProvider * providerForIdentifier(String * identifier);
         
-        virtual void registerProvidersWithFilename(String * filename);
+        virtual void registerProvidersWithFilename(String * filename, bool cleanExisting = false);
         
     private:
         MailProvidersManager();

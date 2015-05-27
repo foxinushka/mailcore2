@@ -62,8 +62,13 @@ void MailProvidersManager::registerProviders(HashMap * providers)
     }
 }
 
-void MailProvidersManager::registerProvidersWithFilename(String * filename)
+void MailProvidersManager::registerProvidersWithFilename(String * filename, bool cleanExisting)
 {
+    if (cleanExisting && mProviders) {
+        delete mProviders;
+        mProviders = new HashMap();
+    }
+    
     HashMap * providersInfos;
     
     providersInfos = (HashMap *) JSON::objectFromJSONData(Data::dataWithContentsOfFile(filename));

@@ -48,4 +48,6 @@
  */
 - (void) registerProvidersWithFilename:(NSString *)filename;
 
+- (void)updateRegisteredProviders;
+
 @end
