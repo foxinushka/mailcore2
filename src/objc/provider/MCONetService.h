@@ -27,6 +27,10 @@
 /** What kind of connection type is supported, like SSL, Start TLS, Plain etc. */
 @property (nonatomic, assign) MCOConnectionType connectionType;
 
+/** Optional recommended auth type. If MCOAuthTypeSASLNone, use autodetect */
+@property (nonatomic, assign) MCOAuthType suggestedAuthType;
+
+
 + (MCONetService *) serviceWithInfo:(NSDictionary *)info;
 
 - (id) initWithInfo:(NSDictionary *)info;
