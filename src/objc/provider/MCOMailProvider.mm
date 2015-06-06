@@ -126,4 +126,8 @@ MCO_OBJC_SYNTHESIZE_STRING(setIdentifier, identifier);
     return _provider->isMainFolder(folderPath.mco_mcString, prefix.mco_mcString);
 }
 
+- (NSString *)description {
+    return [NSString stringWithFormat:@"%@: IMAP: %@, SMTP: %@", self.identifier, self.imapServices, self.smtpServices];
+}
+
 @end

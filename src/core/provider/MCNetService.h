@@ -31,6 +31,9 @@ namespace mailcore {
         
         virtual void setConnectionType(ConnectionType connectionType);
         virtual ConnectionType connectionType();
+        
+        void setSuggestedAuthType(AuthType authType);
+        AuthType suggestedAuthType();
         	
         virtual String * normalizedHostnameWithEmail(String * email);
         
@@ -47,6 +50,7 @@ namespace mailcore {
         String * mHostname;
         unsigned int mPort;
         ConnectionType mConnectionType;
+        AuthType       mSuggestedAuthType;
         
         void init();
         void fillWithInfo(HashMap * info);

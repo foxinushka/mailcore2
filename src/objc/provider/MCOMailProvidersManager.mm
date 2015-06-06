@@ -26,15 +26,24 @@
     return sharedInstance;
 }
 
-- (id) init
-{
-    NSString * filename;
-    
-    self = [super init];
-    
-    filename = [[NSBundle bundleForClass:[self class]] pathForResource:@"providers" ofType:@"json"];
-    if (filename) {
-        mailcore::MailProvidersManager::sharedManager()->registerProvidersWithFilename(filename.mco_mcString);
+- (id) init {
+    if (self = [super init]) {
+        NSString *pathRes = [self pathForProvidersJSONInResources];
+        NSString *pathDoc = [self pathForProvidersJSONInDocuments];
+        
+        BOOL jsonExistAtDoc = NO;
+        NSFileManager *fm = [NSFileManager defaultManager];
+        if (pathRes.length && pathDoc.length) {
+            if ([fm fileExistsAtPath:pathRes] && ![fm fileExistsAtPath:pathDoc]) {
+                jsonExistAtDoc = [fm copyItemAtPath:pathRes toPath:pathDoc error:nil];
+            } else if ([fm fileExistsAtPath:pathDoc]) {
+                jsonExistAtDoc = YES;
+            }
+        }
+        
+        if (jsonExistAtDoc) {
+            mailcore::MailProvidersManager::sharedManager()->registerProvidersWithFilename(pathDoc.mco_mcString);
+        }
     }
     
     return self;
@@ -58,9 +67,24 @@
     return MCO_TO_OBJC(provider);
 }
 
-- (void) registerProvidersWithFilename:(NSString *)filename
+- (void)registerProvidersWithFilename:(NSString *)filename
 {
     mailcore::MailProvidersManager::sharedManager()->registerProvidersWithFilename(filename.mco_mcString);
+}
+
+- (NSString *)pathForProvidersJSONInDocuments {
+    return [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0] stringByAppendingPathComponent:@"providers.json"];
+}
+
+- (NSString *)pathForProvidersJSONInResources {
+    return [[NSBundle bundleForClass:[self class]] pathForResource:@"providers" ofType:@"json"];
+}
+
+- (void)updateRegisteredProviders {
+    NSString *pathDoc = [self pathForProvidersJSONInDocuments];
+    if (pathDoc.length && [[NSFileManager defaultManager] fileExistsAtPath:pathDoc]) {
+        mailcore::MailProvidersManager::sharedManager()->registerProvidersWithFilename(pathDoc.mco_mcString, true);
+    }
 }
 
 @end
