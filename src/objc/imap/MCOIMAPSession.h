@@ -13,6 +13,12 @@
 #import <Foundation/Foundation.h>
 #import <MailCore/MCOConstants.h>
 
+#ifdef __ANDROID__
+#import "CoreFoundation.h"
+#import "dispatch.h"
+#import <MailCore/MCUtils.h>
+#endif
+
 @class MCOIMAPFetchFoldersOperation;
 @class MCOIMAPOperation;
 @class MCOIMAPNamespace;

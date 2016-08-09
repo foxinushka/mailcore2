@@ -81,7 +81,11 @@ public:
     return MCO_NATIVE_INSTANCE->isCancelled();
 }
 
+#ifdef __ANDROID__
+// ignore for android
+#else
 MCO_OBJC_SYNTHESIZE_SCALAR(dispatch_queue_t, dispatch_queue_t, setCallbackDispatchQueue, callbackDispatchQueue);
+#endif
 MCO_OBJC_SYNTHESIZE_SCALAR(BOOL, bool, setShouldRunWhenCancelled, shouldRunWhenCancelled);
 
 - (void) cancel

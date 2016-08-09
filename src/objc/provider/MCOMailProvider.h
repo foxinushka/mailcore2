@@ -8,6 +8,10 @@
 
 #import <Foundation/Foundation.h>
 
+#ifdef __ANDROID__
+#import "CoreFoundation.h"
+#endif
+
 /**
    Represents a email service provider, like for example Gmail, Yahoo, Fastmail.fm etc.
 */

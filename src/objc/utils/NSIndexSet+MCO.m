@@ -9,6 +9,10 @@
 #import "NSIndexSet+MCO.h"
 #import "MCOIndexSet.h"
 
+#ifdef __ANDROID__
+#import "NSIndexSetWithBlocks.h"
+#endif
+
 @implementation NSIndexSet (MCO)
 
 - (MCOIndexSet *) mcoIndexSet

@@ -9,6 +9,10 @@
 #import <Foundation/Foundation.h>
 #import <MailCore/MCOConstants.h>
 
+#ifdef __ANDROID__
+#import "CoreFoundation.h"
+#endif
+
 /**
    This class provides a specific way to access a given service
 */

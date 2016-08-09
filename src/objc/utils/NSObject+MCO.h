@@ -16,6 +16,10 @@
 #include <typeinfo>
 #endif
 
+#ifdef __ANDROID__
+#import "dispatch.h"
+#endif
+
 #ifdef __cplusplus
 namespace mailcore {
     class Object;

@@ -24,6 +24,10 @@
 #include "MCIMAPMessageRenderingOperation.h"
 #include "MCOperationQueueCallback.h"
 
+#ifdef __ANDROID__
+#import "NSObject+MCO.h"
+#endif
+
 using namespace mailcore;
 
 @interface MCOIMAPSession ()
@@ -107,7 +111,11 @@ MCO_OBJC_SYNTHESIZE_BOOL(setCheckCertificateEnabled, isCheckCertificateEnabled)
 MCO_OBJC_SYNTHESIZE_BOOL(setVoIPEnabled, isVoIPEnabled)
 MCO_OBJC_SYNTHESIZE_SCALAR(BOOL, BOOL, setAllowsFolderConcurrentAccessEnabled, allowsFolderConcurrentAccessEnabled)
 MCO_OBJC_SYNTHESIZE_SCALAR(unsigned int, unsigned int, setMaximumConnections, maximumConnections)
+#ifdef __ANDROID__
+// ignore for Android
+#else
 MCO_OBJC_SYNTHESIZE_SCALAR(dispatch_queue_t, dispatch_queue_t, setDispatchQueue, dispatchQueue);
+#endif
 
 - (void) setDefaultNamespace:(MCOIMAPNamespace *)defaultNamespace
 {

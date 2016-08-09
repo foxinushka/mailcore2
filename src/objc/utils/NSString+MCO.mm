@@ -10,6 +10,10 @@
 
 #include "MCString.h"
 
+#ifdef __ANDROID__
+#import "NSStringWithLocale.h"
+#endif
+
 @implementation NSString (MCO)
 
 + (id) mco_objectWithMCObject:(mailcore::Object *)object

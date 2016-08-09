@@ -12,6 +12,10 @@
 
 #import <Foundation/Foundation.h>
 
+#ifdef __ANDROID__
+#import "CoreFoundation.h"
+#endif
+
 @class MCOMessageHeader;
 @class MCOAbstractPart;
 

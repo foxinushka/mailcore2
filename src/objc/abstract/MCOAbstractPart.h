@@ -12,6 +12,10 @@
 
 #import <Foundation/Foundation.h>
 
+#ifdef __ANDROID__
+#import "CoreFoundation.h"
+#endif
+
 @class MCOAbstractMessage;
 
 typedef NS_ENUM(NSInteger, MCOPartType) {

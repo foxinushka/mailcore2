@@ -38,7 +38,11 @@
 
 - (instancetype) initWithData:(NSData *)data
 {
+    #ifdef __ANDROID__
+    mailcore::MessageParser * message = new mailcore::MessageParser([data mco_mcData]);
+    #else
     mailcore::MessageParser * message = new mailcore::MessageParser((CFDataRef) data);
+    #endif
     self = [super initWithMCMessage:message];
     MC_SAFE_RELEASE(message);
     return self;

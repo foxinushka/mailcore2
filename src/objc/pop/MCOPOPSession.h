@@ -14,6 +14,10 @@
 
 #import <MailCore/MCOConstants.h>
 
+#ifdef __ANDROID__
+#import "dispatch.h"
+#endif
+
 @class MCOPOPFetchMessagesOperation;
 @class MCOPOPFetchHeaderOperation;
 @class MCOPOPFetchMessageOperation;

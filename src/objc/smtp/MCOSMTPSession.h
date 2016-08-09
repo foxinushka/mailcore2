@@ -14,6 +14,10 @@
 
 #import <MailCore/MCOConstants.h>
 
+#ifdef __ANDROID__
+#import "dispatch.h"
+#endif
+
 /** 
  This class is used to create an SMTP connection and send messages
 

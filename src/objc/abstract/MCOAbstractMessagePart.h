@@ -13,6 +13,10 @@
 #import <Foundation/Foundation.h>
 #import <MailCore/MCOAbstractPart.h>
 
+#ifdef __ANDROID__
+#import "CoreFoundation.h"
+#endif
+
 @class MCOMessageHeader;
 
 @interface MCOAbstractMessagePart : MCOAbstractPart

@@ -14,6 +14,10 @@
 #import "NSDictionary+MCO.h"
 #import "NSObject+MCO.h"
 
+#ifdef __ANDROID__
+#import "dispatch.h"
+#endif
+
 @implementation MCOMailProvidersManager 
 
 + (MCOMailProvidersManager *) sharedManager

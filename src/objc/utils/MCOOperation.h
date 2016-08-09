@@ -12,6 +12,11 @@
 
 #import <Foundation/Foundation.h>
 
+#ifdef __ANDROID__
+#import "CoreFoundation.h"
+#import "dispatch.h"
+#endif
+
 @interface MCOOperation : NSObject
 
 /** Returns whether the operation is cancelled.*/

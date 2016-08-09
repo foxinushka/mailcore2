@@ -20,6 +20,10 @@
 #include "MCBaseTypes.h"
 #include "MCUtils.h"
 
+#ifdef __ANDROID__
+#import "dispatch.h"
+#endif
+
 static chash * classHash = NULL;
 
 static void init(void)

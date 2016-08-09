@@ -14,6 +14,12 @@
 
 #import <MailCore/MCOConstants.h>
 
+#ifdef __ANDROID__
+#import "CoreFoundation.h"
+#import "dispatch.h"
+#import <MailCore/MCUtils.h>
+#endif
+
 @class MCONNTPFetchAllArticlesOperation;
 @class MCONNTPFetchHeaderOperation;
 @class MCONNTPFetchArticleOperation;
