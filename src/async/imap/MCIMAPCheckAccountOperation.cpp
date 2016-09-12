@@ -30,7 +30,7 @@ void IMAPCheckAccountOperation::main()
     ErrorCode error;
     session()->session()->connectIfNeeded(&error);
     if (error == ErrorNone) {
-        session()->session()->login(&error);
+        session()->session()->loginIfNeeded(&error);
         if (error != ErrorNone) {
             MC_SAFE_REPLACE_COPY(String, mLoginResponse, session()->session()->loginResponse());
             MC_SAFE_REPLACE_COPY(Data, mLoginUnparsedResponseData, session()->session()->unparsedResponseData());
