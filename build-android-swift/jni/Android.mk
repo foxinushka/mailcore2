@@ -12,7 +12,7 @@ LOCAL_C_INCLUDES += $(LOCAL_PATH)/../../src/c
 LOCAL_C_INCLUDES += $(LOCAL_PATH)/../../src/c/basetypes
 LOCAL_C_INCLUDES += $(LOCAL_PATH)/../../src/c/imap
 LOCAL_SRC_FILES  := ../../src/c/basetypes/CIndexSet.cpp \
-					../../src/c/imap/CIMAPSession.cpp \
+					../../src/c/imap/CIMAPAsyncSession.cpp \
 					
 LOCAL_SHARED_LIBRARIES := mailcore
 include $(BUILD_SHARED_LIBRARY)
