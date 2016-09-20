@@ -8,17 +8,17 @@
 #include <MailCore/CBase.h>
 #include <MailCore/CIndexSet.h>
 #include <MailCore/CArray.h>
-#include <MailCore/CIMAPNamespace.h>
-#include <MailCore/CIMAPOperation.h>
-#include <MailCore/CIMAPAppendMessageOperation.h>
-#include <MailCore/CIMAPFetchContentOperation.h>
-#include <MailCore/CIMAPFetchMessagesOperation.h>
-#include <MailCore/СIMAPSearchOperation.h>
-#include <MailCore/СIMAPSearchExpression.h>
-#include <MailCore/CIMAPCopyMessagesOperation.h>
-#include <MailCore/CIMAPFolderInfoOperation.h>
-#include <MailCore/CIMAPFolderStatusOperation.h>
-#include <MailCore/CMessageConstants.h>
+#include "CIMAPNamespace.h"
+#include "CIMAPOperation.h"
+#include "CIMAPAppendMessageOperation.h"
+#include "CIMAPFetchContentOperation.h"
+#include "CIMAPFetchMessagesOperation.h"
+#include "СIMAPSearchOperation.h"
+#include "CIMAPSearchExpression.h"
+#include "CIMAPCopyMessagesOperation.h"
+#include "CIMAPFolderInfoOperation.h"
+#include "CIMAPFolderStatusOperation.h"
+#include "CMessageConstants.h"
 
 #ifdef __cplusplus
 extern "C" {

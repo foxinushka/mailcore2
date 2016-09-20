@@ -11,6 +11,7 @@ LOCAL_C_INCLUDES += $(LOCAL_PATH)/../../build-android/include
 LOCAL_C_INCLUDES += $(LOCAL_PATH)/../../src/c
 LOCAL_C_INCLUDES += $(LOCAL_PATH)/../../src/c/basetypes
 LOCAL_C_INCLUDES += $(LOCAL_PATH)/../../src/c/imap
+LOCAL_C_INCLUDES += $(LOCAL_PATH)/../../src/c/abstract
 LOCAL_C_INCLUDES += $(LOCAL_PATH)/../include
 LOCAL_SRC_FILES  := ../../src/c/basetypes/CArray.cpp \
 					../../src/c/basetypes/CObject.cpp \

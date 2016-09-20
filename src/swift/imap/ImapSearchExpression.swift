@@ -1,5 +1,8 @@
 import Foundation
-import Glibc
+
+#if os(iOS) || os(OSX)
+    import CMailCore
+#endif
 
 class ImapSearchExpression {
 	

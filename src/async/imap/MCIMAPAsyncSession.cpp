@@ -814,7 +814,7 @@ IMAPOperation * IMAPAsyncSession::disconnectOperation()
     return op;
 }
 
-void IMAPAsyncSession::setConnectionLogger(appendMessageOperation * logger)
+void IMAPAsyncSession::setConnectionLogger(ConnectionLogger * logger)
 {
     mConnectionLogger = logger;
     for(unsigned int i = 0 ; i < mSessions->count() ; i ++) {

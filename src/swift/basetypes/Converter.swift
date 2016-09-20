@@ -1,5 +1,8 @@
 import Foundation
-import Glibc
+
+#if os(iOS) || os(OSX)
+import CMailCore
+#endif
 
 func cFromSwift(array: Array<CObject>) -> CArray {
 	var carray = newCArray();
