@@ -3,6 +3,7 @@
 
 #include "stdint.h"
 #include "CBase.h"
+#include "CObject.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -10,6 +11,7 @@ extern "C" {
 
     struct CArray {
         ref self;
+    	void (*addObject)(struct CArray *self, CObject *object);
     };
     typedef struct CArray CArray;
 

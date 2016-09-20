@@ -11,7 +11,10 @@ LOCAL_C_INCLUDES += $(LOCAL_PATH)/../../build-android/include
 LOCAL_C_INCLUDES += $(LOCAL_PATH)/../../src/c
 LOCAL_C_INCLUDES += $(LOCAL_PATH)/../../src/c/basetypes
 LOCAL_C_INCLUDES += $(LOCAL_PATH)/../../src/c/imap
-LOCAL_SRC_FILES  := ../../src/c/basetypes/CIndexSet.cpp \
+LOCAL_C_INCLUDES += $(LOCAL_PATH)/../include
+LOCAL_SRC_FILES  := ../../src/c/basetypes/CArray.cpp \
+					../../src/c/basetypes/CObject.cpp \
+					../../src/c/basetypes/CIndexSet.cpp \
 					../../src/c/imap/CIMAPAsyncSession.cpp \
 					../../src/c/imap/CIMAPOperation.cpp \
 					../../src/c/imap/CIMAPAppendMessageOperation.cpp \

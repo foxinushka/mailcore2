@@ -4,20 +4,23 @@
 extern "C" {
     #include "CIMAPAsyncSession.h"
 
-    extern "C" void setHostname(CIMAPAsyncSession *session, const char *hostname) {
+    void setHostname(CIMAPAsyncSession *session, const char *hostname) {
         reinterpret_cast<mailcore::IMAPAsyncSession *>(session->self)->setHostname(new mailcore::String(hostname));
     }
 
-    extern "C" void setPort(CIMAPAsyncSession *session, unsigned int port) {
+    void setPort(CIMAPAsyncSession *session, unsigned int port) {
         reinterpret_cast<mailcore::IMAPAsyncSession *>(session->self)->setPort(port);
     }
-    extern "C" void setUsername(CIMAPAsyncSession *session, const char *username) {
+
+    void setUsername(CIMAPAsyncSession *session, const char *username) {
         reinterpret_cast<mailcore::IMAPAsyncSession *>(session->self)->setUsername(new mailcore::String(username));
     }
-    extern "C" void setPassword(CIMAPAsyncSession *session, const char *password) {
+
+    void setPassword(CIMAPAsyncSession *session, const char *password) {
         reinterpret_cast<mailcore::IMAPAsyncSession *>(session->self)->setPassword(new mailcore::String(password));
     }
-    extern "C" void setConnectionType(CIMAPAsyncSession *session, uint64_t connectionType) {
+
+    void setConnectionType(CIMAPAsyncSession *session, ConnectionType connectionType) {
         reinterpret_cast<mailcore::IMAPAsyncSession *>(session->self)->setConnectionType(static_cast<mailcore::ConnectionType>(connectionType));
     }
 
@@ -33,7 +36,7 @@ extern "C" {
         reinterpret_cast<mailcore::IMAPAsyncSession *>(session->self)->setOAuth2Token(new mailcore::String(token));   
     }
 
-    void setAuthType(CIMAPAsyncSession *session, uint64_t authType){
+    void setAuthType(CIMAPAsyncSession *session, AuthType authType){
         reinterpret_cast<mailcore::IMAPAsyncSession *>(session->self)->setAuthType(static_cast<mailcore::AuthType>(authType));   
     }
 
@@ -48,14 +51,6 @@ extern "C" {
     void setDefaultNamespace(CIMAPAsyncSession *session, CIMAPNamespace *nspace){
         reinterpret_cast<mailcore::IMAPAsyncSession *>(session->self)->setDefaultNamespace(reinterpret_cast<mailcore::IMAPNamespace *>(nspace->self));  
     }
-
-    // extern "C" void fetchMessagesByNumber(CIMAPAsyncSession *session, const char *folder, uint64_t request, CIndexSet uids, uint64_t *error) {
-    //     mailcore::ErrorCode errorCode;
-    //     reinterpret_cast<mailcore::IMAPAsyncSession *>(session->self)->
-    //             fetchMessagesByNumber(new mailcore::String(folder), static_cast<mailcore::IMAPMessagesRequestKind >(request),
-    //                                   reinterpret_cast<mailcore::IndexSet *>(uids.self), NULL, &errorCode);
-    //     (*error) = errorCode;
-    // }
 
     CIMAPOperation disconnectOperation(CIMAPAsyncSession *session){
         mailcore::IMAPOperation *imapOperation = reinterpret_cast<mailcore::IMAPAsyncSession *>(session->self)->disconnectOperation();
@@ -97,31 +92,31 @@ extern "C" {
         return wrapIMAPOperation(reinterpret_cast<void *>(imapOperation));
     }
 
-    CIMAPOperation storeFlagsByUIDOperation(CIMAPAsyncSession *session, const char *folder, CIndexSet *set, uint64_t kind, uint64_t flags, CArray *customFlags){
+    CIMAPOperation storeFlagsByUIDOperation(CIMAPAsyncSession *session, const char *folder, CIndexSet *set, IMAPStoreFlagsRequestKind kind, MessageFlag flags, CArray *customFlags){
         mailcore::IMAPOperation *imapOperation = reinterpret_cast<mailcore::IMAPAsyncSession *>(session->self)->storeFlagsByUIDOperation(new mailcore::String(folder), 
             reinterpret_cast<mailcore::IndexSet *>(set->self), static_cast<mailcore::IMAPStoreFlagsRequestKind>(kind), static_cast<mailcore::MessageFlag>(flags), reinterpret_cast<mailcore::Array *>(customFlags->self));
         return wrapIMAPOperation(reinterpret_cast<void *>(imapOperation));
     }
 
-    CIMAPAppendMessageOperation appendMessageOperation(CIMAPAsyncSession *session, const char *folder, const char *messagePath, uint64_t flags, CArray *array){
+    CIMAPAppendMessageOperation appendMessageOperation(CIMAPAsyncSession *session, const char *folder, const char *messagePath, MessageFlag flags, CArray *array){
         mailcore::IMAPAppendMessageOperation *imapOperation = reinterpret_cast<mailcore::IMAPAsyncSession *>(session->self)->appendMessageOperation(new mailcore::String(folder), 
             new mailcore::String(messagePath), static_cast<mailcore::MessageFlag>(flags), reinterpret_cast<mailcore::Array *>(array->self));
         return wrapIMAPAppendMessageOperation(reinterpret_cast<void *>(imapOperation));
     }
 
-    CIMAPFetchMessagesOperation fetchMessagesByNumberOperation(CIMAPAsyncSession *session, const char *folder, uint64_t kind, CIndexSet *numbers){
+    CIMAPFetchMessagesOperation fetchMessagesByNumberOperation(CIMAPAsyncSession *session, const char *folder, IMAPMessagesRequestKind kind, CIndexSet *numbers){
         mailcore::IMAPFetchMessagesOperation *imapOperation = reinterpret_cast<mailcore::IMAPAsyncSession *>(session->self)->fetchMessagesByNumberOperation(new mailcore::String(folder),
             static_cast<mailcore::IMAPMessagesRequestKind>(kind), reinterpret_cast<mailcore::IndexSet *>(numbers->self));
         return wrapCIMAPFetchMessagesOperation(reinterpret_cast<void *>(imapOperation));
     }
 
-    CIMAPFetchMessagesOperation fetchMessagesByUIDOperation(CIMAPAsyncSession *session, const char *folder, uint64_t kind, CIndexSet *uids){
+    CIMAPFetchMessagesOperation fetchMessagesByUIDOperation(CIMAPAsyncSession *session, const char *folder, IMAPMessagesRequestKind kind, CIndexSet *uids){
         mailcore::IMAPFetchMessagesOperation *imapOperation = reinterpret_cast<mailcore::IMAPAsyncSession *>(session->self)->fetchMessagesByUIDOperation(new mailcore::String(folder),
             static_cast<mailcore::IMAPMessagesRequestKind>(kind), reinterpret_cast<mailcore::IndexSet *>(uids->self));
         return wrapCIMAPFetchMessagesOperation(reinterpret_cast<void *>(imapOperation));
     }
 
-    CIMAPFetchMessagesOperation syncMessagesByUIDOperation(CIMAPAsyncSession *session, const char *folder, uint64_t kind, CIndexSet *uids, uint64_t modSeq){
+    CIMAPFetchMessagesOperation syncMessagesByUIDOperation(CIMAPAsyncSession *session, const char *folder, IMAPMessagesRequestKind kind, CIndexSet *uids, uint64_t modSeq){
         mailcore::IMAPFetchMessagesOperation *imapOperation = reinterpret_cast<mailcore::IMAPAsyncSession *>(session->self)->syncMessagesByUIDOperation(new mailcore::String(folder),
             static_cast<mailcore::IMAPMessagesRequestKind>(kind), reinterpret_cast<mailcore::IndexSet *>(uids->self), modSeq);
         return wrapCIMAPFetchMessagesOperation(reinterpret_cast<void *>(imapOperation));
@@ -132,7 +127,7 @@ extern "C" {
         return wrapCIMAPFetchContentOperation(reinterpret_cast<void *>(imapOperation));
     }
 
-    CIMAPFetchContentOperation fetchMessageAttachmentByUIDOperation(CIMAPAsyncSession *session, const char *folder, uint32_t uid, const char *partID, uint64_t encoding, bool urgent){
+    CIMAPFetchContentOperation fetchMessageAttachmentByUIDOperation(CIMAPAsyncSession *session, const char *folder, uint32_t uid, const char *partID, Encoding encoding, bool urgent){
         mailcore::IMAPFetchContentOperation *imapOperation = reinterpret_cast<mailcore::IMAPAsyncSession *>(session->self)->fetchMessageAttachmentByUIDOperation(new mailcore::String(folder),
             uid, new mailcore::String(partID), static_cast<mailcore::Encoding>(encoding), urgent);
         return wrapCIMAPFetchContentOperation(reinterpret_cast<void *>(imapOperation));
@@ -144,7 +139,7 @@ extern "C" {
         return wrapCIMAPSearchOperation(reinterpret_cast<void *>(imapOperation));
     }
 
-    CIMAPSearchOperation searchOperation(CIMAPAsyncSession *session, const char *folder, uint64_t kind, const char *str){
+    CIMAPSearchOperation searchOperation(CIMAPAsyncSession *session, const char *folder, IMAPSearchKind kind, const char *str){
         mailcore::IMAPSearchOperation *imapOperation = reinterpret_cast<mailcore::IMAPAsyncSession *>(session->self)->searchOperation(new mailcore::String(folder), 
             static_cast<mailcore::IMAPSearchKind>(kind), new mailcore::String(str));
         return wrapCIMAPSearchOperation(reinterpret_cast<void *>(imapOperation));
@@ -176,6 +171,34 @@ extern "C" {
         session.setConnectionType = &setConnectionType;
         session.setTimeout = &setTimeout;
         session.setCheckCertificateEnabled = &setCheckCertificateEnabled;
+        session.setOAuth2Token = &setOAuth2Token;
+        session.setAuthType = &setAuthType;
+        session.setMaximumConnections = &setMaximumConnections;
+        session.setAllowsFolderConcurrentAccessEnabled = &setAllowsFolderConcurrentAccessEnabled;
+        session.setDefaultNamespace = &setDefaultNamespace;
+
+        session.disconnectOperation = &disconnectOperation;
+        session.noopOperation = &noopOperation;
+        session.checkAccountOperation = &checkAccountOperation;
+        session.capabilityOperation = &capabilityOperation;
+        session.fetchAllFoldersOperation = &fetchAllFoldersOperation;
+        session.expungeOperation = &expungeOperation;
+        session.createFolderOperation = &createFolderOperation;
+        session.deleteFolderOperation = &deleteFolderOperation;
+        session.storeFlagsByUIDOperation = &storeFlagsByUIDOperation;
+
+        session.appendMessageOperation = &appendMessageOperation;
+        session.fetchMessagesByNumberOperation = &fetchMessagesByNumberOperation;
+        session.fetchMessagesByUIDOperation = &fetchMessagesByUIDOperation;
+        session.syncMessagesByUIDOperation = &syncMessagesByUIDOperation;
+        session.fetchMessageByUIDOperation = &fetchMessageByUIDOperation;
+        session.fetchMessageAttachmentByUIDOperation = &fetchMessageAttachmentByUIDOperation;
+        session.searchOperationWithExpression = &searchOperationWithExpression;
+        session.searchOperation = &searchOperation;
+        session.copyMessagesOperation = &copyMessagesOperation;
+        session.folderInfoOperation = &folderInfoOperation;
+        session.folderStatusOperation = &folderStatusOperation;
+
         return session;
     }
 
