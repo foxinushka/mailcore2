@@ -1,3 +1,6 @@
+#ifndef MAILCORE_MESSAGE_CONSTANT
+#define MAILCORE_MESSAGE_CONSTANT
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -276,4 +279,6 @@ extern "C" {
     
 #ifdef __cplusplus
 }
+#endif
+
 #endif

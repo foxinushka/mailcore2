@@ -160,6 +160,11 @@ extern "C" {
         mailcore::IMAPFolderStatusOperation *imapOperation = reinterpret_cast<mailcore::IMAPAsyncSession *>(session->self)->folderStatusOperation(new mailcore::String(folder));
         return wrapCIMAPFolderStatusOperation(reinterpret_cast<void *>(imapOperation));
     }
+    
+    CIMAPIdleOperation idleOperation(struct CIMAPAsyncSession *session, const char *folder, uint32_t lastKnownUID){
+        mailcore::IMAPIdleOperation *imapOperation = reinterpret_cast<mailcore::IMAPAsyncSession *>(session->self)->idleOperation(new mailcore::String(folder), lastKnownUID);
+        return initCIMAPIdleOperation(reinterpret_cast<void *>(imapOperation));
+    }
 
     CIMAPAsyncSession newCIMAPAsyncSession(){
         CIMAPAsyncSession session;

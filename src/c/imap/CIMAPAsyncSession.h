@@ -8,6 +8,8 @@
 #include <MailCore/CBase.h>
 #include <MailCore/CIndexSet.h>
 #include <MailCore/CArray.h>
+#include <MailCore/CIMAPIdleOperation.h>
+
 #include "CIMAPNamespace.h"
 #include "CIMAPOperation.h"
 #include "CIMAPAppendMessageOperation.h"
@@ -19,6 +21,7 @@
 #include "CIMAPFolderInfoOperation.h"
 #include "CIMAPFolderStatusOperation.h"
 #include "CMessageConstants.h"
+#include "CIMAPIdleOperation.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -60,6 +63,7 @@ extern "C" {
         CIMAPCopyMessagesOperation  (*copyMessagesOperation)(struct CIMAPAsyncSession *self, const char *folder, CIndexSet *uids,const char *destFolder);
         CIMAPFolderInfoOperation    (*folderInfoOperation)(struct CIMAPAsyncSession *self, const char *folder);
         CIMAPFolderStatusOperation  (*folderStatusOperation)(struct CIMAPAsyncSession *self, const char *folder);
+        CIMAPIdleOperation          (*idleOperation)(struct CIMAPAsyncSession *self, const char *folder, uint32_t lastKnownUID);
     } CIMAPAsyncSession;
 
     CIMAPAsyncSession newCIMAPAsyncSession();

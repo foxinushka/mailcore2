@@ -5,5 +5,6 @@
 #include <MailCore/CArray.h>
 #include <MailCore/CObject.h>
 #include <MailCore/CIMAPAsyncSession.h>
+#include <MailCore/CIMAPIdleOperation.h>
 
 #endif

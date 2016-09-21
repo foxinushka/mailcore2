@@ -147,6 +147,10 @@ class ImapSession {
     	return ImapFolderStatusOperation(operation: session.folderStatusOperation(&session, folder));
     }
     
+    func idleOperation(folder:String, lastKnownUID:UInt32) -> ImapIdleOperation {
+        return ImapIdleOperation(operation: session.idleOperation(&session, folder, lastKnownUID));
+    }
+    
 
 	deinit {
 		deleteCIMAPAsyncSession(session);

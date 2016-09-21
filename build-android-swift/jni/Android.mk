@@ -25,6 +25,10 @@ LOCAL_SRC_FILES  := ../../src/c/basetypes/CArray.cpp \
 					../../src/c/imap/CIMAPFolderInfoOperation.cpp \
 					../../src/c/imap/CIMAPFolderStatusOperation.cpp \
 					../../src/c/imap/CIMAPFetchMessagesOperation.cpp \
+					../../src/c/utils/COperation.cpp \
+					../../src/c/imap/CIMAPBaseOperation.cpp \
+					../../src/c/imap/CIMAPIdleOperation.cpp \
 					
+LOCAL_CFLAGS := -fblocks					
 LOCAL_SHARED_LIBRARIES := mailcore
 include $(BUILD_SHARED_LIBRARY)
