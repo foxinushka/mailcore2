@@ -1,15 +1,14 @@
-#include <MailCore/MCAsync.h>
+#include "CIMAPFolderStatusOperation.h"
+#include "CIMAPFolderStatusOperation+Private.h"
 
 extern "C" {
-	#include "CIMAPFolderStatusOperation.h"
+    CIMAPFolderStatusOperation newCIMAPFolderStatusOperation(mailcore::IMAPFolderStatusOperation *operationRef){
+        CIMAPFolderStatusOperation operation;
+        operation.self = reinterpret_cast<void *>(operationRef);
+        return operation;
+    }
 
-	CIMAPFolderStatusOperation wrapCIMAPFolderStatusOperation(ref operationRef){
-	    CIMAPFolderStatusOperation operation;
-	    operation.self = operationRef;
-	    return operation;
-	}
-
-	void deleteCIMAPFolderStatusOperation(CIMAPFolderStatusOperation operation) {
-	    delete reinterpret_cast<mailcore::IMAPFolderStatusOperation *>(operation.self);
-	}
+    void deleteCIMAPFolderStatusOperation(CIMAPFolderStatusOperation operation) {
+        delete reinterpret_cast<mailcore::IMAPFolderStatusOperation *>(operation.self);
+    }
 }

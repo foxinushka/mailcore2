@@ -10,7 +10,7 @@ extern "C" {
     typedef struct CIMAPAsyncSession CIMAPAsyncSession;
     
     struct CIMAPBaseOperation {
-        COperation                                  ancestor;
+        COperation                                  cOperation;
         ref                                         inheritor;
         /*CIMAPBaseOperationIMAPCallback*/ref       _callback;
         
@@ -22,7 +22,6 @@ extern "C" {
     };
     typedef struct CIMAPBaseOperation CIMAPBaseOperation;
 
-    CIMAPBaseOperation initCIMAPBaseOperation(/*mailcore::Operation*/ref operation);
     void deleteCIMAPBaseOperation(CIMAPBaseOperation *operation);
 
 #ifdef __cplusplus

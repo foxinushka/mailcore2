@@ -1,7 +1,7 @@
 #ifndef MAILCORE_CIMAP_APPEND_MESSAGE_OPERATION_H
 #define MAILCORE_CIMAP_APPEND_MESSAGE_OPERATION_H
 
-#include "CBase.h"
+#include <MailCore/CBase.h>
 
 #ifdef __cplusplus
 extern "C" {
@@ -12,7 +12,6 @@ extern "C" {
     };
     typedef struct CIMAPAppendMessageOperation CIMAPAppendMessageOperation;
 
-    CIMAPAppendMessageOperation wrapIMAPAppendMessageOperation(ref operation);
     void deleteIMAPAppendMessageOperation(CIMAPAppendMessageOperation self);
 
 #ifdef __cplusplus

@@ -1,8 +1,7 @@
 #include <MailCore/MCAsync.h>
-
-extern "C" {
 #include "CIMAPSearchExpression.h"
-    
+
+extern "C" {    
     СIMAPSearchExpression searchAll() {
         СIMAPSearchExpression searchExpression;
         searchExpression.self = new mailcore::IMAPSearchExpression();

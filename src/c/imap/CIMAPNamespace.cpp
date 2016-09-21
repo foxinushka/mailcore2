@@ -1,8 +1,7 @@
 #include <MailCore/MCAsync.h>
-
-extern "C" {
 #include "CIMAPNamespace.h"
-    
+
+extern "C" {    
     CIMAPNamespace newCIMAPNamespace() {
         CIMAPNamespace operation;
         operation.self = new mailcore::IMAPNamespace();

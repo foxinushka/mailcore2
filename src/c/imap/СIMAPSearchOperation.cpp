@@ -1,11 +1,10 @@
-#include <MailCore/MCAsync.h>
+#include "СIMAPSearchOperation.h"
+#include "СIMAPSearchOperation+Private.h"
 
 extern "C" {
-	#include "СIMAPSearchOperation.h"
-
-	CIMAPSearchOperation wrapCIMAPSearchOperation(ref operationRef){
+    CIMAPSearchOperation newCIMAPSearchOperation(mailcore::IMAPSearchOperation *op) {
 	    CIMAPSearchOperation operation;
-	    operation.self = operationRef;
+	    operation.self = reinterpret_cast<void *>(op);
 	    return operation;
 	}
 

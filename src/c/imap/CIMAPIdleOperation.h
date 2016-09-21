@@ -2,16 +2,16 @@
 #define MAILCORE_CIMAP_IDLE_OPERATION_H
 
 #include <MailCore/CMessageConstants.h>
+#include <MailCore/CIMAPBaseOperation.h>
 
 #ifdef __cplusplus
 extern "C" {
 #endif
-    #include "CIMAPBaseOperation.h"
     
     typedef void (^CIMAPIdleOperationCompletionType)(ErrorCode error);
     
     struct CIMAPIdleOperation {
-        CIMAPBaseOperation   ancestor;
+        CIMAPBaseOperation                      ancestor;
         CIMAPIdleOperationCompletionType       _completionBlock;
         
         void (*start)(struct CIMAPIdleOperation *self, CIMAPIdleOperationCompletionType completionBlock);
@@ -20,7 +20,6 @@ extern "C" {
     };
     typedef struct CIMAPIdleOperation CIMAPIdleOperation;
 
-    CIMAPIdleOperation initCIMAPIdleOperation(/*mailcore::Operation*/ref operation);
     void deleteCIMAPIdleOperation(CIMAPIdleOperation *operation);
 
 #ifdef __cplusplus

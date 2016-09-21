@@ -1,7 +1,7 @@
 #ifndef MAILCORE_СIMAP_SEARCH_OPERATION_H
 #define MAILCORE_СIMAP_SEARCH_OPERATION_H
 
-#include "CBase.h"
+#include <MailCore/CBase.h>
 
 #ifdef __cplusplus
 extern "C" {
@@ -12,7 +12,6 @@ extern "C" {
     };
     typedef struct CIMAPSearchOperation CIMAPSearchOperation;
 
-    CIMAPSearchOperation wrapCIMAPSearchOperation(ref operation);
     void deleteCIMAPSearchOperation(CIMAPSearchOperation self);
 
 #ifdef __cplusplus

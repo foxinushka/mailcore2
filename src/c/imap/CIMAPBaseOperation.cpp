@@ -1,6 +1,6 @@
-#include <MailCore/MCAsync.h>
-#include <MailCore/COperation.h>
+#include "COperation+Private.h"
 #include "CIMAPBaseOperation.h"
+#include "CIMAPBaseOperation+Private.h"
 
 class CIMAPBaseOperationIMAPCallback : public mailcore::IMAPOperationCallback {
 public:
@@ -25,20 +25,18 @@ private:
     CIMAPBaseOperation * mOperation;
 };
 
-extern "C" {
-    CIMAPBaseOperation initCIMAPBaseOperation(/*mailcore::Operation*/ref operationRef) {
-	    CIMAPBaseOperation operation;
-	    operation.ancestor = initCOperation(operationRef);
-        //operation.ancestor.inheritor = &operation;
-        
-        CIMAPBaseOperationIMAPCallback *callback = new CIMAPBaseOperationIMAPCallback(&operation);
-        operation._callback = reinterpret_cast<void *>(callback);
-        reinterpret_cast<mailcore::IMAPOperation *>(operationRef)->setImapCallback(callback);
-        
-	    return operation;
-	}
+extern "C" CIMAPBaseOperation newCIMAPBaseOperation(mailcore::Operation* operationRef) {
+    CIMAPBaseOperation operation;
+    operation.cOperation = newCOperation(operationRef);
+    operation.cOperation.inheritor = &operation;
+    
+    CIMAPBaseOperationIMAPCallback *callback = new CIMAPBaseOperationIMAPCallback(&operation);
+    operation._callback = reinterpret_cast<void *>(callback);
+    reinterpret_cast<mailcore::IMAPOperation *>(operationRef)->setImapCallback(callback);
+    
+    return operation;
+}
 
-	void deleteCIMAPBaseOperation(CIMAPBaseOperation *operation) {
-        delete reinterpret_cast<CIMAPBaseOperationIMAPCallback *>(operation->_callback);
-	}
+extern "C" void deleteCIMAPBaseOperation(CIMAPBaseOperation *operation) {
+    delete reinterpret_cast<CIMAPBaseOperationIMAPCallback *>(operation->_callback);
 }

@@ -1,15 +1,12 @@
-#include <MailCore/MCAsync.h>
+#include "CIMAPCopyMessagesOperation.h"
+#include "CIMAPCopyMessagesOperation+Private.h"
 
-extern "C" {
-	#include "CIMAPCopyMessagesOperation.h"
+extern "C" CIMAPCopyMessagesOperation newCIMAPCopyMessagesOperation(mailcore::IMAPCopyMessagesOperation *ref){
+    CIMAPCopyMessagesOperation operation;
+    operation.self = reinterpret_cast<void *>(ref);
+    return operation;
+}
 
-	CIMAPCopyMessagesOperation wrapCIMAPCopyMessagesOperation(ref operationRef){
-	    CIMAPCopyMessagesOperation operation;
-	    operation.self = operationRef;
-	    return operation;
-	}
-
-	void deleteCIMAPCopyMessagesOperation(CIMAPCopyMessagesOperation operation) {
-	    delete reinterpret_cast<mailcore::IMAPCopyMessagesOperation *>(operation.self);
-	}
+extern "C" void deleteCIMAPCopyMessagesOperation(CIMAPCopyMessagesOperation operation) {
+    delete reinterpret_cast<mailcore::IMAPCopyMessagesOperation *>(operation.self);
 }

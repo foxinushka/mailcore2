@@ -1,15 +1,12 @@
-#include <MailCore/MCAsync.h>
+#include "CIMAPFetchMessagesOperation.h"
+#include "CIMAPFetchMessagesOperation+Private.h"
 
-extern "C" {
-	#include "CIMAPFetchMessagesOperation.h"
+extern "C" CIMAPFetchMessagesOperation newCIMAPFetchMessagesOperation(mailcore::IMAPFetchMessagesOperation *operationRef){
+    CIMAPFetchMessagesOperation operation;
+    operation.self = reinterpret_cast<void *>(operationRef);
+    return operation;
+}
 
-	CIMAPFetchMessagesOperation wrapCIMAPFetchMessagesOperation(ref operationRef){
-	    CIMAPFetchMessagesOperation operation;
-	    operation.self = operationRef;
-	    return operation;
-	}
-
-	void deleteCIMAPFetchMessagesOperation(CIMAPFetchMessagesOperation operation) {
-	    delete reinterpret_cast<mailcore::IMAPFetchMessagesOperation *>(operation.self);
-	}
+extern "C" void deleteCIMAPFetchMessagesOperation(CIMAPFetchMessagesOperation operation) {
+    delete reinterpret_cast<mailcore::IMAPFetchMessagesOperation *>(operation.self);
 }

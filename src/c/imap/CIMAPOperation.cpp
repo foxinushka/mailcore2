@@ -1,15 +1,13 @@
-#include <MailCore/MCAsync.h>
+#include "CIMAPOperation.h"
+#include "CIMAPOperation+Private.h"
 
-extern "C" {
-	#include "CIMAPOperation.h"
-
-	CIMAPOperation wrapIMAPOperation(ref operationRef) {
-	    CIMAPOperation operation;
-	    operation.self = operationRef;
-	    return operation;
-	}
-
-	void deleteCIMAPOperation(CIMAPOperation operation) {
-	    delete reinterpret_cast<mailcore::IMAPOperation *>(operation.self);
-	}
+extern "C" CIMAPOperation newIMAPOperation(mailcore::IMAPOperation *operationRef) {
+    CIMAPOperation operation;
+    operation.self = reinterpret_cast<void *>(operationRef);
+    return operation;
 }
+
+extern "C" void deleteCIMAPOperation(CIMAPOperation operation) {
+        delete reinterpret_cast<mailcore::IMAPOperation *>(operation.self);
+}
+

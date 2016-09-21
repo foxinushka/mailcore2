@@ -1,15 +1,12 @@
-#include <MailCore/MCAsync.h>
+#include "CIMAPAppendMessageOperation.h"
+#include "CIMAPAppendMessageOperation+Private.h"
 
-extern "C" {
-	#include "CIMAPAppendMessageOperation.h"
+extern "C" CIMAPAppendMessageOperation newIMAPAppendMessageOperation(mailcore::IMAPAppendMessageOperation *op){
+    CIMAPAppendMessageOperation operation;
+    operation.self = reinterpret_cast<void *>(op);
+    return operation;
+}
 
-	CIMAPAppendMessageOperation wrapIMAPAppendMessageOperation(ref operationRef){
-	    CIMAPAppendMessageOperation operation;
-	    operation.self = operationRef;
-	    return operation;
-	}
-
-	void deleteIMAPAppendMessageOperation(CIMAPAppendMessageOperation operation) {
+extern "C" void deleteIMAPAppendMessageOperation(CIMAPAppendMessageOperation operation) {
 	    delete reinterpret_cast<mailcore::IMAPAppendMessageOperation *>(operation.self);
-	}
 }

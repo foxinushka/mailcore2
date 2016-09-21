@@ -1,15 +1,14 @@
-#include <MailCore/MCAsync.h>
+#include "CIMAPFolderInfoOperation.h"
+#include "CIMAPFolderInfoOperation+Private.h"
 
 extern "C" {
-	#include "CIMAPFolderInfoOperation.h"
+    CIMAPFolderInfoOperation newCIMAPFolderInfoOperation(mailcore::IMAPFolderInfoOperation *operationRef){
+        CIMAPFolderInfoOperation operation;
+        operation.self = reinterpret_cast<void *>(operationRef);
+        return operation;
+    }
 
-	CIMAPFolderInfoOperation wrapCIMAPFolderInfoOperation(ref operationRef){
-	    CIMAPFolderInfoOperation operation;
-	    operation.self = operationRef;
-	    return operation;
-	}
-
-	void deleteCIMAPFolderInfoOperation(CIMAPFolderInfoOperation operation) {
-	    delete reinterpret_cast<mailcore::IMAPFolderInfoOperation *>(operation.self);
-	}
+    void deleteCIMAPFolderInfoOperation(CIMAPFolderInfoOperation operation) {
+        delete reinterpret_cast<mailcore::IMAPFolderInfoOperation *>(operation.self);
+    }
 }

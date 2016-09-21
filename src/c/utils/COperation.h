@@ -1,7 +1,7 @@
 #ifndef MAILCORE_C_OPERATION_H
 #define MAILCORE_C_OPERATION_H
 
-#include "CBase.h"
+#include <MailCore/CBase.h>
 
 #ifdef __cplusplus
 extern "C" {
@@ -21,9 +21,8 @@ extern "C" {
         void    (*operationCompleted)(struct COperation *self);
     };
     typedef struct COperation COperation;
-
-    COperation initCOperation(/*mailcore::Operation*/ref operation);
-    void deleteCOperation(COperation self);
+    
+    void deleteCOperation(COperation *self);
 
 #ifdef __cplusplus
 }

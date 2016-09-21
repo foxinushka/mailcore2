@@ -174,6 +174,7 @@
 		84E65533199BE15500EC8CC4 /* MCNNTPSession.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 849189A018C93FB7002063A3 /* MCNNTPSession.h */; };
 		84E65534199BE2BF00EC8CC4 /* MCNNTPGroupInfo.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 849189AA18C94986002063A3 /* MCNNTPGroupInfo.h */; };
 		84E65535199BE2C300EC8CC4 /* MCNNTPGroupInfo.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 849189AA18C94986002063A3 /* MCNNTPGroupInfo.h */; };
+		84ECAD621D92F56A006261FD /* COperation+Private.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 84ECAD611D92F44E006261FD /* COperation+Private.h */; };
 		84F7B4161D915997005F83E8 /* CArray.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 84F7B4101D915997005F83E8 /* CArray.cpp */; };
 		84F7B4171D915997005F83E8 /* CIndexSet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 84F7B4121D915997005F83E8 /* CIndexSet.cpp */; };
 		84F7B4181D915997005F83E8 /* CObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 84F7B4141D915997005F83E8 /* CObject.cpp */; };
@@ -1108,10 +1109,11 @@
 /* Begin PBXCopyFilesBuildPhase section */
 		84F7B3F91D915927005F83E8 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
+			buildActionMask = 12;
 			dstPath = include/MailCore;
 			dstSubfolderSpec = 16;
 			files = (
+				84ECAD621D92F56A006261FD /* COperation+Private.h in CopyFiles */,
 				84B110B51D92C6270079C769 /* CIMAPBaseOperation.h in CopyFiles */,
 				84B110B61D92C6270079C769 /* CIMAPIdleOperation.h in CopyFiles */,
 				84B110AE1D9294060079C769 /* COperation.h in CopyFiles */,
@@ -1730,6 +1732,17 @@
 		84D7378E199C02A8005124E5 /* MCONNTPDisconnectOperation.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MCONNTPDisconnectOperation.mm; sourceTree = "<group>"; };
 		84D73791199C0511005124E5 /* MCONNTPGroupInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCONNTPGroupInfo.h; sourceTree = "<group>"; };
 		84D73792199C0511005124E5 /* MCONNTPGroupInfo.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MCONNTPGroupInfo.mm; sourceTree = "<group>"; };
+		84ECAD611D92F44E006261FD /* COperation+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "COperation+Private.h"; path = "c/utils/COperation+Private.h"; sourceTree = "<group>"; };
+		84ECAD631D92F668006261FD /* CIMAPBaseOperation+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "CIMAPBaseOperation+Private.h"; path = "c/imap/CIMAPBaseOperation+Private.h"; sourceTree = "<group>"; };
+		84ECAD641D92F797006261FD /* CIMAPIdleOperation+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "CIMAPIdleOperation+Private.h"; path = "c/imap/CIMAPIdleOperation+Private.h"; sourceTree = "<group>"; };
+		84ECAD651D92F919006261FD /* CIMAPAppendMessageOperation+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "CIMAPAppendMessageOperation+Private.h"; path = "c/imap/CIMAPAppendMessageOperation+Private.h"; sourceTree = "<group>"; };
+		84ECAD661D92FA39006261FD /* CIMAPCopyMessagesOperation+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "CIMAPCopyMessagesOperation+Private.h"; path = "c/imap/CIMAPCopyMessagesOperation+Private.h"; sourceTree = "<group>"; };
+		84ECAD671D92FB14006261FD /* CIMAPFetchContentOperation+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "CIMAPFetchContentOperation+Private.h"; path = "c/imap/CIMAPFetchContentOperation+Private.h"; sourceTree = "<group>"; };
+		84ECAD681D92FBB8006261FD /* CIMAPFetchMessagesOperation+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "CIMAPFetchMessagesOperation+Private.h"; path = "c/imap/CIMAPFetchMessagesOperation+Private.h"; sourceTree = "<group>"; };
+		84ECAD691D92FC7A006261FD /* CIMAPFolderInfoOperation+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "CIMAPFolderInfoOperation+Private.h"; path = "c/imap/CIMAPFolderInfoOperation+Private.h"; sourceTree = "<group>"; };
+		84ECAD6A1D92FD01006261FD /* CIMAPFolderStatusOperation+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "CIMAPFolderStatusOperation+Private.h"; path = "c/imap/CIMAPFolderStatusOperation+Private.h"; sourceTree = "<group>"; };
+		84ECAD6B1D92FD80006261FD /* CIMAPOperation+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "CIMAPOperation+Private.h"; path = "c/imap/CIMAPOperation+Private.h"; sourceTree = "<group>"; };
+		84ECAD6C1D92FDF0006261FD /* СIMAPSearchOperation+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "СIMAPSearchOperation+Private.h"; path = "c/imap/СIMAPSearchOperation+Private.h"; sourceTree = "<group>"; };
 		84F7B3FB1D915927005F83E8 /* libCMailCore-ios.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libCMailCore-ios.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		84F7B40D1D915985005F83E8 /* CBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CBase.h; path = c/CBase.h; sourceTree = "<group>"; };
 		84F7B40E1D915985005F83E8 /* CCore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CCore.h; path = c/CCore.h; sourceTree = "<group>"; };
@@ -2476,6 +2489,7 @@
 			children = (
 				84B110A71D92924C0079C769 /* COperation.cpp */,
 				84B110A81D92924C0079C769 /* COperation.h */,
+				84ECAD611D92F44E006261FD /* COperation+Private.h */,
 			);
 			name = utils;
 			sourceTree = "<group>";
@@ -2573,30 +2587,40 @@
 			children = (
 				84B110AF1D929B560079C769 /* CIMAPBaseOperation.cpp */,
 				84B110B01D929B560079C769 /* CIMAPBaseOperation.h */,
+				84ECAD631D92F668006261FD /* CIMAPBaseOperation+Private.h */,
 				84B110B21D92A1850079C769 /* CIMAPIdleOperation.cpp */,
 				84B110B31D92A1850079C769 /* CIMAPIdleOperation.h */,
+				84ECAD641D92F797006261FD /* CIMAPIdleOperation+Private.h */,
 				84F7B45A1D915D88005F83E8 /* CIMAPAppendMessageOperation.cpp */,
 				84F7B45B1D915D88005F83E8 /* CIMAPAppendMessageOperation.h */,
+				84ECAD651D92F919006261FD /* CIMAPAppendMessageOperation+Private.h */,
 				84F7B45C1D915D88005F83E8 /* CIMAPAsyncSession.cpp */,
 				84F7B45D1D915D88005F83E8 /* CIMAPAsyncSession.h */,
 				84F7B45E1D915D88005F83E8 /* CIMAPCopyMessagesOperation.cpp */,
 				84F7B45F1D915D88005F83E8 /* CIMAPCopyMessagesOperation.h */,
+				84ECAD661D92FA39006261FD /* CIMAPCopyMessagesOperation+Private.h */,
 				84F7B4601D915D88005F83E8 /* CIMAPFetchContentOperation.cpp */,
 				84F7B4611D915D88005F83E8 /* CIMAPFetchContentOperation.h */,
+				84ECAD671D92FB14006261FD /* CIMAPFetchContentOperation+Private.h */,
 				84F7B4621D915D88005F83E8 /* CIMAPFetchMessagesOperation.cpp */,
 				84F7B4631D915D88005F83E8 /* CIMAPFetchMessagesOperation.h */,
+				84ECAD681D92FBB8006261FD /* CIMAPFetchMessagesOperation+Private.h */,
 				84F7B4641D915D88005F83E8 /* CIMAPFolderInfoOperation.cpp */,
 				84F7B4651D915D88005F83E8 /* CIMAPFolderInfoOperation.h */,
+				84ECAD691D92FC7A006261FD /* CIMAPFolderInfoOperation+Private.h */,
 				84F7B4661D915D88005F83E8 /* CIMAPFolderStatusOperation.cpp */,
 				84F7B4671D915D88005F83E8 /* CIMAPFolderStatusOperation.h */,
+				84ECAD6A1D92FD01006261FD /* CIMAPFolderStatusOperation+Private.h */,
 				84F7B4BD1D9178D3005F83E8 /* CIMAPNamespace.cpp */,
 				84F7B4681D915D88005F83E8 /* CIMAPNamespace.h */,
 				84F7B4691D915D88005F83E8 /* CIMAPOperation.cpp */,
 				84F7B46A1D915D88005F83E8 /* CIMAPOperation.h */,
+				84ECAD6B1D92FD80006261FD /* CIMAPOperation+Private.h */,
 				84F7B4BF1D917963005F83E8 /* CIMAPSearchExpression.cpp */,
 				84F7B46B1D915D88005F83E8 /* CIMAPSearchExpression.h */,
 				84F7B46C1D915D88005F83E8 /* СIMAPSearchOperation.cpp */,
 				84F7B46D1D915D88005F83E8 /* СIMAPSearchOperation.h */,
+				84ECAD6C1D92FDF0006261FD /* СIMAPSearchOperation+Private.h */,
 			);
 			name = imap;
 			sourceTree = "<group>";

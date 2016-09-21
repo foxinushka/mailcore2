@@ -1,7 +1,7 @@
 #ifndef MAILCORE_CIMAP_COPY_MESSAGES_OPERATION_H
 #define MAILCORE_CIMAP_COPY_MESSAGES_OPERATION_H
 
-#include "CBase.h"
+#include <MailCore/CBase.h>
 
 #ifdef __cplusplus
 extern "C" {
@@ -12,7 +12,6 @@ extern "C" {
     };
     typedef struct CIMAPCopyMessagesOperation CIMAPCopyMessagesOperation;
 
-    CIMAPCopyMessagesOperation wrapCIMAPCopyMessagesOperation(ref operation);
     void deleteCIMAPCopyMessagesOperation(CIMAPCopyMessagesOperation self);
 
 #ifdef __cplusplus
