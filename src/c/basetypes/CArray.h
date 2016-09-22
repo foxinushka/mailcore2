@@ -22,4 +22,9 @@ extern "C" {
 }
 #endif
 
+#ifdef __cplusplus
+CArray newCArray2(mailcore::Array *array);
+mailcore::Array* cast(CArray *array);
+#endif
+
 #endif

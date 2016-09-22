@@ -29,6 +29,9 @@ LOCAL_SRC_FILES  := ../../src/c/basetypes/CArray.cpp \
 					../../src/c/utils/COperation.cpp \
 					../../src/c/imap/CIMAPBaseOperation.cpp \
 					../../src/c/imap/CIMAPIdleOperation.cpp \
+					../../src/c/abstract/CAbstractPart.cpp \
+					../../src/c/abstract/CMessageHeader.cpp \
+					../../src/c/abstract/CAddress.cpp \
 					
 LOCAL_CFLAGS := -fblocks					
 LOCAL_SHARED_LIBRARIES := mailcore
