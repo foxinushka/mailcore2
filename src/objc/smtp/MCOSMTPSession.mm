@@ -193,6 +193,14 @@ MCO_OBJC_SYNTHESIZE_SCALAR(dispatch_queue_t, dispatch_queue_t, setDispatchQueue,
     return result;
 }
 
+- (MCOSMTPOperation *) checkAccountOperationWithFrom:(MCOAddress *)from to:(MCOAddress *)to
+{
+    mailcore::SMTPOperation *coreOp = MCO_NATIVE_INSTANCE->checkAccountOperation(MCO_FROM_OBJC(mailcore::Address, from), MCO_FROM_OBJC(mailcore::Address, to));
+    MCOSMTPOperation * result = [[[MCOSMTPOperation alloc] initWithMCOperation:coreOp] autorelease];
+    [result setSession:self];
+    return result;
+}
+
 - (MCOSMTPOperation *) noopOperation
 {
     mailcore::SMTPOperation * coreOp = MCO_NATIVE_INSTANCE->noopOperation();
