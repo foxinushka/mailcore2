@@ -259,6 +259,15 @@ SMTPOperation * SMTPAsyncSession::checkAccountOperation(Address * from)
     return (SMTPOperation *) op->autorelease();
 }
 
+SMTPOperation * SMTPAsyncSession::checkAccountOperation(Address * from, Address * to)
+{
+    SMTPCheckAccountOperation * op = new SMTPCheckAccountOperation();
+    op->setFrom(from);
+    op->setTo(to);
+    op->setSession(this);
+    return (SMTPOperation *) op->autorelease();
+}
+
 SMTPOperation * SMTPAsyncSession::noopOperation()
 {
     SMTPNoopOperation * op = new SMTPNoopOperation();

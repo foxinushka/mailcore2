@@ -16,11 +16,13 @@ using namespace mailcore;
 SMTPCheckAccountOperation::SMTPCheckAccountOperation()
 {
     mFrom = NULL;
+    mTo = NULL;
 }
 
 SMTPCheckAccountOperation::~SMTPCheckAccountOperation()
 {
     MC_SAFE_RELEASE(mFrom);
+    MC_SAFE_RELEASE(mTo);
 }
 
 void SMTPCheckAccountOperation::setFrom(Address * from)
@@ -33,10 +35,26 @@ Address * SMTPCheckAccountOperation::from()
     return mFrom;
 }
 
+void SMTPCheckAccountOperation::setTo(Address * to)
+{
+    MC_SAFE_REPLACE_RETAIN(Address, mTo, to);
+}
+
+Address * SMTPCheckAccountOperation::to()
+{
+    return mTo;
+}
+
 void SMTPCheckAccountOperation::main()
 {
     ErrorCode error;
     
-    session()->session()->checkAccount(mFrom, &error);
+    if (mTo) {
+        session()->session()->checkAccount(mFrom, mTo, &error);
+    }
+    else {
+        session()->session()->checkAccount(mFrom, &error);
+    }
+    
     setError(error);
 }
