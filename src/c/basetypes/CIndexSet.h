@@ -20,4 +20,9 @@ extern "C" {
 }
 #endif
 
+#ifdef __cplusplus
+CIndexSet newCIndexSet(mailcore::IndexSet *set);
+mailcore::IndexSet* cast(CIndexSet *self);
+#endif
+
 #endif

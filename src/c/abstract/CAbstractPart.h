@@ -3,39 +3,13 @@
 
 #include "stdint.h"
 
-#include <MailCore/CBase.h>
-#include <MailCore/CArray.h>
+#include "CBase.h"
+#include "CArray.h"
+#include "CMessageConstants.h"
 
 #ifdef __cplusplus
 extern "C" {
 #endif
-    
-    typedef enum {
-        // Used for a single part.
-        // The part will be a MCOAbstractPart.
-        PartTypeSingle,
-        
-        // Used for a message part (MIME type: message/rfc822).
-        // The part will be a MCOAbstractMessagePart.
-        // It's when a message is sent as attachment of an other message.
-        PartTypeMessage,
-        
-        // Used for a multipart, multipart/mixed.
-        // The part will be a MCOAbstractMultipart.
-        PartTypeMultipartMixed,
-        
-        // Used for a multipart, multipart/related.
-        // The part will be a MCOAbstractMultipart.
-        PartTypeMultipartRelated,
-        
-        // Used for a multipart, multipart/alternative.
-        // The part will be a MCOAbstractMultipart.
-        PartTypeMultipartAlternative,
-        
-        // Used for a signed message, multipart/signed.
-        // The part will be a MCOAbstractMultipart.
-        PartTypeMultipartSigned,
-    }PartType;
 
     struct CAbstractPart {
         ref nativeInstance;
@@ -63,10 +37,10 @@ extern "C" {
         
         struct CAbstractPart    (*partForContentID)(struct CAbstractPart *self, const UChar* contentID);
         struct CAbstractPart    (*partForUniqueID)(struct CAbstractPart *self, const UChar* uniqueID);
-        
+        const UChar*            (*decodedStringForData)(struct CAbstractPart *self, const uint8_t* bytes, uint32_t lenght);
         void                    (*setContentTypeParameterValue)(struct CAbstractPart *self, const UChar* value, const UChar* name);
         void                    (*removeContentTypeParameterForName)(struct CAbstractPart *self, const UChar* name);
-        const UChar*             (*contentTypeParameterValueForName)(struct CAbstractPart *self, const UChar* name);
+        const UChar*            (*contentTypeParameterValueForName)(struct CAbstractPart *self, const UChar* name);
         CArray                  (*allContentTypeParametersNames)(struct CAbstractPart *self);
         
     };

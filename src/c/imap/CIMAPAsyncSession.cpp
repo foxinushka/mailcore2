@@ -1,14 +1,11 @@
 #include <MailCore/MCAsync.h>
 
 #include "CIMAPAsyncSession.h"
-#include "CIMAPIdleOperation+Private.h"
-#include "CIMAPAppendMessageOperation+Private.h"
-#include "CIMAPCopyMessagesOperation+Private.h"
-#include "CIMAPFetchContentOperation+Private.h"
-#include "CIMAPFetchMessagesOperation+Private.h"
+#include "CIMAPAppendMessageOperation.h"
+#include "CIMAPCopyMessagesOperation.h"
+#include "CIMAPFetchContentOperation.h"
 #include "CIMAPFolderInfoOperation+Private.h"
 #include "CIMAPFolderStatusOperation+Private.h"
-#include "CIMAPOperation+Private.h"
 #include "СIMAPSearchOperation+Private.h"
 
 extern "C" {
@@ -61,43 +58,43 @@ extern "C" {
         reinterpret_cast<mailcore::IMAPAsyncSession *>(session->self)->setDefaultNamespace(reinterpret_cast<mailcore::IMAPNamespace *>(nspace->self));  
     }
 
-    CIMAPOperation disconnectOperation(CIMAPAsyncSession *session){
+    CIMAPBaseOperation disconnectOperation(CIMAPAsyncSession *session){
         mailcore::IMAPOperation *imapOperation = reinterpret_cast<mailcore::IMAPAsyncSession *>(session->self)->disconnectOperation();
-        return newIMAPOperation(imapOperation);
+        return newCIMAPBaseOperation(imapOperation);
     }
 
-    CIMAPOperation noopOperation(CIMAPAsyncSession *session){
-        return newIMAPOperation(reinterpret_cast<mailcore::IMAPAsyncSession *>(session->self)->noopOperation());
+    CIMAPBaseOperation noopOperation(CIMAPAsyncSession *session){
+        return newCIMAPBaseOperation(reinterpret_cast<mailcore::IMAPAsyncSession *>(session->self)->noopOperation());
     }
 
-    CIMAPOperation checkAccountOperation(CIMAPAsyncSession *session){
-        return newIMAPOperation(reinterpret_cast<mailcore::IMAPAsyncSession *>(session->self)->checkAccountOperation());
+    CIMAPBaseOperation checkAccountOperation(CIMAPAsyncSession *session){
+        return newCIMAPBaseOperation(reinterpret_cast<mailcore::IMAPAsyncSession *>(session->self)->checkAccountOperation());
     }
 
-    CIMAPOperation capabilityOperation(CIMAPAsyncSession *session){
-        return newIMAPOperation(reinterpret_cast<mailcore::IMAPAsyncSession *>(session->self)->capabilityOperation());
+    CIMAPBaseOperation capabilityOperation(CIMAPAsyncSession *session){
+        return newCIMAPBaseOperation(reinterpret_cast<mailcore::IMAPAsyncSession *>(session->self)->capabilityOperation());
     }
 
-    CIMAPOperation fetchAllFoldersOperation(CIMAPAsyncSession *session){
-        return newIMAPOperation(reinterpret_cast<mailcore::IMAPAsyncSession *>(session->self)->fetchAllFoldersOperation());
+    CIMAPBaseOperation fetchAllFoldersOperation(CIMAPAsyncSession *session){
+        return newCIMAPBaseOperation(reinterpret_cast<mailcore::IMAPAsyncSession *>(session->self)->fetchAllFoldersOperation());
     }
 
-    CIMAPOperation expungeOperation(CIMAPAsyncSession *session, const char *folder){
-        return newIMAPOperation(reinterpret_cast<mailcore::IMAPAsyncSession *>(session->self)->expungeOperation(new mailcore::String(folder)));
+    CIMAPBaseOperation expungeOperation(CIMAPAsyncSession *session, const char *folder){
+        return newCIMAPBaseOperation(reinterpret_cast<mailcore::IMAPAsyncSession *>(session->self)->expungeOperation(new mailcore::String(folder)));
     }
 
-    CIMAPOperation createFolderOperation(CIMAPAsyncSession *session, const char *folder){
-        return newIMAPOperation(reinterpret_cast<mailcore::IMAPAsyncSession *>(session->self)->createFolderOperation(new mailcore::String(folder)));
+    CIMAPBaseOperation createFolderOperation(CIMAPAsyncSession *session, const char *folder){
+        return newCIMAPBaseOperation(reinterpret_cast<mailcore::IMAPAsyncSession *>(session->self)->createFolderOperation(new mailcore::String(folder)));
     }
 
-    CIMAPOperation deleteFolderOperation(CIMAPAsyncSession *session, const char *folder){
-        return newIMAPOperation(reinterpret_cast<mailcore::IMAPAsyncSession *>(session->self)->deleteFolderOperation(new mailcore::String(folder)));
+    CIMAPBaseOperation deleteFolderOperation(CIMAPAsyncSession *session, const char *folder){
+        return newCIMAPBaseOperation(reinterpret_cast<mailcore::IMAPAsyncSession *>(session->self)->deleteFolderOperation(new mailcore::String(folder)));
     }
 
-    CIMAPOperation storeFlagsByUIDOperation(CIMAPAsyncSession *session, const char *folder, CIndexSet *set, IMAPStoreFlagsRequestKind kind, MessageFlag flags, CArray *customFlags){
+    CIMAPBaseOperation storeFlagsByUIDOperation(CIMAPAsyncSession *session, const char *folder, CIndexSet *set, IMAPStoreFlagsRequestKind kind, MessageFlag flags, CArray *customFlags){
         mailcore::IMAPOperation *imapOperation = reinterpret_cast<mailcore::IMAPAsyncSession *>(session->self)->storeFlagsByUIDOperation(new mailcore::String(folder), 
             reinterpret_cast<mailcore::IndexSet *>(set->self), static_cast<mailcore::IMAPStoreFlagsRequestKind>(kind), static_cast<mailcore::MessageFlag>(flags), reinterpret_cast<mailcore::Array *>(customFlags->self));
-        return newIMAPOperation(imapOperation);
+        return newCIMAPBaseOperation(imapOperation);
     }
 
     CIMAPAppendMessageOperation appendMessageOperation(CIMAPAsyncSession *session, const char *folder, const char *messagePath, MessageFlag flags, CArray *array){
@@ -162,9 +159,9 @@ extern "C" {
         return newCIMAPFolderStatusOperation(imapOperation);
     }
     
-    CIMAPIdleOperation idleOperation(struct CIMAPAsyncSession *session, const char *folder, uint32_t lastKnownUID){
-        return newCIMAPIdleOperation(reinterpret_cast<mailcore::IMAPAsyncSession *>(session->self)->idleOperation(new mailcore::String(folder), lastKnownUID));
-    }
+//    CIMAPIdleOperation idleOperation(struct CIMAPAsyncSession *session, const char *folder, uint32_t lastKnownUID){
+//        return newCIMAPIdleOperation(reinterpret_cast<mailcore::IMAPAsyncSession *>(session->self)->idleOperation(new mailcore::String(folder), lastKnownUID));
+//    }
 
     CIMAPAsyncSession newCIMAPAsyncSession(){
         CIMAPAsyncSession session;

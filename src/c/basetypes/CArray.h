@@ -11,7 +11,12 @@ extern "C" {
 
     struct CArray {
         ref self;
-    	void (*addObject)(struct CArray *self, CObject *object);
+        
+    	void        (*addObject)(struct CArray *self, CObject *object);
+        uint32_t    (*size)(struct CArray *self);
+        CObject     (*getObject)(struct CArray *self, uint32_t index);
+        
+        uint32_t    (*getUint)(struct CArray *self, uint32_t index);
     };
     typedef struct CArray CArray;
 

@@ -1,12 +1,27 @@
 #include "CIMAPFetchContentOperation.h"
-#include "CIMAPFetchContentOperation+Private.h"
+
+#define nativeType mailcore::IMAPFetchContentOperation
+#define structName CIMAPFetchContentOperation
+
+CData data(struct CIMAPFetchContentOperation *self);
 
 extern "C" CIMAPFetchContentOperation newCIMAPFetchContentOperation(mailcore::IMAPFetchContentOperation *operationRef){
-    CIMAPFetchContentOperation operation;
-    operation.self = reinterpret_cast<void *>(operationRef);
-    return operation;
+    CIMAPFetchContentOperation self;
+    self.baseOperation = newCIMAPBaseOperation(operationRef);
+    
+    self.data = &data;
+    
+    return self;
 }
 
 extern "C" void deleteCIMAPFetchContentOperation(CIMAPFetchContentOperation operation) {
-    delete reinterpret_cast<mailcore::IMAPFetchContentOperation *>(operation.self);
+
+}
+
+CData data(struct CIMAPFetchContentOperation *self){
+    mailcore::Data *data = reinterpret_cast<nativeType*>(self->baseOperation.cOperation.nativeInstance)->data();
+    CData cdata; 
+    cdata.bytes = data->bytes();
+    cdata.lenght = data->length();
+    return cdata;
 }

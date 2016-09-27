@@ -17,6 +17,7 @@ LOCAL_C_INCLUDES += $(LOCAL_PATH)/../include
 LOCAL_SRC_FILES  := ../../src/c/basetypes/CArray.cpp \
 					../../src/c/basetypes/CObject.cpp \
 					../../src/c/basetypes/CIndexSet.cpp \
+					../../src/c/basetypes/CDictionary.cpp \
 					../../src/c/imap/CIMAPAsyncSession.cpp \
 					../../src/c/imap/CIMAPOperation.cpp \
 					../../src/c/imap/CIMAPAppendMessageOperation.cpp \
@@ -31,6 +32,9 @@ LOCAL_SRC_FILES  := ../../src/c/basetypes/CArray.cpp \
 					../../src/c/imap/CIMAPIdleOperation.cpp \
 					../../src/c/abstract/CAbstractPart.cpp \
 					../../src/c/abstract/CMessageHeader.cpp \
+					../../src/c/abstract/CAbstractMessage.cpp \
+					../../src/c/abstract/CAbstractMessagePart.cpp \
+					../../src/c/abstract/CAbstractMultipart.cpp \
 					../../src/c/abstract/CAddress.cpp \
 					
 LOCAL_CFLAGS := -fblocks					

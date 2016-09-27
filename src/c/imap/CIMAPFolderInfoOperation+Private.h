@@ -2,7 +2,7 @@
 #define MAILCORE_CIMAP_FOLDER_INFO_OPERATION_PRIVATE_H
 
 #include <MailCore/MCAsync.h>
-#include <MailCore/CIMAPFolderInfoOperation.h>
+#include "CIMAPFolderInfoOperation.h"
 
 extern "C" CIMAPFolderInfoOperation newCIMAPFolderInfoOperation(mailcore::IMAPFolderInfoOperation *operation);
 

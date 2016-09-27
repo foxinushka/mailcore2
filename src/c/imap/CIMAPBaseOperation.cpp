@@ -1,12 +1,17 @@
-#include "COperation+Private.h"
+#include "COperation.h"
 #include "CIMAPBaseOperation.h"
-#include "CIMAPBaseOperation+Private.h"
+#include "CBase+Private.h"
+#include <MailCore/MCAsync.h>
+
+#define nativeType mailcore::IMAPOperation
+#define structName CIMAPBaseOperation
 
 class CIMAPBaseOperationIMAPCallback : public mailcore::IMAPOperationCallback {
 public:
-    CIMAPBaseOperationIMAPCallback(CIMAPBaseOperation * op)
+    CIMAPBaseOperationIMAPCallback(CIMAPProgressBlock itemProgressBlock, CIMAPProgressBlock bodyProgressBlock)
     {
-        mOperation = op;
+        mItemProgressBlock = itemProgressBlock;
+        mBodyProgressBlock = bodyProgressBlock;
     }
     
     virtual ~CIMAPBaseOperationIMAPCallback()
@@ -14,27 +19,39 @@ public:
     }
     
     virtual void bodyProgress(mailcore::IMAPOperation * session, unsigned int current, unsigned int maximum) {
-        mOperation->bodyProgress(current, maximum);
+        mBodyProgressBlock(current, maximum);
     }
     
     virtual void itemProgress(mailcore::IMAPOperation * session, unsigned int current, unsigned int maximum) {
-        mOperation->itemProgress(current, maximum);
+        mItemProgressBlock(current, maximum);
     }
     
 private:
-    CIMAPBaseOperation * mOperation;
+    CIMAPProgressBlock mItemProgressBlock;
+    CIMAPProgressBlock mBodyProgressBlock;
 };
 
-extern "C" CIMAPBaseOperation newCIMAPBaseOperation(mailcore::Operation* operationRef) {
-    CIMAPBaseOperation operation;
-    operation.cOperation = newCOperation(operationRef);
-    operation.cOperation.inheritor = &operation;
+void        setProgressBlocks(struct CIMAPBaseOperation *self, CIMAPProgressBlock itemProgressBlock, CIMAPProgressBlock bodyProgressBlock);
+ErrorCode   error(struct CIMAPBaseOperation *self);
+
+extern "C" CIMAPBaseOperation newCIMAPBaseOperation(mailcore::IMAPOperation* operation) {
+    CIMAPBaseOperation self;
+    self.cOperation = newCOperation(operation);
     
-    CIMAPBaseOperationIMAPCallback *callback = new CIMAPBaseOperationIMAPCallback(&operation);
-    operation._callback = reinterpret_cast<void *>(callback);
-    reinterpret_cast<mailcore::IMAPOperation *>(operationRef)->setImapCallback(callback);
+    self.setProgressBlocks = &setProgressBlocks;
+    self.error = &error;
     
-    return operation;
+    return self;
+}
+
+ErrorCode error(struct CIMAPBaseOperation *self) {
+    return static_cast<ErrorCode>(reinterpret_cast<nativeType*>(self->cOperation.nativeInstance)->error());
+}
+
+void setProgressBlocks(struct CIMAPBaseOperation *self, CIMAPProgressBlock itemProgressBlock, CIMAPProgressBlock bodyProgressBlock) {
+    CIMAPBaseOperationIMAPCallback *callback = new CIMAPBaseOperationIMAPCallback(itemProgressBlock, bodyProgressBlock);
+    self->_callback = reinterpret_cast<void *>(callback);
+    reinterpret_cast<nativeType*>(self->cOperation.nativeInstance)->setImapCallback(callback);
 }
 
 extern "C" void deleteCIMAPBaseOperation(CIMAPBaseOperation *operation) {

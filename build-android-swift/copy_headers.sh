@@ -26,3 +26,5 @@ for var in "$sources_path"
 do
 	recursive_observe "$var"
 done
+
+cp $(pwd)/../src/core/basetypes/MCICUTypes.h "${headers_path}"

@@ -18,16 +18,30 @@ swiftc \
     -module-name swiftmailcore \
     -Xlinker -soname=libswiftmailcore.so \
     -o ./libs/armeabi-v7a/libswiftmailcore.so \
-    ../src/swift/imap/ImapSession.swift \
+    ../src/swift/utils/Operation.swift \
+    ../src/swift/utils/MailCoreError.swift \
+    ../src/swift/abstract/AbstractMessage.swift \
+    ../src/swift/abstract/AbstractMessagePart.swift \
+    ../src/swift/abstract/AbstractMultipart.swift \
+    ../src/swift/abstract/AbstractPart.swift \
+    ../src/swift/abstract/Address.swift \
+    ../src/swift/abstract/MessageHeader.swift \
+    ../src/swift/imap/ImapBaseOperation.swift \
     ../src/swift/imap/ImapOperation.swift \
-    ../src/swift/imap/ImapNamespace.swift \
     ../src/swift/imap/ImapAppendMessageOperation.swift \
+    ../src/swift/imap/ImapCopyMessagesOperation.swift \
     ../src/swift/imap/ImapFetchContentOperation.swift \
     ../src/swift/imap/ImapFetchMessagesOperation.swift \
-    ../src/swift/imap/ImapCopyMessagesOperation.swift \
     ../src/swift/imap/ImapFolderInfoOperation.swift \
     ../src/swift/imap/ImapFolderStatusOperation.swift \
-    ../src/swift/imap/ImapSearchExpression.swift \
     ../src/swift/imap/ImapSearchOperation.swift \
+    ../src/swift/imap/ImapIdleOperation.swift \
+    ../src/swift/imap/ImapNamespace.swift \
+    ../src/swift/imap/ImapSearchExpression.swift \
+    ../src/swift/imap/ImapSession.swift \
     ../src/swift/basetypes/Converter.swift \
     ../src/swift/basetypes/IndexSet.swift \
+    ../src/swift/basetypes/String+Mailcore.swift \
+    ../src/swift/basetypes/Dictionary+Mailcore.swift \
+    ../src/swift/basetypes/Data+Mailcore.swift \
+    ../src/swift/basetypes/Array+Mailcore.swift \

@@ -1,19 +1,52 @@
 import Foundation
 
-#if os(iOS) || os(OSX)
-    import CMailCore
-#endif
-
-class ImapAppendMessageOperation {
+class ImapAppendMessageOperation : ImapBaseOperation {
+    
+    typealias CompletionBlock = (Error?, UInt32) -> Void
 	
-	var operation:CIMAPAppendMessageOperation;
+	internal var operation: CIMAPAppendMessageOperation;
+    private var completionBlock : CompletionBlock?;
+    public var progressBlock : OperationProgressBlock?;
 
-	init(operation:CIMAPAppendMessageOperation) {
- 		self.operation = operation
+	internal init(operation:CIMAPAppendMessageOperation) {
+        self.operation = operation;
+        super.init(baseOperation: operation.baseOperation);
 	}
 
 	deinit {
-        //?
-		deleteIMAPAppendMessageOperation(operation);
+        progressBlock = nil;
+        completionBlock = nil;
 	}
+    
+    public func start(completionBlock: CompletionBlock?) {
+        self.completionBlock = completionBlock;
+        start();
+    }
+    
+    override func cancel() {
+        completionBlock = nil;
+        super.cancel();
+    }
+    
+    override func operationCompleted() {
+        if (completionBlock == nil) {
+            return;
+        }
+        
+        let errorCode = error();
+        if errorCode == ErrorNone {
+            completionBlock!(nil, operation.createdUID(&operation));
+        }
+        else {
+            completionBlock!(MailCoreError(code: errorCode), 0);
+        }
+        completionBlock = nil;
+    }
+    
+    override func bodyProgress(current: UInt32, maximum: UInt32) {
+        if progressBlock != nil {
+            progressBlock!(current, maximum);
+        }
+    }
+    
 }

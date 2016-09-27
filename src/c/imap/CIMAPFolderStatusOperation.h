@@ -1,7 +1,7 @@
 #ifndef MAILCORE_CIMAP_FOLDER_STATUS_OPERATION_H
 #define MAILCORE_CIMAP_FOLDER_STATUS_OPERATION_H
 
-#include <MailCore/CBase.h>
+#include "CBase.h"
 
 #ifdef __cplusplus
 extern "C" {

@@ -3,8 +3,8 @@
 
 #include "stdint.h"
 
-#include <MailCore/CBase.h>
-#include <MailCore/CArray.h>
+#include "CBase.h"
+#include "CArray.h"
 
 #ifdef __cplusplus
 extern "C" {

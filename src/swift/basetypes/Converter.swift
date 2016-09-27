@@ -1,14 +1,17 @@
 import Foundation
 
-#if os(iOS) || os(OSX)
-import CMailCore
-#endif
-
-func cFromSwift(array: Array<CObject>) -> CArray {
-	var carray = newCArray();
-	for element in array {
-		var obj: CObject  = element;
-   		carray.addObject(&carray, &obj);
-	}
-    return carray;
+func arrayFromC(_ arg: CArray) -> Array<Any> {
+    var cArray: CArray = arg;
+    var array = Array<Any>();
+    let size = cArray.size(&cArray);
+    for index in 1...size {
+        array.append(cArray.getObject(&cArray, index));
+    }
+    return array;
 }
+
+func cArray(_ array: Array<Any>) -> UnsafeMutablePointer<CArray>?? {
+    return nil;
+}
+
+

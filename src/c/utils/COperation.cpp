@@ -1,65 +1,70 @@
 #include "COperation.h"
-#include "COperation+Private.h"
+#include "CBase+Private.h"
+
+#define nativeType mailcore::Operation
+#define structName COperation
 
 
 class COperationCompletionCallback : public mailcore::Object, public mailcore::OperationCallback {
 public:
-    COperationCompletionCallback(COperation *op) {
-        mOperation = op;
+    COperationCompletionCallback(COperationCompletionBlock block) {
+        completionBlock = block;
     }
     
-    virtual void operationFinished(COperation * op)
+    virtual void operationFinished(mailcore::Operation * op)
     {
-        mOperation->_operationCompleted(mOperation);
+        completionBlock();
     }
     
 private:
-    COperation *mOperation;
+    COperationCompletionBlock completionBlock;;
 };
 
+void setCompletionBlock(COperation *self, COperationCompletionBlock block);
 bool COperationIsCanceled(COperation *operation);
 void COperationCancel(COperation *operation);
 void COperationStart(COperation *operation);
-void COperation_operationCompleted(COperation *operation);
+bool shouldRunWhenCancelled(struct COperation *self);
+void setShouldRunWhenCancelled(struct COperation *self, bool shouldRunWhenCancelled);
 
 COperation newCOperation(mailcore::Operation *operationRef) {
-    COperation operation;
-    operation.self = operationRef;
+    COperation self;
+    self.nativeInstance = operationRef;
+    self._callback = NULL;
     
-    COperationCompletionCallback *callback = new COperationCompletionCallback(&operation);
-    operation._callback = reinterpret_cast<void *>(callback);
-    reinterpret_cast<mailcore::Operation *>(operationRef)->setCallback(callback);
+    self.setCompletionBlock = &setCompletionBlock;
+    self.isCanceled = &COperationIsCanceled;
+    self.cancel = &COperationCancel;
+    self.start = &COperationStart;
+    self.shouldRunWhenCancelled = &shouldRunWhenCancelled;
+    self.setShouldRunWhenCancelled = &setShouldRunWhenCancelled;
     
-    operation.isCanceled = &COperationIsCanceled;
-    operation.cancel = &COperationCancel;
-    operation.start = &COperationStart;
-    operation._operationCompleted = &COperation_operationCompleted;
-    
-    return operation;
+    return self;
 }
 
-bool COperationIsCanceled(COperation *operation) {
-    return reinterpret_cast<mailcore::Operation *>(operation->self)->isCancelled();
+void setCompletionBlock(COperation *self, COperationCompletionBlock block) {
+    COperationCompletionCallback *callback = new COperationCompletionCallback(block);
+    self->_callback = reinterpret_cast<void *>(callback);
+    C_NATIVE_INSTANCE->setCallback(callback);
 }
 
-void COperationCancel(COperation *operation) {
-    if (operation->_started) {
-        operation->_started = false;
+C_SYNTHESIZE_BOOL(setShouldRunWhenCancelled, shouldRunWhenCancelled);
+
+bool COperationIsCanceled(COperation *self) {
+    return C_NATIVE_INSTANCE->isCancelled();
+}
+
+void COperationCancel(COperation *self) {
+    C_NATIVE_INSTANCE->cancel();
+}
+
+void COperationStart(COperation *self) {
+    C_NATIVE_INSTANCE->start();
+}
+
+extern "C" void deleteCOperation(COperation *self) {
+    C_NATIVE_INSTANCE->release();
+    if (self->_callback != NULL) {
+        reinterpret_cast<COperationCompletionCallback *>(self->_callback)->release();
     }
-    reinterpret_cast<mailcore::Operation *>(operation->self)->cancel();
-}
-
-void COperationStart(COperation *operation) {
-    operation->_started = true;
-    reinterpret_cast<mailcore::Operation *>(operation->self)->start();
-}
-
-void COperation_operationCompleted(COperation *operation) {
-    operation->_started = false;
-    operation->operationCompleted(operation);
-}
-
-extern "C" void deleteCOperation(COperation *operation) {
-    reinterpret_cast<mailcore::Operation *>(operation->self)->release();
-    reinterpret_cast<COperationCompletionCallback *>(operation->_callback)->release();
 }

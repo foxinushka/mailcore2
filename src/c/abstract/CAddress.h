@@ -3,8 +3,8 @@
 
 #include "stdint.h"
 
-#include <MailCore/CBase.h>
-#include <MailCore/CArray.h>
+#include "CBase.h"
+#include "CArray.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -22,13 +22,14 @@ extern "C" {
     };
     typedef struct CAddress CAddress;
     
-    CAddress    addressWithDisplayName(const UChar* displayName, const UChar* mailbox);
-    CAddress    addressWithMailbox(const UChar* mailbox);
-    CAddress    addressWithRFC822String(const UChar* RFC822String);
-    CAddress    addressWithNonEncodedRFC822String(const UChar* nonEncodedRFC822String);
-    CArray      addressesWithRFC822String(const UChar* string);
-    CArray      addressesWithNonEncodedRFC822String(const UChar* string);
+    CAddress    CaddressWithDisplayName(const UChar* displayName, const UChar* mailbox);
+    CAddress    CaddressWithMailbox(const UChar* mailbox);
+    CAddress    CaddressWithRFC822String(const UChar* RFC822String);
+    CAddress    CaddressWithNonEncodedRFC822String(const UChar* nonEncodedRFC822String);
+    CArray      CaddressesWithRFC822String(const UChar* string);
+    CArray      CaddressesWithNonEncodedRFC822String(const UChar* string);
 
+    CAddress newCAddress();
     void deleteCAddress(CAddress *self);
     
 #ifdef __cplusplus

@@ -2,7 +2,7 @@
 #define MAILCORE_СIMAP_SEARCH_OPERATION_PRIVATE_H
 
 #include <MailCore/MCAsync.h>
-#include <MailCore/СIMAPSearchOperation.h>
+#include "СIMAPSearchOperation.h"
 
 extern "C" CIMAPSearchOperation newCIMAPSearchOperation(mailcore::IMAPSearchOperation *operation);
 

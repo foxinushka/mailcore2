@@ -1,14 +1,17 @@
 #ifndef MAILCORE_CIMAP_COPY_MESSAGES_OPERATION_H
 #define MAILCORE_CIMAP_COPY_MESSAGES_OPERATION_H
 
-#include <MailCore/CBase.h>
+#include "CIMAPBaseOperation.h"
+#include "CDictionary.h"
 
 #ifdef __cplusplus
 extern "C" {
 #endif
     
     struct CIMAPCopyMessagesOperation {
-        ref self;
+        CIMAPBaseOperation baseOperation;
+        
+        CDictionary (*uidMapping)(struct CIMAPCopyMessagesOperation *self);
     };
     typedef struct CIMAPCopyMessagesOperation CIMAPCopyMessagesOperation;
 
@@ -16,6 +19,12 @@ extern "C" {
 
 #ifdef __cplusplus
 }
+#endif
+
+#ifdef __cplusplus
+#include <MailCore/MCAsync.h>
+
+extern "C" CIMAPCopyMessagesOperation newCIMAPCopyMessagesOperation(mailcore::IMAPCopyMessagesOperation *operation);
 #endif
 
 #endif

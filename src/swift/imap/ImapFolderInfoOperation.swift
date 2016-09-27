@@ -1,8 +1,8 @@
 import Foundation
 
-#if os(iOS) || os(OSX)
-    import CMailCore
-#endif
+//#if os(iOS) || os(OSX)
+//    import CMailCore
+//#endif
 
 class ImapFolderInfoOperation {
 	

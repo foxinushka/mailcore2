@@ -1,24 +1,22 @@
 #ifndef MAILCORE_CIMAP_BASE_OPERATION_H
 #define MAILCORE_CIMAP_BASE_OPERATION_H
 
-#include <MailCore/COperation.h>
+#include "COperation.h"
 
 #ifdef __cplusplus
 extern "C" {
 #endif
     
+    typedef void (^CIMAPProgressBlock)(unsigned int current, unsigned int maximum);
+    
     typedef struct CIMAPAsyncSession CIMAPAsyncSession;
     
     struct CIMAPBaseOperation {
         COperation                                  cOperation;
-        ref                                         inheritor;
         /*CIMAPBaseOperationIMAPCallback*/ref       _callback;
         
-        CIMAPAsyncSession *session;
-        
-        //virtual
-        void (*bodyProgress)(unsigned int current, unsigned int maximum);
-        void (*itemProgress)(unsigned int current, unsigned int maximum);
+        ErrorCode   (*error)(struct CIMAPBaseOperation *self);
+        void        (*setProgressBlocks)(struct CIMAPBaseOperation *self, CIMAPProgressBlock itemProgressBlock, CIMAPProgressBlock bodyProgressBlock);
     };
     typedef struct CIMAPBaseOperation CIMAPBaseOperation;
 
@@ -26,6 +24,12 @@ extern "C" {
 
 #ifdef __cplusplus
 }
+#endif
+
+#ifdef __cplusplus
+#include <MailCore/MCAsync.h>
+
+extern "C" CIMAPBaseOperation newCIMAPBaseOperation(mailcore::IMAPOperation* operation);
 #endif
 
 #endif

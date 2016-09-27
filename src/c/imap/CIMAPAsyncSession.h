@@ -5,21 +5,21 @@
 #include <time.h>
 #include <stdbool.h>
 
-#include <MailCore/CBase.h>
-#include <MailCore/CIndexSet.h>
-#include <MailCore/CArray.h>
-#include <MailCore/CIMAPNamespace.h>
-#include <MailCore/CIMAPOperation.h>
-#include <MailCore/CIMAPAppendMessageOperation.h>
-#include <MailCore/CIMAPFetchContentOperation.h>
-#include <MailCore/CIMAPFetchMessagesOperation.h>
-#include <MailCore/СIMAPSearchOperation.h>
-#include <MailCore/CIMAPSearchExpression.h>
-#include <MailCore/CIMAPCopyMessagesOperation.h>
-#include <MailCore/CIMAPFolderInfoOperation.h>
-#include <MailCore/CIMAPFolderStatusOperation.h>
-#include <MailCore/CMessageConstants.h>
-#include <MailCore/CIMAPIdleOperation.h>
+#include "CBase.h"
+#include "CIndexSet.h"
+#include "CArray.h"
+#include "CIMAPNamespace.h"
+#include "CIMAPBaseOperation.h"
+#include "CIMAPAppendMessageOperation.h"
+#include "CIMAPFetchContentOperation.h"
+#include "CIMAPFetchMessagesOperation.h"
+#include "СIMAPSearchOperation.h"
+#include "CIMAPSearchExpression.h"
+#include "CIMAPCopyMessagesOperation.h"
+#include "CIMAPFolderInfoOperation.h"
+#include "CIMAPFolderStatusOperation.h"
+#include "CMessageConstants.h"
+#include "CIMAPIdleOperation.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -40,15 +40,15 @@ extern "C" {
         void    (*setAllowsFolderConcurrentAccessEnabled)(struct CIMAPAsyncSession *self, bool enabled);
         void    (*setDefaultNamespace)(struct CIMAPAsyncSession *self, CIMAPNamespace *nspace);
 
-        CIMAPOperation  (*disconnectOperation)(struct CIMAPAsyncSession *self);
-        CIMAPOperation  (*noopOperation)(struct CIMAPAsyncSession *self);
-        CIMAPOperation  (*checkAccountOperation)(struct CIMAPAsyncSession *self);
-        CIMAPOperation  (*capabilityOperation)(struct CIMAPAsyncSession *self);
-        CIMAPOperation  (*fetchAllFoldersOperation)(struct CIMAPAsyncSession *self);
-        CIMAPOperation  (*expungeOperation)(struct CIMAPAsyncSession *self, const char *folder);
-        CIMAPOperation  (*createFolderOperation)(struct CIMAPAsyncSession *self, const char *folder);
-        CIMAPOperation  (*deleteFolderOperation)(struct CIMAPAsyncSession *self, const char *folder);
-        CIMAPOperation  (*storeFlagsByUIDOperation)(struct CIMAPAsyncSession *session, const char *folder, CIndexSet *set, IMAPStoreFlagsRequestKind kind, MessageFlag flags, CArray *customFlags);
+        CIMAPBaseOperation  (*disconnectOperation)(struct CIMAPAsyncSession *self);
+        CIMAPBaseOperation  (*noopOperation)(struct CIMAPAsyncSession *self);
+        CIMAPBaseOperation  (*checkAccountOperation)(struct CIMAPAsyncSession *self);
+        CIMAPBaseOperation  (*capabilityOperation)(struct CIMAPAsyncSession *self);
+        CIMAPBaseOperation  (*fetchAllFoldersOperation)(struct CIMAPAsyncSession *self);
+        CIMAPBaseOperation  (*expungeOperation)(struct CIMAPAsyncSession *self, const char *folder);
+        CIMAPBaseOperation  (*createFolderOperation)(struct CIMAPAsyncSession *self, const char *folder);
+        CIMAPBaseOperation  (*deleteFolderOperation)(struct CIMAPAsyncSession *self, const char *folder);
+        CIMAPBaseOperation  (*storeFlagsByUIDOperation)(struct CIMAPAsyncSession *session, const char *folder, CIndexSet *set, IMAPStoreFlagsRequestKind kind, MessageFlag flags, CArray *customFlags);
 
         CIMAPAppendMessageOperation (*appendMessageOperation)(struct CIMAPAsyncSession *session, const char *folder, const char *messagePath, MessageFlag flags, CArray *array);
         CIMAPFetchMessagesOperation (*fetchMessagesByNumberOperation)(struct CIMAPAsyncSession *session, const char *folder, IMAPMessagesRequestKind kind, CIndexSet *numbers);
@@ -61,7 +61,7 @@ extern "C" {
         CIMAPCopyMessagesOperation  (*copyMessagesOperation)(struct CIMAPAsyncSession *self, const char *folder, CIndexSet *uids,const char *destFolder);
         CIMAPFolderInfoOperation    (*folderInfoOperation)(struct CIMAPAsyncSession *self, const char *folder);
         CIMAPFolderStatusOperation  (*folderStatusOperation)(struct CIMAPAsyncSession *self, const char *folder);
-        CIMAPIdleOperation          (*idleOperation)(struct CIMAPAsyncSession *self, const char *folder, uint32_t lastKnownUID);
+        //CIMAPIdleOperation          (*idleOperation)(struct CIMAPAsyncSession *self, const char *folder, uint32_t lastKnownUID);
     } CIMAPAsyncSession;
 
     CIMAPAsyncSession newCIMAPAsyncSession();

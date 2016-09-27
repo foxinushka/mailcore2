@@ -1,32 +1,48 @@
 import Foundation
 
-#if os(iOS) || os(OSX)
-    import CMailCore
-#endif
-
-class ImapIdleOperation {
+class ImapIdleOperation : ImapBaseOperation {
     
-    typealias CompletionBlock = @convention(block) (ErrorCode) -> Void
-
-	var ref:CIMAPIdleOperation;
-
-	init(operation:CIMAPIdleOperation) {
- 		self.ref = operation
-	}
+    typealias CompletionBlock = (Error?) -> Void
+    
+    internal var idleOperation: CIMAPIdleOperation;
+    private var completionBlock: CompletionBlock?;
+    
+    internal init(idleOperation: CIMAPIdleOperation) {
+        self.idleOperation = idleOperation;
+        super.init(baseOperation: idleOperation.operation);
+    }
 
 	deinit {
-		deleteCIMAPIdleOperation(&ref);
+		deleteCIMAPIdleOperation(&idleOperation);
 	}
-    
-    func start(completionBlock: CompletionBlock?) {
-        ref.start(&ref, completionBlock);
+
+    public func start(completionBlock: CompletionBlock?) {
+        self.completionBlock = completionBlock;
+        start();
+    }
+
+    override func cancel() {
+        self.completionBlock = nil;
+        super.cancel();
     }
     
-    func cancel() {
-        ref.cancel(&ref);
+    override func operationCompleted() {
+        if (completionBlock == nil) {
+            return;
+        }
+
+        let errorCode = error();
+        if errorCode == ErrorNone {
+            completionBlock!(nil);
+        }
+        else {
+            completionBlock!(MailCoreError(code: errorCode));
+        }
+        completionBlock = nil;
+    }
+
+    public func interruptIdle() {
+        idleOperation.interruptIdle(&idleOperation);
     }
     
-    func interruptIdle() {
-        ref.interruptIdle(&ref);
-    }
 }

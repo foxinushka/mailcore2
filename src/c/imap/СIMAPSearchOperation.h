@@ -1,7 +1,7 @@
 #ifndef MAILCORE_СIMAP_SEARCH_OPERATION_H
 #define MAILCORE_СIMAP_SEARCH_OPERATION_H
 
-#include <MailCore/CBase.h>
+#include "CBase.h"
 
 #ifdef __cplusplus
 extern "C" {

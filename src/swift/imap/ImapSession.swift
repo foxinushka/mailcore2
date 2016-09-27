@@ -1,8 +1,8 @@
 import Foundation
 
-#if os(iOS) || os(OSX)
-    import CMailCore
-#endif
+//#if os(iOS) || os(OSX)
+//    import CMailCore
+//#endif
 
 class ImapSession {
 	
@@ -96,15 +96,13 @@ class ImapSession {
     }
 
     func storeFlagsByUIDOperation(folder:String, uids:IndexSet, kind:IMAPStoreFlagsRequestKind, flags:MessageFlag, customFlags:Array<CObject>) -> ImapOperation {
-    	var array: CArray = cFromSwift(array: customFlags);
-    	return ImapOperation(operation: session.storeFlagsByUIDOperation(&session, folder, &uids.indexSet, kind, flags, &array));
+    	return ImapOperation(operation: session.storeFlagsByUIDOperation(&session, folder, &uids.indexSet, kind, flags, cArray(customFlags)!));
     }
 
 
 
     func appendMessageOperation(folder:String, path:String, flags:MessageFlag, customFlags:Array<CObject>) -> ImapAppendMessageOperation {
-    	var array: CArray = cFromSwift(array: customFlags);
-    	return ImapAppendMessageOperation(operation: session.appendMessageOperation(&session, folder, path, flags, &array));
+    	return ImapAppendMessageOperation(operation: session.appendMessageOperation(&session, folder, path, flags, cArray(customFlags)!));
     }
 
     func fetchMessagesByNumber(folder:String, type:IMAPMessagesRequestKind, numbers:IndexSet) -> ImapFetchMessagesOperation {
@@ -147,9 +145,9 @@ class ImapSession {
     	return ImapFolderStatusOperation(operation: session.folderStatusOperation(&session, folder));
     }
     
-    func idleOperation(folder:String, lastKnownUID:UInt32) -> ImapIdleOperation {
-        return ImapIdleOperation(operation: session.idleOperation(&session, folder, lastKnownUID));
-    }
+//    func idleOperation(folder:String, lastKnownUID:UInt32) -> ImapIdleOperation {
+//        return ImapIdleOperation(operation: session.idleOperation(&session, folder, lastKnownUID));
+//    }
     
 
 	deinit {

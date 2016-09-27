@@ -5,6 +5,7 @@
 #include <MailCore/MCString.h>
 
 #define C_NATIVE_INSTANCE reinterpret_cast<nativeType*>(self->nativeInstance)
+#define C_ANCESTOR_INSTANCE reinterpret_cast<nativeType*>(ancestor->nativeInstance)
 
 #define C_SYNTHESIZE_SCALAR(cType, mcType, setter, getter) \
 cType getter(structName *self){ \

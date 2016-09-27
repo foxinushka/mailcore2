@@ -1,12 +1,35 @@
 #include "CIMAPAppendMessageOperation.h"
-#include "CIMAPAppendMessageOperation+Private.h"
+
+#define nativeType mailcore::IMAPAppendMessageOperation
+#define structName CIMAPAppendMessageOperation
+
+void        setDate(struct CIMAPAppendMessageOperation *self, time_t date);
+time_t      date(struct CIMAPAppendMessageOperation *self);
+uint32_t    createdUID(struct CIMAPAppendMessageOperation *self);
 
 extern "C" CIMAPAppendMessageOperation newIMAPAppendMessageOperation(mailcore::IMAPAppendMessageOperation *op){
-    CIMAPAppendMessageOperation operation;
-    operation.self = reinterpret_cast<void *>(op);
-    return operation;
+    CIMAPAppendMessageOperation self;
+    self.baseOperation = newCIMAPBaseOperation(op);
+    
+    self.setDate = &setDate;
+    self.date = &date;
+    self.createdUID = &createdUID;
+    
+    return self;
 }
 
-extern "C" void deleteIMAPAppendMessageOperation(CIMAPAppendMessageOperation operation) {
-	    delete reinterpret_cast<mailcore::IMAPAppendMessageOperation *>(operation.self);
+void setDate(struct CIMAPAppendMessageOperation *self, time_t date) {
+    reinterpret_cast<nativeType*>(self->baseOperation.cOperation.nativeInstance)->setDate(date);
+}
+
+time_t date(struct CIMAPAppendMessageOperation *self) {
+    return reinterpret_cast<nativeType*>(self->baseOperation.cOperation.nativeInstance)->date();
+}
+
+uint32_t createdUID(struct CIMAPAppendMessageOperation *self) {
+    return reinterpret_cast<nativeType*>(self->baseOperation.cOperation.nativeInstance)->createdUID();
+}
+
+extern "C" void deleteIMAPAppendMessageOperation(CIMAPAppendMessageOperation *operation) {
+
 }
