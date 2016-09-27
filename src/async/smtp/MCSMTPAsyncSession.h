@@ -71,6 +71,7 @@ namespace mailcore {
         virtual SMTPOperation * sendMessageOperation(Address * from, Array * recipients,
                                                      String * filename);
         virtual SMTPOperation * checkAccountOperation(Address * from);
+        virtual SMTPOperation * checkAccountOperation(Address * from, Address * to);
         
         virtual SMTPOperation * noopOperation();
         

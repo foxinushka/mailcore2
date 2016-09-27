@@ -25,12 +25,15 @@ namespace mailcore {
         virtual void setFrom(Address * from);
         virtual Address * from();
         
+        virtual void setTo(Address * to);
+        virtual Address * to();
+        
     public: // subclass behavior
         virtual void main();
         
     private:
         Address * mFrom;
-        
+        Address * mTo;
     };
 
 }

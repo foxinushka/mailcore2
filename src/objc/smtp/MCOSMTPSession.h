@@ -183,6 +183,16 @@
 - (MCOSMTPOperation *) checkAccountOperationWithFrom:(MCOAddress *)from;
 
 /**
+ Returns an operation that will check whether the SMTP account is valid with explicit recipient address.
+ 
+ MCOSMTPOperation * op = [session checkAccountOperationWithFrom:[MCOAddress addressWithMailbox:@"hoa@etpan.org"] to:[MCOAddress addressWithMailbox:@"test@addr.org"]];
+ [op start:^(NSError * __nullable error) {
+ ...
+ }];
+ */
+- (MCOSMTPOperation *) checkAccountOperationWithFrom:(MCOAddress *)from to:(MCOAddress *)to;
+
+/**
  Returns an operation that will perform a No-Op.
  
  MCOSMTPOperation * op = [session noopOperation];
