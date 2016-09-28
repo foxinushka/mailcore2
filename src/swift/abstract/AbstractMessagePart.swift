@@ -1,6 +1,6 @@
 import Foundation
 
-class AbstractMessagePart : AbstractPart {
+public class AbstractMessagePart : AbstractPart {
     
     var abstractMessagePart:CAbstractMessagePart;
     

@@ -1,8 +1,8 @@
 import Foundation
 
-class AbstractPart {
+public class AbstractPart {
     
-    var nativeInstance:CAbstractPart;
+    private var nativeInstance:CAbstractPart;
     
     init(_ abstractPart:CAbstractPart) {
         self.nativeInstance = abstractPart;
@@ -10,6 +10,10 @@ class AbstractPart {
     
     deinit {
         deleteCAbstractPart(&self.nativeInstance);
+    }
+    
+    internal func CAbstractPart() -> CAbstractPart {
+        return nativeInstance;
     }
     
     /** Returns type of the part (single / message part / multipart/mixed,

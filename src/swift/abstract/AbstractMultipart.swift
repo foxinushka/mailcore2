@@ -1,6 +1,6 @@
 import Foundation
 
-class AbstractMultipart : AbstractPart {
+public class AbstractMultipart : AbstractPart {
     
     var abstractMultipart: CAbstractMultipart;
     

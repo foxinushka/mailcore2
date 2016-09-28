@@ -1,23 +1,16 @@
 #include <MailCore/MCCore.h>
-
-extern "C" {
-	#include "CIndexSet.h"
-
-	CIndexSet newCIndexSetWithRange(uint64_t start, uint64_t end) {
-        return newCIndexSet(mailcore::IndexSet::indexSetWithRange(mailcore::RangeMake(start, end)));
-	}
-
-	void deleteCIndexSet(CIndexSet indexSet) {
-	    delete reinterpret_cast<mailcore::IndexSet *>(indexSet.self);
-	}
-}
+#include "CIndexSet.h"
 
 CIndexSet newCIndexSet(mailcore::IndexSet *set) {
     CIndexSet indexSet;
-    indexSet.self = set;
+    indexSet.nativeInstance = set;
     return indexSet;
 }
 
-mailcore::IndexSet* cast(CIndexSet *self) {
-    return reinterpret_cast<mailcore::IndexSet*>(self->self);
+mailcore::IndexSet* cast(CIndexSet self) {
+    return reinterpret_cast<mailcore::IndexSet*>(self.nativeInstance);
+}
+
+void deleteCIndexSet(CIndexSet indexSet) {
+    
 }

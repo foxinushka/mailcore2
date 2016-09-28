@@ -8,7 +8,7 @@ CIndexSet   vanishedMessages(struct CIMAPFetchMessagesOperation *self);
 CArray      extraHeaders(struct CIMAPFetchMessagesOperation *self);
 void        setExtraHeaders(struct CIMAPFetchMessagesOperation *self, CArray *array);
 
-extern "C" CIMAPFetchMessagesOperation newCIMAPFetchMessagesOperation(mailcore::IMAPFetchMessagesOperation *operationRef){
+CIMAPFetchMessagesOperation newCIMAPFetchMessagesOperation(mailcore::IMAPFetchMessagesOperation *operationRef){
     CIMAPFetchMessagesOperation self;
     self.baseOperation = newCIMAPBaseOperation(operationRef);
 
@@ -20,7 +20,7 @@ extern "C" CIMAPFetchMessagesOperation newCIMAPFetchMessagesOperation(mailcore::
     return self;
 }
 
-extern "C" void deleteCIMAPFetchMessagesOperation(CIMAPFetchMessagesOperation *operation) {
+void deleteCIMAPFetchMessagesOperation(CIMAPFetchMessagesOperation *operation) {
 
 }
 
@@ -28,9 +28,9 @@ CArray messages(struct CIMAPFetchMessagesOperation *self){
     return newCArray2(reinterpret_cast<nativeType*>(self->baseOperation.cOperation.nativeInstance)->messages());
 }
 
-//CIndexSet vanishedMessages(struct CIMAPFetchMessagesOperation *self){
-//    return newCIndexSet(reinterpret_cast<nativeType*>(self->baseOperation.cOperation.nativeInstance)->vanishedMessages());
-//}
+CIndexSet vanishedMessages(struct CIMAPFetchMessagesOperation *self){
+    return newCIndexSet(reinterpret_cast<nativeType*>(self->baseOperation.cOperation.nativeInstance)->vanishedMessages());
+}
 
 CArray extraHeaders(struct CIMAPFetchMessagesOperation *self){
     return newCArray2(reinterpret_cast<nativeType*>(self->baseOperation.cOperation.nativeInstance)->extraHeaders());

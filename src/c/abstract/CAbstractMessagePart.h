@@ -29,7 +29,7 @@ extern "C" {
 #endif
 
 #ifdef __cplusplus
-CAbstractPart newCAbstractMessagePart(mailcore::AbstractPart *part);
+CAbstractMessagePart newCAbstractMessagePart(mailcore::AbstractMessagePart *part);
 mailcore::AbstractPart * cast(CAbstractMessagePart *part);
 #endif
 

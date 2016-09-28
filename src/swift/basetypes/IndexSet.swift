@@ -1,6 +1,6 @@
 import Foundation
 
-class IndexSet {
+public class IndexSet {
 	
 	var indexSet:CIndexSet;
     
@@ -8,9 +8,9 @@ class IndexSet {
         self.indexSet = cindexset;
     }
 
-	init(start:UInt64, end:UInt64) {
- 		self.indexSet = newCIndexSetWithRange(start, end);
-	}
+//	init(start:UInt64, end:UInt64) {
+// 		self.indexSet = newCIndexSetWithRange(start, end);
+//	}
 
 	deinit {
 		deleteCIndexSet(indexSet);

@@ -23,3 +23,7 @@ CArray newCArray2(mailcore::Array *array) {
 mailcore::Array* cast(CArray *array){
     return reinterpret_cast<mailcore::Array*>(array->self);
 }
+
+mailcore::Array* nativeInstance(CArray array) {
+    return reinterpret_cast<mailcore::Array*>(array.self);
+}

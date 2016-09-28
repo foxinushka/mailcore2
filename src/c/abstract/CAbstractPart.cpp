@@ -64,8 +64,13 @@ CAbstractPart newCAbstractPart(mailcore::AbstractPart *part){
     return self;
 }
 
+//TODO: delete
 mailcore::AbstractPart * cast(CAbstractPart *part){
     return reinterpret_cast<mailcore::AbstractPart*>(part->nativeInstance);
+}
+
+mailcore::AbstractPart * cast(CAbstractPart part){
+    return reinterpret_cast<mailcore::AbstractPart*>(part.nativeInstance);
 }
 
 extern "C" void deleteCAbstractPart(CAbstractPart *self){

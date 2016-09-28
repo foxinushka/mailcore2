@@ -1,14 +1,28 @@
 #include "CIMAPFolderInfoOperation.h"
-#include "CIMAPFolderInfoOperation+Private.h"
+#include "CBase+Private.h"
 
-extern "C" {
-    CIMAPFolderInfoOperation newCIMAPFolderInfoOperation(mailcore::IMAPFolderInfoOperation *operationRef){
-        CIMAPFolderInfoOperation operation;
-        operation.self = reinterpret_cast<void *>(operationRef);
-        return operation;
-    }
+#define nativeType mailcore::IMAPFolderInfoOperation
+#define structName CIMAPFolderInfoOperation
 
-    void deleteCIMAPFolderInfoOperation(CIMAPFolderInfoOperation operation) {
-        delete reinterpret_cast<mailcore::IMAPFolderInfoOperation *>(operation.self);
-    }
+CIMAPFolderInfo info(struct CIMAPFolderInfoOperation self);
+
+CIMAPFolderInfoOperation newCIMAPFolderInfoOperation(mailcore::IMAPFolderInfoOperation *operation){
+    CIMAPFolderInfoOperation self;
+    self.baseOperation = newCIMAPBaseOperation(operation);
+    
+    self.info = &info;
+    
+    return self;
+}
+
+mailcore::IMAPFolderInfoOperation * cast(CIMAPFolderInfoOperation self) {
+    return reinterpret_cast<mailcore::IMAPFolderInfoOperation *>(self.baseOperation.cOperation.nativeInstance);
+}
+
+void deleteCIMAPFolderInfoOperation(CIMAPFolderInfoOperation operation) {
+    
+}
+
+CIMAPFolderInfo info(CIMAPFolderInfoOperation self) {
+    return newCIMAPFolderInfo(cast(self)->info());
 }

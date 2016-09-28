@@ -53,8 +53,10 @@ extern "C" {
 #endif
 
 #ifdef __cplusplus
+#include <MailCore/MCCore.h>
 CAbstractPart newCAbstractPart(mailcore::AbstractPart *part);
 mailcore::AbstractPart * cast(CAbstractPart *part);
+mailcore::AbstractPart * cast(CAbstractPart part);
 #endif
 
 #endif

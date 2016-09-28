@@ -1,0 +1,22 @@
+import Foundation
+
+public class ImapMultipart : AbstractMultipart {
+    
+    private var nativeInstance:CIMAPMultipart;
+    
+    internal init(part:CIMAPMultipart) {
+        self.nativeInstance = part;
+        super.init(abstractMultipart: part.abstractMultipart);
+    }
+    
+    deinit {
+        
+    }
+    
+    /** A part identifier is of the form 1.2.1*/
+    public var partID: String {
+        get { return String(utf16: nativeInstance.partID(&nativeInstance)!)!; }
+        set { nativeInstance.setPartID(&nativeInstance, newValue.utf16CString); }
+    }
+    
+}

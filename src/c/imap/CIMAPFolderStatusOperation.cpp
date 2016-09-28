@@ -1,14 +1,28 @@
 #include "CIMAPFolderStatusOperation.h"
-#include "CIMAPFolderStatusOperation+Private.h"
+#include "CBase+Private.h"
 
-extern "C" {
-    CIMAPFolderStatusOperation newCIMAPFolderStatusOperation(mailcore::IMAPFolderStatusOperation *operationRef){
-        CIMAPFolderStatusOperation operation;
-        operation.self = reinterpret_cast<void *>(operationRef);
-        return operation;
-    }
+#define nativeType mailcore::IMAPFolderStatusOperation
+#define structName CIMAPFolderStatusOperation
 
-    void deleteCIMAPFolderStatusOperation(CIMAPFolderStatusOperation operation) {
-        delete reinterpret_cast<mailcore::IMAPFolderStatusOperation *>(operation.self);
-    }
+CIMAPFolderStatus status(struct CIMAPFolderStatusOperation self);
+
+CIMAPFolderStatusOperation newCIMAPFolderStatusOperation(mailcore::IMAPFolderStatusOperation *operation){
+    CIMAPFolderStatusOperation self;
+    self.baseOperation = newCIMAPBaseOperation(operation);
+    
+    self.status = &status;
+    
+    return self;
+}
+
+mailcore::IMAPFolderStatusOperation * cast(CIMAPFolderStatusOperation self) {
+    return reinterpret_cast<mailcore::IMAPFolderStatusOperation *>(self.baseOperation.cOperation.nativeInstance);
+}
+
+void deleteCIMAPFolderStatusOperation(CIMAPFolderStatusOperation operation) {
+    
+}
+
+CIMAPFolderStatus status(CIMAPFolderStatusOperation self) {
+    return newCIMAPFolderStatus(cast(self)->status());
 }

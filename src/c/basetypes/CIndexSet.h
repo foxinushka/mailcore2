@@ -9,11 +9,12 @@ extern "C" {
 #endif
 
     struct CIndexSet {
-        ref self;
+        ref nativeInstance;
+        
     };
     typedef struct CIndexSet CIndexSet;
 
-    CIndexSet newCIndexSetWithRange(uint64_t start, uint64_t end);
+    //CIndexSet newCIndexSetWithRange(uint64_t start, uint64_t end);
     void deleteCIndexSet(CIndexSet self);
     
 #ifdef __cplusplus
@@ -21,8 +22,9 @@ extern "C" {
 #endif
 
 #ifdef __cplusplus
+#include <MailCore/MCCore.h>
 CIndexSet newCIndexSet(mailcore::IndexSet *set);
-mailcore::IndexSet* cast(CIndexSet *self);
+mailcore::IndexSet* cast(CIndexSet self);
 #endif
 
 #endif

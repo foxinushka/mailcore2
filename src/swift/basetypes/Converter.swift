@@ -14,4 +14,8 @@ func cArray(_ array: Array<Any>) -> UnsafeMutablePointer<CArray>?? {
     return nil;
 }
 
+func cArray2(_ array: Array<Any>) -> CArray {
+    return newCArray();
+}
+
 

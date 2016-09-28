@@ -1,12 +1,16 @@
 import Foundation
 
-class AbsrtactMessage {
+public class AbsrtactMessage {
 	
-    var nativeInstance:CAbstractMessage;
+    private var nativeInstance:CAbstractMessage;
 
     init(abstractMessage:CAbstractMessage) {
         self.nativeInstance = abstractMessage;
 	}
+    
+    deinit {
+        deleteCAbstractMessage(&nativeInstance);
+    }
     
     /** Header of the message. */
     public var header : MessageHeader {
@@ -47,8 +51,4 @@ class AbsrtactMessage {
     public func requiredPartsForRendering() -> Array<Any>? {
         return arrayFromC(nativeInstance.requiredPartsForRendering(&nativeInstance));
     }
-
-	deinit {
-        deleteCAbstractMessage(&nativeInstance);
-	}
 }

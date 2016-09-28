@@ -38,7 +38,7 @@ extern "C" {
         void    (*setAuthType)(struct CIMAPAsyncSession *session, AuthType authType);  
         void    (*setMaximumConnections)(struct CIMAPAsyncSession *self, unsigned int maxConnections);
         void    (*setAllowsFolderConcurrentAccessEnabled)(struct CIMAPAsyncSession *self, bool enabled);
-        void    (*setDefaultNamespace)(struct CIMAPAsyncSession *self, CIMAPNamespace *nspace);
+        void    (*setDefaultNamespace)(struct CIMAPAsyncSession *self, CIMAPNamespace nspace);
 
         CIMAPBaseOperation  (*disconnectOperation)(struct CIMAPAsyncSession *self);
         CIMAPBaseOperation  (*noopOperation)(struct CIMAPAsyncSession *self);
@@ -56,7 +56,7 @@ extern "C" {
         CIMAPFetchMessagesOperation (*syncMessagesByUIDOperation)(struct CIMAPAsyncSession *session, const char *folder, IMAPMessagesRequestKind kind, CIndexSet *uids, uint64_t modSeq);
         CIMAPFetchContentOperation  (*fetchMessageByUIDOperation)(struct CIMAPAsyncSession *self, const char *folder, uint32_t uid, bool urgent);
         CIMAPFetchContentOperation  (*fetchMessageAttachmentByUIDOperation)(struct CIMAPAsyncSession *session, const char *folder, uint32_t uid, const char *partID, Encoding encoding, bool urgent);
-        CIMAPSearchOperation        (*searchOperationWithExpression)(struct CIMAPAsyncSession *self, const char *folder, СIMAPSearchExpression *expression);
+        CIMAPSearchOperation        (*searchOperationWithExpression)(struct CIMAPAsyncSession *self, const char *folder, CIMAPSearchExpression expression);
         CIMAPSearchOperation        (*searchOperation)(struct CIMAPAsyncSession *session, const char *folder, IMAPSearchKind kind, const char *str);
         CIMAPCopyMessagesOperation  (*copyMessagesOperation)(struct CIMAPAsyncSession *self, const char *folder, CIndexSet *uids,const char *destFolder);
         CIMAPFolderInfoOperation    (*folderInfoOperation)(struct CIMAPAsyncSession *self, const char *folder);

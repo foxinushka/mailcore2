@@ -2,21 +2,38 @@
 #define MAILCORE_CIMAP_NAMESPACE_H
 
 #include "CBase.h"
+#include "CArray.h"
 
 #ifdef __cplusplus
 extern "C" {
 #endif
     
     struct CIMAPNamespace {
-        ref self;
+        ref nativeInstance;
+        
+        const UChar*    (*mainPrefix)(struct CIMAPNamespace *self);
+        char            (*mainDelimiter)(struct CIMAPNamespace *self);
+        CArray          (*prefixes)(struct CIMAPNamespace *self);
+        const UChar*    (*pathForComponents)(struct CIMAPNamespace *self, CArray components);
+        const UChar*    (*pathForComponentsAndPrefix)(struct CIMAPNamespace *self, CArray components, const UChar* prefix);
+        CArray          (*componentsFromPath)(struct CIMAPNamespace *self, const UChar* path);
+        bool            (*containsFolderPath)(struct CIMAPNamespace *self, const UChar* path);
+        
     };
     typedef struct CIMAPNamespace CIMAPNamespace;
 
-    CIMAPNamespace newCIMAPNamespace();
+    CIMAPNamespace newCIMAPNamespace(const UChar* prefix, char delimiter);
     void deleteCIMAPNamespace(CIMAPNamespace self);
 
 #ifdef __cplusplus
 }
+#endif
+
+#ifdef __cplusplus
+#include <MailCore/MCAsync.h>
+
+CIMAPNamespace newCIMAPNamespace(mailcore::IMAPNamespace *folder);
+mailcore::IMAPNamespace * cast(CIMAPNamespace self);
 #endif
 
 #endif

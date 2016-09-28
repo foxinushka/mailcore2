@@ -28,8 +28,10 @@ extern "C" {
 #endif
 
 #ifdef __cplusplus
+#include <MailCore/MCCore.h>
 CArray newCArray2(mailcore::Array *array);
 mailcore::Array* cast(CArray *array);
+mailcore::Array* nativeInstance(CArray array);
 #endif
 
 #endif

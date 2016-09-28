@@ -58,7 +58,7 @@ class ImapSession {
 	}
 
 	func setDefaultNamespace(defaultNamespace: ImapNamespace) {
-		session.setDefaultNamespace(&session, &defaultNamespace.ref);	
+		session.setDefaultNamespace(&session, defaultNamespace.CIMAPNamespace());
 	}
 
 
@@ -126,7 +126,7 @@ class ImapSession {
     }
 
     func searchExpressionOperation(folder:String, expression:ImapSearchExpression) -> ImapSearchOperation {
-    	return ImapSearchOperation(operation: session.searchOperationWithExpression(&session, folder, &expression.ref));
+    	return ImapSearchOperation(operation: session.searchOperationWithExpression(&session, folder, expression.cast()));
     }
 
     func searchOperation(folder:String, kind:IMAPSearchKind, searchString:String) -> ImapSearchOperation {

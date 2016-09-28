@@ -1,6 +1,6 @@
 import Foundation
 
-class MessageHeader {
+public class MessageHeader {
     var nativeInstance:CMessageHeader;
     
     init(header:CMessageHeader) {
