@@ -9,6 +9,10 @@ public class ImapMessagePart : AbstractMessagePart {
         super.init(abstractMessagePart: part.abstractMessagePart);
     }
     
+    required public init(_ obj: CObject) {
+        fatalError("init has not been implemented")
+    }
+    
     deinit {
         
     }

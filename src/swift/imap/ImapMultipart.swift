@@ -9,6 +9,10 @@ public class ImapMultipart : AbstractMultipart {
         super.init(abstractMultipart: part.abstractMultipart);
     }
     
+    required public init(_ obj: CObject) {
+        fatalError("init has not been implemented")
+    }
+    
     deinit {
         
     }

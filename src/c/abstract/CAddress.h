@@ -19,6 +19,7 @@ extern "C" {
         void            (*setMailbox)(struct CAddress self, const UChar* mailbox);
         const UChar*    (*RFC822String)(struct CAddress self);
         const UChar*    (*nonEncodedRFC822String)(struct CAddress self);
+        CObject         (*castToCObject)(struct CAddress self);
     };
     typedef struct CAddress CAddress;
     
@@ -30,6 +31,7 @@ extern "C" {
     CArray      CaddressesWithNonEncodedRFC822String(const UChar* string);
 
     CAddress newCAddress();
+    CAddress castCAddress(CObject obj);
     void deleteCAddress(CAddress self);
     
 #ifdef __cplusplus

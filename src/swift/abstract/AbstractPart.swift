@@ -1,8 +1,8 @@
 import Foundation
 
-public class AbstractPart {
+public class AbstractPart : Convertible {
     
-    private var nativeInstance:CAbstractPart;
+    fileprivate var nativeInstance:CAbstractPart;
     
     init(_ abstractPart:CAbstractPart) {
         self.nativeInstance = abstractPart;
@@ -113,9 +113,17 @@ public class AbstractPart {
     }
     
     /** Returns an array with the names of all content type parameters.*/
-    public func allContentTypeParametersNames() -> Array<Any> {
-        return arrayFromC(nativeInstance.allContentTypeParametersNames(nativeInstance));
+    public func allContentTypeParametersNames() -> Array<String> {
+        return Array<String>.cast(nativeInstance.allContentTypeParametersNames(nativeInstance));
     }
     
+    required public init(_ obj: CObject) {
+        self.nativeInstance = castFromCObject(obj);
+    }
+    
+    func cast() -> CObject {
+        return nativeInstance.castToCObject(nativeInstance);
+    }
+
 }
 

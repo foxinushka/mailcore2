@@ -92,4 +92,12 @@ CArray allContentTypeParametersNames(struct CAbstractPart self){
     return newCArray(cast(self)->allContentTypeParametersNames());
 }
 
+CAbstractPart castFromCObject(CObject obj) {
+    return newCAbstractPart((mailcore::AbstractPart*) obj.nativeInstance);
+}
+
+CObject castToCObject(struct CAbstractPart self) {
+    return newCObject((mailcore::Object*) self.nativeInstance);
+}
+
 

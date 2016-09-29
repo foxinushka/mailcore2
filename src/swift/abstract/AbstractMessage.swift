@@ -29,26 +29,26 @@ public class AbsrtactMessage {
     }
     
     /** All attachments in the message.
-     It will return an array of MCOIMAPPart for MCOIMAPMessage.
-     It will return an array of MCOAttachment for MCOMessageParser.
-     It will return an array of MCOAttachment for MCOMessageBuilder. */
-    public func attachments() -> Array<Any>? {
-        return arrayFromC(nativeInstance.attachments(nativeInstance));
+     It will return an array of IMAPPart for IMAPMessage.
+     It will return an array of Attachment for MessageParser.
+     It will return an array of Attachment for MessageBuilder. */
+    public func attachments() -> Array<AbstractPart> {
+        return Array<AbstractPart>.cast(nativeInstance.attachments(nativeInstance));
     }
     
     /** All image attachments included inline in the message through cid: URLs.
-     It will return an array of MCOIMAPPart for MCOIMAPMessage.
-     It will return an array of MCOAttachment for MCOMessageParser.
-     It will return an array of MCOAttachment for MCOMessageBuilder. */
-    public func htmlInlineAttachments() -> Array<Any>? {
-        return arrayFromC(nativeInstance.htmlInlineAttachments(nativeInstance));
+     It will return an array of IMAPPart for IMAPMessage.
+     It will return an array of Attachment for MessageParser.
+     It will return an array of Attachment for MessageBuilder. */
+    public func htmlInlineAttachments() -> Array<AbstractPart> {
+        return Array<AbstractPart>.cast(nativeInstance.htmlInlineAttachments(nativeInstance));
     }
     
     /**
      Returns parts required to render the message as plain text or html.
      This does not include inline images and attachments, but only the text content
      */
-    public func requiredPartsForRendering() -> Array<Any>? {
-        return arrayFromC(nativeInstance.requiredPartsForRendering(nativeInstance));
+    public func requiredPartsForRendering() -> Array<AbstractPart> {
+        return Array<AbstractPart>.cast(nativeInstance.requiredPartsForRendering(nativeInstance));
     }
 }

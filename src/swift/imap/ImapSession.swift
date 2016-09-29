@@ -1,9 +1,5 @@
 import Foundation
 
-//#if os(iOS) || os(OSX)
-//    import CMailCore
-//#endif
-
 class ImapSession {
 	
 	var session:CIMAPAsyncSession;
@@ -95,14 +91,14 @@ class ImapSession {
     	return ImapOperation(operation: session.deleteFolderOperation(session, folder.utf16CString))
     }
 
-    func storeFlagsByUIDOperation(folder:String, uids:IndexSet, kind:IMAPStoreFlagsRequestKind, flags:MessageFlag, customFlags:Array<CObject>) -> ImapOperation {
-    	return ImapOperation(operation: session.storeFlagsByUIDOperation(session, folder.utf16CString, uids.indexSet, kind, flags, cArray(customFlags)));
+    func storeFlagsByUIDOperation(folder:String, uids:IndexSet, kind:IMAPStoreFlagsRequestKind, flags:MessageFlag, customFlags:Array<String>) -> ImapOperation {
+    	return ImapOperation(operation: session.storeFlagsByUIDOperation(session, folder.utf16CString, uids.indexSet, kind, flags, Array<String>.cast(customFlags)));
     }
 
 
 
-    func appendMessageOperation(folder:String, path:String, flags:MessageFlag, customFlags:Array<CObject>) -> ImapAppendMessageOperation {
-    	return ImapAppendMessageOperation(operation: session.appendMessageOperation(session, folder.utf16CString, path.utf16CString, flags, cArray(customFlags)));
+    func appendMessageOperation(folder:String, path:String, flags:MessageFlag, customFlags:Array<String>) -> ImapAppendMessageOperation {
+    	return ImapAppendMessageOperation(operation: session.appendMessageOperation(session, folder.utf16CString, path.utf16CString, flags, Array<String>.cast(customFlags)));
     }
 
     func fetchMessagesByNumber(folder:String, type:IMAPMessagesRequestKind, numbers:IndexSet) -> ImapFetchMessagesOperation {

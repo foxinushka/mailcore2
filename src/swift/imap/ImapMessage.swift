@@ -1,6 +1,6 @@
 import Foundation
 
-public class ImapMessage : AbsrtactMessage {
+public final class ImapMessage : AbsrtactMessage, Convertible {
     
     private var nativeInstance:CIMAPMessage;
     
@@ -46,9 +46,9 @@ public class ImapMessage : AbsrtactMessage {
     }
     
     /** Flag keywords of the message, mostly custom flags */
-    public var customFlags: Array<Any> {
-        get { return arrayFromC(nativeInstance.customFlags(nativeInstance)); }
-        set { nativeInstance.setCustomFlags(nativeInstance, cArray(newValue)); }
+    public var customFlags: Array<String> {
+        get { return Array<String>.cast(nativeInstance.customFlags(nativeInstance)); }
+        set { nativeInstance.setCustomFlags(nativeInstance, Array<String>.cast(newValue)); }
     }
     
     /** It's the last modification sequence value of the message synced from the server. See RFC4551 */
@@ -64,9 +64,9 @@ public class ImapMessage : AbsrtactMessage {
     }
     
     /** All Gmail labels of the message */
-    public var gmailLabels: Array<Any> {
-        get { return arrayFromC(nativeInstance.gmailLabels(nativeInstance)); }
-        set { nativeInstance.setGmailLabels(nativeInstance, cArray(newValue)); }
+    public var gmailLabels: Array<String> {
+        get { return Array<String>.cast(nativeInstance.gmailLabels(nativeInstance)); }
+        set { nativeInstance.setGmailLabels(nativeInstance, Array<String>.cast(newValue)); }
     }
     
     /** Gmail message ID of the message */
@@ -87,6 +87,26 @@ public class ImapMessage : AbsrtactMessage {
      */
     public func partForPartID(partID: String) -> AbstractPart {
         return AbstractPart(nativeInstance.partForPartID(nativeInstance, partID.utf16CString));
+    }
+    
+    /** All attachments in the message. */
+    public func attachments() -> Array<ImapPart> {
+        return Array<ImapPart>.cast(nativeInstance.abstractMessage.attachments(nativeInstance.abstractMessage));
+    }
+    
+    /** All image attachments included inline in the message through cid: URLs. */
+    public func htmlInlineAttachments() -> Array<ImapPart> {
+        return Array<ImapPart>.cast(nativeInstance.abstractMessage.htmlInlineAttachments(nativeInstance.abstractMessage));
+    }
+    
+    func cast() -> CObject {
+        return nativeInstance.castToCObject(nativeInstance);
+    }
+    
+    init(_ obj: CObject){
+        let message = castCIMAPMessage(obj);
+        self.nativeInstance = message;
+        super.init(abstractMessage: message.abstractMessage);
     }
     
 }

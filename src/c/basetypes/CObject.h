@@ -10,14 +10,22 @@ extern "C" {
 
     struct CObject {
         ref nativeInstance;
+        
+        const UChar*    (*castToString)(struct CObject self);
     };
     typedef struct CObject CObject;
 
-    CObject newCObject();
+    CObject newCObjectWithString(const UChar* string);
     void deleteCObject(CObject self);
     
 #ifdef __cplusplus
 }
+#endif
+
+#ifdef __cplusplus
+#include <MailCore/MCCore.h>
+CObject newCObject(mailcore::Object *obj);
+mailcore::Object* cast(CObject self);
 #endif
 
 #endif

@@ -29,13 +29,13 @@ public class ImapNamespaceItem {
     }
     
     /** Returns folder path for given path components in the context of this namespace item */
-    public func path(component: Array<Any>) -> String {
-        return String(utf16: nativeInstance.pathForComponents(nativeInstance, cArray(component))!)!;
+    public func path(component: Array<String>) -> String {
+        return String(utf16: nativeInstance.pathForComponents(nativeInstance, Array<String>.cast(component))!)!;
     }
     
     /** Returns components for the given path in the context of this namespace */
-    public func components(path: String) -> Array<Any> {
-        return arrayFromC(nativeInstance.componentForPath(nativeInstance, path.utf16CString));
+    public func components(path: String) -> Array<String> {
+        return Array<String>.cast(nativeInstance.componentForPath(nativeInstance, path.utf16CString));
     }
     
     /** Returns YES if the namespace contains this folder path */

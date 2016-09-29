@@ -40,10 +40,10 @@ extern "C" {
         void            (*setGmailThreadID)(struct CIMAPMessage self, uint64_t gmailThreadID);
         
         CAbstractPart   (*partForPartID)(struct CIMAPMessage self, const UChar* partID);
-        
+        CObject         (*castToCObject)(struct CIMAPMessage self);
     };
     typedef struct CIMAPMessage CIMAPMessage;
-    
+    CIMAPMessage castCIMAPMessage(CObject obj);
     void deleteCIMAPMessage(CIMAPMessage self);
     
 #ifdef __cplusplus

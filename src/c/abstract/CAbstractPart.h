@@ -43,9 +43,11 @@ extern "C" {
         const UChar*            (*contentTypeParameterValueForName)(struct CAbstractPart self, const UChar* name);
         CArray                  (*allContentTypeParametersNames)(struct CAbstractPart self);
         
+        CObject                 (*castToCObject)(struct CAbstractPart self);
     };
     typedef struct CAbstractPart CAbstractPart;
     
+    CAbstractPart castFromCObject(CObject obj);
     void deleteCAbstractPart(CAbstractPart self);
     
 #ifdef __cplusplus

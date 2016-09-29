@@ -10,7 +10,7 @@ class ImapBaseOperation : Operation {
     
     internal init(baseOperation: CIMAPBaseOperation) {
         self.baseOperation = baseOperation;
-        super.init(cOperation: baseOperation.cOperation);
+        super.init(baseOperation.cOperation);
         self.baseOperation.setProgressBlocks(self.baseOperation, itemProgress, bodyProgress);
     }
     

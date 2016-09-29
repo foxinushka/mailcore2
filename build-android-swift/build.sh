@@ -45,7 +45,7 @@ swiftc \
     ../src/swift/imap/ImapNamespace.swift \
     ../src/swift/imap/ImapSearchExpression.swift \
     ../src/swift/imap/ImapSession.swift \
-    ../src/swift/basetypes/Converter.swift \
+    ../src/swift/basetypes/Convertible.swift \
     ../src/swift/basetypes/IndexSet.swift \
     ../src/swift/basetypes/String+Mailcore.swift \
     ../src/swift/basetypes/Dictionary+Mailcore.swift \

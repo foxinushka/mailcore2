@@ -2,7 +2,7 @@ import Foundation
 
 class ImapFetchMessagesOperation : ImapBaseOperation {
     
-    typealias CompletionBlock = (Error?, Array<Any>?, IndexSet?) -> Void
+    typealias CompletionBlock = (Error?, Array<ImapMessage>?, IndexSet?) -> Void
     
     internal var operation: CIMAPFetchMessagesOperation;
     private var completionBlock : CompletionBlock?;
@@ -34,7 +34,7 @@ class ImapFetchMessagesOperation : ImapBaseOperation {
         
         let errorCode = error();
         if errorCode == ErrorNone {
-            completionBlock!(nil, arrayFromC(operation.messages(operation)), IndexSet(cindexset: operation.vanishedMessages(operation)));
+            completionBlock!(nil, Array<ImapMessage>.cast(operation.messages(operation)), IndexSet(cindexset: operation.vanishedMessages(operation)));
         }
         else {
             completionBlock!(MailCoreError(code: errorCode), nil, nil);
@@ -48,9 +48,9 @@ class ImapFetchMessagesOperation : ImapBaseOperation {
         }
     }
     
-    public var extraHeaders: Array<Any> {
-        get { return arrayFromC(operation.extraHeaders(operation)); }
-        set { operation.setExtraHeaders(operation, cArray(newValue));}
+    public var extraHeaders: Array<String> {
+        get { return Array<String>.cast(operation.extraHeaders(operation)); }
+        set { operation.setExtraHeaders(operation, Array<String>.cast(newValue));}
     }
     
 }

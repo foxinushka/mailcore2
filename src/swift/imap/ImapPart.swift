@@ -9,6 +9,12 @@ public class ImapPart : AbstractPart {
         super.init(part.abstractPart);
     }
     
+    required public init(_ obj: CObject) {
+        let part = castCIMAPPart(obj);
+        self.nativeInstance = part;
+        super.init(part.abstractPart);
+    }
+    
     deinit {
         
     }

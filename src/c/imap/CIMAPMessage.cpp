@@ -3,7 +3,6 @@
 
 #include <MailCore/MCCore.h>
 
-#define nativeInstance abstractMessage.nativeInstance
 #define nativeType mailcore::IMAPMessage
 #define structName CIMAPMessage
 
@@ -20,6 +19,7 @@ C_SYNTHESIZE_SCALAR(uint64_t, uint64_t, setGmailMessageID, gmailMessageID)
 C_SYNTHESIZE_SCALAR(uint64_t, uint64_t, setGmailThreadID, gmailThreadID)
 
 CAbstractPart partForPartID(struct CIMAPMessage self, const UChar* partID);
+CObject       castToCObject(struct CIMAPMessage self);
 
 CIMAPMessage newCIMAPMessage(mailcore::IMAPMessage *msg) {
     CIMAPMessage self;
@@ -48,12 +48,14 @@ CIMAPMessage newCIMAPMessage(mailcore::IMAPMessage *msg) {
     self.gmailThreadID = &gmailThreadID;
     self.setGmailThreadID = &setGmailThreadID;
     self.partForPartID = &partForPartID;
+
+    self.castToCObject = &castToCObject;
     
     return self;
 }
 
 mailcore::IMAPMessage* cast(CIMAPMessage self) {
-    return reinterpret_cast<mailcore::IMAPMessage*>(self.nativeInstance);
+    return reinterpret_cast<mailcore::IMAPMessage*>(self.abstractMessage.nativeInstance);
 }
 
 void deleteCIMAPMessage(CIMAPMessage self) {
@@ -62,4 +64,12 @@ void deleteCIMAPMessage(CIMAPMessage self) {
 
 CAbstractPart partForPartID(struct CIMAPMessage self, const UChar* partID) {
     return newCAbstractPart(cast(self)->partForPartID(mailcore::String::stringWithCharacters(partID)));
+}
+
+CIMAPMessage castCIMAPMessage(CObject obj) {
+    return newCIMAPMessage((mailcore::IMAPMessage*) obj.nativeInstance);
+}
+
+CObject castToCObject(struct CIMAPMessage self) {
+    return newCObject((mailcore::Object *) cast(self));
 }

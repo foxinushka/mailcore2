@@ -24,39 +24,39 @@ public class MessageHeader {
     }
     
     /** References field. It's an array of message-ids.*/
-    public var references : Array<Any> {
-        set { self.nativeInstance.setReferences(nativeInstance, cArray(newValue)); }
-        get { return arrayFromC(self.nativeInstance.references(nativeInstance)); }
+    public var references : Array<String> {
+        set { self.nativeInstance.setReferences(nativeInstance, Array<String>.cast(newValue)); }
+        get { return Array<String>.cast(self.nativeInstance.references(nativeInstance)); }
     }
     
     /** In-Reply-To field. It's an array of message-ids.*/
-    public var inReplyTo : Array<Any> {
-        set { self.nativeInstance.setInReplyTo(nativeInstance, cArray(newValue)); }
-        get { return arrayFromC(self.nativeInstance.inReplyTo(nativeInstance)); }
+    public var inReplyTo : Array<String> {
+        set { self.nativeInstance.setInReplyTo(nativeInstance, Array<String>.cast(newValue)); }
+        get { return Array<String>.cast(self.nativeInstance.inReplyTo(nativeInstance)); }
     }
     
     /** To field: recipient of the message. It's an array of MCOAddress.*/
-    public var to: Array<Any> {
-        set { self.nativeInstance.setTo(nativeInstance, cArray(newValue)); }
-        get { return arrayFromC(self.nativeInstance.to(nativeInstance)); }
+    public var to: Array<Address> {
+        set { self.nativeInstance.setTo(nativeInstance, Array<Address>.cast(newValue)); }
+        get { return Array<Address>.cast(self.nativeInstance.to(nativeInstance)); }
     }
     
     /** Cc field: cc recipient of the message. It's an array of MCOAddress.*/
-    public var cc: Array<Any> {
-        set { self.nativeInstance.setCc(nativeInstance, cArray(newValue)); }
-        get { return arrayFromC(self.nativeInstance.cc(nativeInstance)); }
+    public var cc: Array<Address> {
+        set { self.nativeInstance.setCc(nativeInstance, Array<Address>.cast(newValue)); }
+        get { return Array<Address>.cast(self.nativeInstance.cc(nativeInstance)); }
     }
     
     /** Bcc field: bcc recipient of the message. It's an array of MCOAddress.*/
-    public var bcc: Array<Any> {
-        set { self.nativeInstance.setBcc(nativeInstance, cArray(newValue)); }
-        get { return arrayFromC(self.nativeInstance.bcc(nativeInstance)); }
+    public var bcc: Array<Address> {
+        set { self.nativeInstance.setBcc(nativeInstance, Array<Address>.cast(newValue)); }
+        get { return Array<Address>.cast(self.nativeInstance.bcc(nativeInstance)); }
     }
     
     /** Reply-To field. It's an array of MCOAddress.*/
-    public var replyTo: Array<Any> {
-        set { self.nativeInstance.setReplyTo(nativeInstance, cArray(newValue)); }
-        get { return arrayFromC(self.nativeInstance.replyTo(nativeInstance)); }
+    public var replyTo: Array<Address> {
+        set { self.nativeInstance.setReplyTo(nativeInstance, Array<Address>.cast(newValue)); }
+        get { return Array<Address>.cast(self.nativeInstance.replyTo(nativeInstance)); }
     }
     
     /** Subject of the message.*/
@@ -86,6 +86,11 @@ public class MessageHeader {
         return String(utf16: nativeInstance.extraHeaderValueForName(nativeInstance, name.utf16CString)!)!;
     }
     
+    /** Returns an array with the names of all custom headers.*/
+    public func allExtraHeadersNames() -> Array<String> {
+        return Array<String>.cast(nativeInstance.allExtraHeadersNames(nativeInstance));
+    }
+    
     /** Extracted subject (also remove square brackets).*/
     public func extractedSubject() -> String {
         return String(utf16: nativeInstance.extractedSubject(nativeInstance)!)!;
@@ -105,13 +110,13 @@ public class MessageHeader {
     }
     
     /** Returns a header that can be used as a base for a reply message.*/
-    public func replyHeaderWithExcludedRecipients(excludedRecipients: Array<Any>) -> MessageHeader {
-        return MessageHeader(header: nativeInstance.replyHeaderWithExcludedRecipients(nativeInstance, cArray(excludedRecipients)));
+    public func replyHeaderWithExcludedRecipients(excludedRecipients: Array<Address>) -> MessageHeader {
+        return MessageHeader(header: nativeInstance.replyHeaderWithExcludedRecipients(nativeInstance, Array<Address>.cast(excludedRecipients)));
     }
     
     /** Returns a header that can be used as a base for a reply all message.*/
-    public func replyAllHeaderWithExcludedRecipients(excludedRecipients: Array<Any>) -> MessageHeader {
-        return MessageHeader(header: nativeInstance.replyAllHeaderWithExcludedRecipients(nativeInstance, cArray(excludedRecipients)));
+    public func replyAllHeaderWithExcludedRecipients(excludedRecipients: Array<Address>) -> MessageHeader {
+        return MessageHeader(header: nativeInstance.replyAllHeaderWithExcludedRecipients(nativeInstance, Array<Address>.cast(excludedRecipients)));
     }
     
     /** Returns a header that can be used as a base for a forward message.*/

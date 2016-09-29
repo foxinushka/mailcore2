@@ -10,6 +10,7 @@ C_SYNTHESIZE_STRING(setMailbox, mailbox);
 
 const UChar* RFC822String(struct CAddress self);
 const UChar* nonEncodedRFC822String(struct CAddress self);
+CObject castToCObject(struct CAddress self);
 
 CAddress newCAddress(mailcore::Address *address){
     CAddress self;
@@ -22,6 +23,8 @@ CAddress newCAddress(mailcore::Address *address){
     self.setMailbox = &setMailbox;
     self.RFC822String = &RFC822String;
     self.nonEncodedRFC822String = &nonEncodedRFC822String;
+
+    self.castToCObject = &castToCObject;
     
     return self;
 }
@@ -102,6 +105,14 @@ const UChar* RFC822String(struct CAddress self){
 
 const UChar* nonEncodedRFC822String(struct CAddress self){
     return cast(self)->nonEncodedRFC822String()->unicodeCharacters();
+}
+
+CAddress castCAddress(CObject obj) {
+    return newCAddress((mailcore::Address*) obj.nativeInstance);
+}
+
+CObject castToCObject(struct CAddress self) {
+    return newCObject((mailcore::Object*) self.nativeInstance);
 }
 
 

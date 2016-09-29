@@ -3,7 +3,6 @@
 
 #include <MailCore/MCCore.h>
 
-#define nativeInstance abstractPart.nativeInstance
 #define nativeType mailcore::IMAPPart
 #define structName CIMAPPart
 
@@ -13,7 +12,7 @@ C_SYNTHESIZE_ENUM(Encoding, mailcore::Encoding, setEncoding, encoding)
 
 unsigned int decodedSize(struct CIMAPPart self);
 
-CIMAPPart newCIMAPMessage(mailcore::IMAPPart *part) {
+CIMAPPart newCIMAPPart(mailcore::IMAPPart *part) {
     CIMAPPart self;
     self.abstractPart = newCAbstractPart(part);
     
@@ -29,10 +28,14 @@ CIMAPPart newCIMAPMessage(mailcore::IMAPPart *part) {
 }
 
 mailcore::IMAPPart* cast(CIMAPPart self) {
-    return reinterpret_cast<mailcore::IMAPPart*>(self.nativeInstance);
+    return reinterpret_cast<mailcore::IMAPPart*>(self.abstractPart.nativeInstance);
 }
 
 unsigned int decodedSize(struct CIMAPPart self) {
     return cast(self)->decodedSize();
+}
+
+CIMAPPart castCIMAPPart(CObject obj) {
+    return newCIMAPPart((mailcore::IMAPPart*) obj.nativeInstance);
 }
 

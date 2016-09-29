@@ -9,9 +9,13 @@ public class AbstractMultipart : AbstractPart {
         super.init(abstractMultipart.abstractPart);
     }
     
-    public var parts : Array<Any> {
-        set { abstractMultipart.setParts(abstractMultipart, cArray(newValue)); }
-        get { return arrayFromC(abstractMultipart.parts(abstractMultipart)); }
+    required public init(_ obj: CObject) {
+        fatalError("init has not been implemented")
+    }
+    
+    public var parts : Array<AbstractPart> {
+        set { abstractMultipart.setParts(abstractMultipart, Array<AbstractPart>.cast(newValue)); }
+        get { return Array<AbstractPart>.cast(abstractMultipart.parts(abstractMultipart)); }
     }
     
 }

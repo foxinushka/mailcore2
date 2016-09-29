@@ -22,6 +22,8 @@ extern "C" {
     };
     typedef struct CIMAPPart CIMAPPart;
     
+    CIMAPPart castCIMAPPart(CObject obj);
+    
 #ifdef __cplusplus
 }
 #endif
@@ -29,7 +31,7 @@ extern "C" {
 #ifdef __cplusplus
 #include <MailCore/MCAsync.h>
 
-CIMAPPart newCIMAPMessagePart(mailcore::IMAPPart *part);
+CIMAPPart newCIMAPPart(mailcore::IMAPPart *part);
 mailcore::IMAPPart * cast(CIMAPPart self);
 #endif
 

@@ -5,7 +5,7 @@ class Operation {
     internal var nativeInstance: COperation;
     private var _started: Bool = false;
     
-    internal init(cOperation: COperation) {
+    internal init(_ cOperation: COperation) {
         self.nativeInstance = cOperation;
         self.nativeInstance.setCompletionBlock(nativeInstance, operationCompleted);
     }

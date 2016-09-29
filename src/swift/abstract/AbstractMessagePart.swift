@@ -9,6 +9,10 @@ public class AbstractMessagePart : AbstractPart {
         super.init(abstractMessagePart.abstractPart);
     }
     
+    required public init(_ obj: CObject) {
+        fatalError("init has not been implemented")
+    }
+    
     public var header : MessageHeader {
         set { abstractMessagePart.setHeader(abstractMessagePart, newValue.nativeInstance); }
         get { return MessageHeader(header: abstractMessagePart.header(abstractMessagePart)); }
