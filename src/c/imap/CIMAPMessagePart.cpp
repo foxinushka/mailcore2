@@ -19,6 +19,6 @@ CIMAPMessagePart newCIMAPMessage(mailcore::IMAPMessagePart *part) {
     return self;
 }
 
-mailcore::IMAPMessagePart* cast(CIMAPMessagePart *self) {
-    return reinterpret_cast<mailcore::IMAPMessagePart*>(self->nativeInstance);
+mailcore::IMAPMessagePart* cast(CIMAPMessagePart self) {
+    return reinterpret_cast<mailcore::IMAPMessagePart*>(self.nativeInstance);
 }

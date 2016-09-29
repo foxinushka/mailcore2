@@ -13,13 +13,13 @@ extern "C" {
     struct CDictionary {
         ref nativeInstance;
         
-        CArray          (*allKeys)(struct CDictionary *self);
-        uint32_t        (*uintForKey)(struct CDictionary *self, uint32_t key);
+        CArray          (*allKeys)(struct CDictionary self);
+        uint32_t        (*uintForKey)(struct CDictionary self, uint32_t key);
     };
     typedef struct CDictionary CDictionary;
     
     CDictionary newCDictionary();
-    void deleteCDictionary(CDictionary *self);
+    void deleteCDictionary(CDictionary self);
     
 #ifdef __cplusplus
 }
@@ -28,7 +28,7 @@ extern "C" {
 #ifdef __cplusplus
 #include <MailCore/MCCore.h>
 CDictionary newCDictionary(mailcore::HashMap *dict);
-mailcore::HashMap* cast(CDictionary *dict);
+mailcore::HashMap* cast(CDictionary dict);
 #endif
 
 #endif /* CDictionary_hpp */

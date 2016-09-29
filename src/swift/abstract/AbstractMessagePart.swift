@@ -10,13 +10,13 @@ public class AbstractMessagePart : AbstractPart {
     }
     
     public var header : MessageHeader {
-        set { abstractMessagePart.setHeader(&abstractMessagePart, &newValue.nativeInstance); }
-        get { return MessageHeader(header: abstractMessagePart.header(&abstractMessagePart)); }
+        set { abstractMessagePart.setHeader(abstractMessagePart, newValue.nativeInstance); }
+        get { return MessageHeader(header: abstractMessagePart.header(abstractMessagePart)); }
     }
     
-    public var mainPart : AbstractMessagePart {
-        set { abstractMessagePart.setMainPart(&abstractMessagePart, &newValue.abstractMessagePart); }
-        get { return AbstractMessagePart(abstractMessagePart: abstractMessagePart.mainPart(&abstractMessagePart)); }
+    public var mainPart : AbstractPart {
+        set { abstractMessagePart.setMainPart(abstractMessagePart, newValue.CAbstractPart()); }
+        get { return AbstractPart(abstractMessagePart.mainPart(abstractMessagePart)); }
     }
 
 }

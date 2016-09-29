@@ -15,8 +15,8 @@ extern "C" {
         COperation                                  cOperation;
         /*CIMAPBaseOperationIMAPCallback*/ref       _callback;
         
-        ErrorCode   (*error)(struct CIMAPBaseOperation *self);
-        void        (*setProgressBlocks)(struct CIMAPBaseOperation *self, CIMAPProgressBlock itemProgressBlock, CIMAPProgressBlock bodyProgressBlock);
+        ErrorCode   (*error)(struct CIMAPBaseOperation self);
+        void        (*setProgressBlocks)(struct CIMAPBaseOperation self, CIMAPProgressBlock itemProgressBlock, CIMAPProgressBlock bodyProgressBlock);
     };
     typedef struct CIMAPBaseOperation CIMAPBaseOperation;
 
@@ -29,7 +29,8 @@ extern "C" {
 #ifdef __cplusplus
 #include <MailCore/MCAsync.h>
 
-extern "C" CIMAPBaseOperation newCIMAPBaseOperation(mailcore::IMAPOperation* operation);
+CIMAPBaseOperation newCIMAPBaseOperation(mailcore::IMAPOperation* operation);
+mailcore::IMAPOperation* cast(CIMAPBaseOperation self);
 #endif
 
 #endif

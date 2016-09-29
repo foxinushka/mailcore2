@@ -3,7 +3,7 @@
 #define nativeType mailcore::IMAPIdleOperation
 #define structName CIMAPIdleOperation
 
-void interruptIdle(struct CIMAPIdleOperation *self);
+void interruptIdle(struct CIMAPIdleOperation self);
 
 CIMAPIdleOperation newCIMAPIdleOperation(mailcore::IMAPIdleOperation* operation) {
     CIMAPIdleOperation self;
@@ -14,10 +14,13 @@ CIMAPIdleOperation newCIMAPIdleOperation(mailcore::IMAPIdleOperation* operation)
     return self;
 }
 
-void interruptIdle(struct CIMAPIdleOperation *self) {
-    reinterpret_cast<nativeType*>(self->operation.cOperation.nativeInstance)->interruptIdle();
+mailcore::IMAPIdleOperation* cast(CIMAPIdleOperation self) {
+    return reinterpret_cast<nativeType*>(self.operation.cOperation.nativeInstance);
 }
 
-extern "C" void deleteCIMAPIdleOperation(CIMAPIdleOperation *self) {
-    deleteCIMAPBaseOperation(&self->operation);
+void interruptIdle(struct CIMAPIdleOperation self) {
+    cast(self)->interruptIdle();
+}
+
+void deleteCIMAPIdleOperation(CIMAPIdleOperation self) {
 }

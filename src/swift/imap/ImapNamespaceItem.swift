@@ -30,7 +30,7 @@ public class ImapNamespaceItem {
     
     /** Returns folder path for given path components in the context of this namespace item */
     public func path(component: Array<Any>) -> String {
-        return String(utf16: nativeInstance.pathForComponents(nativeInstance, cArray2(component))!)!;
+        return String(utf16: nativeInstance.pathForComponents(nativeInstance, cArray(component))!)!;
     }
     
     /** Returns components for the given path in the context of this namespace */

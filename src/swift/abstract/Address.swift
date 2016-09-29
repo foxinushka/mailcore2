@@ -59,34 +59,34 @@ class Address : Hashable {
     }
     
     deinit {
-        deleteCAddress(&self.nativeInstance);
+        deleteCAddress(self.nativeInstance);
     }
     
     var displayName : String? {
-        set { self.nativeInstance.setDisplayName(&nativeInstance, newValue?.utf16CString); }
-        get { return String(utf16: self.nativeInstance.displayName(&self.nativeInstance)!); }
+        set { self.nativeInstance.setDisplayName(nativeInstance, newValue?.utf16CString); }
+        get { return String(utf16: self.nativeInstance.displayName(self.nativeInstance)!); }
     }
     
     var mailbox : String? {
-        set { self.nativeInstance.setMailbox(&nativeInstance, newValue?.utf16CString); }
-        get { return String(utf16: self.nativeInstance.mailbox(&self.nativeInstance)!); }
+        set { self.nativeInstance.setMailbox(nativeInstance, newValue?.utf16CString); }
+        get { return String(utf16: self.nativeInstance.mailbox(self.nativeInstance)!); }
     }
     
     func RFC822String() -> String? {
-        return String(utf16: nativeInstance.RFC822String(&nativeInstance)!);
+        return String(utf16: nativeInstance.RFC822String(nativeInstance)!);
     }
     
     func nonEncodedRFC822String() -> String? {
-        return String(utf16: nativeInstance.nonEncodedRFC822String(&nativeInstance)!);
+        return String(utf16: nativeInstance.nonEncodedRFC822String(nativeInstance)!);
     }
     
     var hashValue: Int {
-        return (String(utf16: nativeInstance.displayName(&nativeInstance)!)?.hashValue)! ^ (String(utf16: nativeInstance.mailbox(&nativeInstance)!)?.hashValue)!;
+        return (String(utf16: nativeInstance.displayName(nativeInstance)!)?.hashValue)! ^ (String(utf16: nativeInstance.mailbox(nativeInstance)!)?.hashValue)!;
     }
     
     public static func ==(lhs: Address, rhs: Address) -> Bool {
-        return String(utf16: lhs.nativeInstance.displayName(&lhs.nativeInstance)!) == String(utf16: rhs.nativeInstance.displayName(&rhs.nativeInstance)!) &&
-            String(utf16: lhs.nativeInstance.mailbox(&lhs.nativeInstance)!) == String(utf16: rhs.nativeInstance.mailbox(&rhs.nativeInstance)!);
+        return String(utf16: lhs.nativeInstance.displayName(lhs.nativeInstance)!) == String(utf16: rhs.nativeInstance.displayName(rhs.nativeInstance)!) &&
+            String(utf16: lhs.nativeInstance.mailbox(lhs.nativeInstance)!) == String(utf16: rhs.nativeInstance.mailbox(rhs.nativeInstance)!);
     }
     
 }

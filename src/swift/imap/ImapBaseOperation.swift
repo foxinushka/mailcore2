@@ -11,7 +11,7 @@ class ImapBaseOperation : Operation {
     internal init(baseOperation: CIMAPBaseOperation) {
         self.baseOperation = baseOperation;
         super.init(cOperation: baseOperation.cOperation);
-        self.baseOperation.setProgressBlocks(&self.baseOperation, itemProgress, bodyProgress);
+        self.baseOperation.setProgressBlocks(self.baseOperation, itemProgress, bodyProgress);
     }
     
     deinit {
@@ -19,7 +19,7 @@ class ImapBaseOperation : Operation {
     }
     
     internal func error() -> ErrorCode {
-        return baseOperation.error(&baseOperation);
+        return baseOperation.error(baseOperation);
     }
     
     public func itemProgress(current: UInt32, maximum: UInt32) {

@@ -13,12 +13,12 @@ extern "C" {
     struct CAddress {
         ref nativeInstance;
         
-        const UChar*    (*displayName)(struct CAddress* self);
-        void            (*setDisplayName)(struct CAddress* self, const UChar* displayName);
-        const UChar*    (*mailbox)(struct CAddress* self);
-        void            (*setMailbox)(struct CAddress* self, const UChar* mailbox);
-        const UChar*    (*RFC822String)(struct CAddress* self);
-        const UChar*    (*nonEncodedRFC822String)(struct CAddress* self);
+        const UChar*    (*displayName)(struct CAddress self);
+        void            (*setDisplayName)(struct CAddress self, const UChar* displayName);
+        const UChar*    (*mailbox)(struct CAddress self);
+        void            (*setMailbox)(struct CAddress self, const UChar* mailbox);
+        const UChar*    (*RFC822String)(struct CAddress self);
+        const UChar*    (*nonEncodedRFC822String)(struct CAddress self);
     };
     typedef struct CAddress CAddress;
     
@@ -30,7 +30,7 @@ extern "C" {
     CArray      CaddressesWithNonEncodedRFC822String(const UChar* string);
 
     CAddress newCAddress();
-    void deleteCAddress(CAddress *self);
+    void deleteCAddress(CAddress self);
     
 #ifdef __cplusplus
 }
@@ -38,7 +38,7 @@ extern "C" {
 
 #ifdef __cplusplus
 CAddress newCAddress(mailcore::Address *address);
-mailcore::Address * cast(CAddress *address);
+mailcore::Address* cast(CAddress address);
 #endif
 
 #endif

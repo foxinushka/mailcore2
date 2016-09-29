@@ -14,7 +14,6 @@ extern "C" {
     };
     typedef struct CIndexSet CIndexSet;
 
-    //CIndexSet newCIndexSetWithRange(uint64_t start, uint64_t end);
     void deleteCIndexSet(CIndexSet self);
     
 #ifdef __cplusplus

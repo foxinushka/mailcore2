@@ -14,16 +14,16 @@ extern "C" {
         ref     nativeInstance;
         ref     _callback;
         
-        void    (*setCompletionBlock)(struct COperation *self, COperationCompletionBlock block);
-        bool    (*isCanceled)(struct COperation *self);
-        bool    (*shouldRunWhenCancelled)(struct COperation *self);
-        void    (*setShouldRunWhenCancelled)(struct COperation *self, bool shouldRunWhenCancelled);
-        void    (*cancel)(struct COperation *self);
-        void    (*start)(struct COperation *self);
+        void    (*setCompletionBlock)(struct COperation self, COperationCompletionBlock block);
+        bool    (*isCanceled)(struct COperation self);
+        bool    (*shouldRunWhenCancelled)(struct COperation self);
+        void    (*setShouldRunWhenCancelled)(struct COperation self, bool shouldRunWhenCancelled);
+        void    (*cancel)(struct COperation self);
+        void    (*start)(struct COperation self);
     };
     typedef struct COperation COperation;
     
-    void deleteCOperation(COperation *self);
+    void deleteCOperation(COperation self);
 
 #ifdef __cplusplus
 }
@@ -33,6 +33,7 @@ extern "C" {
 #include <MailCore/MCAsync.h>
 
 COperation newCOperation(mailcore::Operation *operation);
+mailcore::Operation* cast(COperation self);
 #endif
 
 #endif

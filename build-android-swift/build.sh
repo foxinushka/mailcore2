@@ -10,7 +10,7 @@ swiftc \
     -target armv7-none-linux-androideabi \
     -sdk $ANDROID_NDK/platforms/android-21/arch-arm \
     -I $(pwd)/include \
-    -import-objc-header $(pwd)/include/MailCore/CCore.h \
+    -import-objc-header $(pwd)/include/MailCore/swiftmailcore2-Bridging-Header.h \
     -l$(pwd)/libs/armeabi-v7a/libcmailcore.so \
     -L $ANDROID_NDK/sources/cxx-stl/llvm-libc++/libs/armeabi-v7a \
     -L $ANDROID_NDK/toolchains/arm-linux-androideabi-4.9/prebuilt/linux-x86_64/lib/gcc/arm-linux-androideabi/4.9.x \
@@ -26,6 +26,12 @@ swiftc \
     ../src/swift/abstract/AbstractPart.swift \
     ../src/swift/abstract/Address.swift \
     ../src/swift/abstract/MessageHeader.swift \
+    ../src/swift/imap/ImapFolder.swift \
+    ../src/swift/imap/ImapFolderInfo.swift \
+    ../src/swift/imap/ImapFolderStatus.swift \
+    ../src/swift/imap/ImapMessage.swift \
+    ../src/swift/imap/ImapMultipart.swift \
+    ../src/swift/imap/ImapPart.swift \
     ../src/swift/imap/ImapBaseOperation.swift \
     ../src/swift/imap/ImapOperation.swift \
     ../src/swift/imap/ImapAppendMessageOperation.swift \

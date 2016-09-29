@@ -10,13 +10,13 @@ extern "C" {
     struct CIMAPAppendMessageOperation {
         CIMAPBaseOperation baseOperation;
         
-        void        (*setDate)(struct CIMAPAppendMessageOperation *self, time_t date);
-        time_t      (*date)(struct CIMAPAppendMessageOperation *self);
-        uint32_t    (*createdUID)(struct CIMAPAppendMessageOperation *self);
+        void        (*setDate)(struct CIMAPAppendMessageOperation self, time_t date);
+        time_t      (*date)(struct CIMAPAppendMessageOperation self);
+        uint32_t    (*createdUID)(struct CIMAPAppendMessageOperation self);
     };
     typedef struct CIMAPAppendMessageOperation CIMAPAppendMessageOperation;
 
-    void deleteIMAPAppendMessageOperation(CIMAPAppendMessageOperation *self);
+    void deleteIMAPAppendMessageOperation(CIMAPAppendMessageOperation self);
 
 #ifdef __cplusplus
 }
@@ -25,7 +25,8 @@ extern "C" {
 #ifdef __cplusplus
 #include <MailCore/MCAsync.h>
 
-extern "C" CIMAPAppendMessageOperation newIMAPAppendMessageOperation(mailcore::IMAPAppendMessageOperation *operation);
+CIMAPAppendMessageOperation newIMAPAppendMessageOperation(mailcore::IMAPAppendMessageOperation *operation);
+mailcore::IMAPAppendMessageOperation* cast(CIMAPAppendMessageOperation self);
 #endif
 
 #endif

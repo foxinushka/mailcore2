@@ -59,7 +59,7 @@ extern "C" {
 #ifdef __cplusplus
 #include <MailCore/MCAsync.h>
 
-mailcore::IMAPSearchExpression * cast(CIMAPSearchExpression self);
+mailcore::IMAPSearchExpression* cast(CIMAPSearchExpression self);
 #endif
 
 #endif

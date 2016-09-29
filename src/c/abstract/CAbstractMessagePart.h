@@ -16,10 +16,10 @@ extern "C" {
     struct CAbstractMessagePart {
         CAbstractPart abstractPart;
         
-        struct CMessageHeader           (*header)(struct CAbstractMessagePart *self);
-        void                            (*setHeader)(struct CAbstractMessagePart *self, struct CMessageHeader* header);
-        struct CAbstractMessagePart     (*mainPart)(struct CAbstractMessagePart *self);
-        void                            (*setMainPart)(struct CAbstractMessagePart *self, struct CAbstractMessagePart* part);
+        struct CMessageHeader           (*header)(struct CAbstractMessagePart self);
+        void                            (*setHeader)(struct CAbstractMessagePart self, struct CMessageHeader header);
+        struct CAbstractPart            (*mainPart)(struct CAbstractMessagePart self);
+        void                            (*setMainPart)(struct CAbstractMessagePart self, struct CAbstractPart part);
         
     };
     typedef struct CAbstractMessagePart CAbstractMessagePart;
@@ -30,7 +30,7 @@ extern "C" {
 
 #ifdef __cplusplus
 CAbstractMessagePart newCAbstractMessagePart(mailcore::AbstractMessagePart *part);
-mailcore::AbstractPart * cast(CAbstractMessagePart *part);
+mailcore::AbstractMessagePart* cast(CAbstractMessagePart part);
 #endif
 
 #endif

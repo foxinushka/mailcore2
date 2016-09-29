@@ -12,11 +12,11 @@ extern "C" {
     struct CIMAPIdleOperation {
         CIMAPBaseOperation  operation;
 
-        void    (*interruptIdle)(struct CIMAPIdleOperation *self);
+        void    (*interruptIdle)(struct CIMAPIdleOperation self);
     };
     typedef struct CIMAPIdleOperation CIMAPIdleOperation;
     
-    void deleteCIMAPIdleOperation(CIMAPIdleOperation *self);
+    void deleteCIMAPIdleOperation(CIMAPIdleOperation self);
     
 #ifdef __cplusplus
 }
@@ -26,6 +26,7 @@ extern "C" {
 #include <MailCore/MCAsync.h>
 
 CIMAPIdleOperation newCIMAPIdleOperation(mailcore::IMAPIdleOperation *operation);
+mailcore::IMAPIdleOperation* cast(CIMAPIdleOperation self);
 #endif
 
 #endif /* CIMAPIdleOperation_h */

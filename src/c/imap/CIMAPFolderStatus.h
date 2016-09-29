@@ -12,18 +12,18 @@ extern "C" {
     struct CIMAPFolderStatus {
         ref nativeInstance;
         
-        uint32_t        (*uidNext)(struct CIMAPFolderStatus *self);
-        void            (*setUidNext)(struct CIMAPFolderStatus *self, uint32_t uid);
-        uint32_t        (*uidValidity)(struct CIMAPFolderStatus *self);
-        void            (*setUidValidity)(struct CIMAPFolderStatus *self, uint32_t uid);
-        uint32_t        (*recentCount)(struct CIMAPFolderStatus *self);
-        void            (*setRecentCount)(struct CIMAPFolderStatus *self, uint32_t recentCount);
-        uint32_t        (*unseenCount)(struct CIMAPFolderStatus *self);
-        void            (*setUnseenCount)(struct CIMAPFolderStatus *self, uint32_t messageCount);
-        uint32_t        (*messageCount)(struct CIMAPFolderStatus *self);
-        void            (*setMessageCount)(struct CIMAPFolderStatus *self, uint32_t messageCount);
-        uint64_t        (*highestModSeqValue)(struct CIMAPFolderStatus *self);
-        void            (*setHighestModSeqValue)(struct CIMAPFolderStatus *self, uint64_t highestModSeqValue);
+        uint32_t        (*uidNext)(struct CIMAPFolderStatus self);
+        void            (*setUidNext)(struct CIMAPFolderStatus self, uint32_t uid);
+        uint32_t        (*uidValidity)(struct CIMAPFolderStatus self);
+        void            (*setUidValidity)(struct CIMAPFolderStatus self, uint32_t uid);
+        uint32_t        (*recentCount)(struct CIMAPFolderStatus self);
+        void            (*setRecentCount)(struct CIMAPFolderStatus self, uint32_t recentCount);
+        uint32_t        (*unseenCount)(struct CIMAPFolderStatus self);
+        void            (*setUnseenCount)(struct CIMAPFolderStatus self, uint32_t messageCount);
+        uint32_t        (*messageCount)(struct CIMAPFolderStatus self);
+        void            (*setMessageCount)(struct CIMAPFolderStatus self, uint32_t messageCount);
+        uint64_t        (*highestModSeqValue)(struct CIMAPFolderStatus self);
+        void            (*setHighestModSeqValue)(struct CIMAPFolderStatus self, uint64_t highestModSeqValue);
     };
     typedef struct CIMAPFolderStatus CIMAPFolderStatus;
     

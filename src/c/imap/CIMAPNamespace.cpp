@@ -7,13 +7,13 @@
 #define nativeType mailcore::IMAPNamespace
 #define structName CIMAPNamespace
 
-const UChar*    mainPrefix(struct CIMAPNamespace *self);
-char            mainDelimiter(struct CIMAPNamespace *self);
-CArray          prefixes(struct CIMAPNamespace *self);
-const UChar*    pathForComponents(struct CIMAPNamespace *self, CArray components);
-const UChar*    pathForComponentsAndPrefix(struct CIMAPNamespace *self, CArray components, const UChar* prefix);
-CArray          componentsFromPath(struct CIMAPNamespace *self, const UChar* path);
-bool            containsFolderPath(struct CIMAPNamespace *self, const UChar* path);
+const UChar*    mainPrefix(struct CIMAPNamespace self);
+char            mainDelimiter(struct CIMAPNamespace self);
+CArray          prefixes(struct CIMAPNamespace self);
+const UChar*    pathForComponents(struct CIMAPNamespace self, CArray components);
+const UChar*    pathForComponentsAndPrefix(struct CIMAPNamespace self, CArray components, const UChar* prefix);
+CArray          componentsFromPath(struct CIMAPNamespace self, const UChar* path);
+bool            containsFolderPath(struct CIMAPNamespace self, const UChar* path);
 
 CIMAPNamespace newCIMAPNamespace(mailcore::IMAPNamespace *folder) {
     CIMAPNamespace self;
@@ -35,41 +35,38 @@ CIMAPNamespace newCIMAPNamespace(const UChar* prefix, char delimiter) {
     return newCIMAPNamespace(mailcore::IMAPNamespace::namespaceWithPrefix(mailcore::String::stringWithCharacters(prefix), delimiter));
 }
 
-mailcore::IMAPNamespace * cast(CIMAPNamespace *self) {
-    return C_NATIVE_INSTANCE;
+mailcore::IMAPNamespace * cast(CIMAPNamespace self) {
+    return reinterpret_cast<mailcore::IMAPNamespace*>(self.nativeInstance);
 }
 
 void deleteCIMAPNamespace(CIMAPNamespace self) {
     reinterpret_cast<nativeType*>(self.nativeInstance)->release();
 }
 
-const UChar* mainPrefix(struct CIMAPNamespace *self) {
-    return C_NATIVE_INSTANCE->mainPrefix()->unicodeCharacters();
+const UChar* mainPrefix(struct CIMAPNamespace self) {
+    return cast(self)->mainPrefix()->unicodeCharacters();
 }
 
-char mainDelimiter(struct CIMAPNamespace *self) {
-    return C_NATIVE_INSTANCE->mainDelimiter();
+char mainDelimiter(struct CIMAPNamespace self) {
+    return cast(self)->mainDelimiter();
 }
 
-CArray prefixes(struct CIMAPNamespace *self) {
-    return newCArray2(C_NATIVE_INSTANCE->prefixes());
+CArray prefixes(struct CIMAPNamespace self) {
+    return newCArray(cast(self)->prefixes());
 }
 
-const UChar* pathForComponents(struct CIMAPNamespace *self, CArray components) {
-    return C_NATIVE_INSTANCE->pathForComponents(cast(&components))->unicodeCharacters();
+const UChar* pathForComponents(struct CIMAPNamespace self, CArray components) {
+    return cast(self)->pathForComponents(cast(components))->unicodeCharacters();
 }
 
-const UChar* pathForComponentsAndPrefix(struct CIMAPNamespace *self, CArray components, const UChar* prefix) {
-    return C_NATIVE_INSTANCE->pathForComponentsAndPrefix(cast(&components), mailcore::String::stringWithCharacters(prefix))->unicodeCharacters();
+const UChar* pathForComponentsAndPrefix(struct CIMAPNamespace self, CArray components, const UChar* prefix) {
+    return cast(self)->pathForComponentsAndPrefix(cast(components), mailcore::String::stringWithCharacters(prefix))->unicodeCharacters();
 }
 
-CArray componentsFromPath(struct CIMAPNamespace *self, const UChar* path) {
-    return newCArray2(C_NATIVE_INSTANCE->componentsFromPath(mailcore::String::stringWithCharacters(path)));
+CArray componentsFromPath(struct CIMAPNamespace self, const UChar* path) {
+    return newCArray(cast(self)->componentsFromPath(mailcore::String::stringWithCharacters(path)));
 }
 
-bool containsFolderPath(struct CIMAPNamespace *self, const UChar* path) {
-    return C_NATIVE_INSTANCE->containsFolderPath(mailcore::String::stringWithCharacters(path));
+bool containsFolderPath(struct CIMAPNamespace self, const UChar* path) {
+    return cast(self)->containsFolderPath(mailcore::String::stringWithCharacters(path));
 }
-
-
-

@@ -10,13 +10,12 @@ extern "C" {
 #endif
 
     struct CArray {
-        ref self;
+        ref         nativeInstance;
         
-    	void        (*addObject)(struct CArray *self, CObject *object);
-        uint32_t    (*size)(struct CArray *self);
-        CObject     (*getObject)(struct CArray *self, uint32_t index);
-        
-        uint32_t    (*getUint)(struct CArray *self, uint32_t index);
+    	void        (*addObject)(struct CArray self, CObject object);
+        uint32_t    (*size)(struct CArray self);
+        CObject     (*getObject)(struct CArray self, uint32_t index);
+        uint32_t    (*getUint)(struct CArray self, uint32_t index);
     };
     typedef struct CArray CArray;
 
@@ -29,9 +28,8 @@ extern "C" {
 
 #ifdef __cplusplus
 #include <MailCore/MCCore.h>
-CArray newCArray2(mailcore::Array *array);
-mailcore::Array* cast(CArray *array);
-mailcore::Array* nativeInstance(CArray array);
+CArray newCArray(mailcore::Array *array);
+mailcore::Array* cast(CArray array);
 #endif
 
 #endif

@@ -19,7 +19,7 @@ C_SYNTHESIZE_ARRAY(setGmailLabels, gmailLabels)
 C_SYNTHESIZE_SCALAR(uint64_t, uint64_t, setGmailMessageID, gmailMessageID)
 C_SYNTHESIZE_SCALAR(uint64_t, uint64_t, setGmailThreadID, gmailThreadID)
 
-CAbstractPart partForPartID(struct CIMAPMessage *self, const UChar* partID);
+CAbstractPart partForPartID(struct CIMAPMessage self, const UChar* partID);
 
 CIMAPMessage newCIMAPMessage(mailcore::IMAPMessage *msg) {
     CIMAPMessage self;
@@ -52,14 +52,14 @@ CIMAPMessage newCIMAPMessage(mailcore::IMAPMessage *msg) {
     return self;
 }
 
-mailcore::IMAPMessage* cast(CIMAPMessage *self) {
-    return reinterpret_cast<mailcore::IMAPMessage*>(self->nativeInstance);
+mailcore::IMAPMessage* cast(CIMAPMessage self) {
+    return reinterpret_cast<mailcore::IMAPMessage*>(self.nativeInstance);
 }
 
-void deleteCIMAPMessage(CIMAPMessage *self) {
+void deleteCIMAPMessage(CIMAPMessage self) {
 
 }
 
-CAbstractPart partForPartID(struct CIMAPMessage *self, const UChar* partID) {
-    return newCAbstractPart(C_NATIVE_INSTANCE->partForPartID(mailcore::String::stringWithCharacters(partID)));
+CAbstractPart partForPartID(struct CIMAPMessage self, const UChar* partID) {
+    return newCAbstractPart(cast(self)->partForPartID(mailcore::String::stringWithCharacters(partID)));
 }

@@ -28,3 +28,4 @@ do
 done
 
 cp $(pwd)/../src/core/basetypes/MCICUTypes.h "${headers_path}"
+cp $(pwd)/../src/swift/swiftmailcore2-Bridging-Header.h "${headers_path}"

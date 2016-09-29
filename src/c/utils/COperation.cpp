@@ -20,12 +20,12 @@ private:
     COperationCompletionBlock completionBlock;;
 };
 
-void setCompletionBlock(COperation *self, COperationCompletionBlock block);
-bool COperationIsCanceled(COperation *operation);
-void COperationCancel(COperation *operation);
-void COperationStart(COperation *operation);
-bool shouldRunWhenCancelled(struct COperation *self);
-void setShouldRunWhenCancelled(struct COperation *self, bool shouldRunWhenCancelled);
+void setCompletionBlock(COperation self, COperationCompletionBlock block);
+bool COperationIsCanceled(COperation self);
+void COperationCancel(COperation self);
+void COperationStart(COperation self);
+bool shouldRunWhenCancelled(COperation self);
+void setShouldRunWhenCancelled(COperation self, bool shouldRunWhenCancelled);
 
 COperation newCOperation(mailcore::Operation *operationRef) {
     COperation self;
@@ -42,29 +42,33 @@ COperation newCOperation(mailcore::Operation *operationRef) {
     return self;
 }
 
-void setCompletionBlock(COperation *self, COperationCompletionBlock block) {
+mailcore::Operation* cast(COperation self) {
+    return reinterpret_cast<mailcore::Operation *>(self.nativeInstance);
+}
+
+void setCompletionBlock(COperation self, COperationCompletionBlock block) {
     COperationCompletionCallback *callback = new COperationCompletionCallback(block);
-    self->_callback = reinterpret_cast<void *>(callback);
-    C_NATIVE_INSTANCE->setCallback(callback);
+    self._callback = reinterpret_cast<void *>(callback);
+    cast(self)->setCallback(callback);
 }
 
 C_SYNTHESIZE_BOOL(setShouldRunWhenCancelled, shouldRunWhenCancelled);
 
-bool COperationIsCanceled(COperation *self) {
-    return C_NATIVE_INSTANCE->isCancelled();
+bool COperationIsCanceled(COperation self) {
+    return cast(self)->isCancelled();
 }
 
-void COperationCancel(COperation *self) {
-    C_NATIVE_INSTANCE->cancel();
+void COperationCancel(COperation self) {
+    cast(self)->cancel();
 }
 
-void COperationStart(COperation *self) {
-    C_NATIVE_INSTANCE->start();
+void COperationStart(COperation self) {
+    cast(self)->start();
 }
 
-extern "C" void deleteCOperation(COperation *self) {
-    C_NATIVE_INSTANCE->release();
-    if (self->_callback != NULL) {
-        reinterpret_cast<COperationCompletionCallback *>(self->_callback)->release();
+extern "C" void deleteCOperation(COperation self) {
+    cast(self)->release();
+    if (self._callback != NULL) {
+        reinterpret_cast<COperationCompletionCallback *>(self._callback)->release();
     }
 }

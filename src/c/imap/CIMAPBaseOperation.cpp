@@ -31,10 +31,10 @@ private:
     CIMAPProgressBlock mBodyProgressBlock;
 };
 
-void        setProgressBlocks(struct CIMAPBaseOperation *self, CIMAPProgressBlock itemProgressBlock, CIMAPProgressBlock bodyProgressBlock);
-ErrorCode   error(struct CIMAPBaseOperation *self);
+void        setProgressBlocks(struct CIMAPBaseOperation self, CIMAPProgressBlock itemProgressBlock, CIMAPProgressBlock bodyProgressBlock);
+ErrorCode   error(struct CIMAPBaseOperation self);
 
-extern "C" CIMAPBaseOperation newCIMAPBaseOperation(mailcore::IMAPOperation* operation) {
+CIMAPBaseOperation newCIMAPBaseOperation(mailcore::IMAPOperation* operation) {
     CIMAPBaseOperation self;
     self.cOperation = newCOperation(operation);
     
@@ -44,16 +44,21 @@ extern "C" CIMAPBaseOperation newCIMAPBaseOperation(mailcore::IMAPOperation* ope
     return self;
 }
 
-ErrorCode error(struct CIMAPBaseOperation *self) {
-    return static_cast<ErrorCode>(reinterpret_cast<nativeType*>(self->cOperation.nativeInstance)->error());
+mailcore::IMAPOperation* cast(CIMAPBaseOperation self) {
+    return reinterpret_cast<mailcore::IMAPOperation*>(self.cOperation.nativeInstance);
 }
 
-void setProgressBlocks(struct CIMAPBaseOperation *self, CIMAPProgressBlock itemProgressBlock, CIMAPProgressBlock bodyProgressBlock) {
+ErrorCode error(struct CIMAPBaseOperation self) {
+    return static_cast<ErrorCode>(cast(self)->error());
+}
+
+void setProgressBlocks(struct CIMAPBaseOperation self, CIMAPProgressBlock itemProgressBlock, CIMAPProgressBlock bodyProgressBlock) {
     CIMAPBaseOperationIMAPCallback *callback = new CIMAPBaseOperationIMAPCallback(itemProgressBlock, bodyProgressBlock);
-    self->_callback = reinterpret_cast<void *>(callback);
-    reinterpret_cast<nativeType*>(self->cOperation.nativeInstance)->setImapCallback(callback);
+    self._callback = reinterpret_cast<void *>(callback);
+    cast(self)->setImapCallback(callback);
 }
 
 extern "C" void deleteCIMAPBaseOperation(CIMAPBaseOperation *operation) {
-    delete reinterpret_cast<CIMAPBaseOperationIMAPCallback *>(operation->_callback);
+    //TODO: check
+    //delete reinterpret_cast<CIMAPBaseOperationIMAPCallback *>(operation->_callback);
 }

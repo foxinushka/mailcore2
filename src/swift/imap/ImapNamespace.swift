@@ -25,17 +25,17 @@ public class ImapNamespace {
     
     /** Returns the prefix of the main item of this namespace. */
     public func mainPrefix() -> String {
-        return String(utf16: nativeInstance.mainPrefix(&nativeInstance)!)!;
+        return String(utf16: nativeInstance.mainPrefix(nativeInstance)!)!;
     }
     
     /** Returns the path delimiter of the main item of this namespace */
     public func mainDelimiter() -> CChar {
-        return nativeInstance.mainDelimiter(&nativeInstance);
+        return nativeInstance.mainDelimiter(nativeInstance);
     }
     
     /** Returns the list of prefixes of this namespace. */
     public func prefixes() -> Array<Any> {
-        return arrayFromC(nativeInstance.prefixes(&nativeInstance));
+        return arrayFromC(nativeInstance.prefixes(nativeInstance));
     }
     
     /**
@@ -43,7 +43,7 @@ public class ImapNamespace {
      of the main item of the namespace.
      */
     public func path(components: Array<Any>) -> String {
-        return String(utf16: nativeInstance.pathForComponents(&nativeInstance, cArray2(components))!)!;
+        return String(utf16: nativeInstance.pathForComponents(nativeInstance, cArray(components))!)!;
     }
     
     /**
@@ -51,16 +51,16 @@ public class ImapNamespace {
      It will use the best item matching the prefix to compute the path.
      */
     public func path(components: Array<Any>, prefix: String) -> String {
-        return String(utf16: nativeInstance.pathForComponentsAndPrefix(&nativeInstance, cArray2(components), prefix.utf16CString)!)!;
+        return String(utf16: nativeInstance.pathForComponentsAndPrefix(nativeInstance, cArray(components), prefix.utf16CString)!)!;
     }
     
     /** Returns the components given a folder path. */
     public func componentsFromPath(path: String) -> Array<Any> {
-        return arrayFromC(nativeInstance.componentsFromPath(&nativeInstance, path.utf16CString));
+        return arrayFromC(nativeInstance.componentsFromPath(nativeInstance, path.utf16CString));
     }
     
     /** Returns YES if the namespace contains the given folder path. */
     public func containsFolderPath(path: String) -> Bool {
-        return nativeInstance.containsFolderPath(&nativeInstance, path.utf16CString);
+        return nativeInstance.containsFolderPath(nativeInstance, path.utf16CString);
     }
 }

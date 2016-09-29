@@ -34,11 +34,11 @@ void deleteCIMAPNamespaceItem(CIMAPNamespaceItem self) {
 }
 
 const UChar* pathForComponents(struct CIMAPNamespaceItem self, CArray components) {
-    return cast(self)->pathForComponents(nativeInstance(components))->unicodeCharacters();
+    return cast(self)->pathForComponents(cast(components))->unicodeCharacters();
 }
 
 CArray componentForPath(struct CIMAPNamespaceItem self, const UChar* path) {
-    return newCArray2(cast(self)->componentsForPath(mailcore::String::stringWithCharacters(path)));
+    return newCArray(cast(self)->componentsForPath(mailcore::String::stringWithCharacters(path)));
 }
 
 bool containsFolder(struct CIMAPNamespaceItem self, const UChar* folder) {

@@ -16,8 +16,8 @@ extern "C" {
     struct CAbstractMultipart {
         CAbstractPart abstractPart;
         
-        CArray      (*parts)(struct CAbstractMultipart *multipart);
-        void        (*setParts)(struct CAbstractMultipart *multipart, CArray *parts);
+        CArray      (*parts)(struct CAbstractMultipart self);
+        void        (*setParts)(struct CAbstractMultipart self, CArray parts);
     };
     typedef struct CAbstractMultipart CAbstractMultipart;
     
@@ -27,7 +27,7 @@ extern "C" {
 
 #ifdef __cplusplus
 CAbstractMultipart newCAbstractMultipart(mailcore::AbstractPart *part);
-mailcore::AbstractPart * cast(CAbstractMultipart *part);
+mailcore::AbstractMultipart* cast(CAbstractMultipart part);
 #endif
 
 #endif

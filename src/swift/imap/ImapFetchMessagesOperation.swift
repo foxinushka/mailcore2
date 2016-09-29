@@ -34,7 +34,7 @@ class ImapFetchMessagesOperation : ImapBaseOperation {
         
         let errorCode = error();
         if errorCode == ErrorNone {
-            completionBlock!(nil, arrayFromC(operation.messages(&operation)), IndexSet(cindexset: operation.vanishedMessages(&operation)));
+            completionBlock!(nil, arrayFromC(operation.messages(operation)), IndexSet(cindexset: operation.vanishedMessages(operation)));
         }
         else {
             completionBlock!(MailCoreError(code: errorCode), nil, nil);
@@ -49,8 +49,8 @@ class ImapFetchMessagesOperation : ImapBaseOperation {
     }
     
     public var extraHeaders: Array<Any> {
-        get { return arrayFromC(operation.extraHeaders(&operation)); }
-        set { operation.setExtraHeaders(&operation, cArray(newValue)!);}
+        get { return arrayFromC(operation.extraHeaders(operation)); }
+        set { operation.setExtraHeaders(operation, cArray(newValue));}
     }
     
 }

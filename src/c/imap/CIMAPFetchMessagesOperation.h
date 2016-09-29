@@ -12,14 +12,14 @@ extern "C" {
     struct CIMAPFetchMessagesOperation {
         CIMAPBaseOperation baseOperation;
         
-        CArray      (*messages)(struct CIMAPFetchMessagesOperation *self);
-        CIndexSet   (*vanishedMessages)(struct CIMAPFetchMessagesOperation *self);
-        CArray      (*extraHeaders)(struct CIMAPFetchMessagesOperation *self);
-        void        (*setExtraHeaders)(struct CIMAPFetchMessagesOperation *self, CArray *array);
+        CArray      (*messages)(struct CIMAPFetchMessagesOperation self);
+        CIndexSet   (*vanishedMessages)(struct CIMAPFetchMessagesOperation self);
+        CArray      (*extraHeaders)(struct CIMAPFetchMessagesOperation self);
+        void        (*setExtraHeaders)(struct CIMAPFetchMessagesOperation self, CArray array);
     };
     typedef struct CIMAPFetchMessagesOperation CIMAPFetchMessagesOperation;
 
-    void deleteCIMAPFetchMessagesOperation(CIMAPFetchMessagesOperation *self);
+    void deleteCIMAPFetchMessagesOperation(CIMAPFetchMessagesOperation self);
 
 #ifdef __cplusplus
 }
@@ -28,7 +28,8 @@ extern "C" {
 #ifdef __cplusplus
 #include <MailCore/MCAsync.h>
 
-extern "C" CIMAPFetchMessagesOperation newCIMAPFetchMessagesOperation(mailcore::IMAPFetchMessagesOperation *operation);
+CIMAPFetchMessagesOperation newCIMAPFetchMessagesOperation(mailcore::IMAPFetchMessagesOperation *operation);
+mailcore::IMAPFetchMessagesOperation* cast(CIMAPFetchMessagesOperation self);
 #endif
 
 #endif

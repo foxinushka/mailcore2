@@ -16,69 +16,69 @@ public class ImapMessage : AbsrtactMessage {
     /** IMAP UID of the message. */
     //@property (nonatomic, assign) uint32_t uid;
     public var uid: UInt32 {
-        get { return nativeInstance.uid(&nativeInstance); }
-        set { nativeInstance.setUid(&nativeInstance, newValue); }
+        get { return nativeInstance.uid(nativeInstance); }
+        set { nativeInstance.setUid(nativeInstance, newValue); }
     }
     
     /** IMAP sequence number of the message.
      @warning *Important*: This property won't be serialized. */
     public var sequenceNumber: UInt32 {
-        get { return nativeInstance.sequenceNumber(&nativeInstance); }
-        set { nativeInstance.setSequenceNumber(&nativeInstance, newValue); }
+        get { return nativeInstance.sequenceNumber(nativeInstance); }
+        set { nativeInstance.setSequenceNumber(nativeInstance, newValue); }
     }
     
     /* Size of the entire message */
     public var size: UInt32 {
-        get { return nativeInstance.size(&nativeInstance); }
-        set { nativeInstance.setSize(&nativeInstance, newValue); }
+        get { return nativeInstance.size(nativeInstance); }
+        set { nativeInstance.setSize(nativeInstance, newValue); }
     }
     
     /** Flags of the message, like if it is deleted, read, starred etc */
     public var flags: MessageFlag {
-        get { return nativeInstance.flags(&nativeInstance); }
-        set { nativeInstance.setFlags(&nativeInstance, newValue); }
+        get { return nativeInstance.flags(nativeInstance); }
+        set { nativeInstance.setFlags(nativeInstance, newValue); }
     }
     
     /** The contents of the message flags when it was fetched from the server */
     public var originalFlags: MessageFlag {
-        get { return nativeInstance.originalFlags(&nativeInstance); }
-        set { nativeInstance.setOriginalFlags(&nativeInstance, newValue); }
+        get { return nativeInstance.originalFlags(nativeInstance); }
+        set { nativeInstance.setOriginalFlags(nativeInstance, newValue); }
     }
     
     /** Flag keywords of the message, mostly custom flags */
     public var customFlags: Array<Any> {
-        get { return arrayFromC(nativeInstance.customFlags(&nativeInstance)); }
-        set { nativeInstance.setCustomFlags(&nativeInstance, cArray(newValue)!); }
+        get { return arrayFromC(nativeInstance.customFlags(nativeInstance)); }
+        set { nativeInstance.setCustomFlags(nativeInstance, cArray(newValue)); }
     }
     
     /** It's the last modification sequence value of the message synced from the server. See RFC4551 */
     public var modSeqValue: UInt64 {
-        get { return nativeInstance.modSeqValue(&nativeInstance); }
-        set { nativeInstance.setModSeqValue(&nativeInstance, newValue); }
+        get { return nativeInstance.modSeqValue(nativeInstance); }
+        set { nativeInstance.setModSeqValue(nativeInstance, newValue); }
     }
     
     /** Main MIME part of the message */
     public var mainPart: AbstractPart {
-        get { return AbstractPart(nativeInstance.mainPart(&nativeInstance)); }
-        set { nativeInstance.setMainPart(&nativeInstance, newValue.CAbstractPart()); }
+        get { return AbstractPart(nativeInstance.mainPart(nativeInstance)); }
+        set { nativeInstance.setMainPart(nativeInstance, newValue.CAbstractPart()); }
     }
     
     /** All Gmail labels of the message */
     public var gmailLabels: Array<Any> {
-        get { return arrayFromC(nativeInstance.gmailLabels(&nativeInstance)); }
-        set { nativeInstance.setGmailLabels(&nativeInstance, cArray(newValue)!); }
+        get { return arrayFromC(nativeInstance.gmailLabels(nativeInstance)); }
+        set { nativeInstance.setGmailLabels(nativeInstance, cArray(newValue)); }
     }
     
     /** Gmail message ID of the message */
     public var gmailMessageID: UInt64 {
-        get { return nativeInstance.gmailMessageID(&nativeInstance); }
-        set { nativeInstance.setGmailMessageID(&nativeInstance, newValue); }
+        get { return nativeInstance.gmailMessageID(nativeInstance); }
+        set { nativeInstance.setGmailMessageID(nativeInstance, newValue); }
     }
     
     /** Gmail thread ID of the message */
     public var gmailThreadID: UInt64 {
-        get { return nativeInstance.gmailThreadID(&nativeInstance); }
-        set { nativeInstance.setGmailThreadID(&nativeInstance, newValue); }
+        get { return nativeInstance.gmailThreadID(nativeInstance); }
+        set { nativeInstance.setGmailThreadID(nativeInstance, newValue); }
     }
     
     /**
@@ -86,7 +86,7 @@ public class ImapMessage : AbsrtactMessage {
      @param partID A part identifier looks like 1.2.1
      */
     public func partForPartID(partID: String) -> AbstractPart {
-        return AbstractPart(nativeInstance.partForPartID(&nativeInstance, partID.utf16CString));
+        return AbstractPart(nativeInstance.partForPartID(nativeInstance, partID.utf16CString));
     }
     
 }

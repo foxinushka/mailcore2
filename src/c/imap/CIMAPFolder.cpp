@@ -25,12 +25,12 @@ CIMAPFolder newCIMAPFolder(mailcore::IMAPFolder *folder) {
     return self;
 }
 
-mailcore::IMAPFolder * cast(CIMAPFolder *self) {
-    return reinterpret_cast<mailcore::IMAPFolder*>(self->nativeInstance);
+mailcore::IMAPFolder * cast(CIMAPFolder self) {
+    return reinterpret_cast<mailcore::IMAPFolder*>(self.nativeInstance);
 }
 
-void deleteCIMAPFolder(CIMAPFolder *self) {
-    if (C_NATIVE_INSTANCE != NULL) {
-        C_NATIVE_INSTANCE->release();
+void deleteCIMAPFolder(CIMAPFolder self) {
+    if (cast(self) != NULL) {
+        cast(self)->release();
     }
 }

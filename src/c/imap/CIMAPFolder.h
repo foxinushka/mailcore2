@@ -13,16 +13,16 @@ extern "C" {
     struct CIMAPFolder {
         ref nativeInstance;
         
-        const UChar*    (*path)(struct CIMAPFolder *self);
-        void            (*setPath)(struct CIMAPFolder *self, const UChar* path);
-        char            (*delimiter)(struct CIMAPFolder *self);
-        void            (*setDelimiter)(struct CIMAPFolder *self, char delimiter);
-        IMAPFolderFlag  (*flags)(struct CIMAPFolder *self);
-        void            (*setFlags)(struct CIMAPFolder *self, IMAPFolderFlag flags);
+        const UChar*    (*path)(struct CIMAPFolder self);
+        void            (*setPath)(struct CIMAPFolder self, const UChar* path);
+        char            (*delimiter)(struct CIMAPFolder self);
+        void            (*setDelimiter)(struct CIMAPFolder self, char delimiter);
+        IMAPFolderFlag  (*flags)(struct CIMAPFolder self);
+        void            (*setFlags)(struct CIMAPFolder self, IMAPFolderFlag flags);
     };
     typedef struct CIMAPFolder CIMAPFolder;
     
-    void deleteCIMAPFolder(CIMAPFolder *self);
+    void deleteCIMAPFolder(CIMAPFolder self);
     
 #ifdef __cplusplus
 }
@@ -32,7 +32,7 @@ extern "C" {
 #include <MailCore/MCAsync.h>
 
 CIMAPFolder newCIMAPFolder(mailcore::IMAPFolder *folder);
-mailcore::IMAPFolder * cast(CIMAPFolder *self);
+mailcore::IMAPFolder* cast(CIMAPFolder self);
 #endif
 
 #endif /* CIMAPFolder_h */

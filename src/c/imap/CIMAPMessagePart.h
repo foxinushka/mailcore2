@@ -11,12 +11,12 @@ extern "C" {
     struct CIMAPMessagePart {
         CAbstractMessagePart abstractMessagePart;
         
-        const UChar*    (*partID)(struct CIMAPMessagePart *self);
-        void            (*setPartID)(struct CIMAPMessagePart *self, const UChar* partID);
+        const UChar*    (*partID)(struct CIMAPMessagePart self);
+        void            (*setPartID)(struct CIMAPMessagePart self, const UChar* partID);
     };
     typedef struct CIMAPMessagePart CIMAPMessagePart;
     
-    void deleteCIMAPMessagePart(CIMAPMessagePart *self);
+    void deleteCIMAPMessagePart(CIMAPMessagePart self);
     
 #ifdef __cplusplus
 }
@@ -26,7 +26,7 @@ extern "C" {
 #include <MailCore/MCAsync.h>
 
 CIMAPMessagePart newCIMAPMessagePart(mailcore::IMAPMessagePart *part);
-mailcore::IMAPMessagePart * cast(CIMAPMessagePart *self);
+mailcore::IMAPMessagePart* cast(CIMAPMessagePart self);
 #endif
 
 #endif /* CIMAPMessagePart_h */

@@ -10,8 +10,8 @@ public class AbstractMultipart : AbstractPart {
     }
     
     public var parts : Array<Any> {
-        set { abstractMultipart.setParts(&abstractMultipart, cArray(newValue)!); }
-        get { return arrayFromC(abstractMultipart.parts(&abstractMultipart)); }
+        set { abstractMultipart.setParts(abstractMultipart, cArray(newValue)); }
+        get { return arrayFromC(abstractMultipart.parts(abstractMultipart)); }
     }
     
 }

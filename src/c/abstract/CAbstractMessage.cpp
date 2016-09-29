@@ -7,13 +7,13 @@
 #define nativeType mailcore::AbstractMessage
 #define structName CAbstractMessage
 
-CMessageHeader  header(struct CAbstractMessage* self);
-void            setHeader(struct CAbstractMessage* self, CMessageHeader* header);
-CAbstractPart   partForContentID(struct CAbstractMessage* self, const UChar* contentID);
-CAbstractPart   partForUniqueID(struct CAbstractMessage* self, const UChar* uniqueID);
-CArray          attachments(struct CAbstractMessage* self);
-CArray          htmlInlineAttachments(struct CAbstractMessage* self);
-CArray          requiredPartsForRendering(struct CAbstractMessage* self);
+CMessageHeader  header(struct CAbstractMessage self);
+void            setHeader(struct CAbstractMessage self, CMessageHeader header);
+CAbstractPart   partForContentID(struct CAbstractMessage self, const UChar* contentID);
+CAbstractPart   partForUniqueID(struct CAbstractMessage self, const UChar* uniqueID);
+CArray          attachments(struct CAbstractMessage self);
+CArray          htmlInlineAttachments(struct CAbstractMessage self);
+CArray          requiredPartsForRendering(struct CAbstractMessage self);
 
 CAbstractMessage newCAbstractMessage(mailcore::AbstractMessage *address){
     CAbstractMessage self;
@@ -31,36 +31,40 @@ CAbstractMessage newCAbstractMessage(mailcore::AbstractMessage *address){
     return self;
 }
 
-extern "C" void deleteCAbstractMessage(CAbstractMessage *self){
-    C_NATIVE_INSTANCE->release();
+mailcore::AbstractMessage* cast(CAbstractMessage self) {
+    return reinterpret_cast<mailcore::AbstractMessage*>(self.nativeInstance);
 }
 
-CMessageHeader header(struct CAbstractMessage* self){
-    return newCMessageHeader(C_NATIVE_INSTANCE->header());
+void deleteCAbstractMessage(CAbstractMessage self){
+    cast(self)->release();
 }
 
-void setHeader(struct CAbstractMessage* self, CMessageHeader* header){
-    C_NATIVE_INSTANCE->setHeader(cast(header));
+CMessageHeader header(CAbstractMessage self){
+    return newCMessageHeader(cast(self)->header());
 }
 
-CAbstractPart partForContentID(struct CAbstractMessage* self, const UChar* contentID){
-    return newCAbstractPart(C_NATIVE_INSTANCE->partForContentID(mailcore::String::stringWithCharacters(contentID)));
+void setHeader(CAbstractMessage self, CMessageHeader header){
+    cast(self)->setHeader(cast(header));
 }
 
-CAbstractPart partForUniqueID(struct CAbstractMessage* self, const UChar* uniqueID){
-    return newCAbstractPart(C_NATIVE_INSTANCE->partForUniqueID(mailcore::String::stringWithCharacters(uniqueID)));
+CAbstractPart partForContentID(CAbstractMessage self, const UChar* contentID){
+    return newCAbstractPart(cast(self)->partForContentID(mailcore::String::stringWithCharacters(contentID)));
 }
 
-CArray attachments(struct CAbstractMessage* self){
-    return newCArray2(C_NATIVE_INSTANCE->attachments());
+CAbstractPart partForUniqueID(CAbstractMessage self, const UChar* uniqueID){
+    return newCAbstractPart(cast(self)->partForUniqueID(mailcore::String::stringWithCharacters(uniqueID)));
 }
 
-CArray htmlInlineAttachments(struct CAbstractMessage* self){
-    return newCArray2(C_NATIVE_INSTANCE->htmlInlineAttachments());
+CArray attachments(CAbstractMessage self){
+    return newCArray(cast(self)->attachments());
 }
 
-CArray requiredPartsForRendering(struct CAbstractMessage* self){
-    return newCArray2(C_NATIVE_INSTANCE->requiredPartsForRendering());
+CArray htmlInlineAttachments(CAbstractMessage self){
+    return newCArray(cast(self)->htmlInlineAttachments());
+}
+
+CArray requiredPartsForRendering(CAbstractMessage self){
+    return newCArray(cast(self)->requiredPartsForRendering());
 }
 
 

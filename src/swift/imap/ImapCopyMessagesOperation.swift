@@ -33,7 +33,7 @@ class ImapCopyMessagesOperation : ImapBaseOperation {
         
         let errorCode = error();
         if errorCode == ErrorNone {
-            completionBlock!(nil, dictFromMailcoreUInt32UInt32(operation.uidMapping(&operation)));
+            completionBlock!(nil, dictFromMailcoreUInt32UInt32(operation.uidMapping(operation)));
         }
         else {
             completionBlock!(MailCoreError(code: errorCode), nil);

@@ -9,7 +9,7 @@ extern "C" {
 #endif
 
     struct CObject {
-        ref self;
+        ref nativeInstance;
     };
     typedef struct CObject CObject;
 

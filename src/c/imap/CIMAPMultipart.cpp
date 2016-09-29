@@ -19,6 +19,6 @@ CIMAPMultipart newCIMAPMultipart(mailcore::IMAPMultipart *part) {
     return self;
 }
 
-mailcore::IMAPMultipart* cast(CIMAPMultipart *self) {
-    return reinterpret_cast<mailcore::IMAPMultipart*>(self->nativeInstance);
+mailcore::IMAPMultipart* cast(CIMAPMultipart self) {
+    return reinterpret_cast<mailcore::IMAPMultipart*>(self.nativeInstance);
 }

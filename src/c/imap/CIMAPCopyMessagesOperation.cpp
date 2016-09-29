@@ -1,11 +1,12 @@
 #include "CIMAPCopyMessagesOperation.h"
+#include "CBase+Private.h"
 
 #define nativeType mailcore::IMAPCopyMessagesOperation
 #define structName CIMAPCopyMessagesOperation
 
-CDictionary uidMapping(struct CIMAPCopyMessagesOperation *self);
+CDictionary uidMapping(struct CIMAPCopyMessagesOperation self);
 
-extern "C" CIMAPCopyMessagesOperation newCIMAPCopyMessagesOperation(mailcore::IMAPCopyMessagesOperation *ref){
+CIMAPCopyMessagesOperation newCIMAPCopyMessagesOperation(mailcore::IMAPCopyMessagesOperation *ref){
     CIMAPCopyMessagesOperation self;
     self.baseOperation = newCIMAPBaseOperation(ref);
     
@@ -14,10 +15,14 @@ extern "C" CIMAPCopyMessagesOperation newCIMAPCopyMessagesOperation(mailcore::IM
     return self;
 }
 
-extern "C" void deleteCIMAPCopyMessagesOperation(CIMAPCopyMessagesOperation operation) {
+mailcore::IMAPCopyMessagesOperation * cast(CIMAPCopyMessagesOperation self) {
+    return reinterpret_cast<mailcore::IMAPCopyMessagesOperation*>(self.baseOperation.cOperation.nativeInstance);
+}
+
+void deleteCIMAPCopyMessagesOperation(CIMAPCopyMessagesOperation operation) {
     
 }
 
-CDictionary uidMapping(struct CIMAPCopyMessagesOperation *self) {
-    return newCDictionary(reinterpret_cast<nativeType*>(self->baseOperation.cOperation.nativeInstance)->uidMapping());
+CDictionary uidMapping(struct CIMAPCopyMessagesOperation self) {
+    return newCDictionary(cast(self)->uidMapping());
 }

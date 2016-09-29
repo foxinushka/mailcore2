@@ -34,7 +34,7 @@ class ImapFetchContentOperation : ImapBaseOperation {
         
         let errorCode = error();
         if errorCode == ErrorNone {
-            completionBlock!(nil, Data(cdata: operation.data(&operation)));
+            completionBlock!(nil, Data(cdata: operation.data(operation)));
         }
         else {
             completionBlock!(MailCoreError(code: errorCode), nil);

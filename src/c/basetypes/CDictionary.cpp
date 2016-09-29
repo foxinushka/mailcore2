@@ -11,8 +11,8 @@ extern "C" CDictionary newCDictionary(){
     return newCDictionary(new mailcore::HashMap());
 }
 
-extern "C" void deleteCDictionary(CDictionary *self){
-    delete C_NATIVE_INSTANCE;
+extern "C" void deleteCDictionary(CDictionary self){
+    //delete cast(self);
 }
 
 CDictionary newCDictionary(mailcore::HashMap *dict){
@@ -21,6 +21,6 @@ CDictionary newCDictionary(mailcore::HashMap *dict){
     return self;
 }
 
-mailcore::HashMap* cast(CDictionary *self){
-    return reinterpret_cast<mailcore::HashMap*>(self->nativeInstance);
+mailcore::HashMap* cast(CDictionary self){
+    return reinterpret_cast<mailcore::HashMap*>(self.nativeInstance);
 }

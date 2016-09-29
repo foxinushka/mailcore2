@@ -35,7 +35,7 @@ class ImapAppendMessageOperation : ImapBaseOperation {
         
         let errorCode = error();
         if errorCode == ErrorNone {
-            completionBlock!(nil, operation.createdUID(&operation));
+            completionBlock!(nil, operation.createdUID(operation));
         }
         else {
             completionBlock!(MailCoreError(code: errorCode), 0);

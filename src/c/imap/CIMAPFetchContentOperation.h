@@ -10,7 +10,7 @@ extern "C" {
     struct CIMAPFetchContentOperation {
         CIMAPBaseOperation baseOperation;
         
-        CData (*data)(struct CIMAPFetchContentOperation *self);
+        CData (*data)(struct CIMAPFetchContentOperation self);
     };
     typedef struct CIMAPFetchContentOperation CIMAPFetchContentOperation;
 
@@ -23,7 +23,8 @@ extern "C" {
 #ifdef __cplusplus
 #include <MailCore/MCAsync.h>
 
-extern "C" CIMAPFetchContentOperation newCIMAPFetchContentOperation(mailcore::IMAPFetchContentOperation *operation);
+CIMAPFetchContentOperation newCIMAPFetchContentOperation(mailcore::IMAPFetchContentOperation *operation);
+mailcore::IMAPFetchContentOperation* cast(CIMAPFetchContentOperation self);
 #endif
 
 #endif

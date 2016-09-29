@@ -13,7 +13,7 @@ class ImapIdleOperation : ImapBaseOperation {
     }
 
 	deinit {
-		deleteCIMAPIdleOperation(&idleOperation);
+		deleteCIMAPIdleOperation(idleOperation);
 	}
 
     public func start(completionBlock: CompletionBlock?) {
@@ -42,7 +42,7 @@ class ImapIdleOperation : ImapBaseOperation {
     }
 
     public func interruptIdle() {
-        idleOperation.interruptIdle(&idleOperation);
+        idleOperation.interruptIdle(idleOperation);
     }
     
 }

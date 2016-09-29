@@ -11,7 +11,7 @@ extern "C" {
     struct CIMAPCopyMessagesOperation {
         CIMAPBaseOperation baseOperation;
         
-        CDictionary (*uidMapping)(struct CIMAPCopyMessagesOperation *self);
+        CDictionary (*uidMapping)(struct CIMAPCopyMessagesOperation self);
     };
     typedef struct CIMAPCopyMessagesOperation CIMAPCopyMessagesOperation;
 
@@ -24,7 +24,8 @@ extern "C" {
 #ifdef __cplusplus
 #include <MailCore/MCAsync.h>
 
-extern "C" CIMAPCopyMessagesOperation newCIMAPCopyMessagesOperation(mailcore::IMAPCopyMessagesOperation *operation);
+CIMAPCopyMessagesOperation newCIMAPCopyMessagesOperation(mailcore::IMAPCopyMessagesOperation *operation);
+mailcore::IMAPCopyMessagesOperation * cast(CIMAPCopyMessagesOperation self);
 #endif
 
 #endif
