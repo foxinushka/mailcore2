@@ -12,10 +12,12 @@ extern "C" {
         ref nativeInstance;
         
         const UChar*    (*castToString)(struct CObject self);
+        uint32_t        (*castToUInt32)(struct CObject self);
     };
     typedef struct CObject CObject;
 
     CObject newCObjectWithString(const UChar* string);
+    CObject newCObjectWithUInt32(uint32_t string);
     void deleteCObject(CObject self);
     
 #ifdef __cplusplus

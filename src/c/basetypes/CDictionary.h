@@ -14,7 +14,7 @@ extern "C" {
         ref nativeInstance;
         
         CArray          (*allKeys)(struct CDictionary self);
-        uint32_t        (*uintForKey)(struct CDictionary self, uint32_t key);
+        CObject         (*getValue)(struct CDictionary self, CObject key);
     };
     typedef struct CDictionary CDictionary;
     

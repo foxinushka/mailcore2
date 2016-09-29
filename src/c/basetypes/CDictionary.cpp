@@ -15,6 +15,8 @@ extern "C" void deleteCDictionary(CDictionary self){
     //delete cast(self);
 }
 
+CObject getValue(struct CDictionary self, CObject key);
+
 CDictionary newCDictionary(mailcore::HashMap *dict){
     CDictionary self;
     self.nativeInstance = dict;
@@ -23,4 +25,8 @@ CDictionary newCDictionary(mailcore::HashMap *dict){
 
 mailcore::HashMap* cast(CDictionary self){
     return reinterpret_cast<mailcore::HashMap*>(self.nativeInstance);
+}
+
+CObject getValue(struct CDictionary self, CObject key) {
+    return newCObject(cast(self)->objectForKey(cast(key)));
 }

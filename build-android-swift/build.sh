@@ -51,3 +51,4 @@ swiftc \
     ../src/swift/basetypes/Dictionary+Mailcore.swift \
     ../src/swift/basetypes/Data+Mailcore.swift \
     ../src/swift/basetypes/Array+Mailcore.swift \
+    ../src/swift/basetypes/UInt32+Mailcore.swift \
