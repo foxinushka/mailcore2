@@ -124,7 +124,7 @@ public class ImapSearchExpression {
      MCOIMAPSearchExpression * expr = [MCOIMAPSearchExpression searchUids:uids]
      **/
     public static func searchUIDs(uids: IndexSet) -> ImapSearchExpression {
-        return ImapSearchExpression(newCIMAPSearchExpressionSearchUIDs(uids.indexSet));
+        return ImapSearchExpression(newCIMAPSearchExpressionSearchUIDs(IndexSet.cast(uids)));
     }
     
     /**
@@ -135,7 +135,7 @@ public class ImapSearchExpression {
      MCOIMAPSearchExpression * expr = [MCOIMAPSearchExpression searchNumbers:numbers]
      **/
     public static func searchNumbers(numbers: IndexSet) -> ImapSearchExpression {
-        return ImapSearchExpression(newCIMAPSearchExpressionSearchNumbers(numbers.indexSet));
+        return ImapSearchExpression(newCIMAPSearchExpressionSearchNumbers(IndexSet.cast(numbers)));
     }
     
     /**

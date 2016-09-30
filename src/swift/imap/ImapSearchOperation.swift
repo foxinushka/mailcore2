@@ -43,7 +43,7 @@ class ImapSearchOperation : ImapBaseOperation {
         
         let errorCode = error();
         if errorCode == ErrorNone {
-            completionBlock!(nil, IndexSet(cindexset: operation.uids(operation)));
+            completionBlock!(nil, IndexSet.cast(operation.uids(operation)));
         }
         else {
             completionBlock!(MailCoreError(code: errorCode), nil);

@@ -34,7 +34,7 @@ class ImapFetchMessagesOperation : ImapBaseOperation {
         
         let errorCode = error();
         if errorCode == ErrorNone {
-            completionBlock!(nil, Array<ImapMessage>.cast(operation.messages(operation)), IndexSet(cindexset: operation.vanishedMessages(operation)));
+            completionBlock!(nil, Array<ImapMessage>.cast(operation.messages(operation)), IndexSet.cast(operation.vanishedMessages(operation)));
         }
         else {
             completionBlock!(MailCoreError(code: errorCode), nil, nil);
