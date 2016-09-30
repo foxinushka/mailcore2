@@ -30,11 +30,11 @@ mailcore::IMAPNamespaceItem * cast(CIMAPNamespaceItem self) {
 }
 
 void deleteCIMAPNamespaceItem(CIMAPNamespaceItem self) {
-    cast(self)->release();
+    C_SAFE_RELEASE(self);
 }
 
 const UChar* pathForComponents(struct CIMAPNamespaceItem self, CArray components) {
-    return cast(self)->pathForComponents(cast(components))->unicodeCharacters();
+    return cast(self)->pathForComponents(components.nativeInstance)->unicodeCharacters();
 }
 
 CArray componentForPath(struct CIMAPNamespaceItem self, const UChar* path) {

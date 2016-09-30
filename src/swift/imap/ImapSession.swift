@@ -7,6 +7,10 @@ class ImapSession {
 	init() {
  		session = newCIMAPAsyncSession();
 	}
+    
+    deinit {
+        deleteCIMAPAsyncSession(session);
+    }
 
 
 	func setHostname(hostname: String) {
@@ -144,9 +148,5 @@ class ImapSession {
     func idleOperation(folder:String, lastKnownUID:UInt32) -> ImapIdleOperation {
         return ImapIdleOperation(idleOperation: session.idleOperation(session, folder.utf16CString, lastKnownUID));
     }
-    
 
-	deinit {
-		deleteCIMAPAsyncSession(session);
-	}
 }

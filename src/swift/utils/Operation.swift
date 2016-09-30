@@ -7,7 +7,11 @@ class Operation {
     
     internal init(_ cOperation: COperation) {
         self.nativeInstance = cOperation;
-        self.nativeInstance.setCompletionBlock(nativeInstance, operationCompleted);
+        self.nativeInstance = cOperation.setCompletionBlock(cOperation, operationCompleted);
+    }
+    
+    deinit {
+        deleteCOperation(nativeInstance);
     }
     
     /** Returns whether the operation is cancelled.*/
@@ -31,14 +35,12 @@ class Operation {
     public func cancel() {
         if (_started) {
             _started = false;
-            //[self release];
         }
         nativeInstance.cancel(nativeInstance);
     }
     
     internal func start(){
         _started = true;
-        //[self retain];
         nativeInstance.start(nativeInstance);
     }
 }

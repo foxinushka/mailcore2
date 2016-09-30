@@ -8,6 +8,11 @@
 #include "CAbstractPart.h"
 
 #ifdef __cplusplus
+
+namespace mailcore {
+    class AbstractMessagePart;
+}
+
 extern "C" {
 #endif
     
@@ -26,9 +31,7 @@ extern "C" {
     
 #ifdef __cplusplus
 }
-#endif
 
-#ifdef __cplusplus
 CAbstractMessagePart newCAbstractMessagePart(mailcore::AbstractMessagePart *part);
 mailcore::AbstractMessagePart* cast(CAbstractMessagePart part);
 #endif

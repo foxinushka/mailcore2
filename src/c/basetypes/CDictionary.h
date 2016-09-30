@@ -7,28 +7,30 @@
 #include "CArray.h"
 
 #ifdef __cplusplus
+
+namespace mailcore {
+    class HashMap;
+}
+
 extern "C" {
 #endif
     
     struct CDictionary {
-        ref nativeInstance;
+        #ifdef __cplusplus
+        mailcore::HashMap* nativeInstance;
+        #endif
         
         CArray          (*allKeys)(struct CDictionary self);
         CObject         (*getValue)(struct CDictionary self, CObject key);
     };
     typedef struct CDictionary CDictionary;
     
-    CDictionary newCDictionary();
     void deleteCDictionary(CDictionary self);
     
 #ifdef __cplusplus
 }
-#endif
 
-#ifdef __cplusplus
-#include <MailCore/MCCore.h>
 CDictionary newCDictionary(mailcore::HashMap *dict);
-mailcore::HashMap* cast(CDictionary dict);
 #endif
 
 #endif /* CDictionary_hpp */

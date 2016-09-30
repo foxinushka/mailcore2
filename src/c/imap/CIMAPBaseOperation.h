@@ -4,6 +4,10 @@
 #include "COperation.h"
 
 #ifdef __cplusplus
+class CIMAPBaseOperationIMAPCallback;
+#endif
+
+#ifdef __cplusplus
 extern "C" {
 #endif
     
@@ -13,14 +17,16 @@ extern "C" {
     
     struct CIMAPBaseOperation {
         COperation                                  cOperation;
-        /*CIMAPBaseOperationIMAPCallback*/ref       _callback;
+        #ifdef __cplusplus
+        CIMAPBaseOperationIMAPCallback*             _callback;
+        #endif
         
-        ErrorCode   (*error)(struct CIMAPBaseOperation self);
-        void        (*setProgressBlocks)(struct CIMAPBaseOperation self, CIMAPProgressBlock itemProgressBlock, CIMAPProgressBlock bodyProgressBlock);
+        ErrorCode                   (*error)(struct CIMAPBaseOperation self);
+        struct CIMAPBaseOperation   (*setProgressBlocks)(struct CIMAPBaseOperation self, CIMAPProgressBlock itemProgressBlock, CIMAPProgressBlock bodyProgressBlock);
     };
     typedef struct CIMAPBaseOperation CIMAPBaseOperation;
 
-    void deleteCIMAPBaseOperation(CIMAPBaseOperation *operation);
+    void deleteCIMAPBaseOperation(CIMAPBaseOperation operation);
 
 #ifdef __cplusplus
 }

@@ -16,6 +16,8 @@ public:
     
     virtual ~CIMAPBaseOperationIMAPCallback()
     {
+        mItemProgressBlock = NULL;
+        mBodyProgressBlock = NULL;
     }
     
     virtual void bodyProgress(mailcore::IMAPOperation * session, unsigned int current, unsigned int maximum) {
@@ -31,7 +33,7 @@ private:
     CIMAPProgressBlock mBodyProgressBlock;
 };
 
-void        setProgressBlocks(struct CIMAPBaseOperation self, CIMAPProgressBlock itemProgressBlock, CIMAPProgressBlock bodyProgressBlock);
+CIMAPBaseOperation        setProgressBlocks(struct CIMAPBaseOperation self, CIMAPProgressBlock itemProgressBlock, CIMAPProgressBlock bodyProgressBlock);
 ErrorCode   error(struct CIMAPBaseOperation self);
 
 CIMAPBaseOperation newCIMAPBaseOperation(mailcore::IMAPOperation* operation) {
@@ -52,13 +54,15 @@ ErrorCode error(struct CIMAPBaseOperation self) {
     return static_cast<ErrorCode>(cast(self)->error());
 }
 
-void setProgressBlocks(struct CIMAPBaseOperation self, CIMAPProgressBlock itemProgressBlock, CIMAPProgressBlock bodyProgressBlock) {
+CIMAPBaseOperation setProgressBlocks(struct CIMAPBaseOperation self, CIMAPProgressBlock itemProgressBlock, CIMAPProgressBlock bodyProgressBlock) {
     CIMAPBaseOperationIMAPCallback *callback = new CIMAPBaseOperationIMAPCallback(itemProgressBlock, bodyProgressBlock);
-    self._callback = reinterpret_cast<void *>(callback);
+    self._callback = callback;
     cast(self)->setImapCallback(callback);
+    return self;
 }
 
-extern "C" void deleteCIMAPBaseOperation(CIMAPBaseOperation *operation) {
-    //TODO: check
-    //delete reinterpret_cast<CIMAPBaseOperationIMAPCallback *>(operation->_callback);
+void deleteCIMAPBaseOperation(CIMAPBaseOperation operation) {
+    if (operation._callback != NULL) {
+        delete operation._callback;
+    }
 }

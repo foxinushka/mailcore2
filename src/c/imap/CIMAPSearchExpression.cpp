@@ -18,7 +18,7 @@ mailcore::IMAPSearchExpression * cast(CIMAPSearchExpression self) {
 }
 
 void deleteCIMAPSearchExpression(CIMAPSearchExpression self) {
-    cast(self)->release();
+    C_SAFE_RELEASE(self);
 }
 
 CIMAPSearchExpression newCIMAPSearchExpressionSearchAll() {
@@ -58,11 +58,11 @@ CIMAPSearchExpression newCIMAPSearchExpressionSearchBody(const UChar* value) {
 }
 
 CIMAPSearchExpression newCIMAPSearchExpressionSearchUIDs(CIndexSet uids) {
-    return newCIMAPSearchExpression(mailcore::IMAPSearchExpression::searchUIDs(cast(uids)));
+    return newCIMAPSearchExpression(mailcore::IMAPSearchExpression::searchUIDs(uids.nativeInstance));
 }
 
 CIMAPSearchExpression newCIMAPSearchExpressionSearchNumbers(CIndexSet numbers) {
-    return newCIMAPSearchExpression(mailcore::IMAPSearchExpression::searchNumbers(cast(numbers)));
+    return newCIMAPSearchExpression(mailcore::IMAPSearchExpression::searchNumbers(numbers.nativeInstance));
 }
 
 CIMAPSearchExpression newCIMAPSearchExpressionSearchHeader(const UChar* header, const UChar* value) {

@@ -12,6 +12,10 @@ public class MessageHeader {
         self.importHeadersData(data: data);
     }
     
+    deinit {
+        deleteCMessageHeader(nativeInstance);
+    }
+    
     /** Message-ID field.*/
     public var messageID : String {
         set { self.nativeInstance.setMessageID(nativeInstance, newValue.utf16CString); }

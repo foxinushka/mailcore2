@@ -15,10 +15,6 @@ public class ImapPart : AbstractPart {
         super.init(part.abstractPart);
     }
     
-    deinit {
-        
-    }
-    
     /** A part identifier is of the form 1.2.1*/
     public var partID: String {
         get { return String(utf16: nativeInstance.partID(nativeInstance)!)!; }

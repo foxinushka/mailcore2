@@ -30,7 +30,5 @@ mailcore::IMAPFolder * cast(CIMAPFolder self) {
 }
 
 void deleteCIMAPFolder(CIMAPFolder self) {
-    if (cast(self) != NULL) {
-        cast(self)->release();
-    }
+    C_SAFE_RELEASE(self);
 }

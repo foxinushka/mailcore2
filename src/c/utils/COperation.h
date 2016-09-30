@@ -5,16 +5,23 @@
 #include "CMessageConstants.h"
 
 #ifdef __cplusplus
+
+namespace mailcore {
+    class Operation;
+}
+
 extern "C" {
 #endif
     
     typedef void (^COperationCompletionBlock)();
     
     struct COperation {
-        ref     nativeInstance;
+        #ifdef __cplusplus
+        mailcore::Operation *     nativeInstance;
         ref     _callback;
+        #endif
         
-        void    (*setCompletionBlock)(struct COperation self, COperationCompletionBlock block);
+        struct COperation    (*setCompletionBlock)(struct COperation self, COperationCompletionBlock block);
         bool    (*isCanceled)(struct COperation self);
         bool    (*shouldRunWhenCancelled)(struct COperation self);
         void    (*setShouldRunWhenCancelled)(struct COperation self, bool shouldRunWhenCancelled);
@@ -27,13 +34,8 @@ extern "C" {
 
 #ifdef __cplusplus
 }
-#endif
-
-#ifdef __cplusplus
-#include <MailCore/MCAsync.h>
 
 COperation newCOperation(mailcore::Operation *operation);
-mailcore::Operation* cast(COperation self);
 #endif
 
 #endif

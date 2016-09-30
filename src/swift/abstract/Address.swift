@@ -7,29 +7,33 @@ public final class Address : Hashable, Convertible {
     /** Creates an address with a display name and a mailbox.
      
      Example: [MCOAddress addressWithDisplayName:@"DINH Viêt Hoà" mailbox:@"hoa@etpan.org"] */
-    public static func addressWithDisplayName(displayName: String, mailbox: String) -> Address {
-        return Address(address: CaddressWithDisplayName(displayName.utf16CString, mailbox.utf16CString));
+    public static func addressWithDisplayName(displayName: String, mailbox: String) -> Address? {
+        let address = Address(address: CaddressWithDisplayName(displayName.utf16CString, mailbox.utf16CString));
+        return address.nativeInstance.isNull(address.nativeInstance) ? address : nil;
     }
     
     /** Creates an address with only a mailbox.
      
      Example: [MCOAddress addressWithMailbox:@"hoa@etpan.org"]*/
-    public static func addressWithMailbox(mailbox: String) -> Address {
-        return Address(address: CaddressWithMailbox(mailbox.utf16CString));
+    public static func addressWithMailbox(mailbox: String) -> Address? {
+        let address = Address(address: CaddressWithMailbox(mailbox.utf16CString));
+        return address.nativeInstance.isNull(address.nativeInstance) ? address : nil;
     }
 
     /** Creates an address with a RFC822 string.
      
      Example: [MCOAddress addressWithRFC822String:@"DINH Vi=C3=AAt Ho=C3=A0 <hoa@etpan.org>"]*/
-    public static func addressWithRFC822String(RFC822String: String) -> Address {
-        return Address(address: CaddressWithRFC822String(RFC822String.utf16CString));
+    public static func addressWithRFC822String(RFC822String: String) -> Address? {
+        let address = Address(address: CaddressWithRFC822String(RFC822String.utf16CString));
+        return address.nativeInstance.isNull(address.nativeInstance) ? address : nil;
     }
 
     /** Creates an address with a non-MIME-encoded RFC822 string.
      
      Example: [MCOAddress addressWithNonEncodedRFC822String:@"DINH Viêt Hoà <hoa@etpan.org>"]*/
-    public static func addressWithNonEncodedRFC822String(nonEncodedRFC822String: String) -> Address {
-        return Address(address: CaddressWithNonEncodedRFC822String(nonEncodedRFC822String.utf16CString));
+    public static func addressWithNonEncodedRFC822String(nonEncodedRFC822String: String) -> Address? {
+        let address = Address(address: CaddressWithNonEncodedRFC822String(nonEncodedRFC822String.utf16CString));
+        return address.nativeInstance.isNull(address.nativeInstance) ? address : nil;
     }
 
     /**

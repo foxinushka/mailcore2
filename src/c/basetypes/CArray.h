@@ -6,11 +6,18 @@
 #include "CObject.h"
 
 #ifdef __cplusplus
+
+namespace  mailcore {
+    class Array;
+}
+
 extern "C" {
 #endif
 
     struct CArray {
-        ref         nativeInstance;
+        #ifdef __cplusplus
+        mailcore::Array*         nativeInstance;
+        #endif
         
     	void        (*addObject)(struct CArray self, CObject object);
         uint32_t    (*size)(struct CArray self);
@@ -20,16 +27,11 @@ extern "C" {
     typedef struct CArray CArray;
 
     CArray newCArray();
-    void deleteCArray(CArray self);
     
 #ifdef __cplusplus
 }
-#endif
 
-#ifdef __cplusplus
-#include <MailCore/MCCore.h>
 CArray newCArray(mailcore::Array *array);
-mailcore::Array* cast(CArray array);
 #endif
 
 #endif

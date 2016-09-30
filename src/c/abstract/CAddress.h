@@ -13,6 +13,8 @@ extern "C" {
     struct CAddress {
         ref nativeInstance;
         
+        bool            (*isNull)(struct CAddress self);
+        
         const UChar*    (*displayName)(struct CAddress self);
         void            (*setDisplayName)(struct CAddress self, const UChar* displayName);
         const UChar*    (*mailbox)(struct CAddress self);

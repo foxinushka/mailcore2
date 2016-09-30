@@ -11,11 +11,11 @@ class ImapBaseOperation : Operation {
     internal init(baseOperation: CIMAPBaseOperation) {
         self.baseOperation = baseOperation;
         super.init(baseOperation.cOperation);
-        self.baseOperation.setProgressBlocks(self.baseOperation, itemProgress, bodyProgress);
+        self.baseOperation = self.baseOperation.setProgressBlocks(self.baseOperation, itemProgress, bodyProgress);
     }
     
     deinit {
-        deleteCIMAPBaseOperation(&baseOperation);
+        deleteCIMAPBaseOperation(baseOperation);
     }
     
     internal func error() -> ErrorCode {

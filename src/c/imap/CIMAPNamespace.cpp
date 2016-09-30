@@ -40,7 +40,7 @@ mailcore::IMAPNamespace * cast(CIMAPNamespace self) {
 }
 
 void deleteCIMAPNamespace(CIMAPNamespace self) {
-    reinterpret_cast<nativeType*>(self.nativeInstance)->release();
+    C_SAFE_RELEASE(self);
 }
 
 const UChar* mainPrefix(struct CIMAPNamespace self) {
@@ -56,11 +56,11 @@ CArray prefixes(struct CIMAPNamespace self) {
 }
 
 const UChar* pathForComponents(struct CIMAPNamespace self, CArray components) {
-    return cast(self)->pathForComponents(cast(components))->unicodeCharacters();
+    return cast(self)->pathForComponents(components.nativeInstance)->unicodeCharacters();
 }
 
 const UChar* pathForComponentsAndPrefix(struct CIMAPNamespace self, CArray components, const UChar* prefix) {
-    return cast(self)->pathForComponentsAndPrefix(cast(components), mailcore::String::stringWithCharacters(prefix))->unicodeCharacters();
+    return cast(self)->pathForComponentsAndPrefix(components.nativeInstance, mailcore::String::stringWithCharacters(prefix))->unicodeCharacters();
 }
 
 CArray componentsFromPath(struct CIMAPNamespace self, const UChar* path) {

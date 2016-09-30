@@ -31,7 +31,7 @@ CMessageHeader newCMessageHeader(mailcore::MessageHeader *header){
     CMessageHeader self;
     
     self.nativeInstance = header;
-    header->retain();
+    cast(self)->retain();
     
     self.messageID = &messageID;
     self.setMessageID = &setMessageID;
@@ -111,11 +111,11 @@ void importHeadersData(struct CMessageHeader self, const char *bytes, unsigned i
 }
 
 CMessageHeader replyHeaderWithExcludedRecipients(struct CMessageHeader self, CArray /* MCOAddress */excludedRecipients){
-    return newCMessageHeader(cast(self)->replyHeader(false, cast(excludedRecipients)));
+    return newCMessageHeader(cast(self)->replyHeader(false, excludedRecipients.nativeInstance));
 }
 
 struct CMessageHeader replyAllHeaderWithExcludedRecipients(struct CMessageHeader self, CArray /* MCOAddress */excludedRecipients){
-    return newCMessageHeader(cast(self)->replyHeader(true, cast(excludedRecipients)));
+    return newCMessageHeader(cast(self)->replyHeader(true, excludedRecipients.nativeInstance));
 }
 
 struct CMessageHeader forwardHeader(struct CMessageHeader self){

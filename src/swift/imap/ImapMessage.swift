@@ -9,10 +9,6 @@ public final class ImapMessage : AbsrtactMessage, Convertible {
         super.init(abstractMessage: message.abstractMessage);
     }
     
-    deinit {
-        
-    }
-    
     /** IMAP UID of the message. */
     //@property (nonatomic, assign) uint32_t uid;
     public var uid: UInt32 {

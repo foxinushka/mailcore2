@@ -1,3 +1,4 @@
+#include <MailCore/MCAsync.h>
 #include "COperation.h"
 #include "CBase+Private.h"
 
@@ -20,7 +21,7 @@ private:
     COperationCompletionBlock completionBlock;;
 };
 
-void setCompletionBlock(COperation self, COperationCompletionBlock block);
+struct COperation  setCompletionBlock(COperation self, COperationCompletionBlock block);
 bool COperationIsCanceled(COperation self);
 void COperationCancel(COperation self);
 void COperationStart(COperation self);
@@ -30,6 +31,7 @@ void setShouldRunWhenCancelled(COperation self, bool shouldRunWhenCancelled);
 COperation newCOperation(mailcore::Operation *operationRef) {
     COperation self;
     self.nativeInstance = operationRef;
+    self.nativeInstance->retain();
     self._callback = NULL;
     
     self.setCompletionBlock = &setCompletionBlock;
@@ -46,28 +48,29 @@ mailcore::Operation* cast(COperation self) {
     return reinterpret_cast<mailcore::Operation *>(self.nativeInstance);
 }
 
-void setCompletionBlock(COperation self, COperationCompletionBlock block) {
+struct COperation setCompletionBlock(COperation self, COperationCompletionBlock block) {
     COperationCompletionCallback *callback = new COperationCompletionCallback(block);
     self._callback = reinterpret_cast<void *>(callback);
-    cast(self)->setCallback(callback);
+    self.nativeInstance->setCallback(callback);
+    return self;
 }
 
 C_SYNTHESIZE_BOOL(setShouldRunWhenCancelled, shouldRunWhenCancelled);
 
 bool COperationIsCanceled(COperation self) {
-    return cast(self)->isCancelled();
+    return self.nativeInstance->isCancelled();
 }
 
 void COperationCancel(COperation self) {
-    cast(self)->cancel();
+    self.nativeInstance->cancel();
 }
 
 void COperationStart(COperation self) {
-    cast(self)->start();
+    self.nativeInstance->start();
 }
 
 extern "C" void deleteCOperation(COperation self) {
-    cast(self)->release();
+    self.nativeInstance->release();
     if (self._callback != NULL) {
         reinterpret_cast<COperationCompletionCallback *>(self._callback)->release();
     }

@@ -50,7 +50,18 @@ CArray getter(structName self) \
 \
 void setter(structName self, CArray getter) \
 { \
-    cast(self)->setter(cast(getter)); \
+    cast(self)->setter(getter.nativeInstance); \
 }
+
+#define C_SAFE_RETAIN(o) (o.nativeInstance != NULL ? cast(o)->retain() : NULL)
+#define C_SAFE_COPY(o) (o.nativeInstance != NULL ? cast(o)->copy() : NULL)
+
+#define C_SAFE_RELEASE(o) \
+do { \
+if (o.nativeInstance != NULL) { \
+cast(o)->release(); \
+o.nativeInstance = NULL; \
+} \
+} while (0)
 
 #endif

@@ -40,7 +40,5 @@ mailcore::IMAPFolderStatus * cast(CIMAPFolderStatus self) {
 }
 
 void deleteCIMAPFolderStatus(CIMAPFolderStatus self) {
-    if (cast(self) != NULL) {
-        cast(self)->release();
-    }
+    C_SAFE_RELEASE(self);
 }

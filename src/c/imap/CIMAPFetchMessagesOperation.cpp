@@ -41,5 +41,5 @@ CArray extraHeaders(struct CIMAPFetchMessagesOperation self){
     return newCArray(cast(self)->extraHeaders());
 }
 void setExtraHeaders(struct CIMAPFetchMessagesOperation self, CArray array){
-    cast(self)->setExtraHeaders(cast(array));
+    cast(self)->setExtraHeaders(array.nativeInstance);
 }

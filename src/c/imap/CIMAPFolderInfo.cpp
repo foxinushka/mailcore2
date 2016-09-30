@@ -39,8 +39,6 @@ mailcore::IMAPFolderInfo * cast(CIMAPFolderInfo self) {
 }
 
 void deleteCIMAPFolderInfo(CIMAPFolderInfo self) {
-    if (cast(self) != NULL) {
-        cast(self)->release();
-    }
+    C_SAFE_RELEASE(self);
 }
 

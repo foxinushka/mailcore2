@@ -30,7 +30,7 @@ CArray parts(struct CAbstractMultipart self){
 }
 
 void setParts(struct CAbstractMultipart self, CArray parts){
-    cast(self)->setParts(cast(parts));
+    cast(self)->setParts(parts.nativeInstance);
 }
 
 

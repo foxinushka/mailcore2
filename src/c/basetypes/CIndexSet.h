@@ -5,13 +5,20 @@
 #include "CBase.h"
 
 #ifdef __cplusplus
+
+namespace mailcore {
+    class IndexSet;
+}
+
 extern "C" {
 #endif
     
     typedef void (^CIndexSetEnumerateRangesBlock)(uint64_t location, uint64_t length);
 
     struct CIndexSet {
-        ref nativeInstance;
+        #ifdef __cplusplus
+        mailcore::IndexSet* nativeInstance;
+        #endif
         
         void    (*enumerateRanges)(struct CIndexSet self , CIndexSetEnumerateRangesBlock block);
         void    (*addRange)(struct CIndexSet self, uint64_t location, uint64_t length);
@@ -23,12 +30,8 @@ extern "C" {
     
 #ifdef __cplusplus
 }
-#endif
 
-#ifdef __cplusplus
-#include <MailCore/MCCore.h>
 CIndexSet newCIndexSet(mailcore::IndexSet *set);
-mailcore::IndexSet* cast(CIndexSet self);
 #endif
 
 #endif

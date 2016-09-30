@@ -8,6 +8,7 @@
 C_SYNTHESIZE_STRING(setDisplayName, displayName);
 C_SYNTHESIZE_STRING(setMailbox, mailbox);
 
+bool isNull(struct CAddress self);
 const UChar* RFC822String(struct CAddress self);
 const UChar* nonEncodedRFC822String(struct CAddress self);
 CObject castToCObject(struct CAddress self);
@@ -17,6 +18,7 @@ CAddress newCAddress(mailcore::Address *address){
     self.nativeInstance = address;
     address->retain();
     
+    self.isNull = &isNull;
     self.displayName = &displayName;
     self.setDisplayName = &setDisplayName;
     self.mailbox = &mailbox;
@@ -38,17 +40,14 @@ CAddress newCAddress(){
 }
 
 void deleteCAddress(CAddress self){
-    if (cast(self) != NULL) {
-        cast(self)->release();
-    }
+    C_SAFE_RELEASE(self);
 }
 
 CAddress CaddressWithDisplayName(const UChar* displayName, const UChar* mailbox){
     CAddress self = newCAddress();
-    //deleteCAddress(&address);
+    C_SAFE_RELEASE(self);
     self.nativeInstance = mailcore::Address::addressWithDisplayName(mailcore::String::stringWithCharacters(displayName), mailcore::String::stringWithCharacters(mailbox));
     if (!cast(self)) {
-        //TODO: check this in Swift
         return self;
     }
     cast(self)->retain();
@@ -57,10 +56,9 @@ CAddress CaddressWithDisplayName(const UChar* displayName, const UChar* mailbox)
 
 CAddress CaddressWithMailbox(const UChar* mailbox){
     CAddress self = newCAddress();
-    //deleteCAddress(&address);
+    C_SAFE_RELEASE(self);
     self.nativeInstance = mailcore::Address::addressWithMailbox(mailcore::String::stringWithCharacters(mailbox));
     if (!cast(self)) {
-        //TODO: check this in Swift
         return self;
     }
     cast(self)->retain();
@@ -69,10 +67,9 @@ CAddress CaddressWithMailbox(const UChar* mailbox){
 
 CAddress CaddressWithRFC822String(const UChar* RFC822String){
     CAddress self = newCAddress();
-    //deleteCAddress(&address);
+    C_SAFE_RELEASE(self);
     self.nativeInstance = mailcore::Address::addressWithRFC822String(mailcore::String::stringWithCharacters(RFC822String));
     if (!cast(self)) {
-        //TODO: check this in Swift
         return self;
     }
     cast(self)->retain();
@@ -81,22 +78,25 @@ CAddress CaddressWithRFC822String(const UChar* RFC822String){
 
 CAddress CaddressWithNonEncodedRFC822String(const UChar* nonEncodedRFC822String){
     CAddress self = newCAddress();
-    //deleteCAddress(&address);
+    C_SAFE_RELEASE(self);
     self.nativeInstance = mailcore::Address::addressWithNonEncodedRFC822String(mailcore::String::stringWithCharacters(nonEncodedRFC822String));
     if (!cast(self)) {
-        //TODO: check this in Swift
         return self;
     }
     cast(self)->retain();
     return self;
 }
 
-extern "C" CArray CaddressesWithRFC822String(const UChar* string){
+CArray CaddressesWithRFC822String(const UChar* string){
     return newCArray(mailcore::Address::addressesWithRFC822String(mailcore::String::stringWithCharacters(string)));
 }
 
-extern "C" CArray CaddressesWithNonEncodedRFC822String(const UChar* string){
+CArray CaddressesWithNonEncodedRFC822String(const UChar* string){
     return newCArray(mailcore::Address::addressesWithNonEncodedRFC822String(mailcore::String::stringWithCharacters(string)));
+}
+
+bool isNull(struct CAddress self) {
+    return self.nativeInstance != NULL;
 }
 
 const UChar* RFC822String(struct CAddress self){

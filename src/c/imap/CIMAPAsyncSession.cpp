@@ -56,27 +56,27 @@ CIMAPBaseOperation deleteFolderOperation(CIMAPAsyncSession self, const UChar *fo
 }
 CIMAPBaseOperation storeFlagsByUIDOperation(CIMAPAsyncSession self, const UChar *folder, CIndexSet set, IMAPStoreFlagsRequestKind kind, MessageFlag flags, CArray customFlags){
     mailcore::IMAPOperation *imapOperation = cast(self)->storeFlagsByUIDOperation(new mailcore::String(folder), 
-        cast(set), static_cast<mailcore::IMAPStoreFlagsRequestKind>(kind), static_cast<mailcore::MessageFlag>(flags), cast(customFlags));
+        set.nativeInstance, static_cast<mailcore::IMAPStoreFlagsRequestKind>(kind), static_cast<mailcore::MessageFlag>(flags), customFlags.nativeInstance);
     return newCIMAPBaseOperation(imapOperation);
 }
 CIMAPAppendMessageOperation appendMessageOperation(CIMAPAsyncSession self, const UChar *folder, const UChar *messagePath, MessageFlag flags, CArray array){
     mailcore::IMAPAppendMessageOperation *imapOperation = cast(self)->appendMessageOperation(new mailcore::String(folder), 
-        new mailcore::String(messagePath), static_cast<mailcore::MessageFlag>(flags), cast(array));
+        new mailcore::String(messagePath), static_cast<mailcore::MessageFlag>(flags), array.nativeInstance);
     return newIMAPAppendMessageOperation(imapOperation);
 }
 CIMAPFetchMessagesOperation fetchMessagesByNumberOperation(CIMAPAsyncSession self, const UChar *folder, IMAPMessagesRequestKind kind, CIndexSet numbers){
     mailcore::IMAPFetchMessagesOperation *imapOperation = cast(self)->fetchMessagesByNumberOperation(new mailcore::String(folder),
-        static_cast<mailcore::IMAPMessagesRequestKind>(kind), cast(numbers));
+        static_cast<mailcore::IMAPMessagesRequestKind>(kind), numbers.nativeInstance);
     return newCIMAPFetchMessagesOperation(imapOperation);
 }
 CIMAPFetchMessagesOperation fetchMessagesByUIDOperation(CIMAPAsyncSession self, const UChar *folder, IMAPMessagesRequestKind kind, CIndexSet uids){
     mailcore::IMAPFetchMessagesOperation *imapOperation = cast(self)->fetchMessagesByUIDOperation(new mailcore::String(folder),
-        static_cast<mailcore::IMAPMessagesRequestKind>(kind), cast(uids));
+        static_cast<mailcore::IMAPMessagesRequestKind>(kind), uids.nativeInstance);
     return newCIMAPFetchMessagesOperation(imapOperation);
 }
 CIMAPFetchMessagesOperation syncMessagesByUIDOperation(CIMAPAsyncSession self, const UChar *folder, IMAPMessagesRequestKind kind, CIndexSet uids, uint64_t modSeq){
     mailcore::IMAPFetchMessagesOperation *imapOperation = cast(self)->syncMessagesByUIDOperation(new mailcore::String(folder),
-        static_cast<mailcore::IMAPMessagesRequestKind>(kind), cast(uids), modSeq);
+        static_cast<mailcore::IMAPMessagesRequestKind>(kind), uids.nativeInstance, modSeq);
     return newCIMAPFetchMessagesOperation(imapOperation);
 }
 CIMAPFetchContentOperation fetchMessageByUIDOperation(CIMAPAsyncSession self, const UChar *folder, uint32_t uid, bool urgent){
@@ -100,7 +100,7 @@ CIMAPSearchOperation searchOperation(CIMAPAsyncSession self, const UChar *folder
 }
 CIMAPCopyMessagesOperation copyMessagesOperation(CIMAPAsyncSession self, const UChar *folder, CIndexSet uids,const UChar *destFolder){
     mailcore::IMAPCopyMessagesOperation *imapOperation = cast(self)->copyMessagesOperation(new mailcore::String(folder), 
-        cast(uids), new mailcore::String(destFolder));
+        uids.nativeInstance, new mailcore::String(destFolder));
     return newCIMAPCopyMessagesOperation(imapOperation);
 }
 CIMAPFolderInfoOperation folderInfoOperation(CIMAPAsyncSession self, const UChar *folder){
@@ -152,7 +152,7 @@ CIMAPAsyncSession newCIMAPAsyncSession(){
     return session;
 }
 void deleteCIMAPAsyncSession(CIMAPAsyncSession session){
-    //delete reinterpret_cast<mailcore::IMAPAsyncSession*>(session.nativeInstance);
+    reinterpret_cast<mailcore::IMAPAsyncSession*>(session.nativeInstance)->release();
 }
 
 

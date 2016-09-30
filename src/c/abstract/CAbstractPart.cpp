@@ -25,10 +25,9 @@ CArray                  allContentTypeParametersNames(struct CAbstractPart self)
 
 CAbstractPart newCAbstractPart(mailcore::AbstractPart *part){
     CAbstractPart self;
-    if (part != NULL) {
-        part->retain();
-    }
-    self.nativeInstance = reinterpret_cast<void *>(part);
+    self.nativeInstance = part;
+    C_SAFE_RETAIN(self);
+    
     self.partType = &partType;
     self.setPartType = &setPartType;
     self.filename = &filename;
@@ -62,10 +61,8 @@ mailcore::AbstractPart * cast(CAbstractPart part){
     return reinterpret_cast<mailcore::AbstractPart*>(part.nativeInstance);
 }
 
-extern "C" void deleteCAbstractPart(CAbstractPart self){
-    if (cast(self) != NULL) {
-        cast(self)->release();
-    }
+void deleteCAbstractPart(CAbstractPart self){
+    C_SAFE_RELEASE(self);
 }
 
 struct CAbstractPart partForContentID(struct CAbstractPart self, const UChar* contentID){

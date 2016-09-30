@@ -15,11 +15,10 @@ CArray          attachments(struct CAbstractMessage self);
 CArray          htmlInlineAttachments(struct CAbstractMessage self);
 CArray          requiredPartsForRendering(struct CAbstractMessage self);
 
-CAbstractMessage newCAbstractMessage(mailcore::AbstractMessage *address){
+CAbstractMessage newCAbstractMessage(mailcore::AbstractMessage *msg){
     CAbstractMessage self;
-    self.nativeInstance = address;
-    address->retain();
-    
+    self.nativeInstance = msg;
+    C_SAFE_RETAIN(self);
     self.header = &header;
     self.setHeader = &setHeader;
     self.partForContentID = &partForContentID;
@@ -36,7 +35,7 @@ mailcore::AbstractMessage* cast(CAbstractMessage self) {
 }
 
 void deleteCAbstractMessage(CAbstractMessage self){
-    cast(self)->release();
+    C_SAFE_RELEASE(self);
 }
 
 CMessageHeader header(CAbstractMessage self){
