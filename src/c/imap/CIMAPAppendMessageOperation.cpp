@@ -1,5 +1,6 @@
 #include "CIMAPAppendMessageOperation.h"
 #include "CBase+Private.h"
+#include <MailCore/MCAsync.h>
 
 #define nativeType mailcore::IMAPAppendMessageOperation
 #define structName CIMAPAppendMessageOperation
@@ -11,6 +12,7 @@ uint32_t    createdUID(struct CIMAPAppendMessageOperation self);
 CIMAPAppendMessageOperation newIMAPAppendMessageOperation(mailcore::IMAPAppendMessageOperation *op){
     CIMAPAppendMessageOperation self;
     self.baseOperation = newCIMAPBaseOperation(op);
+    self.instance = op;
     
     self.setDate = &setDate;
     self.date = &date;
@@ -19,12 +21,8 @@ CIMAPAppendMessageOperation newIMAPAppendMessageOperation(mailcore::IMAPAppendMe
     return self;
 }
 
-mailcore::IMAPAppendMessageOperation* cast(CIMAPAppendMessageOperation self) {
-    return reinterpret_cast<mailcore::IMAPAppendMessageOperation*>(self.baseOperation.cOperation.nativeInstance);
-}
-
 uint32_t createdUID(struct CIMAPAppendMessageOperation self) {
-    return cast(self)->createdUID();
+    return self.instance->createdUID();
 }
 
 void deleteIMAPAppendMessageOperation(CIMAPAppendMessageOperation operation) {

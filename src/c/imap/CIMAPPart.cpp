@@ -27,15 +27,11 @@ CIMAPPart newCIMAPPart(mailcore::IMAPPart *part) {
     return self;
 }
 
-mailcore::IMAPPart* cast(CIMAPPart self) {
-    return reinterpret_cast<mailcore::IMAPPart*>(self.abstractPart.nativeInstance);
+unsigned int decodedSize(struct CIMAPPart self) {
+    return self.instance->decodedSize();
 }
 
-unsigned int decodedSize(struct CIMAPPart self) {
-    return cast(self)->decodedSize();
-}
 
 CIMAPPart castCIMAPPart(CObject obj) {
-    return newCIMAPPart((mailcore::IMAPPart*) obj.nativeInstance);
+    return newCIMAPPart((mailcore::IMAPPart*) obj.instance);
 }
-

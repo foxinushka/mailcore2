@@ -16,9 +16,11 @@ extern "C" {
     typedef void (^CIndexSetEnumerateRangesBlock)(uint64_t location, uint64_t length);
 
     struct CIndexSet {
-        #ifdef __cplusplus
-        mailcore::IndexSet* nativeInstance;
-        #endif
+#ifdef __cplusplus
+        mailcore::IndexSet* instance;
+#else
+        void*               instance;
+#endif
         
         void    (*enumerateRanges)(struct CIndexSet self , CIndexSetEnumerateRangesBlock block);
         void    (*addRange)(struct CIndexSet self, uint64_t location, uint64_t length);

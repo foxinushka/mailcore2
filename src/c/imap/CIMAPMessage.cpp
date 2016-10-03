@@ -54,22 +54,18 @@ CIMAPMessage newCIMAPMessage(mailcore::IMAPMessage *msg) {
     return self;
 }
 
-mailcore::IMAPMessage* cast(CIMAPMessage self) {
-    return reinterpret_cast<mailcore::IMAPMessage*>(self.abstractMessage.nativeInstance);
-}
-
 void deleteCIMAPMessage(CIMAPMessage self) {
 
 }
 
 CAbstractPart partForPartID(struct CIMAPMessage self, const UChar* partID) {
-    return newCAbstractPart(cast(self)->partForPartID(mailcore::String::stringWithCharacters(partID)));
+    return newCAbstractPart(self.instance->partForPartID(mailcore::String::stringWithCharacters(partID)));
 }
 
 CIMAPMessage castCIMAPMessage(CObject obj) {
-    return newCIMAPMessage((mailcore::IMAPMessage*) obj.nativeInstance);
+    return newCIMAPMessage((mailcore::IMAPMessage*) obj.instance);
 }
 
 CObject castToCObject(struct CIMAPMessage self) {
-    return newCObject((mailcore::Object *) cast(self));
+    return newCObject(self.instance);
 }

@@ -10,11 +10,22 @@
 #include "CArray.h"
 
 #ifdef __cplusplus
+
+namespace mailcore {
+    class IMAPMessage;
+}
+
 extern "C" {
 #endif
     
     struct CIMAPMessage {
+#ifdef __cplusplus
+        mailcore::IMAPMessage*  instance;
+#else
+        void*                   instance;
+#endif
         CAbstractMessage abstractMessage;
+        
         
         uint32_t        (*uid)(struct CIMAPMessage self);
         void            (*setUid)(struct CIMAPMessage self, uint32_t uid);
@@ -48,13 +59,8 @@ extern "C" {
     
 #ifdef __cplusplus
 }
-#endif
-
-#ifdef __cplusplus
-#include <MailCore/MCAsync.h>
 
 CIMAPMessage newCIMAPMessage(mailcore::IMAPMessage *msg);
-mailcore::IMAPMessage* cast(CIMAPMessage self);
 #endif
 
 #endif /* CIMAPMessage_h */

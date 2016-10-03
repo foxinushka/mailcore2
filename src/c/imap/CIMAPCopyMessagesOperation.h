@@ -5,11 +5,21 @@
 #include "CDictionary.h"
 
 #ifdef __cplusplus
+
+namespace mailcore {
+    class IMAPCopyMessagesOperation;
+}
+
 extern "C" {
 #endif
     
     struct CIMAPCopyMessagesOperation {
         CIMAPBaseOperation baseOperation;
+#ifdef __cplusplus
+        mailcore::IMAPCopyMessagesOperation*    instance;
+#else
+        void*                                   instance;
+#endif
         
         CDictionary (*uidMapping)(struct CIMAPCopyMessagesOperation self);
     };
@@ -19,13 +29,8 @@ extern "C" {
 
 #ifdef __cplusplus
 }
-#endif
-
-#ifdef __cplusplus
-#include <MailCore/MCAsync.h>
 
 CIMAPCopyMessagesOperation newCIMAPCopyMessagesOperation(mailcore::IMAPCopyMessagesOperation *operation);
-mailcore::IMAPCopyMessagesOperation * cast(CIMAPCopyMessagesOperation self);
 #endif
 
 #endif

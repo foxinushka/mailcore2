@@ -6,11 +6,20 @@
 #include "CMessageConstants.h"
 
 #ifdef __cplusplus
+
+namespace mailcore {
+    class IMAPFolderStatus;
+}
+
 extern "C" {
 #endif
     
     struct CIMAPFolderStatus {
-        ref nativeInstance;
+#ifdef __cplusplus
+        mailcore::IMAPFolderStatus*     instance;
+#else
+        void*                           instance;
+#endif
         
         uint32_t        (*uidNext)(struct CIMAPFolderStatus self);
         void            (*setUidNext)(struct CIMAPFolderStatus self, uint32_t uid);
@@ -31,13 +40,8 @@ extern "C" {
     
 #ifdef __cplusplus
 }
-#endif
-
-#ifdef __cplusplus
-#include <MailCore/MCAsync.h>
 
 CIMAPFolderStatus newCIMAPFolderStatus(mailcore::IMAPFolderStatus *folder);
-mailcore::IMAPFolderStatus * cast(CIMAPFolderStatus self);
 #endif
 
 #endif /* CIMAPFolderStatus_h */

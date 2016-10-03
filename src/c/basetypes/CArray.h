@@ -7,7 +7,7 @@
 
 #ifdef __cplusplus
 
-namespace  mailcore {
+namespace mailcore {
     class Array;
 }
 
@@ -15,10 +15,11 @@ extern "C" {
 #endif
 
     struct CArray {
-        #ifdef __cplusplus
-        mailcore::Array*         nativeInstance;
-        #endif
-        
+#ifdef __cplusplus
+        mailcore::Array*    instance;
+#else
+        void*               instance;
+#endif
     	void        (*addObject)(struct CArray self, CObject object);
         uint32_t    (*size)(struct CArray self);
         CObject     (*getObject)(struct CArray self, uint32_t index);

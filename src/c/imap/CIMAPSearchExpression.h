@@ -5,11 +5,20 @@
 #include "CIndexSet.h"
 
 #ifdef __cplusplus
+
+namespace mailcore {
+    class IMAPSearchExpression;
+}
+
 extern "C" {
 #endif
     
     struct CIMAPSearchExpression{
-        ref nativeInstance;
+#ifdef __cplusplus
+        mailcore::IMAPSearchExpression*     instance;
+#else
+        void*                               instance;
+#endif
     };
     typedef struct CIMAPSearchExpression CIMAPSearchExpression;
 
@@ -54,12 +63,6 @@ extern "C" {
 
 #ifdef __cplusplus
 }
-#endif
-
-#ifdef __cplusplus
-#include <MailCore/MCAsync.h>
-
-mailcore::IMAPSearchExpression* cast(CIMAPSearchExpression self);
 #endif
 
 #endif

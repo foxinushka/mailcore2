@@ -5,6 +5,11 @@
 
 #ifdef __cplusplus
 class CIMAPBaseOperationIMAPCallback;
+
+namespace mailcore {
+    class IMAPOperation;
+}
+
 #endif
 
 #ifdef __cplusplus
@@ -16,10 +21,14 @@ extern "C" {
     typedef struct CIMAPAsyncSession CIMAPAsyncSession;
     
     struct CIMAPBaseOperation {
-        COperation                                  cOperation;
-        #ifdef __cplusplus
+#ifdef __cplusplus
+        mailcore::IMAPOperation*                    instance;
         CIMAPBaseOperationIMAPCallback*             _callback;
-        #endif
+#else
+        void*                                       instance;
+        void*                                       _callback;
+#endif
+        COperation                                  cOperation;
         
         ErrorCode                   (*error)(struct CIMAPBaseOperation self);
         struct CIMAPBaseOperation   (*setProgressBlocks)(struct CIMAPBaseOperation self, CIMAPProgressBlock itemProgressBlock, CIMAPProgressBlock bodyProgressBlock);
@@ -30,13 +39,8 @@ extern "C" {
 
 #ifdef __cplusplus
 }
-#endif
-
-#ifdef __cplusplus
-#include <MailCore/MCAsync.h>
 
 CIMAPBaseOperation newCIMAPBaseOperation(mailcore::IMAPOperation* operation);
-mailcore::IMAPOperation* cast(CIMAPBaseOperation self);
 #endif
 
 #endif

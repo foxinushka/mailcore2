@@ -17,7 +17,7 @@ CArray          requiredPartsForRendering(struct CAbstractMessage self);
 
 CAbstractMessage newCAbstractMessage(mailcore::AbstractMessage *msg){
     CAbstractMessage self;
-    self.nativeInstance = msg;
+    self.instance = msg;
     C_SAFE_RETAIN(self);
     self.header = &header;
     self.setHeader = &setHeader;
@@ -30,40 +30,36 @@ CAbstractMessage newCAbstractMessage(mailcore::AbstractMessage *msg){
     return self;
 }
 
-mailcore::AbstractMessage* cast(CAbstractMessage self) {
-    return reinterpret_cast<mailcore::AbstractMessage*>(self.nativeInstance);
-}
-
 void deleteCAbstractMessage(CAbstractMessage self){
     C_SAFE_RELEASE(self);
 }
 
 CMessageHeader header(CAbstractMessage self){
-    return newCMessageHeader(cast(self)->header());
+    return newCMessageHeader(self.instance->header());
 }
 
 void setHeader(CAbstractMessage self, CMessageHeader header){
-    cast(self)->setHeader(cast(header));
+    self.instance->setHeader(header.instance);
 }
 
 CAbstractPart partForContentID(CAbstractMessage self, const UChar* contentID){
-    return newCAbstractPart(cast(self)->partForContentID(mailcore::String::stringWithCharacters(contentID)));
+    return newCAbstractPart(self.instance->partForContentID(mailcore::String::stringWithCharacters(contentID)));
 }
 
 CAbstractPart partForUniqueID(CAbstractMessage self, const UChar* uniqueID){
-    return newCAbstractPart(cast(self)->partForUniqueID(mailcore::String::stringWithCharacters(uniqueID)));
+    return newCAbstractPart(self.instance->partForUniqueID(mailcore::String::stringWithCharacters(uniqueID)));
 }
 
 CArray attachments(CAbstractMessage self){
-    return newCArray(cast(self)->attachments());
+    return newCArray(self.instance->attachments());
 }
 
 CArray htmlInlineAttachments(CAbstractMessage self){
-    return newCArray(cast(self)->htmlInlineAttachments());
+    return newCArray(self.instance->htmlInlineAttachments());
 }
 
 CArray requiredPartsForRendering(CAbstractMessage self){
-    return newCArray(cast(self)->requiredPartsForRendering());
+    return newCArray(self.instance->requiredPartsForRendering());
 }
 
 

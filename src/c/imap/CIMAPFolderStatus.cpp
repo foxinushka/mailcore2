@@ -16,8 +16,8 @@ C_SYNTHESIZE_SCALAR(uint64_t, uint64_t, setHighestModSeqValue, highestModSeqValu
 
 CIMAPFolderStatus newCIMAPFolderStatus(mailcore::IMAPFolderStatus *status) {
     CIMAPFolderStatus self;
-    status->retain();
-    self.nativeInstance = status;
+    self.instance = status;
+    self.instance->retain();
     
     self.uidNext = &uidNext;
     self.setUidNext = &setUidNext;
@@ -33,10 +33,6 @@ CIMAPFolderStatus newCIMAPFolderStatus(mailcore::IMAPFolderStatus *status) {
     self.setHighestModSeqValue = &setHighestModSeqValue;
     
     return self;
-}
-
-mailcore::IMAPFolderStatus * cast(CIMAPFolderStatus self) {
-    return reinterpret_cast<mailcore::IMAPFolderStatus*>(self.nativeInstance);
 }
 
 void deleteCIMAPFolderStatus(CIMAPFolderStatus self) {

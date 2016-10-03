@@ -8,12 +8,20 @@
 #include "CMessageConstants.h"
 
 #ifdef __cplusplus
+
+namespace mailcore {
+    class AbstractPart;
+}
+
 extern "C" {
 #endif
 
     struct CAbstractPart {
-        ref nativeInstance;
-        
+#ifdef __cplusplus
+        mailcore::AbstractPart* instance;
+#else
+        void*                   instance;
+#endif
         PartType        (*partType)(struct CAbstractPart self);
         void            (*setPartType)(struct CAbstractPart self, PartType type);
         const UChar*    (*filename)(struct CAbstractPart self);
@@ -52,12 +60,8 @@ extern "C" {
     
 #ifdef __cplusplus
 }
-#endif
 
-#ifdef __cplusplus
-#include <MailCore/MCCore.h>
 CAbstractPart newCAbstractPart(mailcore::AbstractPart *part);
-mailcore::AbstractPart * cast(CAbstractPart part);
 #endif
 
 #endif

@@ -16,9 +16,11 @@ extern "C" {
 #endif
     
     struct CDictionary {
-        #ifdef __cplusplus
-        mailcore::HashMap* nativeInstance;
-        #endif
+#ifdef __cplusplus
+        mailcore::HashMap*  instance;
+#else
+        void*               instance;
+#endif
         
         CArray          (*allKeys)(struct CDictionary self);
         CObject         (*getValue)(struct CDictionary self, CObject key);

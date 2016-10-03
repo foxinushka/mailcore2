@@ -8,8 +8,6 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-    // General type for reference 
-    typedef void *ref;
     
     struct CData {
         const char* bytes;

@@ -10,7 +10,7 @@ void    addRange(struct CIndexSet self, uint64_t location, uint64_t length);
 
 CIndexSet newCIndexSet(mailcore::IndexSet *set) {
     CIndexSet indexSet;
-    indexSet.nativeInstance = set;
+    indexSet.instance = set;
     
     indexSet.enumerateRanges = &enumerateRanges;
     indexSet.addRange = &addRange;
@@ -18,21 +18,17 @@ CIndexSet newCIndexSet(mailcore::IndexSet *set) {
     return indexSet;
 }
 
-mailcore::IndexSet* cast(CIndexSet self) {
-    return reinterpret_cast<mailcore::IndexSet*>(self.nativeInstance);
-}
-
 void deleteCIndexSet(CIndexSet indexSet) {
     
 }
 
 void enumerateRanges(struct CIndexSet self , CIndexSetEnumerateRangesBlock block) {
-    mailcore::Range * allRanges = cast(self)->allRanges();
-    for(unsigned int i = 0 ; i < cast(self)->rangesCount() ; i ++) {
+    mailcore::Range * allRanges = self.instance->allRanges();
+    for(unsigned int i = 0 ; i < self.instance->rangesCount() ; i ++) {
         block(allRanges[i].location, allRanges[i].length);
     }
 }
 
 void addRange(struct CIndexSet self, uint64_t location, uint64_t length) {
-    cast(self)->addRange(mailcore::RangeMake(location, length));
+    self.instance->addRange(mailcore::RangeMake(location, length));
 }

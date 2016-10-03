@@ -6,17 +6,12 @@ uint32_t     castToUInt32(struct CObject self);
 
 CObject newCObject(mailcore::Object *obj) {
     CObject self;
-    self.nativeInstance = obj;
+    self.instance = obj;
     
     self.castToString = &castToString;
     self.castToUInt32 = &castToUInt32;
     
     return self;
-}
-
-
-mailcore::Object* cast(CObject self) {
-    return reinterpret_cast<mailcore::Object*>(self.nativeInstance);
 }
 
 void deleteCObject(CObject indexSet) {
@@ -28,7 +23,7 @@ CObject newCObjectWithString(const UChar* string) {
 }
 
 const UChar* castToString(struct CObject self) {
-	return ((mailcore::String *) cast(self))->unicodeCharacters();
+	return ((mailcore::String *) self.instance)->unicodeCharacters();
 }
 
 CObject newCObjectWithUInt32(uint32_t value) {
@@ -36,5 +31,5 @@ CObject newCObjectWithUInt32(uint32_t value) {
 }
 
 uint32_t castToUInt32(struct CObject self) {
-    return ((mailcore::Value *) cast(self))->unsignedIntValue();
+    return ((mailcore::Value *) self.instance)->unsignedIntValue();
 }

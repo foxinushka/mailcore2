@@ -1,5 +1,6 @@
 #include "CIMAPFetchMessagesOperation.h"
 #include "CBase+Private.h"
+#include <MailCore/MCAsync.h>
 
 #define nativeType mailcore::IMAPFetchMessagesOperation
 #define structName CIMAPFetchMessagesOperation
@@ -21,25 +22,21 @@ CIMAPFetchMessagesOperation newCIMAPFetchMessagesOperation(mailcore::IMAPFetchMe
     return self;
 }
 
-mailcore::IMAPFetchMessagesOperation* cast(CIMAPFetchMessagesOperation self) {
-    return reinterpret_cast<mailcore::IMAPFetchMessagesOperation*>(self.baseOperation.cOperation.nativeInstance);
-}
-
 void deleteCIMAPFetchMessagesOperation(CIMAPFetchMessagesOperation operation) {
 
 }
 
 CArray messages(struct CIMAPFetchMessagesOperation self){
-    return newCArray(cast(self)->messages());
+    return newCArray(self.instance->messages());
 }
 
 CIndexSet vanishedMessages(struct CIMAPFetchMessagesOperation self){
-    return newCIndexSet(cast(self)->vanishedMessages());
+    return newCIndexSet(self.instance->vanishedMessages());
 }
 
 CArray extraHeaders(struct CIMAPFetchMessagesOperation self){
-    return newCArray(cast(self)->extraHeaders());
+    return newCArray(self.instance->extraHeaders());
 }
 void setExtraHeaders(struct CIMAPFetchMessagesOperation self, CArray array){
-    cast(self)->setExtraHeaders(array.nativeInstance);
+    self.instance->setExtraHeaders(array.instance);
 }

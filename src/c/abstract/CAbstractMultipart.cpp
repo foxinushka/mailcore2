@@ -11,9 +11,10 @@
 CArray      parts(struct CAbstractMultipart multipart);
 void        setParts(struct CAbstractMultipart multipart, CArray parts);
 
-CAbstractMultipart newCAbstractMultipart(mailcore::AbstractPart *part){
+CAbstractMultipart newCAbstractMultipart(mailcore::AbstractMultipart *part){
     CAbstractMultipart self;
     self.abstractPart = newCAbstractPart(part);
+    self.instance = part;
     
     self.parts = &parts;
     self.setParts = &setParts;
@@ -21,16 +22,12 @@ CAbstractMultipart newCAbstractMultipart(mailcore::AbstractPart *part){
     return self;
 }
 
-mailcore::AbstractMultipart * cast(CAbstractMultipart part){
-    return reinterpret_cast<mailcore::AbstractMultipart*>(part.abstractPart.nativeInstance);
-}
-
 CArray parts(struct CAbstractMultipart self){
-    return newCArray(cast(self)->parts());
+    return newCArray(self.instance->parts());
 }
 
 void setParts(struct CAbstractMultipart self, CArray parts){
-    cast(self)->setParts(parts.nativeInstance);
+    self.instance->setParts(parts.instance);
 }
 
 

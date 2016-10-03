@@ -6,61 +6,51 @@
 
 #define C_SYNTHESIZE_SCALAR(cType, mcType, setter, getter) \
 cType getter(structName self){ \
-    return cast(self)->getter(); \
+return self.instance->getter(); \
 } \
 void setter(structName self, cType getter){ \
-    cast(self)->setter(getter); \
+self.instance->setter(getter); \
 }
 
 #define C_SYNTHESIZE_ENUM(cType, mcType, setter, getter) \
 cType getter(structName self){ \
-return static_cast<cType>((int)cast(self)->getter()); \
+return static_cast<cType>((int)self.instance->getter()); \
 } \
 void setter(structName self, cType getter){ \
-cast(self)->setter(static_cast<mcType>((int)getter)); \
+self.instance->setter(static_cast<mcType>((int)getter)); \
 }
-
-#define C_SYNTHESIZE_MAILCORE_OBJ(cType, cConstr, mcType, setter, getter) \
-cType getter(structName self){ \
-return cConstr(cast(self)->getter()); \
-} \
-void setter(structName self, cType getter){ \
-cast(self)->setter(cast(getter)); \
-}
-
-#define C_SYNTHESIZE_BOOL(setter, getter) C_SYNTHESIZE_SCALAR(bool, bool, setter, getter)
-#define C_SYNTHESIZE_CHAR(setter, getter) C_SYNTHESIZE_SCALAR(char, char, setter, getter)
 
 #define C_SYNTHESIZE_STRING(setter, getter) \
 const UChar* getter(structName self) \
 { \
-    return cast(self)->getter()->unicodeCharacters(); \
+return self.instance->getter()->unicodeCharacters(); \
 } \
 \
 void setter(structName self, const UChar *getter) \
 { \
-    cast(self)->setter(mailcore::String::stringWithCharacters(getter)); \
+self.instance->setter(mailcore::String::stringWithCharacters(getter)); \
 }
 
-#define C_SYNTHESIZE_ARRAY(setter, getter) \
-CArray getter(structName self) \
-{ \
-    return newCArray(cast(self)->getter()); \
+#define C_SYNTHESIZE_MAILCORE_OBJ(cType, cConstr, mcType, setter, getter) \
+cType getter(structName self){ \
+return cConstr(self.instance->getter()); \
 } \
-\
-void setter(structName self, CArray getter) \
-{ \
-    cast(self)->setter(getter.nativeInstance); \
+void setter(structName self, cType getter){ \
+self.instance->setter(getter.instance); \
 }
 
-#define C_SAFE_RETAIN(o) (o.nativeInstance != NULL ? cast(o)->retain() : NULL)
-#define C_SAFE_COPY(o) (o.nativeInstance != NULL ? cast(o)->copy() : NULL)
+#define C_SYNTHESIZE_BOOL(setter, getter) C_SYNTHESIZE_SCALAR(bool, bool, setter, getter)
+#define C_SYNTHESIZE_CHAR(setter, getter) C_SYNTHESIZE_SCALAR(char, char, setter, getter)
+#define C_SYNTHESIZE_ARRAY(setter, getter) C_SYNTHESIZE_MAILCORE_OBJ(CArray, newCArray, mailcore::Array, setter, getter)
+
+#define C_SAFE_RETAIN(o) (o.instance != NULL ? o.instance->retain() : NULL)
+#define C_SAFE_COPY(o) (o.instance != NULL ? o.instance->copy() : NULL)
 
 #define C_SAFE_RELEASE(o) \
 do { \
-if (o.nativeInstance != NULL) { \
-cast(o)->release(); \
-o.nativeInstance = NULL; \
+if (o.instance != NULL) { \
+o.instance->release(); \
+o.instance = NULL; \
 } \
 } while (0)
 

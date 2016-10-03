@@ -7,6 +7,11 @@
 #include "CArray.h"
 
 #ifdef __cplusplus
+
+namespace mailcore {
+    class AbstractMultipart;
+}
+
 extern "C" {
 #endif
     
@@ -14,6 +19,11 @@ extern "C" {
     struct CAbstractPart;
     
     struct CAbstractMultipart {
+#ifdef __cplusplus
+        mailcore::AbstractMultipart*    instance;
+#else
+        void*                           instance;
+#endif
         CAbstractPart abstractPart;
         
         CArray      (*parts)(struct CAbstractMultipart self);
@@ -23,11 +33,8 @@ extern "C" {
     
 #ifdef __cplusplus
 }
-#endif
 
-#ifdef __cplusplus
-CAbstractMultipart newCAbstractMultipart(mailcore::AbstractPart *part);
-mailcore::AbstractMultipart* cast(CAbstractMultipart part);
+CAbstractMultipart newCAbstractMultipart(mailcore::AbstractMultipart *part);
 #endif
 
 #endif

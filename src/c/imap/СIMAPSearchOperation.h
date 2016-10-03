@@ -6,11 +6,21 @@
 #include "CIndexSet.h"
 
 #ifdef __cplusplus
+
+namespace mailcore {
+    class IMAPSearchOperation;
+}
+
 extern "C" {
 #endif
     
     struct CIMAPSearchOperation {
         CIMAPBaseOperation baseOperation;
+#ifdef __cplusplus
+        mailcore::IMAPSearchOperation*  instance;
+#else
+        void*                           instance;
+#endif
         
         CIndexSet (*uids)(struct CIMAPSearchOperation self);
     };
@@ -20,13 +30,8 @@ extern "C" {
     
 #ifdef __cplusplus
 }
-#endif
 
-#ifdef __cplusplus
-#include <MailCore/MCAsync.h>
-
-extern "C" CIMAPSearchOperation newCIMAPSearchOperation(mailcore::IMAPSearchOperation *operation);
-mailcore::IMAPSearchOperation * cast(CIMAPSearchOperation self);
+CIMAPSearchOperation newCIMAPSearchOperation(mailcore::IMAPSearchOperation *operation);
 #endif
 
 #endif

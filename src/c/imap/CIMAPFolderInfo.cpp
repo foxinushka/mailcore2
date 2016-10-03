@@ -1,7 +1,7 @@
 #include "CIMAPFolderInfo.h"
 #include "CBase+Private.h"
 
-#include <MailCore/MCCore.h>
+#include <MailCore/MCAsync.h>
 
 #define nativeType mailcore::IMAPFolderInfo
 #define structName CIMAPFolderInfo
@@ -15,8 +15,8 @@ C_SYNTHESIZE_BOOL(setAllowsNewPermanentFlags, allowsNewPermanentFlags);
 
 CIMAPFolderInfo newCIMAPFolderInfo(mailcore::IMAPFolderInfo *info) {
     CIMAPFolderInfo self;
-    info->retain();
-    self.nativeInstance = info;
+    self.instance = info;
+    self.instance->retain();
     
     self.uidNext = &uidNext;
     self.setUidNext = &setUidNext;
@@ -32,10 +32,6 @@ CIMAPFolderInfo newCIMAPFolderInfo(mailcore::IMAPFolderInfo *info) {
     self.setAllowsNewPermanentFlags = &setAllowsNewPermanentFlags;
     
     return self;
-}
-
-mailcore::IMAPFolderInfo * cast(CIMAPFolderInfo self) {
-    return reinterpret_cast<mailcore::IMAPFolderInfo*>(self.nativeInstance);
 }
 
 void deleteCIMAPFolderInfo(CIMAPFolderInfo self) {

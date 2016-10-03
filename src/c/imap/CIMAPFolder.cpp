@@ -13,7 +13,7 @@ C_SYNTHESIZE_ENUM(IMAPFolderFlag, mailcore::IMAPFolderFlag, setFlags, flags)
 CIMAPFolder newCIMAPFolder(mailcore::IMAPFolder *folder) {
     CIMAPFolder self;
     folder->retain();
-    self.nativeInstance = folder;
+    self.instance = folder;
     
     self.setPath = &setPath;
     self.path = &path;
@@ -23,10 +23,6 @@ CIMAPFolder newCIMAPFolder(mailcore::IMAPFolder *folder) {
     self.flags = &flags;
 
     return self;
-}
-
-mailcore::IMAPFolder * cast(CIMAPFolder self) {
-    return reinterpret_cast<mailcore::IMAPFolder*>(self.nativeInstance);
 }
 
 void deleteCIMAPFolder(CIMAPFolder self) {

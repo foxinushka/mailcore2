@@ -6,11 +6,22 @@
 #include "CIMAPFolderInfo.h"
 
 #ifdef __cplusplus
+
+namespace mailcore {
+    class IMAPFolderInfoOperation;
+}
+
 extern "C" {
 #endif
     
     struct CIMAPFolderInfoOperation {
         CIMAPBaseOperation baseOperation;
+#ifdef __cplusplus
+        mailcore::IMAPFolderInfoOperation*  instance;
+#else
+        void*                               instance;
+#endif
+        
         CIMAPFolderInfo (*info)(struct CIMAPFolderInfoOperation self);
     };
     typedef struct CIMAPFolderInfoOperation CIMAPFolderInfoOperation;
@@ -19,13 +30,8 @@ extern "C" {
 
 #ifdef __cplusplus
 }
-#endif
 
-#ifdef __cplusplus
-#include <MailCore/MCAsync.h>
-
-extern "C" CIMAPFolderInfoOperation newCIMAPFolderInfoOperation(mailcore::IMAPFolderInfoOperation *operation);
-mailcore::IMAPFolderInfoOperation * cast(CIMAPFolderInfoOperation self);
+CIMAPFolderInfoOperation newCIMAPFolderInfoOperation(mailcore::IMAPFolderInfoOperation *operation);
 #endif
 
 #endif

@@ -22,11 +22,20 @@
 #include "CIMAPIdleOperation.h"
 
 #ifdef __cplusplus
+
+namespace mailcore {
+    class IMAPAsyncSession;
+}
+
 extern "C" {
 #endif
     
     typedef struct CIMAPAsyncSession {
-        ref     nativeInstance;
+#ifdef __cplusplus
+        mailcore::IMAPAsyncSession*     instance;
+#else
+        void*                           instance;
+#endif
         
         void    (*hostname)(struct CIMAPAsyncSession self, const UChar *hostname);
         void    (*port)(struct CIMAPAsyncSession self, unsigned int port);
@@ -84,11 +93,5 @@ extern "C" {
 #ifdef __cplusplus
 }
 #endif
-
-#ifdef __cplusplus
-#include <MailCore/MCAsync.h>
-
-mailcore::IMAPAsyncSession* cast(CIMAPAsyncSession self);
-#endif /* CIMAPIdleOperation_h */
 
 #endif

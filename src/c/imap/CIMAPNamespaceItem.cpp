@@ -16,7 +16,7 @@ bool                containsFolder(struct CIMAPNamespaceItem self, const UChar* 
 CIMAPNamespaceItem newCIMAPNamespaceItem(mailcore::IMAPNamespaceItem *item) {
     CIMAPNamespaceItem self;
     item->retain();
-    self.nativeInstance = item;
+    self.instance = item;
     
     self.pathForComponents = &pathForComponents;
 	self.componentForPath = &componentForPath;
@@ -25,22 +25,18 @@ CIMAPNamespaceItem newCIMAPNamespaceItem(mailcore::IMAPNamespaceItem *item) {
     return self;
 }
 
-mailcore::IMAPNamespaceItem * cast(CIMAPNamespaceItem self) {
-    return reinterpret_cast<mailcore::IMAPNamespaceItem*>(self.nativeInstance);
-}
-
 void deleteCIMAPNamespaceItem(CIMAPNamespaceItem self) {
     C_SAFE_RELEASE(self);
 }
 
 const UChar* pathForComponents(struct CIMAPNamespaceItem self, CArray components) {
-    return cast(self)->pathForComponents(components.nativeInstance)->unicodeCharacters();
+    return self.instance->pathForComponents(components.instance)->unicodeCharacters();
 }
 
 CArray componentForPath(struct CIMAPNamespaceItem self, const UChar* path) {
-    return newCArray(cast(self)->componentsForPath(mailcore::String::stringWithCharacters(path)));
+    return newCArray(self.instance->componentsForPath(mailcore::String::stringWithCharacters(path)));
 }
 
 bool containsFolder(struct CIMAPNamespaceItem self, const UChar* folder) {
-    return cast(self)->containsFolder(mailcore::String::stringWithCharacters(folder));
+    return self.instance->containsFolder(mailcore::String::stringWithCharacters(folder));
 }

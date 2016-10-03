@@ -1,5 +1,6 @@
 #include "СIMAPSearchOperation.h"
 #include "CBase+Private.h"
+#include <MailCore/MCAsync.h>
 
 #define nativeType mailcore::IMAPSearchOperation
 #define structName CIMAPSearchOperation
@@ -9,14 +10,11 @@ CIndexSet uids(struct CIMAPSearchOperation self);
 CIMAPSearchOperation newCIMAPSearchOperation(mailcore::IMAPSearchOperation *operation){
     CIMAPSearchOperation self;
     self.baseOperation = newCIMAPBaseOperation(operation);
+    self.instance = operation;
     
     self.uids = &uids;
     
     return self;
-}
-
-mailcore::IMAPSearchOperation * cast(CIMAPSearchOperation self) {
-    return reinterpret_cast<mailcore::IMAPSearchOperation *>(self.baseOperation.cOperation.nativeInstance);
 }
 
 void deleteCIMAPSearchOperation(CIMAPSearchOperation operation) {
@@ -24,5 +22,5 @@ void deleteCIMAPSearchOperation(CIMAPSearchOperation operation) {
 }
 
 CIndexSet uids(CIMAPSearchOperation self) {
-    return newCIndexSet(cast(self)->uids());
+    return newCIndexSet(self.instance->uids());
 }

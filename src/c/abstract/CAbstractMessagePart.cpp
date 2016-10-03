@@ -16,6 +16,7 @@ void                    setMainPart(struct CAbstractMessagePart self, CAbstractP
 CAbstractMessagePart newCAbstractMessagePart(mailcore::AbstractMessagePart *part){
     CAbstractMessagePart self;
     self.abstractPart = newCAbstractPart(part);
+    self.instance = part;
     
     self.header = &header;
     self.setHeader = &setHeader;
@@ -25,24 +26,20 @@ CAbstractMessagePart newCAbstractMessagePart(mailcore::AbstractMessagePart *part
     return self;
 }
 
-mailcore::AbstractMessagePart* cast(CAbstractMessagePart part) {
-    return reinterpret_cast<mailcore::AbstractMessagePart*>(part.abstractPart.nativeInstance);
-}
-
 CMessageHeader header(CAbstractMessagePart self){
-    return newCMessageHeader(cast(self)->header());
+    return newCMessageHeader(self.instance->header());
 }
 
 void setHeader(CAbstractMessagePart self, CMessageHeader header){
-    cast(self)->setHeader(cast(header));
+    self.instance->setHeader(header.instance);
 }
 
 CAbstractPart mainPart(CAbstractMessagePart self){
-    return newCAbstractPart(cast(self)->mainPart());
+    return newCAbstractPart(self.instance->mainPart());
 }
 
 void setMainPart(struct CAbstractMessagePart self, CAbstractPart part){
-    cast(self)->setMainPart(cast(part));
+    self.instance->setMainPart(part.instance);
 }
 
 

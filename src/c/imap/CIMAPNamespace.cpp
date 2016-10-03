@@ -18,7 +18,7 @@ bool            containsFolderPath(struct CIMAPNamespace self, const UChar* path
 CIMAPNamespace newCIMAPNamespace(mailcore::IMAPNamespace *folder) {
     CIMAPNamespace self;
     folder->retain();
-    self.nativeInstance = folder;
+    self.instance = folder;
     
     self.mainPrefix = &mainPrefix;
     self.mainDelimiter = &mainDelimiter;
@@ -35,38 +35,34 @@ CIMAPNamespace newCIMAPNamespace(const UChar* prefix, char delimiter) {
     return newCIMAPNamespace(mailcore::IMAPNamespace::namespaceWithPrefix(mailcore::String::stringWithCharacters(prefix), delimiter));
 }
 
-mailcore::IMAPNamespace * cast(CIMAPNamespace self) {
-    return reinterpret_cast<mailcore::IMAPNamespace*>(self.nativeInstance);
-}
-
 void deleteCIMAPNamespace(CIMAPNamespace self) {
     C_SAFE_RELEASE(self);
 }
 
 const UChar* mainPrefix(struct CIMAPNamespace self) {
-    return cast(self)->mainPrefix()->unicodeCharacters();
+    return self.instance->mainPrefix()->unicodeCharacters();
 }
 
 char mainDelimiter(struct CIMAPNamespace self) {
-    return cast(self)->mainDelimiter();
+    return self.instance->mainDelimiter();
 }
 
 CArray prefixes(struct CIMAPNamespace self) {
-    return newCArray(cast(self)->prefixes());
+    return newCArray(self.instance->prefixes());
 }
 
 const UChar* pathForComponents(struct CIMAPNamespace self, CArray components) {
-    return cast(self)->pathForComponents(components.nativeInstance)->unicodeCharacters();
+    return self.instance->pathForComponents(components.instance)->unicodeCharacters();
 }
 
 const UChar* pathForComponentsAndPrefix(struct CIMAPNamespace self, CArray components, const UChar* prefix) {
-    return cast(self)->pathForComponentsAndPrefix(components.nativeInstance, mailcore::String::stringWithCharacters(prefix))->unicodeCharacters();
+    return self.instance->pathForComponentsAndPrefix(components.instance, mailcore::String::stringWithCharacters(prefix))->unicodeCharacters();
 }
 
 CArray componentsFromPath(struct CIMAPNamespace self, const UChar* path) {
-    return newCArray(cast(self)->componentsFromPath(mailcore::String::stringWithCharacters(path)));
+    return newCArray(self.instance->componentsFromPath(mailcore::String::stringWithCharacters(path)));
 }
 
 bool containsFolderPath(struct CIMAPNamespace self, const UChar* path) {
-    return cast(self)->containsFolderPath(mailcore::String::stringWithCharacters(path));
+    return self.instance->containsFolderPath(mailcore::String::stringWithCharacters(path));
 }

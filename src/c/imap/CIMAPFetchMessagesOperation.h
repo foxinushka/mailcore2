@@ -6,11 +6,21 @@
 #include "CIndexSet.h"
 
 #ifdef __cplusplus
+
+namespace mailcore {
+    class IMAPFetchMessagesOperation;
+}
+
 extern "C" {
 #endif
     
     struct CIMAPFetchMessagesOperation {
         CIMAPBaseOperation baseOperation;
+#ifdef __cplusplus
+        mailcore::IMAPFetchMessagesOperation*   instance;
+#else
+        void*                                   instance;
+#endif
         
         CArray      (*messages)(struct CIMAPFetchMessagesOperation self);
         CIndexSet   (*vanishedMessages)(struct CIMAPFetchMessagesOperation self);
@@ -23,13 +33,8 @@ extern "C" {
 
 #ifdef __cplusplus
 }
-#endif
-
-#ifdef __cplusplus
-#include <MailCore/MCAsync.h>
 
 CIMAPFetchMessagesOperation newCIMAPFetchMessagesOperation(mailcore::IMAPFetchMessagesOperation *operation);
-mailcore::IMAPFetchMessagesOperation* cast(CIMAPFetchMessagesOperation self);
 #endif
 
 #endif

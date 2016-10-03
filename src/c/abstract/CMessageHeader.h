@@ -7,12 +7,20 @@
 #include "CArray.h"
 
 #ifdef __cplusplus
+
+namespace mailcore {
+    class MessageHeader;
+}
+
 extern "C" {
 #endif
 
     struct CMessageHeader {
-        ref nativeInstance;
-        
+#ifdef __cplusplus
+        mailcore::MessageHeader*    instance;
+#else
+        void*                       instance;
+#endif
         const UChar*    (*messageID)(struct CMessageHeader self);
         void            (*setMessageID)(struct CMessageHeader self, const UChar* messageID);
         CArray          (*references)(struct CMessageHeader self);
@@ -50,11 +58,8 @@ extern "C" {
     
 #ifdef __cplusplus
 }
-#endif
 
-#ifdef __cplusplus
 CMessageHeader newCMessageHeader(mailcore::MessageHeader *header);
-mailcore::MessageHeader* cast(CMessageHeader self);
 #endif
 
 #endif

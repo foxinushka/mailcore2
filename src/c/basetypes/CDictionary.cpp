@@ -10,10 +10,10 @@ CObject getValue(struct CDictionary self, CObject key);
 
 CDictionary newCDictionary(mailcore::HashMap *dict){
     CDictionary self;
-    self.nativeInstance = dict;
+    self.instance = dict;
     return self;
 }
 
 CObject getValue(struct CDictionary self, CObject key) {
-    return newCObject(self.nativeInstance->objectForKey(key.nativeInstance));
+    return newCObject(self.instance->objectForKey(key.instance));
 }

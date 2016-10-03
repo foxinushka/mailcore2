@@ -5,10 +5,20 @@
 #include "CAbstractMessagePart.h"
 
 #ifdef __cplusplus
+
+namespace mailcore {
+    class IMAPPart;
+}
+
 extern "C" {
 #endif
     
     struct CIMAPPart {
+#ifdef __cplusplus
+        mailcore::IMAPPart*     instance;
+#else
+        void*                   instance;
+#endif
         CAbstractPart abstractPart;
         
         const UChar*    (*partID)(struct CIMAPPart self);
@@ -26,13 +36,8 @@ extern "C" {
     
 #ifdef __cplusplus
 }
-#endif
-
-#ifdef __cplusplus
-#include <MailCore/MCAsync.h>
 
 CIMAPPart newCIMAPPart(mailcore::IMAPPart *part);
-mailcore::IMAPPart * cast(CIMAPPart self);
 #endif
 
 #endif /* CIMAPPart_h */

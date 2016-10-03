@@ -25,7 +25,7 @@ CArray                  allContentTypeParametersNames(struct CAbstractPart self)
 
 CAbstractPart newCAbstractPart(mailcore::AbstractPart *part){
     CAbstractPart self;
-    self.nativeInstance = part;
+    self.instance = part;
     C_SAFE_RETAIN(self);
     
     self.partType = &partType;
@@ -57,44 +57,40 @@ CAbstractPart newCAbstractPart(mailcore::AbstractPart *part){
     return self;
 }
 
-mailcore::AbstractPart * cast(CAbstractPart part){
-    return reinterpret_cast<mailcore::AbstractPart*>(part.nativeInstance);
-}
-
 void deleteCAbstractPart(CAbstractPart self){
     C_SAFE_RELEASE(self);
 }
 
 struct CAbstractPart partForContentID(struct CAbstractPart self, const UChar* contentID){
-    return newCAbstractPart(cast(self)->partForContentID(mailcore::String::stringWithCharacters(contentID)));
+    return newCAbstractPart(self.instance->partForContentID(mailcore::String::stringWithCharacters(contentID)));
 }
 
 struct CAbstractPart partForUniqueID(struct CAbstractPart self, const UChar* uniqueID){
-    return newCAbstractPart(cast(self)->partForUniqueID(mailcore::String::stringWithCharacters(uniqueID)));
+    return newCAbstractPart(self.instance->partForUniqueID(mailcore::String::stringWithCharacters(uniqueID)));
 }
 
 void setContentTypeParameterValue(struct CAbstractPart self, const UChar* value, const UChar* name){
-    cast(self)->setContentTypeParameter(mailcore::String::stringWithCharacters(value), mailcore::String::stringWithCharacters(name));
+    self.instance->setContentTypeParameter(mailcore::String::stringWithCharacters(value), mailcore::String::stringWithCharacters(name));
 }
 
 void removeContentTypeParameterForName(struct CAbstractPart self, const UChar* name){
-    cast(self)->removeContentTypeParameter(mailcore::String::stringWithCharacters(name));
+    self.instance->removeContentTypeParameter(mailcore::String::stringWithCharacters(name));
 }
 
 const UChar* contentTypeParameterValueForName(struct CAbstractPart self, const UChar* name){
-    return cast(self)->contentTypeParameterValueForName(mailcore::String::stringWithCharacters(name))->unicodeCharacters();
+    return self.instance->contentTypeParameterValueForName(mailcore::String::stringWithCharacters(name))->unicodeCharacters();
 }
 
 CArray allContentTypeParametersNames(struct CAbstractPart self){
-    return newCArray(cast(self)->allContentTypeParametersNames());
+    return newCArray(self.instance->allContentTypeParametersNames());
 }
 
 CAbstractPart castFromCObject(CObject obj) {
-    return newCAbstractPart((mailcore::AbstractPart*) obj.nativeInstance);
+    return newCAbstractPart((mailcore::AbstractPart*) obj.instance);
 }
 
 CObject castToCObject(struct CAbstractPart self) {
-    return newCObject((mailcore::Object*) self.nativeInstance);
+    return newCObject((mailcore::Object*) self.instance);
 }
 
 

@@ -12,10 +12,6 @@ class ImapIdleOperation : ImapBaseOperation {
         super.init(baseOperation: idleOperation.operation);
     }
 
-	deinit {
-		deleteCIMAPIdleOperation(idleOperation);
-	}
-
     public func start(completionBlock: CompletionBlock?) {
         self.completionBlock = completionBlock;
         start();

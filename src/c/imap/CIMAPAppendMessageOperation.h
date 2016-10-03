@@ -2,13 +2,25 @@
 #define MAILCORE_CIMAP_APPEND_MESSAGE_OPERATION_H
 
 #include "CIMAPBaseOperation.h"
+#include "stdint.h"
+#include "time.h"
 
 #ifdef __cplusplus
+
+namespace mailcore {
+    class IMAPAppendMessageOperation;
+}
+
 extern "C" {
 #endif
     
     struct CIMAPAppendMessageOperation {
         CIMAPBaseOperation baseOperation;
+#ifdef __cplusplus
+        mailcore::IMAPAppendMessageOperation*   instance;
+#else
+        void*                                   instance;
+#endif
         
         void        (*setDate)(struct CIMAPAppendMessageOperation self, time_t date);
         time_t      (*date)(struct CIMAPAppendMessageOperation self);
@@ -20,13 +32,8 @@ extern "C" {
 
 #ifdef __cplusplus
 }
-#endif
-
-#ifdef __cplusplus
-#include <MailCore/MCAsync.h>
 
 CIMAPAppendMessageOperation newIMAPAppendMessageOperation(mailcore::IMAPAppendMessageOperation *operation);
-mailcore::IMAPAppendMessageOperation* cast(CIMAPAppendMessageOperation self);
 #endif
 
 #endif

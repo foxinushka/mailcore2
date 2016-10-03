@@ -9,12 +9,8 @@
 
 CIMAPSearchExpression newCIMAPSearchExpression(mailcore::IMAPSearchExpression *expr) {
     CIMAPSearchExpression self;
-    self.nativeInstance = expr->copy();
+    self.instance = (mailcore::IMAPSearchExpression *) expr->copy();
     return self;
-}
-
-mailcore::IMAPSearchExpression * cast(CIMAPSearchExpression self) {
-    return reinterpret_cast<mailcore::IMAPSearchExpression*>(self.nativeInstance);
 }
 
 void deleteCIMAPSearchExpression(CIMAPSearchExpression self) {
@@ -58,11 +54,11 @@ CIMAPSearchExpression newCIMAPSearchExpressionSearchBody(const UChar* value) {
 }
 
 CIMAPSearchExpression newCIMAPSearchExpressionSearchUIDs(CIndexSet uids) {
-    return newCIMAPSearchExpression(mailcore::IMAPSearchExpression::searchUIDs(uids.nativeInstance));
+    return newCIMAPSearchExpression(mailcore::IMAPSearchExpression::searchUIDs(uids.instance));
 }
 
 CIMAPSearchExpression newCIMAPSearchExpressionSearchNumbers(CIndexSet numbers) {
-    return newCIMAPSearchExpression(mailcore::IMAPSearchExpression::searchNumbers(numbers.nativeInstance));
+    return newCIMAPSearchExpression(mailcore::IMAPSearchExpression::searchNumbers(numbers.instance));
 }
 
 CIMAPSearchExpression newCIMAPSearchExpressionSearchHeader(const UChar* header, const UChar* value) {
@@ -154,13 +150,13 @@ CIMAPSearchExpression newCIMAPSearchExpressionSearchGmailRaw(const UChar* expr) 
 }
 
 CIMAPSearchExpression newCIMAPSearchExpressionSearchAnd(CIMAPSearchExpression expression, CIMAPSearchExpression other) {
-    return newCIMAPSearchExpression(mailcore::IMAPSearchExpression::searchAnd(cast(expression), cast(other)));
+    return newCIMAPSearchExpression(mailcore::IMAPSearchExpression::searchAnd(expression.instance, other.instance));
 }
 
 CIMAPSearchExpression newCIMAPSearchExpressionSearchOr(CIMAPSearchExpression expression, CIMAPSearchExpression other) {
-    return newCIMAPSearchExpression(mailcore::IMAPSearchExpression::searchOr(cast(expression), cast(other)));
+    return newCIMAPSearchExpression(mailcore::IMAPSearchExpression::searchOr(expression.instance, other.instance));
 }
 
 CIMAPSearchExpression newCIMAPSearchExpressionSearchNot(CIMAPSearchExpression expression) {
-    return newCIMAPSearchExpression(mailcore::IMAPSearchExpression::searchNot(cast(expression)));
+    return newCIMAPSearchExpression(mailcore::IMAPSearchExpression::searchNot(expression.instance));
 }

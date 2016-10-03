@@ -30,8 +30,8 @@ void setShouldRunWhenCancelled(COperation self, bool shouldRunWhenCancelled);
 
 COperation newCOperation(mailcore::Operation *operationRef) {
     COperation self;
-    self.nativeInstance = operationRef;
-    self.nativeInstance->retain();
+    self.instance = operationRef;
+    self.instance->retain();
     self._callback = NULL;
     
     self.setCompletionBlock = &setCompletionBlock;
@@ -44,34 +44,29 @@ COperation newCOperation(mailcore::Operation *operationRef) {
     return self;
 }
 
-mailcore::Operation* cast(COperation self) {
-    return reinterpret_cast<mailcore::Operation *>(self.nativeInstance);
-}
-
 struct COperation setCompletionBlock(COperation self, COperationCompletionBlock block) {
-    COperationCompletionCallback *callback = new COperationCompletionCallback(block);
-    self._callback = reinterpret_cast<void *>(callback);
-    self.nativeInstance->setCallback(callback);
+    self._callback = new COperationCompletionCallback(block);
+    self.instance->setCallback(self._callback);
     return self;
 }
 
 C_SYNTHESIZE_BOOL(setShouldRunWhenCancelled, shouldRunWhenCancelled);
 
 bool COperationIsCanceled(COperation self) {
-    return self.nativeInstance->isCancelled();
+    return self.instance->isCancelled();
 }
 
 void COperationCancel(COperation self) {
-    self.nativeInstance->cancel();
+    self.instance->cancel();
 }
 
 void COperationStart(COperation self) {
-    self.nativeInstance->start();
+    self.instance->start();
 }
 
 extern "C" void deleteCOperation(COperation self) {
-    self.nativeInstance->release();
+    self.instance->release();
     if (self._callback != NULL) {
-        reinterpret_cast<COperationCompletionCallback *>(self._callback)->release();
+        self._callback->release();
     }
 }

@@ -39,6 +39,7 @@ ErrorCode   error(struct CIMAPBaseOperation self);
 CIMAPBaseOperation newCIMAPBaseOperation(mailcore::IMAPOperation* operation) {
     CIMAPBaseOperation self;
     self.cOperation = newCOperation(operation);
+    self.instance = operation;
     
     self.setProgressBlocks = &setProgressBlocks;
     self.error = &error;
@@ -46,18 +47,14 @@ CIMAPBaseOperation newCIMAPBaseOperation(mailcore::IMAPOperation* operation) {
     return self;
 }
 
-mailcore::IMAPOperation* cast(CIMAPBaseOperation self) {
-    return reinterpret_cast<mailcore::IMAPOperation*>(self.cOperation.nativeInstance);
-}
-
 ErrorCode error(struct CIMAPBaseOperation self) {
-    return static_cast<ErrorCode>(cast(self)->error());
+    return static_cast<ErrorCode>(self.instance->error());
 }
 
 CIMAPBaseOperation setProgressBlocks(struct CIMAPBaseOperation self, CIMAPProgressBlock itemProgressBlock, CIMAPProgressBlock bodyProgressBlock) {
     CIMAPBaseOperationIMAPCallback *callback = new CIMAPBaseOperationIMAPCallback(itemProgressBlock, bodyProgressBlock);
     self._callback = callback;
-    cast(self)->setImapCallback(callback);
+    self.instance->setImapCallback(callback);
     return self;
 }
 

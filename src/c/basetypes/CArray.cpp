@@ -2,7 +2,7 @@
 #include "CArray.h"
 
 void addObject(struct CArray array, CObject object) {
-    array.nativeInstance->addObject(reinterpret_cast<mailcore::Object *>(object.nativeInstance));
+    array.instance->addObject(reinterpret_cast<mailcore::Object *>(object.instance));
 }
 
 CArray newCArray() {
@@ -15,7 +15,7 @@ void deleteCArray(CArray array) {
 
 CArray newCArray(mailcore::Array *array) {
     CArray self;
-    self.nativeInstance = array;
+    self.instance = array;
     self.addObject = &addObject;
     return self;
 }

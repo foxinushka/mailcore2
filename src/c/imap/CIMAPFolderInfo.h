@@ -6,11 +6,20 @@
 #include "CMessageConstants.h"
 
 #ifdef __cplusplus
+
+namespace mailcore {
+    class IMAPFolderInfo;
+}
+
 extern "C" {
 #endif
     
     struct CIMAPFolderInfo {
-        ref nativeInstance;
+#ifdef __cplusplus
+        mailcore::IMAPFolderInfo*   instance;
+#else
+        void*                       instance;
+#endif
         
         uint32_t        (*uidNext)(struct CIMAPFolderInfo self);
         void            (*setUidNext)(struct CIMAPFolderInfo self, uint32_t uid);
@@ -31,13 +40,8 @@ extern "C" {
     
 #ifdef __cplusplus
 }
-#endif
-
-#ifdef __cplusplus
-#include <MailCore/MCAsync.h>
 
 CIMAPFolderInfo newCIMAPFolderInfo(mailcore::IMAPFolderInfo *folder);
-mailcore::IMAPFolderInfo* cast(CIMAPFolderInfo self);
 #endif
 
 #endif /* CIMAPFolderInfo_h */

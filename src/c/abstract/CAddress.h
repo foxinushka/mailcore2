@@ -7,14 +7,20 @@
 #include "CArray.h"
 
 #ifdef __cplusplus
+
+namespace mailcore {
+    class Address;
+}
+
 extern "C" {
 #endif
 
     struct CAddress {
-        ref nativeInstance;
-        
-        bool            (*isNull)(struct CAddress self);
-        
+#ifdef __cplusplus
+        mailcore::Address*  instance;
+#else
+        void*               instance;
+#endif       
         const UChar*    (*displayName)(struct CAddress self);
         void            (*setDisplayName)(struct CAddress self, const UChar* displayName);
         const UChar*    (*mailbox)(struct CAddress self);
@@ -38,11 +44,8 @@ extern "C" {
     
 #ifdef __cplusplus
 }
-#endif
 
-#ifdef __cplusplus
 CAddress newCAddress(mailcore::Address *address);
-mailcore::Address* cast(CAddress address);
 #endif
 
 #endif

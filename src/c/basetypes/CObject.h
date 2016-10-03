@@ -14,9 +14,11 @@ extern "C" {
 #endif
 
     struct CObject {
-        #ifdef __cplusplus
-        mailcore::Object* nativeInstance;
-        #endif
+#ifdef __cplusplus
+        mailcore::Object*   instance;
+#else
+        void*               instance;
+#endif
         
         const UChar*    (*castToString)(struct CObject self);
         uint32_t        (*castToUInt32)(struct CObject self);
@@ -29,9 +31,7 @@ extern "C" {
     
 #ifdef __cplusplus
 }
-#endif
 
-#ifdef __cplusplus
 CObject newCObject(mailcore::Object *obj);
 #endif
 

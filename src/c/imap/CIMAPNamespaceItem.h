@@ -5,11 +5,20 @@
 #include "CArray.h"
 
 #ifdef __cplusplus
+
+namespace mailcore {
+    class IMAPNamespaceItem;
+}
+
 extern "C" {
 #endif
     
     struct CIMAPNamespaceItem {
-        ref nativeInstance;
+#ifdef __cplusplus
+        mailcore::IMAPNamespaceItem*    instance;
+#else
+        void*                           instance;
+#endif
         
         const UChar*        (*prefix)(struct CIMAPNamespaceItem self);
         void                (*setPrefix)(struct CIMAPNamespaceItem self, const UChar* prefix);
@@ -32,7 +41,6 @@ extern "C" {
 #include <MailCore/MCAsync.h>
 
 CIMAPNamespaceItem newCIMAPNamespaceItem(mailcore::IMAPNamespaceItem *folder);
-mailcore::IMAPNamespaceItem * cast(CIMAPNamespaceItem self);
 #endif
 
 #endif /* CIMAPNamespaceItem_h */

@@ -7,6 +7,11 @@
 #include "CArray.h"
 
 #ifdef __cplusplus
+
+namespace mailcore {
+    class AbstractMessage;
+}
+
 extern "C" {
 #endif
     
@@ -14,7 +19,11 @@ extern "C" {
     struct CAbstractPart;
     
     struct CAbstractMessage {
-        ref nativeInstance;
+#ifdef __cplusplus
+        mailcore::AbstractMessage*  instance;
+#else
+        void*                       instance;
+#endif
         
         struct CMessageHeader   (*header)(struct CAbstractMessage self);
         void                    (*setHeader)(struct CAbstractMessage self, struct CMessageHeader header);
@@ -30,11 +39,8 @@ extern "C" {
     
 #ifdef __cplusplus
 }
-#endif
 
-#ifdef __cplusplus
 CAbstractMessage newCAbstractMessage(mailcore::AbstractMessage *msg);
-mailcore::AbstractMessage* cast(CAbstractMessage msg);
 #endif
 
 #endif

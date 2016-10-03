@@ -10,16 +10,21 @@ namespace mailcore {
     class Operation;
 }
 
+class COperationCompletionCallback;
+
 extern "C" {
 #endif
     
     typedef void (^COperationCompletionBlock)();
     
     struct COperation {
-        #ifdef __cplusplus
-        mailcore::Operation *     nativeInstance;
-        ref     _callback;
-        #endif
+#ifdef __cplusplus
+        mailcore::Operation *               instance;
+        COperationCompletionCallback*       _callback;
+#else
+        void*                               instance;
+        void*                               _callback;
+#endif
         
         struct COperation    (*setCompletionBlock)(struct COperation self, COperationCompletionBlock block);
         bool    (*isCanceled)(struct COperation self);

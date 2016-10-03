@@ -19,6 +19,11 @@ extern "C" {
     struct CMessageHeader;
     
     struct CAbstractMessagePart {
+#ifdef __cplusplus
+        mailcore::AbstractMessagePart*  instance;
+#else
+        void*                           instance;
+#endif
         CAbstractPart abstractPart;
         
         struct CMessageHeader           (*header)(struct CAbstractMessagePart self);
@@ -33,7 +38,6 @@ extern "C" {
 }
 
 CAbstractMessagePart newCAbstractMessagePart(mailcore::AbstractMessagePart *part);
-mailcore::AbstractMessagePart* cast(CAbstractMessagePart part);
 #endif
 
 #endif
