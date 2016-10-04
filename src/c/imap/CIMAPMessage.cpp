@@ -24,6 +24,7 @@ CObject       castToCObject(struct CIMAPMessage self);
 CIMAPMessage newCIMAPMessage(mailcore::IMAPMessage *msg) {
     CIMAPMessage self;
     self.abstractMessage = newCAbstractMessage(msg);
+    self.instance = msg;
     
     self.uid = &uid;
     self.setUid = &setUid;

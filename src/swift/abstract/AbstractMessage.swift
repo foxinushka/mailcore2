@@ -1,10 +1,10 @@
 import Foundation
 
-public class AbsrtactMessage {
+public class AbstractMessage {
 	
     private var nativeInstance:CAbstractMessage;
 
-    init(abstractMessage:CAbstractMessage) {
+    init(_ abstractMessage:CAbstractMessage) {
         self.nativeInstance = abstractMessage;
 	}
     

@@ -33,3 +33,10 @@ CObject newCObjectWithUInt32(uint32_t value) {
 uint32_t castToUInt32(struct CObject self) {
     return ((mailcore::Value *) self.instance)->unsignedIntValue();
 }
+
+CData newCData(mailcore::Data data) {
+    CData result;
+    result.bytes = data.bytes();
+    result.length = data.length();
+    return result;
+}

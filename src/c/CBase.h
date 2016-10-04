@@ -11,12 +11,18 @@ extern "C" {
     
     struct CData {
         const char* bytes;
-        unsigned int lenght;
+        unsigned int length;
     };
     typedef struct CData CData;
     
 #ifdef __cplusplus
 }
+
+namespace mailcore {
+    class Data;
+}
+
+CData newCData(mailcore::Data data);
 #endif
 
 #endif

@@ -31,5 +31,8 @@
 #include "CSMTPSession.h"
 #include "CSMTPOperation.h"
 
+#include "CAttachment.h"
+#include "CMessageBuilder.h"
+#include "CMessageParser.h"
 
 #endif /* CCore_Bridging_Header_h */

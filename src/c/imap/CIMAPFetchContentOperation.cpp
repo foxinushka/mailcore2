@@ -25,6 +25,6 @@ CData data(struct CIMAPFetchContentOperation self){
     mailcore::Data *data = self.instance->data();
     CData cdata; 
     cdata.bytes = data->bytes();
-    cdata.lenght = data->length();
+    cdata.length = data->length();
     return cdata;
 }

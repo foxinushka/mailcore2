@@ -46,6 +46,9 @@ LOCAL_SRC_FILES  := ../../src/c/utils/COperation.cpp \
 					../../src/c/imap/CIMAPIdleOperation.cpp \
 					../../src/c/smtp/CSMTPOperation.cpp \
 					../../src/c/smtp/CSMTPSession.cpp \
+					../../src/c/rfc822/CAttachment.cpp \
+					../../src/c/rfc822/CMessageBuilder.cpp \
+					../../src/c/rfc822/CMessageParser.cpp \
 
 					
 LOCAL_CFLAGS := -fblocks					

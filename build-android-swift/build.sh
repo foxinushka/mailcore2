@@ -56,3 +56,6 @@ swiftc \
     ../src/swift/smtp/SmtpOperation.swift \
     ../src/swift/smtp/SmtpSendOperation.swift \
     ../src/swift/smtp/SmtpSession.swift \
+    ../src/swift/rfc822/Attachment.swift \
+    ../src/swift/rfc822/MessageBuilder.swift \
+    ../src/swift/rfc822/MessageParser.swift \

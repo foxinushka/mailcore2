@@ -1,12 +1,12 @@
 import Foundation
 
-public final class ImapMessage : AbsrtactMessage, Convertible {
+public final class ImapMessage : AbstractMessage, Convertible {
     
     private var nativeInstance:CIMAPMessage;
     
     internal init(message:CIMAPMessage) {
         self.nativeInstance = message;
-        super.init(abstractMessage: message.abstractMessage);
+        super.init(message.abstractMessage);
     }
     
     /** IMAP UID of the message. */
@@ -102,7 +102,7 @@ public final class ImapMessage : AbsrtactMessage, Convertible {
     init(_ obj: CObject){
         let message = castCIMAPMessage(obj);
         self.nativeInstance = message;
-        super.init(abstractMessage: message.abstractMessage);
+        super.init(message.abstractMessage);
     }
     
 }
