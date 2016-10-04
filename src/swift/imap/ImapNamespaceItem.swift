@@ -17,9 +17,9 @@ public class ImapNamespaceItem {
     }
     
     /** This is the prefix for this namespace item */
-    public var prefix: String {
-        get { return String(utf16: nativeInstance.prefix(nativeInstance)!)!; }
-        set { nativeInstance.setPrefix(nativeInstance, newValue.utf16CString); }
+    public var prefix: String? {
+        get { return String(utf16: nativeInstance.prefix(nativeInstance)); }
+        set { nativeInstance.setPrefix(nativeInstance, newValue?.utf16CString); }
     }
     
     /** This is the delimiter of the path for this namespace item */
@@ -29,8 +29,8 @@ public class ImapNamespaceItem {
     }
     
     /** Returns folder path for given path components in the context of this namespace item */
-    public func path(component: Array<String>) -> String {
-        return String(utf16: nativeInstance.pathForComponents(nativeInstance, Array<String>.cast(component))!)!;
+    public func path(component: Array<String>) -> String? {
+        return String(utf16: nativeInstance.pathForComponents(nativeInstance, Array<String>.cast(component)));
     }
     
     /** Returns components for the given path in the context of this namespace */

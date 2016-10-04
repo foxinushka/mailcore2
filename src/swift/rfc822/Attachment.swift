@@ -23,13 +23,13 @@ public class Attachment : AbstractPart {
         fatalError("init has not been implemented")
     }
     
-    public func decodedString() -> String {
-        return String(utf16: nativeInstance.decodedString(nativeInstance)!)!;
+    public func decodedString() -> String? {
+        return String(utf16: nativeInstance.decodedString(nativeInstance));
     }
     
     /** Returns a MIME type for a filename.*/
-    public static func mimeTypeForFilename(filename: String) -> String {
-        return String(utf16: CmimeTypeForFilename(filename.utf16CString)!)!;
+    public static func mimeTypeForFilename(filename: String) -> String? {
+        return String(utf16: CmimeTypeForFilename(filename.utf16CString));
     }
     
     /** Returns a file attachment with the content of the given file.*/

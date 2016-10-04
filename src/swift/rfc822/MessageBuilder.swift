@@ -10,15 +10,15 @@ public class MessageBuilder : AbstractMessage {
     }
     
     /** Main HTML content of the message.*/
-    public var htmlBody: String {
-        get { return String(utf16: nativeInstance.htmlBody(nativeInstance)!)!; }
-        set { nativeInstance.setHTMLBody(nativeInstance, newValue.utf16CString); }
+    public var htmlBody: String? {
+        get { return String(utf16: nativeInstance.htmlBody(nativeInstance)); }
+        set { nativeInstance.setHTMLBody(nativeInstance, newValue?.utf16CString); }
     }
     
     /** Plain text content of the message.*/
-    public var textBody: String {
-        get { return String(utf16: nativeInstance.textBody(nativeInstance)!)!; }
-        set { nativeInstance.setTextBody(nativeInstance, newValue.utf16CString); }
+    public var textBody: String? {
+        get { return String(utf16: nativeInstance.textBody(nativeInstance)); }
+        set { nativeInstance.setTextBody(nativeInstance, newValue?.utf16CString); }
     }
     
     /** List of file attachments.*/
@@ -34,9 +34,9 @@ public class MessageBuilder : AbstractMessage {
     }
     
     /** Prefix for the boundary identifier. Default value is nil.*/
-    public var boundaryPrefix: String {
-        get { return String(utf16: nativeInstance.boundaryPrefix(nativeInstance)!)!; }
-        set { nativeInstance.setBoundaryPrefix(nativeInstance, newValue.utf16CString); }
+    public var boundaryPrefix: String? {
+        get { return String(utf16: nativeInstance.boundaryPrefix(nativeInstance)); }
+        set { nativeInstance.setBoundaryPrefix(nativeInstance, newValue?.utf16CString); }
     }
     
     /** Add an attachment.*/
@@ -92,25 +92,25 @@ public class MessageBuilder : AbstractMessage {
     //- (NSString *) htmlRenderingWithDelegate:(id <MCOHTMLRendererDelegate>)delegate;
     
     /** HTML rendering of the body of the message to be displayed in a web view.*/
-    public func htmlBodyRendering() -> String {
-        return String(utf16: nativeInstance.htmlBodyRendering(nativeInstance)!)!;
+    public func htmlBodyRendering() -> String? {
+        return String(utf16: nativeInstance.htmlBodyRendering(nativeInstance));
     }
     
     /** Text rendering of the message.*/
-    public func plainTextRendering() -> String {
-        return String(utf16: nativeInstance.plainTextRendering(nativeInstance)!)!;
+    public func plainTextRendering() -> String? {
+        return String(utf16: nativeInstance.plainTextRendering(nativeInstance));
     }
     
     /** Text rendering of the body of the message. All end of line will be removed and white spaces cleaned up.
      This method can be used to generate the summary of the message.*/
-    public func plainTextBodyRendering() -> String {
-        return String(utf16: nativeInstance.plainTextBodyRendering(nativeInstance)!)!;
+    public func plainTextBodyRendering() -> String? {
+        return String(utf16: nativeInstance.plainTextBodyRendering(nativeInstance));
     }
     
     /** Text rendering of the body of the message. All end of line will be removed and white spaces cleaned up if requested.
      This method can be used to generate the summary of the message.*/
-    public func plainTextBodyRenderingAndStripWhitespace(stripWhitespace: Bool) -> String {
-        return String(utf16: nativeInstance.plainTextBodyRenderingAndStripWhitespace(nativeInstance, stripWhitespace)!)!;
+    public func plainTextBodyRenderingAndStripWhitespace(stripWhitespace: Bool) -> String? {
+        return String(utf16: nativeInstance.plainTextBodyRenderingAndStripWhitespace(nativeInstance, stripWhitespace));
     }
 
 }

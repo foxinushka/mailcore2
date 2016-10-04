@@ -9,9 +9,9 @@ public class SmtpSession {
     }
     
     /** This is the hostname of the SMTP server to connect to. */
-    public var hostname : String {
-        get { return String(utf16: self.session.hostname(self.session)!)!; }
-        set { self.session.setHostname(self.session, newValue.utf16CString); }
+    public var hostname : String? {
+        get { return String(utf16: self.session.hostname(self.session)); }
+        set { self.session.setHostname(self.session, newValue?.utf16CString); }
     }
     
     /** This is the port of the SMTP server to connect to. */
@@ -21,21 +21,21 @@ public class SmtpSession {
     }
     
     /** This is the username of the account. */
-    public var username : String {
-        get { return String(utf16: self.session.username(self.session)!)!; }
-        set { self.session.setUsername(self.session, newValue.utf16CString); }
+    public var username : String? {
+        get { return String(utf16: self.session.username(self.session)); }
+        set { self.session.setUsername(self.session, newValue?.utf16CString); }
     }
     
     /** This is the password of the account. */
-    public var password : String {
-        get { return String(utf16: self.session.password(self.session)!)!; }
-        set { self.session.setPassword(self.session, newValue.utf16CString); }
+    public var password : String? {
+        get { return String(utf16: self.session.password(self.session)); }
+        set { self.session.setPassword(self.session, newValue?.utf16CString); }
     }
     
     /** This is the OAuth2 token. */
-    public var OAuth2Token : String {
-        get { return String(utf16: self.session.OAuth2Token(self.session)!)!; }
-        set { self.session.setOAuth2Token(self.session, newValue.utf16CString); }
+    public var OAuth2Token : String? {
+        get { return String(utf16: self.session.OAuth2Token(self.session)); }
+        set { self.session.setOAuth2Token(self.session, newValue?.utf16CString); }
     }
     
     /**

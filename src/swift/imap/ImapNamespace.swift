@@ -24,8 +24,8 @@ public class ImapNamespace {
     }
     
     /** Returns the prefix of the main item of this namespace. */
-    public func mainPrefix() -> String {
-        return String(utf16: nativeInstance.mainPrefix(nativeInstance)!)!;
+    public func mainPrefix() -> String? {
+        return String(utf16: nativeInstance.mainPrefix(nativeInstance));
     }
     
     /** Returns the path delimiter of the main item of this namespace */
@@ -42,16 +42,16 @@ public class ImapNamespace {
      Returns the folder path for the given list of path components in the context
      of the main item of the namespace.
      */
-    public func path(components: Array<String>) -> String {
-        return String(utf16: nativeInstance.pathForComponents(nativeInstance, Array<String>.cast(components))!)!;
+    public func path(components: Array<String>) -> String? {
+        return String(utf16: nativeInstance.pathForComponents(nativeInstance, Array<String>.cast(components)));
     }
     
     /**
      Returns the folder path for the given list of path components and a prefix.
      It will use the best item matching the prefix to compute the path.
      */
-    public func path(components: Array<String>, prefix: String) -> String {
-        return String(utf16: nativeInstance.pathForComponentsAndPrefix(nativeInstance, Array<String>.cast(components), prefix.utf16CString)!)!;
+    public func path(components: Array<String>, prefix: String) -> String? {
+        return String(utf16: nativeInstance.pathForComponentsAndPrefix(nativeInstance, Array<String>.cast(components), prefix.utf16CString));
     }
     
     /** Returns the components given a folder path. */

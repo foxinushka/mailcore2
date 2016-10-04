@@ -72,29 +72,37 @@ public final class Address : Hashable, Convertible {
     
     public var displayName : String? {
         set { self.nativeInstance.setDisplayName(nativeInstance, newValue?.utf16CString); }
-        get { return String(utf16: self.nativeInstance.displayName(self.nativeInstance)!); }
+        get { return String(utf16: self.nativeInstance.displayName(self.nativeInstance)); }
     }
     
     public var mailbox : String? {
         set { self.nativeInstance.setMailbox(nativeInstance, newValue?.utf16CString); }
-        get { return String(utf16: self.nativeInstance.mailbox(self.nativeInstance)!); }
+        get { return String(utf16: self.nativeInstance.mailbox(self.nativeInstance)); }
     }
     
     public func RFC822String() -> String? {
-        return String(utf16: nativeInstance.RFC822String(nativeInstance)!);
+        return String(utf16: nativeInstance.RFC822String(nativeInstance));
     }
     
     public func nonEncodedRFC822String() -> String? {
-        return String(utf16: nativeInstance.nonEncodedRFC822String(nativeInstance)!);
+        return String(utf16: nativeInstance.nonEncodedRFC822String(nativeInstance));
     }
     
     public var hashValue: Int {
-        return (String(utf16: nativeInstance.displayName(nativeInstance)!)?.hashValue)! ^ (String(utf16: nativeInstance.mailbox(nativeInstance)!)?.hashValue)!;
+        if displayName != nil && mailbox != nil {
+            return displayName!.hashValue ^ mailbox!.hashValue;
+        }
+        if displayName != nil {
+            return displayName!.hashValue;
+        }
+        if mailbox != nil {
+            return mailbox!.hashValue;
+        }
+        return 0;
     }
     
     public static func ==(lhs: Address, rhs: Address) -> Bool {
-        return String(utf16: lhs.nativeInstance.displayName(lhs.nativeInstance)!) == String(utf16: rhs.nativeInstance.displayName(rhs.nativeInstance)!) &&
-            String(utf16: lhs.nativeInstance.mailbox(lhs.nativeInstance)!) == String(utf16: rhs.nativeInstance.mailbox(rhs.nativeInstance)!);
+        return lhs.displayName == rhs.displayName && lhs.mailbox == rhs.mailbox;
     }
     
     internal init(_ obj: CObject) {

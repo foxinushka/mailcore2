@@ -17,9 +17,9 @@ public class MessageHeader {
     }
     
     /** Message-ID field.*/
-    public var messageID : String {
-        set { self.nativeInstance.setMessageID(nativeInstance, newValue.utf16CString); }
-        get { return String(utf16: self.nativeInstance.messageID(nativeInstance)!)!; }
+    public var messageID : String? {
+        set { self.nativeInstance.setMessageID(nativeInstance, newValue?.utf16CString); }
+        get { return String(utf16: self.nativeInstance.messageID(nativeInstance)); }
     }
     
     /** Message-ID auto-generated flag.*/
@@ -64,15 +64,15 @@ public class MessageHeader {
     }
     
     /** Subject of the message.*/
-    public var subject: String {
-        set { self.nativeInstance.setSubject(nativeInstance, newValue.utf16CString); }
-        get { return String(utf16: self.nativeInstance.subject(nativeInstance)!)!; }
+    public var subject: String? {
+        set { self.nativeInstance.setSubject(nativeInstance, newValue?.utf16CString); }
+        get { return String(utf16: self.nativeInstance.subject(nativeInstance)); }
     }
     
     /** Email user agent name: X-Mailer header.*/
-    public var userAgent: String {
-        set { self.nativeInstance.setUserAgent(nativeInstance, newValue.utf16CString); }
-        get { return String(utf16: self.nativeInstance.userAgent(nativeInstance)!)!; }
+    public var userAgent: String? {
+        set { self.nativeInstance.setUserAgent(nativeInstance, newValue?.utf16CString); }
+        get { return String(utf16: self.nativeInstance.userAgent(nativeInstance)); }
     }
     
     /** Adds a custom header.*/
@@ -86,8 +86,8 @@ public class MessageHeader {
     }
     
     /** Returns the value of a given custom header.*/
-    public func extraHeaderValueForName(name: String) -> String {
-        return String(utf16: nativeInstance.extraHeaderValueForName(nativeInstance, name.utf16CString)!)!;
+    public func extraHeaderValueForName(name: String) -> String? {
+        return String(utf16: nativeInstance.extraHeaderValueForName(nativeInstance, name.utf16CString));
     }
     
     /** Returns an array with the names of all custom headers.*/
@@ -96,13 +96,13 @@ public class MessageHeader {
     }
     
     /** Extracted subject (also remove square brackets).*/
-    public func extractedSubject() -> String {
-        return String(utf16: nativeInstance.extractedSubject(nativeInstance)!)!;
+    public func extractedSubject() -> String? {
+        return String(utf16: nativeInstance.extractedSubject(nativeInstance));
     }
     
     /** Extracted subject (don't remove square brackets).*/
-    public func partialExtractedSubject() -> String {
-        return String(utf16: nativeInstance.partialExtractedSubject(nativeInstance)!)!;
+    public func partialExtractedSubject() -> String? {
+        return String(utf16: nativeInstance.partialExtractedSubject(nativeInstance));
     }
     
     /** Fill the header using the given RFC 822 data.*/

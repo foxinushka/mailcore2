@@ -2,9 +2,9 @@ import Foundation
 
 extension String : Convertible  {
     
-    init?(utf16 cString: UnsafePointer<UInt16>) {
+    init?(utf16 cString: UnsafePointer<UInt16>?) {
         guard let (s, _) = String.decodeCString(cString, as: UTF16.self,
-                                                repairingInvalidCodeUnits: false) else {
+                                                repairingInvalidCodeUnits: true) else {
                                                     return nil
         }
         self = s
@@ -19,6 +19,6 @@ extension String : Convertible  {
     }
     
     init(_ str: CObject) {
-        self = String(utf16: str.castToString(str)!)!;
+        self = String(utf16: str.castToString(str))!;
     }
 }

@@ -38,25 +38,25 @@ public class MessageParser : AbstractMessage {
     //- (NSString *) htmlRenderingWithDelegate:(id <MCOHTMLRendererDelegate>)delegate;
     
     /** HTML rendering of the body of the message to be displayed in a web view.*/
-    public func htmlBodyRendering() -> String {
-        return String(utf16: nativeInstance.htmlBodyRendering(nativeInstance)!)!;
+    public func htmlBodyRendering() -> String? {
+        return String(utf16: nativeInstance.htmlBodyRendering(nativeInstance));
     }
     
     /** Text rendering of the message.*/
-    public func plainTextRendering() -> String {
-        return String(utf16: nativeInstance.plainTextRendering(nativeInstance)!)!;
+    public func plainTextRendering() -> String? {
+        return String(utf16: nativeInstance.plainTextRendering(nativeInstance));
     }
     
     /** Text rendering of the body of the message. All end of line will be removed and white spaces cleaned up.
      This method can be used to generate the summary of the message.*/
-    public func plainTextBodyRendering() -> String {
-        return String(utf16: nativeInstance.plainTextBodyRendering(nativeInstance)!)!;
+    public func plainTextBodyRendering() -> String? {
+        return String(utf16: nativeInstance.plainTextBodyRendering(nativeInstance));
     }
     
     /** Text rendering of the body of the message. All end of line will be removed and white spaces cleaned up if requested.
      This method can be used to generate the summary of the message.*/
-    public func plainTextBodyRenderingAndStripWhitespace(stripWhitespace: Bool) -> String {
-        return String(utf16: nativeInstance.plainTextBodyRenderingAndStripWhitespace(nativeInstance, stripWhitespace)!)!;
+    public func plainTextBodyRenderingAndStripWhitespace(stripWhitespace: Bool) -> String? {
+        return String(utf16: nativeInstance.plainTextBodyRenderingAndStripWhitespace(nativeInstance, stripWhitespace));
     }
     
     
