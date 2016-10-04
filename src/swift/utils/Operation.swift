@@ -1,6 +1,6 @@
 import Foundation
 
-class Operation {
+public class Operation {
     
     internal var nativeInstance: COperation;
     private var _started: Bool = false;

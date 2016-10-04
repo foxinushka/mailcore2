@@ -34,12 +34,12 @@ CAddress newCAddress(){
 }
 
 void deleteCAddress(CAddress self){
-    C_SAFE_RELEASE(self);
+    C_SAFE_RELEASE(self.instance);
 }
 
 CAddress CaddressWithDisplayName(const UChar* displayName, const UChar* mailbox){
     CAddress self = newCAddress();
-    C_SAFE_RELEASE(self);
+    C_SAFE_RELEASE(self.instance);
     self.instance = mailcore::Address::addressWithDisplayName(mailcore::String::stringWithCharacters(displayName), mailcore::String::stringWithCharacters(mailbox));
     if (self.instance == NULL) {
         return self;
@@ -50,7 +50,7 @@ CAddress CaddressWithDisplayName(const UChar* displayName, const UChar* mailbox)
 
 CAddress CaddressWithMailbox(const UChar* mailbox){
     CAddress self = newCAddress();
-    C_SAFE_RELEASE(self);
+    C_SAFE_RELEASE(self.instance);
     self.instance = mailcore::Address::addressWithMailbox(mailcore::String::stringWithCharacters(mailbox));
     if (self.instance == NULL) {
         return self;
@@ -61,7 +61,7 @@ CAddress CaddressWithMailbox(const UChar* mailbox){
 
 CAddress CaddressWithRFC822String(const UChar* RFC822String){
     CAddress self = newCAddress();
-    C_SAFE_RELEASE(self);
+    C_SAFE_RELEASE(self.instance);
     self.instance = mailcore::Address::addressWithRFC822String(mailcore::String::stringWithCharacters(RFC822String));
     if (self.instance == NULL) {
         return self;
@@ -72,7 +72,7 @@ CAddress CaddressWithRFC822String(const UChar* RFC822String){
 
 CAddress CaddressWithNonEncodedRFC822String(const UChar* nonEncodedRFC822String){
     CAddress self = newCAddress();
-    C_SAFE_RELEASE(self);
+    C_SAFE_RELEASE(self.instance);
     self.instance = mailcore::Address::addressWithNonEncodedRFC822String(mailcore::String::stringWithCharacters(nonEncodedRFC822String));
     if (self.instance == NULL) {
         return self;

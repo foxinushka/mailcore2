@@ -35,6 +35,6 @@ CIMAPFolderInfo newCIMAPFolderInfo(mailcore::IMAPFolderInfo *info) {
 }
 
 void deleteCIMAPFolderInfo(CIMAPFolderInfo self) {
-    C_SAFE_RELEASE(self);
+    C_SAFE_RELEASE(self.instance);
 }
 

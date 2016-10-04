@@ -31,7 +31,7 @@ CAbstractMessage newCAbstractMessage(mailcore::AbstractMessage *msg){
 }
 
 void deleteCAbstractMessage(CAbstractMessage self){
-    C_SAFE_RELEASE(self);
+    C_SAFE_RELEASE(self.instance);
 }
 
 CMessageHeader header(CAbstractMessage self){

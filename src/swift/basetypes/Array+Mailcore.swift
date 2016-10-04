@@ -19,4 +19,12 @@ extension Array {
         return cArray;
     }
     
+    func cast() -> CArray {
+        let cArray = newCArray();
+        for convertable in self {
+            cArray.addObject(cArray, (convertable as! Convertible).cast());
+        }
+        return cArray;
+    }
+    
 }

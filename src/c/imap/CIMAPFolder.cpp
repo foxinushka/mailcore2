@@ -26,5 +26,5 @@ CIMAPFolder newCIMAPFolder(mailcore::IMAPFolder *folder) {
 }
 
 void deleteCIMAPFolder(CIMAPFolder self) {
-    C_SAFE_RELEASE(self);
+    C_SAFE_RELEASE(self.instance);
 }

@@ -36,5 +36,5 @@ CIMAPFolderStatus newCIMAPFolderStatus(mailcore::IMAPFolderStatus *status) {
 }
 
 void deleteCIMAPFolderStatus(CIMAPFolderStatus self) {
-    C_SAFE_RELEASE(self);
+    C_SAFE_RELEASE(self.instance);
 }

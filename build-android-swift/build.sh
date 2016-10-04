@@ -53,3 +53,6 @@ swiftc \
     ../src/swift/basetypes/Data+Mailcore.swift \
     ../src/swift/basetypes/Array+Mailcore.swift \
     ../src/swift/basetypes/UInt32+Mailcore.swift \
+    ../src/swift/smtp/SmtpOperation.swift \
+    ../src/swift/smtp/SmtpSendOperation.swift \
+    ../src/swift/smtp/SmtpSession.swift \

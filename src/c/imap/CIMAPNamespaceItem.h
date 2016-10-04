@@ -35,10 +35,6 @@ extern "C" {
     
 #ifdef __cplusplus
 }
-#endif
-
-#ifdef __cplusplus
-#include <MailCore/MCAsync.h>
 
 CIMAPNamespaceItem newCIMAPNamespaceItem(mailcore::IMAPNamespaceItem *folder);
 #endif

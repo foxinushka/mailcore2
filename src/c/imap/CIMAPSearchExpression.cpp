@@ -14,7 +14,7 @@ CIMAPSearchExpression newCIMAPSearchExpression(mailcore::IMAPSearchExpression *e
 }
 
 void deleteCIMAPSearchExpression(CIMAPSearchExpression self) {
-    C_SAFE_RELEASE(self);
+    C_SAFE_RELEASE(self.instance);
 }
 
 CIMAPSearchExpression newCIMAPSearchExpressionSearchAll() {

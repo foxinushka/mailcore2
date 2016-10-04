@@ -28,5 +28,8 @@
 #include "CIMAPFolderStatus.h"
 #include "CIMAPSearchExpression.h"
 
+#include "CSMTPSession.h"
+#include "CSMTPOperation.h"
+
 
 #endif /* CCore_Bridging_Header_h */

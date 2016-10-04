@@ -58,7 +58,7 @@ CAbstractPart newCAbstractPart(mailcore::AbstractPart *part){
 }
 
 void deleteCAbstractPart(CAbstractPart self){
-    C_SAFE_RELEASE(self);
+    C_SAFE_RELEASE(self.instance);
 }
 
 struct CAbstractPart partForContentID(struct CAbstractPart self, const UChar* contentID){

@@ -48,9 +48,9 @@ self.instance->setter(getter.instance); \
 
 #define C_SAFE_RELEASE(o) \
 do { \
-if (o.instance != NULL) { \
-o.instance->release(); \
-o.instance = NULL; \
+if (o != NULL) { \
+o->release(); \
+o = NULL; \
 } \
 } while (0)
 

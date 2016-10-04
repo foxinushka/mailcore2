@@ -4,6 +4,10 @@ public final class Address : Hashable, Convertible {
     
     private var nativeInstance:CAddress;
     
+    internal func getNativeInstance() -> CAddress {
+        return self.nativeInstance;
+    }
+    
     /** Creates an address with a display name and a mailbox.
      
      Example: [MCOAddress addressWithDisplayName:@"DINH Viêt Hoà" mailbox:@"hoa@etpan.org"] */

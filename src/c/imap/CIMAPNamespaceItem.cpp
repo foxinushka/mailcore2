@@ -26,7 +26,7 @@ CIMAPNamespaceItem newCIMAPNamespaceItem(mailcore::IMAPNamespaceItem *item) {
 }
 
 void deleteCIMAPNamespaceItem(CIMAPNamespaceItem self) {
-    C_SAFE_RELEASE(self);
+    C_SAFE_RELEASE(self.instance);
 }
 
 const UChar* pathForComponents(struct CIMAPNamespaceItem self, CArray components) {

@@ -36,7 +36,7 @@ CIMAPNamespace newCIMAPNamespace(const UChar* prefix, char delimiter) {
 }
 
 void deleteCIMAPNamespace(CIMAPNamespace self) {
-    C_SAFE_RELEASE(self);
+    C_SAFE_RELEASE(self.instance);
 }
 
 const UChar* mainPrefix(struct CIMAPNamespace self) {
