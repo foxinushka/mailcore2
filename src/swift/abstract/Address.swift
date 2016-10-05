@@ -70,20 +70,28 @@ public final class Address : Hashable, Convertible {
         deleteCAddress(self.nativeInstance);
     }
     
+    /** Returns the display name of the address.*/
     public var displayName : String? {
         set { self.nativeInstance.setDisplayName(nativeInstance, newValue?.utf16CString); }
         get { return String(utf16: self.nativeInstance.displayName(self.nativeInstance)); }
     }
     
+    /** Returns the mailbox of the address.*/
     public var mailbox : String? {
         set { self.nativeInstance.setMailbox(nativeInstance, newValue?.utf16CString); }
         get { return String(utf16: self.nativeInstance.mailbox(self.nativeInstance)); }
     }
     
+    /** Returns the RFC822 encoding of the address.
+     
+     For example: "DINH Vi=C3=AAt Ho=C3=A0 <hoa@etpan.org>"*/
     public func RFC822String() -> String? {
         return String(utf16: nativeInstance.RFC822String(nativeInstance));
     }
     
+    /** Returns the non-MIME-encoded RFC822 encoding of the address.
+     
+     For example: "DINH Viêt Hoà <hoa@etpan.org>"*/
     public func nonEncodedRFC822String() -> String? {
         return String(utf16: nativeInstance.nonEncodedRFC822String(nativeInstance));
     }

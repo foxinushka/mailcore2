@@ -1,9 +1,13 @@
 import Foundation
 
 public class MessageHeader {
-    var nativeInstance:CMessageHeader;
+    private var nativeInstance:CMessageHeader;
     
-    init(header:CMessageHeader) {
+    internal func CMessageHeader() -> CMessageHeader {
+        return nativeInstance;
+    }
+    
+    internal init(header:CMessageHeader) {
         self.nativeInstance = header;
     }
     

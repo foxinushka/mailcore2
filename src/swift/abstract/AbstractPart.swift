@@ -2,9 +2,9 @@ import Foundation
 
 public class AbstractPart : Convertible {
     
-    fileprivate var nativeInstance:CAbstractPart;
+    private var nativeInstance:CAbstractPart;
     
-    init(_ abstractPart:CAbstractPart) {
+    internal init(_ abstractPart:CAbstractPart) {
         self.nativeInstance = abstractPart;
     }
     
@@ -121,7 +121,7 @@ public class AbstractPart : Convertible {
         self.nativeInstance = castFromCObject(obj);
     }
     
-    func cast() -> CObject {
+    internal func cast() -> CObject {
         return nativeInstance.castToCObject(nativeInstance);
     }
 

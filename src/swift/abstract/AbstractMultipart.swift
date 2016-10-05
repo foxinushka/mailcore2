@@ -2,10 +2,10 @@ import Foundation
 
 public class AbstractMultipart : AbstractPart {
     
-    var abstractMultipart: CAbstractMultipart;
+    private var nativeInstance: CAbstractMultipart;
     
-    init(abstractMultipart: CAbstractMultipart) {
-        self.abstractMultipart = abstractMultipart;
+    internal init(abstractMultipart: CAbstractMultipart) {
+        self.nativeInstance = abstractMultipart;
         super.init(abstractMultipart.abstractPart);
     }
     
@@ -13,9 +13,10 @@ public class AbstractMultipart : AbstractPart {
         fatalError("init has not been implemented")
     }
     
+    /** Returns the subparts of that multipart.*/
     public var parts : Array<AbstractPart> {
-        set { abstractMultipart.setParts(abstractMultipart, Array<AbstractPart>.cast(newValue)); }
-        get { return Array<AbstractPart>.cast(abstractMultipart.parts(abstractMultipart)); }
+        set { nativeInstance.setParts(nativeInstance, Array<AbstractPart>.cast(newValue)); }
+        get { return Array<AbstractPart>.cast(nativeInstance.parts(nativeInstance)); }
     }
     
 }

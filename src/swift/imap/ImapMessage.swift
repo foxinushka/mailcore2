@@ -95,11 +95,11 @@ public final class ImapMessage : AbstractMessage, Convertible {
         return Array<ImapPart>.cast(nativeInstance.abstractMessage.htmlInlineAttachments(nativeInstance.abstractMessage));
     }
     
-    func cast() -> CObject {
+    internal func cast() -> CObject {
         return nativeInstance.castToCObject(nativeInstance);
     }
     
-    init(_ obj: CObject){
+    internal init(_ obj: CObject){
         let message = castCIMAPMessage(obj);
         self.nativeInstance = message;
         super.init(message.abstractMessage);

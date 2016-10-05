@@ -1,9 +1,9 @@
 import Foundation
 
-class ImapBaseOperation : Operation {
+public class ImapBaseOperation : Operation {
     
-    typealias OperationProgressBlock = (UInt32, UInt32) -> Void
-    typealias OperationItemProgressBlock = (UInt32) -> Void
+    public typealias OperationProgressBlock = (UInt32, UInt32) -> Void
+    public typealias OperationItemProgressBlock = (UInt32) -> Void
     
     internal var baseOperation: CIMAPBaseOperation;
     public var session: ImapSession?;

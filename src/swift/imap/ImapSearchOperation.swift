@@ -1,13 +1,13 @@
 import Foundation
 
-class ImapSearchOperation : ImapBaseOperation {
+public class ImapSearchOperation : ImapBaseOperation {
     
-    typealias CompletionBlock = (Error?, IndexSet?) -> Void
+    public typealias CompletionBlock = (Error?, IndexSet?) -> Void
 	
     private var operation: CIMAPSearchOperation;
     private var completionBlock : CompletionBlock?;
     
-    init(operation:CIMAPSearchOperation) {
+    internal init(operation:CIMAPSearchOperation) {
         self.operation = operation
         super.init(baseOperation: operation.baseOperation);
     }
@@ -31,12 +31,12 @@ class ImapSearchOperation : ImapBaseOperation {
         start();
     }
     
-    override func cancel() {
+    public override func cancel() {
         completionBlock = nil;
         super.cancel();
     }
     
-    override func operationCompleted() {
+    public override func operationCompleted() {
         if (completionBlock == nil) {
             return;
         }

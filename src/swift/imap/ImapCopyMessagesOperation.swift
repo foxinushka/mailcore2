@@ -1,8 +1,8 @@
 import Foundation
 
-class ImapCopyMessagesOperation : ImapBaseOperation {
+public class ImapCopyMessagesOperation : ImapBaseOperation {
     
-    typealias CompletionBlock = (Error?, Dictionary<UInt32, UInt32>?) -> Void
+    public typealias CompletionBlock = (Error?, Dictionary<UInt32, UInt32>?) -> Void
     
     internal var operation: CIMAPCopyMessagesOperation;
     private var completionBlock : CompletionBlock?;
@@ -21,12 +21,12 @@ class ImapCopyMessagesOperation : ImapBaseOperation {
         start();
     }
     
-    override func cancel() {
+    public override func cancel() {
         completionBlock = nil;
         super.cancel();
     }
     
-    override func operationCompleted() {
+    public override func operationCompleted() {
         if (completionBlock == nil) {
             return;
         }

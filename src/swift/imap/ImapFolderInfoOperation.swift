@@ -4,14 +4,14 @@ import Foundation
  The class is used to get folder metadata (like UIDVALIDITY, UIDNEXT, etc).
  @see IMAPFolderInfo
  */
-class ImapFolderInfoOperation : ImapBaseOperation {
+public class ImapFolderInfoOperation : ImapBaseOperation {
     
-    typealias CompletionBlock = (Error?, ImapFolderInfo?) -> Void
+    public typealias CompletionBlock = (Error?, ImapFolderInfo?) -> Void
 	
 	private var operation: CIMAPFolderInfoOperation;
     private var completionBlock : CompletionBlock?;
 
-	init(operation:CIMAPFolderInfoOperation) {
+	internal init(operation:CIMAPFolderInfoOperation) {
  		self.operation = operation
         super.init(baseOperation: operation.baseOperation);
 	}
@@ -35,12 +35,12 @@ class ImapFolderInfoOperation : ImapBaseOperation {
         start();
     }
     
-    override func cancel() {
+    public override func cancel() {
         completionBlock = nil;
         super.cancel();
     }
     
-    override func operationCompleted() {
+    public override func operationCompleted() {
         if (completionBlock == nil) {
             return;
         }

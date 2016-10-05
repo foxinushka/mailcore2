@@ -1,8 +1,8 @@
 import Foundation
 
-class ImapIdleOperation : ImapBaseOperation {
+public class ImapIdleOperation : ImapBaseOperation {
     
-    typealias CompletionBlock = (Error?) -> Void
+    public typealias CompletionBlock = (Error?) -> Void
     
     internal var idleOperation: CIMAPIdleOperation;
     private var completionBlock: CompletionBlock?;
@@ -17,12 +17,12 @@ class ImapIdleOperation : ImapBaseOperation {
         start();
     }
 
-    override func cancel() {
+    public override func cancel() {
         self.completionBlock = nil;
         super.cancel();
     }
     
-    override func operationCompleted() {
+    public override func operationCompleted() {
         if (completionBlock == nil) {
             return;
         }

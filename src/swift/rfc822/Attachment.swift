@@ -14,7 +14,7 @@ public class Attachment : AbstractPart {
         }
     }
     
-    init(_ attachment: CAttachment) {
+    internal init(_ attachment: CAttachment) {
         self.nativeInstance = attachment;
         super.init(attachment.abstractPart);
     }

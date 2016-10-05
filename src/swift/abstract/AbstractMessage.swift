@@ -4,7 +4,7 @@ public class AbstractMessage {
 	
     private var nativeInstance:CAbstractMessage;
 
-    init(_ abstractMessage:CAbstractMessage) {
+    internal init(_ abstractMessage:CAbstractMessage) {
         self.nativeInstance = abstractMessage;
 	}
     
@@ -14,7 +14,7 @@ public class AbstractMessage {
     
     /** Header of the message. */
     public var header : MessageHeader {
-        set { nativeInstance.setHeader(nativeInstance, newValue.nativeInstance); }
+        set { nativeInstance.setHeader(nativeInstance, newValue.CMessageHeader()); }
         get { return MessageHeader(header: nativeInstance.header(nativeInstance)); }
     }
     

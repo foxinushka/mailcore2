@@ -2,10 +2,10 @@ import Foundation
 
 public class AbstractMessagePart : AbstractPart {
     
-    var abstractMessagePart:CAbstractMessagePart;
+    private var nativeInstance:CAbstractMessagePart;
     
-    init(abstractMessagePart:CAbstractMessagePart) {
-        self.abstractMessagePart = abstractMessagePart;
+    internal init(abstractMessagePart:CAbstractMessagePart) {
+        self.nativeInstance = abstractMessagePart;
         super.init(abstractMessagePart.abstractPart);
     }
     
@@ -13,14 +13,17 @@ public class AbstractMessagePart : AbstractPart {
         fatalError("init has not been implemented")
     }
     
+    // Returns the header of the embedded message.
     public var header : MessageHeader {
-        set { abstractMessagePart.setHeader(abstractMessagePart, newValue.nativeInstance); }
-        get { return MessageHeader(header: abstractMessagePart.header(abstractMessagePart)); }
+        set { nativeInstance.setHeader(nativeInstance, newValue.CMessageHeader()); }
+        get { return MessageHeader(header: nativeInstance.header(nativeInstance)); }
     }
     
+    // Returns the main part of the embedded message. It can be MCOAbstractPart, MCOAbstractMultipart
+    // or a MCOAbstractMessagePart.
     public var mainPart : AbstractPart {
-        set { abstractMessagePart.setMainPart(abstractMessagePart, newValue.CAbstractPart()); }
-        get { return AbstractPart(abstractMessagePart.mainPart(abstractMessagePart)); }
+        set { nativeInstance.setMainPart(nativeInstance, newValue.CAbstractPart()); }
+        get { return AbstractPart(nativeInstance.mainPart(nativeInstance)); }
     }
 
 }

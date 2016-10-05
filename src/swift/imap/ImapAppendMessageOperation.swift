@@ -1,8 +1,8 @@
 import Foundation
 
-class ImapAppendMessageOperation : ImapBaseOperation {
+public class ImapAppendMessageOperation : ImapBaseOperation {
     
-    typealias CompletionBlock = (Error?, UInt32) -> Void
+    public typealias CompletionBlock = (Error?, UInt32) -> Void
 	
 	internal var operation: CIMAPAppendMessageOperation;
     private var completionBlock : CompletionBlock?;
@@ -23,12 +23,12 @@ class ImapAppendMessageOperation : ImapBaseOperation {
         start();
     }
     
-    override func cancel() {
+    public override func cancel() {
         completionBlock = nil;
         super.cancel();
     }
     
-    override func operationCompleted() {
+    public override func operationCompleted() {
         if (completionBlock == nil) {
             return;
         }
@@ -43,7 +43,7 @@ class ImapAppendMessageOperation : ImapBaseOperation {
         completionBlock = nil;
     }
     
-    override func bodyProgress(current: UInt32, maximum: UInt32) {
+    public override func bodyProgress(current: UInt32, maximum: UInt32) {
         if progressBlock != nil {
             progressBlock!(current, maximum);
         }

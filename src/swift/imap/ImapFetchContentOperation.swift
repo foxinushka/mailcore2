@@ -1,8 +1,8 @@
 import Foundation
 
-class ImapFetchContentOperation : ImapBaseOperation {
+public class ImapFetchContentOperation : ImapBaseOperation {
     
-    typealias CompletionBlock = (Error?,  Data?) -> Void
+    public typealias CompletionBlock = (Error?,  Data?) -> Void
     
     internal var operation: CIMAPFetchContentOperation;
     private var completionBlock : CompletionBlock?;
@@ -22,12 +22,12 @@ class ImapFetchContentOperation : ImapBaseOperation {
         start();
     }
     
-    override func cancel() {
+    public override func cancel() {
         completionBlock = nil;
         super.cancel();
     }
     
-    override func operationCompleted() {
+    public override func operationCompleted() {
         if (completionBlock == nil) {
             return;
         }
@@ -42,7 +42,7 @@ class ImapFetchContentOperation : ImapBaseOperation {
         completionBlock = nil;
     }
     
-    override func bodyProgress(current: UInt32, maximum: UInt32) {
+    public override func bodyProgress(current: UInt32, maximum: UInt32) {
         if progressBlock != nil {
             progressBlock!(current, maximum);
         }
