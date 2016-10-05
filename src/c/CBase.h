@@ -2,7 +2,7 @@
 #define MAILCORE_CBASE_H
 
 #include <stdbool.h>
-
+#include <stdint.h>
 #include <MailCore/MCICUTypes.h>
 
 #ifdef __cplusplus

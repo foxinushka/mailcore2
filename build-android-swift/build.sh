@@ -16,7 +16,7 @@ swiftc \
     -L $ANDROID_NDK/sources/cxx-stl/llvm-libc++/libs/armeabi-v7a \
     -L $ANDROID_NDK/toolchains/arm-linux-androideabi-4.9/prebuilt/linux-x86_64/lib/gcc/arm-linux-androideabi/4.9.x \
     -emit-library \
-    -module-name swiftmailcore \
+    -module-name SwiftMailCore \
     -Xlinker -soname=libswiftmailcore.so \
     -o ./libs/armeabi-v7a/libswiftmailcore.so \
     ../src/swift/utils/Operation.swift \
@@ -47,7 +47,7 @@ swiftc \
     ../src/swift/imap/ImapSearchExpression.swift \
     ../src/swift/imap/ImapSession.swift \
     ../src/swift/basetypes/Convertible.swift \
-    ../src/swift/basetypes/IndexSet+Mailcore.swift \
+    ../src/swift/basetypes/IndexSet.swift \
     ../src/swift/basetypes/String+Mailcore.swift \
     ../src/swift/basetypes/Dictionary+Mailcore.swift \
     ../src/swift/basetypes/Data+Mailcore.swift \

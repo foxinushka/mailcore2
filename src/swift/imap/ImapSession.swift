@@ -93,7 +93,7 @@ public class ImapSession {
     }
 
     public func storeFlagsByUIDOperation(folder:String, uids:IndexSet, kind:IMAPStoreFlagsRequestKind, flags:MessageFlag, customFlags:Array<String>) -> ImapOperation {
-    	return ImapOperation(operation: session.storeFlagsByUIDOperation(session, folder.utf16CString, IndexSet.cast(uids), kind, flags, Array<String>.cast(customFlags)));
+    	return ImapOperation(operation: session.storeFlagsByUIDOperation(session, folder.utf16CString, uids.cast(), kind, flags, Array<String>.cast(customFlags)));
     }
 
     public func appendMessageOperation(folder:String, path:String, flags:MessageFlag, customFlags:Array<String>) -> ImapAppendMessageOperation {
@@ -101,15 +101,15 @@ public class ImapSession {
     }
 
     public func fetchMessagesByNumber(folder:String, type:IMAPMessagesRequestKind, numbers:IndexSet) -> ImapFetchMessagesOperation {
-    	return ImapFetchMessagesOperation(operation: session.fetchMessagesByNumberOperation(session, folder.utf16CString, type, IndexSet.cast(numbers)));
+    	return ImapFetchMessagesOperation(operation: session.fetchMessagesByNumberOperation(session, folder.utf16CString, type, numbers.cast()));
     }
 
     public func fetchMessagesOperation(folder:String, kind:IMAPMessagesRequestKind, numbers:IndexSet) -> ImapFetchMessagesOperation {
-    	return ImapFetchMessagesOperation(operation: session.fetchMessagesByUIDOperation(session, folder.utf16CString, kind, IndexSet.cast(numbers)));
+    	return ImapFetchMessagesOperation(operation: session.fetchMessagesByUIDOperation(session, folder.utf16CString, kind, numbers.cast()));
     }
 
     public func syncMessages(folder:String, kind:IMAPMessagesRequestKind, uids:IndexSet, modSeq:UInt64) -> ImapFetchMessagesOperation {
-    	return ImapFetchMessagesOperation(operation: session.syncMessagesByUIDOperation(session, folder.utf16CString, kind, IndexSet.cast(uids), modSeq));
+    	return ImapFetchMessagesOperation(operation: session.syncMessagesByUIDOperation(session, folder.utf16CString, kind, uids.cast(), modSeq));
     }
 
     public func fetchMessageOperation(folder:String, uid:UInt32, urgent:Bool) -> ImapFetchContentOperation {
@@ -129,7 +129,7 @@ public class ImapSession {
     }
 
     public func copyMessagesOperation(folder:String, uids:IndexSet, destFolder:String) -> ImapCopyMessagesOperation {
-    	return ImapCopyMessagesOperation(operation: session.copyMessagesOperation(session, folder.utf16CString, IndexSet.cast(uids), destFolder.utf16CString));
+    	return ImapCopyMessagesOperation(operation: session.copyMessagesOperation(session, folder.utf16CString, uids.cast(), destFolder.utf16CString));
     }
 
     public func folderInfoOperation(folder:String) -> ImapFolderInfoOperation {

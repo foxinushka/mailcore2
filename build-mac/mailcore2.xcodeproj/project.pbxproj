@@ -85,6 +85,7 @@
 		843AFCDC1D9579F30086FB46 /* AbstractPart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843AFCD61D9579F30086FB46 /* AbstractPart.swift */; };
 		843AFCDD1D9579F30086FB46 /* Address.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843AFCD71D9579F30086FB46 /* Address.swift */; };
 		843AFCDE1D9579F30086FB46 /* MessageHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843AFCD81D9579F30086FB46 /* MessageHeader.swift */; };
+		84501D0D1DA511A400A9FF4D /* IndexSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84501D0C1DA511A400A9FF4D /* IndexSet.swift */; };
 		848F95381D9D568B00058351 /* UInt32+Mailcore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848F95371D9D568B00058351 /* UInt32+Mailcore.swift */; };
 		84915BB8199C4B0400EDDED9 /* MCNNTP.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8491899C18C93F92002063A3 /* MCNNTP.h */; };
 		849189A118C93FB7002063A3 /* MCNNTPSession.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8491899F18C93FB7002063A3 /* MCNNTPSession.cpp */; };
@@ -276,7 +277,6 @@
 		84F7B48E1D916CE7005F83E8 /* SwiftMailCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84F7B4871D916CE6005F83E8 /* SwiftMailCore.framework */; };
 		84F7B48F1D916CE7005F83E8 /* SwiftMailCore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 84F7B4871D916CE6005F83E8 /* SwiftMailCore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		84F7B4981D916D0B005F83E8 /* Convertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F7B4961D916D0B005F83E8 /* Convertible.swift */; };
-		84F7B4991D916D0B005F83E8 /* IndexSet+Mailcore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F7B4971D916D0B005F83E8 /* IndexSet+Mailcore.swift */; };
 		84F7B4A81D916D4A005F83E8 /* ImapAppendMessageOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F7B49D1D916D4A005F83E8 /* ImapAppendMessageOperation.swift */; };
 		84F7B4A91D916D4A005F83E8 /* ImapCopyMessagesOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F7B49E1D916D4A005F83E8 /* ImapCopyMessagesOperation.swift */; };
 		84F7B4AA1D916D4A005F83E8 /* ImapFetchContentOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F7B49F1D916D4A005F83E8 /* ImapFetchContentOperation.swift */; };
@@ -1714,6 +1714,7 @@
 		843AFCD61D9579F30086FB46 /* AbstractPart.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AbstractPart.swift; path = swift/abstract/AbstractPart.swift; sourceTree = "<group>"; };
 		843AFCD71D9579F30086FB46 /* Address.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Address.swift; path = swift/abstract/Address.swift; sourceTree = "<group>"; };
 		843AFCD81D9579F30086FB46 /* MessageHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MessageHeader.swift; path = swift/abstract/MessageHeader.swift; sourceTree = "<group>"; };
+		84501D0C1DA511A400A9FF4D /* IndexSet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = IndexSet.swift; path = swift/basetypes/IndexSet.swift; sourceTree = "<group>"; };
 		848F95371D9D568B00058351 /* UInt32+Mailcore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UInt32+Mailcore.swift"; path = "swift/basetypes/UInt32+Mailcore.swift"; sourceTree = "<group>"; };
 		8491899C18C93F92002063A3 /* MCNNTP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCNNTP.h; path = nntp/MCNNTP.h; sourceTree = "<group>"; };
 		8491899F18C93FB7002063A3 /* MCNNTPSession.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MCNNTPSession.cpp; path = nntp/MCNNTPSession.cpp; sourceTree = "<group>"; };
@@ -1868,7 +1869,6 @@
 		84F7B4891D916CE7005F83E8 /* swiftmailcore2.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = swiftmailcore2.h; sourceTree = "<group>"; };
 		84F7B48A1D916CE7005F83E8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		84F7B4961D916D0B005F83E8 /* Convertible.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Convertible.swift; path = swift/basetypes/Convertible.swift; sourceTree = "<group>"; };
-		84F7B4971D916D0B005F83E8 /* IndexSet+Mailcore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "IndexSet+Mailcore.swift"; path = "swift/basetypes/IndexSet+Mailcore.swift"; sourceTree = "<group>"; };
 		84F7B49D1D916D4A005F83E8 /* ImapAppendMessageOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ImapAppendMessageOperation.swift; path = swift/imap/ImapAppendMessageOperation.swift; sourceTree = "<group>"; };
 		84F7B49E1D916D4A005F83E8 /* ImapCopyMessagesOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ImapCopyMessagesOperation.swift; path = swift/imap/ImapCopyMessagesOperation.swift; sourceTree = "<group>"; };
 		84F7B49F1D916D4A005F83E8 /* ImapFetchContentOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ImapFetchContentOperation.swift; path = swift/imap/ImapFetchContentOperation.swift; sourceTree = "<group>"; };
@@ -2827,12 +2827,12 @@
 			isa = PBXGroup;
 			children = (
 				84F7B4961D916D0B005F83E8 /* Convertible.swift */,
-				84F7B4971D916D0B005F83E8 /* IndexSet+Mailcore.swift */,
 				849EA1741D9928CE000E4E4D /* String+Mailcore.swift */,
 				84E3DB3D1D9AA56A003B598F /* Dictionary+Mailcore.swift */,
 				84E3DB431D9ABDCC003B598F /* Data+Mailcore.swift */,
 				84E3DB451D9AC3A6003B598F /* Array+Mailcore.swift */,
 				848F95371D9D568B00058351 /* UInt32+Mailcore.swift */,
+				84501D0C1DA511A400A9FF4D /* IndexSet.swift */,
 			);
 			name = basetypes;
 			sourceTree = "<group>";
@@ -4184,6 +4184,7 @@
 				843AFCDE1D9579F30086FB46 /* MessageHeader.swift in Sources */,
 				843AFCDA1D9579F30086FB46 /* AbstractMessagePart.swift in Sources */,
 				8418C7371DA3D85900B7FE35 /* MessageParser.swift in Sources */,
+				84501D0D1DA511A400A9FF4D /* IndexSet.swift in Sources */,
 				8494D6E21D9C11C7009EEE5E /* ImapFolderStatus.swift in Sources */,
 				843AFCDD1D9579F30086FB46 /* Address.swift in Sources */,
 				84E3DB461D9AC3A6003B598F /* Array+Mailcore.swift in Sources */,
@@ -4207,7 +4208,6 @@
 				84B892141DA27A54008FD1C4 /* CSMTPOperation.cpp in Sources */,
 				84CD9BE31D9BFB37000622CB /* CIMAPNamespaceItem.cpp in Sources */,
 				84F7B4A81D916D4A005F83E8 /* ImapAppendMessageOperation.swift in Sources */,
-				84F7B4991D916D0B005F83E8 /* IndexSet+Mailcore.swift in Sources */,
 				84B892181DA27FDD008FD1C4 /* SmtpSession.swift in Sources */,
 				84B110A51D928E1D0079C769 /* ImapIdleOperation.swift in Sources */,
 			);
