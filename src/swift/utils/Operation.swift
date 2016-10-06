@@ -1,4 +1,5 @@
 import Foundation
+import Dispatch
 
 public class Operation {
     
@@ -12,6 +13,27 @@ public class Operation {
     
     deinit {
         deleteCOperation(nativeInstance);
+    }
+    
+    /** The queue this operation dispatches the callback on.  Defaults to the main queue.
+     This property should be used only if there's performance issue creating or calling the callback
+     in the main thread. */
+    public var callbackDispatchQueue: DispatchQueue? {
+        get {
+            #if os(Android)
+                //This property is ignored for Android
+                return nil;
+            #else
+                return nativeInstance.callbackDispatchQueue(nativeInstance);
+            #endif
+        }
+        set {
+            #if os(Android)
+            #else
+                nativeInstance.setCallbackDispatchQueue(nativeInstance, newValue);
+            #endif
+        }
+        
     }
     
     /** Returns whether the operation is cancelled.*/

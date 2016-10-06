@@ -51,6 +51,10 @@ struct COperation setCompletionBlock(COperation self, COperationCompletionBlock 
 }
 
 C_SYNTHESIZE_BOOL(setShouldRunWhenCancelled, shouldRunWhenCancelled);
+#ifdef __ANDROID__
+#else
+C_SYNTHESIZE_SCALAR(dispatch_queue_t, dispatch_queue_t, setCallbackDispatchQueue, callbackDispatchQueue)
+#endif
 
 bool COperationIsCanceled(COperation self) {
     return self.instance->isCancelled();
