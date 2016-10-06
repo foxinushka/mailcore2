@@ -5,6 +5,11 @@
 #include <time.h>
 #include <stdbool.h>
 
+#ifdef __ANDROID__
+#else
+#include <dispatch/dispatch.h>
+#endif
+
 #include "CBase.h"
 #include "CIndexSet.h"
 #include "CArray.h"
@@ -27,28 +32,32 @@ namespace mailcore {
     class IMAPAsyncSession;
 }
 
+class CIMAPCallbackBridge;
+
 extern "C" {
 #endif
     
     typedef struct CIMAPAsyncSession {
 #ifdef __cplusplus
         mailcore::IMAPAsyncSession*     instance;
+        CIMAPCallbackBridge*            _callback;
 #else
         void*                           instance;
+        void*                           _callback;
 #endif
         
-        void    (*hostname)(struct CIMAPAsyncSession self, const UChar *hostname);
-        void    (*port)(struct CIMAPAsyncSession self, unsigned int port);
-        void    (*username)(struct CIMAPAsyncSession self, const UChar *username);
-        void    (*password)(struct CIMAPAsyncSession self, const UChar *password);
-        void    (*connectionType)(struct CIMAPAsyncSession self, ConnectionType connectionType);
-        void    (*timeout)(struct CIMAPAsyncSession self, time_t timeout);
-        void    (*isCheckCertificateEnabled)(struct CIMAPAsyncSession self, bool checkCertificateEnabled);
-        void    (*OAuth2Token)(struct CIMAPAsyncSession self, const UChar *token);
-        void    (*authType)(struct CIMAPAsyncSession self, AuthType authType);
-        void    (*maximumConnections)(struct CIMAPAsyncSession self, unsigned int maxConnections);
-        void    (*allowsFolderConcurrentAccessEnabled)(struct CIMAPAsyncSession self, bool enabled);
-        void    (*defaultNamespace)(struct CIMAPAsyncSession self, CIMAPNamespace nspace);
+        const UChar*    (*hostname)(struct CIMAPAsyncSession self);
+        unsigned int    (*port)(struct CIMAPAsyncSession self);
+        const UChar*    (*username)(struct CIMAPAsyncSession self);
+        const UChar*    (*password)(struct CIMAPAsyncSession self);
+        ConnectionType  (*connectionType)(struct CIMAPAsyncSession self);
+        time_t          (*timeout)(struct CIMAPAsyncSession self);
+        bool            (*isCheckCertificateEnabled)(struct CIMAPAsyncSession self);
+        const UChar*    (*OAuth2Token)(struct CIMAPAsyncSession self);
+        AuthType        (*authType)(struct CIMAPAsyncSession self);
+        unsigned int    (*maximumConnections)(struct CIMAPAsyncSession self);
+        bool            (*allowsFolderConcurrentAccessEnabled)(struct CIMAPAsyncSession self);
+        CIMAPNamespace  (*defaultNamespace)(struct CIMAPAsyncSession self);
         
         void    (*setHostname)(struct CIMAPAsyncSession self, const UChar *hostname);
         void    (*setPort)(struct CIMAPAsyncSession self, unsigned int port);
@@ -62,6 +71,13 @@ extern "C" {
         void    (*setMaximumConnections)(struct CIMAPAsyncSession self, unsigned int maxConnections);
         void    (*setAllowsFolderConcurrentAccessEnabled)(struct CIMAPAsyncSession self, bool enabled);
         void    (*setDefaultNamespace)(struct CIMAPAsyncSession self, CIMAPNamespace nspace);
+        
+#ifdef __ANDROID__
+#else
+        dispatch_queue_t    (*dispatchQueue)(struct CIMAPAsyncSession self);
+        void                (*setDispatchQueue)(struct CIMAPAsyncSession self, dispatch_queue_t queue);
+#endif
+        void    (*setConnectionLogger)(struct CIMAPAsyncSession self, ConnectionLogger logger);
 
         CIMAPBaseOperation  (*disconnectOperation)(struct CIMAPAsyncSession self);
         CIMAPBaseOperation  (*noopOperation)(struct CIMAPAsyncSession self);

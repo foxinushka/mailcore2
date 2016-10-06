@@ -19,24 +19,6 @@ class CSMTPCallbackBridge;
 extern "C" {
 #endif
     
-    typedef enum ConnectionLogType {
-        // Received data
-        ConnectionLogTypeReceived,
-        // Sent data
-        ConnectionLogTypeSent,
-        // Sent private data
-        ConnectionLogTypeSentPrivate,
-        // Parse error
-        ConnectionLogTypeErrorParse,
-        // Error while receiving data - log() is called with a NULL buffer.
-        ConnectionLogTypeErrorReceived,
-        // Error while sending data - log() is called with a NULL buffer.
-        ConnectionLogTypeErrorSent,
-    } ConnectionLogType;
-    
-    typedef void (^COperationQueueRunningChangeBlock)();
-    typedef void (^CConnectionLogger)(void* sender, ConnectionLogType logType, char* bytes, unsigned int length);
-    
     struct CSMTPSession {
 #ifdef __cplusplus
         mailcore::SMTPAsyncSession*     instance;
@@ -69,8 +51,8 @@ extern "C" {
         void    (*setCheckCertificateEnabled)(struct CSMTPSession self, bool checkCertificateEnabled);
         void    (*setUseHeloIPEnabled)(struct CSMTPSession self, bool useHeloIPEnabled);
         
-        void    (*setConnectionLogger)(struct CSMTPSession self, CConnectionLogger logger);
-        void    (*setOperationQueueRunningChangeBlock)(struct CSMTPSession self, COperationQueueRunningChangeBlock logger);
+        void    (*setConnectionLogger)(struct CSMTPSession self, ConnectionLogger logger);
+        void    (*setOperationQueueRunningChangeBlock)(struct CSMTPSession self, OperationQueueRunningChangeBlock logger);
         void    (*cancelAllOperations)(struct CSMTPSession self);
         
         CSMTPOperation (*loginOperation)(struct CSMTPSession self);

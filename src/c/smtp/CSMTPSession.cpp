@@ -26,6 +26,8 @@ C_SYNTHESIZE_BOOL(setUseHeloIPEnabled, useHeloIPEnabled)
 
 bool isOperationQueueRunning(struct CSMTPSession self);
 
+typedef ConnectionLogger CConnectionLogger;
+
 class CSMTPCallbackBridge : public mailcore::Object, public mailcore::ConnectionLogger, public mailcore::OperationQueueCallback {
 public:
     CSMTPCallbackBridge()
@@ -55,7 +57,7 @@ public:
     }
     
     CConnectionLogger mLogger;
-    COperationQueueRunningChangeBlock mQueueRunningChangeBlock;
+    OperationQueueRunningChangeBlock mQueueRunningChangeBlock;
 };
 
 CSMTPSession newCSMTPSession() {
@@ -98,7 +100,7 @@ bool isOperationQueueRunning(struct CSMTPSession self) {
     return self.instance->isOperationQueueRunning();
 }
 
-void setConnectionLogger(struct CSMTPSession self, CConnectionLogger logger) {
+void setConnectionLogger(struct CSMTPSession self, ConnectionLogger logger) {
     self._callback->mLogger = logger;
     if (logger != NULL) {
         self.instance->setConnectionLogger(self._callback);
@@ -108,7 +110,7 @@ void setConnectionLogger(struct CSMTPSession self, CConnectionLogger logger) {
     }
 }
 
-void setOperationQueueRunningChangeBlock(struct CSMTPSession self, COperationQueueRunningChangeBlock queueRunningChangeBlock) {
+void setOperationQueueRunningChangeBlock(struct CSMTPSession self, OperationQueueRunningChangeBlock queueRunningChangeBlock) {
     self._callback->mQueueRunningChangeBlock = queueRunningChangeBlock;
     if (queueRunningChangeBlock != NULL) {
         self.instance->setOperationQueueCallback(self._callback);

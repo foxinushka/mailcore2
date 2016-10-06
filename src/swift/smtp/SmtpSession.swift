@@ -85,7 +85,7 @@ public class SmtpSession {
      ...
      }];
      */
-    public var connectionLogger : CConnectionLogger {
+    public var connectionLogger : ConnectionLogger {
         get { return self.connectionLogger; }
         set { self.session.setConnectionLogger(self.session, newValue); }
     }
@@ -110,7 +110,7 @@ public class SmtpSession {
      }
      }];
      */
-    public var operationQueueRunningChangeBlock : COperationQueueRunningChangeBlock {
+    public var operationQueueRunningChangeBlock : OperationQueueRunningChangeBlock {
         get { return self.operationQueueRunningChangeBlock; }
         set { self.session.setOperationQueueRunningChangeBlock(self.session, newValue); }
     }

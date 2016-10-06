@@ -1,4 +1,9 @@
 #include <MailCore/MCAsync.h>
+#ifdef __ANDROID__
+#include <MailCore/MCOperationQueueCallback.h>
+#else
+#include "MCOperationQueueCallback.h"
+#endif
 
 #include "CIMAPAsyncSession.h"
 #include "CIMAPAppendMessageOperation.h"
@@ -25,6 +30,54 @@ C_SYNTHESIZE_ENUM(AuthType, mailcore::AuthType, setAuthType, authType)
 C_SYNTHESIZE_SCALAR(unsigned int, unsigned int, setMaximumConnections, maximumConnections)
 C_SYNTHESIZE_BOOL(setAllowsFolderConcurrentAccessEnabled, allowsFolderConcurrentAccessEnabled)
 C_SYNTHESIZE_MAILCORE_OBJ(CIMAPNamespace, newCIMAPNamespace, mailcore::CIMAPNamespace, setDefaultNamespace, defaultNamespace)
+#ifdef __ANDROID__
+#else
+C_SYNTHESIZE_SCALAR(dispatch_queue_t, dispatch_queue_t, setDispatchQueue, dispatchQueue)
+#endif
+
+typedef ConnectionLogger CConnectionLogger;
+
+class CIMAPCallbackBridge : public mailcore::Object, public mailcore::ConnectionLogger, public mailcore::OperationQueueCallback {
+public:
+    CIMAPCallbackBridge()
+    {
+        
+    }
+    
+    virtual void log(void * sender, mailcore::ConnectionLogType logType, mailcore::Data *data)
+    {
+        if (mLogger != NULL) {
+            mLogger(sender, static_cast<ConnectionLogType>((int)logType), data->bytes(), data->length());
+        }
+    }
+    
+    virtual void queueStartRunning()
+    {
+        if (mQueueRunningChangeBlock != NULL) {
+            mQueueRunningChangeBlock();
+        }
+    }
+    
+    virtual void queueStoppedRunning()
+    {
+        if (mQueueRunningChangeBlock != NULL) {
+            mQueueRunningChangeBlock();
+        }
+    }
+    
+    CConnectionLogger mLogger;
+    OperationQueueRunningChangeBlock mQueueRunningChangeBlock;
+};
+
+void setConnectionLogger(struct CIMAPAsyncSession self, ConnectionLogger logger) {
+    self._callback->mLogger = logger;
+    if (logger != NULL) {
+        self.instance->setConnectionLogger(self._callback);
+    }
+    else {
+        self.instance->setConnectionLogger(NULL);
+    }
+}
 
 CIMAPBaseOperation disconnectOperation(CIMAPAsyncSession self){
     return newCIMAPBaseOperation(self.instance->disconnectOperation());
@@ -132,6 +185,21 @@ CIMAPIdleOperation idleOperation(struct CIMAPAsyncSession self, const UChar *fol
 CIMAPAsyncSession newCIMAPAsyncSession(){
     CIMAPAsyncSession session;
     session.instance = new mailcore::IMAPAsyncSession();
+    session._callback = new CIMAPCallbackBridge();
+    session.instance->setOperationQueueCallback(session._callback);
+    
+    session.hostname = &hostname;
+    session.port = &port;
+    session.username = &username;
+    session.password = &password;
+    session.connectionType = &connectionType;
+    session.timeout = &timeout;
+    session.isCheckCertificateEnabled = &isCheckCertificateEnabled;
+    session.OAuth2Token = &OAuth2Token;
+    session.authType = &authType;
+    session.maximumConnections = &maximumConnections;
+    session.allowsFolderConcurrentAccessEnabled = &allowsFolderConcurrentAccessEnabled;
+    session.defaultNamespace = &defaultNamespace;
     session.setHostname = &setHostname;
     session.setPort = &setPort;
     session.setUsername = &setUsername;
@@ -144,6 +212,11 @@ CIMAPAsyncSession newCIMAPAsyncSession(){
     session.setMaximumConnections = &setMaximumConnections;
     session.setAllowsFolderConcurrentAccessEnabled = &setAllowsFolderConcurrentAccessEnabled;
     session.setDefaultNamespace = &setDefaultNamespace;
+#ifdef __ANDROID__
+#else
+    session.dispatchQueue = &dispatchQueue;
+    session.setDispatchQueue = &setDispatchQueue;
+#endif
     session.disconnectOperation = &disconnectOperation;
     session.noopOperation = &noopOperation;
     session.checkAccountOperation = &checkAccountOperation;
@@ -168,6 +241,9 @@ CIMAPAsyncSession newCIMAPAsyncSession(){
 }
 
 void deleteCIMAPAsyncSession(CIMAPAsyncSession session){
+    session.instance->setConnectionLogger(NULL);
+    session.instance->setOperationQueueCallback(NULL);
+    C_SAFE_RELEASE(session._callback);
     session.instance->release();
 }
 

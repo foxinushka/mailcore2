@@ -268,14 +268,33 @@ extern "C" {
         PartTypeMultipartSigned,
     }PartType;
     
-    // Private type - It should not be used directly.
-    typedef enum {
-        IMAPMessageRenderingTypeHTML,
-        IMAPMessageRenderingTypeHTMLBody,
-        IMAPMessageRenderingTypePlainText,
-        IMAPMessageRenderingTypePlainTextBody,
-        IMAPMessageRenderingTypePlainTextBodyAndStripWhitespace,
-    }IMAPMessageRenderingType;
+    typedef enum ConnectionLogType {
+        // Received data
+        ConnectionLogTypeReceived,
+        // Sent data
+        ConnectionLogTypeSent,
+        // Sent private data
+        ConnectionLogTypeSentPrivate,
+        // Parse error
+        ConnectionLogTypeErrorParse,
+        // Error while receiving data - log() is called with a NULL buffer.
+        ConnectionLogTypeErrorReceived,
+        // Error while sending data - log() is called with a NULL buffer.
+        ConnectionLogTypeErrorSent,
+    } ConnectionLogType;
+    
+    /**
+     It's called when asynchronous operations stop/start running.
+     */
+    typedef void (^OperationQueueRunningChangeBlock)();
+    
+    /**
+     It's a network traffic logger.
+     @param sender is the identifier of the underlaying network socket.
+     @param logType is the type of the log.
+     @param bytes is the data related to the log.
+     */
+    typedef void (^ConnectionLogger)(void* sender, ConnectionLogType logType, const char* bytes, unsigned int length);
     
 #ifdef __cplusplus
 }
