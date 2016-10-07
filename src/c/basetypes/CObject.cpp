@@ -40,3 +40,11 @@ CData newCData(mailcore::Data data) {
     result.length = data.length();
     return result;
 }
+
+CData newCData(const char* bytes, unsigned int length) {
+    CData result;
+    result.bytes = bytes;
+    result.length = length;
+    return result;
+}
+

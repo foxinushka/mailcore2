@@ -27,6 +27,9 @@ swiftc \
     ../src/swift/abstract/AbstractPart.swift \
     ../src/swift/abstract/Address.swift \
     ../src/swift/abstract/MessageHeader.swift \
+    ../src/swift/abstract/AbstractMessageRendererCallback.swift \
+    ../src/swift/abstract/HtmlRendererDelegate.swift \
+    ../src/swift/abstract/HtmlRendererImapDelegate.swift \
     ../src/swift/imap/ImapFolder.swift \
     ../src/swift/imap/ImapFolderInfo.swift \
     ../src/swift/imap/ImapFolderStatus.swift \

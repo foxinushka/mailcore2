@@ -24,9 +24,11 @@ extern "C" {
         
         CArray          (*allKeys)(struct CDictionary self);
         CObject         (*getValue)(struct CDictionary self, CObject key);
+        void            (*setValue)(struct CDictionary self, CObject key, CObject value);
     };
     typedef struct CDictionary CDictionary;
     
+    CDictionary newCDictionary();
     void deleteCDictionary(CDictionary self);
     
 #ifdef __cplusplus

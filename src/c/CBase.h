@@ -15,6 +15,8 @@ extern "C" {
     };
     typedef struct CData CData;
     
+    CData newCData(const char* bytes, unsigned int length);
+    
 #ifdef __cplusplus
 }
 

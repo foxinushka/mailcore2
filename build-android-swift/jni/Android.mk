@@ -21,6 +21,7 @@ LOCAL_SRC_FILES  := ../../src/c/utils/COperation.cpp \
 					../../src/c/abstract/CAbstractMessagePart.cpp \
 					../../src/c/abstract/CAbstractMultipart.cpp \
 					../../src/c/abstract/CAddress.cpp \
+					../../src/c/abstract/CAbstractMessageRendererCallback.cpp \
 					../../src/c/basetypes/CArray.cpp \
 					../../src/c/basetypes/CObject.cpp \
 					../../src/c/basetypes/CIndexSet.cpp \

@@ -13,6 +13,14 @@ extension Dictionary {
         }
         return result;
     }
+    
+    static func cast<K: Convertible, T: Convertible>(_ dict:Dictionary<K, T>) -> CDictionary {
+        let result = newCDictionary();
+        for (key, value) in dict {
+            result.setValue(result, key.cast(), value.cast());
+        }
+        return result;
+    }
 }
 
 

@@ -16,7 +16,7 @@ public class AbstractMessagePart : AbstractPart {
     // Returns the header of the embedded message.
     public var header : MessageHeader {
         set { nativeInstance.setHeader(nativeInstance, newValue.CMessageHeader()); }
-        get { return MessageHeader(header: nativeInstance.header(nativeInstance)); }
+        get { return MessageHeader(nativeInstance.header(nativeInstance)); }
     }
     
     // Returns the main part of the embedded message. It can be MCOAbstractPart, MCOAbstractMultipart

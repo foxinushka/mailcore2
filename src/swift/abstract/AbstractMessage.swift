@@ -15,7 +15,7 @@ public class AbstractMessage {
     /** Header of the message. */
     public var header : MessageHeader {
         set { nativeInstance.setHeader(nativeInstance, newValue.CMessageHeader()); }
-        get { return MessageHeader(header: nativeInstance.header(nativeInstance)); }
+        get { return MessageHeader(nativeInstance.header(nativeInstance)); }
     }
     
     /** Returns the part with the given Content-ID.*/

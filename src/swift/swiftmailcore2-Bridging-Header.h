@@ -11,6 +11,7 @@
 #include "CAddress.h"
 #include "CAbstractPart.h"
 #include "CMessageHeader.h"
+#include "CAbstractMessageRendererCallback.h"
 
 #include "CIMAPAsyncSession.h"
 #include "COperation.h"

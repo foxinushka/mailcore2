@@ -7,7 +7,7 @@ public class MessageHeader {
         return nativeInstance;
     }
     
-    internal init(header:CMessageHeader) {
+    internal init(_ header:CMessageHeader) {
         self.nativeInstance = header;
     }
     
@@ -119,17 +119,17 @@ public class MessageHeader {
     
     /** Returns a header that can be used as a base for a reply message.*/
     public func replyHeaderWithExcludedRecipients(excludedRecipients: Array<Address>) -> MessageHeader {
-        return MessageHeader(header: nativeInstance.replyHeaderWithExcludedRecipients(nativeInstance, Array<Address>.cast(excludedRecipients)));
+        return MessageHeader(nativeInstance.replyHeaderWithExcludedRecipients(nativeInstance, Array<Address>.cast(excludedRecipients)));
     }
     
     /** Returns a header that can be used as a base for a reply all message.*/
     public func replyAllHeaderWithExcludedRecipients(excludedRecipients: Array<Address>) -> MessageHeader {
-        return MessageHeader(header: nativeInstance.replyAllHeaderWithExcludedRecipients(nativeInstance, Array<Address>.cast(excludedRecipients)));
+        return MessageHeader(nativeInstance.replyAllHeaderWithExcludedRecipients(nativeInstance, Array<Address>.cast(excludedRecipients)));
     }
     
     /** Returns a header that can be used as a base for a forward message.*/
     public func forwardHeader() -> MessageHeader {
-        return MessageHeader(header: nativeInstance.forwardHeader(nativeInstance));
+        return MessageHeader(nativeInstance.forwardHeader(nativeInstance));
     }
     
 }
