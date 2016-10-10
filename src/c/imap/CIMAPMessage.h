@@ -8,6 +8,7 @@
 #include "CAbstractPart.h"
 #include "CAbstractMessage.h"
 #include "CArray.h"
+#include "CAbstractMessageRendererCallback.h"
 
 #ifdef __cplusplus
 
@@ -51,6 +52,7 @@ extern "C" {
         void            (*setGmailThreadID)(struct CIMAPMessage self, uint64_t gmailThreadID);
         
         CAbstractPart   (*partForPartID)(struct CIMAPMessage self, const UChar* partID);
+        const UChar*    (*htmlRendering)(struct CIMAPMessage self, const UChar* folder, CAbstractMessageRendererCallback rendererCallback);
         CObject         (*castToCObject)(struct CIMAPMessage self);
     };
     typedef struct CIMAPMessage CIMAPMessage;

@@ -85,6 +85,19 @@ public final class ImapMessage : AbstractMessage, Convertible {
         return AbstractPart(nativeInstance.partForPartID(nativeInstance, partID.utf16CString));
     }
     
+    /**
+     HTML rendering of the message to be displayed in a web view.
+     The delegate should implement at least
+     [MCOAbstractMessage:dataForIMAPPart:folder:]
+     so that the complete HTML rendering can take place.
+     */
+    public func htmlRendering(folder: String, delegate: HtmlRendererImapDelegate) -> String? {
+        let rendererCallback: AbstractMessageRendererCallback = AbstractMessageRendererCallback(message: self);
+        rendererCallback.setHtmlRenderImapDelegate(delegate: delegate);
+        return String(utf16: self.nativeInstance.htmlRendering(nativeInstance, folder.utf16CString, rendererCallback.cast()));
+    }
+    
+    
     /** All attachments in the message. */
     public func attachments() -> Array<ImapPart> {
         return Array<ImapPart>.cast(nativeInstance.abstractMessage.attachments(nativeInstance.abstractMessage));

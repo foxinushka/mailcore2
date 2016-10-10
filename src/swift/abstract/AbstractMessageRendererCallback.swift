@@ -94,4 +94,8 @@ internal class AbstractMessageRendererCallback {
     internal func prefetchImageIMAPPart(folder: UnsafePointer<UInt16>?, part: CIMAPPart) {
         imapDelegate!.abstractMessage(message, prefetchImageIMAPPart: ImapPart(part: part), folder: String(utf16: folder));
     }
+    
+    internal func cast() -> CAbstractMessageRendererCallback {
+        return nativeInstance;
+    }
 }

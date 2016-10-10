@@ -20,6 +20,7 @@ C_SYNTHESIZE_SCALAR(uint64_t, uint64_t, setGmailThreadID, gmailThreadID)
 
 CAbstractPart partForPartID(struct CIMAPMessage self, const UChar* partID);
 CObject       castToCObject(struct CIMAPMessage self);
+const UChar*  htmlRendering(struct CIMAPMessage self, const UChar* folder, CAbstractMessageRendererCallback rendererCallback);
 
 CIMAPMessage newCIMAPMessage(mailcore::IMAPMessage *msg) {
     CIMAPMessage self;
@@ -49,6 +50,7 @@ CIMAPMessage newCIMAPMessage(mailcore::IMAPMessage *msg) {
     self.gmailThreadID = &gmailThreadID;
     self.setGmailThreadID = &setGmailThreadID;
     self.partForPartID = &partForPartID;
+    self.htmlRendering = &htmlRendering;
 
     self.castToCObject = &castToCObject;
     
@@ -61,6 +63,10 @@ void deleteCIMAPMessage(CIMAPMessage self) {
 
 CAbstractPart partForPartID(struct CIMAPMessage self, const UChar* partID) {
     return newCAbstractPart(self.instance->partForPartID(mailcore::String::stringWithCharacters(partID)));
+}
+
+const UChar* htmlRendering(struct CIMAPMessage self, const UChar* folder, CAbstractMessageRendererCallback rendererCallback) {
+    return self.instance->htmlRendering(new mailcore::String(folder), (mailcore::HTMLRendererIMAPCallback*) rendererCallback.callbackBridge)->unicodeCharacters();
 }
 
 CIMAPMessage castCIMAPMessage(CObject obj) {
