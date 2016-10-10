@@ -48,14 +48,14 @@ public:
     
     virtual bool canPreviewPart(mailcore::AbstractPart * part) {
         if (canPreviewPartBlock != NULL) {
-            return canPreviewPartBlock(newCAbstractPart(part));
+            return canPreviewPartBlock(newCAbstractPart(part)) > 0;
         }
         return HTMLRendererTemplateCallback::canPreviewPart(part);
     }
     
     virtual bool shouldShowPart(mailcore::AbstractPart * part) {
         if (shouldShowPartBlock != NULL) {
-            return shouldShowPartBlock(newCAbstractPart(part));
+            return shouldShowPartBlock(newCAbstractPart(part)) > 0;
         }
         return HTMLRendererTemplateCallback::shouldShowPart(part);
     }

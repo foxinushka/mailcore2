@@ -18,8 +18,8 @@ class AbstractMessageRendererCallback;
 extern "C" {
 #endif
     
-    typedef bool            (^CanPreviewPartBlock)(CAbstractPart part);
-    typedef bool            (^ShouldShowPartBlock)(CAbstractPart part);
+    typedef uint8_t         (^CanPreviewPartBlock)(CAbstractPart part);
+    typedef uint8_t         (^ShouldShowPartBlock)(CAbstractPart part);
     typedef CDictionary     (^TemplateValuesForHeaderBlock)(CMessageHeader header);
     typedef CDictionary     (^TemplateValuesForPartBlock)(CAbstractPart part);
     typedef const UChar*    (^TemplateForMainHeaderBlock)(CMessageHeader header);

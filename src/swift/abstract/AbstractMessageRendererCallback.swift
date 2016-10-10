@@ -26,12 +26,12 @@ internal class AbstractMessageRendererCallback {
         self.nativeInstance.setHtmlRedererImapDelefate(self.nativeInstance, dataForIMAPPart, prefetchAttachmentIMAPPart, prefetchImageIMAPPart);
     }
     
-    internal func canPreviewPart(part: CAbstractPart) -> Bool {
-        return rendererDelegate!.abstractMessage(message, canPreviewPart: AbstractPart(part));
+    internal func canPreviewPart(part: CAbstractPart) -> UInt8 {
+        return rendererDelegate!.abstractMessage(message, canPreviewPart: AbstractPart(part)) ? 1 : 0;
     }
     
-    internal func shouldShowPartBlock(part: CAbstractPart) -> Bool {
-        return rendererDelegate!.abstractMessage(message, shouldShowPart: AbstractPart(part));
+    internal func shouldShowPartBlock(part: CAbstractPart) -> UInt8 {
+        return rendererDelegate!.abstractMessage(message, shouldShowPart: AbstractPart(part)) ? 1 : 0;
     }
     
     internal func templateValuesForHeaderBlock(header: CMessageHeader) -> CDictionary {
