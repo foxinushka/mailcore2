@@ -90,6 +90,31 @@ public class SmtpSession {
         set { self.session.setConnectionLogger(self.session, newValue); }
     }
     
+    /** This property provides some hints to MCOSMTPSession about where it's called from.
+     It will make MCOSMTPSession safe. It will also set all the callbacks of operations to run on this given queue.
+     Defaults to the main queue.
+     This property should be used only if there's performance issue using MCOSMTPSession in the main thread. */
+    /** The queue this operation dispatches the callback on.  Defaults to the main queue.
+     This property should be used only if there's performance issue creating or calling the callback
+     in the main thread. */
+    public var dispatchQueue: DispatchQueue? {
+        get {
+            #if os(Android)
+                //This property is ignored for Android
+                return nil;
+            #else
+                return session.dispatchQueue(session);
+            #endif
+        }
+        set {
+            #if os(Android)
+            #else
+                session.setDispatchQueue(session, newValue);
+            #endif
+        }
+        
+    }
+    
     
     /**
      The value will be YES when asynchronous operations are running, else it will return NO.

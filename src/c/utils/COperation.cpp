@@ -5,6 +5,11 @@
 #define nativeType mailcore::Operation
 #define structName COperation
 
+C_SYNTHESIZE_BOOL(setShouldRunWhenCancelled, shouldRunWhenCancelled);
+#ifdef __ANDROID__
+#else
+C_SYNTHESIZE_SCALAR(dispatch_queue_t, dispatch_queue_t, setCallbackDispatchQueue, callbackDispatchQueue)
+#endif
 
 class COperationCompletionCallback : public mailcore::Object, public mailcore::OperationCallback {
 public:
@@ -25,8 +30,6 @@ struct COperation  setCompletionBlock(COperation self, COperationCompletionBlock
 bool COperationIsCanceled(COperation self);
 void COperationCancel(COperation self);
 void COperationStart(COperation self);
-bool shouldRunWhenCancelled(COperation self);
-void setShouldRunWhenCancelled(COperation self, bool shouldRunWhenCancelled);
 
 COperation newCOperation(mailcore::Operation *operationRef) {
     COperation self;
@@ -40,6 +43,12 @@ COperation newCOperation(mailcore::Operation *operationRef) {
     self.start = &COperationStart;
     self.shouldRunWhenCancelled = &shouldRunWhenCancelled;
     self.setShouldRunWhenCancelled = &setShouldRunWhenCancelled;
+#ifdef __ANDROID__
+#else
+    self.callbackDispatchQueue = &callbackDispatchQueue;
+    self.setCallbackDispatchQueue = &setCallbackDispatchQueue;
+#endif
+    
     
     return self;
 }
@@ -50,11 +59,7 @@ struct COperation setCompletionBlock(COperation self, COperationCompletionBlock 
     return self;
 }
 
-C_SYNTHESIZE_BOOL(setShouldRunWhenCancelled, shouldRunWhenCancelled);
-#ifdef __ANDROID__
-#else
-C_SYNTHESIZE_SCALAR(dispatch_queue_t, dispatch_queue_t, setCallbackDispatchQueue, callbackDispatchQueue)
-#endif
+
 
 bool COperationIsCanceled(COperation self) {
     return self.instance->isCancelled();

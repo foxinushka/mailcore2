@@ -23,6 +23,10 @@ C_SYNTHESIZE_BOOL(setCheckCertificateEnabled, isCheckCertificateEnabled)
 C_SYNTHESIZE_STRING(setOAuth2Token, OAuth2Token)
 C_SYNTHESIZE_ENUM(AuthType, mailcore::AuthType, setAuthType, authType)
 C_SYNTHESIZE_BOOL(setUseHeloIPEnabled, useHeloIPEnabled)
+#ifdef __ANDROID__
+#else
+C_SYNTHESIZE_SCALAR(dispatch_queue_t, dispatch_queue_t, setDispatchQueue, dispatchQueue)
+#endif
 
 bool isOperationQueueRunning(struct CSMTPSession self);
 
@@ -86,7 +90,12 @@ CSMTPSession newCSMTPSession() {
     self.setTimeout = &setTimeout;
     self.setCheckCertificateEnabled = &setCheckCertificateEnabled;
     self.setUseHeloIPEnabled = &setUseHeloIPEnabled;
-    
+#ifdef __ANDROID__
+#else
+    self.dispatchQueue = &dispatchQueue;
+    self.setDispatchQueue = &setDispatchQueue;
+#endif
+
     return self;
 }
 
