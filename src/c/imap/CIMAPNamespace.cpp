@@ -14,6 +14,7 @@ const UChar*    pathForComponents(struct CIMAPNamespace self, CArray components)
 const UChar*    pathForComponentsAndPrefix(struct CIMAPNamespace self, CArray components, const UChar* prefix);
 CArray          componentsFromPath(struct CIMAPNamespace self, const UChar* path);
 bool            containsFolderPath(struct CIMAPNamespace self, const UChar* path);
+CObject         castToCObject(struct CIMAPNamespace self);
 
 CIMAPNamespace newCIMAPNamespace(mailcore::IMAPNamespace *folder) {
     CIMAPNamespace self;
@@ -27,6 +28,7 @@ CIMAPNamespace newCIMAPNamespace(mailcore::IMAPNamespace *folder) {
     self.pathForComponentsAndPrefix = &pathForComponentsAndPrefix;
     self.componentsFromPath = &componentsFromPath;
     self.containsFolderPath = &containsFolderPath;
+    self.castToCObject = &castToCObject;
     
     return self;
 }
@@ -65,4 +67,12 @@ CArray componentsFromPath(struct CIMAPNamespace self, const UChar* path) {
 
 bool containsFolderPath(struct CIMAPNamespace self, const UChar* path) {
     return self.instance->containsFolderPath(mailcore::String::stringWithCharacters(path));
+}
+
+CIMAPNamespace CIMAPNamespaceCastFromCObject(CObject obj) {
+    return newCIMAPNamespace((mailcore::IMAPNamespace*) obj.instance);
+}
+
+CObject castToCObject(struct CIMAPNamespace self) {
+    return newCObject((mailcore::Object*) self.instance);
 }

@@ -28,9 +28,11 @@ extern "C" {
         CArray          (*componentsFromPath)(struct CIMAPNamespace self, const UChar* path);
         bool            (*containsFolderPath)(struct CIMAPNamespace self, const UChar* path);
         
+        CObject         (*castToCObject)(struct CIMAPNamespace self);
     };
     typedef struct CIMAPNamespace CIMAPNamespace;
 
+    CIMAPNamespace CIMAPNamespaceCastFromCObject(CObject obj);
     CIMAPNamespace newCIMAPNamespace(const UChar* prefix, char delimiter);
     void deleteCIMAPNamespace(CIMAPNamespace self);
 

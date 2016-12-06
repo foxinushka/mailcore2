@@ -30,6 +30,7 @@
 #include "CIMAPCheckAccountOperation.h"
 #include "CIMAPCustomCommandOperation.h"
 #include "CIMAPFetchContentToFileOperation.h"
+#include "CIMAPFetchNamespaceOperation.h"
 
 #ifdef __cplusplus
 
@@ -92,6 +93,7 @@ extern "C" {
         CIMAPBaseOperation  (*storeFlagsByUIDOperation)(struct CIMAPAsyncSession self, const UChar *folder, CIndexSet set, IMAPStoreFlagsRequestKind kind, MessageFlag flags, CArray customFlags);
         
         CIMAPFetchContentToFileOperation (*fetchMessageAttachmentToFileOperation)(struct CIMAPAsyncSession self, const UChar* folder, uint32_t uid, const UChar* partID, Encoding encoding, const UChar* filename, bool urgent);
+        CIMAPFetchNamespaceOperation (*fetchNamespace)(struct CIMAPAsyncSession self);
         CIMAPCustomCommandOperation (*customCommandOperation)(struct CIMAPAsyncSession self, const UChar *command);
         CIMAPCheckAccountOperation  (*checkAccountOperation)(struct CIMAPAsyncSession self);
         CIMAPCapabilityOperation    (*capabilityOperation)(struct CIMAPAsyncSession self);

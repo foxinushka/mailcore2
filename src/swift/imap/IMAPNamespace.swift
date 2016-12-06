@@ -1,7 +1,7 @@
 import Foundation
 
-public class IMAPNamespace {
-	
+public class IMAPNamespace : Convertible {
+
 	private var nativeInstance:CIMAPNamespace;
     
     internal func CIMAPNamespace() -> CIMAPNamespace {
@@ -62,5 +62,13 @@ public class IMAPNamespace {
     /** Returns YES if the namespace contains the given folder path. */
     public func containsFolderPath(path: String) -> Bool {
         return path.utf16({ nativeInstance.containsFolderPath(nativeInstance, $0) })
+    }
+    
+    func cast() -> CObject {
+        return nativeInstance.castToCObject(nativeInstance)
+    }
+    
+    public required init(_ obj: CObject) {
+        self.nativeInstance = CIMAPNamespaceCastFromCObject(obj)
     }
 }

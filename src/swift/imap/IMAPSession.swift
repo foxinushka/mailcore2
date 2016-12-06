@@ -510,5 +510,24 @@ public class IMAPSession {
             })
         }))
     }
+    
+    /**
+     Returns an operation to fetch the list of namespaces.
+     
+     MCOIMAPFetchNamespaceOperation * op = [session fetchNamespaceOperation];
+     [op start:^(NSError * __nullable error, NSDictionary * namespaces) {
+     if (error != nil)
+     return;
+     MCOIMAPNamespace * ns = [namespace objectForKey:MCOIMAPNamespacePersonal];
+     NSString * path = [ns pathForComponents:[NSArray arrayWithObject:]];
+     MCOIMAPOperation * createOp = [session createFolderOperation:foobar];
+     [createOp start:^(NSError * __nullable error) {
+     ...
+     }];
+     }];
+     */
+    public func fetchNamespaceOperation() -> IMAPFetchNamespaceOperation {
+        return IMAPFetchNamespaceOperation(operation: session.fetchNamespace(session))
+    }
 
 }
