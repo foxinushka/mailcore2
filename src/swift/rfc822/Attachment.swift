@@ -29,22 +29,22 @@ public class Attachment : AbstractPart {
     
     /** Returns a MIME type for a filename.*/
     public static func mimeTypeForFilename(filename: String) -> String? {
-        return String(utf16: CmimeTypeForFilename(filename.utf16CString));
+        return String(utf16: filename.utf16({ CmimeTypeForFilename($0) }));
     }
     
     /** Returns a file attachment with the content of the given file.*/
     public static func attachmentWithContentsOfFile(filename: String) -> Attachment {
-        return Attachment(CattachmentWithContentsOfFile(filename.utf16CString));
+        return Attachment(filename.utf16({ CattachmentWithContentsOfFile($0) }));
     }
     
     /** Returns a file attachment with the given data and filename.*/
     public static func attachmentWithData( data: Data, filename: String) -> Attachment {
-        return Attachment(CattachmentWithData(data.bytes(), data.length(), filename.utf16CString));
+        return Attachment(filename.utf16({ CattachmentWithData(data.bytes(), data.length(), $0) }));
     }
     
     /** Returns a part with an HTML content.*/
     public static func attachmentWithHTMLString(htmlString: String) -> Attachment {
-        return Attachment(CattachmentWithHTMLString(htmlString.utf16CString));
+        return Attachment(htmlString.utf16({ CattachmentWithHTMLString($0) }));
     }
     
     /** Returns a part with a RFC 822 messsage attachment.*/
@@ -54,7 +54,7 @@ public class Attachment : AbstractPart {
     
     /** Returns a part with an plain text content.*/
     public static func attachmentWithText(text: String) -> Attachment {
-        return Attachment(CattachmentWithText(text.utf16CString));
+        return Attachment(text.utf16({ CattachmentWithText($0) }));
     }
     
 }

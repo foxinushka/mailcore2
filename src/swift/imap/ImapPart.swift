@@ -18,7 +18,7 @@ public class ImapPart : AbstractPart {
     /** A part identifier is of the form 1.2.1*/
     public var partID: String? {
         get { return String(utf16: nativeInstance.partID(nativeInstance)); }
-        set { nativeInstance.setPartID(nativeInstance, newValue?.utf16CString); }
+        set { newValue?.utf16({ nativeInstance.setPartID(nativeInstance, $0) }) }
     }
     
     /** The size of the single part in bytes */

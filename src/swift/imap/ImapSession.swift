@@ -22,31 +22,31 @@ public class ImapSession {
     /** This is the hostname of the IMAP server to connect to. */
     public var hostname: String? {
         get { return String(utf16: session.hostname(session)); }
-        set { session.setHostname(session, newValue?.utf16CString); }
+        set { newValue?.utf16({ session.setHostname(session, $0) }) }
     }
     
     /** This is the port of the IMAP server to connect to. */
     public var port: UInt32 {
         get { return session.port(session); }
-        set { session.setPort(session, port); }
+        set { session.setPort(session, newValue); }
     }
     
     /** This is the username of the account. */
     public var username: String? {
         get { return String(utf16: session.username(session)); }
-        set { session.setUsername(session, newValue?.utf16CString); }
+        set { newValue?.utf16({ session.setUsername(session, $0) }) }
     }
     
     /** This is the password of the account. */
     public var password: String? {
         get { return String(utf16: session.password(session)); }
-        set { session.setPassword(session, newValue?.utf16CString); }
+        set { newValue?.utf16({ session.setPassword(session, $0) }) }
     }
     
     /** This is the OAuth2 token. */
     public var OAuth2Token: String? {
         get { return String(utf16: session.OAuth2Token(session)); }
-        set { session.setOAuth2Token(session, newValue?.utf16CString); }
+        set { newValue?.utf16({ session.setOAuth2Token(session, $0) }) }
     }
     
     /**
@@ -199,8 +199,8 @@ public class ImapSession {
      ...
      }];
      */
-    public func fetchAllFoldersOperation() -> ImapOperation {
-    	return ImapOperation(operation: session.fetchAllFoldersOperation(session))
+    public func fetchAllFoldersOperation() -> ImapFetchFoldersOperation {
+    	return ImapFetchFoldersOperation(operation: session.fetchAllFoldersOperation(session))
     }
     
     /**
@@ -212,7 +212,7 @@ public class ImapSession {
      }];
      */
     public func expungeOperation(folder:String) -> ImapOperation {
-    	return ImapOperation(operation: session.expungeOperation(session, folder.utf16CString))
+        return ImapOperation(operation: folder.utf16({ session.expungeOperation(session, $0) }))
     }
 
     /**
@@ -224,7 +224,7 @@ public class ImapSession {
      }];
      */
     public func createFolderOperation(folder:String) -> ImapOperation {
-    	return ImapOperation(operation: session.createFolderOperation(session, folder.utf16CString))
+        return ImapOperation(operation: folder.utf16({ session.createFolderOperation(session, $0) }))
     }
 
     /**
@@ -239,11 +239,11 @@ public class ImapSession {
      }];
      */
     public func deleteFolderOperation(folder:String) -> ImapOperation {
-    	return ImapOperation(operation: session.deleteFolderOperation(session, folder.utf16CString))
+        return ImapOperation(operation: folder.utf16({ session.deleteFolderOperation(session, $0) }))
     }
 
     public func storeFlagsByUIDOperation(folder:String, uids:IndexSet, kind:IMAPStoreFlagsRequestKind, flags:MessageFlag, customFlags:Array<String>) -> ImapOperation {
-    	return ImapOperation(operation: session.storeFlagsByUIDOperation(session, folder.utf16CString, uids.cast(), kind, flags, Array<String>.cast(customFlags)));
+        return ImapOperation(operation: folder.utf16({ session.storeFlagsByUIDOperation(session, $0, uids.cast(), kind, flags, Array<String>.cast(customFlags)) }));
     }
 
     /**
@@ -257,7 +257,11 @@ public class ImapSession {
      }];
      */
     public func appendMessageOperation(folder:String, path:String, flags:MessageFlag, customFlags:Array<String>) -> ImapAppendMessageOperation {
-    	return ImapAppendMessageOperation(operation: session.appendMessageOperation(session, folder.utf16CString, path.utf16CString, flags, Array<String>.cast(customFlags)));
+        return ImapAppendMessageOperation(operation: folder.utf16({ folderPtr in
+            path.utf16({ pathPtr in
+                session.appendMessageOperation(session, folderPtr, pathPtr, flags, Array<String>.cast(customFlags))
+            })
+        }));
     }
 
     /**
@@ -283,7 +287,7 @@ public class ImapSession {
      }];
      */
     public func fetchMessagesByNumber(folder:String, type:IMAPMessagesRequestKind, numbers:IndexSet) -> ImapFetchMessagesOperation {
-    	return ImapFetchMessagesOperation(operation: session.fetchMessagesByNumberOperation(session, folder.utf16CString, type, numbers.cast()));
+        return ImapFetchMessagesOperation(operation: folder.utf16({ session.fetchMessagesByNumberOperation(session, $0, type, numbers.cast()) }));
     }
 
     /**
@@ -309,7 +313,7 @@ public class ImapSession {
      }];
      */
     public func fetchMessagesOperation(folder:String, kind:IMAPMessagesRequestKind, numbers:IndexSet) -> ImapFetchMessagesOperation {
-    	return ImapFetchMessagesOperation(operation: session.fetchMessagesByUIDOperation(session, folder.utf16CString, kind, numbers.cast()));
+        return ImapFetchMessagesOperation(operation: folder.utf16({ session.fetchMessagesByUIDOperation(session, $0, kind, numbers.cast()) }));
     }
 
     /**
@@ -328,7 +332,7 @@ public class ImapSession {
      vanishedMessages will be set only for servers that support QRESYNC. See [RFC5162](http://tools.ietf.org/html/rfc5162)
      */
     public func syncMessages(folder:String, kind:IMAPMessagesRequestKind, uids:IndexSet, modSeq:UInt64) -> ImapFetchMessagesOperation {
-    	return ImapFetchMessagesOperation(operation: session.syncMessagesByUIDOperation(session, folder.utf16CString, kind, uids.cast(), modSeq));
+        return ImapFetchMessagesOperation(operation: folder.utf16({ session.syncMessagesByUIDOperation(session, $0, kind, uids.cast(), modSeq) }));
     }
 
     /**
@@ -342,7 +346,7 @@ public class ImapSession {
      }];
      */
     public func fetchMessageOperation(folder:String, uid:UInt32, urgent:Bool) -> ImapFetchContentOperation {
-    	return ImapFetchContentOperation(operation: session.fetchMessageByUIDOperation(session, folder.utf16CString, uid, urgent));
+        return ImapFetchContentOperation(operation: folder.utf16({ session.fetchMessageByUIDOperation(session, $0, uid, urgent) }));
     }
 
     /**
@@ -359,7 +363,12 @@ public class ImapSession {
      }];
      */
     public func fetchMessageAttachmentOperation(folder:String, uid:UInt32, partId:String, encoding:Encoding, urgent:Bool) -> ImapFetchContentOperation {
-    	return ImapFetchContentOperation(operation: session.fetchMessageAttachmentByUIDOperation(session, folder.utf16CString, uid, partId.utf16CString, encoding, urgent));
+        return ImapFetchContentOperation(operation: folder.utf16({ folderPtr in
+            partId.utf16({ partIdPtr in
+                session.fetchMessageAttachmentByUIDOperation(session, folderPtr, uid, partIdPtr, encoding, urgent)
+            })
+        
+        }))
     }
 
     /**
@@ -373,7 +382,7 @@ public class ImapSession {
      }];
      */
     public func searchExpressionOperation(folder:String, expression:ImapSearchExpression) -> ImapSearchOperation {
-    	return ImapSearchOperation(operation: session.searchOperationWithExpression(session, folder.utf16CString, expression.cast()));
+        return ImapSearchOperation(operation: folder.utf16({ session.searchOperationWithExpression(session, $0, expression.cast()) }));
     }
 
     /**
@@ -387,7 +396,11 @@ public class ImapSession {
      }];
      */
     public func searchOperation(folder:String, kind:IMAPSearchKind, searchString:String) -> ImapSearchOperation {
-    	return ImapSearchOperation(operation: session.searchOperation(session, folder.utf16CString, kind, searchString.utf16CString));
+        return ImapSearchOperation(operation: folder.utf16({ folderPtr in
+            searchString.utf16({ searchStringPtr in
+                session.searchOperation(session, folderPtr, kind, searchStringPtr)
+            })
+        }))
     }
 
     /**
@@ -401,7 +414,11 @@ public class ImapSession {
      }];
      */
     public func copyMessagesOperation(folder:String, uids:IndexSet, destFolder:String) -> ImapCopyMessagesOperation {
-    	return ImapCopyMessagesOperation(operation: session.copyMessagesOperation(session, folder.utf16CString, uids.cast(), destFolder.utf16CString));
+        return ImapCopyMessagesOperation(operation: folder.utf16({ folderPtr in
+            destFolder.utf16({ destFolderPtr in
+                 session.copyMessagesOperation(session, folderPtr, uids.cast(), destFolderPtr)
+            })
+        }))
     }
 
     /**
@@ -416,7 +433,7 @@ public class ImapSession {
      }];
      */
     public func folderInfoOperation(folder:String) -> ImapFolderInfoOperation {
-    	return ImapFolderInfoOperation(operation: session.folderInfoOperation(session, folder.utf16CString));
+        return ImapFolderInfoOperation(operation: folder.utf16({ session.folderInfoOperation(session, $0) }));
     }
 
     /**
@@ -430,7 +447,7 @@ public class ImapSession {
      }];
      */
     public func folderStatusOperation(folder:String) -> ImapFolderStatusOperation {
-    	return ImapFolderStatusOperation(operation: session.folderStatusOperation(session, folder.utf16CString));
+        return ImapFolderStatusOperation(operation: folder.utf16({ session.folderStatusOperation(session, $0) }));
     }
     
     /**
@@ -444,7 +461,7 @@ public class ImapSession {
      }];
      */
     public func idleOperation(folder:String, lastKnownUID:UInt32) -> ImapIdleOperation {
-        return ImapIdleOperation(idleOperation: session.idleOperation(session, folder.utf16CString, lastKnownUID));
+        return ImapIdleOperation(idleOperation: folder.utf16({ session.idleOperation(session, $0, lastKnownUID) }));
     }
 
 }

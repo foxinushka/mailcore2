@@ -22,16 +22,16 @@ extern "C" {
     typedef uint8_t         (^ShouldShowPartBlock)(CAbstractPart part);
     typedef CDictionary     (^TemplateValuesForHeaderBlock)(CMessageHeader header);
     typedef CDictionary     (^TemplateValuesForPartBlock)(CAbstractPart part);
-    typedef const UChar*    (^TemplateForMainHeaderBlock)(CMessageHeader header);
-    typedef const UChar*    (^TemplateForImageBlock)(CAbstractPart part);
-    typedef const UChar*    (^TemplateForAttachmentBlock)(CAbstractPart part);
-    typedef const UChar*    (^TemplateForMessageBlock)(CAbstractMessage message);
-    typedef const UChar*    (^TemplateForEmbeddedMessageBlock)(CAbstractMessagePart part);
-    typedef const UChar*    (^TemplateForEmbeddedMessageHeaderBlock)(CMessageHeader header);
-    typedef const UChar*    (^TemplateForAttachmentSeparatorBlock)();
-    typedef const UChar*    (^CleanHTMLForPartBlock)(const UChar* html);
-    typedef const UChar*    (^FilterHTMLForPartBlock)(const UChar* html);
-    typedef const UChar*    (^FilterHTMLForMessageBlock)(const UChar* html);
+    typedef CObject         (^TemplateForMainHeaderBlock)(CMessageHeader header);
+    typedef CObject         (^TemplateForImageBlock)(CAbstractPart part);
+    typedef CObject         (^TemplateForAttachmentBlock)(CAbstractPart part);
+    typedef CObject         (^TemplateForMessageBlock)(CAbstractMessage message);
+    typedef CObject         (^TemplateForEmbeddedMessageBlock)(CAbstractMessagePart part);
+    typedef CObject         (^TemplateForEmbeddedMessageHeaderBlock)(CMessageHeader header);
+    typedef CObject         (^TemplateForAttachmentSeparatorBlock)();
+    typedef CObject         (^CleanHTMLForPartBlock)(const UChar* html);
+    typedef CObject         (^FilterHTMLForPartBlock)(const UChar* html);
+    typedef CObject         (^FilterHTMLForMessageBlock)(const UChar* html);
     
     typedef CData           (^DataForIMAPPartBlock)(const UChar* folder, CIMAPPart part);
     typedef void            (^PrefetchAttachmentIMAPPartBlock)(const UChar* folder, CIMAPPart part);

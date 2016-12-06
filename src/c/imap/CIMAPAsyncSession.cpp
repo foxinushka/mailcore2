@@ -65,8 +65,8 @@ public:
         }
     }
     
-    CConnectionLogger mLogger;
-    OperationQueueRunningChangeBlock mQueueRunningChangeBlock;
+    CConnectionLogger mLogger = NULL;
+    OperationQueueRunningChangeBlock mQueueRunningChangeBlock = NULL;
 };
 
 void setConnectionLogger(struct CIMAPAsyncSession self, ConnectionLogger logger) {
@@ -95,8 +95,8 @@ CIMAPBaseOperation capabilityOperation(CIMAPAsyncSession self){
     return newCIMAPBaseOperation(self.instance->capabilityOperation());
 }
 
-CIMAPBaseOperation fetchAllFoldersOperation(CIMAPAsyncSession self){
-    return newCIMAPBaseOperation(self.instance->fetchAllFoldersOperation());
+CIMAPFetchFoldersOperation fetchAllFoldersOperation(CIMAPAsyncSession self){
+    return newCIMAPFetchFoldersOperation(self.instance->fetchAllFoldersOperation());
 }
 
 CIMAPBaseOperation expungeOperation(CIMAPAsyncSession self, const UChar *folder){

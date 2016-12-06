@@ -1,6 +1,6 @@
 import Foundation
 
-public class ImapFolder {
+public class ImapFolder: Convertible {
     
     internal var nativeInstance:CIMAPFolder;
     
@@ -15,7 +15,7 @@ public class ImapFolder {
     /** The folder's path, like for example INBOX.Archive */
     public var path: String? {
         get { return String(utf16: nativeInstance.path(nativeInstance)); }
-        set { nativeInstance.setPath(nativeInstance, newValue?.utf16CString); }
+        set { newValue?.utf16({ nativeInstance.setPath(nativeInstance, $0) }) }
     }
 
     /** It's the delimiter for each component of the path. Commonly . or / */
@@ -31,6 +31,14 @@ public class ImapFolder {
     public var flags: IMAPFolderFlag {
         get { return nativeInstance.flags(nativeInstance); }
         set { nativeInstance.setFlags(nativeInstance, newValue); }
+    }
+    
+    func cast() -> CObject {
+        return nativeInstance.castToCObject(nativeInstance)
+    }
+    
+    public required init(_ obj: CObject) {
+        self.nativeInstance = CIMAPFolderCastFromCObject(obj)
     }
 
 }

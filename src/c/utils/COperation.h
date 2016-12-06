@@ -20,7 +20,7 @@ class COperationCompletionCallback;
 extern "C" {
 #endif
     
-    typedef void (^COperationCompletionBlock)();
+    typedef void (*COperationCompletionBlock)(const void* ref);
     
     struct COperation {
 #ifdef __cplusplus
@@ -37,7 +37,7 @@ extern "C" {
         void                (*setCallbackDispatchQueue)(struct COperation self, dispatch_queue_t queue);
 #endif
         
-        struct COperation    (*setCompletionBlock)(struct COperation self, COperationCompletionBlock block);
+        struct COperation   (*setCompletionBlock)(struct COperation self, COperationCompletionBlock block, const void* userInfo);
         bool    (*isCanceled)(struct COperation self);
         bool    (*shouldRunWhenCancelled)(struct COperation self);
         void    (*setShouldRunWhenCancelled)(struct COperation self, bool shouldRunWhenCancelled);

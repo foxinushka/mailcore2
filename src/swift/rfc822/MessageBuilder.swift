@@ -4,6 +4,10 @@ public class MessageBuilder : AbstractMessage {
     
     private var nativeInstance: CMessageBuilder;
     
+    public convenience init() {
+        self.init(newCMessageBuilder())
+    }
+    
     internal init(_ builder: CMessageBuilder) {
         self.nativeInstance = builder;
         super.init(builder.abstractMessage);
@@ -12,13 +16,13 @@ public class MessageBuilder : AbstractMessage {
     /** Main HTML content of the message.*/
     public var htmlBody: String? {
         get { return String(utf16: nativeInstance.htmlBody(nativeInstance)); }
-        set { nativeInstance.setHTMLBody(nativeInstance, newValue?.utf16CString); }
+        set { newValue?.utf16({ nativeInstance.setHTMLBody(nativeInstance, $0) }) }
     }
     
     /** Plain text content of the message.*/
     public var textBody: String? {
         get { return String(utf16: nativeInstance.textBody(nativeInstance)); }
-        set { nativeInstance.setTextBody(nativeInstance, newValue?.utf16CString); }
+        set { newValue?.utf16({ nativeInstance.setTextBody(nativeInstance, $0) }) }
     }
     
     /** List of file attachments.*/
@@ -36,7 +40,7 @@ public class MessageBuilder : AbstractMessage {
     /** Prefix for the boundary identifier. Default value is nil.*/
     public var boundaryPrefix: String? {
         get { return String(utf16: nativeInstance.boundaryPrefix(nativeInstance)); }
-        set { nativeInstance.setBoundaryPrefix(nativeInstance, newValue?.utf16CString); }
+        set { newValue?.utf16({ nativeInstance.setBoundaryPrefix(nativeInstance, $0) }) }
     }
     
     /** Add an attachment.*/
@@ -61,7 +65,7 @@ public class MessageBuilder : AbstractMessage {
     
     /** Store RFC 822 formatted message to file. */
     public func writeToFile(filename: String) -> (successful: Bool, error: Error?) {
-        let code = nativeInstance.writeToFile(nativeInstance, filename.utf16CString);
+        let code = filename.utf16({ nativeInstance.writeToFile(nativeInstance, $0) })
         var error: Error?
         if code != ErrorNone {
             error = MailCoreError(code: code);

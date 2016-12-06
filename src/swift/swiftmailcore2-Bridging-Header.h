@@ -36,4 +36,6 @@
 #include "CMessageBuilder.h"
 #include "CMessageParser.h"
 
+#include "CIMAPFetchFoldersOperation.h"
+
 #endif /* CCore_Bridging_Header_h */

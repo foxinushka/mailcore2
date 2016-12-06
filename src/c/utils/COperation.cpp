@@ -12,21 +12,22 @@ C_SYNTHESIZE_SCALAR(dispatch_queue_t, dispatch_queue_t, setCallbackDispatchQueue
 #endif
 
 class COperationCompletionCallback : public mailcore::Object, public mailcore::OperationCallback {
+private:
+    COperationCompletionBlock completionBlock = NULL;
+    const void* userInfo = NULL;
 public:
-    COperationCompletionCallback(COperationCompletionBlock block) {
-        completionBlock = block;
+    COperationCompletionCallback(COperationCompletionBlock block, const void* userInfo) {
+        this->completionBlock = block;
+        this->userInfo = userInfo;
     }
     
     virtual void operationFinished(mailcore::Operation * op)
     {
-        completionBlock();
+        completionBlock(this->userInfo);
     }
-    
-private:
-    COperationCompletionBlock completionBlock;;
 };
 
-struct COperation  setCompletionBlock(COperation self, COperationCompletionBlock block);
+struct COperation setCompletionBlock(COperation self, COperationCompletionBlock block, const void* userInfo);
 bool COperationIsCanceled(COperation self);
 void COperationCancel(COperation self);
 void COperationStart(COperation self);
@@ -53,8 +54,8 @@ COperation newCOperation(mailcore::Operation *operationRef) {
     return self;
 }
 
-struct COperation setCompletionBlock(COperation self, COperationCompletionBlock block) {
-    self._callback = new COperationCompletionCallback(block);
+struct COperation setCompletionBlock(COperation self, COperationCompletionBlock block, const void* userInfo) {
+    self._callback = new COperationCompletionCallback(block, userInfo);
     self.instance->setCallback(self._callback);
     return self;
 }

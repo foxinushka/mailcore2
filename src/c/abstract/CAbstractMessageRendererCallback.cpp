@@ -85,7 +85,7 @@ public:
     virtual mailcore::String * templateForMainHeader(mailcore::MessageHeader * header) {
         mailcore::String * result = NULL;
         if (templateForMainHeaderBlock != NULL) {
-            result = new mailcore::String(templateForMainHeaderBlock(newCMessageHeader(header)));
+            result = reinterpret_cast<mailcore::String*>(templateForMainHeaderBlock(newCMessageHeader(header)).instance) ;
         }
         if (result == NULL) {
             result = HTMLRendererTemplateCallback::templateForMainHeader(header);
@@ -96,7 +96,7 @@ public:
     virtual mailcore::String * templateForImage(mailcore::AbstractPart * part) {
         mailcore::String * result = NULL;
         if (templateForImageBlock != NULL) {
-            result = new mailcore::String(templateForImageBlock(newCAbstractPart(part)));
+            result = reinterpret_cast<mailcore::String*>(templateForImageBlock(newCAbstractPart(part)).instance);
         }
         if (result == NULL) {
             result = HTMLRendererTemplateCallback::templateForImage(part);
@@ -107,7 +107,7 @@ public:
     virtual mailcore::String * templateForAttachment(mailcore::AbstractPart * part) {
         mailcore::String * result = NULL;
         if (templateForAttachmentBlock != NULL) {
-            result = new mailcore::String(templateForAttachmentBlock(newCAbstractPart(part)));
+            result = reinterpret_cast<mailcore::String*>(templateForAttachmentBlock(newCAbstractPart(part)).instance);
         }
         if (result == NULL) {
             result = HTMLRendererTemplateCallback::templateForAttachment(part);
@@ -118,7 +118,7 @@ public:
     virtual mailcore::String * templateForMessage(mailcore::AbstractMessage * message) {
         mailcore::String * result = NULL;
         if (templateForMessageBlock != NULL) {
-            result = new mailcore::String(templateForMessageBlock(newCAbstractMessage(message)));
+            result = reinterpret_cast<mailcore::String*>(templateForMessageBlock(newCAbstractMessage(message)).instance);
         }
         if (result == NULL) {
             result = HTMLRendererTemplateCallback::templateForMessage(message);
@@ -129,7 +129,7 @@ public:
     virtual mailcore::String * templateForEmbeddedMessage(mailcore::AbstractMessagePart * part) {
         mailcore::String * result = NULL;
         if (templateForEmbeddedMessageBlock != NULL) {
-            result = new mailcore::String(templateForEmbeddedMessageBlock(newCAbstractMessagePart(part)));
+            result = reinterpret_cast<mailcore::String*>(templateForEmbeddedMessageBlock(newCAbstractMessagePart(part)).instance);
         }
         if (result == NULL) {
             result = HTMLRendererTemplateCallback::templateForEmbeddedMessage(part);
@@ -140,7 +140,7 @@ public:
     virtual mailcore::String * templateForEmbeddedMessageHeader(mailcore::MessageHeader * header) {
         mailcore::String * result = NULL;
         if (templateForEmbeddedMessageHeaderBlock != NULL) {
-            result = new mailcore::String(templateForEmbeddedMessageHeaderBlock(newCMessageHeader(header)));
+            result = reinterpret_cast<mailcore::String*>(templateForEmbeddedMessageHeaderBlock(newCMessageHeader(header)).instance);
         }
         if (result == NULL) {
             result = HTMLRendererTemplateCallback::templateForEmbeddedMessageHeader(header);
@@ -151,7 +151,7 @@ public:
     virtual mailcore::String * templateForAttachmentSeparator() {
         mailcore::String * result = NULL;
         if (templateForAttachmentSeparatorBlock != NULL) {
-            result = new mailcore::String(templateForAttachmentSeparatorBlock());
+            result = reinterpret_cast<mailcore::String*>(templateForAttachmentSeparatorBlock().instance);
         }
         if (result == NULL) {
             result = HTMLRendererTemplateCallback::templateForAttachmentSeparator();
@@ -162,7 +162,7 @@ public:
     virtual mailcore::String * cleanHTMLForPart(mailcore::String * html) {
         mailcore::String * result = NULL;
         if (cleanHTMLForPartBlock != NULL) {
-            result = new mailcore::String(cleanHTMLForPartBlock(html->unicodeCharacters()));
+            result = reinterpret_cast<mailcore::String*>(cleanHTMLForPartBlock(html->unicodeCharacters()).instance);
         }
         if (result == NULL) {
             result = HTMLRendererTemplateCallback::cleanHTMLForPart(html);
@@ -173,7 +173,7 @@ public:
     virtual mailcore::String * filterHTMLForPart(mailcore::String * html) {
         mailcore::String * result = NULL;
         if (filterHTMLForPartBlock != NULL) {
-            result = new mailcore::String(filterHTMLForPartBlock(html->unicodeCharacters()));
+            result = reinterpret_cast<mailcore::String*>(filterHTMLForPartBlock(html->unicodeCharacters()).instance);
         }
         if (result == NULL) {
             result = HTMLRendererTemplateCallback::filterHTMLForPart(html);
@@ -184,7 +184,7 @@ public:
     virtual mailcore::String * filterHTMLForMessage(mailcore::String * html) {
         mailcore::String * result = NULL;
         if (filterHTMLForMessageBlock != NULL) {
-            result = new mailcore::String(filterHTMLForMessageBlock(html->unicodeCharacters()));
+            result = reinterpret_cast<mailcore::String*>(filterHTMLForMessageBlock(html->unicodeCharacters()).instance);
         }
         if (result == NULL) {
             result = HTMLRendererTemplateCallback::filterHTMLForMessage(html);

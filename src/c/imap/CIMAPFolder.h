@@ -5,6 +5,7 @@
 
 #include "CBase.h"
 #include "CMessageConstants.h"
+#include "CObject.h"
 
 #ifdef __cplusplus
 
@@ -28,9 +29,12 @@ extern "C" {
         void            (*setDelimiter)(struct CIMAPFolder self, char delimiter);
         IMAPFolderFlag  (*flags)(struct CIMAPFolder self);
         void            (*setFlags)(struct CIMAPFolder self, IMAPFolderFlag flags);
+        
+        CObject         (*castToCObject)(struct CIMAPFolder self);
     };
     typedef struct CIMAPFolder CIMAPFolder;
     
+    CIMAPFolder CIMAPFolderCastFromCObject(CObject obj);
     void deleteCIMAPFolder(CIMAPFolder self);
     
 #ifdef __cplusplus

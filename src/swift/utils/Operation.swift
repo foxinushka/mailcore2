@@ -8,7 +8,7 @@ public class Operation {
     
     internal init(_ cOperation: COperation) {
         self.nativeInstance = cOperation;
-        self.nativeInstance = cOperation.setCompletionBlock(cOperation, operationCompleted);
+        self.nativeInstance = cOperation.setCompletionBlock(cOperation, operationCompletedCallback, Unmanaged.passUnretained(self).toOpaque())
     }
     
     deinit {
@@ -65,4 +65,10 @@ public class Operation {
         _started = true;
         nativeInstance.start(nativeInstance);
     }
+}
+
+//MARK: C Functions
+public func operationCompletedCallback(ref: UnsafeRawPointer?) {
+    let retained = Unmanaged<Operation>.fromOpaque(ref!).takeUnretainedValue()
+    retained.operationCompleted()
 }

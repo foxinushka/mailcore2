@@ -42,44 +42,44 @@ internal class AbstractMessageRendererCallback {
         return Dictionary<String, String>.cast(rendererDelegate!.abstractMessage(message, templateValuesForPart: AbstractPart(part)));
     }
     
-    internal func templateForMainHeaderBlock(header: CMessageHeader) -> UnsafePointer<UInt16> {
-        return UnsafePointer<UInt16>(rendererDelegate!.abstractMessage(message, templateForMainHeader: MessageHeader(header)).utf16CString);
+    internal func templateForMainHeaderBlock(header: CMessageHeader) -> CObject {
+        return rendererDelegate!.abstractMessage(message, templateForMainHeader: MessageHeader(header)).cast();
     }
     
-    internal func templateForImageBlock(part: CAbstractPart) -> UnsafePointer<UInt16> {
-        return UnsafePointer<UInt16>(rendererDelegate!.abstractMessage(message, templateForImage: AbstractPart(part)).utf16CString);
+    internal func templateForImageBlock(part: CAbstractPart) -> CObject {
+        return rendererDelegate!.abstractMessage(message, templateForImage: AbstractPart(part)).cast()
     }
     
-    internal func templateForAttachmentBlock(part: CAbstractPart) -> UnsafePointer<UInt16> {
-        return UnsafePointer<UInt16>(rendererDelegate!.abstractMessage(message, templateForAttachment: AbstractPart(part)).utf16CString);
+    internal func templateForAttachmentBlock(part: CAbstractPart) -> CObject {
+        return rendererDelegate!.abstractMessage(message, templateForAttachment: AbstractPart(part)).cast()
     }
     
-    internal func templateForMessageBlock(msg: CAbstractMessage) -> UnsafePointer<UInt16> {
-        return UnsafePointer<UInt16>(rendererDelegate!.abstractMessageTemplateForMessage(message).utf16CString);
+    internal func templateForMessageBlock(msg: CAbstractMessage) -> CObject {
+        return rendererDelegate!.abstractMessageTemplateForMessage(message).cast()
     }
     
-    internal func templateForEmbeddedMessageBlock(part: CAbstractMessagePart) -> UnsafePointer<UInt16> {
-        return UnsafePointer<UInt16>(rendererDelegate!.abstractMessage(message, templateForEmbeddedMessage: AbstractMessagePart(abstractMessagePart: part)).utf16CString);
+    internal func templateForEmbeddedMessageBlock(part: CAbstractMessagePart) -> CObject {
+        return rendererDelegate!.abstractMessage(message, templateForEmbeddedMessage: AbstractMessagePart(abstractMessagePart: part)).cast();
     }
     
-    internal func templateForEmbeddedMessageHeaderBlock(header: CMessageHeader) -> UnsafePointer<UInt16> {
-        return UnsafePointer<UInt16>(rendererDelegate!.abstractMessage(message, templateForEmbeddedMessageHeader: MessageHeader(header)).utf16CString);
+    internal func templateForEmbeddedMessageHeaderBlock(header: CMessageHeader) -> CObject {
+        return rendererDelegate!.abstractMessage(message, templateForEmbeddedMessageHeader: MessageHeader(header)).cast();
     }
     
-    internal func templateForAttachmentSeparatorBlock() -> UnsafePointer<UInt16> {
-        return UnsafePointer<UInt16>(rendererDelegate!.abstractMessageTemplateForAttachmentSeparator(message).utf16CString);
+    internal func templateForAttachmentSeparatorBlock() -> CObject {
+        return rendererDelegate!.abstractMessageTemplateForAttachmentSeparator(message).cast();
     }
     
-    internal func cleanHTMLForPartBlock(html: UnsafePointer<UInt16>?) -> UnsafePointer<UInt16> {
-        return UnsafePointer<UInt16>(rendererDelegate!.abstractMessage(message, cleanHTMLForPart: String(utf16: html)).utf16CString);
+    internal func cleanHTMLForPartBlock(html: UnsafePointer<UInt16>?) -> CObject {
+        return rendererDelegate!.abstractMessage(message, cleanHTMLForPart: String(utf16: html)).cast();
     }
     
-    internal func filterHTMLForPartBlock(html: UnsafePointer<UInt16>?) -> UnsafePointer<UInt16> {
-        return UnsafePointer<UInt16>(rendererDelegate!.abstractMessage(message, filterHTMLForPart: String(utf16: html)).utf16CString);
+    internal func filterHTMLForPartBlock(html: UnsafePointer<UInt16>?) -> CObject {
+        return rendererDelegate!.abstractMessage(message, filterHTMLForPart: String(utf16: html)).cast();
     }
     
-    internal func filterHTMLForMessageBlock(html: UnsafePointer<UInt16>?) -> UnsafePointer<UInt16> {
-        return UnsafePointer<UInt16>(rendererDelegate!.abstractMessage(message, filterHTMLForMessage: String(utf16: html)).utf16CString);
+    internal func filterHTMLForMessageBlock(html: UnsafePointer<UInt16>?) -> CObject {
+        return rendererDelegate!.abstractMessage(message, filterHTMLForMessage: String(utf16: html)).cast();
     }
     
     internal func dataForIMAPPart(folder: UnsafePointer<UInt16>?, part: CIMAPPart) -> CData {

@@ -5,7 +5,7 @@ extension Array {
     static func cast<T: Convertible>(_ cArray: CArray) -> Array<T> {
         var array = Array<T>();
         let size = cArray.size(cArray);
-        for index in 1...size {
+        for index in 0..<size {
             array.append(T(cArray.getObject(cArray, index)));
         }
         return array;

@@ -20,7 +20,7 @@ public class ImapNamespace {
      Returns a simple namespace with only one item.
      */
     static func namespace(prefix: String, delimiter: CChar) -> ImapNamespace {
-        return ImapNamespace(namespace: newCIMAPNamespace(prefix.utf16CString, delimiter));
+        return ImapNamespace(namespace: prefix.utf16({ newCIMAPNamespace($0, delimiter) }));
     }
     
     /** Returns the prefix of the main item of this namespace. */
@@ -51,16 +51,16 @@ public class ImapNamespace {
      It will use the best item matching the prefix to compute the path.
      */
     public func path(components: Array<String>, prefix: String) -> String? {
-        return String(utf16: nativeInstance.pathForComponentsAndPrefix(nativeInstance, Array<String>.cast(components), prefix.utf16CString));
+        return String(utf16: prefix.utf16({ nativeInstance.pathForComponentsAndPrefix(nativeInstance, Array<String>.cast(components), $0) }));
     }
     
     /** Returns the components given a folder path. */
     public func componentsFromPath(path: String) -> Array<String> {
-        return Array<String>.cast(nativeInstance.componentsFromPath(nativeInstance, path.utf16CString));
+        return Array<String>.cast(path.utf16({ nativeInstance.componentsFromPath(nativeInstance, $0) }));
     }
     
     /** Returns YES if the namespace contains the given folder path. */
     public func containsFolderPath(path: String) -> Bool {
-        return nativeInstance.containsFolderPath(nativeInstance, path.utf16CString);
+        return path.utf16({ nativeInstance.containsFolderPath(nativeInstance, $0) })
     }
 }

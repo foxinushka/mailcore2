@@ -82,7 +82,7 @@ public final class ImapMessage : AbstractMessage, Convertible {
      @param partID A part identifier looks like 1.2.1
      */
     public func partForPartID(partID: String) -> AbstractPart {
-        return AbstractPart(nativeInstance.partForPartID(nativeInstance, partID.utf16CString));
+        return AbstractPart( partID.utf16({ nativeInstance.partForPartID(nativeInstance, $0) }));
     }
     
     /**
@@ -94,7 +94,7 @@ public final class ImapMessage : AbstractMessage, Convertible {
     public func htmlRendering(folder: String, delegate: HtmlRendererImapDelegate) -> String? {
         let rendererCallback: AbstractMessageRendererCallback = AbstractMessageRendererCallback(message: self);
         rendererCallback.setHtmlRenderImapDelegate(delegate: delegate);
-        return String(utf16: self.nativeInstance.htmlRendering(nativeInstance, folder.utf16CString, rendererCallback.cast()));
+        return String(utf16: folder.utf16({ self.nativeInstance.htmlRendering(nativeInstance, $0, rendererCallback.cast()) }));
     }
     
     

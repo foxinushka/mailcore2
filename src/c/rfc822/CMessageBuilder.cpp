@@ -24,6 +24,10 @@ const UChar*    plainTextRendering(struct CMessageBuilder self);
 const UChar*    plainTextBodyRendering(struct CMessageBuilder self);
 const UChar*    plainTextBodyRenderingAndStripWhitespace(struct CMessageBuilder self, bool stripWhitespace);
 
+CMessageBuilder newCMessageBuilder() {
+    return newCMessageBuilder(new mailcore::MessageBuilder());
+}
+
 CMessageBuilder newCMessageBuilder(mailcore::MessageBuilder *builder) {
     CMessageBuilder self;
     self.abstractMessage = newCAbstractMessage(builder);

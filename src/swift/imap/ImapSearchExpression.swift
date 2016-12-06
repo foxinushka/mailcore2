@@ -36,7 +36,7 @@ public class ImapSearchExpression {
      MCOIMAPSearchExpression * expr = [MCOIMAPSearchExpression searchFrom:@"laura@etpan.org"]
      */
     public static func searchFrom(value: String) -> ImapSearchExpression {
-        return ImapSearchExpression(newCIMAPSearchExpressionSearchFrom(value.utf16CString));
+        return ImapSearchExpression(value.utf16({ newCIMAPSearchExpressionSearchFrom($0) }));
     }
     
     /**
@@ -47,7 +47,7 @@ public class ImapSearchExpression {
      MCOIMAPSearchExpression * expr = [MCOIMAPSearchExpression searchRecipient:@"ngan@etpan.org"]
      **/
     public static func searchRecipient(value: String) -> ImapSearchExpression {
-        return ImapSearchExpression(newCIMAPSearchExpressionSearchRecipient(value.utf16CString));
+        return ImapSearchExpression(value.utf16({ newCIMAPSearchExpressionSearchRecipient($0) }));
     }
     
     /**
@@ -58,7 +58,7 @@ public class ImapSearchExpression {
      MCOIMAPSearchExpression * expr = [MCOIMAPSearchExpression searchTo:@"ngan@etpan.org"]
      **/
     public static func searchTo(value: String) -> ImapSearchExpression {
-        return ImapSearchExpression(newCIMAPSearchExpressionSearchTo(value.utf16CString));
+        return ImapSearchExpression(value.utf16({ newCIMAPSearchExpressionSearchTo($0) }));
     }
     
     /**
@@ -69,7 +69,7 @@ public class ImapSearchExpression {
      MCOIMAPSearchExpression * expr = [MCOIMAPSearchExpression searchCc:@"ngan@etpan.org"]
      **/
     public static func searchCc(value: String) -> ImapSearchExpression {
-        return ImapSearchExpression(newCIMAPSearchExpressionSearchCc(value.utf16CString));
+        return ImapSearchExpression(value.utf16({ newCIMAPSearchExpressionSearchCc($0) }));
     }
     
     /**
@@ -80,7 +80,7 @@ public class ImapSearchExpression {
      MCOIMAPSearchExpression * expr = [MCOIMAPSearchExpression searchBcc:@"ngan@etpan.org"]
      **/
     public static func searchBcc(value: String) -> ImapSearchExpression {
-        return ImapSearchExpression(newCIMAPSearchExpressionSearchBcc(value.utf16CString));
+        return ImapSearchExpression(value.utf16({ newCIMAPSearchExpressionSearchBcc($0) }));
     }
     
     /*
@@ -91,7 +91,7 @@ public class ImapSearchExpression {
      MCOIMAPSearchExpression * expr = [MCOIMAPSearchExpression searchSubject:@"airline"]
      **/
     public static func searchSubject(value: String) -> ImapSearchExpression {
-        return ImapSearchExpression(newCIMAPSearchExpressionSearchSubject(value.utf16CString));
+        return ImapSearchExpression(value.utf16({ newCIMAPSearchExpressionSearchSubject($0) }));
     }
     
     /**
@@ -102,7 +102,7 @@ public class ImapSearchExpression {
      MCOIMAPSearchExpression * expr = [MCOIMAPSearchExpression searchContent:@"meeting"]
      */
     public static func searchContent(value: String) -> ImapSearchExpression {
-        return ImapSearchExpression(newCIMAPSearchExpressionSearchContent(value.utf16CString));
+        return ImapSearchExpression(value.utf16({ newCIMAPSearchExpressionSearchContent($0) }));
     }
     
     /**
@@ -113,7 +113,7 @@ public class ImapSearchExpression {
      MCOIMAPSearchExpression * expr = [MCOIMAPSearchExpression searchBody:@"building"]
      */
     public static func searchBody(value: String) -> ImapSearchExpression {
-        return ImapSearchExpression(newCIMAPSearchExpressionSearchBody(value.utf16CString));
+        return ImapSearchExpression(value.utf16({ newCIMAPSearchExpressionSearchBody($0) }));
     }
     
     /**
@@ -146,7 +146,11 @@ public class ImapSearchExpression {
      MCOIMAPSearchExpression * expr = [MCOIMAPSearchExpression searchHeader:@"List-Id" value:@"shoes"]
      **/
     public static func searchHeader(header: String, value: String) -> ImapSearchExpression {
-        return ImapSearchExpression(newCIMAPSearchExpressionSearchHeader(header.utf16CString, value.utf16CString));
+        return ImapSearchExpression( header.utf16({ headerPtr in
+            value.utf16({ valuePtr in
+                newCIMAPSearchExpressionSearchHeader(headerPtr, valuePtr)
+            })
+        }))
     }
     
     /**
@@ -387,7 +391,7 @@ public class ImapSearchExpression {
      MCOIMAPSearchExpression * expr = [MCOIMAPSearchExpression searchGmailRaw:@"from:bill has:attachment filename:cal meeting schedule"]
      */
     public static func searchGmailRaw(expr: String) -> ImapSearchExpression {
-        return ImapSearchExpression(newCIMAPSearchExpressionSearchGmailRaw(expr.utf16CString));
+        return ImapSearchExpression(expr.utf16({ newCIMAPSearchExpressionSearchGmailRaw($0) }));
     }
     
     

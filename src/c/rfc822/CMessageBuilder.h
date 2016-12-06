@@ -51,6 +51,8 @@ extern "C" {
     };
     typedef struct CMessageBuilder CMessageBuilder;
     
+    CMessageBuilder newCMessageBuilder();
+    
 #ifdef __cplusplus
 }
 

@@ -20,12 +20,12 @@ public class AbstractMessage {
     
     /** Returns the part with the given Content-ID.*/
     public func partForContentID(contentID: String) -> AbstractPart {
-        return AbstractPart(nativeInstance.partForContentID(nativeInstance, contentID.utf16CString));
+        return AbstractPart(contentID.utf16({ nativeInstance.partForContentID(nativeInstance, $0) }));
     }
     
     /** Returns the part with the given unique identifier.*/
     public func partForUniqueID(uniqueID: String) -> AbstractPart {
-        return AbstractPart(nativeInstance.partForUniqueID(nativeInstance, uniqueID.utf16CString));
+        return AbstractPart(uniqueID.utf16({ nativeInstance.partForUniqueID(nativeInstance, $0) }));
     }
     
     /** All attachments in the message.
