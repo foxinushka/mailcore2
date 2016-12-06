@@ -463,5 +463,19 @@ public class IMAPSession {
     public func idleOperation(folder:String, lastKnownUID:UInt32) -> IMAPIdleOperation {
         return IMAPIdleOperation(idleOperation: folder.utf16({ session.idleOperation(session, $0, lastKnownUID) }));
     }
+    
+    /**
+     Returns an operation for custom command.
+     @param command is the text representation of the command to be send.
+     
+     
+     MCOIMAPCustomCommandOperation * op = [session customCommandOperation:@"ACTIVATE SERVICE"];
+     [op start: ^(NSString * __nullable response, NSError * __nullable error) {
+     ...
+     }];
+     */
+    public func customCommandOperation(_ command: String) -> IMAPCustomCommandOperation {
+        return IMAPCustomCommandOperation.init(operation: command.utf16({ session.customCommandOperation(session, $0) }))
+    }
 
 }

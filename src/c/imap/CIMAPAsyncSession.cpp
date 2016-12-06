@@ -79,6 +79,10 @@ void setConnectionLogger(struct CIMAPAsyncSession self, ConnectionLogger logger)
     }
 }
 
+CIMAPCustomCommandOperation customCommandOperation(struct CIMAPAsyncSession self, const UChar *command) {
+    return newCIMAPCustomCommandOperation(self.instance->customCommand(new mailcore::String(command), false));
+}
+
 CIMAPBaseOperation disconnectOperation(CIMAPAsyncSession self){
     return newCIMAPBaseOperation(self.instance->disconnectOperation());
 }

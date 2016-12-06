@@ -28,6 +28,7 @@
 #include "CIMAPFetchFoldersOperation.h"
 #include "CIMAPCapabilityOperation.h"
 #include "CIMAPCheckAccountOperation.h"
+#include "CIMAPCustomCommandOperation.h"
 
 #ifdef __cplusplus
 
@@ -89,6 +90,7 @@ extern "C" {
         CIMAPBaseOperation  (*deleteFolderOperation)(struct CIMAPAsyncSession self, const UChar *folder);
         CIMAPBaseOperation  (*storeFlagsByUIDOperation)(struct CIMAPAsyncSession self, const UChar *folder, CIndexSet set, IMAPStoreFlagsRequestKind kind, MessageFlag flags, CArray customFlags);
         
+        CIMAPCustomCommandOperation (*customCommandOperation)(struct CIMAPAsyncSession self, const UChar *command);
         CIMAPCheckAccountOperation  (*checkAccountOperation)(struct CIMAPAsyncSession self);
         CIMAPCapabilityOperation    (*capabilityOperation)(struct CIMAPAsyncSession self);
         CIMAPFetchFoldersOperation  (*fetchAllFoldersOperation)(struct CIMAPAsyncSession self);
