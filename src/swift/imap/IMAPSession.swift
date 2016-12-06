@@ -171,8 +171,8 @@ public class IMAPSession {
      ...
      }];
      */
-    public func checkAccountOperation() -> IMAPOperation {
-    	return IMAPOperation(operation: session.checkAccountOperation(session))
+    public func checkAccountOperation() -> IMAPCheckAccountOperation {
+    	return IMAPCheckAccountOperation(operation: session.checkAccountOperation(session))
     }
 
     /**

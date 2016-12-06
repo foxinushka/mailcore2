@@ -99,6 +99,9 @@
 		8491BB601DF6E66F00E6D679 /* IMAPCapabilityOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8491BB5F1DF6E66F00E6D679 /* IMAPCapabilityOperation.swift */; };
 		8491BB631DF6E74800E6D679 /* CIMAPCapabilityOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8491BB611DF6E74800E6D679 /* CIMAPCapabilityOperation.cpp */; };
 		8491BB641DF6E74800E6D679 /* CIMAPCapabilityOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 8491BB621DF6E74800E6D679 /* CIMAPCapabilityOperation.h */; };
+		8491BB671DF6F64400E6D679 /* CIMAPCheckAccountOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8491BB651DF6F64400E6D679 /* CIMAPCheckAccountOperation.cpp */; };
+		8491BB681DF6F64400E6D679 /* CIMAPCheckAccountOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 8491BB661DF6F64400E6D679 /* CIMAPCheckAccountOperation.h */; };
+		8491BB6A1DF6FA5000E6D679 /* IMAPCheckAccountOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8491BB691DF6FA5000E6D679 /* IMAPCheckAccountOperation.swift */; };
 		8494D6D11D9C03BB009EEE5E /* CIMAPPart.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8494D6CF1D9C03BB009EEE5E /* CIMAPPart.cpp */; };
 		8494D6D21D9C03BB009EEE5E /* CIMAPPart.h in Headers */ = {isa = PBXBuildFile; fileRef = 8494D6D01D9C03BB009EEE5E /* CIMAPPart.h */; };
 		8494D6D41D9C06F5009EEE5E /* IMAPPart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8494D6D31D9C06F5009EEE5E /* IMAPPart.swift */; };
@@ -1748,6 +1751,9 @@
 		8491BB5F1DF6E66F00E6D679 /* IMAPCapabilityOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = IMAPCapabilityOperation.swift; path = swift/imap/IMAPCapabilityOperation.swift; sourceTree = "<group>"; };
 		8491BB611DF6E74800E6D679 /* CIMAPCapabilityOperation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CIMAPCapabilityOperation.cpp; path = c/imap/CIMAPCapabilityOperation.cpp; sourceTree = "<group>"; };
 		8491BB621DF6E74800E6D679 /* CIMAPCapabilityOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CIMAPCapabilityOperation.h; path = c/imap/CIMAPCapabilityOperation.h; sourceTree = "<group>"; };
+		8491BB651DF6F64400E6D679 /* CIMAPCheckAccountOperation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CIMAPCheckAccountOperation.cpp; path = c/imap/CIMAPCheckAccountOperation.cpp; sourceTree = "<group>"; };
+		8491BB661DF6F64400E6D679 /* CIMAPCheckAccountOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CIMAPCheckAccountOperation.h; path = c/imap/CIMAPCheckAccountOperation.h; sourceTree = "<group>"; };
+		8491BB691DF6FA5000E6D679 /* IMAPCheckAccountOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = IMAPCheckAccountOperation.swift; path = swift/imap/IMAPCheckAccountOperation.swift; sourceTree = "<group>"; };
 		8494D6CF1D9C03BB009EEE5E /* CIMAPPart.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CIMAPPart.cpp; path = c/imap/CIMAPPart.cpp; sourceTree = "<group>"; };
 		8494D6D01D9C03BB009EEE5E /* CIMAPPart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CIMAPPart.h; path = c/imap/CIMAPPart.h; sourceTree = "<group>"; };
 		8494D6D31D9C06F5009EEE5E /* IMAPPart.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = IMAPPart.swift; path = swift/imap/IMAPPart.swift; sourceTree = "<group>"; };
@@ -2839,6 +2845,8 @@
 				84E1E0261DF5D33B00D45A31 /* CIMAPFetchFoldersOperation.h */,
 				8491BB611DF6E74800E6D679 /* CIMAPCapabilityOperation.cpp */,
 				8491BB621DF6E74800E6D679 /* CIMAPCapabilityOperation.h */,
+				8491BB651DF6F64400E6D679 /* CIMAPCheckAccountOperation.cpp */,
+				8491BB661DF6F64400E6D679 /* CIMAPCheckAccountOperation.h */,
 			);
 			name = imap;
 			sourceTree = "<group>";
@@ -2929,6 +2937,7 @@
 				84F7B4A71D916D4A005F83E8 /* IMAPSession.swift */,
 				84E1E0291DF5D4E500D45A31 /* IMAPFetchFoldersOperation.swift */,
 				8491BB5F1DF6E66F00E6D679 /* IMAPCapabilityOperation.swift */,
+				8491BB691DF6FA5000E6D679 /* IMAPCheckAccountOperation.swift */,
 			);
 			name = imap;
 			sourceTree = "<group>";
@@ -3837,6 +3846,7 @@
 				84E3DB561D9BDB41003B598F /* CIMAPMessagePart.h in Headers */,
 				849EA0CB1D990E0D000E4E4D /* CIMAPFetchMessagesOperation.h in Headers */,
 				849EA0CC1D990E0D000E4E4D /* CIMAPFolderInfoOperation.h in Headers */,
+				8491BB681DF6F64400E6D679 /* CIMAPCheckAccountOperation.h in Headers */,
 				849EA0CD1D990E0D000E4E4D /* CIMAPFolderStatusOperation.h in Headers */,
 				849EA0CE1D990E0D000E4E4D /* CIMAPNamespace.h in Headers */,
 				849EA0D11D990E0D000E4E4D /* СIMAPSearchOperation.h in Headers */,
@@ -4287,6 +4297,7 @@
 				8494D6DC1D9C0DE8009EEE5E /* IMAPFolderInfo.swift in Sources */,
 				84E1E0271DF5D33B00D45A31 /* CIMAPFetchFoldersOperation.cpp in Sources */,
 				8418C7351DA3D84200B7FE35 /* MessageBuilder.swift in Sources */,
+				8491BB6A1DF6FA5000E6D679 /* IMAPCheckAccountOperation.swift in Sources */,
 				849EA0EB1D990E35000E4E4D /* CArray.cpp in Sources */,
 				8494D6E71D9C2274009EEE5E /* CIMAPSearchExpression.cpp in Sources */,
 				84B892101DA268F8008FD1C4 /* CSMTPSession.cpp in Sources */,
@@ -4300,6 +4311,7 @@
 				84F7B4B11D916D4A005F83E8 /* IMAPSearchOperation.swift in Sources */,
 				84F7B4AE1D916D4A005F83E8 /* IMAPNamespace.swift in Sources */,
 				843AFCDE1D9579F30086FB46 /* MessageHeader.swift in Sources */,
+				8491BB671DF6F64400E6D679 /* CIMAPCheckAccountOperation.cpp in Sources */,
 				843AFCDA1D9579F30086FB46 /* AbstractMessagePart.swift in Sources */,
 				84E1E02A1DF5D4E500D45A31 /* IMAPFetchFoldersOperation.swift in Sources */,
 				8418C7371DA3D85900B7FE35 /* MessageParser.swift in Sources */,

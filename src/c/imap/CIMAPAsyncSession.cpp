@@ -87,8 +87,8 @@ CIMAPBaseOperation noopOperation(CIMAPAsyncSession self){
     return newCIMAPBaseOperation(self.instance->noopOperation());
 }
 
-CIMAPBaseOperation checkAccountOperation(CIMAPAsyncSession self){
-    return newCIMAPBaseOperation(self.instance->checkAccountOperation());
+CIMAPCheckAccountOperation checkAccountOperation(CIMAPAsyncSession self){
+    return newCIMAPCheckAccountOperation(self.instance->checkAccountOperation());
 }
 
 CIMAPCapabilityOperation capabilityOperation(CIMAPAsyncSession self){
