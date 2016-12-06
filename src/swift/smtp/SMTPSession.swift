@@ -1,7 +1,7 @@
 import Foundation
 import Dispatch
 
-public class SmtpSession {
+public class SMTPSession {
     
     var session:CSMTPSession;
     
@@ -159,8 +159,8 @@ public class SmtpSession {
      ...
      }];
      */
-    public func loginOperation() -> SmtpOperation{
-        return SmtpOperation(self.session.loginOperation(self.session));
+    public func loginOperation() -> SMTPOperation{
+        return SMTPOperation(self.session.loginOperation(self.session));
     }
     
     /**
@@ -175,11 +175,11 @@ public class SmtpSession {
      ...
      }];
      */
-    public func sendOperationWithData(messageData: Data) -> SmtpSendOperation{
+    public func sendOperationWithData(messageData: Data) -> SMTPSendOperation{
         let bytes: UnsafePointer<Int8>? = messageData.withUnsafeBytes{(bytes: UnsafePointer<Int8>)-> UnsafePointer<Int8> in
             return bytes;
         }
-        return SmtpSendOperation(self.session.sendOperationWithData(self.session, bytes, UInt32(messageData.count)));
+        return SMTPSendOperation(self.session.sendOperationWithData(self.session, bytes, UInt32(messageData.count)));
     }
     
     /**
@@ -196,11 +196,11 @@ public class SmtpSession {
      ...
      }];
      */
-    public func sendOperationWithData(messageData: Data, from: Address, recipients: Array<Address>) -> SmtpSendOperation {
+    public func sendOperationWithData(messageData: Data, from: Address, recipients: Array<Address>) -> SMTPSendOperation {
         let bytes: UnsafePointer<Int8>? = messageData.withUnsafeBytes{(bytes: UnsafePointer<Int8>)-> UnsafePointer<Int8> in
             return bytes;
         }
-        return SmtpSendOperation(self.session.sendOperationWithDataAndFromAndRecipients(self.session, bytes, UInt32(messageData.count), from.getNativeInstance(), recipients.cast()));
+        return SMTPSendOperation(self.session.sendOperationWithDataAndFromAndRecipients(self.session, bytes, UInt32(messageData.count), from.getNativeInstance(), recipients.cast()));
     }
     
     
@@ -217,8 +217,8 @@ public class SmtpSession {
      ...
      }];
      */
-    public func sendOperationWithContentsOfFile(path: String, from: Address, recipients: Array<Address>) -> SmtpSendOperation {
-        return SmtpSendOperation(path.utf16({ self.session.sendOperationWithContentsOfFile(self.session, $0, from.getNativeInstance(), recipients.cast()) }));
+    public func sendOperationWithContentsOfFile(path: String, from: Address, recipients: Array<Address>) -> SMTPSendOperation {
+        return SMTPSendOperation(path.utf16({ self.session.sendOperationWithContentsOfFile(self.session, $0, from.getNativeInstance(), recipients.cast()) }));
     }
 
     
@@ -230,8 +230,8 @@ public class SmtpSession {
      ...
      }];
      */
-    public func checkAccountOperationWithFrom(from: Address) -> SmtpOperation {
-        return SmtpOperation(self.session.checkAccountOperationWithFrom(self.session, from.getNativeInstance()));
+    public func checkAccountOperationWithFrom(from: Address) -> SMTPOperation {
+        return SMTPOperation(self.session.checkAccountOperationWithFrom(self.session, from.getNativeInstance()));
     }
     
     /**
@@ -242,8 +242,8 @@ public class SmtpSession {
      ...
      }];
      */
-    public func noopOperation(from: Address) -> SmtpOperation {
-        return SmtpOperation(self.session.noopOperation(self.session));
+    public func noopOperation(from: Address) -> SMTPOperation {
+        return SMTPOperation(self.session.noopOperation(self.session));
     }
 
 }

@@ -1,6 +1,6 @@
 import Foundation
 
-public final class ImapMessage : AbstractMessage, Convertible {
+public final class IMAPMessage : AbstractMessage, Convertible {
     
     private var nativeInstance:CIMAPMessage;
     
@@ -91,7 +91,7 @@ public final class ImapMessage : AbstractMessage, Convertible {
      [MCOAbstractMessage:dataForIMAPPart:folder:]
      so that the complete HTML rendering can take place.
      */
-    public func htmlRendering(folder: String, delegate: HtmlRendererImapDelegate) -> String? {
+    public func htmlRendering(folder: String, delegate: HTMLRendererImapDelegate) -> String? {
         let rendererCallback: AbstractMessageRendererCallback = AbstractMessageRendererCallback(message: self);
         rendererCallback.setHtmlRenderImapDelegate(delegate: delegate);
         return String(utf16: folder.utf16({ self.nativeInstance.htmlRendering(nativeInstance, $0, rendererCallback.cast()) }));
@@ -99,13 +99,13 @@ public final class ImapMessage : AbstractMessage, Convertible {
     
     
     /** All attachments in the message. */
-    public func attachments() -> Array<ImapPart> {
-        return Array<ImapPart>.cast(nativeInstance.abstractMessage.attachments(nativeInstance.abstractMessage));
+    public func attachments() -> Array<IMAPPart> {
+        return Array<IMAPPart>.cast(nativeInstance.abstractMessage.attachments(nativeInstance.abstractMessage));
     }
     
     /** All image attachments included inline in the message through cid: URLs. */
-    public func htmlInlineAttachments() -> Array<ImapPart> {
-        return Array<ImapPart>.cast(nativeInstance.abstractMessage.htmlInlineAttachments(nativeInstance.abstractMessage));
+    public func htmlInlineAttachments() -> Array<IMAPPart> {
+        return Array<IMAPPart>.cast(nativeInstance.abstractMessage.htmlInlineAttachments(nativeInstance.abstractMessage));
     }
     
     internal func cast() -> CObject {

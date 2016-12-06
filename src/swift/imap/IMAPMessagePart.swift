@@ -1,12 +1,12 @@
 import Foundation
 
-public class ImapMultipart : AbstractMultipart {
+public class IMAPMessagePart : AbstractMessagePart {
     
-    private var nativeInstance:CIMAPMultipart;
+    private var nativeInstance:CIMAPMessagePart;
     
-    internal init(part:CIMAPMultipart) {
+    internal init(part:CIMAPMessagePart) {
         self.nativeInstance = part;
-        super.init(abstractMultipart: part.abstractMultipart);
+        super.init(abstractMessagePart: part.abstractMessagePart);
     }
     
     required public init(_ obj: CObject) {

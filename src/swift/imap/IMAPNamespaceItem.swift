@@ -1,6 +1,6 @@
 import Foundation
 
-public class ImapNamespaceItem {
+public class IMAPNamespaceItem {
     
     private var nativeInstance:CIMAPNamespaceItem;
     

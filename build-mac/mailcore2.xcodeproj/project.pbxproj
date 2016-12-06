@@ -98,14 +98,14 @@
 		849189AC18C94986002063A3 /* MCNNTPGroupInfo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 849189A918C94986002063A3 /* MCNNTPGroupInfo.cpp */; };
 		8494D6D11D9C03BB009EEE5E /* CIMAPPart.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8494D6CF1D9C03BB009EEE5E /* CIMAPPart.cpp */; };
 		8494D6D21D9C03BB009EEE5E /* CIMAPPart.h in Headers */ = {isa = PBXBuildFile; fileRef = 8494D6D01D9C03BB009EEE5E /* CIMAPPart.h */; };
-		8494D6D41D9C06F5009EEE5E /* ImapPart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8494D6D31D9C06F5009EEE5E /* ImapPart.swift */; };
+		8494D6D41D9C06F5009EEE5E /* IMAPPart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8494D6D31D9C06F5009EEE5E /* IMAPPart.swift */; };
 		8494D6D71D9C082E009EEE5E /* CIMAPFolderInfo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8494D6D51D9C082E009EEE5E /* CIMAPFolderInfo.cpp */; };
 		8494D6D81D9C082E009EEE5E /* CIMAPFolderInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 8494D6D61D9C082E009EEE5E /* CIMAPFolderInfo.h */; };
-		8494D6DC1D9C0DE8009EEE5E /* ImapFolderInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8494D6DB1D9C0DE8009EEE5E /* ImapFolderInfo.swift */; };
+		8494D6DC1D9C0DE8009EEE5E /* IMAPFolderInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8494D6DB1D9C0DE8009EEE5E /* IMAPFolderInfo.swift */; };
 		8494D6DF1D9C0FE9009EEE5E /* CIMAPFolderStatus.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8494D6DD1D9C0FE9009EEE5E /* CIMAPFolderStatus.cpp */; };
 		8494D6E01D9C0FE9009EEE5E /* CIMAPFolderStatus.h in Headers */ = {isa = PBXBuildFile; fileRef = 8494D6DE1D9C0FE9009EEE5E /* CIMAPFolderStatus.h */; };
-		8494D6E21D9C11C7009EEE5E /* ImapFolderStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8494D6E11D9C11C7009EEE5E /* ImapFolderStatus.swift */; };
-		8494D6E41D9C2253009EEE5E /* ImapSearchExpression.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8494D6E31D9C2253009EEE5E /* ImapSearchExpression.swift */; };
+		8494D6E21D9C11C7009EEE5E /* IMAPFolderStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8494D6E11D9C11C7009EEE5E /* IMAPFolderStatus.swift */; };
+		8494D6E41D9C2253009EEE5E /* IMAPSearchExpression.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8494D6E31D9C2253009EEE5E /* IMAPSearchExpression.swift */; };
 		8494D6E71D9C2274009EEE5E /* CIMAPSearchExpression.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8494D6E51D9C2274009EEE5E /* CIMAPSearchExpression.cpp */; };
 		8494D6E81D9C2274009EEE5E /* CIMAPSearchExpression.h in Headers */ = {isa = PBXBuildFile; fileRef = 8494D6E61D9C2274009EEE5E /* CIMAPSearchExpression.h */; };
 		849EA0BD1D990E0D000E4E4D /* COperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 84B110A81D92924C0079C769 /* COperation.h */; };
@@ -157,13 +157,13 @@
 		849F53D917F28443002D417F /* MCIMAPNoopOperation.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 84B639EC17F280F3003B5BA2 /* MCIMAPNoopOperation.h */; };
 		849F53DA17F28443002D417F /* MCPOPNoopOperation.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 84B639E717F27EBD003B5BA2 /* MCPOPNoopOperation.h */; };
 		849F53DB17F28443002D417F /* MCSMTPNoopOperation.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 84B639E217F279BB003B5BA2 /* MCSMTPNoopOperation.h */; };
-		84A929121DA7B5BB0020205B /* HtmlRendererDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A929111DA7B5BB0020205B /* HtmlRendererDelegate.swift */; };
-		84A929141DA7B8480020205B /* HtmlRendererImapDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A929131DA7B8480020205B /* HtmlRendererImapDelegate.swift */; };
+		84A929121DA7B5BB0020205B /* HTMLRendererDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A929111DA7B5BB0020205B /* HTMLRendererDelegate.swift */; };
+		84A929141DA7B8480020205B /* HTMLRendererImapDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A929131DA7B8480020205B /* HTMLRendererImapDelegate.swift */; };
 		84A929161DA7B9790020205B /* AbstractMessageRendererCallback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A929151DA7B9790020205B /* AbstractMessageRendererCallback.swift */; };
 		84A929191DA7BABF0020205B /* CAbstractMessageRendererCallback.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 84A929171DA7BABF0020205B /* CAbstractMessageRendererCallback.cpp */; };
 		84A9291A1DA7BABF0020205B /* CAbstractMessageRendererCallback.h in Headers */ = {isa = PBXBuildFile; fileRef = 84A929181DA7BABF0020205B /* CAbstractMessageRendererCallback.h */; };
 		84AF9E7E172DBAF600E60AA3 /* providers.json in Resources */ = {isa = PBXBuildFile; fileRef = 84AF9E7D172DBAF600E60AA3 /* providers.json */; };
-		84B110A51D928E1D0079C769 /* ImapIdleOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B110A41D928E1D0079C769 /* ImapIdleOperation.swift */; };
+		84B110A51D928E1D0079C769 /* IMAPIdleOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B110A41D928E1D0079C769 /* IMAPIdleOperation.swift */; };
 		84B639E317F279BB003B5BA2 /* MCSMTPNoopOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 84B639E117F279BB003B5BA2 /* MCSMTPNoopOperation.cpp */; };
 		84B639E417F279BB003B5BA2 /* MCSMTPNoopOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 84B639E117F279BB003B5BA2 /* MCSMTPNoopOperation.cpp */; };
 		84B639E817F27EBD003B5BA2 /* MCPOPNoopOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 84B639E617F27EBD003B5BA2 /* MCPOPNoopOperation.cpp */; };
@@ -180,14 +180,14 @@
 		84B892111DA268F8008FD1C4 /* CSMTPSession.h in Headers */ = {isa = PBXBuildFile; fileRef = 84B8920F1DA268F8008FD1C4 /* CSMTPSession.h */; };
 		84B892141DA27A54008FD1C4 /* CSMTPOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 84B892121DA27A54008FD1C4 /* CSMTPOperation.cpp */; };
 		84B892151DA27A54008FD1C4 /* CSMTPOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 84B892131DA27A54008FD1C4 /* CSMTPOperation.h */; };
-		84B892181DA27FDD008FD1C4 /* SmtpSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B892171DA27FDD008FD1C4 /* SmtpSession.swift */; };
-		84B8921A1DA28121008FD1C4 /* SmtpOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B892191DA28121008FD1C4 /* SmtpOperation.swift */; };
-		84B892201DA29A3B008FD1C4 /* SmtpSendOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B8921F1DA29A3B008FD1C4 /* SmtpSendOperation.swift */; };
+		84B892181DA27FDD008FD1C4 /* SMTPSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B892171DA27FDD008FD1C4 /* SMTPSession.swift */; };
+		84B8921A1DA28121008FD1C4 /* SMTPOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B892191DA28121008FD1C4 /* SMTPOperation.swift */; };
+		84B892201DA29A3B008FD1C4 /* SMTPSendOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B8921F1DA29A3B008FD1C4 /* SMTPSendOperation.swift */; };
 		84CD9BDE1D9BE3AF000622CB /* CIMAPMultipart.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 84CD9BDC1D9BE3AF000622CB /* CIMAPMultipart.cpp */; };
-		84CD9BE01D9BE514000622CB /* ImapMultipart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84CD9BDF1D9BE514000622CB /* ImapMultipart.swift */; };
+		84CD9BE01D9BE514000622CB /* IMAPMultipart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84CD9BDF1D9BE514000622CB /* IMAPMultipart.swift */; };
 		84CD9BE31D9BFB37000622CB /* CIMAPNamespaceItem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 84CD9BE11D9BFB37000622CB /* CIMAPNamespaceItem.cpp */; };
 		84CD9BE41D9BFB37000622CB /* CIMAPNamespaceItem.h in Headers */ = {isa = PBXBuildFile; fileRef = 84CD9BE21D9BFB37000622CB /* CIMAPNamespaceItem.h */; };
-		84CD9BE61D9C0039000622CB /* ImapNamespaceItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84CD9BE51D9C0039000622CB /* ImapNamespaceItem.swift */; };
+		84CD9BE61D9C0039000622CB /* IMAPNamespaceItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84CD9BE51D9C0039000622CB /* IMAPNamespaceItem.swift */; };
 		84CFA98319F7153B00FE35D2 /* MCONNTPFetchOverviewOperation.mm in Sources */ = {isa = PBXBuildFile; fileRef = 84CFA98219F7153B00FE35D2 /* MCONNTPFetchOverviewOperation.mm */; };
 		84CFA98419F7153B00FE35D2 /* MCONNTPFetchOverviewOperation.mm in Sources */ = {isa = PBXBuildFile; fileRef = 84CFA98219F7153B00FE35D2 /* MCONNTPFetchOverviewOperation.mm */; };
 		84CFA98719F7159700FE35D2 /* MCNNTPFetchOverviewOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 84CFA98519F7159700FE35D2 /* MCNNTPFetchOverviewOperation.cpp */; };
@@ -260,9 +260,9 @@
 		84D73794199C0511005124E5 /* MCONNTPGroupInfo.mm in Sources */ = {isa = PBXBuildFile; fileRef = 84D73792199C0511005124E5 /* MCONNTPGroupInfo.mm */; };
 		84E1E0271DF5D33B00D45A31 /* CIMAPFetchFoldersOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 84E1E0251DF5D33B00D45A31 /* CIMAPFetchFoldersOperation.cpp */; };
 		84E1E0281DF5D33B00D45A31 /* CIMAPFetchFoldersOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 84E1E0261DF5D33B00D45A31 /* CIMAPFetchFoldersOperation.h */; };
-		84E1E02A1DF5D4E500D45A31 /* ImapFetchFoldersOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E1E0291DF5D4E500D45A31 /* ImapFetchFoldersOperation.swift */; };
+		84E1E02A1DF5D4E500D45A31 /* IMAPFetchFoldersOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E1E0291DF5D4E500D45A31 /* IMAPFetchFoldersOperation.swift */; };
 		84E3DB341D997D32003B598F /* Operation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E3DB331D997D32003B598F /* Operation.swift */; };
-		84E3DB361D9A7059003B598F /* ImapBaseOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E3DB351D9A7059003B598F /* ImapBaseOperation.swift */; };
+		84E3DB361D9A7059003B598F /* IMAPBaseOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E3DB351D9A7059003B598F /* IMAPBaseOperation.swift */; };
 		84E3DB391D9A7C93003B598F /* CIMAPIdleOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 84E3DB371D9A7C93003B598F /* CIMAPIdleOperation.cpp */; };
 		84E3DB3A1D9A7C93003B598F /* CIMAPIdleOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 84E3DB381D9A7C93003B598F /* CIMAPIdleOperation.h */; };
 		84E3DB3C1D9A8459003B598F /* MailCoreError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E3DB3B1D9A8459003B598F /* MailCoreError.swift */; };
@@ -273,13 +273,13 @@
 		84E3DB461D9AC3A6003B598F /* Array+Mailcore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E3DB451D9AC3A6003B598F /* Array+Mailcore.swift */; };
 		84E3DB491D9BB29E003B598F /* CIMAPFolder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 84E3DB471D9BB29E003B598F /* CIMAPFolder.cpp */; };
 		84E3DB4A1D9BB29E003B598F /* CIMAPFolder.h in Headers */ = {isa = PBXBuildFile; fileRef = 84E3DB481D9BB29E003B598F /* CIMAPFolder.h */; };
-		84E3DB4C1D9BB9F7003B598F /* ImapFolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E3DB4B1D9BB9F7003B598F /* ImapFolder.swift */; };
+		84E3DB4C1D9BB9F7003B598F /* IMAPFolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E3DB4B1D9BB9F7003B598F /* IMAPFolder.swift */; };
 		84E3DB4F1D9BBDAD003B598F /* CIMAPMessage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 84E3DB4D1D9BBDAD003B598F /* CIMAPMessage.cpp */; };
 		84E3DB501D9BBDAD003B598F /* CIMAPMessage.h in Headers */ = {isa = PBXBuildFile; fileRef = 84E3DB4E1D9BBDAD003B598F /* CIMAPMessage.h */; };
-		84E3DB521D9BCEED003B598F /* ImapMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E3DB511D9BCEED003B598F /* ImapMessage.swift */; };
+		84E3DB521D9BCEED003B598F /* IMAPMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E3DB511D9BCEED003B598F /* IMAPMessage.swift */; };
 		84E3DB551D9BDB41003B598F /* CIMAPMessagePart.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 84E3DB531D9BDB41003B598F /* CIMAPMessagePart.cpp */; };
 		84E3DB561D9BDB41003B598F /* CIMAPMessagePart.h in Headers */ = {isa = PBXBuildFile; fileRef = 84E3DB541D9BDB41003B598F /* CIMAPMessagePart.h */; };
-		84E3DB581D9BDD62003B598F /* ImapMessagePart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E3DB571D9BDD62003B598F /* ImapMessagePart.swift */; };
+		84E3DB581D9BDD62003B598F /* IMAPMessagePart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E3DB571D9BDD62003B598F /* IMAPMessagePart.swift */; };
 		84E65533199BE15500EC8CC4 /* MCNNTPSession.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 849189A018C93FB7002063A3 /* MCNNTPSession.h */; };
 		84E65534199BE2BF00EC8CC4 /* MCNNTPGroupInfo.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 849189AA18C94986002063A3 /* MCNNTPGroupInfo.h */; };
 		84E65535199BE2C300EC8CC4 /* MCNNTPGroupInfo.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 849189AA18C94986002063A3 /* MCNNTPGroupInfo.h */; };
@@ -289,16 +289,16 @@
 		84F7B48E1D916CE7005F83E8 /* SwiftMailCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84F7B4871D916CE6005F83E8 /* SwiftMailCore.framework */; };
 		84F7B48F1D916CE7005F83E8 /* SwiftMailCore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 84F7B4871D916CE6005F83E8 /* SwiftMailCore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		84F7B4981D916D0B005F83E8 /* Convertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F7B4961D916D0B005F83E8 /* Convertible.swift */; };
-		84F7B4A81D916D4A005F83E8 /* ImapAppendMessageOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F7B49D1D916D4A005F83E8 /* ImapAppendMessageOperation.swift */; };
-		84F7B4A91D916D4A005F83E8 /* ImapCopyMessagesOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F7B49E1D916D4A005F83E8 /* ImapCopyMessagesOperation.swift */; };
-		84F7B4AA1D916D4A005F83E8 /* ImapFetchContentOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F7B49F1D916D4A005F83E8 /* ImapFetchContentOperation.swift */; };
-		84F7B4AB1D916D4A005F83E8 /* ImapFetchMessagesOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F7B4A01D916D4A005F83E8 /* ImapFetchMessagesOperation.swift */; };
-		84F7B4AC1D916D4A005F83E8 /* ImapFolderInfoOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F7B4A11D916D4A005F83E8 /* ImapFolderInfoOperation.swift */; };
-		84F7B4AD1D916D4A005F83E8 /* ImapFolderStatusOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F7B4A21D916D4A005F83E8 /* ImapFolderStatusOperation.swift */; };
-		84F7B4AE1D916D4A005F83E8 /* ImapNamespace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F7B4A31D916D4A005F83E8 /* ImapNamespace.swift */; };
-		84F7B4AF1D916D4A005F83E8 /* ImapOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F7B4A41D916D4A005F83E8 /* ImapOperation.swift */; };
-		84F7B4B11D916D4A005F83E8 /* ImapSearchOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F7B4A61D916D4A005F83E8 /* ImapSearchOperation.swift */; };
-		84F7B4B21D916D4A005F83E8 /* ImapSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F7B4A71D916D4A005F83E8 /* ImapSession.swift */; };
+		84F7B4A81D916D4A005F83E8 /* IMAPAppendMessageOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F7B49D1D916D4A005F83E8 /* IMAPAppendMessageOperation.swift */; };
+		84F7B4A91D916D4A005F83E8 /* IMAPCopyMessagesOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F7B49E1D916D4A005F83E8 /* IMAPCopyMessagesOperation.swift */; };
+		84F7B4AA1D916D4A005F83E8 /* IMAPFetchContentOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F7B49F1D916D4A005F83E8 /* IMAPFetchContentOperation.swift */; };
+		84F7B4AB1D916D4A005F83E8 /* IMAPFetchMessagesOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F7B4A01D916D4A005F83E8 /* IMAPFetchMessagesOperation.swift */; };
+		84F7B4AC1D916D4A005F83E8 /* IMAPFolderInfoOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F7B4A11D916D4A005F83E8 /* IMAPFolderInfoOperation.swift */; };
+		84F7B4AD1D916D4A005F83E8 /* IMAPFolderStatusOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F7B4A21D916D4A005F83E8 /* IMAPFolderStatusOperation.swift */; };
+		84F7B4AE1D916D4A005F83E8 /* IMAPNamespace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F7B4A31D916D4A005F83E8 /* IMAPNamespace.swift */; };
+		84F7B4AF1D916D4A005F83E8 /* IMAPOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F7B4A41D916D4A005F83E8 /* IMAPOperation.swift */; };
+		84F7B4B11D916D4A005F83E8 /* IMAPSearchOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F7B4A61D916D4A005F83E8 /* IMAPSearchOperation.swift */; };
+		84F7B4B21D916D4A005F83E8 /* IMAPSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F7B4A71D916D4A005F83E8 /* IMAPSession.swift */; };
 		84F7B4C21D917B1D005F83E8 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 84F7B4C11D917B1D005F83E8 /* libc++.tbd */; };
 		84F7B4C51D917C95005F83E8 /* MailCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27780C3A19CF9CD100C77E44 /* MailCore.framework */; };
 		851682AD1C6A2484005B86C4 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 851682AC1C6A2484005B86C4 /* Default-568h@2x.png */; };
@@ -1744,14 +1744,14 @@
 		849189AA18C94986002063A3 /* MCNNTPGroupInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCNNTPGroupInfo.h; path = nntp/MCNNTPGroupInfo.h; sourceTree = "<group>"; };
 		8494D6CF1D9C03BB009EEE5E /* CIMAPPart.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CIMAPPart.cpp; path = c/imap/CIMAPPart.cpp; sourceTree = "<group>"; };
 		8494D6D01D9C03BB009EEE5E /* CIMAPPart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CIMAPPart.h; path = c/imap/CIMAPPart.h; sourceTree = "<group>"; };
-		8494D6D31D9C06F5009EEE5E /* ImapPart.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ImapPart.swift; path = swift/imap/ImapPart.swift; sourceTree = "<group>"; };
+		8494D6D31D9C06F5009EEE5E /* IMAPPart.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = IMAPPart.swift; path = swift/imap/IMAPPart.swift; sourceTree = "<group>"; };
 		8494D6D51D9C082E009EEE5E /* CIMAPFolderInfo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CIMAPFolderInfo.cpp; path = c/imap/CIMAPFolderInfo.cpp; sourceTree = "<group>"; };
 		8494D6D61D9C082E009EEE5E /* CIMAPFolderInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CIMAPFolderInfo.h; path = c/imap/CIMAPFolderInfo.h; sourceTree = "<group>"; };
-		8494D6DB1D9C0DE8009EEE5E /* ImapFolderInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ImapFolderInfo.swift; path = swift/imap/ImapFolderInfo.swift; sourceTree = "<group>"; };
+		8494D6DB1D9C0DE8009EEE5E /* IMAPFolderInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = IMAPFolderInfo.swift; path = swift/imap/IMAPFolderInfo.swift; sourceTree = "<group>"; };
 		8494D6DD1D9C0FE9009EEE5E /* CIMAPFolderStatus.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CIMAPFolderStatus.cpp; path = c/imap/CIMAPFolderStatus.cpp; sourceTree = "<group>"; };
 		8494D6DE1D9C0FE9009EEE5E /* CIMAPFolderStatus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CIMAPFolderStatus.h; path = c/imap/CIMAPFolderStatus.h; sourceTree = "<group>"; };
-		8494D6E11D9C11C7009EEE5E /* ImapFolderStatus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ImapFolderStatus.swift; path = swift/imap/ImapFolderStatus.swift; sourceTree = "<group>"; };
-		8494D6E31D9C2253009EEE5E /* ImapSearchExpression.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ImapSearchExpression.swift; path = swift/imap/ImapSearchExpression.swift; sourceTree = "<group>"; };
+		8494D6E11D9C11C7009EEE5E /* IMAPFolderStatus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = IMAPFolderStatus.swift; path = swift/imap/IMAPFolderStatus.swift; sourceTree = "<group>"; };
+		8494D6E31D9C2253009EEE5E /* IMAPSearchExpression.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = IMAPSearchExpression.swift; path = swift/imap/IMAPSearchExpression.swift; sourceTree = "<group>"; };
 		8494D6E51D9C2274009EEE5E /* CIMAPSearchExpression.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CIMAPSearchExpression.cpp; path = c/imap/CIMAPSearchExpression.cpp; sourceTree = "<group>"; };
 		8494D6E61D9C2274009EEE5E /* CIMAPSearchExpression.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CIMAPSearchExpression.h; path = c/imap/CIMAPSearchExpression.h; sourceTree = "<group>"; };
 		8498CCAA1D9511FC0074217C /* CAbstractMessage.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CAbstractMessage.cpp; path = c/abstract/CAbstractMessage.cpp; sourceTree = "<group>"; };
@@ -1762,13 +1762,13 @@
 		8498CCB11D9520660074217C /* CAbstractMultipart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CAbstractMultipart.h; path = c/abstract/CAbstractMultipart.h; sourceTree = "<group>"; };
 		849EA16F1D99175E000E4E4D /* swiftmailcore2-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "swiftmailcore2-Bridging-Header.h"; path = "swift/swiftmailcore2-Bridging-Header.h"; sourceTree = "<group>"; };
 		849EA1741D9928CE000E4E4D /* String+Mailcore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "String+Mailcore.swift"; path = "swift/basetypes/String+Mailcore.swift"; sourceTree = "<group>"; };
-		84A929111DA7B5BB0020205B /* HtmlRendererDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HtmlRendererDelegate.swift; path = swift/abstract/HtmlRendererDelegate.swift; sourceTree = "<group>"; };
-		84A929131DA7B8480020205B /* HtmlRendererImapDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HtmlRendererImapDelegate.swift; path = swift/abstract/HtmlRendererImapDelegate.swift; sourceTree = "<group>"; };
+		84A929111DA7B5BB0020205B /* HTMLRendererDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HTMLRendererDelegate.swift; path = swift/abstract/HTMLRendererDelegate.swift; sourceTree = "<group>"; };
+		84A929131DA7B8480020205B /* HTMLRendererImapDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HTMLRendererImapDelegate.swift; path = swift/abstract/HTMLRendererImapDelegate.swift; sourceTree = "<group>"; };
 		84A929151DA7B9790020205B /* AbstractMessageRendererCallback.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AbstractMessageRendererCallback.swift; path = swift/abstract/AbstractMessageRendererCallback.swift; sourceTree = "<group>"; };
 		84A929171DA7BABF0020205B /* CAbstractMessageRendererCallback.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CAbstractMessageRendererCallback.cpp; path = c/abstract/CAbstractMessageRendererCallback.cpp; sourceTree = "<group>"; };
 		84A929181DA7BABF0020205B /* CAbstractMessageRendererCallback.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CAbstractMessageRendererCallback.h; path = c/abstract/CAbstractMessageRendererCallback.h; sourceTree = "<group>"; };
 		84AF9E7D172DBAF600E60AA3 /* providers.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = providers.json; path = ../resources/providers.json; sourceTree = "<group>"; };
-		84B110A41D928E1D0079C769 /* ImapIdleOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ImapIdleOperation.swift; path = swift/imap/ImapIdleOperation.swift; sourceTree = "<group>"; };
+		84B110A41D928E1D0079C769 /* IMAPIdleOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = IMAPIdleOperation.swift; path = swift/imap/IMAPIdleOperation.swift; sourceTree = "<group>"; };
 		84B110A71D92924C0079C769 /* COperation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = COperation.cpp; path = c/utils/COperation.cpp; sourceTree = "<group>"; };
 		84B110A81D92924C0079C769 /* COperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = COperation.h; path = c/utils/COperation.h; sourceTree = "<group>"; };
 		84B110AF1D929B560079C769 /* CIMAPBaseOperation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CIMAPBaseOperation.cpp; path = c/imap/CIMAPBaseOperation.cpp; sourceTree = "<group>"; };
@@ -1785,15 +1785,15 @@
 		84B8920F1DA268F8008FD1C4 /* CSMTPSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CSMTPSession.h; path = c/smtp/CSMTPSession.h; sourceTree = "<group>"; };
 		84B892121DA27A54008FD1C4 /* CSMTPOperation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CSMTPOperation.cpp; path = c/smtp/CSMTPOperation.cpp; sourceTree = "<group>"; };
 		84B892131DA27A54008FD1C4 /* CSMTPOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CSMTPOperation.h; path = c/smtp/CSMTPOperation.h; sourceTree = "<group>"; };
-		84B892171DA27FDD008FD1C4 /* SmtpSession.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SmtpSession.swift; path = swift/smtp/SmtpSession.swift; sourceTree = "<group>"; };
-		84B892191DA28121008FD1C4 /* SmtpOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SmtpOperation.swift; path = swift/smtp/SmtpOperation.swift; sourceTree = "<group>"; };
-		84B8921F1DA29A3B008FD1C4 /* SmtpSendOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SmtpSendOperation.swift; path = swift/smtp/SmtpSendOperation.swift; sourceTree = "<group>"; };
+		84B892171DA27FDD008FD1C4 /* SMTPSession.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SMTPSession.swift; path = swift/smtp/SMTPSession.swift; sourceTree = "<group>"; };
+		84B892191DA28121008FD1C4 /* SMTPOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SMTPOperation.swift; path = swift/smtp/SMTPOperation.swift; sourceTree = "<group>"; };
+		84B8921F1DA29A3B008FD1C4 /* SMTPSendOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SMTPSendOperation.swift; path = swift/smtp/SMTPSendOperation.swift; sourceTree = "<group>"; };
 		84CD9BDC1D9BE3AF000622CB /* CIMAPMultipart.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CIMAPMultipart.cpp; path = c/imap/CIMAPMultipart.cpp; sourceTree = "<group>"; };
 		84CD9BDD1D9BE3AF000622CB /* CIMAPMultipart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CIMAPMultipart.h; path = c/imap/CIMAPMultipart.h; sourceTree = "<group>"; };
-		84CD9BDF1D9BE514000622CB /* ImapMultipart.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ImapMultipart.swift; path = swift/imap/ImapMultipart.swift; sourceTree = "<group>"; };
+		84CD9BDF1D9BE514000622CB /* IMAPMultipart.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = IMAPMultipart.swift; path = swift/imap/IMAPMultipart.swift; sourceTree = "<group>"; };
 		84CD9BE11D9BFB37000622CB /* CIMAPNamespaceItem.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CIMAPNamespaceItem.cpp; path = c/imap/CIMAPNamespaceItem.cpp; sourceTree = "<group>"; };
 		84CD9BE21D9BFB37000622CB /* CIMAPNamespaceItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CIMAPNamespaceItem.h; path = c/imap/CIMAPNamespaceItem.h; sourceTree = "<group>"; };
-		84CD9BE51D9C0039000622CB /* ImapNamespaceItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ImapNamespaceItem.swift; path = swift/imap/ImapNamespaceItem.swift; sourceTree = "<group>"; };
+		84CD9BE51D9C0039000622CB /* IMAPNamespaceItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = IMAPNamespaceItem.swift; path = swift/imap/IMAPNamespaceItem.swift; sourceTree = "<group>"; };
 		84CFA98119F7153B00FE35D2 /* MCONNTPFetchOverviewOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCONNTPFetchOverviewOperation.h; sourceTree = "<group>"; };
 		84CFA98219F7153B00FE35D2 /* MCONNTPFetchOverviewOperation.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MCONNTPFetchOverviewOperation.mm; sourceTree = "<group>"; };
 		84CFA98519F7159700FE35D2 /* MCNNTPFetchOverviewOperation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MCNNTPFetchOverviewOperation.cpp; sourceTree = "<group>"; };
@@ -1841,9 +1841,9 @@
 		84D73792199C0511005124E5 /* MCONNTPGroupInfo.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MCONNTPGroupInfo.mm; sourceTree = "<group>"; };
 		84E1E0251DF5D33B00D45A31 /* CIMAPFetchFoldersOperation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CIMAPFetchFoldersOperation.cpp; path = c/imap/CIMAPFetchFoldersOperation.cpp; sourceTree = "<group>"; };
 		84E1E0261DF5D33B00D45A31 /* CIMAPFetchFoldersOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CIMAPFetchFoldersOperation.h; path = c/imap/CIMAPFetchFoldersOperation.h; sourceTree = "<group>"; };
-		84E1E0291DF5D4E500D45A31 /* ImapFetchFoldersOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ImapFetchFoldersOperation.swift; path = swift/imap/ImapFetchFoldersOperation.swift; sourceTree = "<group>"; };
+		84E1E0291DF5D4E500D45A31 /* IMAPFetchFoldersOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = IMAPFetchFoldersOperation.swift; path = swift/imap/IMAPFetchFoldersOperation.swift; sourceTree = "<group>"; };
 		84E3DB331D997D32003B598F /* Operation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Operation.swift; path = swift/utils/Operation.swift; sourceTree = "<group>"; };
-		84E3DB351D9A7059003B598F /* ImapBaseOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ImapBaseOperation.swift; path = swift/imap/ImapBaseOperation.swift; sourceTree = "<group>"; };
+		84E3DB351D9A7059003B598F /* IMAPBaseOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = IMAPBaseOperation.swift; path = swift/imap/IMAPBaseOperation.swift; sourceTree = "<group>"; };
 		84E3DB371D9A7C93003B598F /* CIMAPIdleOperation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CIMAPIdleOperation.cpp; path = c/imap/CIMAPIdleOperation.cpp; sourceTree = "<group>"; };
 		84E3DB381D9A7C93003B598F /* CIMAPIdleOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CIMAPIdleOperation.h; path = c/imap/CIMAPIdleOperation.h; sourceTree = "<group>"; };
 		84E3DB3B1D9A8459003B598F /* MailCoreError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MailCoreError.swift; path = swift/utils/MailCoreError.swift; sourceTree = "<group>"; };
@@ -1854,13 +1854,13 @@
 		84E3DB451D9AC3A6003B598F /* Array+Mailcore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Array+Mailcore.swift"; path = "swift/basetypes/Array+Mailcore.swift"; sourceTree = "<group>"; };
 		84E3DB471D9BB29E003B598F /* CIMAPFolder.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CIMAPFolder.cpp; path = c/imap/CIMAPFolder.cpp; sourceTree = "<group>"; };
 		84E3DB481D9BB29E003B598F /* CIMAPFolder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CIMAPFolder.h; path = c/imap/CIMAPFolder.h; sourceTree = "<group>"; };
-		84E3DB4B1D9BB9F7003B598F /* ImapFolder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ImapFolder.swift; path = swift/imap/ImapFolder.swift; sourceTree = "<group>"; };
+		84E3DB4B1D9BB9F7003B598F /* IMAPFolder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = IMAPFolder.swift; path = swift/imap/IMAPFolder.swift; sourceTree = "<group>"; };
 		84E3DB4D1D9BBDAD003B598F /* CIMAPMessage.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CIMAPMessage.cpp; path = c/imap/CIMAPMessage.cpp; sourceTree = "<group>"; };
 		84E3DB4E1D9BBDAD003B598F /* CIMAPMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CIMAPMessage.h; path = c/imap/CIMAPMessage.h; sourceTree = "<group>"; };
-		84E3DB511D9BCEED003B598F /* ImapMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ImapMessage.swift; path = swift/imap/ImapMessage.swift; sourceTree = "<group>"; };
+		84E3DB511D9BCEED003B598F /* IMAPMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = IMAPMessage.swift; path = swift/imap/IMAPMessage.swift; sourceTree = "<group>"; };
 		84E3DB531D9BDB41003B598F /* CIMAPMessagePart.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CIMAPMessagePart.cpp; path = c/imap/CIMAPMessagePart.cpp; sourceTree = "<group>"; };
 		84E3DB541D9BDB41003B598F /* CIMAPMessagePart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CIMAPMessagePart.h; path = c/imap/CIMAPMessagePart.h; sourceTree = "<group>"; };
-		84E3DB571D9BDD62003B598F /* ImapMessagePart.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ImapMessagePart.swift; path = swift/imap/ImapMessagePart.swift; sourceTree = "<group>"; };
+		84E3DB571D9BDD62003B598F /* IMAPMessagePart.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = IMAPMessagePart.swift; path = swift/imap/IMAPMessagePart.swift; sourceTree = "<group>"; };
 		84E71FB21DF5694C00000F88 /* swiftmailcore2Test.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = swiftmailcore2Test.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		84E71FB41DF5694C00000F88 /* swiftmailcore2Test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = swiftmailcore2Test.swift; sourceTree = "<group>"; };
 		84E71FB61DF5694C00000F88 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -1901,16 +1901,16 @@
 		84F7B4891D916CE7005F83E8 /* swiftmailcore2.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = swiftmailcore2.h; sourceTree = "<group>"; };
 		84F7B48A1D916CE7005F83E8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		84F7B4961D916D0B005F83E8 /* Convertible.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Convertible.swift; path = swift/basetypes/Convertible.swift; sourceTree = "<group>"; };
-		84F7B49D1D916D4A005F83E8 /* ImapAppendMessageOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ImapAppendMessageOperation.swift; path = swift/imap/ImapAppendMessageOperation.swift; sourceTree = "<group>"; };
-		84F7B49E1D916D4A005F83E8 /* ImapCopyMessagesOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ImapCopyMessagesOperation.swift; path = swift/imap/ImapCopyMessagesOperation.swift; sourceTree = "<group>"; };
-		84F7B49F1D916D4A005F83E8 /* ImapFetchContentOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ImapFetchContentOperation.swift; path = swift/imap/ImapFetchContentOperation.swift; sourceTree = "<group>"; };
-		84F7B4A01D916D4A005F83E8 /* ImapFetchMessagesOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ImapFetchMessagesOperation.swift; path = swift/imap/ImapFetchMessagesOperation.swift; sourceTree = "<group>"; };
-		84F7B4A11D916D4A005F83E8 /* ImapFolderInfoOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ImapFolderInfoOperation.swift; path = swift/imap/ImapFolderInfoOperation.swift; sourceTree = "<group>"; };
-		84F7B4A21D916D4A005F83E8 /* ImapFolderStatusOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ImapFolderStatusOperation.swift; path = swift/imap/ImapFolderStatusOperation.swift; sourceTree = "<group>"; };
-		84F7B4A31D916D4A005F83E8 /* ImapNamespace.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ImapNamespace.swift; path = swift/imap/ImapNamespace.swift; sourceTree = "<group>"; };
-		84F7B4A41D916D4A005F83E8 /* ImapOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ImapOperation.swift; path = swift/imap/ImapOperation.swift; sourceTree = "<group>"; };
-		84F7B4A61D916D4A005F83E8 /* ImapSearchOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ImapSearchOperation.swift; path = swift/imap/ImapSearchOperation.swift; sourceTree = "<group>"; };
-		84F7B4A71D916D4A005F83E8 /* ImapSession.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ImapSession.swift; path = swift/imap/ImapSession.swift; sourceTree = "<group>"; };
+		84F7B49D1D916D4A005F83E8 /* IMAPAppendMessageOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = IMAPAppendMessageOperation.swift; path = swift/imap/IMAPAppendMessageOperation.swift; sourceTree = "<group>"; };
+		84F7B49E1D916D4A005F83E8 /* IMAPCopyMessagesOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = IMAPCopyMessagesOperation.swift; path = swift/imap/IMAPCopyMessagesOperation.swift; sourceTree = "<group>"; };
+		84F7B49F1D916D4A005F83E8 /* IMAPFetchContentOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = IMAPFetchContentOperation.swift; path = swift/imap/IMAPFetchContentOperation.swift; sourceTree = "<group>"; };
+		84F7B4A01D916D4A005F83E8 /* IMAPFetchMessagesOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = IMAPFetchMessagesOperation.swift; path = swift/imap/IMAPFetchMessagesOperation.swift; sourceTree = "<group>"; };
+		84F7B4A11D916D4A005F83E8 /* IMAPFolderInfoOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = IMAPFolderInfoOperation.swift; path = swift/imap/IMAPFolderInfoOperation.swift; sourceTree = "<group>"; };
+		84F7B4A21D916D4A005F83E8 /* IMAPFolderStatusOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = IMAPFolderStatusOperation.swift; path = swift/imap/IMAPFolderStatusOperation.swift; sourceTree = "<group>"; };
+		84F7B4A31D916D4A005F83E8 /* IMAPNamespace.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = IMAPNamespace.swift; path = swift/imap/IMAPNamespace.swift; sourceTree = "<group>"; };
+		84F7B4A41D916D4A005F83E8 /* IMAPOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = IMAPOperation.swift; path = swift/imap/IMAPOperation.swift; sourceTree = "<group>"; };
+		84F7B4A61D916D4A005F83E8 /* IMAPSearchOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = IMAPSearchOperation.swift; path = swift/imap/IMAPSearchOperation.swift; sourceTree = "<group>"; };
+		84F7B4A71D916D4A005F83E8 /* IMAPSession.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = IMAPSession.swift; path = swift/imap/IMAPSession.swift; sourceTree = "<group>"; };
 		84F7B4BD1D9178D3005F83E8 /* CIMAPNamespace.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CIMAPNamespace.cpp; path = c/imap/CIMAPNamespace.cpp; sourceTree = "<group>"; };
 		84F7B4C11D917B1D005F83E8 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.0.sdk/usr/lib/libc++.tbd"; sourceTree = DEVELOPER_DIR; };
 		851682AC1C6A2484005B86C4 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
@@ -2602,8 +2602,8 @@
 				843AFCD61D9579F30086FB46 /* AbstractPart.swift */,
 				843AFCD71D9579F30086FB46 /* Address.swift */,
 				843AFCD81D9579F30086FB46 /* MessageHeader.swift */,
-				84A929111DA7B5BB0020205B /* HtmlRendererDelegate.swift */,
-				84A929131DA7B8480020205B /* HtmlRendererImapDelegate.swift */,
+				84A929111DA7B5BB0020205B /* HTMLRendererDelegate.swift */,
+				84A929131DA7B8480020205B /* HTMLRendererImapDelegate.swift */,
 				84A929151DA7B9790020205B /* AbstractMessageRendererCallback.swift */,
 			);
 			name = abstract;
@@ -2666,9 +2666,9 @@
 		84B892161DA27FA1008FD1C4 /* smtp */ = {
 			isa = PBXGroup;
 			children = (
-				84B892171DA27FDD008FD1C4 /* SmtpSession.swift */,
-				84B892191DA28121008FD1C4 /* SmtpOperation.swift */,
-				84B8921F1DA29A3B008FD1C4 /* SmtpSendOperation.swift */,
+				84B892171DA27FDD008FD1C4 /* SMTPSession.swift */,
+				84B892191DA28121008FD1C4 /* SMTPOperation.swift */,
+				84B8921F1DA29A3B008FD1C4 /* SMTPSendOperation.swift */,
 			);
 			name = smtp;
 			sourceTree = "<group>";
@@ -2898,28 +2898,28 @@
 		84F7B49C1D916D37005F83E8 /* imap */ = {
 			isa = PBXGroup;
 			children = (
-				84E3DB4B1D9BB9F7003B598F /* ImapFolder.swift */,
-				84E3DB511D9BCEED003B598F /* ImapMessage.swift */,
-				84E3DB571D9BDD62003B598F /* ImapMessagePart.swift */,
-				84CD9BDF1D9BE514000622CB /* ImapMultipart.swift */,
-				84F7B4A31D916D4A005F83E8 /* ImapNamespace.swift */,
-				84CD9BE51D9C0039000622CB /* ImapNamespaceItem.swift */,
-				8494D6D31D9C06F5009EEE5E /* ImapPart.swift */,
-				8494D6DB1D9C0DE8009EEE5E /* ImapFolderInfo.swift */,
-				8494D6E11D9C11C7009EEE5E /* ImapFolderStatus.swift */,
-				8494D6E31D9C2253009EEE5E /* ImapSearchExpression.swift */,
-				84E3DB351D9A7059003B598F /* ImapBaseOperation.swift */,
-				84F7B4A41D916D4A005F83E8 /* ImapOperation.swift */,
-				84F7B49D1D916D4A005F83E8 /* ImapAppendMessageOperation.swift */,
-				84F7B49E1D916D4A005F83E8 /* ImapCopyMessagesOperation.swift */,
-				84F7B49F1D916D4A005F83E8 /* ImapFetchContentOperation.swift */,
-				84F7B4A01D916D4A005F83E8 /* ImapFetchMessagesOperation.swift */,
-				84F7B4A11D916D4A005F83E8 /* ImapFolderInfoOperation.swift */,
-				84F7B4A21D916D4A005F83E8 /* ImapFolderStatusOperation.swift */,
-				84F7B4A61D916D4A005F83E8 /* ImapSearchOperation.swift */,
-				84B110A41D928E1D0079C769 /* ImapIdleOperation.swift */,
-				84F7B4A71D916D4A005F83E8 /* ImapSession.swift */,
-				84E1E0291DF5D4E500D45A31 /* ImapFetchFoldersOperation.swift */,
+				84E3DB4B1D9BB9F7003B598F /* IMAPFolder.swift */,
+				84E3DB511D9BCEED003B598F /* IMAPMessage.swift */,
+				84E3DB571D9BDD62003B598F /* IMAPMessagePart.swift */,
+				84CD9BDF1D9BE514000622CB /* IMAPMultipart.swift */,
+				84F7B4A31D916D4A005F83E8 /* IMAPNamespace.swift */,
+				84CD9BE51D9C0039000622CB /* IMAPNamespaceItem.swift */,
+				8494D6D31D9C06F5009EEE5E /* IMAPPart.swift */,
+				8494D6DB1D9C0DE8009EEE5E /* IMAPFolderInfo.swift */,
+				8494D6E11D9C11C7009EEE5E /* IMAPFolderStatus.swift */,
+				8494D6E31D9C2253009EEE5E /* IMAPSearchExpression.swift */,
+				84E3DB351D9A7059003B598F /* IMAPBaseOperation.swift */,
+				84F7B4A41D916D4A005F83E8 /* IMAPOperation.swift */,
+				84F7B49D1D916D4A005F83E8 /* IMAPAppendMessageOperation.swift */,
+				84F7B49E1D916D4A005F83E8 /* IMAPCopyMessagesOperation.swift */,
+				84F7B49F1D916D4A005F83E8 /* IMAPFetchContentOperation.swift */,
+				84F7B4A01D916D4A005F83E8 /* IMAPFetchMessagesOperation.swift */,
+				84F7B4A11D916D4A005F83E8 /* IMAPFolderInfoOperation.swift */,
+				84F7B4A21D916D4A005F83E8 /* IMAPFolderStatusOperation.swift */,
+				84F7B4A61D916D4A005F83E8 /* IMAPSearchOperation.swift */,
+				84B110A41D928E1D0079C769 /* IMAPIdleOperation.swift */,
+				84F7B4A71D916D4A005F83E8 /* IMAPSession.swift */,
+				84E1E0291DF5D4E500D45A31 /* IMAPFetchFoldersOperation.swift */,
 			);
 			name = imap;
 			sourceTree = "<group>";
@@ -4240,18 +4240,18 @@
 				849EA0D71D990E35000E4E4D /* COperation.cpp in Sources */,
 				8418C72E1DA3C74400B7FE35 /* CMessageBuilder.cpp in Sources */,
 				8418C7321DA3D42600B7FE35 /* CMessageParser.cpp in Sources */,
-				84E3DB521D9BCEED003B598F /* ImapMessage.swift in Sources */,
-				8494D6E41D9C2253009EEE5E /* ImapSearchExpression.swift in Sources */,
+				84E3DB521D9BCEED003B598F /* IMAPMessage.swift in Sources */,
+				8494D6E41D9C2253009EEE5E /* IMAPSearchExpression.swift in Sources */,
 				84E3DB3E1D9AA56A003B598F /* Dictionary+Mailcore.swift in Sources */,
-				84E3DB581D9BDD62003B598F /* ImapMessagePart.swift in Sources */,
+				84E3DB581D9BDD62003B598F /* IMAPMessagePart.swift in Sources */,
 				849EA0D81D990E35000E4E4D /* CAbstractMessage.cpp in Sources */,
 				849EA0D91D990E35000E4E4D /* CAbstractMessagePart.cpp in Sources */,
-				84B8921A1DA28121008FD1C4 /* SmtpOperation.swift in Sources */,
+				84B8921A1DA28121008FD1C4 /* SMTPOperation.swift in Sources */,
 				849EA0DA1D990E35000E4E4D /* CAbstractMultipart.cpp in Sources */,
 				849EA0DB1D990E35000E4E4D /* CAddress.cpp in Sources */,
-				84E3DB361D9A7059003B598F /* ImapBaseOperation.swift in Sources */,
-				84CD9BE01D9BE514000622CB /* ImapMultipart.swift in Sources */,
-				84A929141DA7B8480020205B /* HtmlRendererImapDelegate.swift in Sources */,
+				84E3DB361D9A7059003B598F /* IMAPBaseOperation.swift in Sources */,
+				84CD9BE01D9BE514000622CB /* IMAPMultipart.swift in Sources */,
+				84A929141DA7B8480020205B /* HTMLRendererImapDelegate.swift in Sources */,
 				849EA0DC1D990E35000E4E4D /* CAbstractPart.cpp in Sources */,
 				8494D6D11D9C03BB009EEE5E /* CIMAPPart.cpp in Sources */,
 				849EA0DD1D990E35000E4E4D /* CMessageHeader.cpp in Sources */,
@@ -4263,17 +4263,17 @@
 				849EA0E11D990E35000E4E4D /* CIMAPAsyncSession.cpp in Sources */,
 				849EA0E21D990E35000E4E4D /* CIMAPCopyMessagesOperation.cpp in Sources */,
 				849EA0E31D990E35000E4E4D /* CIMAPFetchContentOperation.cpp in Sources */,
-				8494D6D41D9C06F5009EEE5E /* ImapPart.swift in Sources */,
+				8494D6D41D9C06F5009EEE5E /* IMAPPart.swift in Sources */,
 				849EA0E41D990E35000E4E4D /* CIMAPFetchMessagesOperation.cpp in Sources */,
 				849EA0E51D990E35000E4E4D /* CIMAPFolderInfoOperation.cpp in Sources */,
-				84E3DB4C1D9BB9F7003B598F /* ImapFolder.swift in Sources */,
+				84E3DB4C1D9BB9F7003B598F /* IMAPFolder.swift in Sources */,
 				84E3DB551D9BDB41003B598F /* CIMAPMessagePart.cpp in Sources */,
-				84A929121DA7B5BB0020205B /* HtmlRendererDelegate.swift in Sources */,
+				84A929121DA7B5BB0020205B /* HTMLRendererDelegate.swift in Sources */,
 				849EA0E61D990E35000E4E4D /* CIMAPFolderStatusOperation.cpp in Sources */,
-				84B892201DA29A3B008FD1C4 /* SmtpSendOperation.swift in Sources */,
+				84B892201DA29A3B008FD1C4 /* SMTPSendOperation.swift in Sources */,
 				849EA0E71D990E35000E4E4D /* CIMAPNamespace.cpp in Sources */,
 				849EA0EA1D990E35000E4E4D /* СIMAPSearchOperation.cpp in Sources */,
-				8494D6DC1D9C0DE8009EEE5E /* ImapFolderInfo.swift in Sources */,
+				8494D6DC1D9C0DE8009EEE5E /* IMAPFolderInfo.swift in Sources */,
 				84E1E0271DF5D33B00D45A31 /* CIMAPFetchFoldersOperation.cpp in Sources */,
 				8418C7351DA3D84200B7FE35 /* MessageBuilder.swift in Sources */,
 				849EA0EB1D990E35000E4E4D /* CArray.cpp in Sources */,
@@ -4283,23 +4283,23 @@
 				849EA0ED1D990E35000E4E4D /* CObject.cpp in Sources */,
 				84E3DB341D997D32003B598F /* Operation.swift in Sources */,
 				84E3DB491D9BB29E003B598F /* CIMAPFolder.cpp in Sources */,
-				84F7B4AB1D916D4A005F83E8 /* ImapFetchMessagesOperation.swift in Sources */,
-				84CD9BE61D9C0039000622CB /* ImapNamespaceItem.swift in Sources */,
+				84F7B4AB1D916D4A005F83E8 /* IMAPFetchMessagesOperation.swift in Sources */,
+				84CD9BE61D9C0039000622CB /* IMAPNamespaceItem.swift in Sources */,
 				84F7B4981D916D0B005F83E8 /* Convertible.swift in Sources */,
-				84F7B4B11D916D4A005F83E8 /* ImapSearchOperation.swift in Sources */,
-				84F7B4AE1D916D4A005F83E8 /* ImapNamespace.swift in Sources */,
+				84F7B4B11D916D4A005F83E8 /* IMAPSearchOperation.swift in Sources */,
+				84F7B4AE1D916D4A005F83E8 /* IMAPNamespace.swift in Sources */,
 				843AFCDE1D9579F30086FB46 /* MessageHeader.swift in Sources */,
 				843AFCDA1D9579F30086FB46 /* AbstractMessagePart.swift in Sources */,
-				84E1E02A1DF5D4E500D45A31 /* ImapFetchFoldersOperation.swift in Sources */,
+				84E1E02A1DF5D4E500D45A31 /* IMAPFetchFoldersOperation.swift in Sources */,
 				8418C7371DA3D85900B7FE35 /* MessageParser.swift in Sources */,
 				84501D0D1DA511A400A9FF4D /* IndexSet.swift in Sources */,
-				8494D6E21D9C11C7009EEE5E /* ImapFolderStatus.swift in Sources */,
+				8494D6E21D9C11C7009EEE5E /* IMAPFolderStatus.swift in Sources */,
 				843AFCDD1D9579F30086FB46 /* Address.swift in Sources */,
 				84E3DB461D9AC3A6003B598F /* Array+Mailcore.swift in Sources */,
-				84F7B4B21D916D4A005F83E8 /* ImapSession.swift in Sources */,
+				84F7B4B21D916D4A005F83E8 /* IMAPSession.swift in Sources */,
 				848F95381D9D568B00058351 /* UInt32+Mailcore.swift in Sources */,
 				84A929191DA7BABF0020205B /* CAbstractMessageRendererCallback.cpp in Sources */,
-				84F7B4AD1D916D4A005F83E8 /* ImapFolderStatusOperation.swift in Sources */,
+				84F7B4AD1D916D4A005F83E8 /* IMAPFolderStatusOperation.swift in Sources */,
 				843AFCD91D9579F30086FB46 /* AbstractMessage.swift in Sources */,
 				843AFCDC1D9579F30086FB46 /* AbstractPart.swift in Sources */,
 				843AFCDB1D9579F30086FB46 /* AbstractMultipart.swift in Sources */,
@@ -4307,19 +4307,19 @@
 				84E3DB411D9AA676003B598F /* CDictionary.cpp in Sources */,
 				84E3DB391D9A7C93003B598F /* CIMAPIdleOperation.cpp in Sources */,
 				8418C72B1DA3C1DD00B7FE35 /* Attachment.swift in Sources */,
-				84F7B4AA1D916D4A005F83E8 /* ImapFetchContentOperation.swift in Sources */,
+				84F7B4AA1D916D4A005F83E8 /* IMAPFetchContentOperation.swift in Sources */,
 				8418C7271DA3BDFA00B7FE35 /* CAttachment.cpp in Sources */,
-				84F7B4AC1D916D4A005F83E8 /* ImapFolderInfoOperation.swift in Sources */,
-				84F7B4AF1D916D4A005F83E8 /* ImapOperation.swift in Sources */,
+				84F7B4AC1D916D4A005F83E8 /* IMAPFolderInfoOperation.swift in Sources */,
+				84F7B4AF1D916D4A005F83E8 /* IMAPOperation.swift in Sources */,
 				849EA1751D9928CE000E4E4D /* String+Mailcore.swift in Sources */,
 				84E3DB4F1D9BBDAD003B598F /* CIMAPMessage.cpp in Sources */,
-				84F7B4A91D916D4A005F83E8 /* ImapCopyMessagesOperation.swift in Sources */,
+				84F7B4A91D916D4A005F83E8 /* IMAPCopyMessagesOperation.swift in Sources */,
 				84B892141DA27A54008FD1C4 /* CSMTPOperation.cpp in Sources */,
 				84CD9BE31D9BFB37000622CB /* CIMAPNamespaceItem.cpp in Sources */,
-				84F7B4A81D916D4A005F83E8 /* ImapAppendMessageOperation.swift in Sources */,
+				84F7B4A81D916D4A005F83E8 /* IMAPAppendMessageOperation.swift in Sources */,
 				84A929161DA7B9790020205B /* AbstractMessageRendererCallback.swift in Sources */,
-				84B892181DA27FDD008FD1C4 /* SmtpSession.swift in Sources */,
-				84B110A51D928E1D0079C769 /* ImapIdleOperation.swift in Sources */,
+				84B892181DA27FDD008FD1C4 /* SMTPSession.swift in Sources */,
+				84B110A51D928E1D0079C769 /* IMAPIdleOperation.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

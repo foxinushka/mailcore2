@@ -1,6 +1,6 @@
 import Foundation
 
-public protocol HtmlRendererDelegate {
+public protocol HTMLRendererDelegate {
     
     func abstractMessage(_ msg: AbstractMessage, canPreviewPart: AbstractPart) -> Bool;
     

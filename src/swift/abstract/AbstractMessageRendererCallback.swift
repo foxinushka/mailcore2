@@ -4,8 +4,8 @@ internal class AbstractMessageRendererCallback {
     
     internal var message: AbstractMessage;
     
-    fileprivate var rendererDelegate: HtmlRendererDelegate?;
-    fileprivate var imapDelegate: HtmlRendererImapDelegate?;
+    fileprivate var rendererDelegate: HTMLRendererDelegate?;
+    fileprivate var imapDelegate: HTMLRendererImapDelegate?;
     private var nativeInstance: CAbstractMessageRendererCallback!;
     
     internal init(message: AbstractMessage) {
@@ -18,11 +18,11 @@ internal class AbstractMessageRendererCallback {
                                                                   prefetchAttachmentIMAPPart, prefetchImageIMAPPart, Unmanaged.passUnretained(self).toOpaque());
     }
     
-    internal func setHtmlRenderDelegate(delegate: HtmlRendererDelegate) {
+    internal func setHtmlRenderDelegate(delegate: HTMLRendererDelegate) {
         self.rendererDelegate = delegate;
     }
     
-    internal func setHtmlRenderImapDelegate(delegate: HtmlRendererImapDelegate) {
+    internal func setHtmlRenderImapDelegate(delegate: HTMLRendererImapDelegate) {
         self.imapDelegate = delegate;
     }
     
@@ -104,16 +104,16 @@ func filterHTMLForMessageBlock(ref: UnsafeRawPointer?, html: UnsafePointer<UInt1
 
 func dataForIMAPPart(ref: UnsafeRawPointer?, folder: UnsafePointer<UInt16>?, part: CIMAPPart) -> CData {
     let selfRef = Unmanaged<AbstractMessageRendererCallback>.fromOpaque(ref!).takeUnretainedValue()
-    let data = selfRef.imapDelegate!.abstractMessage(selfRef.message, dataForIMAPPart: ImapPart(part: part), folder: String(utf16: folder));
+    let data = selfRef.imapDelegate!.abstractMessage(selfRef.message, dataForIMAPPart: IMAPPart(part: part), folder: String(utf16: folder));
     return newCData(data.bytes(), data.length());
 }
 
 func prefetchAttachmentIMAPPart(ref: UnsafeRawPointer?, folder: UnsafePointer<UInt16>?, part: CIMAPPart) {
     let selfRef = Unmanaged<AbstractMessageRendererCallback>.fromOpaque(ref!).takeUnretainedValue()
-    selfRef.imapDelegate!.abstractMessage(selfRef.message, prefetchAttachmentIMAPPart: ImapPart(part: part), folder: String(utf16: folder));
+    selfRef.imapDelegate!.abstractMessage(selfRef.message, prefetchAttachmentIMAPPart: IMAPPart(part: part), folder: String(utf16: folder));
 }
 
 func prefetchImageIMAPPart(ref: UnsafeRawPointer?, folder: UnsafePointer<UInt16>?, part: CIMAPPart) {
     let selfRef = Unmanaged<AbstractMessageRendererCallback>.fromOpaque(ref!).takeUnretainedValue()
-    selfRef.imapDelegate!.abstractMessage(selfRef.message, prefetchImageIMAPPart: ImapPart(part: part), folder: String(utf16: folder));
+    selfRef.imapDelegate!.abstractMessage(selfRef.message, prefetchImageIMAPPart: IMAPPart(part: part), folder: String(utf16: folder));
 }

@@ -2,20 +2,20 @@ import Foundation
 
 /**
  The class is used to get folder metadata (like UIDVALIDITY, UIDNEXT, etc).
- @see IMAPFolderInfo
+ @see IMAPFolderStatus
  */
-public class ImapFolderInfoOperation : ImapBaseOperation {
+public class IMAPFolderStatusOperation : IMAPBaseOperation {
     
-    public typealias CompletionBlock = (Error?, ImapFolderInfo?) -> Void
-	
-	private var operation: CIMAPFolderInfoOperation;
+    public typealias CompletionBlock = (Error?, IMAPFolderStatus?) -> Void
+    
+    private var operation: CIMAPFolderStatusOperation;
     private var completionBlock : CompletionBlock?;
-
-	internal init(operation:CIMAPFolderInfoOperation) {
- 		self.operation = operation
+    
+    internal init(operation:CIMAPFolderStatusOperation) {
+        self.operation = operation
         super.init(baseOperation: operation.baseOperation);
-	}
-
+    }
+    
     deinit {
         completionBlock = nil;
     }
@@ -25,10 +25,10 @@ public class ImapFolderInfoOperation : ImapBaseOperation {
      
      @param completionBlock Called when the operation is finished.
      
-     - On success `error` will be nil and `info` will contain the folder metadata
+     - On success `error` will be nil and `status` will contain the status metadata
      
      - On failure, `error` will be set with `MCOErrorDomain` as domain and an
-     error code available in `MCOConstants.h`, `info` will be nil
+     error code available in `MCOConstants.h`, `status` will be nil
      */
     public func start(completionBlock: CompletionBlock?) {
         self.completionBlock = completionBlock;
@@ -47,7 +47,7 @@ public class ImapFolderInfoOperation : ImapBaseOperation {
         
         let errorCode = error();
         if errorCode == ErrorNone {
-            completionBlock!(nil, ImapFolderInfo(info: operation.info(operation)));
+            completionBlock!(nil, IMAPFolderStatus(status: operation.status(operation)));
         }
         else {
             completionBlock!(MailCoreError(code: errorCode), nil);

@@ -1,6 +1,6 @@
 import Foundation
 
-public class ImapNamespace {
+public class IMAPNamespace {
 	
 	private var nativeInstance:CIMAPNamespace;
     
@@ -19,8 +19,8 @@ public class ImapNamespace {
     /**
      Returns a simple namespace with only one item.
      */
-    static func namespace(prefix: String, delimiter: CChar) -> ImapNamespace {
-        return ImapNamespace(namespace: prefix.utf16({ newCIMAPNamespace($0, delimiter) }));
+    static func namespace(prefix: String, delimiter: CChar) -> IMAPNamespace {
+        return IMAPNamespace(namespace: prefix.utf16({ newCIMAPNamespace($0, delimiter) }));
     }
     
     /** Returns the prefix of the main item of this namespace. */

@@ -1,21 +1,22 @@
 import Foundation
 
-public class ImapFetchContentOperation : ImapBaseOperation {
+public class IMAPAppendMessageOperation : IMAPBaseOperation {
     
-    public typealias CompletionBlock = (Error?,  Data?) -> Void
-    
-    internal var operation: CIMAPFetchContentOperation;
+    public typealias CompletionBlock = (Error?, UInt32) -> Void
+	
+	internal var operation: CIMAPAppendMessageOperation;
     private var completionBlock : CompletionBlock?;
     public var progressBlock : OperationProgressBlock?;
-    
-    internal init(operation:CIMAPFetchContentOperation) {
+
+	internal init(operation:CIMAPAppendMessageOperation) {
         self.operation = operation;
         super.init(baseOperation: operation.baseOperation);
-    }
-    
-    deinit {
+	}
+
+	deinit {
+        progressBlock = nil;
         completionBlock = nil;
-    }
+	}
     
     public func start(completionBlock: CompletionBlock?) {
         self.completionBlock = completionBlock;
@@ -34,10 +35,10 @@ public class ImapFetchContentOperation : ImapBaseOperation {
         
         let errorCode = error();
         if errorCode == ErrorNone {
-            completionBlock!(nil, Data(cdata: operation.data(operation)));
+            completionBlock!(nil, operation.createdUID(operation));
         }
         else {
-            completionBlock!(MailCoreError(code: errorCode), nil);
+            completionBlock!(MailCoreError(code: errorCode), 0);
         }
         completionBlock = nil;
     }
@@ -49,4 +50,3 @@ public class ImapFetchContentOperation : ImapBaseOperation {
     }
     
 }
-

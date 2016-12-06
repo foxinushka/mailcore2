@@ -1,6 +1,6 @@
 import Foundation
 
-public class ImapSearchOperation : ImapBaseOperation {
+public class IMAPSearchOperation : IMAPBaseOperation {
     
     public typealias CompletionBlock = (Error?, IndexSet?) -> Void
 	

@@ -1,6 +1,6 @@
 import Foundation
 
-public class ImapFolderStatus {
+public class IMAPFolderStatus {
     
     private var nativeInstance:CIMAPFolderStatus;
     

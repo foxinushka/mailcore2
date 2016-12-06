@@ -1,6 +1,6 @@
 import Foundation
 
-public class ImapFolderInfo {
+public class IMAPFolderInfo {
     
     private var nativeInstance:CIMAPFolderInfo;
     

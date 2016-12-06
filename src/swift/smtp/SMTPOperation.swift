@@ -1,14 +1,21 @@
 import Foundation
 
-public class ImapOperation : ImapBaseOperation {
+public class SMTPOperation: Operation {
     
     public typealias CompletionBlock = (Error?) -> Void
     
+    internal var operation: CSMTPOperation;
+    public var session: SMTPSession?;
     private var completionBlock: CompletionBlock?;
-	
-	internal init(operation:CIMAPBaseOperation) {
-        super.init(baseOperation: operation);
-	}
+    
+    internal init(_ operation: CSMTPOperation) {
+        self.operation = operation;
+        super.init(operation.cOperation);
+    }
+    
+    deinit {
+        deleteCSMTPOperation(self.operation);
+    }
     
     public func start(completionBlock: CompletionBlock?) {
         self.completionBlock = completionBlock;
@@ -17,22 +24,25 @@ public class ImapOperation : ImapBaseOperation {
     
     public override func cancel() {
         self.completionBlock = nil;
-        super.cancel();
+        super.cancel()
     }
     
-    public override func operationCompleted() {
+    override public func operationCompleted() {
         if (completionBlock == nil) {
             return;
         }
         
-        let errorCode = error();
+        let errorCode = operation.error(operation);
         if errorCode == ErrorNone {
             completionBlock!(nil);
         }
         else {
+            //TODO: copy lastSMTPResponse info
             completionBlock!(MailCoreError(code: errorCode));
         }
         completionBlock = nil;
     }
+
+    
 
 }

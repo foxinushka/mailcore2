@@ -1,6 +1,6 @@
 import Foundation
 
-public class SmtpSendOperation : SmtpOperation {
+public class SMTPSendOperation : SMTPOperation {
     
     public typealias OperationProgressBlock = (UInt32, UInt32) -> Void
     
@@ -14,7 +14,7 @@ public class SmtpSendOperation : SmtpOperation {
 
 //MARK: C-Function
 func operationProgressCallback(_ ref: UnsafeRawPointer?, _ current: UInt32, _ max: UInt32) {
-    let selfRef = Unmanaged<SmtpSendOperation>.fromOpaque(ref!).takeUnretainedValue()
+    let selfRef = Unmanaged<SMTPSendOperation>.fromOpaque(ref!).takeUnretainedValue()
     if selfRef.progressBlock != nil {
         selfRef.progressBlock!(current, max)
     }

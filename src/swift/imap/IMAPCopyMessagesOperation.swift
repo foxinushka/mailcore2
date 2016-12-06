@@ -1,6 +1,6 @@
 import Foundation
 
-public class ImapCopyMessagesOperation : ImapBaseOperation {
+public class IMAPCopyMessagesOperation : IMAPBaseOperation {
     
     public typealias CompletionBlock = (Error?, Dictionary<UInt32, UInt32>?) -> Void
     

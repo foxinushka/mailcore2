@@ -1,6 +1,6 @@
 import Foundation
 
-public class ImapPart : AbstractPart {
+public class IMAPPart : AbstractPart {
     
     private var nativeInstance:CIMAPPart;
     

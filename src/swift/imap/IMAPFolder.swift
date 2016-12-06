@@ -1,6 +1,6 @@
 import Foundation
 
-public class ImapFolder: Convertible {
+public class IMAPFolder: Convertible {
     
     internal var nativeInstance:CIMAPFolder;
     

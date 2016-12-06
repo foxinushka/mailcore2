@@ -1,8 +1,8 @@
 import Foundation
 
-public class ImapFetchMessagesOperation : ImapBaseOperation {
+public class IMAPFetchMessagesOperation : IMAPBaseOperation {
     
-    public typealias CompletionBlock = (Error?, Array<ImapMessage>?, IndexSet?) -> Void
+    public typealias CompletionBlock = (Error?, Array<IMAPMessage>?, IndexSet?) -> Void
     
     internal var operation: CIMAPFetchMessagesOperation;
     private var completionBlock : CompletionBlock?;
@@ -34,7 +34,7 @@ public class ImapFetchMessagesOperation : ImapBaseOperation {
         
         let errorCode = error();
         if errorCode == ErrorNone {
-            completionBlock!(nil, Array<ImapMessage>.cast(operation.messages(operation)), IndexSet(operation.vanishedMessages(operation)));
+            completionBlock!(nil, Array<IMAPMessage>.cast(operation.messages(operation)), IndexSet(operation.vanishedMessages(operation)));
         }
         else {
             completionBlock!(MailCoreError(code: errorCode), nil, nil);
