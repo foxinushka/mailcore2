@@ -205,6 +205,9 @@
 		84CFA99019F724E500FE35D2 /* MCNNTPFetchServerTimeOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 84CFA98D19F724E500FE35D2 /* MCNNTPFetchServerTimeOperation.cpp */; };
 		84CFA99519F725CB00FE35D2 /* MCONNTPFetchServerTimeOperation.mm in Sources */ = {isa = PBXBuildFile; fileRef = 84CFA99419F725CB00FE35D2 /* MCONNTPFetchServerTimeOperation.mm */; };
 		84CFA99619F725CB00FE35D2 /* MCONNTPFetchServerTimeOperation.mm in Sources */ = {isa = PBXBuildFile; fileRef = 84CFA99419F725CB00FE35D2 /* MCONNTPFetchServerTimeOperation.mm */; };
+		84D344DB1DF7090700B81A94 /* CIMAPFetchContentToFileOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 84D344D91DF7090700B81A94 /* CIMAPFetchContentToFileOperation.cpp */; };
+		84D344DC1DF7090700B81A94 /* CIMAPFetchContentToFileOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 84D344DA1DF7090700B81A94 /* CIMAPFetchContentToFileOperation.h */; };
+		84D344DE1DF70DB600B81A94 /* IMAPFetchContentToFileOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D344DD1DF70DB600B81A94 /* IMAPFetchContentToFileOperation.swift */; };
 		84D7372C199BF66C005124E5 /* MCNNTPAsyncSession.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 84D7372A199BF66C005124E5 /* MCNNTPAsyncSession.cpp */; };
 		84D7372D199BF66C005124E5 /* MCNNTPAsyncSession.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 84D7372A199BF66C005124E5 /* MCNNTPAsyncSession.cpp */; };
 		84D73730199BF704005124E5 /* MCNNTPOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 84D7372E199BF704005124E5 /* MCNNTPOperation.cpp */; };
@@ -1820,6 +1823,9 @@
 		84CFA98E19F724E500FE35D2 /* MCNNTPFetchServerTimeOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCNNTPFetchServerTimeOperation.h; sourceTree = "<group>"; };
 		84CFA99319F725CB00FE35D2 /* MCONNTPFetchServerTimeOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCONNTPFetchServerTimeOperation.h; sourceTree = "<group>"; };
 		84CFA99419F725CB00FE35D2 /* MCONNTPFetchServerTimeOperation.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MCONNTPFetchServerTimeOperation.mm; sourceTree = "<group>"; };
+		84D344D91DF7090700B81A94 /* CIMAPFetchContentToFileOperation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CIMAPFetchContentToFileOperation.cpp; path = c/imap/CIMAPFetchContentToFileOperation.cpp; sourceTree = "<group>"; };
+		84D344DA1DF7090700B81A94 /* CIMAPFetchContentToFileOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CIMAPFetchContentToFileOperation.h; path = c/imap/CIMAPFetchContentToFileOperation.h; sourceTree = "<group>"; };
+		84D344DD1DF70DB600B81A94 /* IMAPFetchContentToFileOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = IMAPFetchContentToFileOperation.swift; path = swift/imap/IMAPFetchContentToFileOperation.swift; sourceTree = "<group>"; };
 		84D73729199BF63F005124E5 /* MCAsyncNNTP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = MCAsyncNNTP.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		84D7372A199BF66C005124E5 /* MCNNTPAsyncSession.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; lineEnding = 0; path = MCNNTPAsyncSession.cpp; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
 		84D7372B199BF66C005124E5 /* MCNNTPAsyncSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCNNTPAsyncSession.h; sourceTree = "<group>"; };
@@ -2855,6 +2861,8 @@
 				8491BB661DF6F64400E6D679 /* CIMAPCheckAccountOperation.h */,
 				8491BB6B1DF7028C00E6D679 /* CIMAPCustomCommandOperation.cpp */,
 				8491BB6C1DF7028C00E6D679 /* CIMAPCustomCommandOperation.h */,
+				84D344D91DF7090700B81A94 /* CIMAPFetchContentToFileOperation.cpp */,
+				84D344DA1DF7090700B81A94 /* CIMAPFetchContentToFileOperation.h */,
 			);
 			name = imap;
 			sourceTree = "<group>";
@@ -2947,6 +2955,7 @@
 				8491BB5F1DF6E66F00E6D679 /* IMAPCapabilityOperation.swift */,
 				8491BB691DF6FA5000E6D679 /* IMAPCheckAccountOperation.swift */,
 				8491BB6F1DF7057800E6D679 /* IMAPCustomCommandOperation.swift */,
+				84D344DD1DF70DB600B81A94 /* IMAPFetchContentToFileOperation.swift */,
 			);
 			name = imap;
 			sourceTree = "<group>";
@@ -3838,6 +3847,7 @@
 				84E1E0281DF5D33B00D45A31 /* CIMAPFetchFoldersOperation.h in Headers */,
 				849EA0C21D990E0D000E4E4D /* CAddress.h in Headers */,
 				849EA0C31D990E0D000E4E4D /* CAbstractPart.h in Headers */,
+				84D344DC1DF7090700B81A94 /* CIMAPFetchContentToFileOperation.h in Headers */,
 				849EA0C41D990E0D000E4E4D /* CMessageHeader.h in Headers */,
 				84B892111DA268F8008FD1C4 /* CSMTPSession.h in Headers */,
 				849EA1701D99175E000E4E4D /* swiftmailcore2-Bridging-Header.h in Headers */,
@@ -4317,8 +4327,10 @@
 				849EA0ED1D990E35000E4E4D /* CObject.cpp in Sources */,
 				84E3DB341D997D32003B598F /* Operation.swift in Sources */,
 				84E3DB491D9BB29E003B598F /* CIMAPFolder.cpp in Sources */,
+				84D344DE1DF70DB600B81A94 /* IMAPFetchContentToFileOperation.swift in Sources */,
 				84F7B4AB1D916D4A005F83E8 /* IMAPFetchMessagesOperation.swift in Sources */,
 				84CD9BE61D9C0039000622CB /* IMAPNamespaceItem.swift in Sources */,
+				84D344DB1DF7090700B81A94 /* CIMAPFetchContentToFileOperation.cpp in Sources */,
 				84F7B4981D916D0B005F83E8 /* Convertible.swift in Sources */,
 				84F7B4B11D916D4A005F83E8 /* IMAPSearchOperation.swift in Sources */,
 				84F7B4AE1D916D4A005F83E8 /* IMAPNamespace.swift in Sources */,

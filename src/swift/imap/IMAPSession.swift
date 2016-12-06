@@ -477,5 +477,38 @@ public class IMAPSession {
     public func customCommandOperation(_ command: String) -> IMAPCustomCommandOperation {
         return IMAPCustomCommandOperation.init(operation: command.utf16({ session.customCommandOperation(session, $0) }))
     }
+    
+    /**
+     Returns an operation to fetch an attachment to a file.
+     @param  urgent is set to YES, an additional connection to the same folder might be opened to fetch the content.
+     Operation will be perform in a memory efficient manner.
+     
+     MCOIMAPFetchContentToFileOperation * op = [session fetchMessageAttachmentToFileOperationWithFolder:@"INBOX"
+     uid:456
+     partID:@"1.2"
+     encoding:MCOEncodingBase64
+     filename:filename
+     urgent:YES];
+     
+     // Optionally, explicitly enable chunked mode
+     [op setLoadingByChunksEnabled:YES];
+     [op setChunksSize:1024*1024];
+     // need in chunked mode for correct progress indication
+     [op setEstimatedSize:sizeOfAttachFromBodystructure];
+     
+     [op start:^(NSError * __nullable error) {
+     ...
+     }];
+     
+     */
+    func fetchMessageAttachmentToFileOperation(folder: String, uid: UInt32, partID: String, encoding: Encoding, filename:String, urgent: Bool) -> IMAPFetchContentToFileOperation {
+        return IMAPFetchContentToFileOperation(operation:  folder.utf16({ folderPtr in
+            partID.utf16({ partIDPtr  in
+                filename.utf16({ filenamePtr in
+                    session.fetchMessageAttachmentToFileOperation(session, folderPtr, uid, partIDPtr, encoding, filenamePtr, urgent)
+                })
+            })
+        }))
+    }
 
 }

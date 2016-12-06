@@ -79,6 +79,10 @@ void setConnectionLogger(struct CIMAPAsyncSession self, ConnectionLogger logger)
     }
 }
 
+CIMAPFetchContentToFileOperation fetchMessageAttachmentToFileOperation(struct CIMAPAsyncSession self, const UChar* folder, uint32_t uid, const UChar* partID, Encoding encoding, const UChar* filename, bool urgent){
+    return newCIMAPFetchContentToFileOperation(self.instance->fetchMessageAttachmentToFileByUIDOperation(new mailcore::String(folder), uid, new mailcore::String(partID), ((mailcore::Encoding) encoding), new mailcore::String(filename), urgent));
+}
+
 CIMAPCustomCommandOperation customCommandOperation(struct CIMAPAsyncSession self, const UChar *command) {
     return newCIMAPCustomCommandOperation(self.instance->customCommand(new mailcore::String(command), false));
 }
