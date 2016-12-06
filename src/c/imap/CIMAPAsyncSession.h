@@ -26,6 +26,7 @@
 #include "CMessageConstants.h"
 #include "CIMAPIdleOperation.h"
 #include "CIMAPFetchFoldersOperation.h"
+#include "CIMAPCapabilityOperation.h"
 
 #ifdef __cplusplus
 
@@ -83,12 +84,13 @@ extern "C" {
         CIMAPBaseOperation  (*disconnectOperation)(struct CIMAPAsyncSession self);
         CIMAPBaseOperation  (*noopOperation)(struct CIMAPAsyncSession self);
         CIMAPBaseOperation  (*checkAccountOperation)(struct CIMAPAsyncSession self);
-        CIMAPBaseOperation  (*capabilityOperation)(struct CIMAPAsyncSession self);
         CIMAPBaseOperation  (*expungeOperation)(struct CIMAPAsyncSession self, const UChar *folder);
         CIMAPBaseOperation  (*createFolderOperation)(struct CIMAPAsyncSession self, const UChar *folder);
         CIMAPBaseOperation  (*deleteFolderOperation)(struct CIMAPAsyncSession self, const UChar *folder);
         CIMAPBaseOperation  (*storeFlagsByUIDOperation)(struct CIMAPAsyncSession self, const UChar *folder, CIndexSet set, IMAPStoreFlagsRequestKind kind, MessageFlag flags, CArray customFlags);
-
+        
+        
+        CIMAPCapabilityOperation    (*capabilityOperation)(struct CIMAPAsyncSession self);
         CIMAPFetchFoldersOperation  (*fetchAllFoldersOperation)(struct CIMAPAsyncSession self);
         CIMAPAppendMessageOperation (*appendMessageOperation)(struct CIMAPAsyncSession session, const UChar *folder, const UChar *messagePath, MessageFlag flags, CArray array);
         CIMAPFetchMessagesOperation (*fetchMessagesByNumberOperation)(struct CIMAPAsyncSession session, const UChar *folder, IMAPMessagesRequestKind kind, CIndexSet numbers);

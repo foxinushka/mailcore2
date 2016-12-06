@@ -91,8 +91,8 @@ CIMAPBaseOperation checkAccountOperation(CIMAPAsyncSession self){
     return newCIMAPBaseOperation(self.instance->checkAccountOperation());
 }
 
-CIMAPBaseOperation capabilityOperation(CIMAPAsyncSession self){
-    return newCIMAPBaseOperation(self.instance->capabilityOperation());
+CIMAPCapabilityOperation capabilityOperation(CIMAPAsyncSession self){
+    return newCIMAPCapabilityOperation(self.instance->capabilityOperation());
 }
 
 CIMAPFetchFoldersOperation fetchAllFoldersOperation(CIMAPAsyncSession self){

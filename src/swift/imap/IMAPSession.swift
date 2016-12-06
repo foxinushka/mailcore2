@@ -187,8 +187,8 @@ public class IMAPSession {
      }
      }];
      */
-    public func capabilityOperation() -> IMAPOperation {
-    	return IMAPOperation(operation: session.capabilityOperation(session))
+    public func capabilityOperation() -> IMAPCapabilityOperation {
+    	return IMAPCapabilityOperation(operation: session.capabilityOperation(session))
     }
     
     /**
