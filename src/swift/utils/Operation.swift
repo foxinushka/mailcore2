@@ -69,6 +69,6 @@ public class Operation {
 
 //MARK: C Functions
 public func operationCompletedCallback(ref: UnsafeRawPointer?) {
-    let retained = Unmanaged<Operation>.fromOpaque(ref!).takeUnretainedValue()
-    retained.operationCompleted()
+    let selfRef = Unmanaged<Operation>.fromOpaque(ref!).takeUnretainedValue()
+    selfRef.operationCompleted()
 }

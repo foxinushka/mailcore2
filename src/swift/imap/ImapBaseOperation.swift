@@ -11,7 +11,7 @@ public class ImapBaseOperation : Operation {
     internal init(baseOperation: CIMAPBaseOperation) {
         self.baseOperation = baseOperation;
         super.init(baseOperation.cOperation);
-        self.baseOperation = self.baseOperation.setProgressBlocks(self.baseOperation, itemProgress, bodyProgress);
+        self.baseOperation = self.baseOperation.setProgressBlocks(self.baseOperation, itemProgressCallback, bodyProgressCallback, Unmanaged.passUnretained(self).toOpaque());
     }
     
     deinit {
@@ -30,3 +30,15 @@ public class ImapBaseOperation : Operation {
     
     }
 }
+
+//MARK: C Functions
+public func itemProgressCallback(ref: UnsafeRawPointer?, current: UInt32, maximum: UInt32) {
+    let selfRef = Unmanaged<ImapBaseOperation>.fromOpaque(ref!).takeUnretainedValue()
+    selfRef.itemProgress(current: current, maximum: maximum)
+}
+
+public func bodyProgressCallback(ref: UnsafeRawPointer?, current: UInt32, maximum: UInt32) {
+    let selfRef = Unmanaged<ImapBaseOperation>.fromOpaque(ref!).takeUnretainedValue()
+    selfRef.bodyProgress(current: current, maximum: maximum)
+}
+

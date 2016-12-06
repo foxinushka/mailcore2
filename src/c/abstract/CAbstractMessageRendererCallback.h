@@ -18,24 +18,24 @@ class AbstractMessageRendererCallback;
 extern "C" {
 #endif
     
-    typedef uint8_t         (^CanPreviewPartBlock)(CAbstractPart part);
-    typedef uint8_t         (^ShouldShowPartBlock)(CAbstractPart part);
-    typedef CDictionary     (^TemplateValuesForHeaderBlock)(CMessageHeader header);
-    typedef CDictionary     (^TemplateValuesForPartBlock)(CAbstractPart part);
-    typedef CObject         (^TemplateForMainHeaderBlock)(CMessageHeader header);
-    typedef CObject         (^TemplateForImageBlock)(CAbstractPart part);
-    typedef CObject         (^TemplateForAttachmentBlock)(CAbstractPart part);
-    typedef CObject         (^TemplateForMessageBlock)(CAbstractMessage message);
-    typedef CObject         (^TemplateForEmbeddedMessageBlock)(CAbstractMessagePart part);
-    typedef CObject         (^TemplateForEmbeddedMessageHeaderBlock)(CMessageHeader header);
-    typedef CObject         (^TemplateForAttachmentSeparatorBlock)();
-    typedef CObject         (^CleanHTMLForPartBlock)(const UChar* html);
-    typedef CObject         (^FilterHTMLForPartBlock)(const UChar* html);
-    typedef CObject         (^FilterHTMLForMessageBlock)(const UChar* html);
+    typedef uint8_t         (*CanPreviewPartBlock)(const void* userInfo, CAbstractPart part);
+    typedef uint8_t         (*ShouldShowPartBlock)(const void* userInfo, CAbstractPart part);
+    typedef CDictionary     (*TemplateValuesForHeaderBlock)(const void* userInfo, CMessageHeader header);
+    typedef CDictionary     (*TemplateValuesForPartBlock)(const void* userInfo, CAbstractPart part);
+    typedef CObject         (*TemplateForMainHeaderBlock)(const void* userInfo, CMessageHeader header);
+    typedef CObject         (*TemplateForImageBlock)(const void* userInfo, CAbstractPart part);
+    typedef CObject         (*TemplateForAttachmentBlock)(const void* userInfo, CAbstractPart part);
+    typedef CObject         (*TemplateForMessageBlock)(const void* userInfo, CAbstractMessage message);
+    typedef CObject         (*TemplateForEmbeddedMessageBlock)(const void* userInfo, CAbstractMessagePart part);
+    typedef CObject         (*TemplateForEmbeddedMessageHeaderBlock)(const void* userInfo, CMessageHeader header);
+    typedef CObject         (*TemplateForAttachmentSeparatorBlock)(const void* userInfo);
+    typedef CObject         (*CleanHTMLForPartBlock)(const void* userInfo, const UChar* html);
+    typedef CObject         (*FilterHTMLForPartBlock)(const void* userInfo, const UChar* html);
+    typedef CObject         (*FilterHTMLForMessageBlock)(const void* userInfo, const UChar* html);
     
-    typedef CData           (^DataForIMAPPartBlock)(const UChar* folder, CIMAPPart part);
-    typedef void            (^PrefetchAttachmentIMAPPartBlock)(const UChar* folder, CIMAPPart part);
-    typedef void            (^PrefetchImageIMAPPartBlock)(const UChar* folder, CIMAPPart part);
+    typedef CData           (*DataForIMAPPartBlock)(const void* userInfo, const UChar* folder, CIMAPPart part);
+    typedef void            (*PrefetchAttachmentIMAPPartBlock)(const void* userInfo, const UChar* folder, CIMAPPart part);
+    typedef void            (*PrefetchImageIMAPPartBlock)(const void* userInfo, const UChar* folder, CIMAPPart part);
     
     struct CAbstractMessageRendererCallback {
 #ifdef __cplusplus
@@ -43,31 +43,27 @@ extern "C" {
 #else
         void*                                   callbackBridge;
 #endif
-        
-        void (*setHtmlRendererDelegateCallbacks)(struct CAbstractMessageRendererCallback self,
-                                                              CanPreviewPartBlock canPreviewPartBlock,
-                                                              ShouldShowPartBlock shouldShowPartBlock,
-                                                              TemplateValuesForHeaderBlock templateValuesForHeaderBlock,
-                                                              TemplateValuesForPartBlock templateValuesForPartBlock,
-                                                              TemplateForMainHeaderBlock templateForMainHeaderBlock,
-                                                              TemplateForImageBlock templateForImageBlock,
-                                                              TemplateForAttachmentBlock templateForAttachmentBlock,
-                                                              TemplateForMessageBlock templateForMessageBlock,
-                                                              TemplateForEmbeddedMessageBlock templateForEmbeddedMessageBlock,
-                                                              TemplateForEmbeddedMessageHeaderBlock templateForEmbeddedMessageHeaderBlock,
-                                                              TemplateForAttachmentSeparatorBlock templateForAttachmentSeparatorBlock,
-                                                              CleanHTMLForPartBlock cleanHTMLForPartBlock,
-                                                              FilterHTMLForPartBlock filterHTMLForPartBlock,
-                                                              FilterHTMLForMessageBlock filterHTMLForMessageBlock);
-        
-        void (*setHtmlRedererImapDelefate)(struct CAbstractMessageRendererCallback self,
-                                 DataForIMAPPartBlock dataForIMAPPartBlock,
-                                 PrefetchAttachmentIMAPPartBlock prefetchAttachmentIMAPPartBlock,
-                                 PrefetchImageIMAPPartBlock prefetchImageIMAPPartBlock);
     };
     typedef struct CAbstractMessageRendererCallback CAbstractMessageRendererCallback;
     
-    CAbstractMessageRendererCallback newCAbstractMessageRendererCallback();
+    CAbstractMessageRendererCallback newCAbstractMessageRendererCallback(CanPreviewPartBlock canPreviewPartBlock,
+                                                                         ShouldShowPartBlock shouldShowPartBlock,
+                                                                         TemplateValuesForHeaderBlock templateValuesForHeaderBlock,
+                                                                         TemplateValuesForPartBlock templateValuesForPartBlock,
+                                                                         TemplateForMainHeaderBlock templateForMainHeaderBlock,
+                                                                         TemplateForImageBlock templateForImageBlock,
+                                                                         TemplateForAttachmentBlock templateForAttachmentBlock,
+                                                                         TemplateForMessageBlock templateForMessageBlock,
+                                                                         TemplateForEmbeddedMessageBlock templateForEmbeddedMessageBlock,
+                                                                         TemplateForEmbeddedMessageHeaderBlock templateForEmbeddedMessageHeaderBlock,
+                                                                         TemplateForAttachmentSeparatorBlock templateForAttachmentSeparatorBlock,
+                                                                         CleanHTMLForPartBlock cleanHTMLForPartBlock,
+                                                                         FilterHTMLForPartBlock filterHTMLForPartBlock,
+                                                                         FilterHTMLForMessageBlock filterHTMLForMessageBlock,
+                                                                         DataForIMAPPartBlock dataForIMAPPartBlock,
+                                                                         PrefetchAttachmentIMAPPartBlock prefetchAttachmentIMAPPartBlock,
+                                                                         PrefetchImageIMAPPartBlock prefetchImageIMAPPartBlock,
+                                                                         const void* userInfo);
     
     void deleteCAbstractMessageRendererCallback(CAbstractMessageRendererCallback self);
     

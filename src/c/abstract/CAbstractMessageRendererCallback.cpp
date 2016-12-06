@@ -4,24 +4,24 @@
 
 class AbstractMessageRendererCallback : public mailcore::Object, public mailcore::HTMLRendererTemplateCallback, public mailcore::HTMLRendererIMAPCallback {
 public:
-    AbstractMessageRendererCallback() {
-
-    }
-    
-    void setHtmlRendererDelegateCallbacks(CanPreviewPartBlock canPreviewPartBlock,
-                                          ShouldShowPartBlock shouldShowPartBlock,
-                                          TemplateValuesForHeaderBlock templateValuesForHeaderBlock,
-                                          TemplateValuesForPartBlock templateValuesForPartBlock,
-                                          TemplateForMainHeaderBlock templateForMainHeaderBlock,
-                                          TemplateForImageBlock templateForImageBlock,
-                                          TemplateForAttachmentBlock templateForAttachmentBlock,
-                                          TemplateForMessageBlock templateForMessageBlock,
-                                          TemplateForEmbeddedMessageBlock templateForEmbeddedMessageBlock,
-                                          TemplateForEmbeddedMessageHeaderBlock templateForEmbeddedMessageHeaderBlock,
-                                          TemplateForAttachmentSeparatorBlock templateForAttachmentSeparatorBlock,
-                                          CleanHTMLForPartBlock cleanHTMLForPartBlock,
-                                          FilterHTMLForPartBlock filterHTMLForPartBlock,
-                                          FilterHTMLForMessageBlock filterHTMLForMessageBlock) {
+    AbstractMessageRendererCallback(CanPreviewPartBlock canPreviewPartBlock,
+                                    ShouldShowPartBlock shouldShowPartBlock,
+                                    TemplateValuesForHeaderBlock templateValuesForHeaderBlock,
+                                    TemplateValuesForPartBlock templateValuesForPartBlock,
+                                    TemplateForMainHeaderBlock templateForMainHeaderBlock,
+                                    TemplateForImageBlock templateForImageBlock,
+                                    TemplateForAttachmentBlock templateForAttachmentBlock,
+                                    TemplateForMessageBlock templateForMessageBlock,
+                                    TemplateForEmbeddedMessageBlock templateForEmbeddedMessageBlock,
+                                    TemplateForEmbeddedMessageHeaderBlock templateForEmbeddedMessageHeaderBlock,
+                                    TemplateForAttachmentSeparatorBlock templateForAttachmentSeparatorBlock,
+                                    CleanHTMLForPartBlock cleanHTMLForPartBlock,
+                                    FilterHTMLForPartBlock filterHTMLForPartBlock,
+                                    FilterHTMLForMessageBlock filterHTMLForMessageBlock,
+                                    DataForIMAPPartBlock dataForIMAPPartBlock,
+                                    PrefetchAttachmentIMAPPartBlock prefetchAttachmentIMAPPartBlock,
+                                    PrefetchImageIMAPPartBlock prefetchImageIMAPPartBlock,
+                                    const void* userInfo) {
         this->canPreviewPartBlock = canPreviewPartBlock;
         this->shouldShowPartBlock = shouldShowPartBlock;
         this->templateValuesForHeaderBlock = templateValuesForHeaderBlock;
@@ -36,26 +36,22 @@ public:
         this->cleanHTMLForPartBlock = cleanHTMLForPartBlock;
         this->filterHTMLForPartBlock = filterHTMLForPartBlock;
         this->filterHTMLForMessageBlock = filterHTMLForMessageBlock;
-    }
-    
-    void setHtmlRedererImapDelefate(DataForIMAPPartBlock dataForIMAPPartBlock,
-                                    PrefetchAttachmentIMAPPartBlock prefetchAttachmentIMAPPartBlock,
-                                    PrefetchImageIMAPPartBlock prefetchImageIMAPPartBlock) {
         this->dataForIMAPPartBlock = dataForIMAPPartBlock;
         this->prefetchAttachmentIMAPPartBlock = prefetchAttachmentIMAPPartBlock;
         this->prefetchImageIMAPPartBlock = prefetchImageIMAPPartBlock;
+        this->userInfo = userInfo;
     }
     
     virtual bool canPreviewPart(mailcore::AbstractPart * part) {
         if (canPreviewPartBlock != NULL) {
-            return canPreviewPartBlock(newCAbstractPart(part)) > 0;
+            return canPreviewPartBlock(userInfo, newCAbstractPart(part)) > 0;
         }
         return HTMLRendererTemplateCallback::canPreviewPart(part);
     }
     
     virtual bool shouldShowPart(mailcore::AbstractPart * part) {
         if (shouldShowPartBlock != NULL) {
-            return shouldShowPartBlock(newCAbstractPart(part)) > 0;
+            return shouldShowPartBlock(userInfo, newCAbstractPart(part)) > 0;
         }
         return HTMLRendererTemplateCallback::shouldShowPart(part);
     }
@@ -63,7 +59,7 @@ public:
     virtual mailcore::HashMap * templateValuesForHeader(mailcore::MessageHeader * header) {
         mailcore::HashMap * result = NULL;
         if (templateValuesForHeaderBlock != NULL) {
-            result = templateValuesForHeaderBlock(newCMessageHeader(header)).instance;
+            result = templateValuesForHeaderBlock(userInfo, newCMessageHeader(header)).instance;
         }
         if (result == NULL) {
             result = HTMLRendererTemplateCallback::templateValuesForHeader(header);
@@ -74,7 +70,7 @@ public:
     virtual mailcore::HashMap * templateValuesForPart(mailcore::AbstractPart * part) {
         mailcore::HashMap * result = NULL;
         if (templateValuesForPartBlock != NULL) {
-            result = templateValuesForPartBlock(newCAbstractPart(part)).instance;
+            result = templateValuesForPartBlock(userInfo, newCAbstractPart(part)).instance;
         }
         if (result == NULL) {
             result = HTMLRendererTemplateCallback::templateValuesForPart(part);
@@ -85,7 +81,7 @@ public:
     virtual mailcore::String * templateForMainHeader(mailcore::MessageHeader * header) {
         mailcore::String * result = NULL;
         if (templateForMainHeaderBlock != NULL) {
-            result = reinterpret_cast<mailcore::String*>(templateForMainHeaderBlock(newCMessageHeader(header)).instance) ;
+            result = reinterpret_cast<mailcore::String*>(templateForMainHeaderBlock(userInfo, newCMessageHeader(header)).instance) ;
         }
         if (result == NULL) {
             result = HTMLRendererTemplateCallback::templateForMainHeader(header);
@@ -96,7 +92,7 @@ public:
     virtual mailcore::String * templateForImage(mailcore::AbstractPart * part) {
         mailcore::String * result = NULL;
         if (templateForImageBlock != NULL) {
-            result = reinterpret_cast<mailcore::String*>(templateForImageBlock(newCAbstractPart(part)).instance);
+            result = reinterpret_cast<mailcore::String*>(templateForImageBlock(userInfo, newCAbstractPart(part)).instance);
         }
         if (result == NULL) {
             result = HTMLRendererTemplateCallback::templateForImage(part);
@@ -107,7 +103,7 @@ public:
     virtual mailcore::String * templateForAttachment(mailcore::AbstractPart * part) {
         mailcore::String * result = NULL;
         if (templateForAttachmentBlock != NULL) {
-            result = reinterpret_cast<mailcore::String*>(templateForAttachmentBlock(newCAbstractPart(part)).instance);
+            result = reinterpret_cast<mailcore::String*>(templateForAttachmentBlock(userInfo, newCAbstractPart(part)).instance);
         }
         if (result == NULL) {
             result = HTMLRendererTemplateCallback::templateForAttachment(part);
@@ -118,7 +114,7 @@ public:
     virtual mailcore::String * templateForMessage(mailcore::AbstractMessage * message) {
         mailcore::String * result = NULL;
         if (templateForMessageBlock != NULL) {
-            result = reinterpret_cast<mailcore::String*>(templateForMessageBlock(newCAbstractMessage(message)).instance);
+            result = reinterpret_cast<mailcore::String*>(templateForMessageBlock(userInfo, newCAbstractMessage(message)).instance);
         }
         if (result == NULL) {
             result = HTMLRendererTemplateCallback::templateForMessage(message);
@@ -129,7 +125,7 @@ public:
     virtual mailcore::String * templateForEmbeddedMessage(mailcore::AbstractMessagePart * part) {
         mailcore::String * result = NULL;
         if (templateForEmbeddedMessageBlock != NULL) {
-            result = reinterpret_cast<mailcore::String*>(templateForEmbeddedMessageBlock(newCAbstractMessagePart(part)).instance);
+            result = reinterpret_cast<mailcore::String*>(templateForEmbeddedMessageBlock(userInfo, newCAbstractMessagePart(part)).instance);
         }
         if (result == NULL) {
             result = HTMLRendererTemplateCallback::templateForEmbeddedMessage(part);
@@ -140,7 +136,7 @@ public:
     virtual mailcore::String * templateForEmbeddedMessageHeader(mailcore::MessageHeader * header) {
         mailcore::String * result = NULL;
         if (templateForEmbeddedMessageHeaderBlock != NULL) {
-            result = reinterpret_cast<mailcore::String*>(templateForEmbeddedMessageHeaderBlock(newCMessageHeader(header)).instance);
+            result = reinterpret_cast<mailcore::String*>(templateForEmbeddedMessageHeaderBlock(userInfo, newCMessageHeader(header)).instance);
         }
         if (result == NULL) {
             result = HTMLRendererTemplateCallback::templateForEmbeddedMessageHeader(header);
@@ -151,7 +147,7 @@ public:
     virtual mailcore::String * templateForAttachmentSeparator() {
         mailcore::String * result = NULL;
         if (templateForAttachmentSeparatorBlock != NULL) {
-            result = reinterpret_cast<mailcore::String*>(templateForAttachmentSeparatorBlock().instance);
+            result = reinterpret_cast<mailcore::String*>(templateForAttachmentSeparatorBlock(userInfo).instance);
         }
         if (result == NULL) {
             result = HTMLRendererTemplateCallback::templateForAttachmentSeparator();
@@ -162,7 +158,7 @@ public:
     virtual mailcore::String * cleanHTMLForPart(mailcore::String * html) {
         mailcore::String * result = NULL;
         if (cleanHTMLForPartBlock != NULL) {
-            result = reinterpret_cast<mailcore::String*>(cleanHTMLForPartBlock(html->unicodeCharacters()).instance);
+            result = reinterpret_cast<mailcore::String*>(cleanHTMLForPartBlock(userInfo, html->unicodeCharacters()).instance);
         }
         if (result == NULL) {
             result = HTMLRendererTemplateCallback::cleanHTMLForPart(html);
@@ -173,7 +169,7 @@ public:
     virtual mailcore::String * filterHTMLForPart(mailcore::String * html) {
         mailcore::String * result = NULL;
         if (filterHTMLForPartBlock != NULL) {
-            result = reinterpret_cast<mailcore::String*>(filterHTMLForPartBlock(html->unicodeCharacters()).instance);
+            result = reinterpret_cast<mailcore::String*>(filterHTMLForPartBlock(userInfo, html->unicodeCharacters()).instance);
         }
         if (result == NULL) {
             result = HTMLRendererTemplateCallback::filterHTMLForPart(html);
@@ -184,7 +180,7 @@ public:
     virtual mailcore::String * filterHTMLForMessage(mailcore::String * html) {
         mailcore::String * result = NULL;
         if (filterHTMLForMessageBlock != NULL) {
-            result = reinterpret_cast<mailcore::String*>(filterHTMLForMessageBlock(html->unicodeCharacters()).instance);
+            result = reinterpret_cast<mailcore::String*>(filterHTMLForMessageBlock(userInfo, html->unicodeCharacters()).instance);
         }
         if (result == NULL) {
             result = HTMLRendererTemplateCallback::filterHTMLForMessage(html);
@@ -195,7 +191,7 @@ public:
     virtual mailcore::Data * dataForIMAPPart(mailcore::String * folder, mailcore::IMAPPart * part) {
         mailcore::Data * result = NULL;
         if (dataForIMAPPartBlock != NULL) {
-            CData data = dataForIMAPPartBlock(folder->unicodeCharacters(), newCIMAPPart(part));
+            CData data = dataForIMAPPartBlock(userInfo, folder->unicodeCharacters(), newCIMAPPart(part));
             result = new mailcore::Data(data.bytes, data.length);
         }
         return result;
@@ -203,13 +199,13 @@ public:
     
     virtual void prefetchAttachmentIMAPPart(mailcore::String * folder, mailcore::IMAPPart * part) {
         if (prefetchAttachmentIMAPPartBlock != NULL) {
-            prefetchAttachmentIMAPPartBlock(folder->unicodeCharacters(), newCIMAPPart(part));
+            prefetchAttachmentIMAPPartBlock(userInfo, folder->unicodeCharacters(), newCIMAPPart(part));
         }
     }
     
     virtual void prefetchImageIMAPPart(mailcore::String * folder, mailcore::IMAPPart * part) {
         if (prefetchImageIMAPPartBlock != NULL) {
-            prefetchImageIMAPPartBlock(folder->unicodeCharacters(), newCIMAPPart(part));
+            prefetchImageIMAPPartBlock(userInfo, folder->unicodeCharacters(), newCIMAPPart(part));
         }
     }
     
@@ -232,50 +228,47 @@ private:
     DataForIMAPPartBlock dataForIMAPPartBlock;
     PrefetchAttachmentIMAPPartBlock prefetchAttachmentIMAPPartBlock;
     PrefetchImageIMAPPartBlock prefetchImageIMAPPartBlock;
+    
+    const void* userInfo;
 };
 
-void setHtmlRendererDelegateCallbacks(CAbstractMessageRendererCallback self,
-                                                      CanPreviewPartBlock canPreviewPartBlock,
-                                                      ShouldShowPartBlock shouldShowPartBlock,
-                                                      TemplateValuesForHeaderBlock templateValuesForHeaderBlock,
-                                                      TemplateValuesForPartBlock templateValuesForPartBlock,
-                                                      TemplateForMainHeaderBlock templateForMainHeaderBlock,
-                                                      TemplateForImageBlock templateForImageBlock,
-                                                      TemplateForAttachmentBlock templateForAttachmentBlock,
-                                                      TemplateForMessageBlock templateForMessageBlock,
-                                                      TemplateForEmbeddedMessageBlock templateForEmbeddedMessageBlock,
-                                                      TemplateForEmbeddedMessageHeaderBlock templateForEmbeddedMessageHeaderBlock,
-                                                      TemplateForAttachmentSeparatorBlock templateForAttachmentSeparatorBlock,
-                                                      CleanHTMLForPartBlock cleanHTMLForPartBlock,
-                                                      FilterHTMLForPartBlock filterHTMLForPartBlock,
-                                                      FilterHTMLForMessageBlock filterHTMLForMessageBlock) {
-    
-    self.callbackBridge->setHtmlRendererDelegateCallbacks(canPreviewPartBlock,
-                                                          shouldShowPartBlock,
-                                                          templateValuesForHeaderBlock,
-                                                          templateValuesForPartBlock,
-                                                          templateForMainHeaderBlock,
-                                                          templateForImageBlock,
-                                                          templateForAttachmentBlock,
-                                                          templateForMessageBlock,
-                                                          templateForEmbeddedMessageBlock,
-                                                          templateForEmbeddedMessageHeaderBlock,
-                                                          templateForAttachmentSeparatorBlock,
-                                                          cleanHTMLForPartBlock,
-                                                          filterHTMLForPartBlock,
-                                                          filterHTMLForMessageBlock);
-}
-
-void setHtmlRedererImapDelefate(CAbstractMessageRendererCallback self,
-                         DataForIMAPPartBlock dataForIMAPPartBlock,
-                         PrefetchAttachmentIMAPPartBlock prefetchAttachmentIMAPPartBlock,
-                         PrefetchImageIMAPPartBlock prefetchImageIMAPPartBlock) {
-    self.callbackBridge->setHtmlRedererImapDelefate(dataForIMAPPartBlock, prefetchImageIMAPPartBlock, prefetchAttachmentIMAPPartBlock);
-}
-
-CAbstractMessageRendererCallback newCAbstractMessageRendererCallback() {
+CAbstractMessageRendererCallback newCAbstractMessageRendererCallback(CanPreviewPartBlock canPreviewPartBlock,
+                                                                     ShouldShowPartBlock shouldShowPartBlock,
+                                                                     TemplateValuesForHeaderBlock templateValuesForHeaderBlock,
+                                                                     TemplateValuesForPartBlock templateValuesForPartBlock,
+                                                                     TemplateForMainHeaderBlock templateForMainHeaderBlock,
+                                                                     TemplateForImageBlock templateForImageBlock,
+                                                                     TemplateForAttachmentBlock templateForAttachmentBlock,
+                                                                     TemplateForMessageBlock templateForMessageBlock,
+                                                                     TemplateForEmbeddedMessageBlock templateForEmbeddedMessageBlock,
+                                                                     TemplateForEmbeddedMessageHeaderBlock templateForEmbeddedMessageHeaderBlock,
+                                                                     TemplateForAttachmentSeparatorBlock templateForAttachmentSeparatorBlock,
+                                                                     CleanHTMLForPartBlock cleanHTMLForPartBlock,
+                                                                     FilterHTMLForPartBlock filterHTMLForPartBlock,
+                                                                     FilterHTMLForMessageBlock filterHTMLForMessageBlock,
+                                                                     DataForIMAPPartBlock dataForIMAPPartBlock,
+                                                                     PrefetchAttachmentIMAPPartBlock prefetchAttachmentIMAPPartBlock,
+                                                                     PrefetchImageIMAPPartBlock prefetchImageIMAPPartBlock,
+                                                                     const void* userInfo) {
     CAbstractMessageRendererCallback self;
-    self.callbackBridge = new AbstractMessageRendererCallback();
+    self.callbackBridge = new AbstractMessageRendererCallback(canPreviewPartBlock,
+                                                              shouldShowPartBlock,
+                                                              templateValuesForHeaderBlock,
+                                                              templateValuesForPartBlock,
+                                                              templateForMainHeaderBlock,
+                                                              templateForImageBlock,
+                                                              templateForAttachmentBlock,
+                                                              templateForMessageBlock,
+                                                              templateForEmbeddedMessageBlock,
+                                                              templateForEmbeddedMessageHeaderBlock,
+                                                              templateForAttachmentSeparatorBlock,
+                                                              cleanHTMLForPartBlock,
+                                                              filterHTMLForPartBlock,
+                                                              filterHTMLForMessageBlock,
+                                                              dataForIMAPPartBlock,
+                                                              prefetchAttachmentIMAPPartBlock,
+                                                              prefetchImageIMAPPartBlock,
+                                                              userInfo);
     
     return self;
 }

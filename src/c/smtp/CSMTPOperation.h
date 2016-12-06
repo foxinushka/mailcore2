@@ -17,7 +17,7 @@ class CSMTPOperationCallback;
 extern "C" {
 #endif
     
-    typedef void (^CProgressBlock)(unsigned int current, unsigned int maximum);
+    typedef void (*CProgressBlock)(const void* userInfo, unsigned int current, unsigned int maximum);
     typedef struct CSMTPSession CSMTPSession;
     
     struct CSMTPOperation {
@@ -31,7 +31,7 @@ extern "C" {
         COperation                                  cOperation;
         
         ErrorCode                   (*error)(struct CSMTPOperation self);
-        struct CSMTPOperation       (*setProgressBlocks)(struct CSMTPOperation self, CProgressBlock progressBlock);
+        struct CSMTPOperation       (*setProgressBlocks)(struct CSMTPOperation self, CProgressBlock progressBlock, const void* userInfo);
     };
     typedef struct CSMTPOperation CSMTPOperation;
     

@@ -24,8 +24,6 @@ extern "C" {
         uint64_t length;
     };
     typedef struct Range Range;
-    
-    typedef void (^CIndexSetEnumerateRangesBlock)(uint64_t location, uint64_t length);
 
     struct CIndexSet {
 #ifdef __cplusplus

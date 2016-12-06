@@ -10,10 +10,6 @@ extension String : Convertible  {
         self = s
     }
     
-//    var utf16CString: [UInt16] {
-//        get { return [UInt16](self.utf16); }
-//    }
-    
     func cast() -> CObject {
         return self.utf16({ newCObjectWithString($0) })
     }

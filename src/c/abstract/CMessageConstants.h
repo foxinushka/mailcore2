@@ -286,7 +286,7 @@ extern "C" {
     /**
      It's called when asynchronous operations stop/start running.
      */
-    typedef void (^OperationQueueRunningChangeBlock)();
+    typedef void (*OperationQueueRunningChangeBlock)();
     
     /**
      It's a network traffic logger.
@@ -294,7 +294,7 @@ extern "C" {
      @param logType is the type of the log.
      @param bytes is the data related to the log.
      */
-    typedef void (^ConnectionLogger)(void* sender, ConnectionLogType logType, const char* bytes, unsigned int length);
+    typedef void (*ConnectionLogger)(void* sender, ConnectionLogType logType, const char* bytes, unsigned int length);
     
 #ifdef __cplusplus
 }

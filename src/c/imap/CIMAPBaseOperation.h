@@ -16,7 +16,7 @@ namespace mailcore {
 extern "C" {
 #endif
     
-    typedef void (^CIMAPProgressBlock)(unsigned int current, unsigned int maximum);
+    typedef void (*CIMAPProgressBlock)(const void* userInfo, unsigned int current, unsigned int maximum);
     
     typedef struct CIMAPAsyncSession CIMAPAsyncSession;
     
@@ -31,7 +31,7 @@ extern "C" {
         COperation                                  cOperation;
         
         ErrorCode                   (*error)(struct CIMAPBaseOperation self);
-        struct CIMAPBaseOperation   (*setProgressBlocks)(struct CIMAPBaseOperation self, CIMAPProgressBlock itemProgressBlock, CIMAPProgressBlock bodyProgressBlock);
+        struct CIMAPBaseOperation   (*setProgressBlocks)(struct CIMAPBaseOperation self, CIMAPProgressBlock itemProgressBlock, CIMAPProgressBlock bodyProgressBlock, const void* userInfo);
     };
     typedef struct CIMAPBaseOperation CIMAPBaseOperation;
 
