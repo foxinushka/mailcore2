@@ -31,6 +31,11 @@
 #include "CIMAPCustomCommandOperation.h"
 #include "CIMAPFetchContentToFileOperation.h"
 #include "CIMAPFetchNamespaceOperation.h"
+#include "CIMAPMoveMessagesOperation.h"
+#include "CIMAPFetchParsedContentOperation.h"
+#include "CIMAPMessageRenderingOperation.h"
+#include "CIMAPQuotaOperation.h"
+#include "CIMAPMessage.h"
 
 #ifdef __cplusplus
 
@@ -110,6 +115,15 @@ extern "C" {
         CIMAPFolderInfoOperation    (*folderInfoOperation)(struct CIMAPAsyncSession self, const UChar *folder);
         CIMAPFolderStatusOperation  (*folderStatusOperation)(struct CIMAPAsyncSession self, const UChar *folder);
         CIMAPIdleOperation          (*idleOperation)(struct CIMAPAsyncSession self, const UChar *folder, uint32_t lastKnownUID);
+        
+        CIMAPMoveMessagesOperation          (*moveMessagesOperation)(struct CIMAPAsyncSession self, const UChar *folder, CIndexSet uids, const UChar* destFolder);
+        CIMAPFetchParsedContentOperation    (*fetchParsedMessageOperationByUIDOperation)(struct CIMAPAsyncSession self, const UChar* folder, uint32_t uid, bool urgent);
+        CIMAPFetchParsedContentOperation    (*fetchParsedMessageOperationByNumberOperation)(struct CIMAPAsyncSession self, const UChar* folder, uint32_t number, bool urgent);
+        CIMAPMessageRenderingOperation      (*htmlRenderingOperation)(struct CIMAPAsyncSession self, CIMAPMessage message, const UChar* folder);
+        CIMAPMessageRenderingOperation      (*htmlBodyRenderingOperation)(struct CIMAPAsyncSession self, CIMAPMessage message, const UChar* folder);
+        CIMAPMessageRenderingOperation      (*plainTextRenderingOperation)(struct CIMAPAsyncSession self, CIMAPMessage message, const UChar* folder);
+        CIMAPMessageRenderingOperation      (*plainTextBodyRenderingOperation)(struct CIMAPAsyncSession self, CIMAPMessage message, const UChar* folder, bool stripWhitespace);
+        CIMAPQuotaOperation                 (*quotaOperation)(struct CIMAPAsyncSession self);
     } CIMAPAsyncSession;
 
     CIMAPAsyncSession newCIMAPAsyncSession();

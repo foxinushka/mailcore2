@@ -2,7 +2,7 @@ import Foundation
 
 public final class IMAPMessage : AbstractMessage, Convertible {
     
-    private var nativeInstance:CIMAPMessage;
+    internal var nativeInstance:CIMAPMessage;
     
     internal init(message:CIMAPMessage) {
         self.nativeInstance = message;

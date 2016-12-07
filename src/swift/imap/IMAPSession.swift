@@ -191,6 +191,10 @@ public class IMAPSession {
     	return IMAPCapabilityOperation(operation: session.capabilityOperation(session))
     }
     
+    public func quotaOperation() -> IMAPQuotaOperation {
+        return IMAPQuotaOperation(operation: session.quotaOperation(session))
+    }
+    
     /**
      Returns an operation that gets all folders
      
@@ -528,6 +532,153 @@ public class IMAPSession {
      */
     public func fetchNamespaceOperation() -> IMAPFetchNamespaceOperation {
         return IMAPFetchNamespaceOperation(operation: session.fetchNamespace(session))
+    }
+    
+    /**
+     Returns an operation to move messages to a folder.
+     
+     MCOIMAPMoveMessagesOperation * op = [session moveMessagesOperationWithFolder:@"INBOX"
+     uids:[MCIndexSet indexSetWithIndex:456]
+     destFolder:@"Cocoa"];
+     [op start:^(NSError * __nullable error, NSDictionary * uidMapping) {
+     NSLog(@"moved to folder with UID mapping %@", uidMapping);
+     }];
+     */
+    public func moveMessagesOperation(folder: String, uids: IndexSet, destFolder: String) -> IMAPMoveMessagesOperation {
+        return IMAPMoveMessagesOperation.init(operation: folder.utf16({ folderPtr in
+            destFolder.utf16({ destFolderPtr in
+                session.moveMessagesOperation(session, folderPtr, uids.nativeInstance, destFolderPtr)
+            })
+        }))
+    }
+    
+    /**
+     Returns an operation to fetch the parsed content of a message.
+     @param urgent is set to YES, an additional connection to the same folder might be opened to fetch the content.
+     
+     MCOIMAPFetchParsedContentOperation * op = [session fetchParsedMessageOperationWithFolder:@"INBOX" uid:456 urgent:NO];
+     [op start:^(NSError * __nullable error, MCOMessageParser * parser) {
+     
+     ...
+     }];
+     */
+    public func fetchParsedMessageOperation(folder: String, uid: UInt32, urgent: Bool) -> IMAPFetchParsedContentOperation {
+        return IMAPFetchParsedContentOperation.init(operation: folder.utf16({ session.fetchParsedMessageOperationByUIDOperation(session, $0, uid, urgent) }))
+    }
+    
+    /**
+     Returns an operation to fetch the parsed content of a message.
+     
+     MCOIMAPFetchParsedContentOperation * op = [session fetchParsedMessageOperationWithFolder:@"INBOX" uid:456];
+     [op start:^(NSError * __nullable error, MCOMessageParser * parser) {
+     
+     ...
+     }];
+     */
+    public func fetchParsedMessageOperation(folder: String, uid: UInt32) -> IMAPFetchParsedContentOperation {
+        return IMAPFetchParsedContentOperation.init(operation: folder.utf16({ session.fetchParsedMessageOperationByUIDOperation(session, $0, uid, false) }))
+    }
+    
+    /**
+     Returns an operation to fetch the parsed content of a message, using IMAP sequence number.
+     @param urgent is set to YES, an additional connection to the same folder might be opened to fetch the content.
+     
+     MCOIMAPFetchParsedContentOperation * op = [session fetchParsedMessageOperationWithFolder:@"INBOX" number:42 urgent:NO];
+     [op start:^(NSError * __nullable error, MCOMessageParser * parser) {
+     
+     ...
+     }];
+     */
+    public func fetchParsedMessageOperation(folder: String, number: UInt32, urgent: Bool) -> IMAPFetchParsedContentOperation {
+        return IMAPFetchParsedContentOperation.init(operation: folder.utf16({ session.fetchParsedMessageOperationByNumberOperation(session, $0, number, urgent) }))
+    }
+    
+    /**
+     Returns an operation to fetch the parsed content of a message, using IMAP sequence number.
+     
+     MCOIMAPFetchParsedContentOperation * op = [session fetchParsedMessageOperationWithFolder:@"INBOX" number:42];
+     [op start:^(NSError * __nullable error, MCOMessageParser * parser) {
+     
+     ...
+     }];
+     */
+    public func fetchParsedMessageOperation(folder: String, number: UInt32) -> IMAPFetchParsedContentOperation {
+        return IMAPFetchParsedContentOperation.init(operation: folder.utf16({ session.fetchParsedMessageOperationByNumberOperation(session, $0, number, false) }))
+    }
+    
+    /**
+     Returns an operation to render the HTML version of a message to be displayed in a web view.
+     
+     MCOIMAPMessageRenderingOperation * op = [session htmlRenderingOperationWithMessage:msg
+     folder:@"INBOX"];
+     
+     [op start:^(NSString * htmlString, NSError * error) {
+     ...
+     }];
+     */
+    public func htmlRenderingOperation(message: IMAPMessage, folder: String) -> IMAPMessageRenderingOperation {
+        return IMAPMessageRenderingOperation.init(operation: folder.utf16({ session.htmlRenderingOperation(session, message.nativeInstance, $0) }))
+    }
+    
+    /**
+     Returns an operation to render the HTML body of a message to be displayed in a web view.
+     
+     MCOIMAPMessageRenderingOperation * op = [session htmlBodyRenderingOperationWithMessage:msg
+     folder:@"INBOX"];
+     
+     [op start:^(NSString * htmlString, NSError * error) {
+     ...
+     }];
+     */
+    public func htmlBodyRenderingOperation(message: IMAPMessage, folder: String) -> IMAPMessageRenderingOperation {
+        return IMAPMessageRenderingOperation.init(operation: folder.utf16({ session.htmlBodyRenderingOperation(session, message.nativeInstance, $0) }))
+    }
+    
+    /**
+     Returns an operation to render the plain text version of a message.
+     
+     MCOIMAPMessageRenderingOperation * op = [session plainTextRenderingOperationWithMessage:msg
+     folder:@"INBOX"];
+     
+     [op start:^(NSString * htmlString, NSError * error) {
+     ...
+     }];
+     */
+    public func plainTextRenderingOperation(message: IMAPMessage, folder: String) -> IMAPMessageRenderingOperation {
+        return IMAPMessageRenderingOperation.init(operation: folder.utf16({ session.plainTextRenderingOperation(session, message.nativeInstance, $0) }))
+    }
+    
+    /**
+     Returns an operation to render the plain text body of a message.
+     All end of line will be removed and white spaces cleaned up if requested.
+     This method can be used to generate the summary of the message.
+     
+     MCOIMAPMessageRenderingOperation * op = [session plainTextBodyRenderingOperationWithMessage:msg
+     folder:@"INBOX"
+     stripWhitespace:YES];
+     
+     [op start:^(NSString * htmlString, NSError * error) {
+     ...
+     }];
+     */
+    public func plainTextBodyRenderingOperationWithMessage(message: IMAPMessage, folder: String, stripWhitespace: Bool) -> IMAPMessageRenderingOperation {
+        return IMAPMessageRenderingOperation.init(operation: folder.utf16({ session.plainTextBodyRenderingOperation(session, message.nativeInstance, $0, stripWhitespace) }))
+    }
+    
+    /**
+     Returns an operation to render the plain text body of a message.
+     All end of line will be removed and white spaces cleaned up.
+     This method can be used to generate the summary of the message.
+     
+     MCOIMAPMessageRenderingOperation * op = [session plainTextBodyRenderingOperationWithMessage:msg
+     folder:@"INBOX"];
+     
+     [op start:^(NSString * htmlString, NSError * error) {
+     ...
+     }];
+     */
+    public func plainTextBodyRenderingOperationWithMessage(message: IMAPMessage, folder: String) -> IMAPMessageRenderingOperation {
+        return IMAPMessageRenderingOperation.init(operation: folder.utf16({ session.plainTextBodyRenderingOperation(session, message.nativeInstance, $0, true) }))
     }
 
 }

@@ -7,7 +7,7 @@ import Foundation
  */
 public class MessageParser : AbstractMessage {
     
-    private var nativeInstance: CMessageParser;
+    internal var nativeInstance: CMessageParser;
     
     internal init(_ parser: CMessageParser) {
         self.nativeInstance = parser;

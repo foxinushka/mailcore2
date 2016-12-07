@@ -191,8 +191,28 @@ CIMAPFolderStatusOperation folderStatusOperation(CIMAPAsyncSession self, const U
 }
 
 CIMAPIdleOperation idleOperation(struct CIMAPAsyncSession self, const UChar *folder, uint32_t lastKnownUID){
-      return newCIMAPIdleOperation(self.instance->idleOperation(new mailcore::String(folder), lastKnownUID));
+    return newCIMAPIdleOperation(self.instance->idleOperation(new mailcore::String(folder), lastKnownUID));
 }
+
+CIMAPMoveMessagesOperation moveMessagesOperation(struct CIMAPAsyncSession self, const UChar *folder, CIndexSet uids, const UChar* destFolder) {
+    return newCIMAPMoveMessagesOperation(self.instance->moveMessagesOperation(new mailcore::String(folder), uids.instance, new mailcore::String(destFolder)));
+}
+
+CIMAPFetchParsedContentOperation fetchParsedMessageOperationByUIDOperation(struct CIMAPAsyncSession self, const UChar* folder, uint32_t uid, bool urgent) {
+    return newCIMAPFetchParsedContentOperation(self.instance->fetchParsedMessageByUIDOperation(new mailcore::String(folder), uid));
+}
+
+CIMAPFetchParsedContentOperation fetchParsedMessageOperationByNumberOperation(struct CIMAPAsyncSession self, const UChar* folder, uint32_t number, bool urgent) {
+    return newCIMAPFetchParsedContentOperation(self.instance->fetchParsedMessageByNumberOperation(new mailcore::String(folder), number));
+}
+CIMAPMessageRenderingOperation htmlRenderingOperation(struct CIMAPAsyncSession self, CIMAPMessage message, const UChar* folder) {
+    return newCIMAPMessageRenderingOperation(self.instance->htmlRenderingOperation(message.instance, new mailcore::String(folder)));
+}
+
+CIMAPMessageRenderingOperation      (*htmlBodyRenderingOperation)(struct CIMAPAsyncSession self, CIMAPMessage message, const UChar* folder);
+CIMAPMessageRenderingOperation      (*plainTextRenderingOperation)(struct CIMAPAsyncSession self, CIMAPMessage message, const UChar* folder);
+CIMAPMessageRenderingOperation      (*plainTextBodyRenderingOperation)(struct CIMAPAsyncSession self, CIMAPMessage message, const UChar* folder, bool stripWhitespace);
+CIMAPQuotaOperation                 (*quotaOperation)(struct CIMAPAsyncSession self);
 
 CIMAPAsyncSession newCIMAPAsyncSession(){
     CIMAPAsyncSession session;

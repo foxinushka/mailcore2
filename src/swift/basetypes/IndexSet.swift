@@ -3,7 +3,7 @@ import Foundation
 /** similar to NSMutableIndexSet but supports int64_t.  MCRange has a location (uint64_t) and length (uint64_t). */
 public class IndexSet {
     
-    private var nativeInstance: CIndexSet;
+    internal var nativeInstance: CIndexSet;
     
     internal func cast() -> CIndexSet {
         return nativeInstance;

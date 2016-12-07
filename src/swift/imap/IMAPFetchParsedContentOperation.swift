@@ -1,13 +1,13 @@
 import Foundation
 
-public class IMAPFetchNamespaceOperation : IMAPBaseOperation {
+public class IMAPFetchParsedContentOperation : IMAPBaseOperation {
     
-    public typealias CompletionBlock = (Error?,  Dictionary<String, IMAPNamespace>?) -> Void
+    public typealias CompletionBlock = (Error?,  MessageParser?) -> Void
     
-    internal var operation: CIMAPFetchNamespaceOperation
+    internal var operation: CIMAPFetchParsedContentOperation
     private var completionBlock : CompletionBlock?
     
-    internal init(operation:CIMAPFetchNamespaceOperation) {
+    internal init(operation:CIMAPFetchParsedContentOperation) {
         self.operation = operation
         super.init(baseOperation: operation.baseOperation)
     }
@@ -33,11 +33,18 @@ public class IMAPFetchNamespaceOperation : IMAPBaseOperation {
         
         let errorCode = error()
         if errorCode == ErrorNone {
-            completionBlock!(nil, Dictionary<String, IMAPNamespace>.cast(operation.namespaces(operation)))
+            let parser = MessageParser(operation.parser(operation))
+            if parser.nativeInstance.instance != nil {
+                completionBlock!(nil, parser)
+            }
+            else {
+                completionBlock!(nil, nil)
+            }
         }
         else {
             completionBlock!(MailCoreError(code: errorCode), nil)
         }
         completionBlock = nil
     }
+    
 }
