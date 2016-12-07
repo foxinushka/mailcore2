@@ -29,7 +29,8 @@ C_SYNTHESIZE_STRING(setOAuth2Token, OAuth2Token)
 C_SYNTHESIZE_ENUM(AuthType, mailcore::AuthType, setAuthType, authType)
 C_SYNTHESIZE_SCALAR(unsigned int, unsigned int, setMaximumConnections, maximumConnections)
 C_SYNTHESIZE_BOOL(setAllowsFolderConcurrentAccessEnabled, allowsFolderConcurrentAccessEnabled)
-C_SYNTHESIZE_MAILCORE_OBJ(CIMAPNamespace, newCIMAPNamespace, mailcore::CIMAPNamespace, setDefaultNamespace, defaultNamespace)
+C_SYNTHESIZE_MAILCORE_OBJ(CIMAPNamespace, newCIMAPNamespace, setDefaultNamespace, defaultNamespace)
+C_SYNTHESIZE_MAILCORE_OBJ(CIMAPIdentity, newCIMAPIdentity, setClientIdentity, clientIdentity)
 #ifdef __ANDROID__
 #else
 C_SYNTHESIZE_SCALAR(dispatch_queue_t, dispatch_queue_t, setDispatchQueue, dispatchQueue)
@@ -79,6 +80,42 @@ void setConnectionLogger(struct CIMAPAsyncSession self, ConnectionLogger logger)
     }
 }
 
+CIMAPIdentity serverIdentity(struct CIMAPAsyncSession self) {
+    return newCIMAPIdentity(self.instance->serverIdentity());
+}
+
+bool isVoIPEnabled(struct CIMAPAsyncSession self) {
+    return self.instance->isVoIPEnabled();
+}
+
+bool isIdleEnabled(struct CIMAPAsyncSession self) {
+    return self.instance->isIdleEnabled();
+}
+
+bool isOperationQueueRunning(struct CIMAPAsyncSession self) {
+    return self.instance->isOperationQueueRunning();
+}
+
+void cancelAllOperations(struct CIMAPAsyncSession self) {
+    return self.instance->cancelAllOperations();
+}
+
+CIMAPBaseOperation subscribeFolderOperation(struct CIMAPAsyncSession self, const UChar *folder) {
+    return newCIMAPBaseOperation(self.instance->subscribeFolderOperation(new mailcore::String(folder)));
+}
+
+CIMAPBaseOperation unsubscribeFolderOperation(struct CIMAPAsyncSession self, const UChar *folder) {
+    return newCIMAPBaseOperation(self.instance->unsubscribeFolderOperation(new mailcore::String(folder)));
+}
+
+CIMAPBaseOperation renameFolderOperation(struct CIMAPAsyncSession self, const UChar *folder, const UChar *otherName) {
+    return newCIMAPBaseOperation(self.instance->renameFolderOperation(new mailcore::String(folder), new mailcore::String(otherName)));
+}
+
+CIMAPFetchFoldersOperation fetchSubscribedFoldersOperation(struct CIMAPAsyncSession self) {
+    return newCIMAPFetchFoldersOperation(self.instance->fetchSubscribedFoldersOperation());
+}
+
 CIMAPFetchNamespaceOperation fetchNamespace(struct CIMAPAsyncSession self) {
     return newCIMAPFetchNamespaceOperation(self.instance->fetchNamespaceOperation());
 }
@@ -89,6 +126,10 @@ CIMAPFetchContentToFileOperation fetchMessageAttachmentToFileOperation(struct CI
 
 CIMAPCustomCommandOperation customCommandOperation(struct CIMAPAsyncSession self, const UChar *command) {
     return newCIMAPCustomCommandOperation(self.instance->customCommand(new mailcore::String(command), false));
+}
+
+CIMAPBaseOperation connectOperation (struct CIMAPAsyncSession self) {
+    return newCIMAPBaseOperation(self.instance->connectOperation());
 }
 
 CIMAPBaseOperation disconnectOperation(CIMAPAsyncSession self){
@@ -129,9 +170,34 @@ CIMAPBaseOperation storeFlagsByUIDOperation(CIMAPAsyncSession self, const UChar 
     return newCIMAPBaseOperation(imapOperation);
 }
 
+CIMAPBaseOperation storeFlagsByNumberOperation(struct CIMAPAsyncSession self, const UChar *folder, CIndexSet numbers, IMAPStoreFlagsRequestKind kind, MessageFlag flags, CArray customFlags) {
+    mailcore::IMAPOperation *imapOperation = self.instance->storeFlagsByNumberOperation(new mailcore::String(folder),
+        numbers.instance, static_cast<mailcore::IMAPStoreFlagsRequestKind>(kind), static_cast<mailcore::MessageFlag>(flags), customFlags.instance);
+    return newCIMAPBaseOperation(imapOperation);
+}
+
+CIMAPBaseOperation storeLabelsByUIDOperation(struct CIMAPAsyncSession self, const UChar *folder, CIndexSet uids, IMAPStoreFlagsRequestKind kind, CArray labels) {
+    mailcore::IMAPOperation *imapOperation = self.instance->storeLabelsByUIDOperation(new mailcore::String(folder),
+        uids.instance, static_cast<mailcore::IMAPStoreFlagsRequestKind>(kind), labels.instance);
+    return newCIMAPBaseOperation(imapOperation);
+}
+
+CIMAPBaseOperation storeLabelsByNumberOperation(struct CIMAPAsyncSession self, const UChar *folder, CIndexSet numbers, IMAPStoreFlagsRequestKind kind, CArray labels) {
+    mailcore::IMAPOperation *imapOperation = self.instance->storeLabelsByNumberOperation(new mailcore::String(folder),
+        numbers.instance, static_cast<mailcore::IMAPStoreFlagsRequestKind>(kind), labels.instance);
+    return newCIMAPBaseOperation(imapOperation);
+}
+
 CIMAPAppendMessageOperation appendMessageOperation(CIMAPAsyncSession self, const UChar *folder, const UChar *messagePath, MessageFlag flags, CArray array){
     mailcore::IMAPAppendMessageOperation *imapOperation = self.instance->appendMessageOperation(new mailcore::String(folder), 
         new mailcore::String(messagePath), static_cast<mailcore::MessageFlag>(flags), array.instance);
+    return newIMAPAppendMessageOperation(imapOperation);
+}
+
+CIMAPAppendMessageOperation appendMessageOperationWithData(CIMAPAsyncSession self, const UChar *folder, CData messageData, MessageFlag flags, CArray array){
+    mailcore::IMAPAppendMessageOperation *imapOperation = self.instance->appendMessageOperation(new mailcore::String(folder),
+                                                                                                new mailcore::Data(messageData.bytes, messageData.length),
+                                                                                                static_cast<mailcore::MessageFlag>(flags), array.instance);
     return newIMAPAppendMessageOperation(imapOperation);
 }
 
@@ -158,9 +224,20 @@ CIMAPFetchContentOperation fetchMessageByUIDOperation(CIMAPAsyncSession self, co
     return newCIMAPFetchContentOperation(imapOperation);
 }
 
+CIMAPFetchContentOperation fetchMessageByNumberOperation(struct CIMAPAsyncSession self, const UChar *folder, uint32_t uid, bool urgent) {
+    mailcore::IMAPFetchContentOperation *imapOperation = self.instance->fetchMessageByNumberOperation(new mailcore::String(folder), uid, urgent);
+    return newCIMAPFetchContentOperation(imapOperation);
+}
+
 CIMAPFetchContentOperation fetchMessageAttachmentByUIDOperation(CIMAPAsyncSession self, const UChar *folder, uint32_t uid, const UChar *partID, Encoding encoding, bool urgent){
     mailcore::IMAPFetchContentOperation *imapOperation = self.instance->fetchMessageAttachmentByUIDOperation(new mailcore::String(folder),
         uid, new mailcore::String(partID), static_cast<mailcore::Encoding>(encoding), urgent);
+    return newCIMAPFetchContentOperation(imapOperation);
+}
+
+CIMAPFetchContentOperation fetchMessageAttachmentByNumberOperation(struct CIMAPAsyncSession self, const UChar *folder, uint32_t number, const UChar *partID, Encoding encoding, bool urgent) {
+    mailcore::IMAPFetchContentOperation *imapOperation = self.instance->fetchMessageAttachmentByNumberOperation(new mailcore::String(folder),
+        number, new mailcore::String(partID), static_cast<mailcore::Encoding>(encoding), urgent);
     return newCIMAPFetchContentOperation(imapOperation);
 }
 
@@ -209,6 +286,10 @@ CIMAPMessageRenderingOperation htmlRenderingOperation(struct CIMAPAsyncSession s
     return newCIMAPMessageRenderingOperation(self.instance->htmlRenderingOperation(message.instance, new mailcore::String(folder)));
 }
 
+CIMAPIdentityOperation identityOperationWithClientIdentity(struct CIMAPAsyncSession self, CIMAPIdentity identity) {
+    return newCIMAPIdentityOperation(self.instance->identityOperation(identity.instance));
+}
+
 CIMAPMessageRenderingOperation      (*htmlBodyRenderingOperation)(struct CIMAPAsyncSession self, CIMAPMessage message, const UChar* folder);
 CIMAPMessageRenderingOperation      (*plainTextRenderingOperation)(struct CIMAPAsyncSession self, CIMAPMessage message, const UChar* folder);
 CIMAPMessageRenderingOperation      (*plainTextBodyRenderingOperation)(struct CIMAPAsyncSession self, CIMAPMessage message, const UChar* folder, bool stripWhitespace);
@@ -244,6 +325,11 @@ CIMAPAsyncSession newCIMAPAsyncSession(){
     session.setMaximumConnections = &setMaximumConnections;
     session.setAllowsFolderConcurrentAccessEnabled = &setAllowsFolderConcurrentAccessEnabled;
     session.setDefaultNamespace = &setDefaultNamespace;
+    
+    session.isVoIPEnabled = &isVoIPEnabled;
+    session.isIdleEnabled = &isIdleEnabled;
+    session.isOperationQueueRunning = &isOperationQueueRunning;
+    
 #ifdef __ANDROID__
 #else
     session.dispatchQueue = &dispatchQueue;

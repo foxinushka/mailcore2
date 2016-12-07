@@ -36,6 +36,8 @@
 #include "CIMAPMessageRenderingOperation.h"
 #include "CIMAPQuotaOperation.h"
 #include "CIMAPMessage.h"
+#include "CIMAPIdentity.h"
+#include "CIMAPIdentityOperation.h"
 
 #ifdef __cplusplus
 
@@ -69,6 +71,13 @@ extern "C" {
         unsigned int    (*maximumConnections)(struct CIMAPAsyncSession self);
         bool            (*allowsFolderConcurrentAccessEnabled)(struct CIMAPAsyncSession self);
         CIMAPNamespace  (*defaultNamespace)(struct CIMAPAsyncSession self);
+        CIMAPIdentity   (*clientIdentity)(struct CIMAPAsyncSession self);
+        CIMAPIdentity   (*serverIdentity)(struct CIMAPAsyncSession self);
+        OperationQueueRunningChangeBlock (*operationQueueRunningChangeBlock)(struct CIMAPAsyncSession self);
+        
+        bool    (*isVoIPEnabled)(struct CIMAPAsyncSession self);
+        bool    (*isIdleEnabled)(struct CIMAPAsyncSession self);
+        bool    (*isOperationQueueRunning)(struct CIMAPAsyncSession self);
         
         void    (*setHostname)(struct CIMAPAsyncSession self, const UChar *hostname);
         void    (*setPort)(struct CIMAPAsyncSession self, unsigned int port);
@@ -82,6 +91,7 @@ extern "C" {
         void    (*setMaximumConnections)(struct CIMAPAsyncSession self, unsigned int maxConnections);
         void    (*setAllowsFolderConcurrentAccessEnabled)(struct CIMAPAsyncSession self, bool enabled);
         void    (*setDefaultNamespace)(struct CIMAPAsyncSession self, CIMAPNamespace nspace);
+        void    (*setClientIdentity)(struct CIMAPAsyncSession self, CIMAPIdentity identity);
         
 #ifdef __ANDROID__
 #else
@@ -90,13 +100,23 @@ extern "C" {
 #endif
         void    (*setConnectionLogger)(struct CIMAPAsyncSession self, ConnectionLogger logger);
 
+        void                (*cancelAllOperations)(struct CIMAPAsyncSession self);
+        CIMAPBaseOperation  (*connectOperation)(struct CIMAPAsyncSession self);
         CIMAPBaseOperation  (*disconnectOperation)(struct CIMAPAsyncSession self);
         CIMAPBaseOperation  (*noopOperation)(struct CIMAPAsyncSession self);
         CIMAPBaseOperation  (*expungeOperation)(struct CIMAPAsyncSession self, const UChar *folder);
         CIMAPBaseOperation  (*createFolderOperation)(struct CIMAPAsyncSession self, const UChar *folder);
         CIMAPBaseOperation  (*deleteFolderOperation)(struct CIMAPAsyncSession self, const UChar *folder);
         CIMAPBaseOperation  (*storeFlagsByUIDOperation)(struct CIMAPAsyncSession self, const UChar *folder, CIndexSet set, IMAPStoreFlagsRequestKind kind, MessageFlag flags, CArray customFlags);
+        CIMAPBaseOperation  (*storeFlagsByNumberOperation)(struct CIMAPAsyncSession self, const UChar *folder, CIndexSet numbers, IMAPStoreFlagsRequestKind kind, MessageFlag flags, CArray customFlags);
+        CIMAPBaseOperation  (*storeLabelsByUIDOperation)(struct CIMAPAsyncSession self, const UChar *folder, CIndexSet uids, IMAPStoreFlagsRequestKind kind, CArray labels);
+        CIMAPBaseOperation  (*storeLabelsByNumberOperation)(struct CIMAPAsyncSession self, const UChar *folder, CIndexSet numbers, IMAPStoreFlagsRequestKind kind, CArray labels);
+        CIMAPBaseOperation  (*renameFolderOperation)(struct CIMAPAsyncSession self, const UChar *folder, const UChar *otherName);
+        CIMAPBaseOperation  (*subscribeFolderOperation)(struct CIMAPAsyncSession self, const UChar *folder);
+        CIMAPBaseOperation  (*unsubscribeFolderOperation)(struct CIMAPAsyncSession self, const UChar *folder);
+
         
+        CIMAPFetchFoldersOperation  (*fetchSubscribedFoldersOperation)(struct CIMAPAsyncSession self);
         CIMAPFetchContentToFileOperation (*fetchMessageAttachmentToFileOperation)(struct CIMAPAsyncSession self, const UChar* folder, uint32_t uid, const UChar* partID, Encoding encoding, const UChar* filename, bool urgent);
         CIMAPFetchNamespaceOperation (*fetchNamespace)(struct CIMAPAsyncSession self);
         CIMAPCustomCommandOperation (*customCommandOperation)(struct CIMAPAsyncSession self, const UChar *command);
@@ -104,11 +124,14 @@ extern "C" {
         CIMAPCapabilityOperation    (*capabilityOperation)(struct CIMAPAsyncSession self);
         CIMAPFetchFoldersOperation  (*fetchAllFoldersOperation)(struct CIMAPAsyncSession self);
         CIMAPAppendMessageOperation (*appendMessageOperation)(struct CIMAPAsyncSession session, const UChar *folder, const UChar *messagePath, MessageFlag flags, CArray array);
+        CIMAPAppendMessageOperation (*appendMessageOperationWithData)(struct CIMAPAsyncSession session, const UChar *folder, CData messageData, MessageFlag flags, CArray array);
         CIMAPFetchMessagesOperation (*fetchMessagesByNumberOperation)(struct CIMAPAsyncSession session, const UChar *folder, IMAPMessagesRequestKind kind, CIndexSet numbers);
         CIMAPFetchMessagesOperation (*fetchMessagesByUIDOperation)(struct CIMAPAsyncSession session, const UChar *folder, IMAPMessagesRequestKind kind, CIndexSet uids);
         CIMAPFetchMessagesOperation (*syncMessagesByUIDOperation)(struct CIMAPAsyncSession session, const UChar *folder, IMAPMessagesRequestKind kind, CIndexSet uids, uint64_t modSeq);
         CIMAPFetchContentOperation  (*fetchMessageByUIDOperation)(struct CIMAPAsyncSession self, const UChar *folder, uint32_t uid, bool urgent);
+        CIMAPFetchContentOperation  (*fetchMessageByNumberOperation)(struct CIMAPAsyncSession self, const UChar *folder, uint32_t uid, bool urgent);
         CIMAPFetchContentOperation  (*fetchMessageAttachmentByUIDOperation)(struct CIMAPAsyncSession session, const UChar *folder, uint32_t uid, const UChar *partID, Encoding encoding, bool urgent);
+        CIMAPFetchContentOperation  (*fetchMessageAttachmentByNumberOperation)(struct CIMAPAsyncSession session, const UChar *folder, uint32_t number, const UChar *partID, Encoding encoding, bool urgent);
         CIMAPSearchOperation        (*searchOperationWithExpression)(struct CIMAPAsyncSession self, const UChar *folder, CIMAPSearchExpression expression);
         CIMAPSearchOperation        (*searchOperation)(struct CIMAPAsyncSession session, const UChar *folder, IMAPSearchKind kind, const UChar *str);
         CIMAPCopyMessagesOperation  (*copyMessagesOperation)(struct CIMAPAsyncSession self, const UChar *folder, CIndexSet uids,const UChar *destFolder);
@@ -124,6 +147,7 @@ extern "C" {
         CIMAPMessageRenderingOperation      (*plainTextRenderingOperation)(struct CIMAPAsyncSession self, CIMAPMessage message, const UChar* folder);
         CIMAPMessageRenderingOperation      (*plainTextBodyRenderingOperation)(struct CIMAPAsyncSession self, CIMAPMessage message, const UChar* folder, bool stripWhitespace);
         CIMAPQuotaOperation                 (*quotaOperation)(struct CIMAPAsyncSession self);
+        CIMAPIdentityOperation              (*identityOperationWithClientIdentity)(struct CIMAPAsyncSession self, CIMAPIdentity identity);
     } CIMAPAsyncSession;
 
     CIMAPAsyncSession newCIMAPAsyncSession();

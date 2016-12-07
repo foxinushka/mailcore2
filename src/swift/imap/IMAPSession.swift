@@ -135,7 +135,55 @@ public class IMAPSession {
                 session.setDispatchQueue(session, newValue);
             #endif
         }
-        
+    }
+    
+    public var isVoIPEnabled: Bool {
+        get { return session.isVoIPEnabled(session) }
+    }
+    
+    public var isIdleEnabled: Bool {
+        get { return session.isIdleEnabled(session) }
+    }
+    
+    public var isOperationQueueRunning: Bool {
+        get { return session.isOperationQueueRunning(session) }
+    }
+    
+    /**
+     Cancel all operations
+     */
+    public func cancelAllOperations() {
+        session.cancelAllOperations(session)
+    }
+    
+    /**
+     Returns an operation that gets the list of subscribed folders.
+     
+     MCOIMAPFetchFoldersOperation * op = [session fetchSubscribedFoldersOperation];
+     [op start:^(NSError * __nullable error, NSArray * folders) {
+     ...
+     }];
+     */
+    
+    public func fetchSubscribedFoldersOperation() -> IMAPFetchFoldersOperation {
+        return IMAPFetchFoldersOperation.init(operation: session.fetchSubscribedFoldersOperation(session))
+    }
+    
+    /**
+     Creates an operation for renaming a folder
+     
+     MCOIMAPOperation * op = [session renameFolderOperation:@"my documents" otherName:@"Documents"];
+     [op start:^(NSError * __nullable error) {
+     ...
+     }];
+     
+     */
+    public func renameFolderOperation(folder: String, otherName: String) -> IMAPOperation {
+        return IMAPOperation.init(operation: folder.utf16({ folderPtr in
+            otherName.utf16({ otherNamePtr in
+                session.renameFolderOperation(session, folderPtr, otherNamePtr)
+            })
+        }))
     }
 
     /**
@@ -149,6 +197,19 @@ public class IMAPSession {
      */
     public func disconnectOperation() -> IMAPOperation {
     	return IMAPOperation(operation: session.disconnectOperation(session))
+    }
+    
+    /**
+     Returns an operation that will connect to the given IMAP server without authenticating.
+     Useful for checking initial server capabilities.
+     
+     MCOIMAPOperation * op = [session connectOperation];
+     [op start:^(NSError * __nullable error) {
+     ...
+     }];
+     */
+    public func connectOperation() -> IMAPOperation {
+        return IMAPOperation.init(operation: session.connectOperation(session))
     }
 
     /**
@@ -230,6 +291,36 @@ public class IMAPSession {
     public func createFolderOperation(folder:String) -> IMAPOperation {
         return IMAPOperation(operation: folder.utf16({ session.createFolderOperation(session, $0) }))
     }
+    
+    /**
+     Returns an operation to subscribe to a folder.
+     
+     MCOIMAPOperation * op = [session createFolderOperation:@"holidays 2013"];
+     [op start:^(NSError * __nullable error) {
+     if (error != nil)
+     return;
+     MCOIMAPOperation * op = [session subscribeFolderOperation:@"holidays 2013"];
+     ...
+     }];
+     */
+    public func subscribeFolderOperation(folder: String) -> IMAPOperation {
+        return IMAPOperation.init(operation: folder.utf16({ session.subscribeFolderOperation(session, $0) }))
+    }
+    
+    /**
+     Returns an operation to unsubscribe from a folder.
+     
+     MCOIMAPOperation * op = [session unsubscribeFolderOperation:@"holidays 2009"];
+     [op start:^(NSError * __nullable error) {
+     if (error != nil)
+     return;
+     MCOIMAPOperation * op = [session deleteFolderOperation:@"holidays 2009"]
+     ...
+     }];
+     */
+    public func unsubscribeFolderOperation(folder: String) -> IMAPOperation {
+        return IMAPOperation.init(operation: folder.utf16({ session.unsubscribeFolderOperation(session, $0) }))
+    }
 
     /**
      Returns an operation to unsubscribe from a folder.
@@ -248,6 +339,140 @@ public class IMAPSession {
 
     public func storeFlagsByUIDOperation(folder:String, uids:IndexSet, kind:IMAPStoreFlagsRequestKind, flags:MessageFlag, customFlags:Array<String>) -> IMAPOperation {
         return IMAPOperation(operation: folder.utf16({ session.storeFlagsByUIDOperation(session, $0, uids.cast(), kind, flags, Array<String>.cast(customFlags)) }));
+    }
+    
+    /**
+     Returns an operation to change flags of messages.
+     
+     For example: Adds the seen flag to the message with UID 456.
+     
+     MCOIMAPOperation * op = [session storeFlagsOperationWithFolder:@"INBOX"
+     uids:[MCOIndexSet indexSetWithIndex:456]
+     kind:MCOIMAPStoreFlagsRequestKindAdd
+     flags:MCOMessageFlagSeen];
+     [op start:^(NSError * __nullable error) {
+     ...
+     }];
+     */
+    public func storeFlagsOperation(folder: String, uids: IndexSet, kind: IMAPStoreFlagsRequestKind, flags: MessageFlag) -> IMAPOperation {
+        return IMAPOperation.init(operation: folder.utf16({ session.storeFlagsByUIDOperation(session, $0, uids.nativeInstance, kind, flags, newCArray()) }))
+    }
+    
+    /**
+     Returns an operation to change flags of messages, using IMAP sequence number.
+     
+     For example: Adds the seen flag to the message with the sequence number number 42.
+     
+     MCOIMAPOperation * op = [session storeFlagsOperationWithFolder:@"INBOX"
+     numbers:[MCOIndexSet indexSetWithIndex:42]
+     kind:MCOIMAPStoreFlagsRequestKindAdd
+     flags:MCOMessageFlagSeen];
+     [op start:^(NSError * __nullable error) {
+     ...
+     }];
+     */
+    public func storeFlagsOperation(folder: String, numbers: IndexSet, kind: IMAPStoreFlagsRequestKind, flags: MessageFlag) -> IMAPOperation {
+        return IMAPOperation.init(operation: folder.utf16({ session.storeFlagsByNumberOperation(session, $0, numbers.nativeInstance, kind, flags, newCArray()) }))
+    }
+    
+    /**
+     Returns an operation to change flags and custom flags of messages.
+     
+     For example: Adds the seen flag and $CNS-Greeting-On flag to the message with UID 456.
+     
+     MCOIMAPOperation * op = [session storeFlagsOperationWithFolder:@"INBOX"
+     uids:[MCOIndexSet indexSetWithIndex:456]
+     kind:MCOIMAPStoreFlagsRequestKindAdd
+     flags:MCOMessageFlagSeen
+     customFlags:@["$CNS-Greeting-On"]];
+     [op start:^(NSError * __nullable error) {
+     ...
+     }];
+     */
+    public func storeFlagsOperation(folder: String, uids: IndexSet, kind: IMAPStoreFlagsRequestKind, flags: MessageFlag, customFlags: Array<String>) -> IMAPOperation {
+        return IMAPOperation.init(operation: folder.utf16({ session.storeFlagsByUIDOperation(session, $0, uids.nativeInstance, kind, flags, customFlags.cast()) }))
+    }
+    
+    /**
+     Returns an operation to change flags and custom flags of messages, using IMAP sequence number.
+     
+     For example: Adds the seen flag and $CNS-Greeting-On flag to the message with the sequence number 42.
+     
+     MCOIMAPOperation * op = [session storeFlagsOperationWithFolder:@"INBOX"
+     numbers:[MCOIndexSet indexSetWithIndex:42]
+     kind:MCOIMAPStoreFlagsRequestKindAdd
+     flags:MCOMessageFlagSeen
+     customFlags:@["$CNS-Greeting-On"]];
+     [op start:^(NSError * __nullable error) {
+     ...
+     }];
+     */
+    public func storeFlagsOperation(folder: String, numbers: IndexSet, kind: IMAPStoreFlagsRequestKind, flags: MessageFlag, customFlags: Array<String>) -> IMAPOperation {
+        return IMAPOperation.init(operation: folder.utf16({ session.storeFlagsByNumberOperation(session, $0, numbers.nativeInstance, kind, flags, customFlags.cast()) }))
+    }
+    
+    /**
+     Returns an operation to change labels of messages. Intended for Gmail
+     
+     For example: Adds the label "Home" flag to the message with UID 42.
+     
+     MCOIMAPOperation * op = [session storeLabelsOperationWithFolder:@"INBOX"
+     numbers:[MCOIndexSet indexSetWithIndex:42]
+     kind:MCOIMAPStoreFlagsRequestKindAdd
+     labels:[NSArray arrayWithObject:@"Home"]];
+     [op start:^(NSError * __nullable error) {
+     ...
+     }];
+     */
+    public func storeLabelsOperation(foler: String, numbers: IndexSet, kind: IMAPStoreFlagsRequestKind, labels: Array<String>) -> IMAPOperation {
+        return IMAPOperation.init(operation: foler.utf16({ session.storeLabelsByNumberOperation(session, $0, numbers.nativeInstance, kind, labels.cast()) }))
+    }
+    
+    /**
+     Returns an operation to change labels of messages. Intended for Gmail
+     
+     For example: Adds the label "Home" flag to the message with UID 456.
+     
+     MCOIMAPOperation * op = [session storeLabelsOperationWithFolder:@"INBOX"
+     uids:[MCOIndexSet indexSetWithIndex:456]
+     kind:MCOIMAPStoreFlagsRequestKindAdd
+     labels:[NSArray arrayWithObject:@"Home"]];
+     [op start:^(NSError * __nullable error) {
+     ...
+     }];
+     */
+    public func storeLabelsOperation(foler: String, uids: IndexSet, kind: IMAPStoreFlagsRequestKind, labels: Array<String>) -> IMAPOperation {
+        return IMAPOperation.init(operation: foler.utf16({ session.storeLabelsByUIDOperation(session, $0, uids.nativeInstance, kind, labels.cast()) }))
+    }
+    
+    /**
+     Returns an operation to add a message to a folder.
+     
+     MCOIMAPOperation * op = [session appendMessageOperationWithFolder:@"Sent Mail" messageData:rfc822Data flags:MCOMessageFlagNone];
+     [op start:^(NSError * __nullable error, uint32_t createdUID) {
+     if (error == nil) {
+     NSLog(@"created message with UID %lu", (unsigned long) createdUID);
+     }
+     }];
+     */
+    public func appendMessageOperation(folder: String, messageData: Data, flags: MessageFlag) -> IMAPAppendMessageOperation {
+        return IMAPAppendMessageOperation.init(operation: folder.utf16({ session.appendMessageOperationWithData(session, $0, newCData(messageData.bytes(), messageData.length()), flags, newCArray()) }))
+    }
+    
+    /**
+     Returns an operation to add a message with custom flags to a folder.
+     
+     MCOIMAPOperation * op = [session appendMessageOperationWithFolder:@"Sent Mail" messageData:rfc822Data flags:MCOMessageFlagNone customFlags:@[@"$CNS-Greeting-On"]];
+     [op start:^(NSError * __nullable error, uint32_t createdUID) {
+     if (error == nil) {
+     NSLog(@"created message with UID %lu", (unsigned long) createdUID);
+     }
+     }];
+     */
+    public func appendMessageOperation(folder: String, messageData: Data, flags: MessageFlag, customFlags:Array<String>) -> IMAPAppendMessageOperation {
+        return IMAPAppendMessageOperation.init(operation: folder.utf16({
+            session.appendMessageOperationWithData(session, $0, newCData(messageData.bytes(), messageData.length()), flags, Array<String>.cast(customFlags))
+        }))
     }
 
     /**
@@ -352,6 +577,46 @@ public class IMAPSession {
     public func fetchMessageOperation(folder:String, uid:UInt32, urgent:Bool) -> IMAPFetchContentOperation {
         return IMAPFetchContentOperation(operation: folder.utf16({ session.fetchMessageByUIDOperation(session, $0, uid, urgent) }));
     }
+    
+    /**
+     Returns an operation to fetch the content of a message.
+     
+     MCOIMAPFetchContentOperation * op = [session fetchMessageOperationWithFolder:@"INBOX" uid:456];
+     [op start:^(NSError * __nullable error, NSData * messageData) {
+     MCOMessageParser * parser = [MCOMessageParser messageParserWithData:messageData]
+     ...
+     }];
+     */
+    public func fetchMessageOperation(folder: String, uid: UInt32) -> IMAPFetchContentOperation {
+        return IMAPFetchContentOperation.init(operation: folder.utf16({ session.fetchMessageByUIDOperation(session, $0, uid, false) }))
+    }
+    
+    /**
+     Returns an operation to fetch the content of a message, using IMAP sequence number.
+     @param urgent is set to YES, an additional connection to the same folder might be opened to fetch the content.
+     
+     MCOIMAPFetchContentOperation * op = [session fetchMessageOperationWithFolder:@"INBOX" number:42 urgent:NO];
+     [op start:^(NSError * __nullable error, NSData * messageData) {
+     MCOMessageParser * parser = [MCOMessageParser messageParserWithData:messageData]
+     ...
+     }];
+     */
+    public func fetchMessageOperation(folder:String, number:UInt32, urgent:Bool) -> IMAPFetchContentOperation {
+        return IMAPFetchContentOperation(operation: folder.utf16({ session.fetchMessageByUIDOperation(session, $0, number, urgent) }));
+    }
+    
+    /**
+     Returns an operation to fetch the content of a message, using IMAP sequence number.
+     
+     MCOIMAPFetchContentOperation * op = [session fetchMessageOperationWithFolder:@"INBOX" number:42];
+     [op start:^(NSError * __nullable error, NSData * messageData) {
+     MCOMessageParser * parser = [MCOMessageParser messageParserWithData:messageData]
+     ...
+     }];
+     */
+    public func fetchMessageOperation(folder:String, number:UInt32) -> IMAPFetchContentOperation {
+        return IMAPFetchContentOperation(operation: folder.utf16({ session.fetchMessageByUIDOperation(session, $0, number, false) }));
+    }
 
     /**
      Returns an operation to fetch an attachment.
@@ -371,7 +636,90 @@ public class IMAPSession {
             partId.utf16({ partIdPtr in
                 session.fetchMessageAttachmentByUIDOperation(session, folderPtr, uid, partIdPtr, encoding, urgent)
             })
-        
+        }))
+    }
+    
+    
+    /**
+     Returns an operation to fetch an attachment.
+     
+     Example 1:
+     
+     MCOIMAPFetchContentOperation * op = [session fetchMessageAttachmentOperationWithFolder:@"INBOX"
+     uid:456
+     partID:@"1.2"
+     encoding:MCOEncodingBase64];
+     [op start:^(NSError * __nullable error, NSData * partData) {
+     ...
+     }];
+     
+     Example 2:
+     
+     MCOIMAPFetchContentOperation * op = [session fetchMessageAttachmentOperationWithFolder:@"INBOX"
+     uid:[message uid]
+     partID:[part partID]
+     encoding:[part encoding]];
+     [op start:^(NSError * __nullable error, NSData * partData) {
+     ...
+     }];
+     */
+    public func fetchMessageAttachmentOperation(folder: String, uid: UInt32, partID: String, encoding: Encoding) -> IMAPFetchContentOperation {
+        return IMAPFetchContentOperation.init(operation: folder.utf16({ folderPtr in
+            partID.utf16({ partIDPtr in
+                session.fetchMessageAttachmentByUIDOperation(session, folderPtr, uid, partIDPtr, encoding, false)
+            })
+        }))
+    }
+    
+    /**
+     Returns an operation to fetch an attachment.
+     @param  urgent is set to YES, an additional connection to the same folder might be opened to fetch the content.
+     
+     MCOIMAPFetchContentOperation * op = [session fetchMessageAttachmentOperationWithFolder:@"INBOX"
+     uid:456
+     partID:@"1.2"
+     encoding:MCOEncodingBase64
+     urgent:YES];
+     [op start:^(NSError * __nullable error, NSData * partData) {
+     ...
+     }];
+     */
+    public func fetchMessageAttachmentOperation(folder:String, number:UInt32, partId:String, encoding:Encoding, urgent:Bool) -> IMAPFetchContentOperation {
+        return IMAPFetchContentOperation(operation: folder.utf16({ folderPtr in
+            partId.utf16({ partIdPtr in
+                session.fetchMessageAttachmentByNumberOperation(session, folderPtr, number, partIdPtr, encoding, urgent)
+            })
+        }))
+    }
+    
+    /**
+     Returns an operation to fetch an attachment.
+     
+     Example 1:
+     
+     MCOIMAPFetchContentOperation * op = [session fetchMessageAttachmentOperationWithFolder:@"INBOX"
+     number:42
+     partID:@"1.2"
+     encoding:MCOEncodingBase64];
+     [op start:^(NSError * __nullable error, NSData * partData) {
+     ...
+     }];
+     
+     Example 2:
+     
+     MCOIMAPFetchContentOperation * op = [session fetchMessageAttachmentOperationWithFolder:@"INBOX"
+     number:[message sequenceNumber]
+     partID:[part partID]
+     encoding:[part encoding]];
+     [op start:^(NSError * __nullable error, NSData * partData) {
+     ...
+     }];
+     */
+    public func fetchMessageAttachmentOperation(folder:String, number:UInt32, partId:String, encoding:Encoding) -> IMAPFetchContentOperation {
+        return IMAPFetchContentOperation(operation: folder.utf16({ folderPtr in
+            partId.utf16({ partIdPtr in
+                session.fetchMessageAttachmentByNumberOperation(session, folderPtr, number, partIdPtr, encoding, false)
+            })
         }))
     }
 
