@@ -39,6 +39,11 @@ CIMAPIdentity newCIMAPIdentity(mailcore::IMAPIdentity *folder) {
     self.setVersion = &setVersion;
     self.version = &version;
     
+    self.allInfoKeys = &allInfoKeys;
+    self.infoForKey = &infoForKey;
+    self.setInfoForKey = &setInfoForKey;
+    self.removeAllInfos= &removeAllInfos;
+    
     return self;
 }
 

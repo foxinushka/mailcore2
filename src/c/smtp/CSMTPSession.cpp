@@ -64,6 +64,58 @@ public:
     OperationQueueRunningChangeBlock mQueueRunningChangeBlock;
 };
 
+bool isOperationQueueRunning(struct CSMTPSession self) {
+    return self.instance->isOperationQueueRunning();
+}
+
+void setConnectionLogger(struct CSMTPSession self, ConnectionLogger logger) {
+    self._callback->mLogger = logger;
+    if (logger != NULL) {
+        self.instance->setConnectionLogger(self._callback);
+    }
+    else {
+        self.instance->setConnectionLogger(NULL);
+    }
+}
+
+void setOperationQueueRunningChangeBlock(struct CSMTPSession self, OperationQueueRunningChangeBlock queueRunningChangeBlock) {
+    self._callback->mQueueRunningChangeBlock = queueRunningChangeBlock;
+    if (queueRunningChangeBlock != NULL) {
+        self.instance->setOperationQueueCallback(self._callback);
+    }
+    else {
+        self.instance->setOperationQueueCallback(NULL);
+    }
+}
+
+CSMTPOperation loginOperation(struct CSMTPSession self) {
+    return newCSMTPOperation(self.instance->loginOperation());
+}
+
+CSMTPOperation sendOperationWithData(struct CSMTPSession self, const char* messageDataBytes, unsigned int messageDataLenght){
+    return newCSMTPOperation(self.instance->sendMessageOperation(new mailcore::Data(messageDataBytes, messageDataLenght)));
+}
+
+CSMTPOperation sendOperationWithDataAndForm(struct CSMTPSession self, const char* messageDataBytes, unsigned int messageDataLenght, CAddress from , CArray recipients) {
+    return newCSMTPOperation(self.instance->sendMessageOperation(from.instance, recipients.instance, new mailcore::Data(messageDataBytes, messageDataLenght)));
+}
+
+CSMTPOperation sendOperationWithContentsOfFile(struct CSMTPSession self, const UChar* path,  CAddress from,  CArray recipients) {
+    return newCSMTPOperation(self.instance->sendMessageOperation(from.instance, recipients.instance, new mailcore::String(path)));
+}
+
+CSMTPOperation checkAccountOperationWithFrom(struct CSMTPSession self, CAddress from) {
+    return newCSMTPOperation(self.instance->checkAccountOperation(from.instance));
+}
+
+CSMTPOperation noopOperation(struct CSMTPSession self) {
+    return newCSMTPOperation(self.instance->noopOperation());
+}
+
+void cancelAllOperations(struct CSMTPSession self) {
+    self.instance->cancelAllOperations();
+}
+
 CSMTPSession newCSMTPSession() {
     CSMTPSession self;
     self.instance = new mailcore::SMTPAsyncSession();
@@ -95,7 +147,18 @@ CSMTPSession newCSMTPSession() {
     self.dispatchQueue = &dispatchQueue;
     self.setDispatchQueue = &setDispatchQueue;
 #endif
-
+    
+    self.loginOperation = &loginOperation;
+    self.sendOperationWithData = &sendOperationWithData;
+    self.sendOperationWithDataAndFromAndRecipients = &sendOperationWithDataAndForm;
+    self.sendOperationWithContentsOfFile = &sendOperationWithContentsOfFile;
+    self.checkAccountOperationWithFrom = &checkAccountOperationWithFrom;
+    self.noopOperation = &noopOperation;
+    
+    self.setOperationQueueRunningChangeBlock = &setOperationQueueRunningChangeBlock;
+    self.setConnectionLogger = &setConnectionLogger;
+    self.cancelAllOperations = &cancelAllOperations;
+    
     return self;
 }
 
@@ -103,53 +166,5 @@ void deleteCSMTPSession(CSMTPSession self) {
     C_SAFE_RELEASE(self._callback);
     self.instance->setConnectionLogger(NULL);
     self.instance->release();
-}
-
-bool isOperationQueueRunning(struct CSMTPSession self) {
-    return self.instance->isOperationQueueRunning();
-}
-
-void setConnectionLogger(struct CSMTPSession self, ConnectionLogger logger) {
-    self._callback->mLogger = logger;
-    if (logger != NULL) {
-        self.instance->setConnectionLogger(self._callback);
-    }
-    else {
-        self.instance->setConnectionLogger(NULL);
-    }
-}
-
-void setOperationQueueRunningChangeBlock(struct CSMTPSession self, OperationQueueRunningChangeBlock queueRunningChangeBlock) {
-    self._callback->mQueueRunningChangeBlock = queueRunningChangeBlock;
-    if (queueRunningChangeBlock != NULL) {
-        self.instance->setOperationQueueCallback(self._callback);
-    }
-    else {
-        self.instance->setOperationQueueCallback(NULL);
-    }
-}
-
-CSMTPOperation loginOperation(struct CSMTPSession self) {
-    return newCSMTPOperation(self.instance->loginOperation());
-}
-
-CSMTPOperation sendOperationWithData(struct CSMTPSession self, char* messageDataBytes, unsigned int messageDataLenght){
-    return newCSMTPOperation(self.instance->sendMessageOperation(new mailcore::Data(messageDataBytes, messageDataLenght)));
-}
-
-CSMTPOperation sendOperationWithDataAndForm(struct CSMTPSession self, char* messageDataBytes, unsigned int messageDataLenght, CAddress from , CArray recipients) {
-    return newCSMTPOperation(self.instance->sendMessageOperation(from.instance, recipients.instance, new mailcore::Data(messageDataBytes, messageDataLenght)));
-}
-
-CSMTPOperation sendOperationWithContentsOfFile(struct CSMTPSession self, const UChar* path,  CAddress from,  CArray recipients) {
-    return newCSMTPOperation(self.instance->sendMessageOperation(from.instance, recipients.instance, new mailcore::String(path)));
-}
-
-CSMTPOperation checkAccountOperationWithFrom(struct CSMTPSession self, CAddress from) {
-    return newCSMTPOperation(self.instance->checkAccountOperation(from.instance));
-}
-
-CSMTPOperation noopOperation(struct CSMTPSession self) {
-    return newCSMTPOperation(self.instance->noopOperation());
 }
 

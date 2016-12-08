@@ -9,6 +9,10 @@
 CObject getValue(struct CDictionary self, CObject key);
 void setValue(struct CDictionary self, CObject key, CObject value);
 
+CArray allKeys(struct CDictionary self) {
+    return newCArray(self.instance->allKeys());
+}
+
 CDictionary newCDictionary() {
     return newCDictionary(new mailcore::HashMap());
 }
@@ -17,6 +21,7 @@ CDictionary newCDictionary(mailcore::HashMap *dict){
     CDictionary self;
     self.instance = dict;
     
+    self.allKeys = &allKeys;
     self.getValue = &getValue;
     self.setValue = &setValue;
     

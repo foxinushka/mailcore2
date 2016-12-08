@@ -61,16 +61,16 @@ class SwiftMailCoreTest : XCTestCase {
         var path = _builderOutputPath?.appendingPathComponent("builder1.eml")
     }
     
-    func testSwift(){
-        let session = ImapSession();
+    func testIMAP(){
+        let session = IMAPSession();
         session.username = "adruk@readdle.com"
         session.password = ""
         session.hostname = "imap.gmail.com"
         session.port = 993
         session.connectionType = ConnectionType.init(rawValue: 1 << 2)
         
-        var checkOp: ImapOperation? = session.checkAccountOperation()
-        var foldersOp: ImapFetchFoldersOperation?
+        var checkOp: IMAPCheckAccountOperation? = session.checkAccountOperation()
+        var foldersOp: IMAPFetchFoldersOperation?
         
         checkOp?.start(completionBlock: { err in
             print("check account done")
@@ -96,6 +96,79 @@ class SwiftMailCoreTest : XCTestCase {
         
         checkOp = nil
     }
+    
+//    func testAllWrappersIntegrity(){
+//        let session = IMAPSession();
+//        testMailcoreObjectWrapperIntegrity(session.session)
+//        testMailcoreObjectWrapperIntegrity(session.fetchSubscribedFoldersOperation().nativeInstance)
+//        testMailcoreObjectWrapperIntegrity(session.renameFolderOperation(folder: "", otherName: "").nativeInstance)
+//        testMailcoreObjectWrapperIntegrity(session.disconnectOperation().nativeInstance)
+//        testMailcoreObjectWrapperIntegrity(session.connectOperation().nativeInstance)
+//        testMailcoreObjectWrapperIntegrity(session.noopOperation().nativeInstance)
+//        testMailcoreObjectWrapperIntegrity(session.checkAccountOperation().nativeInstance)
+//        testMailcoreObjectWrapperIntegrity(session.capabilityOperation().nativeInstance)
+//        testMailcoreObjectWrapperIntegrity(session.quotaOperation().nativeInstance)
+//        testMailcoreObjectWrapperIntegrity(session.fetchAllFoldersOperation().nativeInstance)
+//        testMailcoreObjectWrapperIntegrity(session.expungeOperation(folder: "").nativeInstance)
+//    }
+//    
+//    func testMailcoreObjectWrapperIntegrity(_ objOptional: Any?) {
+//        if let obj = objOptional {
+//            // Create a Mirror
+//            let mirror = Mirror(reflecting: obj)
+//            XCTAssertEqual(mirror.displayStyle, Mirror.DisplayStyle.struct)
+//            
+//            for case let (label?, anyValue) in mirror.children {
+//                if label == "instance" || label == "_callback" {
+//                    continue
+//                }
+//                // anyValue is Builtin.RawPointer, that's why is never 'nil'
+////                let describingValue = String(describing: anyValue);
+////                print(describingValue, "\(Mirror(reflecting: anyValue))")
+////                XCTAssert(describingValue != "nil", "\(label) is nil!")
+//                var opt: Any? = anyValue
+//                print(opt ?? "((((((nil)")
+//            }
+//        }
+//    }
+    
+    func testSMTP() {
+        let session = SMTPSession()
+        session.username = "adruk@readdle.com"
+        session.password = ""
+        session.hostname = "smtp.gmail.com"
+        session.port = 465
+        session.connectionType = ConnectionType.init(rawValue: 1 << 2)
+        
+        var loginOp: SMTPOperation? = session.loginOperation()
+        var sendOp: SMTPSendOperation?
+        loginOp!.start(completionBlock: { err in
+            if err != nil {
+                print("Oh crap, an error ", err!.localizedDescription)
+            }
+            else {
+                print("CONNECTED")
+                
+                sendOp = session.sendOperationWithData(messageData: "Hello".data(using: .utf8)!, from: Address.addressWithMailbox(mailbox: "adruk@readdle.com")!, recipients: [Address.addressWithMailbox(mailbox: "adruk@readdle.com")!])
+                
+                sendOp!.start(completionBlock: { err in
+                    if err != nil {
+                        print("Oh crap, an error ", err!.localizedDescription)
+                    }
+                    else {
+                        print("COMPLETED")
+                    }
+                })
+            }
+        })
+        
+        RunLoop.current.run(until: Date().addingTimeInterval(30))
+        
+        loginOp = nil
+        sendOp = nil
+        
+    }
+    
     
     func testPerformanceExample() {
         // This is an example of a performance test case.

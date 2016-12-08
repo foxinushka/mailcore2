@@ -73,7 +73,7 @@ extern "C" {
         CIMAPNamespace  (*defaultNamespace)(struct CIMAPAsyncSession self);
         CIMAPIdentity   (*clientIdentity)(struct CIMAPAsyncSession self);
         CIMAPIdentity   (*serverIdentity)(struct CIMAPAsyncSession self);
-        OperationQueueRunningChangeBlock (*operationQueueRunningChangeBlock)(struct CIMAPAsyncSession self);
+        //OperationQueueRunningChangeBlock (*operationQueueRunningChangeBlock)(struct CIMAPAsyncSession self);
         
         bool    (*isVoIPEnabled)(struct CIMAPAsyncSession self);
         bool    (*isIdleEnabled)(struct CIMAPAsyncSession self);

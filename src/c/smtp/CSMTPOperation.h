@@ -32,6 +32,8 @@ extern "C" {
         
         ErrorCode                   (*error)(struct CSMTPOperation self);
         struct CSMTPOperation       (*setProgressBlocks)(struct CSMTPOperation self, CProgressBlock progressBlock, const void* userInfo);
+        const UChar*                (*lastSMTPResponse)(struct CSMTPOperation self);
+        int                         (*lastSMTPResponseCode)(struct CSMTPOperation self);
     };
     typedef struct CSMTPOperation CSMTPOperation;
     

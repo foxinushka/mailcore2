@@ -290,10 +290,21 @@ CIMAPIdentityOperation identityOperationWithClientIdentity(struct CIMAPAsyncSess
     return newCIMAPIdentityOperation(self.instance->identityOperation(identity.instance));
 }
 
-CIMAPMessageRenderingOperation      (*htmlBodyRenderingOperation)(struct CIMAPAsyncSession self, CIMAPMessage message, const UChar* folder);
-CIMAPMessageRenderingOperation      (*plainTextRenderingOperation)(struct CIMAPAsyncSession self, CIMAPMessage message, const UChar* folder);
-CIMAPMessageRenderingOperation      (*plainTextBodyRenderingOperation)(struct CIMAPAsyncSession self, CIMAPMessage message, const UChar* folder, bool stripWhitespace);
-CIMAPQuotaOperation                 (*quotaOperation)(struct CIMAPAsyncSession self);
+CIMAPMessageRenderingOperation htmlBodyRenderingOperation(struct CIMAPAsyncSession self, CIMAPMessage message, const UChar* folder) {
+    return newCIMAPMessageRenderingOperation(self.instance->htmlBodyRenderingOperation(message.instance, new mailcore::String(folder)));
+}
+
+CIMAPMessageRenderingOperation plainTextRenderingOperation(struct CIMAPAsyncSession self, CIMAPMessage message, const UChar* folder) {
+    return newCIMAPMessageRenderingOperation(self.instance->plainTextRenderingOperation(message.instance, new mailcore::String(folder)));
+}
+
+CIMAPMessageRenderingOperation plainTextBodyRenderingOperation(struct CIMAPAsyncSession self, CIMAPMessage message, const UChar* folder, bool stripWhitespace) {
+    return newCIMAPMessageRenderingOperation(self.instance->plainTextBodyRenderingOperation(message.instance, new mailcore::String(folder), stripWhitespace));
+}
+
+CIMAPQuotaOperation quotaOperation(struct CIMAPAsyncSession self) {
+    return newCIMAPQuotaOperation(self.instance->quotaOperation());
+}
 
 CIMAPAsyncSession newCIMAPAsyncSession(){
     CIMAPAsyncSession session;
@@ -313,6 +324,11 @@ CIMAPAsyncSession newCIMAPAsyncSession(){
     session.maximumConnections = &maximumConnections;
     session.allowsFolderConcurrentAccessEnabled = &allowsFolderConcurrentAccessEnabled;
     session.defaultNamespace = &defaultNamespace;
+    session.clientIdentity = &clientIdentity;
+    session.serverIdentity = &serverIdentity;
+    session.isVoIPEnabled = &isVoIPEnabled;
+    session.isIdleEnabled = &isIdleEnabled;
+    session.isOperationQueueRunning = &isOperationQueueRunning;
     session.setHostname = &setHostname;
     session.setPort = &setPort;
     session.setUsername = &setUsername;
@@ -325,36 +341,59 @@ CIMAPAsyncSession newCIMAPAsyncSession(){
     session.setMaximumConnections = &setMaximumConnections;
     session.setAllowsFolderConcurrentAccessEnabled = &setAllowsFolderConcurrentAccessEnabled;
     session.setDefaultNamespace = &setDefaultNamespace;
-    
-    session.isVoIPEnabled = &isVoIPEnabled;
-    session.isIdleEnabled = &isIdleEnabled;
-    session.isOperationQueueRunning = &isOperationQueueRunning;
+    session.setClientIdentity = &setClientIdentity;
     
 #ifdef __ANDROID__
 #else
     session.dispatchQueue = &dispatchQueue;
     session.setDispatchQueue = &setDispatchQueue;
 #endif
+    session.setConnectionLogger = &setConnectionLogger;
+    session.cancelAllOperations = &cancelAllOperations;
+    session.connectOperation = &connectOperation;
     session.disconnectOperation = &disconnectOperation;
     session.noopOperation = &noopOperation;
-    session.checkAccountOperation = &checkAccountOperation;
-    session.capabilityOperation = &capabilityOperation;
-    session.fetchAllFoldersOperation = &fetchAllFoldersOperation;
     session.expungeOperation = &expungeOperation;
     session.createFolderOperation = &createFolderOperation;
     session.deleteFolderOperation = &deleteFolderOperation;
     session.storeFlagsByUIDOperation = &storeFlagsByUIDOperation;
+    session.storeFlagsByNumberOperation = &storeFlagsByNumberOperation;
+    session.storeLabelsByUIDOperation = &storeLabelsByUIDOperation;
+    session.storeLabelsByNumberOperation = &storeLabelsByNumberOperation;
+    session.renameFolderOperation = &renameFolderOperation;
+    session.subscribeFolderOperation = &subscribeFolderOperation;
+    session.unsubscribeFolderOperation = &unsubscribeFolderOperation;
+    session.fetchSubscribedFoldersOperation = &fetchSubscribedFoldersOperation;
+    session.fetchMessageAttachmentToFileOperation = &fetchMessageAttachmentToFileOperation;
+    session.fetchNamespace = &fetchNamespace;
+    session.customCommandOperation = &customCommandOperation;
+    session.checkAccountOperation = &checkAccountOperation;
+    session.capabilityOperation = &capabilityOperation;
+    session.fetchAllFoldersOperation = &fetchAllFoldersOperation;
     session.appendMessageOperation = &appendMessageOperation;
+    session.appendMessageOperationWithData = &appendMessageOperationWithData;
     session.fetchMessagesByNumberOperation = &fetchMessagesByNumberOperation;
     session.fetchMessagesByUIDOperation = &fetchMessagesByUIDOperation;
     session.syncMessagesByUIDOperation = &syncMessagesByUIDOperation;
     session.fetchMessageByUIDOperation = &fetchMessageByUIDOperation;
+    session.fetchMessageByNumberOperation = &fetchMessageByNumberOperation;
     session.fetchMessageAttachmentByUIDOperation = &fetchMessageAttachmentByUIDOperation;
+    session.fetchMessageAttachmentByNumberOperation = &fetchMessageAttachmentByNumberOperation;
     session.searchOperationWithExpression = &searchOperationWithExpression;
     session.searchOperation = &searchOperation;
     session.copyMessagesOperation = &copyMessagesOperation;
     session.folderInfoOperation = &folderInfoOperation;
     session.folderStatusOperation = &folderStatusOperation;
+    session.idleOperation = &idleOperation;
+    session.moveMessagesOperation = &moveMessagesOperation;
+    session.fetchParsedMessageOperationByUIDOperation = &fetchParsedMessageOperationByUIDOperation;
+    session.fetchParsedMessageOperationByNumberOperation = &fetchParsedMessageOperationByNumberOperation;
+    session.htmlRenderingOperation = &htmlRenderingOperation;
+    session.htmlBodyRenderingOperation = &htmlBodyRenderingOperation;
+    session.plainTextRenderingOperation = &plainTextRenderingOperation;
+    session.plainTextBodyRenderingOperation = &plainTextBodyRenderingOperation;
+    session.quotaOperation = &quotaOperation;
+    session.identityOperationWithClientIdentity = &identityOperationWithClientIdentity;
     return session;
 }
 

@@ -15,6 +15,7 @@ CAttachment newCAttachment(mailcore::Attachment *attachment){
     self.instance->release();
     
     self.decodedString = &decodedString;
+    self.setData = &setData;
     
     return self;
 }

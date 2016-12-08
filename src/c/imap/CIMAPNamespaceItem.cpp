@@ -18,6 +18,10 @@ CIMAPNamespaceItem newCIMAPNamespaceItem(mailcore::IMAPNamespaceItem *item) {
     item->retain();
     self.instance = item;
     
+    self.prefix = &prefix;
+    self.setPrefix = &setPrefix;
+    self.delimiter = &delimiter;
+    self.setDelimiter = &setDelimiter;
     self.pathForComponents = &pathForComponents;
 	self.componentForPath = &componentForPath;
 	self.containsFolder = &containsFolder;

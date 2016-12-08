@@ -22,6 +22,7 @@ void                    setContentTypeParameterValue(struct CAbstractPart self, 
 void                    removeContentTypeParameterForName(struct CAbstractPart self, const UChar* name);
 const UChar*            contentTypeParameterValueForName(struct CAbstractPart self, const UChar* name);
 CArray                  allContentTypeParametersNames(struct CAbstractPart self);
+CObject                 castToCObject(struct CAbstractPart self);
 
 CAbstractPart newCAbstractPart(mailcore::AbstractPart *part){
     CAbstractPart self;
@@ -54,6 +55,7 @@ CAbstractPart newCAbstractPart(mailcore::AbstractPart *part){
     self.removeContentTypeParameterForName = &removeContentTypeParameterForName;
     self.contentTypeParameterValueForName = &contentTypeParameterValueForName;
     self.allContentTypeParametersNames = &allContentTypeParametersNames;
+    self.castToCObject = &castToCObject;
     return self;
 }
 

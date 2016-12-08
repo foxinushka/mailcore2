@@ -37,12 +37,12 @@ public class IMAPCheckAccountOperation : IMAPBaseOperation {
         }
         else {
             let error = MailCoreError(code: errorCode)
-            if operation.loginResponse(operation) != nil || operation.loginUnparsedResponseData(operation) != nil {
+            if operation.loginResponse(operation) != nil || operation.loginUnparsedResponseData(operation).bytes != nil {
                 var userInfo = Dictionary<String, Any>()
                 if operation.loginResponse(operation) != nil {
                     userInfo["IMAPResponseKey"] = String(utf16: operation.loginResponse(operation))
                 }
-                if operation.loginUnparsedResponseData(operation) != nil {
+                if operation.loginUnparsedResponseData(operation).bytes != nil {
                     userInfo["IMAPUnparsedResponseDataKey"] = Data.init(cdata: operation.loginUnparsedResponseData(operation))
                 }
                 error.userInfo = userInfo

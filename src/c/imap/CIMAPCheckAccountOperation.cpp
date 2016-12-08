@@ -11,7 +11,10 @@ const UChar*  loginResponse(struct CIMAPCheckAccountOperation self) {
 
 CData loginUnparsedResponseData(struct CIMAPCheckAccountOperation self) {
     mailcore::Data* data = self.instance->loginUnparsedResponseData();
-    return newCData(data->bytes(), data->length());
+    if (data != NULL) {
+        return newCData(data->bytes(), data->length());
+    }
+    return newCData(NULL, 0);
 }
 
 CIMAPCheckAccountOperation newCIMAPCheckAccountOperation(mailcore::IMAPCheckAccountOperation *operationRef){

@@ -9,7 +9,7 @@ import Dispatch
  */
 public class IMAPSession {
 	
-	private var session:CIMAPAsyncSession;
+	internal var session:CIMAPAsyncSession;
 
 	public init() {
  		session = newCIMAPAsyncSession();

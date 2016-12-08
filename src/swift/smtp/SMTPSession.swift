@@ -5,6 +5,10 @@ public class SMTPSession {
     
     var session:CSMTPSession;
     
+    public init() {
+        self.session = newCSMTPSession();
+    }
+    
     internal init(session: CSMTPSession) {
         self.session = session;
     }

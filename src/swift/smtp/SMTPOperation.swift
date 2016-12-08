@@ -37,8 +37,18 @@ public class SMTPOperation: Operation {
             completionBlock!(nil);
         }
         else {
-            //TODO: copy lastSMTPResponse info
-            completionBlock!(MailCoreError(code: errorCode));
+            let error = MailCoreError(code: errorCode)
+            if operation.lastSMTPResponse(operation) != nil || operation.lastSMTPResponseCode(operation) != 0 {
+                var userInfo = Dictionary<String, Any>()
+                if operation.lastSMTPResponse(operation) != nil {
+                    userInfo["MCOSMTPResponseKey"] = String(utf16: operation.lastSMTPResponse(operation))
+                }
+                if operation.lastSMTPResponseCode(operation) != 0 {
+                    userInfo["MCOSMTPResponseCodeKey"] = operation.lastSMTPResponseCode(operation)
+                }
+                error.userInfo = userInfo
+            }
+            completionBlock!(error)
         }
         completionBlock = nil;
     }

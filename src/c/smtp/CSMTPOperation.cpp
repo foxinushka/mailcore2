@@ -3,10 +3,9 @@
 
 class CSMTPOperationCallback : public mailcore::SMTPOperationCallback {
 public:
-    CSMTPOperationCallback(const void* userInfo, CProgressBlock block)
+    CSMTPOperationCallback()
     {
-        mBlock = block;
-        mUserInfo = userInfo;
+
     }
     
     virtual ~CSMTPOperationCallback()
@@ -16,36 +15,48 @@ public:
     }
     
     virtual void bodyProgress(mailcore::SMTPOperation * session, unsigned int current, unsigned int maximum) {
-        mBlock(mUserInfo, current, maximum);
+        if (mBlock != NULL) {
+            mBlock(mUserInfo, current, maximum);
+        }
     }
     
-private:
-    const void* mUserInfo;
-    CProgressBlock mBlock;
+    const void* mUserInfo = NULL;
+    CProgressBlock mBlock = NULL;
 };
-
-struct CSMTPOperation setProgressBlocks(struct CSMTPOperation self, CProgressBlock progressBlock, const void* userInfo);
-
-CSMTPOperation newCSMTPOperation(mailcore::SMTPOperation* operation) {
-    CSMTPOperation self;
-    self.cOperation = newCOperation(operation);
-    self.instance = operation;
-    
-    self.setProgressBlocks = &setProgressBlocks;
-    
-    return self;
-}
-
-void deleteCSMTPOperation(CSMTPOperation self) {
-    delete self._callback;
-}
 
 ErrorCode error(struct CSMTPOperation self) {
     return static_cast<ErrorCode>((int)self.instance->error());
 }
 
 CSMTPOperation setProgressBlocks(struct CSMTPOperation self, CProgressBlock progressBlock, const void* userInfo) {
-    self._callback = new CSMTPOperationCallback(userInfo, progressBlock);
-    self.instance->setSmtpCallback(self._callback);
+    self._callback->mBlock = progressBlock;
+    self._callback->mUserInfo = userInfo;
     return self;
+}
+
+const UChar* lastSMTPResponse(struct CSMTPOperation self) {
+    return self.instance->lastSMTPResponse()->unicodeCharacters();
+}
+
+int lastSMTPResponseCode(struct CSMTPOperation self) {
+    return self.instance->lastSMTPResponseCode();
+}
+
+CSMTPOperation newCSMTPOperation(mailcore::SMTPOperation* operation) {
+    CSMTPOperation self;
+    self.cOperation = newCOperation(operation);
+    self.instance = operation;
+    self._callback = new CSMTPOperationCallback();
+    self.instance->setSmtpCallback(self._callback);
+    
+    self.setProgressBlocks = &setProgressBlocks;
+    self.error = &error;
+    self.lastSMTPResponseCode = &lastSMTPResponseCode;
+    self.lastSMTPResponse = &lastSMTPResponse;
+    
+    return self;
+}
+
+void deleteCSMTPOperation(CSMTPOperation self) {
+    delete self._callback;
 }

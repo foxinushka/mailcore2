@@ -6,7 +6,7 @@ public class SMTPSendOperation : SMTPOperation {
     
     override init(_ operation: CSMTPOperation) {
         super.init(operation)
-        self.operation = operation.setProgressBlocks(operation, operationProgressCallback, Unmanaged.passUnretained(self).toOpaque())
+        self.operation = self.operation.setProgressBlocks(self.operation, operationProgressCallback, Unmanaged.passUnretained(self).toOpaque())
     }
     
     public var progressBlock: OperationProgressBlock?
