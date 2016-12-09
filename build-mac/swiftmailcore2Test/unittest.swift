@@ -6,8 +6,14 @@
 //  Copyright © 2016 MailCore. All rights reserved.
 //
 
+#if os(Android)
+// We use own XCTestCase for Android
+import Foundation
+import SwiftMailCore
+#else
 import XCTest
 @testable import SwiftMailCore
+#endif
 
 class SwiftMailCoreTest : XCTestCase {
     

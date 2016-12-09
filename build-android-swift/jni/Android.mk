@@ -13,6 +13,7 @@ LOCAL_C_INCLUDES += $(LOCAL_PATH)/../../src/c/basetypes
 LOCAL_C_INCLUDES += $(LOCAL_PATH)/../../src/c/imap
 LOCAL_C_INCLUDES += $(LOCAL_PATH)/../../src/c/abstract
 LOCAL_C_INCLUDES += $(LOCAL_PATH)/../../src/c/utils
+LOCAL_C_INCLUDES += $(LOCAL_PATH)/../../src/c/rfc822
 LOCAL_C_INCLUDES += $(LOCAL_PATH)/../include
 LOCAL_SRC_FILES  := ../../src/c/utils/COperation.cpp \
 					../../src/c/abstract/CAbstractPart.cpp \
@@ -33,6 +34,7 @@ LOCAL_SRC_FILES  := ../../src/c/utils/COperation.cpp \
 					../../src/c/imap/CIMAPNamespace.cpp \
 					../../src/c/imap/CIMAPNamespaceItem.cpp \
 					../../src/c/imap/CIMAPPart.cpp \
+					../../src/c/imap/CIMAPIdentity.cpp \
 					../../src/c/imap/CIMAPFolderInfo.cpp \
 					../../src/c/imap/CIMAPFolderStatus.cpp \
 					../../src/c/imap/CIMAPSearchExpression.cpp \
@@ -45,6 +47,17 @@ LOCAL_SRC_FILES  := ../../src/c/utils/COperation.cpp \
 					../../src/c/imap/CIMAPFetchMessagesOperation.cpp \
 					../../src/c/imap/CIMAPBaseOperation.cpp \
 					../../src/c/imap/CIMAPIdleOperation.cpp \
+					../../src/c/imap/CIMAPFetchFoldersOperation.cpp \
+					../../src/c/imap/CIMAPFetchNamespaceOperation.cpp \
+					../../src/c/imap/CIMAPFetchContentToFileOperation.cpp \
+					../../src/c/imap/CIMAPCustomCommandOperation.cpp \
+					../../src/c/imap/CIMAPCheckAccountOperation.cpp \
+					../../src/c/imap/CIMAPCapabilityOperation.cpp \
+					../../src/c/imap/CIMAPMoveMessagesOperation.cpp \
+					../../src/c/imap/CIMAPFetchParsedContentOperation.cpp \
+					../../src/c/imap/CIMAPMessageRenderingOperation.cpp \
+					../../src/c/imap/CIMAPIdentityOperation.cpp \
+					../../src/c/imap/CIMAPQuotaOperation.cpp \
 					../../src/c/smtp/CSMTPOperation.cpp \
 					../../src/c/smtp/CSMTPSession.cpp \
 					../../src/c/rfc822/CAttachment.cpp \
