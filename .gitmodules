@@ -1,0 +1,3 @@
+[submodule "src-dep/libetpan"]
+	path = src-dep/libetpan
+	url = https://github.com/serjepatoff/libetpan
