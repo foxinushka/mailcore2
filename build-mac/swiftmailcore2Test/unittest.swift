@@ -10,6 +10,7 @@
 // We use own XCTestCase for Android
 import Foundation
 import SwiftMailCore
+import Dispatch
 #else
 import XCTest
 @testable import SwiftMailCore
@@ -28,14 +29,14 @@ class SwiftMailCoreTest : XCTestCase {
     
     override func setUp() {
         super.setUp()
-        _mainPath = Bundle.init(for: SwiftMailCoreTest.self).resourceURL?.appendingPathComponent("data")
-        _builderPath = Bundle.init(for: SwiftMailCoreTest.self).resourceURL?.appendingPathComponent("builder/input")
-        _builderOutputPath = Bundle.init(for: SwiftMailCoreTest.self).resourceURL?.appendingPathComponent("builder/output")
-        _parserPath = Bundle.init(for: SwiftMailCoreTest.self).resourceURL?.appendingPathComponent("parser/input")
-        _parserOutputPath = Bundle.init(for: SwiftMailCoreTest.self).resourceURL?.appendingPathComponent("parser/output")
-        _charsetDetectionPath = Bundle.init(for: SwiftMailCoreTest.self).resourceURL?.appendingPathComponent("charset-detection")
-        _summaryDetectionPath = Bundle.init(for: SwiftMailCoreTest.self).resourceURL?.appendingPathComponent("summary/input")
-        _summaryDetectionOutputPath = Bundle.init(for: SwiftMailCoreTest.self).resourceURL?.appendingPathComponent("summary/output")
+        // _mainPath = Bundle.init(for: SwiftMailCoreTest.self).resourceURL?.appendingPathComponent("data")
+        // _builderPath = Bundle.init(for: SwiftMailCoreTest.self).resourceURL?.appendingPathComponent("builder/input")
+        // _builderOutputPath = Bundle.init(for: SwiftMailCoreTest.self).resourceURL?.appendingPathComponent("builder/output")
+        // _parserPath = Bundle.init(for: SwiftMailCoreTest.self).resourceURL?.appendingPathComponent("parser/input")
+        // _parserOutputPath = Bundle.init(for: SwiftMailCoreTest.self).resourceURL?.appendingPathComponent("parser/output")
+        // _charsetDetectionPath = Bundle.init(for: SwiftMailCoreTest.self).resourceURL?.appendingPathComponent("charset-detection")
+        // _summaryDetectionPath = Bundle.init(for: SwiftMailCoreTest.self).resourceURL?.appendingPathComponent("summary/input")
+        // _summaryDetectionOutputPath = Bundle.init(for: SwiftMailCoreTest.self).resourceURL?.appendingPathComponent("summary/output")
     }
     
     override func tearDown() {
@@ -60,6 +61,7 @@ class SwiftMailCoreTest : XCTestCase {
 //        NSData * expectedData = [NSData dataWithContentsOfFile:path];
 //        [builder _setBoundaries:@[@"1", @"2", @"3", @"4", @"5"]];
 //        XCTAssertEqualObjects([[NSString alloc] initWithData:[builder data] encoding:NSUTF8StringEncoding], [[NSString alloc] initWithData:expectedData encoding:NSUTF8StringEncoding], @"Pass");
+        
         var builder = MessageBuilder()
         builder.header.to = [Address.addressWithRFC822String(RFC822String: "Foo Bar <dinh.viet.hoa@gmail.com>")!]
         builder.header.messageID = "MyMessageID123@mail.gmail.com"
@@ -68,39 +70,51 @@ class SwiftMailCoreTest : XCTestCase {
     }
     
     func testIMAP(){
+        #if os(Android)
+        let queue = dispatch_queue_create("dispatch_queue_#1", nil);
+        #else
+        let queue = DispatchQueue.global()
+        #endif
+
+        let semaphore = DispatchSemaphore(value: 0)
+        
         let session = IMAPSession();
         session.username = "adruk@readdle.com"
         session.password = ""
         session.hostname = "imap.gmail.com"
         session.port = 993
         session.connectionType = ConnectionType.init(rawValue: 1 << 2)
+        session.dispatchQueue = queue
         
         var checkOp: IMAPCheckAccountOperation? = session.checkAccountOperation()
         var foldersOp: IMAPFetchFoldersOperation?
         
+        NSLog("START testIMAP")
         checkOp?.start(completionBlock: { err in
-            print("check account done")
+            NSLog("check account done")
             if err != nil {
-                print("Oh crap, an error ", err!.localizedDescription)
+                NSLog("Oh crap, an error \(err!.localizedDescription)")
+                semaphore.signal()
             }
             else {
-                print("CONNECTED")
-                print("fetch all folders")
+                NSLog("CONNECTED")
+                NSLog("fetch all folders")
                 foldersOp = session.fetchAllFoldersOperation()
                 foldersOp?.start(completionBlock: { err, folders in
                     if err != nil {
-                        print("Oh crap, an error ", err!.localizedDescription)
+                        NSLog("Oh crap, an error \(err!.localizedDescription)")
                     }
                     else {
-                        print("folders", folders?.map({ $0.path }) ?? "nil")
+                        NSLog("folders \(folders?.map({ $0.path }))")
                     }
+                    semaphore.signal()
                 })
             }
         })
-        
-        RunLoop.current.run(until: Date().addingTimeInterval(30))
+        semaphore.wait()
         
         checkOp = nil
+        NSLog("FINISH testIMAP")
     }
     
 //    func testAllWrappersIntegrity(){
@@ -130,45 +144,55 @@ class SwiftMailCoreTest : XCTestCase {
 //                }
 //                // anyValue is Builtin.RawPointer, that's why is never 'nil'
 ////                let describingValue = String(describing: anyValue);
-////                print(describingValue, "\(Mirror(reflecting: anyValue))")
+////                NSLog(describingValue, "\(Mirror(reflecting: anyValue))")
 ////                XCTAssert(describingValue != "nil", "\(label) is nil!")
 //                var opt: Any? = anyValue
-//                print(opt ?? "((((((nil)")
+//                NSLog(opt ?? "((((((nil)")
 //            }
 //        }
 //    }
     
     func testSMTP() {
+        #if os(Android)
+            let queue = dispatch_queue_create("dispatch_queue_#1", nil);
+        #else
+            let queue = DispatchQueue.global()
+        #endif
+        
+        let semaphore = DispatchSemaphore(value: 0)
+        
         let session = SMTPSession()
         session.username = "adruk@readdle.com"
         session.password = ""
         session.hostname = "smtp.gmail.com"
         session.port = 465
         session.connectionType = ConnectionType.init(rawValue: 1 << 2)
+        session.dispatchQueue = queue
         
         var loginOp: SMTPOperation? = session.loginOperation()
         var sendOp: SMTPSendOperation?
         loginOp!.start(completionBlock: { err in
             if err != nil {
-                print("Oh crap, an error ", err!.localizedDescription)
+                NSLog("Oh crap, an error \(err!.localizedDescription)")
+                semaphore.signal()
             }
             else {
-                print("CONNECTED")
-                
+                NSLog("CONNECTED")
                 sendOp = session.sendOperationWithData(messageData: "Hello".data(using: .utf8)!, from: Address.addressWithMailbox(mailbox: "adruk@readdle.com")!, recipients: [Address.addressWithMailbox(mailbox: "adruk@readdle.com")!])
-                
                 sendOp!.start(completionBlock: { err in
                     if err != nil {
-                        print("Oh crap, an error ", err!.localizedDescription)
+                        NSLog("Oh crap, an error \(err!.localizedDescription)")
+                        semaphore.signal()
                     }
                     else {
-                        print("COMPLETED")
+                        NSLog("COMPLETED")
+                        semaphore.signal()
                     }
                 })
             }
         })
         
-        RunLoop.current.run(until: Date().addingTimeInterval(30))
+        semaphore.wait()
         
         loginOp = nil
         sendOp = nil

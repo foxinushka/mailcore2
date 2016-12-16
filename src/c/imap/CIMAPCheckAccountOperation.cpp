@@ -6,7 +6,8 @@
 #define structName CIMAPCheckAccountOperation
 
 const UChar*  loginResponse(struct CIMAPCheckAccountOperation self) {
-    return self.instance->loginResponse()->unicodeCharacters();
+    mailcore::String* response = self.instance->loginResponse();
+    return (response != NULL) ? response->unicodeCharacters() : NULL;
 }
 
 CData loginUnparsedResponseData(struct CIMAPCheckAccountOperation self) {

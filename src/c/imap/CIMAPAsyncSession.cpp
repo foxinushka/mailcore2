@@ -31,10 +31,7 @@ C_SYNTHESIZE_SCALAR(unsigned int, unsigned int, setMaximumConnections, maximumCo
 C_SYNTHESIZE_BOOL(setAllowsFolderConcurrentAccessEnabled, allowsFolderConcurrentAccessEnabled)
 C_SYNTHESIZE_MAILCORE_OBJ(CIMAPNamespace, newCIMAPNamespace, setDefaultNamespace, defaultNamespace)
 C_SYNTHESIZE_MAILCORE_OBJ(CIMAPIdentity, newCIMAPIdentity, setClientIdentity, clientIdentity)
-#ifdef __ANDROID__
-#else
 C_SYNTHESIZE_SCALAR(dispatch_queue_t, dispatch_queue_t, setDispatchQueue, dispatchQueue)
-#endif
 
 typedef ConnectionLogger CConnectionLogger;
 
@@ -342,12 +339,8 @@ CIMAPAsyncSession newCIMAPAsyncSession(){
     session.setAllowsFolderConcurrentAccessEnabled = &setAllowsFolderConcurrentAccessEnabled;
     session.setDefaultNamespace = &setDefaultNamespace;
     session.setClientIdentity = &setClientIdentity;
-    
-#ifdef __ANDROID__
-#else
     session.dispatchQueue = &dispatchQueue;
     session.setDispatchQueue = &setDispatchQueue;
-#endif
     session.setConnectionLogger = &setConnectionLogger;
     session.cancelAllOperations = &cancelAllOperations;
     session.connectOperation = &connectOperation;

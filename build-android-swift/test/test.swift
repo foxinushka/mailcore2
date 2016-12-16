@@ -1,7 +1,7 @@
 import Foundation
 
-@_silgen_name("main")
-public func main() -> Int {
+@_silgen_name("testSwiftMailCore")
+public func testSwiftMailCore() -> Int {
     let test = SwiftMailCoreTest()
     
     test.setUp()

@@ -6,10 +6,7 @@
 #define structName COperation
 
 C_SYNTHESIZE_BOOL(setShouldRunWhenCancelled, shouldRunWhenCancelled);
-#ifdef __ANDROID__
-#else
 C_SYNTHESIZE_SCALAR(dispatch_queue_t, dispatch_queue_t, setCallbackDispatchQueue, callbackDispatchQueue)
-#endif
 
 class COperationCompletionCallback : public mailcore::Object, public mailcore::OperationCallback {
 private:
@@ -44,12 +41,8 @@ COperation newCOperation(mailcore::Operation *operationRef) {
     self.start = &COperationStart;
     self.shouldRunWhenCancelled = &shouldRunWhenCancelled;
     self.setShouldRunWhenCancelled = &setShouldRunWhenCancelled;
-#ifdef __ANDROID__
-#else
     self.callbackDispatchQueue = &callbackDispatchQueue;
     self.setCallbackDispatchQueue = &setCallbackDispatchQueue;
-#endif
-    
     
     return self;
 }

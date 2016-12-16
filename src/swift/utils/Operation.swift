@@ -18,23 +18,15 @@ public class Operation {
     /** The queue this operation dispatches the callback on.  Defaults to the main queue.
      This property should be used only if there's performance issue creating or calling the callback
      in the main thread. */
-    public var callbackDispatchQueue: DispatchQueue? {
+    /*public var callbackDispatchQueue: DispatchQueue? {
         get {
-            #if os(Android)
-                //This property is ignored for Android
-                return nil;
-            #else
-                return nativeInstance.callbackDispatchQueue(nativeInstance);
-            #endif
+            return nativeInstance.callbackDispatchQueue(nativeInstance);
         }
         set {
-            #if os(Android)
-            #else
-                nativeInstance.setCallbackDispatchQueue(nativeInstance, newValue);
-            #endif
+            nativeInstance.setCallbackDispatchQueue(nativeInstance, newValue);
         }
         
-    }
+    }*/
     
     /** Returns whether the operation is cancelled.*/
     public var isCancelled: Bool {

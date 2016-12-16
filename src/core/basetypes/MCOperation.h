@@ -32,7 +32,7 @@ namespace mailcore {
         
         virtual void start();
         
-#ifdef __APPLE__
+#if defined(__APPLE__) || defined(__ANDROID__)
         virtual void setCallbackDispatchQueue(dispatch_queue_t callbackDispatchQueue);
         virtual dispatch_queue_t callbackDispatchQueue();
 #endif
@@ -46,7 +46,7 @@ namespace mailcore {
         bool mCancelled;
         bool mShouldRunWhenCancelled;
         pthread_mutex_t mLock;
-#ifdef __APPLE__
+#if defined(__APPLE__) || defined(__ANDROID__)
         dispatch_queue_t mCallbackDispatchQueue;
 #endif
         

@@ -314,7 +314,7 @@ void NNTPAsyncSession::logConnection(ConnectionLogType logType, Data * buffer)
     pthread_mutex_unlock(&mConnectionLoggerLock);
 }
 
-#if __APPLE__
+#if defined(__APPLE__) || defined(__ANDROID__)
 void NNTPAsyncSession::setDispatchQueue(dispatch_queue_t dispatchQueue)
 {
     mQueue->setDispatchQueue(dispatchQueue);

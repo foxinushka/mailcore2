@@ -8,10 +8,7 @@
 #include "CArray.h"
 #include "CSMTPOperation.h"
 
-#ifdef __ANDROID__
-#else
 #include <dispatch/dispatch.h>
-#endif
 
 #ifdef __cplusplus
 
@@ -45,11 +42,8 @@ extern "C" {
         bool            (*useHeloIPEnabled)(struct CSMTPSession self);
         bool            (*isOperationQueueRunning)(struct CSMTPSession self);
         
-#ifdef __ANDROID__
-#else
         dispatch_queue_t    (*dispatchQueue)(struct CSMTPSession self);
         void                (*setDispatchQueue)(struct CSMTPSession self, dispatch_queue_t queue);
-#endif
         
         void    (*setHostname)(struct CSMTPSession self, const UChar *hostname);
         void    (*setPort)(struct CSMTPSession self, unsigned int port);

@@ -94,7 +94,7 @@ namespace mailcore {
         virtual void setConnectionLogger(ConnectionLogger * logger);
         virtual ConnectionLogger * connectionLogger();
         
-#ifdef __APPLE__
+#if defined(__APPLE__) || defined(__ANDROID__)
         virtual void setDispatchQueue(dispatch_queue_t dispatchQueue);
         virtual dispatch_queue_t dispatchQueue();
 #endif
@@ -213,7 +213,7 @@ namespace mailcore {
         IMAPIdentity * mClientIdentity;
         bool mQueueRunning;
         OperationQueueCallback * mOperationQueueCallback;
-#if __APPLE__
+#if defined(__APPLE__) || defined(__ANDROID__)
         dispatch_queue_t mDispatchQueue;
 #endif
         String * mGmailUserDisplayName;

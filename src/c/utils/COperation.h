@@ -4,10 +4,7 @@
 #include "CBase.h"
 #include "CMessageConstants.h"
 
-#ifdef __ANDROID__
-#else
 #include <dispatch/dispatch.h>
-#endif
 
 #ifdef __cplusplus
 
@@ -30,12 +27,8 @@ extern "C" {
         void*                               instance;
         void*                               _callback;
 #endif
-        
-#ifdef __ANDROID__
-#else
         dispatch_queue_t    (*callbackDispatchQueue)(struct COperation self);
         void                (*setCallbackDispatchQueue)(struct COperation self, dispatch_queue_t queue);
-#endif
         
         struct COperation   (*setCompletionBlock)(struct COperation self, COperationCompletionBlock block, const void* userInfo);
         bool    (*isCanceled)(struct COperation self);

@@ -120,22 +120,28 @@ public class IMAPSession {
      It will make MCOIMAPSession safe. It will also set all the callbacks of operations to run on this given queue.
      Defaults to the main queue.
      This property should be used only if there's performance issue using MCOIMAPSession in the main thread. */
-    public var dispatchQueue: DispatchQueue? {
+
+    
+    #if os(Android)
+    public var dispatchQueue: dispatch_queue_t? {
         get {
-            #if os(Android)
-                //This property is ignored for Android
-                return nil;
-            #else
-                return session.dispatchQueue(session);
-            #endif
+            return session.dispatchQueue(session);
         }
         set {
-            #if os(Android)
-            #else
-                session.setDispatchQueue(session, newValue);
-            #endif
+            session.setDispatchQueue(session, newValue);
         }
     }
+    #else
+    public var dispatchQueue: DispatchQueue? {
+        get {
+            return session.dispatchQueue(session);
+        }
+        set {
+            session.setDispatchQueue(session, newValue);
+        }
+    }
+    #endif
+
     
     public var isVoIPEnabled: Bool {
         get { return session.isVoIPEnabled(session) }

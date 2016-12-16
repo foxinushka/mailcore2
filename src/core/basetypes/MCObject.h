@@ -3,9 +3,37 @@
 #define MAILCORE_MCOBJECT_H
 
 #include <pthread.h>
-#if __APPLE__
+
+#if defined(__APPLE__) || defined(__ANDROID__)
 #include <dispatch/dispatch.h>
+#endif
+
+#if __APPLE__
 #include <libkern/OSAtomic.h>
+#endif
+
+#if __ANDROID__
+#if __cplusplus
+extern "C" {
+#endif
+    
+    // Create a heap based copy of a Block or simply add a reference to an existing one.
+    // This must be paired with Block_release to recover memory, even when running
+    // under Objective-C Garbage Collection.
+    void *_Block_copy(const void *aBlock);
+    
+    // Lose the reference, and if heap based and last reference, recover the memory
+    void _Block_release(const void *aBlock);
+    
+#if __cplusplus
+}
+#endif
+
+// Type correct macros
+
+#define Block_copy(...) ((__typeof(__VA_ARGS__))_Block_copy((const void *)(__VA_ARGS__)))
+#define Block_release(...) _Block_release((const void *)(__VA_ARGS__))
+
 #endif
 
 #include <MailCore/MCUtils.h>
@@ -43,7 +71,7 @@ namespace mailcore {
         virtual void performMethod(Method method, void * context);
         virtual void performMethodOnMainThread(Method method, void * context, bool waitUntilDone = false);
         virtual void performMethodAfterDelay(Method method, void * context, double delay);
-#if __APPLE__
+#if defined(__APPLE__) || defined(__ANDROID__)
         virtual void performMethodOnDispatchQueue(Method method, void * context, void * targetDispatchQueue, bool waitUntilDone = false);
         virtual void performMethodOnDispatchQueueAfterDelay(Method method, void * context, void * targetDispatchQueue, double delay);
         virtual void cancelDelayedPerformMethodOnDispatchQueue(Method method, void * context, void * targetDispatchQueue);

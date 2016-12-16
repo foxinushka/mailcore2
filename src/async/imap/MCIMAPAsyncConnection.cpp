@@ -112,7 +112,7 @@ IMAPAsyncConnection::IMAPAsyncConnection()
 
 IMAPAsyncConnection::~IMAPAsyncConnection()
 {
-#if __APPLE__
+#if defined(__APPLE__) || defined(__ANDROID__)
     cancelDelayedPerformMethodOnDispatchQueue((Object::Method) &IMAPAsyncConnection::tryAutomaticDisconnectAfterDelay, NULL, dispatchQueue());
 #else
     cancelDelayedPerformMethod((Object::Method) &IMAPAsyncConnection::tryAutomaticDisconnectAfterDelay, NULL);
@@ -280,7 +280,7 @@ void IMAPAsyncConnection::cancelAllOperations()
 void IMAPAsyncConnection::runOperation(IMAPOperation * operation)
 {
     if (mScheduledAutomaticDisconnect) {
-#if __APPLE__
+#if defined(__APPLE__) || defined(__ANDROID__)
         cancelDelayedPerformMethodOnDispatchQueue((Object::Method) &IMAPAsyncConnection::tryAutomaticDisconnectAfterDelay, NULL, dispatchQueue());
 #else
         cancelDelayedPerformMethod((Object::Method) &IMAPAsyncConnection::tryAutomaticDisconnectAfterDelay, NULL);
@@ -300,7 +300,7 @@ void IMAPAsyncConnection::tryAutomaticDisconnect()
 
     bool scheduledAutomaticDisconnect = mScheduledAutomaticDisconnect;
     if (scheduledAutomaticDisconnect) {
-#if __APPLE__
+#if defined(__APPLE__) || defined(__ANDROID__)
         cancelDelayedPerformMethodOnDispatchQueue((Object::Method) &IMAPAsyncConnection::tryAutomaticDisconnectAfterDelay, NULL, dispatchQueue());
 #else
         cancelDelayedPerformMethod((Object::Method) &IMAPAsyncConnection::tryAutomaticDisconnectAfterDelay, NULL);
@@ -309,7 +309,7 @@ void IMAPAsyncConnection::tryAutomaticDisconnect()
 
     mOwner->retain();
     mScheduledAutomaticDisconnect = true;
-#if __APPLE__
+#if defined(__APPLE__) || defined(__ANDROID__)
     performMethodOnDispatchQueueAfterDelay((Object::Method) &IMAPAsyncConnection::tryAutomaticDisconnectAfterDelay, NULL, dispatchQueue(), 30);
 #else
     performMethodAfterDelay((Object::Method) &IMAPAsyncConnection::tryAutomaticDisconnectAfterDelay, NULL, 30);
@@ -416,7 +416,7 @@ void IMAPAsyncConnection::setQueueRunning(bool running)
     mQueueRunning = running;
 }
 
-#if __APPLE__
+#if defined(__APPLE__) || defined(__ANDROID__)
 void IMAPAsyncConnection::setDispatchQueue(dispatch_queue_t dispatchQueue)
 {
     mQueue->setDispatchQueue(dispatchQueue);

@@ -31,7 +31,7 @@ NNTPOperation::~NNTPOperation()
 void NNTPOperation::setSession(NNTPAsyncSession * session)
 {
     MC_SAFE_REPLACE_RETAIN(NNTPAsyncSession, mSession, session);
-#if __APPLE__
+#if defined(__APPLE__) || defined(__ANDROID__)
     dispatch_queue_t queue;
     if (session != NULL) {
         queue = session->dispatchQueue();

@@ -8,14 +8,14 @@ Operation::Operation()
     mCancelled = false;
     mShouldRunWhenCancelled = false;
     pthread_mutex_init(&mLock, NULL);
-#if __APPLE__
+#if defined(__APPLE__) || defined(__ANDROID__)
     mCallbackDispatchQueue = dispatch_get_main_queue();
 #endif
 }
 
 Operation::~Operation()
 {
-#if __APPLE__
+#if defined(__APPLE__) || defined(__ANDROID__)
     if (mCallbackDispatchQueue != NULL) {
         dispatch_release(mCallbackDispatchQueue);
     }
@@ -75,7 +75,7 @@ void Operation::start()
 {
 }
 
-#if __APPLE__
+#if defined(__APPLE__) || defined(__ANDROID__)
 void Operation::setCallbackDispatchQueue(dispatch_queue_t callbackDispatchQueue)
 {
     if (mCallbackDispatchQueue != NULL) {
@@ -95,7 +95,7 @@ dispatch_queue_t Operation::callbackDispatchQueue()
 
 void Operation::performMethodOnCallbackThread(Method method, void * context, bool waitUntilDone)
 {
-#if __APPLE__
+#if defined(__APPLE__) || defined(__ANDROID__)
     dispatch_queue_t queue = mCallbackDispatchQueue;
     if (queue == NULL) {
         queue = dispatch_get_main_queue();

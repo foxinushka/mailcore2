@@ -85,6 +85,7 @@ void Object::release()
     }
 }
 
+//Add Swift autorelease call
 #ifndef __APPLE__
 Object * Object::autorelease()
 {
@@ -169,7 +170,7 @@ static void removeFromPerformHash(Object * obj, Object::Method method, void * co
     chashdatum key;
     struct mainThreadCallKeyData keyData;
     Object * queueIdentifier = NULL;
-#if __APPLE__
+#if defined(__APPLE__) || defined(__ANDROID__)
     if (targetDispatchQueue != NULL) {
         queueIdentifier = (Object *) dispatch_queue_get_specific((dispatch_queue_t) targetDispatchQueue, "MCDispatchQueueID");
     }
@@ -200,7 +201,7 @@ static void addToPerformHash(Object * obj, Object::Method method, void * context
     chashdatum value;
     struct mainThreadCallKeyData keyData;
     Object * queueIdentifier = NULL;
-#if __APPLE__
+#if defined(__APPLE__) || defined(__ANDROID__)
     if (targetDispatchQueue == NULL) {
         queueIdentifier = NULL;
     }
@@ -234,7 +235,7 @@ static void * getFromPerformHash(Object * obj, Object::Method method, void * con
     int r;
     
     Object * queueIdentifier = NULL;
-#if __APPLE__
+#if defined(__APPLE__) || defined(__ANDROID__)
     if (targetDispatchQueue != NULL) {
         queueIdentifier = (Object *) dispatch_queue_get_specific((dispatch_queue_t) targetDispatchQueue, "MCDispatchQueueID");
         if (queueIdentifier == NULL)
@@ -311,7 +312,7 @@ void Object::performMethodOnMainThread(Method method, void * context, bool waitU
     }
 }
 
-#if __APPLE__
+#if defined(__APPLE__) || defined(__ANDROID__)
 void Object::performMethodOnDispatchQueue(Method method, void * context, void * targetDispatchQueue, bool waitUntilDone)
 {
     if (waitUntilDone) {
@@ -381,7 +382,7 @@ void Object::cancelDelayedPerformMethodOnDispatchQueue(Method method, void * con
 
 void Object::performMethodAfterDelay(Method method, void * context, double delay)
 {
-#if __APPLE__
+#if defined(__APPLE__) || defined(__ANDROID__)
     performMethodOnDispatchQueueAfterDelay(method, context, dispatch_get_main_queue(), delay);
 #else
     initDelayedPerform();
@@ -399,7 +400,7 @@ void Object::performMethodAfterDelay(Method method, void * context, double delay
 
 void Object::cancelDelayedPerformMethod(Method method, void * context)
 {
-#if __APPLE__
+#if defined(__APPLE__) || defined(__ANDROID__)
     cancelDelayedPerformMethodOnDispatchQueue(method, context, dispatch_get_main_queue());
 #else
     initDelayedPerform();

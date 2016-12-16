@@ -9,7 +9,6 @@ echo "Build mailcore2"
 swiftc \
     -target armv7-none-linux-androideabi \
     -sdk $ANDROID_NDK/platforms/android-21/arch-arm \
-    -I $(pwd)/../build-android/include \
     -I $(pwd)/include \
     -import-objc-header $(pwd)/include/MailCore/swiftmailcore2-Bridging-Header.h \
     -l$(pwd)/libs/armeabi-v7a/libcmailcore.so \
@@ -85,27 +84,31 @@ swiftc \
     -L $(pwd)/libs/armeabi-v7a \
     -L $ANDROID_NDK/sources/cxx-stl/llvm-libc++/libs/armeabi-v7a \
     -L $ANDROID_NDK/toolchains/arm-linux-androideabi-4.9/prebuilt/linux-x86_64/lib/gcc/arm-linux-androideabi/4.9.x \
-    -emit-executable \
-    -o ./libs/armeabi-v7a/testSwiftMailCore \
+    -emit-library \
+    -module-name TestSwiftMailCore \
+    -Xlinker -soname=libTestSwiftMailCore.so \
+    -o ./libs/armeabi-v7a/libTestSwiftMailCore.so \
     ./test/XCTestCase.swift \
     ../build-mac/swiftmailcore2Test/unittest.swift \
     ./test/test.swift \
 
-echo "Run tests"
+#echo "Run tests"
 
 # Copy swift bundle to /data/local/tmp on device (can be ignored if it's already copied)
-for i in ~/swift-source/bundle/*.so; do echo $i; adb push "$i" /data/local/tmp/; done;
+# for i in ~/swift-source/bundle/*.so; do echo $i; adb push "$i" /data/local/tmp/; done;
 
+# Copy gnu stl
+#adb push ./libs/armeabi-v7a/libgnustl_shared.so /data/local/tmp
 # Copy mailcore2 C++
-adb push ./libs/armeabi-v7a/libMailCore.so /data/local/tmp
+#adb push ./libs/armeabi-v7a/libMailCore.so /data/local/tmp
 # Copy mailcore2 C wrapper for C++ API
-adb push ./libs/armeabi-v7a/libcmailcore.so /data/local/tmp
+#adb push ./libs/armeabi-v7a/libcmailcore.so /data/local/tmp
 # Copy mailcore 2 Swift wrapper for C API
-adb push ./libs/armeabi-v7a/libswiftmailcore.so /data/local/tmp
+#adb push ./libs/armeabi-v7a/libswiftmailcore.so /data/local/tmp
 # Copy tests for SwiftMailCore
-adb push ./libs/armeabi-v7a/testSwiftMailCore /data/local/tmp
+#adb push ./libs/armeabi-v7a/testSwiftMailCore /data/local/tmp
 # Run tests
-adb shell LD_LIBRARY_PATH=/data/local/tmp /data/local/tmp/testSwiftMailCore
+#adb shell LD_LIBRARY_PATH=/data/local/tmp /data/local/tmp/testSwiftMailCore
 
 
 

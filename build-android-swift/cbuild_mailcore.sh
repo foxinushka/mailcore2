@@ -40,7 +40,7 @@ function build {
   
     cd "$current_dir/jni"
     $ANDROID_NDK/ndk-build TARGET_PLATFORM=$ANDROID_PLATFORM TARGET_ARCH_ABI=$TARGET_ARCH_ABI \
-        NDK_TOOLCHAIN_VERSION=4.9 \
+        NDK_TOOLCHAIN_VERSION=clang \
         CTEMPLATE_PATH=$current_dir/third-party/ctemplate-android-$ctemplate_build_version \
         ICU4C_PATH=$current_dir/third-party/icu4c-android-$icu4c_build_version \
         LIBETPAN_PATH=$current_dir/third-party/libetpan-android-$libetpan_build_version \
@@ -51,10 +51,7 @@ function build {
 
     mkdir -p "$current_dir/bin/jni/$TARGET_ARCH_ABI"
     cp "$current_dir/libs/$TARGET_ARCH_ABI/libMailCore.so" "$current_dir/bin/jni/$TARGET_ARCH_ABI"
-    # cp "$ANDROID_NDK/sources/cxx-stl/llvm-libc++/libs/$TARGET_ARCH_ABI/libc++_shared.so" "$current_dir/bin/jni/$TARGET_ARCH_ABI"
     cp "$ANDROID_NDK/sources/cxx-stl/gnu-libstdc++/4.9/libs/$TARGET_ARCH_ABI/libgnustl_shared.so" "$current_dir/bin/jni/$TARGET_ARCH_ABI"
-    # rm -rf "$current_dir/obj"
-    # rm -rf "$current_dir/libs"
 }
 
 mkdir -p "$current_dir/cmake-build"
@@ -75,28 +72,9 @@ download_dep "openssl-android" $openssl_build_version
 download_dep "cyrus-sasl-android" $cyrus_sasl_build_version
 
 # Start building.
-ANDROID_PLATFORM=android-16
-archs="armeabi armeabi-v7a x86"
-for arch in $archs ; do
-  TARGET_ARCH_ABI=$arch
-  build
-done
 ANDROID_PLATFORM=android-21
-archs="arm64-v8a"
+archs="armeabi-v7a"
 for arch in $archs ; do
   TARGET_ARCH_ABI=$arch
   build
 done
-
-ANDROID_PLATFORM=android-16
-cd "$current_dir/../src/java"
-mkdir -p "$current_dir/bin"
-javac -d "$current_dir/bin" -source 1.6 -target 1.6 -classpath $ANDROID_SDK/platforms/$ANDROID_PLATFORM/android.jar com/libmailcore/*.java
-cd "$current_dir/bin"
-jar cf classes.jar .
-rm -rf "$current_dir/bin/com"
-mkdir -p res
-sed -e "s/android:versionCode=\"1\"/android:versionCode=\"$build_version\"/" "$current_dir/AndroidManifest.xml" > "$current_dir/bin/AndroidManifest.xml"
-zip -qry "$current_dir/$package_name-$build_version.aar" .
-
-rm -rf "$current_dir/bin"

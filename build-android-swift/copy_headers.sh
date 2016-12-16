@@ -1,6 +1,6 @@
 #!/bin/sh
 
-sources_path="$(pwd)/../src/c"
+sources_path="$(pwd)/../src"
 headers_path="$(pwd)/include/MailCore/${@##*/}"
 
 rm -rf "${headers_path}"

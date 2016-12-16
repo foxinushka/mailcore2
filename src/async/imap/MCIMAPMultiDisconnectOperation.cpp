@@ -37,7 +37,7 @@ void IMAPMultiDisconnectOperation::start()
     
     retain();
     mc_foreacharray(IMAPOperation, op, _operations) {
-#if __APPLE__
+#if defined(__APPLE__) || defined(__ANDROID__)
         op->setCallbackDispatchQueue(this->callbackDispatchQueue());
 #endif
         op->setCallback(this);

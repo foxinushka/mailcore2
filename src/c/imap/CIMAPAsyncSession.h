@@ -5,10 +5,7 @@
 #include <time.h>
 #include <stdbool.h>
 
-#ifdef __ANDROID__
-#else
 #include <dispatch/dispatch.h>
-#endif
 
 #include "CBase.h"
 #include "CIndexSet.h"
@@ -74,6 +71,7 @@ extern "C" {
         CIMAPIdentity   (*clientIdentity)(struct CIMAPAsyncSession self);
         CIMAPIdentity   (*serverIdentity)(struct CIMAPAsyncSession self);
         //OperationQueueRunningChangeBlock (*operationQueueRunningChangeBlock)(struct CIMAPAsyncSession self);
+        dispatch_queue_t    (*dispatchQueue)(struct CIMAPAsyncSession self);
         
         bool    (*isVoIPEnabled)(struct CIMAPAsyncSession self);
         bool    (*isIdleEnabled)(struct CIMAPAsyncSession self);
@@ -92,12 +90,7 @@ extern "C" {
         void    (*setAllowsFolderConcurrentAccessEnabled)(struct CIMAPAsyncSession self, bool enabled);
         void    (*setDefaultNamespace)(struct CIMAPAsyncSession self, CIMAPNamespace nspace);
         void    (*setClientIdentity)(struct CIMAPAsyncSession self, CIMAPIdentity identity);
-        
-#ifdef __ANDROID__
-#else
-        dispatch_queue_t    (*dispatchQueue)(struct CIMAPAsyncSession self);
-        void                (*setDispatchQueue)(struct CIMAPAsyncSession self, dispatch_queue_t queue);
-#endif
+        void    (*setDispatchQueue)(struct CIMAPAsyncSession self, dispatch_queue_t queue);
         void    (*setConnectionLogger)(struct CIMAPAsyncSession self, ConnectionLogger logger);
 
         void                (*cancelAllOperations)(struct CIMAPAsyncSession self);
