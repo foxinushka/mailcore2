@@ -15,7 +15,7 @@ public class IMAPFolder: Convertible {
     /** The folder's path, like for example INBOX.Archive */
     public var path: String? {
         get { return String(utf16: nativeInstance.path(nativeInstance)); }
-        set { newValue?.utf16({ nativeInstance.setPath(nativeInstance, $0) }) }
+        set { String.utf16(newValue, { nativeInstance.setPath(nativeInstance, $0) }) }
     }
 
     /** It's the delimiter for each component of the path. Commonly . or / */

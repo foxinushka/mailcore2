@@ -22,7 +22,7 @@ public class MessageHeader {
     
     /** Message-ID field.*/
     public var messageID : String? {
-        set { newValue?.utf16({ self.nativeInstance.setMessageID(nativeInstance, $0) }) }
+        set { String.utf16(newValue, { self.nativeInstance.setMessageID(nativeInstance, $0) }) }
         get { return String(utf16: self.nativeInstance.messageID(nativeInstance)); }
     }
     
@@ -69,33 +69,31 @@ public class MessageHeader {
     
     /** Subject of the message.*/
     public var subject: String? {
-        set { newValue?.utf16({ self.nativeInstance.setSubject(nativeInstance, $0) }) }
+        set { String.utf16(newValue, { self.nativeInstance.setSubject(nativeInstance, $0) }) }
         get { return String(utf16: self.nativeInstance.subject(nativeInstance)); }
     }
     
     /** Email user agent name: X-Mailer header.*/
     public var userAgent: String? {
-        set { newValue?.utf16({ self.nativeInstance.setUserAgent(nativeInstance, $0) }) }
+        set { String.utf16(newValue, { self.nativeInstance.setUserAgent(nativeInstance, $0) }) }
         get { return String(utf16: self.nativeInstance.userAgent(nativeInstance)); }
     }
     
     /** Adds a custom header.*/
     public func setExtraHeaderValue(value: String, name: String) {
-        value.utf16({ valuePtr in
-            name.utf16({ namePtr in
-                nativeInstance.setExtraHeaderValue(nativeInstance, valuePtr, namePtr)
-            })
+        String.utf16(value, name, { valuePtr, namePtr in
+            nativeInstance.setExtraHeaderValue(nativeInstance, valuePtr, namePtr)
         })
     }
     
     /** Remove a given custom header.*/
     public func removeExtraHeaderForName(name: String) {
-        name.utf16({ nativeInstance.removeExtraHeaderForName(nativeInstance, $0) })
+        String.utf16(name, { nativeInstance.removeExtraHeaderForName(nativeInstance, $0) })
     }
     
     /** Returns the value of a given custom header.*/
     public func extraHeaderValueForName(name: String) -> String? {
-        return String(utf16: name.utf16({ nativeInstance.extraHeaderValueForName(nativeInstance, $0)}))
+        return String(utf16: String.utf16(name, { nativeInstance.extraHeaderValueForName(nativeInstance, $0)}))
     }
     
     /** Returns an array with the names of all custom headers.*/

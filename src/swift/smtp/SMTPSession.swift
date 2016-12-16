@@ -16,7 +16,7 @@ public class SMTPSession {
     /** This is the hostname of the SMTP server to connect to. */
     public var hostname : String? {
         get { return String(utf16: self.session.hostname(self.session)); }
-        set { newValue?.utf16({ self.session.setHostname(self.session, $0) }) }
+        set { String.utf16(newValue, { self.session.setHostname(self.session, $0) }) }
     }
     
     /** This is the port of the SMTP server to connect to. */
@@ -28,19 +28,19 @@ public class SMTPSession {
     /** This is the username of the account. */
     public var username : String? {
         get { return String(utf16: self.session.username(self.session)); }
-        set { newValue?.utf16({ self.session.setUsername(self.session, $0) }) }
+        set { String.utf16(newValue, { self.session.setUsername(self.session, $0) }) }
     }
     
     /** This is the password of the account. */
     public var password : String? {
         get { return String(utf16: self.session.password(self.session)); }
-        set { newValue?.utf16({ self.session.setPassword(self.session, $0) }) }
+        set { String.utf16(newValue, { self.session.setPassword(self.session, $0) }) }
     }
     
     /** This is the OAuth2 token. */
     public var OAuth2Token : String? {
         get { return String(utf16: self.session.OAuth2Token(self.session)); }
-        set { newValue?.utf16({ self.session.setOAuth2Token(self.session, $0) }) }
+        set { String.utf16(newValue, { self.session.setOAuth2Token(self.session, $0) }) }
     }
     
     /**
@@ -224,7 +224,7 @@ public class SMTPSession {
      }];
      */
     public func sendOperationWithContentsOfFile(path: String, from: Address, recipients: Array<Address>) -> SMTPSendOperation {
-        return SMTPSendOperation(path.utf16({ self.session.sendOperationWithContentsOfFile(self.session, $0, from.getNativeInstance(), recipients.cast()) }));
+        return SMTPSendOperation(String.utf16(path, { self.session.sendOperationWithContentsOfFile(self.session, $0, from.getNativeInstance(), recipients.cast()) }));
     }
 
     

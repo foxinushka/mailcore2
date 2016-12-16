@@ -16,13 +16,13 @@ public class MessageBuilder : AbstractMessage {
     /** Main HTML content of the message.*/
     public var htmlBody: String? {
         get { return String(utf16: nativeInstance.htmlBody(nativeInstance)); }
-        set { newValue?.utf16({ nativeInstance.setHTMLBody(nativeInstance, $0) }) }
+        set { String.utf16(newValue, { nativeInstance.setHTMLBody(nativeInstance, $0) }) }
     }
     
     /** Plain text content of the message.*/
     public var textBody: String? {
         get { return String(utf16: nativeInstance.textBody(nativeInstance)); }
-        set { newValue?.utf16({ nativeInstance.setTextBody(nativeInstance, $0) }) }
+        set { String.utf16(newValue, { nativeInstance.setTextBody(nativeInstance, $0) }) }
     }
     
     /** List of file attachments.*/
@@ -40,7 +40,7 @@ public class MessageBuilder : AbstractMessage {
     /** Prefix for the boundary identifier. Default value is nil.*/
     public var boundaryPrefix: String? {
         get { return String(utf16: nativeInstance.boundaryPrefix(nativeInstance)); }
-        set { newValue?.utf16({ nativeInstance.setBoundaryPrefix(nativeInstance, $0) }) }
+        set { String.utf16(newValue, { nativeInstance.setBoundaryPrefix(nativeInstance, $0) }) }
     }
     
     /** Add an attachment.*/
@@ -65,7 +65,7 @@ public class MessageBuilder : AbstractMessage {
     
     /** Store RFC 822 formatted message to file. */
     public func writeToFile(filename: String) -> (successful: Bool, error: Error?) {
-        let code = filename.utf16({ nativeInstance.writeToFile(nativeInstance, $0) })
+        let code = String.utf16(filename, { nativeInstance.writeToFile(nativeInstance, $0) })
         var error: Error?
         if code != ErrorNone {
             error = MailCoreError(code: code);
