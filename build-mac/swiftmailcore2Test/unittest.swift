@@ -89,23 +89,23 @@ class SwiftMailCoreTest : XCTestCase {
         var checkOp: IMAPCheckAccountOperation? = session.checkAccountOperation()
         var foldersOp: IMAPFetchFoldersOperation?
         
-        NSLog("START testIMAP")
+        print("START testIMAP")
         checkOp?.start(completionBlock: { err in
-            NSLog("check account done")
+            print("check account done")
             if err != nil {
-                NSLog("Oh crap, an error \(err!.localizedDescription)")
+                print("Oh crap, an error \(err!.localizedDescription)")
                 semaphore.signal()
             }
             else {
-                NSLog("CONNECTED")
-                NSLog("fetch all folders")
+                print("CONNECTED")
+                print("fetch all folders")
                 foldersOp = session.fetchAllFoldersOperation()
                 foldersOp?.start(completionBlock: { err, folders in
                     if err != nil {
-                        NSLog("Oh crap, an error \(err!.localizedDescription)")
+                        print("Oh crap, an error \(err!.localizedDescription)")
                     }
                     else {
-                        NSLog("folders \(folders?.map({ $0.path }))")
+                        print("folders \(folders?.map({ $0.path }))")
                     }
                     semaphore.signal()
                 })
@@ -114,7 +114,7 @@ class SwiftMailCoreTest : XCTestCase {
         semaphore.wait()
         
         checkOp = nil
-        NSLog("FINISH testIMAP")
+        print("FINISH testIMAP")
     }
     
 //    func testAllWrappersIntegrity(){
@@ -144,10 +144,10 @@ class SwiftMailCoreTest : XCTestCase {
 //                }
 //                // anyValue is Builtin.RawPointer, that's why is never 'nil'
 ////                let describingValue = String(describing: anyValue);
-////                NSLog(describingValue, "\(Mirror(reflecting: anyValue))")
+////                print(describingValue, "\(Mirror(reflecting: anyValue))")
 ////                XCTAssert(describingValue != "nil", "\(label) is nil!")
 //                var opt: Any? = anyValue
-//                NSLog(opt ?? "((((((nil)")
+//                print(opt ?? "((((((nil)")
 //            }
 //        }
 //    }
@@ -173,19 +173,19 @@ class SwiftMailCoreTest : XCTestCase {
         var sendOp: SMTPSendOperation?
         loginOp!.start(completionBlock: { err in
             if err != nil {
-                NSLog("Oh crap, an error \(err!.localizedDescription)")
+                print("Oh crap, an error \(err!.localizedDescription)")
                 semaphore.signal()
             }
             else {
-                NSLog("CONNECTED")
+                print("CONNECTED")
                 sendOp = session.sendOperationWithData(messageData: "Hello".data(using: .utf8)!, from: Address.addressWithMailbox(mailbox: "adruk@readdle.com")!, recipients: [Address.addressWithMailbox(mailbox: "adruk@readdle.com")!])
                 sendOp!.start(completionBlock: { err in
                     if err != nil {
-                        NSLog("Oh crap, an error \(err!.localizedDescription)")
+                        print("Oh crap, an error \(err!.localizedDescription)")
                         semaphore.signal()
                     }
                     else {
-                        NSLog("COMPLETED")
+                        print("COMPLETED")
                         semaphore.signal()
                     }
                 })

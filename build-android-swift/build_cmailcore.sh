@@ -48,10 +48,6 @@ function build {
         TIDY_HTML5_PATH=$current_dir/third-party/tidy-html5-android-$tidy_html5_build_version \
         OPENSSL_PATH=$current_dir/third-party/openssl-android-$openssl_build_version \
         CYRUS_SASL_PATH=$current_dir/third-party/cyrus-sasl-android-$cyrus_sasl_build_version
-
-    mkdir -p "$current_dir/bin/jni/$TARGET_ARCH_ABI"
-    cp "$current_dir/libs/$TARGET_ARCH_ABI/libMailCore.so" "$current_dir/bin/jni/$TARGET_ARCH_ABI"
-    cp "$ANDROID_NDK/sources/cxx-stl/gnu-libstdc++/4.9/libs/$TARGET_ARCH_ABI/libgnustl_shared.so" "$current_dir/bin/jni/$TARGET_ARCH_ABI"
 }
 
 mkdir -p "$current_dir/cmake-build"
