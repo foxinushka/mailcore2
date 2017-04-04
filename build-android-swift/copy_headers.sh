@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 sources_path="$(pwd)/../src"
 headers_path="$(pwd)/include/MailCore/${@##*/}"

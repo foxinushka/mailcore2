@@ -17,9 +17,3 @@ adb push ./libs/armeabi-v7a/libswiftmailcore.so /data/local/tmp
 adb push ./libs/armeabi-v7a/testSwiftMailCore /data/local/tmp
 # Run tests
 adb shell LD_LIBRARY_PATH=/data/local/tmp /data/local/tmp/testSwiftMailCore
-
-
-
-
-
-

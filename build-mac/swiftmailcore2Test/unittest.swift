@@ -27,6 +27,10 @@ class SwiftMailCoreTest : XCTestCase {
     var _summaryDetectionPath: URL?
     var _summaryDetectionOutputPath: URL?
     
+    
+    let email = ProcessInfo.processInfo.environment["EMAIL"] ?? "apogonets@readdle.com"
+    let password = ProcessInfo.processInfo.environment["PASSWORD"] ?? ""
+    
     override func setUp() {
         super.setUp()
         // _mainPath = Bundle.init(for: SwiftMailCoreTest.self).resourceURL?.appendingPathComponent("data")
@@ -79,8 +83,8 @@ class SwiftMailCoreTest : XCTestCase {
         let semaphore = DispatchSemaphore(value: 0)
         
         let session = IMAPSession();
-        session.username = "adruk@readdle.com"
-        session.password = ""
+        session.username = email
+        session.password = password
         session.hostname = "imap.gmail.com"
         session.port = 993
         session.connectionType = ConnectionType.init(rawValue: 1 << 2)
@@ -162,8 +166,8 @@ class SwiftMailCoreTest : XCTestCase {
         let semaphore = DispatchSemaphore(value: 0)
         
         let session = SMTPSession()
-        session.username = "adruk@readdle.com"
-        session.password = ""
+        session.username = email
+        session.password = password
         session.hostname = "smtp.gmail.com"
         session.port = 465
         session.connectionType = ConnectionType.init(rawValue: 1 << 2)
@@ -171,6 +175,9 @@ class SwiftMailCoreTest : XCTestCase {
         
         var loginOp: SMTPOperation? = session.loginOperation()
         var sendOp: SMTPSendOperation?
+        
+        let address = Address.addressWithMailbox(mailbox: email)!
+        
         loginOp!.start(completionBlock: { err in
             if err != nil {
                 print("Oh crap, an error \(err!.localizedDescription)")
@@ -178,7 +185,8 @@ class SwiftMailCoreTest : XCTestCase {
             }
             else {
                 print("CONNECTED")
-                sendOp = session.sendOperationWithData(messageData: "Hello".data(using: .utf8)!, from: Address.addressWithMailbox(mailbox: "adruk@readdle.com")!, recipients: [Address.addressWithMailbox(mailbox: "adruk@readdle.com")!])
+                
+                sendOp = session.sendOperationWithData(messageData: "Hello".data(using: .utf8)!, from: address, recipients: [address])
                 sendOp!.start(completionBlock: { err in
                     if err != nil {
                         print("Oh crap, an error \(err!.localizedDescription)")

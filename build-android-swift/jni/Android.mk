@@ -112,8 +112,8 @@ include $(PREBUILT_STATIC_LIBRARY)
 
 include $(CLEAR_VARS)
 LOCAL_MODULE    := dispatch
-LOCAL_EXPORT_C_INCLUDES := $(CURRENT_DIR)/../third-party/libdispatch-android-1/include
-LOCAL_SRC_FILES := $(CURRENT_DIR)/../third-party/libdispatch-android-1/libs/$(TARGET_ARCH_ABI)/libdispatch.so
+LOCAL_EXPORT_C_INCLUDES := $(SWIFT_LIB)
+LOCAL_SRC_FILES := $(SWIFT_LIB)/android/libdispatch.so
 include $(PREBUILT_SHARED_LIBRARY)
 
 include $(CLEAR_VARS)

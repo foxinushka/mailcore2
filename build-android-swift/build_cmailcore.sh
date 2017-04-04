@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 build_version=4
 package_name=mailcore2-android
@@ -14,11 +14,6 @@ current_dir="`pwd`"
 
 if test "x$ANDROID_NDK" = x ; then
   echo should set ANDROID_NDK before running this script.
-  exit 1
-fi
-
-if test "x$ANDROID_SDK" = x ; then
-  echo should set ANDROID_SDK before running this script.
   exit 1
 fi
 

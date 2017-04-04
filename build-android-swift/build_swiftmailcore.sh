@@ -81,13 +81,8 @@ swiftc \
     -L $ANDROID_NDK/sources/cxx-stl/llvm-libc++/libs/armeabi-v7a \
     -L $ANDROID_NDK/toolchains/arm-linux-androideabi-4.9/prebuilt/linux-x86_64/lib/gcc/arm-linux-androideabi/4.9.x \
     -emit-executable \
+    -Xlinker -pie \
     -o ./libs/armeabi-v7a/testSwiftMailCore \
     ./test/XCTestCase.swift \
     ../build-mac/swiftmailcore2Test/unittest.swift \
     ./test/test.swift \
-
-
-
-
-
-
