@@ -21,17 +21,19 @@ extern "C" {
         void*                                 instance;
 #endif
         
-        CIMAPIdentity    (*serverIdentity)(struct CIMAPIdentityOperation self);
-        
     };
     typedef struct CIMAPIdentityOperation CIMAPIdentityOperation;
     
-    void deleteCIMAPIdentityOperation(CIMAPIdentityOperation self);
+    CIMAPIdentity   CIMAPIdentityOperation_serverIdentity(struct CIMAPIdentityOperation self)
+                    CF_SWIFT_NAME(CIMAPIdentityOperation.serverIdentity(self:));
+    
+    void            CIMAPIdentityOperation_release(CIMAPIdentityOperation self)
+                    CF_SWIFT_NAME(CIMAPIdentityOperation.release(self:));
     
 #ifdef __cplusplus
 }
 
-CIMAPIdentityOperation newCIMAPIdentityOperation(mailcore::IMAPIdentityOperation *operation);
+CIMAPIdentityOperation CIMAPIdentityOperation_new(mailcore::IMAPIdentityOperation *operation);
 #endif
 
 #endif /* CIMAPIdentityOperation_hpp */

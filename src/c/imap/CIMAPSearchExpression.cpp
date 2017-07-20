@@ -7,156 +7,156 @@
 #define nativeType mailcore::IMAPSearchExpression
 #define structName CIMAPSearchExpression
 
-CIMAPSearchExpression newCIMAPSearchExpression(mailcore::IMAPSearchExpression *expr) {
+CIMAPSearchExpression CIMAPSearchExpression_new(mailcore::IMAPSearchExpression *expr) {
     CIMAPSearchExpression self;
     self.instance = (mailcore::IMAPSearchExpression *) expr->copy();
     return self;
 }
 
-void deleteCIMAPSearchExpression(CIMAPSearchExpression self) {
+void CIMAPSearchExpression_release(CIMAPSearchExpression self) {
     C_SAFE_RELEASE(self.instance);
 }
 
-CIMAPSearchExpression newCIMAPSearchExpressionSearchAll() {
-    return newCIMAPSearchExpression(mailcore::IMAPSearchExpression::searchAll());
+CIMAPSearchExpression CIMAPSearchExpression_SearchAll() {
+    return CIMAPSearchExpression_new(mailcore::IMAPSearchExpression::searchAll());
 }
 
-CIMAPSearchExpression newCIMAPSearchExpressionSearchFrom(const UChar* value) {
-    return newCIMAPSearchExpression(mailcore::IMAPSearchExpression::searchFrom(mailcore::String::stringWithCharacters(value)));
+CIMAPSearchExpression CIMAPSearchExpression_SearchFrom(const UChar* value) {
+    return CIMAPSearchExpression_new(mailcore::IMAPSearchExpression::searchFrom(mailcore::String::stringWithCharacters(value)));
 }
 
-CIMAPSearchExpression newCIMAPSearchExpressionSearchRecipient(const UChar* value){
-    return newCIMAPSearchExpression(mailcore::IMAPSearchExpression::searchRecipient(mailcore::String::stringWithCharacters(value)));
+CIMAPSearchExpression CIMAPSearchExpression_SearchRecipient(const UChar* value){
+    return CIMAPSearchExpression_new(mailcore::IMAPSearchExpression::searchRecipient(mailcore::String::stringWithCharacters(value)));
 }
 
-CIMAPSearchExpression newCIMAPSearchExpressionSearchTo(const UChar* value) {
-    return newCIMAPSearchExpression(mailcore::IMAPSearchExpression::searchTo(mailcore::String::stringWithCharacters(value)));
+CIMAPSearchExpression CIMAPSearchExpression_SearchTo(const UChar* value) {
+    return CIMAPSearchExpression_new(mailcore::IMAPSearchExpression::searchTo(mailcore::String::stringWithCharacters(value)));
 }
 
-CIMAPSearchExpression newCIMAPSearchExpressionSearchCc(const UChar* value) {
-    return newCIMAPSearchExpression(mailcore::IMAPSearchExpression::searchCc(mailcore::String::stringWithCharacters(value)));
+CIMAPSearchExpression CIMAPSearchExpression_SearchCc(const UChar* value) {
+    return CIMAPSearchExpression_new(mailcore::IMAPSearchExpression::searchCc(mailcore::String::stringWithCharacters(value)));
 }
 
-CIMAPSearchExpression newCIMAPSearchExpressionSearchBcc(const UChar* value) {
-    return newCIMAPSearchExpression(mailcore::IMAPSearchExpression::searchBcc(mailcore::String::stringWithCharacters(value)));
+CIMAPSearchExpression CIMAPSearchExpression_SearchBcc(const UChar* value) {
+    return CIMAPSearchExpression_new(mailcore::IMAPSearchExpression::searchBcc(mailcore::String::stringWithCharacters(value)));
 }
 
-CIMAPSearchExpression newCIMAPSearchExpressionSearchSubject(const UChar* value) {
-    return newCIMAPSearchExpression(mailcore::IMAPSearchExpression::searchSubject(mailcore::String::stringWithCharacters(value)));
+CIMAPSearchExpression CIMAPSearchExpression_SearchSubject(const UChar* value) {
+    return CIMAPSearchExpression_new(mailcore::IMAPSearchExpression::searchSubject(mailcore::String::stringWithCharacters(value)));
 }
 
-CIMAPSearchExpression newCIMAPSearchExpressionSearchContent(const UChar* value) {
-    return newCIMAPSearchExpression(mailcore::IMAPSearchExpression::searchContent(mailcore::String::stringWithCharacters(value)));
+CIMAPSearchExpression CIMAPSearchExpression_SearchContent(const UChar* value) {
+    return CIMAPSearchExpression_new(mailcore::IMAPSearchExpression::searchContent(mailcore::String::stringWithCharacters(value)));
 }
 
-CIMAPSearchExpression newCIMAPSearchExpressionSearchBody(const UChar* value) {
-    return newCIMAPSearchExpression(mailcore::IMAPSearchExpression::searchBody(mailcore::String::stringWithCharacters(value)));
+CIMAPSearchExpression CIMAPSearchExpression_SearchBody(const UChar* value) {
+    return CIMAPSearchExpression_new(mailcore::IMAPSearchExpression::searchBody(mailcore::String::stringWithCharacters(value)));
 }
 
-CIMAPSearchExpression newCIMAPSearchExpressionSearchUIDs(CIndexSet uids) {
-    return newCIMAPSearchExpression(mailcore::IMAPSearchExpression::searchUIDs(uids.instance));
+CIMAPSearchExpression CIMAPSearchExpression_SearchUIDs(CIndexSet uids) {
+    return CIMAPSearchExpression_new(mailcore::IMAPSearchExpression::searchUIDs(uids.instance));
 }
 
-CIMAPSearchExpression newCIMAPSearchExpressionSearchNumbers(CIndexSet numbers) {
-    return newCIMAPSearchExpression(mailcore::IMAPSearchExpression::searchNumbers(numbers.instance));
+CIMAPSearchExpression CIMAPSearchExpression_SearchNumbers(CIndexSet numbers) {
+    return CIMAPSearchExpression_new(mailcore::IMAPSearchExpression::searchNumbers(numbers.instance));
 }
 
-CIMAPSearchExpression newCIMAPSearchExpressionSearchHeader(const UChar* header, const UChar* value) {
-    return newCIMAPSearchExpression(mailcore::IMAPSearchExpression::searchHeader(mailcore::String::stringWithCharacters(header), mailcore::String::stringWithCharacters(value)));
+CIMAPSearchExpression CIMAPSearchExpression_SearchHeader(const UChar* header, const UChar* value) {
+    return CIMAPSearchExpression_new(mailcore::IMAPSearchExpression::searchHeader(mailcore::String::stringWithCharacters(header), mailcore::String::stringWithCharacters(value)));
 }
 
-CIMAPSearchExpression newCIMAPSearchExpressionSearchRead() {
-    return newCIMAPSearchExpression(mailcore::IMAPSearchExpression::searchRead());
+CIMAPSearchExpression CIMAPSearchExpression_SearchRead() {
+    return CIMAPSearchExpression_new(mailcore::IMAPSearchExpression::searchRead());
 }
 
-CIMAPSearchExpression newCIMAPSearchExpressionSearchUnread() {
-    return newCIMAPSearchExpression(mailcore::IMAPSearchExpression::searchUnread());
+CIMAPSearchExpression CIMAPSearchExpression_SearchUnread() {
+    return CIMAPSearchExpression_new(mailcore::IMAPSearchExpression::searchUnread());
 }
 
-CIMAPSearchExpression newCIMAPSearchExpressionSearchFlagged() {
-    return newCIMAPSearchExpression(mailcore::IMAPSearchExpression::searchFlagged());
+CIMAPSearchExpression CIMAPSearchExpression_SearchFlagged() {
+    return CIMAPSearchExpression_new(mailcore::IMAPSearchExpression::searchFlagged());
 }
 
-CIMAPSearchExpression newCIMAPSearchExpressionSearchUnflagged() {
-    return newCIMAPSearchExpression(mailcore::IMAPSearchExpression::searchUnflagged());
+CIMAPSearchExpression CIMAPSearchExpression_SearchUnflagged() {
+    return CIMAPSearchExpression_new(mailcore::IMAPSearchExpression::searchUnflagged());
 }
 
-CIMAPSearchExpression newCIMAPSearchExpressionSearchAnswered() {
-    return newCIMAPSearchExpression(mailcore::IMAPSearchExpression::searchAnswered());
+CIMAPSearchExpression CIMAPSearchExpression_SearchAnswered() {
+    return CIMAPSearchExpression_new(mailcore::IMAPSearchExpression::searchAnswered());
 }
 
-CIMAPSearchExpression newCIMAPSearchExpressionSearchUnanswered() {
-    return newCIMAPSearchExpression(mailcore::IMAPSearchExpression::searchUnanswered());
+CIMAPSearchExpression CIMAPSearchExpression_SearchUnanswered() {
+    return CIMAPSearchExpression_new(mailcore::IMAPSearchExpression::searchUnanswered());
 }
 
-CIMAPSearchExpression newCIMAPSearchExpressionSearchDraft() {
-    return newCIMAPSearchExpression(mailcore::IMAPSearchExpression::searchDraft());
+CIMAPSearchExpression CIMAPSearchExpression_SearchDraft() {
+    return CIMAPSearchExpression_new(mailcore::IMAPSearchExpression::searchDraft());
 }
 
-CIMAPSearchExpression newCIMAPSearchExpressionSearchUndraft() {
-    return newCIMAPSearchExpression(mailcore::IMAPSearchExpression::searchUndraft());
+CIMAPSearchExpression CIMAPSearchExpression_SearchUndraft() {
+    return CIMAPSearchExpression_new(mailcore::IMAPSearchExpression::searchUndraft());
 }
 
-CIMAPSearchExpression newCIMAPSearchExpressionSearchDeleted() {
-    return newCIMAPSearchExpression(mailcore::IMAPSearchExpression::searchDeleted());
+CIMAPSearchExpression CIMAPSearchExpression_SearchDeleted() {
+    return CIMAPSearchExpression_new(mailcore::IMAPSearchExpression::searchDeleted());
 }
 
-CIMAPSearchExpression newCIMAPSearchExpressionSearchSpam() {
-    return newCIMAPSearchExpression(mailcore::IMAPSearchExpression::searchSpam());
+CIMAPSearchExpression CIMAPSearchExpression_SearchSpam() {
+    return CIMAPSearchExpression_new(mailcore::IMAPSearchExpression::searchSpam());
 }
 
-CIMAPSearchExpression newCIMAPSearchExpressionSearchBeforeDate(time_t date) {
-    return newCIMAPSearchExpression(mailcore::IMAPSearchExpression::searchBeforeDate(date));
+CIMAPSearchExpression CIMAPSearchExpression_SearchBeforeDate(time_t date) {
+    return CIMAPSearchExpression_new(mailcore::IMAPSearchExpression::searchBeforeDate(date));
 }
 
-CIMAPSearchExpression newCIMAPSearchExpressionSearchOnDate(time_t date) {
-    return newCIMAPSearchExpression(mailcore::IMAPSearchExpression::searchOnDate(date));
+CIMAPSearchExpression CIMAPSearchExpression_SearchOnDate(time_t date) {
+    return CIMAPSearchExpression_new(mailcore::IMAPSearchExpression::searchOnDate(date));
 }
 
-CIMAPSearchExpression newCIMAPSearchExpressionSearchSinceDate(time_t date) {
-    return newCIMAPSearchExpression(mailcore::IMAPSearchExpression::searchSinceDate(date));
+CIMAPSearchExpression CIMAPSearchExpression_SearchSinceDate(time_t date) {
+    return CIMAPSearchExpression_new(mailcore::IMAPSearchExpression::searchSinceDate(date));
 }
 
-CIMAPSearchExpression newCIMAPSearchExpressionSearchBeforeReceivedDate(time_t date) {
-    return newCIMAPSearchExpression(mailcore::IMAPSearchExpression::searchBeforeReceivedDate(date));
+CIMAPSearchExpression CIMAPSearchExpression_SearchBeforeReceivedDate(time_t date) {
+    return CIMAPSearchExpression_new(mailcore::IMAPSearchExpression::searchBeforeReceivedDate(date));
 }
 
-CIMAPSearchExpression newCIMAPSearchExpressionSearchOnReceivedDate(time_t date) {
-    return newCIMAPSearchExpression(mailcore::IMAPSearchExpression::searchOnReceivedDate(date));
+CIMAPSearchExpression CIMAPSearchExpression_SearchOnReceivedDate(time_t date) {
+    return CIMAPSearchExpression_new(mailcore::IMAPSearchExpression::searchOnReceivedDate(date));
 }
 
-CIMAPSearchExpression newCIMAPSearchExpressionSearchSinceReceivedDate(time_t date) {
-    return newCIMAPSearchExpression(mailcore::IMAPSearchExpression::searchSinceReceivedDate(date));
+CIMAPSearchExpression CIMAPSearchExpression_SearchSinceReceivedDate(time_t date) {
+    return CIMAPSearchExpression_new(mailcore::IMAPSearchExpression::searchSinceReceivedDate(date));
 }
 
-CIMAPSearchExpression newCIMAPSearchExpressionSearchSizeLargerThan(uint32_t size) {
-    return newCIMAPSearchExpression(mailcore::IMAPSearchExpression::searchSizeLarger(size));
+CIMAPSearchExpression CIMAPSearchExpression_SearchSizeLargerThan(uint32_t size) {
+    return CIMAPSearchExpression_new(mailcore::IMAPSearchExpression::searchSizeLarger(size));
 }
 
-CIMAPSearchExpression newCIMAPSearchExpressionSearchSizeSmallerThan(uint32_t size) {
-    return newCIMAPSearchExpression(mailcore::IMAPSearchExpression::searchSizeSmaller(size));
+CIMAPSearchExpression CIMAPSearchExpression_SearchSizeSmallerThan(uint32_t size) {
+    return CIMAPSearchExpression_new(mailcore::IMAPSearchExpression::searchSizeSmaller(size));
 }
 
-CIMAPSearchExpression newCIMAPSearchExpressionSearchGmailThreadID(uint64_t number) {
-    return newCIMAPSearchExpression(mailcore::IMAPSearchExpression::searchGmailThreadID(number));
+CIMAPSearchExpression CIMAPSearchExpression_SearchGmailThreadID(uint64_t number) {
+    return CIMAPSearchExpression_new(mailcore::IMAPSearchExpression::searchGmailThreadID(number));
 }
 
-CIMAPSearchExpression newCIMAPSearchExpressionSearchGmailMessageID(uint64_t number) {
-    return newCIMAPSearchExpression(mailcore::IMAPSearchExpression::searchGmailMessageID(number));
+CIMAPSearchExpression CIMAPSearchExpression_SearchGmailMessageID(uint64_t number) {
+    return CIMAPSearchExpression_new(mailcore::IMAPSearchExpression::searchGmailMessageID(number));
 }
 
-CIMAPSearchExpression newCIMAPSearchExpressionSearchGmailRaw(const UChar* expr) {
-    return newCIMAPSearchExpression(mailcore::IMAPSearchExpression::searchGmailRaw(mailcore::String::stringWithCharacters(expr)));
+CIMAPSearchExpression CIMAPSearchExpression_SearchGmailRaw(const UChar* expr) {
+    return CIMAPSearchExpression_new(mailcore::IMAPSearchExpression::searchGmailRaw(mailcore::String::stringWithCharacters(expr)));
 }
 
-CIMAPSearchExpression newCIMAPSearchExpressionSearchAnd(CIMAPSearchExpression expression, CIMAPSearchExpression other) {
-    return newCIMAPSearchExpression(mailcore::IMAPSearchExpression::searchAnd(expression.instance, other.instance));
+CIMAPSearchExpression CIMAPSearchExpression_SearchAnd(CIMAPSearchExpression expression, CIMAPSearchExpression other) {
+    return CIMAPSearchExpression_new(mailcore::IMAPSearchExpression::searchAnd(expression.instance, other.instance));
 }
 
-CIMAPSearchExpression newCIMAPSearchExpressionSearchOr(CIMAPSearchExpression expression, CIMAPSearchExpression other) {
-    return newCIMAPSearchExpression(mailcore::IMAPSearchExpression::searchOr(expression.instance, other.instance));
+CIMAPSearchExpression CIMAPSearchExpression_SearchOr(CIMAPSearchExpression expression, CIMAPSearchExpression other) {
+    return CIMAPSearchExpression_new(mailcore::IMAPSearchExpression::searchOr(expression.instance, other.instance));
 }
 
-CIMAPSearchExpression newCIMAPSearchExpressionSearchNot(CIMAPSearchExpression expression) {
-    return newCIMAPSearchExpression(mailcore::IMAPSearchExpression::searchNot(expression.instance));
+CIMAPSearchExpression CIMAPSearchExpression_SearchNot(CIMAPSearchExpression expression) {
+    return CIMAPSearchExpression_new(mailcore::IMAPSearchExpression::searchNot(expression.instance));
 }

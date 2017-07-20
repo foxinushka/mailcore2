@@ -21,20 +21,29 @@ extern "C" {
 #else
         void*                                   instance;
 #endif
-        
-        CArray      (*messages)(struct CIMAPFetchMessagesOperation self);
-        CIndexSet   (*vanishedMessages)(struct CIMAPFetchMessagesOperation self);
-        CArray      (*extraHeaders)(struct CIMAPFetchMessagesOperation self);
-        void        (*setExtraHeaders)(struct CIMAPFetchMessagesOperation self, CArray array);
     };
     typedef struct CIMAPFetchMessagesOperation CIMAPFetchMessagesOperation;
 
-    void deleteCIMAPFetchMessagesOperation(CIMAPFetchMessagesOperation self);
+    CArray      CIMAPFetchMessagesOperation_messages(struct CIMAPFetchMessagesOperation self)
+    			CF_SWIFT_NAME(CIMAPFetchMessagesOperation.messages(self:));
+
+    CIndexSet   CIMAPFetchMessagesOperation_vanishedMessages(struct CIMAPFetchMessagesOperation self)
+    			CF_SWIFT_NAME(CIMAPFetchMessagesOperation.vanishedMessages(self:));
+
+    CArray      CIMAPFetchMessagesOperation_extraHeaders(struct CIMAPFetchMessagesOperation self)
+    			CF_SWIFT_NAME(getter:CIMAPFetchMessagesOperation.extraHeaders(self:));
+
+    void        CIMAPFetchMessagesOperation_setExtraHeaders(struct CIMAPFetchMessagesOperation self, CArray array)
+    			CF_SWIFT_NAME(setter:CIMAPFetchMessagesOperation.extraHeaders(self:newValue:));
+
+
+    void 		CIMAPFetchMessagesOperation_release(CIMAPFetchMessagesOperation self)
+    			CF_SWIFT_NAME(CIMAPFetchMessagesOperation.release(self:));
 
 #ifdef __cplusplus
 }
 
-CIMAPFetchMessagesOperation newCIMAPFetchMessagesOperation(mailcore::IMAPFetchMessagesOperation *operation);
+CIMAPFetchMessagesOperation CIMAPFetchMessagesOperation_new(mailcore::IMAPFetchMessagesOperation *operation);
 #endif
 
 #endif

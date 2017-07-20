@@ -13,28 +13,14 @@ C_SYNTHESIZE_SCALAR(int, int, setMessageCount, messageCount)
 C_SYNTHESIZE_SCALAR(uint32_t, uint32_t, setFirstUnseenUid, firstUnseenUid)
 C_SYNTHESIZE_BOOL(setAllowsNewPermanentFlags, allowsNewPermanentFlags);
 
-CIMAPFolderInfo newCIMAPFolderInfo(mailcore::IMAPFolderInfo *info) {
+CIMAPFolderInfo CIMAPFolderInfo_new(mailcore::IMAPFolderInfo *info) {
     CIMAPFolderInfo self;
     self.instance = info;
     self.instance->retain();
-    
-    self.uidNext = &uidNext;
-    self.setUidNext = &setUidNext;
-    self.uidValidity = &uidValidity;
-    self.setUidValidity = &setUidValidity;
-    self.modSequenceValue = &modSequenceValue;
-    self.setModSequenceValue = &setModSequenceValue;
-    self.messageCount = &messageCount;
-    self.setMessageCount = &setMessageCount;
-    self.firstUnseenUid = &firstUnseenUid;
-    self.setFirstUnseenUid = &setFirstUnseenUid;
-    self.allowsNewPermanentFlags = &allowsNewPermanentFlags;
-    self.setAllowsNewPermanentFlags = &setAllowsNewPermanentFlags;
-    
     return self;
 }
 
-void deleteCIMAPFolderInfo(CIMAPFolderInfo self) {
+void CIMAPFolderInfo_release(CIMAPFolderInfo self) {
     C_SAFE_RELEASE(self.instance);
 }
 

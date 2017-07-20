@@ -29,18 +29,23 @@ extern "C" {
         void*                                       _callback;
 #endif
         COperation                                  cOperation;
-        
-        ErrorCode                   (*error)(struct CIMAPBaseOperation self);
-        struct CIMAPBaseOperation   (*setProgressBlocks)(struct CIMAPBaseOperation self, CIMAPProgressBlock itemProgressBlock, CIMAPProgressBlock bodyProgressBlock, const void* userInfo);
     };
     typedef struct CIMAPBaseOperation CIMAPBaseOperation;
+    
+    ErrorCode                   CIMAPBaseOperation_error(struct CIMAPBaseOperation self)
+                                CF_SWIFT_NAME(CIMAPBaseOperation.error(self:));
+    
+    struct CIMAPBaseOperation   CIMAPBaseOperation_setProgressBlocks(struct CIMAPBaseOperation self, CIMAPProgressBlock itemProgressBlock,
+                                                     CIMAPProgressBlock bodyProgressBlock, const void* userInfo)
+                                CF_SWIFT_NAME(CIMAPBaseOperation.setProgressBlocks(self:itemProgressBlock:bodyProgressBlock:userInfo:));
 
-    void deleteCIMAPBaseOperation(CIMAPBaseOperation operation);
+    void                        CIMAPBaseOperation_release(CIMAPBaseOperation operation)
+                                CF_SWIFT_NAME(CIMAPBaseOperation.release(self:));
 
 #ifdef __cplusplus
 }
 
-CIMAPBaseOperation newCIMAPBaseOperation(mailcore::IMAPOperation* operation);
+CIMAPBaseOperation CIMAPBaseOperation_new(mailcore::IMAPOperation* operation);
 #endif
 
 #endif

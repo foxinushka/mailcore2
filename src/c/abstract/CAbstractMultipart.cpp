@@ -8,25 +8,18 @@
 #define nativeType mailcore::AbstractMultipart
 #define structName CAbstractMultipart
 
-CArray      parts(struct CAbstractMultipart multipart);
-void        setParts(struct CAbstractMultipart multipart, CArray parts);
-
-CAbstractMultipart newCAbstractMultipart(mailcore::AbstractMultipart *part){
+CAbstractMultipart CAbstractMultipart_new(mailcore::AbstractMultipart *part){
     CAbstractMultipart self;
-    self.abstractPart = newCAbstractPart(part);
+    self.abstractPart = CAbstractPart_new(part);
     self.instance = part;
-    
-    self.parts = &parts;
-    self.setParts = &setParts;
-    
     return self;
 }
 
-CArray parts(struct CAbstractMultipart self){
-    return newCArray(self.instance->parts());
+CArray CAbstractMultipart_parts(struct CAbstractMultipart self){
+    return CArray_new(self.instance->parts());
 }
 
-void setParts(struct CAbstractMultipart self, CArray parts){
+void CAbstractMultipart_setParts(struct CAbstractMultipart self, CArray parts){
     self.instance->setParts(parts.instance);
 }
 

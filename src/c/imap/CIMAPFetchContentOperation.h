@@ -19,17 +19,19 @@ extern "C" {
 #else
         void*                                   instance;
 #endif
-        
-        CData (*data)(struct CIMAPFetchContentOperation self);
     };
     typedef struct CIMAPFetchContentOperation CIMAPFetchContentOperation;
-
-    void deleteCIMAPFetchContentOperation(CIMAPFetchContentOperation self);
+    
+    CData   CIMAPFetchContentOperation_data(struct CIMAPFetchContentOperation self)
+            CF_SWIFT_NAME(CIMAPFetchContentOperation.data(self:));
+    
+    void    CIMAPFetchContentOperation_release(CIMAPFetchContentOperation self)
+            CF_SWIFT_NAME(CIMAPFetchContentOperation.release(self:));
 
 #ifdef __cplusplus
 }
 
-CIMAPFetchContentOperation newCIMAPFetchContentOperation(mailcore::IMAPFetchContentOperation *operation);
+CIMAPFetchContentOperation CIMAPFetchContentOperation_new(mailcore::IMAPFetchContentOperation *operation);
 #endif
 
 #endif

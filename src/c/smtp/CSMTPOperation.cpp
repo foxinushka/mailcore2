@@ -24,39 +24,33 @@ public:
     CProgressBlock mBlock = NULL;
 };
 
-ErrorCode error(struct CSMTPOperation self) {
+ErrorCode CSMTPOperation_error(struct CSMTPOperation self) {
     return static_cast<ErrorCode>((int)self.instance->error());
 }
 
-CSMTPOperation setProgressBlocks(struct CSMTPOperation self, CProgressBlock progressBlock, const void* userInfo) {
+CSMTPOperation CSMTPOperation_setProgressBlocks(struct CSMTPOperation self, CProgressBlock progressBlock, const void* userInfo) {
     self._callback->mBlock = progressBlock;
     self._callback->mUserInfo = userInfo;
     return self;
 }
 
-const UChar* lastSMTPResponse(struct CSMTPOperation self) {
+const UChar* CSMTPOperation_lastSMTPResponse(struct CSMTPOperation self) {
     return self.instance->lastSMTPResponse()->unicodeCharacters();
 }
 
-int lastSMTPResponseCode(struct CSMTPOperation self) {
+int CSMTPOperation_lastSMTPResponseCode(struct CSMTPOperation self) {
     return self.instance->lastSMTPResponseCode();
 }
 
-CSMTPOperation newCSMTPOperation(mailcore::SMTPOperation* operation) {
+CSMTPOperation CSMTPOperation_new(mailcore::SMTPOperation* operation) {
     CSMTPOperation self;
-    self.cOperation = newCOperation(operation);
+    self.cOperation = COperation_new(operation);
     self.instance = operation;
     self._callback = new CSMTPOperationCallback();
     self.instance->setSmtpCallback(self._callback);
-    
-    self.setProgressBlocks = &setProgressBlocks;
-    self.error = &error;
-    self.lastSMTPResponseCode = &lastSMTPResponseCode;
-    self.lastSMTPResponse = &lastSMTPResponse;
-    
     return self;
 }
 
-void deleteCSMTPOperation(CSMTPOperation self) {
+void CSMTPOperation_release(CSMTPOperation self) {
     delete self._callback;
 }

@@ -106,6 +106,7 @@
 		84501D0D1DA511A400A9FF4D /* IndexSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84501D0C1DA511A400A9FF4D /* IndexSet.swift */; };
 		84714BC41DF569F000280704 /* unittest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84714BC31DF569F000280704 /* unittest.swift */; };
 		84714BC61DF56ACC00280704 /* data in Resources */ = {isa = PBXBuildFile; fileRef = 84714BC51DF56ACC00280704 /* data */; };
+		847530621F2230B30011100D /* CBase+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 847530611F2230B30011100D /* CBase+Private.h */; };
 		848F95381D9D568B00058351 /* UInt32+Mailcore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848F95371D9D568B00058351 /* UInt32+Mailcore.swift */; };
 		84915BB8199C4B0400EDDED9 /* MCNNTP.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8491899C18C93F92002063A3 /* MCNNTP.h */; };
 		849189A118C93FB7002063A3 /* MCNNTPSession.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8491899F18C93FB7002063A3 /* MCNNTPSession.cpp */; };
@@ -178,12 +179,12 @@
 		849EA0EB1D990E35000E4E4D /* CArray.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 84F7B4101D915997005F83E8 /* CArray.cpp */; };
 		849EA0EC1D990E35000E4E4D /* CIndexSet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 84F7B4121D915997005F83E8 /* CIndexSet.cpp */; };
 		849EA0ED1D990E35000E4E4D /* CObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 84F7B4141D915997005F83E8 /* CObject.cpp */; };
-		849EA1701D99175E000E4E4D /* swiftmailcore2-Bridging-Header.h in Headers */ = {isa = PBXBuildFile; fileRef = 849EA16F1D99175E000E4E4D /* swiftmailcore2-Bridging-Header.h */; };
 		849EA1751D9928CE000E4E4D /* String+Mailcore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849EA1741D9928CE000E4E4D /* String+Mailcore.swift */; };
 		849F53D817F28443002D417F /* MCOPOPNoopOperation.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 84B639EF17F282B4003B5BA2 /* MCOPOPNoopOperation.h */; };
 		849F53D917F28443002D417F /* MCIMAPNoopOperation.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 84B639EC17F280F3003B5BA2 /* MCIMAPNoopOperation.h */; };
 		849F53DA17F28443002D417F /* MCPOPNoopOperation.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 84B639E717F27EBD003B5BA2 /* MCPOPNoopOperation.h */; };
 		849F53DB17F28443002D417F /* MCSMTPNoopOperation.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 84B639E217F279BB003B5BA2 /* MCSMTPNoopOperation.h */; };
+		84A382A91F25EAB5000AAF3E /* CIMAPMultipart.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 84CD9BDC1D9BE3AF000622CB /* CIMAPMultipart.cpp */; };
 		84A929121DA7B5BB0020205B /* HTMLRendererDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A929111DA7B5BB0020205B /* HTMLRendererDelegate.swift */; };
 		84A929141DA7B8480020205B /* HTMLRendererImapDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A929131DA7B8480020205B /* HTMLRendererImapDelegate.swift */; };
 		84A929161DA7B9790020205B /* AbstractMessageRendererCallback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A929151DA7B9790020205B /* AbstractMessageRendererCallback.swift */; };
@@ -1787,6 +1788,7 @@
 		84501D0C1DA511A400A9FF4D /* IndexSet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = IndexSet.swift; path = swift/basetypes/IndexSet.swift; sourceTree = "<group>"; };
 		84714BC31DF569F000280704 /* unittest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = unittest.swift; sourceTree = "<group>"; };
 		84714BC51DF56ACC00280704 /* data */ = {isa = PBXFileReference; lastKnownFileType = folder; name = data; path = ../../unittest/data; sourceTree = "<group>"; };
+		847530611F2230B30011100D /* CBase+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "CBase+Private.h"; path = "c/CBase+Private.h"; sourceTree = "<group>"; };
 		848F95371D9D568B00058351 /* UInt32+Mailcore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UInt32+Mailcore.swift"; path = "swift/basetypes/UInt32+Mailcore.swift"; sourceTree = "<group>"; };
 		8491899C18C93F92002063A3 /* MCNNTP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCNNTP.h; path = nntp/MCNNTP.h; sourceTree = "<group>"; };
 		8491899F18C93FB7002063A3 /* MCNNTPSession.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MCNNTPSession.cpp; path = nntp/MCNNTPSession.cpp; sourceTree = "<group>"; };
@@ -1820,7 +1822,6 @@
 		8498CCAE1D9519B40074217C /* CAbstractMessagePart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CAbstractMessagePart.h; path = c/abstract/CAbstractMessagePart.h; sourceTree = "<group>"; };
 		8498CCB01D9520660074217C /* CAbstractMultipart.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CAbstractMultipart.cpp; path = c/abstract/CAbstractMultipart.cpp; sourceTree = "<group>"; };
 		8498CCB11D9520660074217C /* CAbstractMultipart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CAbstractMultipart.h; path = c/abstract/CAbstractMultipart.h; sourceTree = "<group>"; };
-		849EA16F1D99175E000E4E4D /* swiftmailcore2-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "swiftmailcore2-Bridging-Header.h"; path = "swift/swiftmailcore2-Bridging-Header.h"; sourceTree = "<group>"; };
 		849EA1741D9928CE000E4E4D /* String+Mailcore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "String+Mailcore.swift"; path = "swift/basetypes/String+Mailcore.swift"; sourceTree = "<group>"; };
 		84A929111DA7B5BB0020205B /* HTMLRendererDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HTMLRendererDelegate.swift; path = swift/abstract/HTMLRendererDelegate.swift; sourceTree = "<group>"; };
 		84A929131DA7B8480020205B /* HTMLRendererImapDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HTMLRendererImapDelegate.swift; path = swift/abstract/HTMLRendererImapDelegate.swift; sourceTree = "<group>"; };
@@ -1934,7 +1935,6 @@
 		84ECAD771D93E9CD006261FD /* CAbstractPart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CAbstractPart.h; path = c/abstract/CAbstractPart.h; sourceTree = "<group>"; };
 		84ECAD7A1D93FF9E006261FD /* CMessageHeader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CMessageHeader.cpp; path = c/abstract/CMessageHeader.cpp; sourceTree = "<group>"; };
 		84ECAD7B1D93FF9E006261FD /* CMessageHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CMessageHeader.h; path = c/abstract/CMessageHeader.h; sourceTree = "<group>"; };
-		84ECAD7D1D941FE1006261FD /* CBase+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "CBase+Private.h"; path = "c/CBase+Private.h"; sourceTree = "<group>"; };
 		84ECAD7E1D943B11006261FD /* CAddress.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CAddress.cpp; path = c/abstract/CAddress.cpp; sourceTree = "<group>"; };
 		84ECAD7F1D943B11006261FD /* CAddress.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CAddress.h; path = c/abstract/CAddress.h; sourceTree = "<group>"; };
 		84F7B40D1D915985005F83E8 /* CBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CBase.h; path = c/CBase.h; sourceTree = "<group>"; };
@@ -2831,7 +2831,7 @@
 				84B8920D1DA26893008FD1C4 /* smtp */,
 				84F7B40F1D91598B005F83E8 /* basetypes */,
 				84F7B40D1D915985005F83E8 /* CBase.h */,
-				84ECAD7D1D941FE1006261FD /* CBase+Private.h */,
+				847530611F2230B30011100D /* CBase+Private.h */,
 				84F7B40E1D915985005F83E8 /* CCore.h */,
 			);
 			name = c;
@@ -2958,7 +2958,6 @@
 		84F7B4941D916CF0005F83E8 /* swift */ = {
 			isa = PBXGroup;
 			children = (
-				849EA16F1D99175E000E4E4D /* swiftmailcore2-Bridging-Header.h */,
 				84E3DB321D997D04003B598F /* utils */,
 				8498CCB31D9523C90074217C /* abstract */,
 				84F7B4951D916CFB005F83E8 /* basetypes */,
@@ -3913,8 +3912,8 @@
 				84D344DC1DF7090700B81A94 /* CIMAPFetchContentToFileOperation.h in Headers */,
 				849EA0C41D990E0D000E4E4D /* CMessageHeader.h in Headers */,
 				84B892111DA268F8008FD1C4 /* CSMTPSession.h in Headers */,
-				849EA1701D99175E000E4E4D /* swiftmailcore2-Bridging-Header.h in Headers */,
 				8494D6D21D9C03BB009EEE5E /* CIMAPPart.h in Headers */,
+				847530621F2230B30011100D /* CBase+Private.h in Headers */,
 				84E3DB3A1D9A7C93003B598F /* CIMAPIdleOperation.h in Headers */,
 				849EA0C51D990E0D000E4E4D /* CIMAPBaseOperation.h in Headers */,
 				842D79A41DF8049D00F9424C /* CIMAPMoveMessagesOperation.h in Headers */,
@@ -4347,6 +4346,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				84A382A91F25EAB5000AAF3E /* CIMAPMultipart.cpp in Sources */,
 				842D79BB1DF881A000F9424C /* CIMAPIdentityOperation.cpp in Sources */,
 				849EA0D71D990E35000E4E4D /* COperation.cpp in Sources */,
 				8418C72E1DA3C74400B7FE35 /* CMessageBuilder.cpp in Sources */,
@@ -5239,8 +5239,8 @@
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
-				SWIFT_INCLUDE_PATHS = "";
-				SWIFT_OBJC_BRIDGING_HEADER = "$/../../src/swift/swiftmailcore2-Bridging-Header.h";
+				SWIFT_INCLUDE_PATHS = ../src/c/;
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -5292,8 +5292,8 @@
 				PRODUCT_NAME = SwiftMailCore;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
-				SWIFT_INCLUDE_PATHS = "";
-				SWIFT_OBJC_BRIDGING_HEADER = "$/../../src/swift/swiftmailcore2-Bridging-Header.h";
+				SWIFT_INCLUDE_PATHS = ../src/c/;
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

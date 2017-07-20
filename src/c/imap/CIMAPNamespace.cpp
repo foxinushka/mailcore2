@@ -7,72 +7,53 @@
 #define nativeType mailcore::IMAPNamespace
 #define structName CIMAPNamespace
 
-const UChar*    mainPrefix(struct CIMAPNamespace self);
-char            mainDelimiter(struct CIMAPNamespace self);
-CArray          prefixes(struct CIMAPNamespace self);
-const UChar*    pathForComponents(struct CIMAPNamespace self, CArray components);
-const UChar*    pathForComponentsAndPrefix(struct CIMAPNamespace self, CArray components, const UChar* prefix);
-CArray          componentsFromPath(struct CIMAPNamespace self, const UChar* path);
-bool            containsFolderPath(struct CIMAPNamespace self, const UChar* path);
-CObject         castToCObject(struct CIMAPNamespace self);
-
-CIMAPNamespace newCIMAPNamespace(mailcore::IMAPNamespace *folder) {
+CIMAPNamespace CIMAPNamespace_new(mailcore::IMAPNamespace *folder) {
     CIMAPNamespace self;
     folder->retain();
     self.instance = folder;
-    
-    self.mainPrefix = &mainPrefix;
-    self.mainDelimiter = &mainDelimiter;
-    self.prefixes = &prefixes;
-    self.pathForComponents = &pathForComponents;
-    self.pathForComponentsAndPrefix = &pathForComponentsAndPrefix;
-    self.componentsFromPath = &componentsFromPath;
-    self.containsFolderPath = &containsFolderPath;
-    self.castToCObject = &castToCObject;
-    
     return self;
 }
 
-CIMAPNamespace newCIMAPNamespace(const UChar* prefix, char delimiter) {
-    return newCIMAPNamespace(mailcore::IMAPNamespace::namespaceWithPrefix(mailcore::String::stringWithCharacters(prefix), delimiter));
+CIMAPNamespace CIMAPNamespace_new(const UChar* prefix, char delimiter) {
+    return CIMAPNamespace_new(mailcore::IMAPNamespace::namespaceWithPrefix(mailcore::String::stringWithCharacters(prefix), delimiter));
 }
 
-void deleteCIMAPNamespace(CIMAPNamespace self) {
+void CIMAPNamespace_release(CIMAPNamespace self) {
     C_SAFE_RELEASE(self.instance);
 }
 
-const UChar* mainPrefix(struct CIMAPNamespace self) {
+const UChar* CIMAPNamespace_mainPrefix(struct CIMAPNamespace self) {
     return self.instance->mainPrefix()->unicodeCharacters();
 }
 
-char mainDelimiter(struct CIMAPNamespace self) {
+char CIMAPNamespace_mainDelimiter(struct CIMAPNamespace self) {
     return self.instance->mainDelimiter();
 }
 
-CArray prefixes(struct CIMAPNamespace self) {
-    return newCArray(self.instance->prefixes());
+CArray CIMAPNamespace_prefixes(struct CIMAPNamespace self) {
+    return CArray_new(self.instance->prefixes());
 }
 
-const UChar* pathForComponents(struct CIMAPNamespace self, CArray components) {
+const UChar* CIMAPNamespace_pathForComponents(struct CIMAPNamespace self, CArray components) {
     return self.instance->pathForComponents(components.instance)->unicodeCharacters();
 }
 
-const UChar* pathForComponentsAndPrefix(struct CIMAPNamespace self, CArray components, const UChar* prefix) {
+const UChar* CIMAPNamespace_pathForComponentsAndPrefix(struct CIMAPNamespace self, CArray components, const UChar* prefix) {
     return self.instance->pathForComponentsAndPrefix(components.instance, mailcore::String::stringWithCharacters(prefix))->unicodeCharacters();
 }
 
-CArray componentsFromPath(struct CIMAPNamespace self, const UChar* path) {
-    return newCArray(self.instance->componentsFromPath(mailcore::String::stringWithCharacters(path)));
+CArray CIMAPNamespace_componentsFromPath(struct CIMAPNamespace self, const UChar* path) {
+    return CArray_new(self.instance->componentsFromPath(mailcore::String::stringWithCharacters(path)));
 }
 
-bool containsFolderPath(struct CIMAPNamespace self, const UChar* path) {
+bool CIMAPNamespace_containsFolderPath(struct CIMAPNamespace self, const UChar* path) {
     return self.instance->containsFolderPath(mailcore::String::stringWithCharacters(path));
 }
 
-CIMAPNamespace CIMAPNamespaceCastFromCObject(CObject obj) {
-    return newCIMAPNamespace((mailcore::IMAPNamespace*) obj.instance);
+CIMAPNamespace CIMAPNamespace_castFromCObject(CObject obj) {
+    return CIMAPNamespace_new((mailcore::IMAPNamespace*) obj.instance);
 }
 
-CObject castToCObject(struct CIMAPNamespace self) {
-    return newCObject((mailcore::Object*) self.instance);
+CObject CIMAPNamespace_castToCObject(struct CIMAPNamespace self) {
+    return CObject_new((mailcore::Object*) self.instance);
 }

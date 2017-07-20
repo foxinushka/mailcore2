@@ -5,22 +5,17 @@
 #define nativeType mailcore::IMAPMessageRenderingOperation
 #define structName CIMAPMessageRenderingOperation
 
-const UChar*    result(struct CIMAPMessageRenderingOperation self);
-
-CIMAPMessageRenderingOperation newCIMAPMessageRenderingOperation(mailcore::IMAPMessageRenderingOperation *operationRef){
+CIMAPMessageRenderingOperation CIMAPMessageRenderingOperation_new(mailcore::IMAPMessageRenderingOperation *operationRef){
     CIMAPMessageRenderingOperation self;
-    self.baseOperation = newCIMAPBaseOperation(operationRef);
+    self.baseOperation = CIMAPBaseOperation_new(operationRef);
     self.instance = operationRef;
-    
-    self.result = &result;
-    
     return self;
 }
 
-void deleteCIMAPMessageRenderingOperation(CIMAPMessageRenderingOperation operation) {
+void CIMAPMessageRenderingOperation_release(CIMAPMessageRenderingOperation operation) {
     
 }
 
-const UChar* result(struct CIMAPMessageRenderingOperation self) {
+const UChar* CIMAPMessageRenderingOperation_result(struct CIMAPMessageRenderingOperation self) {
     return self.instance->result()->unicodeCharacters();
 }

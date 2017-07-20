@@ -23,23 +23,37 @@ extern "C" {
 #endif
         CAbstractPart abstractPart;
         
-        void                (*setData)(struct CAttachment self, const char* bytes, unsigned int length);
-        const UChar*        (*decodedString)(struct CAttachment self);
-        
     };
     typedef struct CAttachment CAttachment;
     
-    const UChar* CmimeTypeForFilename(const UChar* filename);
-    CAttachment CattachmentWithContentsOfFile(const UChar* filename);
-    CAttachment CattachmentWithData(const char* bytes, unsigned int length, const UChar* filename);
-    CAttachment CattachmentWithHTMLString(const UChar* htmlString);
-    CAttachment CattachmentWithRFC822Message(const char* bytes, unsigned int length);
-    CAttachment CattachmentWithText(const UChar* text);
+    void                CAttachment_setData(struct CAttachment self, const char* bytes, unsigned int length)
+                        CF_SWIFT_NAME(CAttachment.setData(self:bytes:length:));
+    
+    const UChar*        CAttachment_decodedString(struct CAttachment self)
+                        CF_SWIFT_NAME(CAttachment.decodedString(self:));
+    
+    const UChar*        CAttachment_mimeTypeForFilename(const UChar* filename)
+                        CF_SWIFT_NAME(CAttachment.mimeType(forFilename:));
+    
+    CAttachment         CAttachment_WithContentsOfFile(const UChar* filename)
+                        CF_SWIFT_NAME(CAttachment.init(contentsOfFile:));
+    
+    CAttachment         CAttachment_WithData(const char* bytes, unsigned int length, const UChar* filename)
+                        CF_SWIFT_NAME(CAttachment.init(dataBytes:length:filename:));
+    
+    CAttachment         CAttachment_WithHTMLString(const UChar* htmlString)
+                        CF_SWIFT_NAME(CAttachment.init(htmlString:));
+    
+    CAttachment         CAttachment_WithRFC822Message(const char* bytes, unsigned int length)
+                        CF_SWIFT_NAME(CAttachment.init(RFC822MessageBytes:length:));
+    
+    CAttachment         CAttachment_WithText(const UChar* text)
+                        CF_SWIFT_NAME(CAttachment.init(text:));
     
 #ifdef __cplusplus
 }
 
-CAttachment newCAttachment(mailcore::Attachment *attachment);
+CAttachment CAttachment_new(mailcore::Attachment *attachment);
 #endif
 
 #endif /* CAttachment_h */

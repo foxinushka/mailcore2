@@ -1,4 +1,5 @@
 import Foundation
+import CCore
 
 public class IMAPFetchMessagesOperation : IMAPBaseOperation {
     
@@ -34,7 +35,7 @@ public class IMAPFetchMessagesOperation : IMAPBaseOperation {
         
         let errorCode = error();
         if errorCode == ErrorNone {
-            completionBlock!(nil, Array<IMAPMessage>.cast(operation.messages(operation)), IndexSet(operation.vanishedMessages(operation)));
+            completionBlock!(nil, Array<IMAPMessage>.cast(operation.messages()), IndexSet(operation.vanishedMessages()));
         }
         else {
             completionBlock!(MailCoreError(code: errorCode), nil, nil);
@@ -49,8 +50,8 @@ public class IMAPFetchMessagesOperation : IMAPBaseOperation {
     }
     
     public var extraHeaders: Array<String> {
-        get { return Array<String>.cast(operation.extraHeaders(operation)); }
-        set { operation.setExtraHeaders(operation, Array<String>.cast(newValue));}
+        get { return Array<String>.cast(operation.extraHeaders) }
+        set { operation.extraHeaders = Array<String>.cast(newValue) }
     }
     
 }

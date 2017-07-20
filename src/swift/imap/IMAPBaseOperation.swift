@@ -1,4 +1,5 @@
 import Foundation
+import CCore
 
 public class IMAPBaseOperation : Operation {
     
@@ -11,15 +12,17 @@ public class IMAPBaseOperation : Operation {
     internal init(baseOperation: CIMAPBaseOperation) {
         self.baseOperation = baseOperation;
         super.init(baseOperation.cOperation);
-        self.baseOperation = self.baseOperation.setProgressBlocks(self.baseOperation, itemProgressCallback, bodyProgressCallback, Unmanaged.passUnretained(self).toOpaque());
+        self.baseOperation = self.baseOperation.setProgressBlocks(itemProgressBlock: itemProgressCallback,
+                                                                  bodyProgressBlock: bodyProgressCallback,
+                                                                  userInfo: Unmanaged.passUnretained(self).toOpaque());
     }
     
     deinit {
-        deleteCIMAPBaseOperation(baseOperation);
+        baseOperation.release()
     }
     
     internal func error() -> ErrorCode {
-        return baseOperation.error(baseOperation);
+        return baseOperation.error()
     }
     
     public func itemProgress(current: UInt32, maximum: UInt32) {

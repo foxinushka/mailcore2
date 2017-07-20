@@ -5,22 +5,17 @@
 #define nativeType mailcore::IMAPCapabilityOperation
 #define structName CIMAPCapabilityOperation
 
-CIndexSet capabilities(struct CIMAPCapabilityOperation self);
-
-CIMAPCapabilityOperation newCIMAPCapabilityOperation(mailcore::IMAPCapabilityOperation *operationRef){
+CIMAPCapabilityOperation CIMAPCapabilityOperation_new(mailcore::IMAPCapabilityOperation *operationRef){
     CIMAPCapabilityOperation self;
-    self.baseOperation = newCIMAPBaseOperation(operationRef);
+    self.baseOperation = CIMAPBaseOperation_new(operationRef);
     self.instance = operationRef;
-    
-    self.capabilities = &capabilities;
-    
     return self;
 }
 
-void deleteCIMAPFetchFoldersOperation(CIMAPCapabilityOperation operation) {
+void CIMAPCapabilityOperation_release(CIMAPCapabilityOperation operation) {
     
 }
 
-CIndexSet capabilities(struct CIMAPCapabilityOperation self) {
-    return newCIndexSet(self.instance->capabilities());
+CIndexSet CIMAPCapabilityOperation_capabilities(struct CIMAPCapabilityOperation self) {
+    return CIndexSet_new(self.instance->capabilities());
 }

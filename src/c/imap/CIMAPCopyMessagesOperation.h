@@ -20,17 +20,19 @@ extern "C" {
 #else
         void*                                   instance;
 #endif
-        
-        CDictionary (*uidMapping)(struct CIMAPCopyMessagesOperation self);
     };
     typedef struct CIMAPCopyMessagesOperation CIMAPCopyMessagesOperation;
-
-    void deleteCIMAPCopyMessagesOperation(CIMAPCopyMessagesOperation self);
+    
+    CDictionary     CIMAPCopyMessagesOperation_uidMapping(struct CIMAPCopyMessagesOperation self)
+                    CF_SWIFT_NAME(CIMAPCopyMessagesOperation.uidMapping(self:));
+    
+    void            CIMAPCopyMessagesOperation_release(CIMAPCopyMessagesOperation self)
+                    CF_SWIFT_NAME(CIMAPCopyMessagesOperation.release(self:));
 
 #ifdef __cplusplus
 }
 
-CIMAPCopyMessagesOperation newCIMAPCopyMessagesOperation(mailcore::IMAPCopyMessagesOperation *operation);
+CIMAPCopyMessagesOperation CIMAPCopyMessagesOperation_new(mailcore::IMAPCopyMessagesOperation *operation);
 #endif
 
 #endif

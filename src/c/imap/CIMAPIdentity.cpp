@@ -10,51 +10,38 @@ C_SYNTHESIZE_STRING(setVendor, vendor);
 C_SYNTHESIZE_STRING(setName, name);
 C_SYNTHESIZE_STRING(setVersion, version);
 
-CArray allInfoKeys(struct CIMAPIdentity self) {
-    return newCArray(self.instance->allInfoKeys());
+CArray CIMAPIdentity_allInfoKeys(struct CIMAPIdentity self) {
+    return CArray_new(self.instance->allInfoKeys());
 }
 
-const UChar* infoForKey(struct CIMAPIdentity self, const UChar* key) {
+const UChar* CIMAPIdentity_infoForKey(struct CIMAPIdentity self, const UChar* key) {
     return self.instance->infoForKey(new mailcore::String(key))->unicodeCharacters();
 }
 
-void setInfoForKey(struct CIMAPIdentity self, const UChar* value, const UChar* key) {
+void CIMAPIdentity_setInfoForKey(struct CIMAPIdentity self, const UChar* value, const UChar* key) {
     self.instance->setInfoForKey(new mailcore::String(key), new mailcore::String(value));
 }
 
-void removeAllInfos(struct CIMAPIdentity self){
+void CIMAPIdentity_removeAllInfos(struct CIMAPIdentity self){
     self.instance->removeAllInfos();
 }
 
 
-CIMAPIdentity newCIMAPIdentity(mailcore::IMAPIdentity *folder) {
+CIMAPIdentity CIMAPIdentity_new(mailcore::IMAPIdentity *folder) {
     CIMAPIdentity self;
     folder->retain();
     self.instance = folder;
-    
-    self.setVendor = &setVendor;
-    self.vendor = &vendor;
-    self.setName = &setName;
-    self.name = &name;
-    self.setVersion = &setVersion;
-    self.version = &version;
-    
-    self.allInfoKeys = &allInfoKeys;
-    self.infoForKey = &infoForKey;
-    self.setInfoForKey = &setInfoForKey;
-    self.removeAllInfos= &removeAllInfos;
-    
     return self;
 }
 
-CIMAPIdentity newCIMAPIdentity(const UChar* vendor, const UChar* name, const UChar* version) {
-    CIMAPIdentity self = newCIMAPIdentity(new mailcore::IMAPIdentity());
-    self.setVendor(self, vendor);
-    self.setName(self, name);
-    self.setVersion(self, version);
+CIMAPIdentity CIMAPIdentity_new(const UChar* vendor, const UChar* name, const UChar* version) {
+    CIMAPIdentity self = CIMAPIdentity_new(new mailcore::IMAPIdentity());
+    CIMAPIdentity_setVendor(self, vendor);
+    CIMAPIdentity_setName(self, name);
+    CIMAPIdentity_setVersion(self, version);
     return self;
 }
 
-void deleteCIMAPIdentity(CIMAPIdentity self) {
+void CIMAPIdentity_release(CIMAPIdentity self) {
     C_SAFE_RELEASE(self.instance);
 }

@@ -1,4 +1,5 @@
 import Foundation
+import CCore
 
 public class IMAPSearchOperation : IMAPBaseOperation {
     
@@ -43,7 +44,7 @@ public class IMAPSearchOperation : IMAPBaseOperation {
         
         let errorCode = error();
         if errorCode == ErrorNone {
-            completionBlock!(nil, IndexSet(operation.uids(operation)));
+            completionBlock!(nil, IndexSet(operation.uids()));
         }
         else {
             completionBlock!(MailCoreError(code: errorCode), nil);

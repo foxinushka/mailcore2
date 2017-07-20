@@ -1,18 +1,41 @@
-#ifndef MAILCORE_CCORE_H
-#define MAILCORE_CCORE_H
+#ifndef CCore_Bridging_Header_h
+#define CCore_Bridging_Header_h
 
-#include <MailCore/CIndexSet.h>
-#include <MailCore/CArray.h>
-#include <MailCore/CObject.h>
+#include "CIndexSet.h"
+#include "CArray.h"
+#include "CObject.h"
 
-#include <MailCore/CAbstractMessage.h>
-#include <MailCore/CAbstractMessagePart.h>
-#include <MailCore/CAbstractMultipart.h>
-#include <MailCore/CAddress.h>
-#include <MailCore/CAbstractPart.h>
-#include <MailCore/CMessageHeader.h>
+#include "CAbstractMessage.h"
+#include "CAbstractMessagePart.h"
+#include "CAbstractMultipart.h"
+#include "CAddress.h"
+#include "CAbstractPart.h"
+#include "CMessageHeader.h"
+#include "CAbstractMessageRendererCallback.h"
 
-#include <MailCore/CIMAPAsyncSession.h>
-#include <MailCore/CIMAPIdleOperation.h>
+#include "CIMAPAsyncSession.h"
+#include "COperation.h"
+#include "CIMAPBaseOperation.h"
+#include "CIMAPIdleOperation.h"
 
-#endif
+#include "CIMAPFolder.h"
+#include "CIMAPMessage.h"
+#include "CIMAPMessagePart.h"
+#include "CIMAPMultipart.h"
+#include "CIMAPNamespace.h"
+#include "CIMAPNamespaceItem.h"
+#include "CIMAPPart.h"
+#include "CIMAPFolderInfo.h"
+#include "CIMAPFolderStatus.h"
+#include "CIMAPSearchExpression.h"
+
+#include "CSMTPSession.h"
+#include "CSMTPOperation.h"
+
+#include "CAttachment.h"
+#include "CMessageBuilder.h"
+#include "CMessageParser.h"
+
+#include "CIMAPFetchFoldersOperation.h"
+
+#endif /* CCore_Bridging_Header_h */

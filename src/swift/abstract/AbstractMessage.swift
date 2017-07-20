@@ -1,4 +1,5 @@
 import Foundation
+import CCore
 
 public class AbstractMessage {
 	
@@ -9,23 +10,23 @@ public class AbstractMessage {
 	}
     
     deinit {
-        deleteCAbstractMessage(nativeInstance);
+        nativeInstance.release()
     }
     
     /** Header of the message. */
     public var header : MessageHeader {
-        set { nativeInstance.setHeader(nativeInstance, newValue.CMessageHeader()); }
-        get { return MessageHeader(nativeInstance.header(nativeInstance)); }
+        set { nativeInstance.header =  newValue.CMessageHeader() }
+        get { return MessageHeader(nativeInstance.header) }
     }
     
     /** Returns the part with the given Content-ID.*/
     public func partForContentID(contentID: String) -> AbstractPart {
-        return AbstractPart(String.utf16(contentID, { nativeInstance.partForContentID(nativeInstance, $0) }));
+        return AbstractPart(String.utf16(contentID, { nativeInstance.part(forContentID: $0) }));
     }
     
     /** Returns the part with the given unique identifier.*/
     public func partForUniqueID(uniqueID: String) -> AbstractPart {
-        return AbstractPart(String.utf16(uniqueID, { nativeInstance.partForUniqueID(nativeInstance, $0) }));
+        return AbstractPart(String.utf16(uniqueID, { nativeInstance.part(forUniqueID: $0) }));
     }
     
     /** All attachments in the message.
@@ -33,7 +34,7 @@ public class AbstractMessage {
      It will return an array of Attachment for MessageParser.
      It will return an array of Attachment for MessageBuilder. */
     public func attachments() -> Array<AbstractPart> {
-        return Array<AbstractPart>.cast(nativeInstance.attachments(nativeInstance));
+        return Array<AbstractPart>.cast(nativeInstance.attachments());
     }
     
     /** All image attachments included inline in the message through cid: URLs.
@@ -41,7 +42,7 @@ public class AbstractMessage {
      It will return an array of Attachment for MessageParser.
      It will return an array of Attachment for MessageBuilder. */
     public func htmlInlineAttachments() -> Array<AbstractPart> {
-        return Array<AbstractPart>.cast(nativeInstance.htmlInlineAttachments(nativeInstance));
+        return Array<AbstractPart>.cast(nativeInstance.htmlInlineAttachments());
     }
     
     /**
@@ -49,6 +50,6 @@ public class AbstractMessage {
      This does not include inline images and attachments, but only the text content
      */
     public func requiredPartsForRendering() -> Array<AbstractPart> {
-        return Array<AbstractPart>.cast(nativeInstance.requiredPartsForRendering(nativeInstance));
+        return Array<AbstractPart>.cast(nativeInstance.requiredPartsForRendering());
     }
 }

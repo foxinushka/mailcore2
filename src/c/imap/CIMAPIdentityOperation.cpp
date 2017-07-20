@@ -5,20 +5,17 @@
 #define nativeType mailcore::IMAPIdentityOperation
 #define structName CIMAPIdentityOperation
 
-CIMAPIdentity serverIdentity(struct CIMAPIdentityOperation self) {
-    return newCIMAPIdentity(self.instance->serverIdentity());
+CIMAPIdentity CIMAPIdentityOperation_serverIdentity(struct CIMAPIdentityOperation self) {
+    return CIMAPIdentity_new(self.instance->serverIdentity());
 }
 
-CIMAPIdentityOperation newCIMAPIdentityOperation(mailcore::IMAPIdentityOperation *operationRef){
+CIMAPIdentityOperation CIMAPIdentityOperation_new(mailcore::IMAPIdentityOperation *operationRef){
     CIMAPIdentityOperation self;
-    self.baseOperation = newCIMAPBaseOperation(operationRef);
+    self.baseOperation = CIMAPBaseOperation_new(operationRef);
     self.instance = operationRef;
-    
-    self.serverIdentity = &serverIdentity;
-    
     return self;
 }
 
-void deleteCIMAPFetchNamespaceOperation(CIMAPIdentityOperation operation) {
+void CIMAPIdentityOperation_release(CIMAPIdentityOperation operation) {
     
 }

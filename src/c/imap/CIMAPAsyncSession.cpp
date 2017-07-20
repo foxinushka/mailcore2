@@ -29,8 +29,8 @@ C_SYNTHESIZE_STRING(setOAuth2Token, OAuth2Token)
 C_SYNTHESIZE_ENUM(AuthType, mailcore::AuthType, setAuthType, authType)
 C_SYNTHESIZE_SCALAR(unsigned int, unsigned int, setMaximumConnections, maximumConnections)
 C_SYNTHESIZE_BOOL(setAllowsFolderConcurrentAccessEnabled, allowsFolderConcurrentAccessEnabled)
-C_SYNTHESIZE_MAILCORE_OBJ(CIMAPNamespace, newCIMAPNamespace, setDefaultNamespace, defaultNamespace)
-C_SYNTHESIZE_MAILCORE_OBJ(CIMAPIdentity, newCIMAPIdentity, setClientIdentity, clientIdentity)
+C_SYNTHESIZE_MAILCORE_OBJ(CIMAPNamespace, CIMAPNamespace_new, setDefaultNamespace, defaultNamespace)
+C_SYNTHESIZE_MAILCORE_OBJ(CIMAPIdentity, CIMAPIdentity_new, setClientIdentity, clientIdentity)
 C_SYNTHESIZE_SCALAR(dispatch_queue_t, dispatch_queue_t, setDispatchQueue, dispatchQueue)
 
 typedef ConnectionLogger CConnectionLogger;
@@ -67,7 +67,7 @@ public:
     OperationQueueRunningChangeBlock mQueueRunningChangeBlock = NULL;
 };
 
-void setConnectionLogger(struct CIMAPAsyncSession self, ConnectionLogger logger) {
+void CIMAPAsyncSession_setConnectionLogger(struct CIMAPAsyncSession self, ConnectionLogger logger) {
     self._callback->mLogger = logger;
     if (logger != NULL) {
         self.instance->setConnectionLogger(self._callback);
@@ -77,320 +77,241 @@ void setConnectionLogger(struct CIMAPAsyncSession self, ConnectionLogger logger)
     }
 }
 
-CIMAPIdentity serverIdentity(struct CIMAPAsyncSession self) {
-    return newCIMAPIdentity(self.instance->serverIdentity());
+CIMAPIdentity CIMAPAsyncSession_serverIdentity(struct CIMAPAsyncSession self) {
+    return CIMAPIdentity_new(self.instance->serverIdentity());
 }
 
-bool isVoIPEnabled(struct CIMAPAsyncSession self) {
+bool CIMAPAsyncSession_isVoIPEnabled(struct CIMAPAsyncSession self) {
     return self.instance->isVoIPEnabled();
 }
 
-bool isIdleEnabled(struct CIMAPAsyncSession self) {
+bool CIMAPAsyncSession_isIdleEnabled(struct CIMAPAsyncSession self) {
     return self.instance->isIdleEnabled();
 }
 
-bool isOperationQueueRunning(struct CIMAPAsyncSession self) {
+bool CIMAPAsyncSession_isOperationQueueRunning(struct CIMAPAsyncSession self) {
     return self.instance->isOperationQueueRunning();
 }
 
-void cancelAllOperations(struct CIMAPAsyncSession self) {
+void CIMAPAsyncSession_cancelAllOperations(struct CIMAPAsyncSession self) {
     return self.instance->cancelAllOperations();
 }
 
-CIMAPBaseOperation subscribeFolderOperation(struct CIMAPAsyncSession self, const UChar *folder) {
-    return newCIMAPBaseOperation(self.instance->subscribeFolderOperation(new mailcore::String(folder)));
+CIMAPBaseOperation CIMAPAsyncSession_subscribeFolderOperation(struct CIMAPAsyncSession self, const UChar *folder) {
+    return CIMAPBaseOperation_new(self.instance->subscribeFolderOperation(new mailcore::String(folder)));
 }
 
-CIMAPBaseOperation unsubscribeFolderOperation(struct CIMAPAsyncSession self, const UChar *folder) {
-    return newCIMAPBaseOperation(self.instance->unsubscribeFolderOperation(new mailcore::String(folder)));
+CIMAPBaseOperation CIMAPAsyncSession_unsubscribeFolderOperation(struct CIMAPAsyncSession self, const UChar *folder) {
+    return CIMAPBaseOperation_new(self.instance->unsubscribeFolderOperation(new mailcore::String(folder)));
 }
 
-CIMAPBaseOperation renameFolderOperation(struct CIMAPAsyncSession self, const UChar *folder, const UChar *otherName) {
-    return newCIMAPBaseOperation(self.instance->renameFolderOperation(new mailcore::String(folder), new mailcore::String(otherName)));
+CIMAPBaseOperation CIMAPAsyncSession_renameFolderOperation(struct CIMAPAsyncSession self, const UChar *folder, const UChar *otherName) {
+    return CIMAPBaseOperation_new(self.instance->renameFolderOperation(new mailcore::String(folder), new mailcore::String(otherName)));
 }
 
-CIMAPFetchFoldersOperation fetchSubscribedFoldersOperation(struct CIMAPAsyncSession self) {
-    return newCIMAPFetchFoldersOperation(self.instance->fetchSubscribedFoldersOperation());
+CIMAPFetchFoldersOperation CIMAPAsyncSession_fetchSubscribedFoldersOperation(struct CIMAPAsyncSession self) {
+    return CIMAPFetchFoldersOperation_new(self.instance->fetchSubscribedFoldersOperation());
 }
 
-CIMAPFetchNamespaceOperation fetchNamespace(struct CIMAPAsyncSession self) {
-    return newCIMAPFetchNamespaceOperation(self.instance->fetchNamespaceOperation());
+CIMAPFetchNamespaceOperation CIMAPAsyncSession_fetchNamespace(struct CIMAPAsyncSession self) {
+    return CIMAPFetchNamespaceOperation_new(self.instance->fetchNamespaceOperation());
 }
 
-CIMAPFetchContentToFileOperation fetchMessageAttachmentToFileOperation(struct CIMAPAsyncSession self, const UChar* folder, uint32_t uid, const UChar* partID, Encoding encoding, const UChar* filename, bool urgent){
-    return newCIMAPFetchContentToFileOperation(self.instance->fetchMessageAttachmentToFileByUIDOperation(new mailcore::String(folder), uid, new mailcore::String(partID), ((mailcore::Encoding) encoding), new mailcore::String(filename), urgent));
+CIMAPFetchContentToFileOperation CIMAPAsyncSession_fetchMessageAttachmentToFileOperation(struct CIMAPAsyncSession self, const UChar* folder, uint32_t uid, const UChar* partID, Encoding encoding, const UChar* filename, bool urgent){
+    return CIMAPFetchContentToFileOperation_new(self.instance->fetchMessageAttachmentToFileByUIDOperation(new mailcore::String(folder), uid, new mailcore::String(partID), ((mailcore::Encoding) encoding), new mailcore::String(filename), urgent));
 }
 
-CIMAPCustomCommandOperation customCommandOperation(struct CIMAPAsyncSession self, const UChar *command) {
-    return newCIMAPCustomCommandOperation(self.instance->customCommand(new mailcore::String(command), false));
+CIMAPCustomCommandOperation CIMAPAsyncSession_customCommandOperation(struct CIMAPAsyncSession self, const UChar *command) {
+    return CIMAPCustomCommandOperation_new(self.instance->customCommand(new mailcore::String(command), false));
 }
 
-CIMAPBaseOperation connectOperation (struct CIMAPAsyncSession self) {
-    return newCIMAPBaseOperation(self.instance->connectOperation());
+CIMAPBaseOperation CIMAPAsyncSession_connectOperation (struct CIMAPAsyncSession self) {
+    return CIMAPBaseOperation_new(self.instance->connectOperation());
 }
 
-CIMAPBaseOperation disconnectOperation(CIMAPAsyncSession self){
-    return newCIMAPBaseOperation(self.instance->disconnectOperation());
+CIMAPBaseOperation CIMAPAsyncSession_disconnectOperation(CIMAPAsyncSession self){
+    return CIMAPBaseOperation_new(self.instance->disconnectOperation());
 }
 
-CIMAPBaseOperation noopOperation(CIMAPAsyncSession self){
-    return newCIMAPBaseOperation(self.instance->noopOperation());
+CIMAPBaseOperation CIMAPAsyncSession_noopOperation(CIMAPAsyncSession self){
+    return CIMAPBaseOperation_new(self.instance->noopOperation());
 }
 
-CIMAPCheckAccountOperation checkAccountOperation(CIMAPAsyncSession self){
-    return newCIMAPCheckAccountOperation(self.instance->checkAccountOperation());
+CIMAPCheckAccountOperation CIMAPAsyncSession_checkAccountOperation(CIMAPAsyncSession self){
+    return CIMAPCheckAccountOperation_new(self.instance->checkAccountOperation());
 }
 
-CIMAPCapabilityOperation capabilityOperation(CIMAPAsyncSession self){
-    return newCIMAPCapabilityOperation(self.instance->capabilityOperation());
+CIMAPCapabilityOperation CIMAPAsyncSession_capabilityOperation(CIMAPAsyncSession self){
+    return CIMAPCapabilityOperation_new(self.instance->capabilityOperation());
 }
 
-CIMAPFetchFoldersOperation fetchAllFoldersOperation(CIMAPAsyncSession self){
-    return newCIMAPFetchFoldersOperation(self.instance->fetchAllFoldersOperation());
+CIMAPFetchFoldersOperation CIMAPAsyncSession_fetchAllFoldersOperation(CIMAPAsyncSession self){
+    return CIMAPFetchFoldersOperation_new(self.instance->fetchAllFoldersOperation());
 }
 
-CIMAPBaseOperation expungeOperation(CIMAPAsyncSession self, const UChar *folder){
-    return newCIMAPBaseOperation(self.instance->expungeOperation(mailcore::String::stringWithCharacters(folder)));
+CIMAPBaseOperation CIMAPAsyncSession_expungeOperation(CIMAPAsyncSession self, const UChar *folder){
+    return CIMAPBaseOperation_new(self.instance->expungeOperation(mailcore::String::stringWithCharacters(folder)));
 }
 
-CIMAPBaseOperation createFolderOperation(CIMAPAsyncSession self, const UChar *folder){
-    return newCIMAPBaseOperation(self.instance->createFolderOperation(new mailcore::String(folder)));
+CIMAPBaseOperation CIMAPAsyncSession_createFolderOperation(CIMAPAsyncSession self, const UChar *folder){
+    return CIMAPBaseOperation_new(self.instance->createFolderOperation(new mailcore::String(folder)));
 }
 
-CIMAPBaseOperation deleteFolderOperation(CIMAPAsyncSession self, const UChar *folder){
-    return newCIMAPBaseOperation(self.instance->deleteFolderOperation(new mailcore::String(folder)));
+CIMAPBaseOperation CIMAPAsyncSession_deleteFolderOperation(CIMAPAsyncSession self, const UChar *folder){
+    return CIMAPBaseOperation_new(self.instance->deleteFolderOperation(new mailcore::String(folder)));
 }
 
-CIMAPBaseOperation storeFlagsByUIDOperation(CIMAPAsyncSession self, const UChar *folder, CIndexSet set, IMAPStoreFlagsRequestKind kind, MessageFlag flags, CArray customFlags){
+CIMAPBaseOperation CIMAPAsyncSession_storeFlagsByUIDOperation(CIMAPAsyncSession self, const UChar *folder, CIndexSet set, IMAPStoreFlagsRequestKind kind, MessageFlag flags, CArray customFlags){
     mailcore::IMAPOperation *imapOperation = self.instance->storeFlagsByUIDOperation(new mailcore::String(folder), 
         set.instance, static_cast<mailcore::IMAPStoreFlagsRequestKind>(kind), static_cast<mailcore::MessageFlag>(flags), customFlags.instance);
-    return newCIMAPBaseOperation(imapOperation);
+    return CIMAPBaseOperation_new(imapOperation);
 }
 
-CIMAPBaseOperation storeFlagsByNumberOperation(struct CIMAPAsyncSession self, const UChar *folder, CIndexSet numbers, IMAPStoreFlagsRequestKind kind, MessageFlag flags, CArray customFlags) {
+CIMAPBaseOperation CIMAPAsyncSession_storeFlagsByNumberOperation(struct CIMAPAsyncSession self, const UChar *folder, CIndexSet numbers, IMAPStoreFlagsRequestKind kind, MessageFlag flags, CArray customFlags) {
     mailcore::IMAPOperation *imapOperation = self.instance->storeFlagsByNumberOperation(new mailcore::String(folder),
         numbers.instance, static_cast<mailcore::IMAPStoreFlagsRequestKind>(kind), static_cast<mailcore::MessageFlag>(flags), customFlags.instance);
-    return newCIMAPBaseOperation(imapOperation);
+    return CIMAPBaseOperation_new(imapOperation);
 }
 
-CIMAPBaseOperation storeLabelsByUIDOperation(struct CIMAPAsyncSession self, const UChar *folder, CIndexSet uids, IMAPStoreFlagsRequestKind kind, CArray labels) {
+CIMAPBaseOperation CIMAPAsyncSession_storeLabelsByUIDOperation(struct CIMAPAsyncSession self, const UChar *folder, CIndexSet uids, IMAPStoreFlagsRequestKind kind, CArray labels) {
     mailcore::IMAPOperation *imapOperation = self.instance->storeLabelsByUIDOperation(new mailcore::String(folder),
         uids.instance, static_cast<mailcore::IMAPStoreFlagsRequestKind>(kind), labels.instance);
-    return newCIMAPBaseOperation(imapOperation);
+    return CIMAPBaseOperation_new(imapOperation);
 }
 
-CIMAPBaseOperation storeLabelsByNumberOperation(struct CIMAPAsyncSession self, const UChar *folder, CIndexSet numbers, IMAPStoreFlagsRequestKind kind, CArray labels) {
+CIMAPBaseOperation CIMAPAsyncSession_storeLabelsByNumberOperation(struct CIMAPAsyncSession self, const UChar *folder, CIndexSet numbers, IMAPStoreFlagsRequestKind kind, CArray labels) {
     mailcore::IMAPOperation *imapOperation = self.instance->storeLabelsByNumberOperation(new mailcore::String(folder),
         numbers.instance, static_cast<mailcore::IMAPStoreFlagsRequestKind>(kind), labels.instance);
-    return newCIMAPBaseOperation(imapOperation);
+    return CIMAPBaseOperation_new(imapOperation);
 }
 
-CIMAPAppendMessageOperation appendMessageOperation(CIMAPAsyncSession self, const UChar *folder, const UChar *messagePath, MessageFlag flags, CArray array){
+CIMAPAppendMessageOperation CIMAPAsyncSession_appendMessageOperation(CIMAPAsyncSession self, const UChar *folder, const UChar *messagePath, MessageFlag flags, CArray array){
     mailcore::IMAPAppendMessageOperation *imapOperation = self.instance->appendMessageOperation(new mailcore::String(folder), 
         new mailcore::String(messagePath), static_cast<mailcore::MessageFlag>(flags), array.instance);
-    return newIMAPAppendMessageOperation(imapOperation);
+    return CIMAPAppendMessageOperation_new(imapOperation);
 }
 
-CIMAPAppendMessageOperation appendMessageOperationWithData(CIMAPAsyncSession self, const UChar *folder, CData messageData, MessageFlag flags, CArray array){
+CIMAPAppendMessageOperation CIMAPAsyncSession_appendMessageOperationWithData(CIMAPAsyncSession self, const UChar *folder, CData messageData, MessageFlag flags, CArray array){
     mailcore::IMAPAppendMessageOperation *imapOperation = self.instance->appendMessageOperation(new mailcore::String(folder),
                                                                                                 new mailcore::Data(messageData.bytes, messageData.length),
                                                                                                 static_cast<mailcore::MessageFlag>(flags), array.instance);
-    return newIMAPAppendMessageOperation(imapOperation);
+    return CIMAPAppendMessageOperation_new(imapOperation);
 }
 
-CIMAPFetchMessagesOperation fetchMessagesByNumberOperation(CIMAPAsyncSession self, const UChar *folder, IMAPMessagesRequestKind kind, CIndexSet numbers){
+CIMAPFetchMessagesOperation CIMAPAsyncSession_fetchMessagesByNumberOperation(CIMAPAsyncSession self, const UChar *folder, IMAPMessagesRequestKind kind, CIndexSet numbers){
     mailcore::IMAPFetchMessagesOperation *imapOperation = self.instance->fetchMessagesByNumberOperation(new mailcore::String(folder),
         static_cast<mailcore::IMAPMessagesRequestKind>(kind), numbers.instance);
-    return newCIMAPFetchMessagesOperation(imapOperation);
+    return CIMAPFetchMessagesOperation_new(imapOperation);
 }
 
-CIMAPFetchMessagesOperation fetchMessagesByUIDOperation(CIMAPAsyncSession self, const UChar *folder, IMAPMessagesRequestKind kind, CIndexSet uids){
+CIMAPFetchMessagesOperation CIMAPAsyncSession_fetchMessagesByUIDOperation(CIMAPAsyncSession self, const UChar *folder, IMAPMessagesRequestKind kind, CIndexSet uids){
     mailcore::IMAPFetchMessagesOperation *imapOperation = self.instance->fetchMessagesByUIDOperation(new mailcore::String(folder),
         static_cast<mailcore::IMAPMessagesRequestKind>(kind), uids.instance);
-    return newCIMAPFetchMessagesOperation(imapOperation);
+    return CIMAPFetchMessagesOperation_new(imapOperation);
 }
 
-CIMAPFetchMessagesOperation syncMessagesByUIDOperation(CIMAPAsyncSession self, const UChar *folder, IMAPMessagesRequestKind kind, CIndexSet uids, uint64_t modSeq){
+CIMAPFetchMessagesOperation CIMAPAsyncSession_syncMessagesByUIDOperation(CIMAPAsyncSession self, const UChar *folder, IMAPMessagesRequestKind kind, CIndexSet uids, uint64_t modSeq){
     mailcore::IMAPFetchMessagesOperation *imapOperation = self.instance->syncMessagesByUIDOperation(new mailcore::String(folder),
         static_cast<mailcore::IMAPMessagesRequestKind>(kind), uids.instance, modSeq);
-    return newCIMAPFetchMessagesOperation(imapOperation);
+    return CIMAPFetchMessagesOperation_new(imapOperation);
 }
 
-CIMAPFetchContentOperation fetchMessageByUIDOperation(CIMAPAsyncSession self, const UChar *folder, uint32_t uid, bool urgent){
+CIMAPFetchContentOperation CIMAPAsyncSession_fetchMessageByUIDOperation(CIMAPAsyncSession self, const UChar *folder, uint32_t uid, bool urgent){
     mailcore::IMAPFetchContentOperation *imapOperation = self.instance->fetchMessageByUIDOperation(new mailcore::String(folder), uid, urgent);
-    return newCIMAPFetchContentOperation(imapOperation);
+    return CIMAPFetchContentOperation_new(imapOperation);
 }
 
-CIMAPFetchContentOperation fetchMessageByNumberOperation(struct CIMAPAsyncSession self, const UChar *folder, uint32_t uid, bool urgent) {
+CIMAPFetchContentOperation CIMAPAsyncSession_fetchMessageByNumberOperation(struct CIMAPAsyncSession self, const UChar *folder, uint32_t uid, bool urgent) {
     mailcore::IMAPFetchContentOperation *imapOperation = self.instance->fetchMessageByNumberOperation(new mailcore::String(folder), uid, urgent);
-    return newCIMAPFetchContentOperation(imapOperation);
+    return CIMAPFetchContentOperation_new(imapOperation);
 }
 
-CIMAPFetchContentOperation fetchMessageAttachmentByUIDOperation(CIMAPAsyncSession self, const UChar *folder, uint32_t uid, const UChar *partID, Encoding encoding, bool urgent){
+CIMAPFetchContentOperation CIMAPAsyncSession_fetchMessageAttachmentByUIDOperation(CIMAPAsyncSession self, const UChar *folder, uint32_t uid, const UChar *partID, Encoding encoding, bool urgent){
     mailcore::IMAPFetchContentOperation *imapOperation = self.instance->fetchMessageAttachmentByUIDOperation(new mailcore::String(folder),
         uid, new mailcore::String(partID), static_cast<mailcore::Encoding>(encoding), urgent);
-    return newCIMAPFetchContentOperation(imapOperation);
+    return CIMAPFetchContentOperation_new(imapOperation);
 }
 
-CIMAPFetchContentOperation fetchMessageAttachmentByNumberOperation(struct CIMAPAsyncSession self, const UChar *folder, uint32_t number, const UChar *partID, Encoding encoding, bool urgent) {
+CIMAPFetchContentOperation CIMAPAsyncSession_fetchMessageAttachmentByNumberOperation(struct CIMAPAsyncSession self, const UChar *folder, uint32_t number, const UChar *partID, Encoding encoding, bool urgent) {
     mailcore::IMAPFetchContentOperation *imapOperation = self.instance->fetchMessageAttachmentByNumberOperation(new mailcore::String(folder),
         number, new mailcore::String(partID), static_cast<mailcore::Encoding>(encoding), urgent);
-    return newCIMAPFetchContentOperation(imapOperation);
+    return CIMAPFetchContentOperation_new(imapOperation);
 }
 
-CIMAPSearchOperation searchOperationWithExpression(CIMAPAsyncSession self, const UChar *folder, CIMAPSearchExpression expression){
+CIMAPSearchOperation CIMAPAsyncSession_searchOperationWithExpression(CIMAPAsyncSession self, const UChar *folder, CIMAPSearchExpression expression){
     mailcore::IMAPSearchOperation *imapOperation = self.instance->searchOperation(new mailcore::String(folder), expression.instance);
-    return newCIMAPSearchOperation(imapOperation);
+    return CIMAPSearchOperation_new(imapOperation);
 }
 
-CIMAPSearchOperation searchOperation(CIMAPAsyncSession self, const UChar *folder, IMAPSearchKind kind, const UChar *str){
+CIMAPSearchOperation CIMAPAsyncSession_searchOperation(CIMAPAsyncSession self, const UChar *folder, IMAPSearchKind kind, const UChar *str){
     mailcore::IMAPSearchOperation *imapOperation = self.instance->searchOperation(new mailcore::String(folder), 
         static_cast<mailcore::IMAPSearchKind>(kind), new mailcore::String(str));
-    return newCIMAPSearchOperation(imapOperation);
+    return CIMAPSearchOperation_new(imapOperation);
 }
 
-CIMAPCopyMessagesOperation copyMessagesOperation(CIMAPAsyncSession self, const UChar *folder, CIndexSet uids,const UChar *destFolder){
+CIMAPCopyMessagesOperation CIMAPAsyncSession_copyMessagesOperation(CIMAPAsyncSession self, const UChar *folder, CIndexSet uids,const UChar *destFolder){
     mailcore::IMAPCopyMessagesOperation *imapOperation = self.instance->copyMessagesOperation(new mailcore::String(folder), 
         uids.instance, new mailcore::String(destFolder));
-    return newCIMAPCopyMessagesOperation(imapOperation);
+    return CIMAPCopyMessagesOperation_new(imapOperation);
 }
 
-CIMAPFolderInfoOperation folderInfoOperation(CIMAPAsyncSession self, const UChar *folder){
-    return newCIMAPFolderInfoOperation(self.instance->folderInfoOperation(new mailcore::String(folder)));
+CIMAPFolderInfoOperation CIMAPAsyncSession_folderInfoOperation(CIMAPAsyncSession self, const UChar *folder){
+    return CIMAPFolderInfoOperation_new(self.instance->folderInfoOperation(new mailcore::String(folder)));
 }
 
-CIMAPFolderStatusOperation folderStatusOperation(CIMAPAsyncSession self, const UChar *folder){
+CIMAPFolderStatusOperation CIMAPAsyncSession_folderStatusOperation(CIMAPAsyncSession self, const UChar *folder){
     mailcore::IMAPFolderStatusOperation *imapOperation = self.instance->folderStatusOperation(new mailcore::String(folder));
-    return newCIMAPFolderStatusOperation(imapOperation);
+    return CIMAPFolderStatusOperation_new(imapOperation);
 }
 
-CIMAPIdleOperation idleOperation(struct CIMAPAsyncSession self, const UChar *folder, uint32_t lastKnownUID){
-    return newCIMAPIdleOperation(self.instance->idleOperation(new mailcore::String(folder), lastKnownUID));
+CIMAPIdleOperation CIMAPAsyncSession_idleOperation(struct CIMAPAsyncSession self, const UChar *folder, uint32_t lastKnownUID){
+    return CIMAPIdleOperation_new(self.instance->idleOperation(new mailcore::String(folder), lastKnownUID));
 }
 
-CIMAPMoveMessagesOperation moveMessagesOperation(struct CIMAPAsyncSession self, const UChar *folder, CIndexSet uids, const UChar* destFolder) {
-    return newCIMAPMoveMessagesOperation(self.instance->moveMessagesOperation(new mailcore::String(folder), uids.instance, new mailcore::String(destFolder)));
+CIMAPMoveMessagesOperation CIMAPAsyncSession_moveMessagesOperation(struct CIMAPAsyncSession self, const UChar *folder, CIndexSet uids, const UChar* destFolder) {
+    return CIMAPMoveMessagesOperation_new(self.instance->moveMessagesOperation(new mailcore::String(folder), uids.instance, new mailcore::String(destFolder)));
 }
 
-CIMAPFetchParsedContentOperation fetchParsedMessageOperationByUIDOperation(struct CIMAPAsyncSession self, const UChar* folder, uint32_t uid, bool urgent) {
-    return newCIMAPFetchParsedContentOperation(self.instance->fetchParsedMessageByUIDOperation(new mailcore::String(folder), uid));
+CIMAPFetchParsedContentOperation CIMAPAsyncSession_fetchParsedMessageOperationByUIDOperation(struct CIMAPAsyncSession self, const UChar* folder, uint32_t uid, bool urgent) {
+    return CIMAPFetchParsedContentOperation_new(self.instance->fetchParsedMessageByUIDOperation(new mailcore::String(folder), uid));
 }
 
-CIMAPFetchParsedContentOperation fetchParsedMessageOperationByNumberOperation(struct CIMAPAsyncSession self, const UChar* folder, uint32_t number, bool urgent) {
-    return newCIMAPFetchParsedContentOperation(self.instance->fetchParsedMessageByNumberOperation(new mailcore::String(folder), number));
+CIMAPFetchParsedContentOperation CIMAPAsyncSession_fetchParsedMessageOperationByNumberOperation(struct CIMAPAsyncSession self, const UChar* folder, uint32_t number, bool urgent) {
+    return CIMAPFetchParsedContentOperation_new(self.instance->fetchParsedMessageByNumberOperation(new mailcore::String(folder), number));
 }
-CIMAPMessageRenderingOperation htmlRenderingOperation(struct CIMAPAsyncSession self, CIMAPMessage message, const UChar* folder) {
-    return newCIMAPMessageRenderingOperation(self.instance->htmlRenderingOperation(message.instance, new mailcore::String(folder)));
-}
-
-CIMAPIdentityOperation identityOperationWithClientIdentity(struct CIMAPAsyncSession self, CIMAPIdentity identity) {
-    return newCIMAPIdentityOperation(self.instance->identityOperation(identity.instance));
+CIMAPMessageRenderingOperation CIMAPAsyncSession_htmlRenderingOperation(struct CIMAPAsyncSession self, CIMAPMessage message, const UChar* folder) {
+    return CIMAPMessageRenderingOperation_new(self.instance->htmlRenderingOperation(message.instance, new mailcore::String(folder)));
 }
 
-CIMAPMessageRenderingOperation htmlBodyRenderingOperation(struct CIMAPAsyncSession self, CIMAPMessage message, const UChar* folder) {
-    return newCIMAPMessageRenderingOperation(self.instance->htmlBodyRenderingOperation(message.instance, new mailcore::String(folder)));
+CIMAPIdentityOperation CIMAPAsyncSession_identityOperationWithClientIdentity(struct CIMAPAsyncSession self, CIMAPIdentity identity) {
+    return CIMAPIdentityOperation_new(self.instance->identityOperation(identity.instance));
 }
 
-CIMAPMessageRenderingOperation plainTextRenderingOperation(struct CIMAPAsyncSession self, CIMAPMessage message, const UChar* folder) {
-    return newCIMAPMessageRenderingOperation(self.instance->plainTextRenderingOperation(message.instance, new mailcore::String(folder)));
+CIMAPMessageRenderingOperation CIMAPAsyncSession_htmlBodyRenderingOperation(struct CIMAPAsyncSession self, CIMAPMessage message, const UChar* folder) {
+    return CIMAPMessageRenderingOperation_new(self.instance->htmlBodyRenderingOperation(message.instance, new mailcore::String(folder)));
 }
 
-CIMAPMessageRenderingOperation plainTextBodyRenderingOperation(struct CIMAPAsyncSession self, CIMAPMessage message, const UChar* folder, bool stripWhitespace) {
-    return newCIMAPMessageRenderingOperation(self.instance->plainTextBodyRenderingOperation(message.instance, new mailcore::String(folder), stripWhitespace));
+CIMAPMessageRenderingOperation CIMAPAsyncSession_plainTextRenderingOperation(struct CIMAPAsyncSession self, CIMAPMessage message, const UChar* folder) {
+    return CIMAPMessageRenderingOperation_new(self.instance->plainTextRenderingOperation(message.instance, new mailcore::String(folder)));
 }
 
-CIMAPQuotaOperation quotaOperation(struct CIMAPAsyncSession self) {
-    return newCIMAPQuotaOperation(self.instance->quotaOperation());
+CIMAPMessageRenderingOperation CIMAPAsyncSession_plainTextBodyRenderingOperation(struct CIMAPAsyncSession self, CIMAPMessage message, const UChar* folder, bool stripWhitespace) {
+    return CIMAPMessageRenderingOperation_new(self.instance->plainTextBodyRenderingOperation(message.instance, new mailcore::String(folder), stripWhitespace));
 }
 
-CIMAPAsyncSession newCIMAPAsyncSession(){
+CIMAPQuotaOperation CIMAPAsyncSession_quotaOperation(struct CIMAPAsyncSession self) {
+    return CIMAPQuotaOperation_new(self.instance->quotaOperation());
+}
+
+CIMAPAsyncSession CIMAPAsyncSession_new(){
     CIMAPAsyncSession session;
     session.instance = new mailcore::IMAPAsyncSession();
     session._callback = new CIMAPCallbackBridge();
     session.instance->setOperationQueueCallback(session._callback);
-    
-    session.hostname = &hostname;
-    session.port = &port;
-    session.username = &username;
-    session.password = &password;
-    session.connectionType = &connectionType;
-    session.timeout = &timeout;
-    session.isCheckCertificateEnabled = &isCheckCertificateEnabled;
-    session.OAuth2Token = &OAuth2Token;
-    session.authType = &authType;
-    session.maximumConnections = &maximumConnections;
-    session.allowsFolderConcurrentAccessEnabled = &allowsFolderConcurrentAccessEnabled;
-    session.defaultNamespace = &defaultNamespace;
-    session.clientIdentity = &clientIdentity;
-    session.serverIdentity = &serverIdentity;
-    session.isVoIPEnabled = &isVoIPEnabled;
-    session.isIdleEnabled = &isIdleEnabled;
-    session.isOperationQueueRunning = &isOperationQueueRunning;
-    session.setHostname = &setHostname;
-    session.setPort = &setPort;
-    session.setUsername = &setUsername;
-    session.setPassword = &setPassword;
-    session.setConnectionType = &setConnectionType;
-    session.setTimeout = &setTimeout;
-    session.setCheckCertificateEnabled = &setCheckCertificateEnabled;
-    session.setOAuth2Token = &setOAuth2Token;
-    session.setAuthType = &setAuthType;
-    session.setMaximumConnections = &setMaximumConnections;
-    session.setAllowsFolderConcurrentAccessEnabled = &setAllowsFolderConcurrentAccessEnabled;
-    session.setDefaultNamespace = &setDefaultNamespace;
-    session.setClientIdentity = &setClientIdentity;
-    session.dispatchQueue = &dispatchQueue;
-    session.setDispatchQueue = &setDispatchQueue;
-    session.setConnectionLogger = &setConnectionLogger;
-    session.cancelAllOperations = &cancelAllOperations;
-    session.connectOperation = &connectOperation;
-    session.disconnectOperation = &disconnectOperation;
-    session.noopOperation = &noopOperation;
-    session.expungeOperation = &expungeOperation;
-    session.createFolderOperation = &createFolderOperation;
-    session.deleteFolderOperation = &deleteFolderOperation;
-    session.storeFlagsByUIDOperation = &storeFlagsByUIDOperation;
-    session.storeFlagsByNumberOperation = &storeFlagsByNumberOperation;
-    session.storeLabelsByUIDOperation = &storeLabelsByUIDOperation;
-    session.storeLabelsByNumberOperation = &storeLabelsByNumberOperation;
-    session.renameFolderOperation = &renameFolderOperation;
-    session.subscribeFolderOperation = &subscribeFolderOperation;
-    session.unsubscribeFolderOperation = &unsubscribeFolderOperation;
-    session.fetchSubscribedFoldersOperation = &fetchSubscribedFoldersOperation;
-    session.fetchMessageAttachmentToFileOperation = &fetchMessageAttachmentToFileOperation;
-    session.fetchNamespace = &fetchNamespace;
-    session.customCommandOperation = &customCommandOperation;
-    session.checkAccountOperation = &checkAccountOperation;
-    session.capabilityOperation = &capabilityOperation;
-    session.fetchAllFoldersOperation = &fetchAllFoldersOperation;
-    session.appendMessageOperation = &appendMessageOperation;
-    session.appendMessageOperationWithData = &appendMessageOperationWithData;
-    session.fetchMessagesByNumberOperation = &fetchMessagesByNumberOperation;
-    session.fetchMessagesByUIDOperation = &fetchMessagesByUIDOperation;
-    session.syncMessagesByUIDOperation = &syncMessagesByUIDOperation;
-    session.fetchMessageByUIDOperation = &fetchMessageByUIDOperation;
-    session.fetchMessageByNumberOperation = &fetchMessageByNumberOperation;
-    session.fetchMessageAttachmentByUIDOperation = &fetchMessageAttachmentByUIDOperation;
-    session.fetchMessageAttachmentByNumberOperation = &fetchMessageAttachmentByNumberOperation;
-    session.searchOperationWithExpression = &searchOperationWithExpression;
-    session.searchOperation = &searchOperation;
-    session.copyMessagesOperation = &copyMessagesOperation;
-    session.folderInfoOperation = &folderInfoOperation;
-    session.folderStatusOperation = &folderStatusOperation;
-    session.idleOperation = &idleOperation;
-    session.moveMessagesOperation = &moveMessagesOperation;
-    session.fetchParsedMessageOperationByUIDOperation = &fetchParsedMessageOperationByUIDOperation;
-    session.fetchParsedMessageOperationByNumberOperation = &fetchParsedMessageOperationByNumberOperation;
-    session.htmlRenderingOperation = &htmlRenderingOperation;
-    session.htmlBodyRenderingOperation = &htmlBodyRenderingOperation;
-    session.plainTextRenderingOperation = &plainTextRenderingOperation;
-    session.plainTextBodyRenderingOperation = &plainTextBodyRenderingOperation;
-    session.quotaOperation = &quotaOperation;
-    session.identityOperationWithClientIdentity = &identityOperationWithClientIdentity;
     return session;
 }
 
-void deleteCIMAPAsyncSession(CIMAPAsyncSession session){
+void CIMAPAsyncSession_release(CIMAPAsyncSession session){
     session.instance->setConnectionLogger(NULL);
     session.instance->setOperationQueueCallback(NULL);
     C_SAFE_RELEASE(session._callback);

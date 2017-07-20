@@ -1,4 +1,5 @@
 import Foundation
+import CCore
 
 public class IMAPAppendMessageOperation : IMAPBaseOperation {
     
@@ -35,7 +36,7 @@ public class IMAPAppendMessageOperation : IMAPBaseOperation {
         
         let errorCode = error();
         if errorCode == ErrorNone {
-            completionBlock!(nil, operation.createdUID(operation));
+            completionBlock!(nil, operation.createdUID());
         }
         else {
             completionBlock!(MailCoreError(code: errorCode), 0);

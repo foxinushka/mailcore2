@@ -4,18 +4,13 @@
 #define nativeType mailcore::IMAPIdleOperation
 #define structName CIMAPIdleOperation
 
-void interruptIdle(struct CIMAPIdleOperation self);
-
-CIMAPIdleOperation newCIMAPIdleOperation(mailcore::IMAPIdleOperation* operation) {
+CIMAPIdleOperation CIMAPIdleOperation_new(mailcore::IMAPIdleOperation* operation) {
     CIMAPIdleOperation self;
-    self.operation = newCIMAPBaseOperation(operation);
+    self.operation = CIMAPBaseOperation_new(operation);
     self.instance = operation;
-    
-    self.interruptIdle = &interruptIdle;
-    
     return self;
 }
 
-void interruptIdle(struct CIMAPIdleOperation self) {
+void CIMAPIdleOperation_interruptIdle(struct CIMAPIdleOperation self) {
     self.instance->interruptIdle();
 }

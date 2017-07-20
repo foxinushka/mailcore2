@@ -5,8 +5,11 @@ echo "Build swiftmailcore"
 swiftc \
     -target armv7-none-linux-androideabi \
     -sdk $ANDROID_NDK/platforms/android-21/arch-arm \
+    -I $(pwd)/../src/c \
     -I $(pwd)/include \
-    -import-objc-header $(pwd)/include/MailCore/swiftmailcore2-Bridging-Header.h \
+    -I $(pwd)/include/MailCore \
+    -module-link-name CMailCore \
+    -L $(pwd)/../src/c \
     -l$(pwd)/libs/armeabi-v7a/libcmailcore.so \
     -L $ANDROID_NDK/sources/cxx-stl/llvm-libc++/libs/armeabi-v7a \
     -L $ANDROID_NDK/toolchains/arm-linux-androideabi-4.9/prebuilt/linux-x86_64/lib/gcc/arm-linux-androideabi/4.9.x \

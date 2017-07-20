@@ -5,22 +5,17 @@
 #define nativeType mailcore::IMAPFolderInfoOperation
 #define structName CIMAPFolderInfoOperation
 
-CIMAPFolderInfo info(struct CIMAPFolderInfoOperation self);
-
-CIMAPFolderInfoOperation newCIMAPFolderInfoOperation(mailcore::IMAPFolderInfoOperation *operation){
+CIMAPFolderInfoOperation CIMAPFolderInfoOperation_new(mailcore::IMAPFolderInfoOperation *operation){
     CIMAPFolderInfoOperation self;
-    self.baseOperation = newCIMAPBaseOperation(operation);
+    self.baseOperation = CIMAPBaseOperation_new(operation);
     self.instance = operation;
-    
-    self.info = &info;
-    
     return self;
 }
 
-void deleteCIMAPFolderInfoOperation(CIMAPFolderInfoOperation operation) {
+void CIMAPFolderInfoOperation_release(CIMAPFolderInfoOperation operation) {
     
 }
 
-CIMAPFolderInfo info(CIMAPFolderInfoOperation self) {
-    return newCIMAPFolderInfo(self.instance->info());
+CIMAPFolderInfo CIMAPFolderInfoOperation_info(CIMAPFolderInfoOperation self) {
+    return CIMAPFolderInfo_new(self.instance->info());
 }

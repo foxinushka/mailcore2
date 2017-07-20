@@ -1,4 +1,5 @@
 import Foundation
+import CCore
 
 public class AbstractMultipart : AbstractPart {
     
@@ -15,8 +16,8 @@ public class AbstractMultipart : AbstractPart {
     
     /** Returns the subparts of that multipart.*/
     public var parts : Array<AbstractPart> {
-        set { nativeInstance.setParts(nativeInstance, Array<AbstractPart>.cast(newValue)); }
-        get { return Array<AbstractPart>.cast(nativeInstance.parts(nativeInstance)); }
+        set { nativeInstance.parts = Array<AbstractPart>.cast(newValue) }
+        get { return Array<AbstractPart>.cast(nativeInstance.parts) }
     }
     
 }

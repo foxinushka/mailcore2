@@ -1,4 +1,5 @@
 import Foundation
+import CCore
 
 public class IMAPFetchNamespaceOperation : IMAPBaseOperation {
     
@@ -33,7 +34,7 @@ public class IMAPFetchNamespaceOperation : IMAPBaseOperation {
         
         let errorCode = error()
         if errorCode == ErrorNone {
-            completionBlock!(nil, Dictionary<String, IMAPNamespace>.cast(operation.namespaces(operation)))
+            completionBlock!(nil, Dictionary<String, IMAPNamespace>.cast(operation.namespaces()))
         }
         else {
             completionBlock!(MailCoreError(code: errorCode), nil)

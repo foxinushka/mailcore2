@@ -1,5 +1,6 @@
 import Foundation
 import Dispatch
+import CCore
 
 public class Operation {
     
@@ -8,11 +9,11 @@ public class Operation {
     
     internal init(_ cOperation: COperation) {
         self.nativeInstance = cOperation;
-        self.nativeInstance = cOperation.setCompletionBlock(cOperation, operationCompletedCallback, Unmanaged.passUnretained(self).toOpaque())
+        self.nativeInstance = cOperation.setCompletionBlock(block: operationCompletedCallback, userInfo: Unmanaged.passUnretained(self).toOpaque())
     }
     
     deinit {
-        deleteCOperation(nativeInstance);
+        nativeInstance.release()
     }
     
     /** The queue this operation dispatches the callback on.  Defaults to the main queue.
@@ -30,13 +31,13 @@ public class Operation {
     
     /** Returns whether the operation is cancelled.*/
     public var isCancelled: Bool {
-        get { return nativeInstance.isCanceled(nativeInstance); }
+        get { return nativeInstance.isCanceled(); }
     }
     
     /** Returns whether the operation should run even if it's cancelled.*/
     public var shouldRunWhenCancelled: Bool {
-        get { return nativeInstance.shouldRunWhenCancelled(nativeInstance); }
-        set { nativeInstance.setShouldRunWhenCancelled(nativeInstance, newValue); }
+        get { return nativeInstance.shouldRunWhenCancelled; }
+        set { nativeInstance.shouldRunWhenCancelled = newValue; }
     }
     
     /** This methods is called on the main thread when the asynchronous operation is finished.
@@ -50,12 +51,12 @@ public class Operation {
         if (_started) {
             _started = false;
         }
-        nativeInstance.cancel(nativeInstance);
+        nativeInstance.cancel();
     }
     
     internal func start(){
         _started = true;
-        nativeInstance.start(nativeInstance);
+        nativeInstance.start();
     }
 }
 

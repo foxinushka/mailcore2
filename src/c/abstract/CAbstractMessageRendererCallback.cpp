@@ -44,14 +44,14 @@ public:
     
     virtual bool canPreviewPart(mailcore::AbstractPart * part) {
         if (canPreviewPartBlock != NULL) {
-            return canPreviewPartBlock(userInfo, newCAbstractPart(part)) > 0;
+            return canPreviewPartBlock(userInfo, CAbstractPart_new(part)) > 0;
         }
         return HTMLRendererTemplateCallback::canPreviewPart(part);
     }
     
     virtual bool shouldShowPart(mailcore::AbstractPart * part) {
         if (shouldShowPartBlock != NULL) {
-            return shouldShowPartBlock(userInfo, newCAbstractPart(part)) > 0;
+            return shouldShowPartBlock(userInfo, CAbstractPart_new(part)) > 0;
         }
         return HTMLRendererTemplateCallback::shouldShowPart(part);
     }
@@ -59,7 +59,7 @@ public:
     virtual mailcore::HashMap * templateValuesForHeader(mailcore::MessageHeader * header) {
         mailcore::HashMap * result = NULL;
         if (templateValuesForHeaderBlock != NULL) {
-            result = templateValuesForHeaderBlock(userInfo, newCMessageHeader(header)).instance;
+            result = templateValuesForHeaderBlock(userInfo, CMessageHeader_new(header)).instance;
         }
         if (result == NULL) {
             result = HTMLRendererTemplateCallback::templateValuesForHeader(header);
@@ -70,7 +70,7 @@ public:
     virtual mailcore::HashMap * templateValuesForPart(mailcore::AbstractPart * part) {
         mailcore::HashMap * result = NULL;
         if (templateValuesForPartBlock != NULL) {
-            result = templateValuesForPartBlock(userInfo, newCAbstractPart(part)).instance;
+            result = templateValuesForPartBlock(userInfo, CAbstractPart_new(part)).instance;
         }
         if (result == NULL) {
             result = HTMLRendererTemplateCallback::templateValuesForPart(part);
@@ -81,7 +81,7 @@ public:
     virtual mailcore::String * templateForMainHeader(mailcore::MessageHeader * header) {
         mailcore::String * result = NULL;
         if (templateForMainHeaderBlock != NULL) {
-            result = reinterpret_cast<mailcore::String*>(templateForMainHeaderBlock(userInfo, newCMessageHeader(header)).instance) ;
+            result = reinterpret_cast<mailcore::String*>(templateForMainHeaderBlock(userInfo, CMessageHeader_new(header)).instance) ;
         }
         if (result == NULL) {
             result = HTMLRendererTemplateCallback::templateForMainHeader(header);
@@ -92,7 +92,7 @@ public:
     virtual mailcore::String * templateForImage(mailcore::AbstractPart * part) {
         mailcore::String * result = NULL;
         if (templateForImageBlock != NULL) {
-            result = reinterpret_cast<mailcore::String*>(templateForImageBlock(userInfo, newCAbstractPart(part)).instance);
+            result = reinterpret_cast<mailcore::String*>(templateForImageBlock(userInfo, CAbstractPart_new(part)).instance);
         }
         if (result == NULL) {
             result = HTMLRendererTemplateCallback::templateForImage(part);
@@ -103,7 +103,7 @@ public:
     virtual mailcore::String * templateForAttachment(mailcore::AbstractPart * part) {
         mailcore::String * result = NULL;
         if (templateForAttachmentBlock != NULL) {
-            result = reinterpret_cast<mailcore::String*>(templateForAttachmentBlock(userInfo, newCAbstractPart(part)).instance);
+            result = reinterpret_cast<mailcore::String*>(templateForAttachmentBlock(userInfo, CAbstractPart_new(part)).instance);
         }
         if (result == NULL) {
             result = HTMLRendererTemplateCallback::templateForAttachment(part);
@@ -114,7 +114,7 @@ public:
     virtual mailcore::String * templateForMessage(mailcore::AbstractMessage * message) {
         mailcore::String * result = NULL;
         if (templateForMessageBlock != NULL) {
-            result = reinterpret_cast<mailcore::String*>(templateForMessageBlock(userInfo, newCAbstractMessage(message)).instance);
+            result = reinterpret_cast<mailcore::String*>(templateForMessageBlock(userInfo, CAbstractMessage_new(message)).instance);
         }
         if (result == NULL) {
             result = HTMLRendererTemplateCallback::templateForMessage(message);
@@ -125,7 +125,7 @@ public:
     virtual mailcore::String * templateForEmbeddedMessage(mailcore::AbstractMessagePart * part) {
         mailcore::String * result = NULL;
         if (templateForEmbeddedMessageBlock != NULL) {
-            result = reinterpret_cast<mailcore::String*>(templateForEmbeddedMessageBlock(userInfo, newCAbstractMessagePart(part)).instance);
+            result = reinterpret_cast<mailcore::String*>(templateForEmbeddedMessageBlock(userInfo, CAbstractMessagePart_new(part)).instance);
         }
         if (result == NULL) {
             result = HTMLRendererTemplateCallback::templateForEmbeddedMessage(part);
@@ -136,7 +136,7 @@ public:
     virtual mailcore::String * templateForEmbeddedMessageHeader(mailcore::MessageHeader * header) {
         mailcore::String * result = NULL;
         if (templateForEmbeddedMessageHeaderBlock != NULL) {
-            result = reinterpret_cast<mailcore::String*>(templateForEmbeddedMessageHeaderBlock(userInfo, newCMessageHeader(header)).instance);
+            result = reinterpret_cast<mailcore::String*>(templateForEmbeddedMessageHeaderBlock(userInfo, CMessageHeader_new(header)).instance);
         }
         if (result == NULL) {
             result = HTMLRendererTemplateCallback::templateForEmbeddedMessageHeader(header);
@@ -191,7 +191,7 @@ public:
     virtual mailcore::Data * dataForIMAPPart(mailcore::String * folder, mailcore::IMAPPart * part) {
         mailcore::Data * result = NULL;
         if (dataForIMAPPartBlock != NULL) {
-            CData data = dataForIMAPPartBlock(userInfo, folder->unicodeCharacters(), newCIMAPPart(part));
+            CData data = dataForIMAPPartBlock(userInfo, folder->unicodeCharacters(), CIMAPPart_new(part));
             result = new mailcore::Data(data.bytes, data.length);
         }
         return result;
@@ -199,13 +199,13 @@ public:
     
     virtual void prefetchAttachmentIMAPPart(mailcore::String * folder, mailcore::IMAPPart * part) {
         if (prefetchAttachmentIMAPPartBlock != NULL) {
-            prefetchAttachmentIMAPPartBlock(userInfo, folder->unicodeCharacters(), newCIMAPPart(part));
+            prefetchAttachmentIMAPPartBlock(userInfo, folder->unicodeCharacters(), CIMAPPart_new(part));
         }
     }
     
     virtual void prefetchImageIMAPPart(mailcore::String * folder, mailcore::IMAPPart * part) {
         if (prefetchImageIMAPPartBlock != NULL) {
-            prefetchImageIMAPPartBlock(userInfo, folder->unicodeCharacters(), newCIMAPPart(part));
+            prefetchImageIMAPPartBlock(userInfo, folder->unicodeCharacters(), CIMAPPart_new(part));
         }
     }
     
@@ -232,7 +232,7 @@ private:
     const void* userInfo;
 };
 
-CAbstractMessageRendererCallback newCAbstractMessageRendererCallback(CanPreviewPartBlock canPreviewPartBlock,
+CAbstractMessageRendererCallback CAbstractMessageRendererCallback_new(CanPreviewPartBlock canPreviewPartBlock,
                                                                      ShouldShowPartBlock shouldShowPartBlock,
                                                                      TemplateValuesForHeaderBlock templateValuesForHeaderBlock,
                                                                      TemplateValuesForPartBlock templateValuesForPartBlock,
@@ -273,6 +273,6 @@ CAbstractMessageRendererCallback newCAbstractMessageRendererCallback(CanPreviewP
     return self;
 }
 
-void deleteCAbstractMessageRendererCallback(CAbstractMessageRendererCallback self) {
+void CAbstractMessageRendererCallback_release(CAbstractMessageRendererCallback self) {
     
 }

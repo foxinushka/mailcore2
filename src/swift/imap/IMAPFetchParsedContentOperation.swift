@@ -1,4 +1,5 @@
 import Foundation
+import CCore
 
 public class IMAPFetchParsedContentOperation : IMAPBaseOperation {
     
@@ -33,7 +34,7 @@ public class IMAPFetchParsedContentOperation : IMAPBaseOperation {
         
         let errorCode = error()
         if errorCode == ErrorNone {
-            let parser = MessageParser(operation.parser(operation))
+            let parser = MessageParser(operation.parser())
             if parser.nativeInstance.instance != nil {
                 completionBlock!(nil, parser)
             }

@@ -5,22 +5,17 @@
 #define nativeType mailcore::IMAPFetchParsedContentOperation
 #define structName CIMAPFetchParsedContentOperation
 
-CMessageParser parser(struct CIMAPFetchParsedContentOperation self);
-
-CIMAPFetchParsedContentOperation newCIMAPFetchParsedContentOperation(mailcore::IMAPFetchParsedContentOperation *operationRef){
+CIMAPFetchParsedContentOperation CIMAPFetchParsedContentOperation_new(mailcore::IMAPFetchParsedContentOperation *operationRef){
     CIMAPFetchParsedContentOperation self;
-    self.baseOperation = newCIMAPBaseOperation(operationRef);
+    self.baseOperation = CIMAPBaseOperation_new(operationRef);
     self.instance = operationRef;
-    
-    self.parser = &parser;
-    
     return self;
 }
 
-void deleteCIMAPFetchNamespaceOperation(CIMAPFetchParsedContentOperation operation) {
+void CIMAPFetchParsedContentOperation_release(CIMAPFetchParsedContentOperation operation) {
     
 }
 
-CMessageParser parser(struct CIMAPFetchParsedContentOperation self) {
-    return newCMessageParser(self.instance->parser());
+CMessageParser CIMAPFetchParsedContentOperation_parser(struct CIMAPFetchParsedContentOperation self) {
+    return CMessageParser_new(self.instance->parser());
 }

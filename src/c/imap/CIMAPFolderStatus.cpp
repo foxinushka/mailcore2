@@ -14,27 +14,13 @@ C_SYNTHESIZE_SCALAR(uint32_t, uint32_t, setMessageCount, messageCount)
 C_SYNTHESIZE_SCALAR(uint64_t, uint64_t, setHighestModSeqValue, highestModSeqValue)
 
 
-CIMAPFolderStatus newCIMAPFolderStatus(mailcore::IMAPFolderStatus *status) {
+CIMAPFolderStatus CIMAPFolderStatus_new(mailcore::IMAPFolderStatus *status) {
     CIMAPFolderStatus self;
     self.instance = status;
     self.instance->retain();
-    
-    self.uidNext = &uidNext;
-    self.setUidNext = &setUidNext;
-    self.uidValidity = &uidValidity;
-    self.setUidValidity = &setUidValidity;
-    self.recentCount = &recentCount;
-    self.setRecentCount = &setRecentCount;
-    self.unseenCount = &unseenCount;
-    self.setUnseenCount = &setUnseenCount;
-    self.messageCount = &messageCount;
-    self.setMessageCount = &setMessageCount;
-    self.highestModSeqValue = &highestModSeqValue;
-    self.setHighestModSeqValue = &setHighestModSeqValue;
-    
     return self;
 }
 
-void deleteCIMAPFolderStatus(CIMAPFolderStatus self) {
+void CIMAPFolderStatus_release(CIMAPFolderStatus self) {
     C_SAFE_RELEASE(self.instance);
 }

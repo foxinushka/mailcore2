@@ -5,30 +5,26 @@
 #define nativeType mailcore::IMAPCheckAccountOperation
 #define structName CIMAPCheckAccountOperation
 
-const UChar*  loginResponse(struct CIMAPCheckAccountOperation self) {
+const UChar*  CIMAPCheckAccountOperation_loginResponse(struct CIMAPCheckAccountOperation self) {
     mailcore::String* response = self.instance->loginResponse();
     return (response != NULL) ? response->unicodeCharacters() : NULL;
 }
 
-CData loginUnparsedResponseData(struct CIMAPCheckAccountOperation self) {
+CData CIMAPCheckAccountOperation_loginUnparsedResponseData(struct CIMAPCheckAccountOperation self) {
     mailcore::Data* data = self.instance->loginUnparsedResponseData();
     if (data != NULL) {
-        return newCData(data->bytes(), data->length());
+        return CData_new(data->bytes(), data->length());
     }
-    return newCData(NULL, 0);
+    return CData_new(NULL, 0);
 }
 
-CIMAPCheckAccountOperation newCIMAPCheckAccountOperation(mailcore::IMAPCheckAccountOperation *operationRef){
+CIMAPCheckAccountOperation CIMAPCheckAccountOperation_new(mailcore::IMAPCheckAccountOperation *operationRef){
     CIMAPCheckAccountOperation self;
-    self.baseOperation = newCIMAPBaseOperation(operationRef);
+    self.baseOperation = CIMAPBaseOperation_new(operationRef);
     self.instance = operationRef;
-    
-    self.loginResponse = &loginResponse;
-    self.loginUnparsedResponseData = &loginUnparsedResponseData;
-    
     return self;
 }
 
-void deleteCIMAPCheckAccountOperation(CIMAPCheckAccountOperation operation) {
+void CIMAPCheckAccountOperation_release(CIMAPCheckAccountOperation operation) {
     
 }

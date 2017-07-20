@@ -28,18 +28,19 @@ extern "C" {
 #else
         void*                                   instance;
 #endif
-        
-        CArray (*folders)(struct CIMAPFetchFoldersOperation self);
-        
     };
     typedef struct CIMAPFetchFoldersOperation CIMAPFetchFoldersOperation;
     
-    void deleteCIMAPFetchFoldersOperation(CIMAPFetchFoldersOperation self);
+    CArray  CIMAPFetchFoldersOperation_folders(struct CIMAPFetchFoldersOperation self)
+            CF_SWIFT_NAME(CIMAPFetchFoldersOperation.folders(self:));
+
+    void    CIMAPFetchFoldersOperation_release(CIMAPFetchFoldersOperation self)
+            CF_SWIFT_NAME(CIMAPFetchFoldersOperation.release(self:));
     
 #ifdef __cplusplus
 }
 
-CIMAPFetchFoldersOperation newCIMAPFetchFoldersOperation(mailcore::IMAPFetchFoldersOperation *operation);
+CIMAPFetchFoldersOperation CIMAPFetchFoldersOperation_new(mailcore::IMAPFetchFoldersOperation *operation);
 #endif
 
 #endif /* CIMAPFetchFoldersOperation_hpp */

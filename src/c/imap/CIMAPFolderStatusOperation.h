@@ -21,17 +21,19 @@ extern "C" {
 #else
         void*                                   instance;
 #endif
-        
-        CIMAPFolderStatus (*status)(struct CIMAPFolderStatusOperation self);
     };
     typedef struct CIMAPFolderStatusOperation CIMAPFolderStatusOperation;
-    
-    void deleteCIMAPFolderStatusOperation(CIMAPFolderStatusOperation self);
+
+    CIMAPFolderStatus 	CIMAPFolderStatusOperation_status(struct CIMAPFolderStatusOperation self)
+    					CF_SWIFT_NAME(CIMAPFolderStatusOperation.status(self:));
+
+    void 				CIMAPFolderStatusOperation_release(CIMAPFolderStatusOperation self)
+    					CF_SWIFT_NAME(CIMAPFolderStatusOperation.release(self:));
     
 #ifdef __cplusplus
 }
 
-CIMAPFolderStatusOperation newCIMAPFolderStatusOperation(mailcore::IMAPFolderStatusOperation *operation);
+CIMAPFolderStatusOperation CIMAPFolderStatusOperation_new(mailcore::IMAPFolderStatusOperation *operation);
 #endif
 
 #endif

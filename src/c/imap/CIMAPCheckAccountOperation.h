@@ -20,19 +20,22 @@ extern "C" {
 #else
         void*                                   instance;
 #endif
-        
-        const UChar*    (*loginResponse)(struct CIMAPCheckAccountOperation self);
-        CData           (*loginUnparsedResponseData)(struct CIMAPCheckAccountOperation self);
-        
     };
     typedef struct CIMAPCheckAccountOperation CIMAPCheckAccountOperation;
     
-    void deleteCIMAPCheckAccountOperation(CIMAPCheckAccountOperation self);
+    const UChar*    CIMAPCheckAccountOperation_loginResponse(struct CIMAPCheckAccountOperation self)
+                    CF_SWIFT_NAME(CIMAPCheckAccountOperation.loginResponse(self:));
+    
+    CData           CIMAPCheckAccountOperation_loginUnparsedResponseData(struct CIMAPCheckAccountOperation self)
+                    CF_SWIFT_NAME(CIMAPCheckAccountOperation.loginUnparsedResponseData(self:));
+    
+    void            CIMAPCheckAccountOperation_release(CIMAPCheckAccountOperation self)
+                    CF_SWIFT_NAME(CIMAPCheckAccountOperation.release(self:));
     
 #ifdef __cplusplus
 }
 
-CIMAPCheckAccountOperation newCIMAPCheckAccountOperation(mailcore::IMAPCheckAccountOperation *operation);
+CIMAPCheckAccountOperation CIMAPCheckAccountOperation_new(mailcore::IMAPCheckAccountOperation *operation);
 #endif
 
 #endif /* CIMAPCheckAccountOperation_hpp */

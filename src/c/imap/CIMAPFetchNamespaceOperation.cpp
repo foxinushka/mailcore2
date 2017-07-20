@@ -5,22 +5,17 @@
 #define nativeType mailcore::IMAPFetchNamespaceOperation
 #define structName CIMAPFetchNamespaceOperation
 
-CDictionary namespaces(struct CIMAPFetchNamespaceOperation self);
-
-CIMAPFetchNamespaceOperation newCIMAPFetchNamespaceOperation(mailcore::IMAPFetchNamespaceOperation *operationRef){
+CIMAPFetchNamespaceOperation CIMAPFetchNamespaceOperation_new(mailcore::IMAPFetchNamespaceOperation *operationRef){
     CIMAPFetchNamespaceOperation self;
-    self.baseOperation = newCIMAPBaseOperation(operationRef);
+    self.baseOperation = CIMAPBaseOperation_new(operationRef);
     self.instance = operationRef;
-    
-    self.namespaces = &namespaces;
-    
     return self;
 }
 
-void deleteCIMAPFetchNamespaceOperation(CIMAPFetchNamespaceOperation operation) {
+void CIMAPFetchNamespaceOperation_release(CIMAPFetchNamespaceOperation operation) {
     
 }
 
-CDictionary namespaces(struct CIMAPFetchNamespaceOperation self) {
-    return newCDictionary(self.instance->namespaces());
+CDictionary CIMAPFetchNamespaceOperation_namespaces(struct CIMAPFetchNamespaceOperation self) {
+    return CDictionary_new(self.instance->namespaces());
 }

@@ -5,38 +5,27 @@
 #define nativeType mailcore::IMAPFetchMessagesOperation
 #define structName CIMAPFetchMessagesOperation
 
-CArray      messages(struct CIMAPFetchMessagesOperation self);
-CIndexSet   vanishedMessages(struct CIMAPFetchMessagesOperation self);
-CArray      extraHeaders(struct CIMAPFetchMessagesOperation self);
-void        setExtraHeaders(struct CIMAPFetchMessagesOperation self, CArray array);
-
-CIMAPFetchMessagesOperation newCIMAPFetchMessagesOperation(mailcore::IMAPFetchMessagesOperation *operationRef){
+CIMAPFetchMessagesOperation CIMAPFetchMessagesOperation_new(mailcore::IMAPFetchMessagesOperation *operationRef){
     CIMAPFetchMessagesOperation self;
-    self.baseOperation = newCIMAPBaseOperation(operationRef);
-
-    self.messages = &messages;
-    self.vanishedMessages = &vanishedMessages;
-    self.extraHeaders = &extraHeaders;
-    self.setExtraHeaders = &setExtraHeaders;
-    
+    self.baseOperation = CIMAPBaseOperation_new(operationRef);
     return self;
 }
 
-void deleteCIMAPFetchMessagesOperation(CIMAPFetchMessagesOperation operation) {
+void CIMAPFetchMessagesOperation_release(CIMAPFetchMessagesOperation operation) {
 
 }
 
-CArray messages(struct CIMAPFetchMessagesOperation self){
-    return newCArray(self.instance->messages());
+CArray CIMAPFetchMessagesOperation_messages(struct CIMAPFetchMessagesOperation self){
+    return CArray_new(self.instance->messages());
 }
 
-CIndexSet vanishedMessages(struct CIMAPFetchMessagesOperation self){
-    return newCIndexSet(self.instance->vanishedMessages());
+CIndexSet CIMAPFetchMessagesOperation_vanishedMessages(struct CIMAPFetchMessagesOperation self){
+    return CIndexSet_new(self.instance->vanishedMessages());
 }
 
-CArray extraHeaders(struct CIMAPFetchMessagesOperation self){
-    return newCArray(self.instance->extraHeaders());
+CArray CIMAPFetchMessagesOperation_extraHeaders(struct CIMAPFetchMessagesOperation self){
+    return CArray_new(self.instance->extraHeaders());
 }
-void setExtraHeaders(struct CIMAPFetchMessagesOperation self, CArray array){
+void CIMAPFetchMessagesOperation_setExtraHeaders(struct CIMAPFetchMessagesOperation self, CArray array){
     self.instance->setExtraHeaders(array.instance);
 }

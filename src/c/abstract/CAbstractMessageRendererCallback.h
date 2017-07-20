@@ -46,7 +46,7 @@ extern "C" {
     };
     typedef struct CAbstractMessageRendererCallback CAbstractMessageRendererCallback;
     
-    CAbstractMessageRendererCallback newCAbstractMessageRendererCallback(CanPreviewPartBlock canPreviewPartBlock,
+    CAbstractMessageRendererCallback    CAbstractMessageRendererCallback_new(CanPreviewPartBlock canPreviewPartBlock,
                                                                          ShouldShowPartBlock shouldShowPartBlock,
                                                                          TemplateValuesForHeaderBlock templateValuesForHeaderBlock,
                                                                          TemplateValuesForPartBlock templateValuesForPartBlock,
@@ -63,9 +63,11 @@ extern "C" {
                                                                          DataForIMAPPartBlock dataForIMAPPartBlock,
                                                                          PrefetchAttachmentIMAPPartBlock prefetchAttachmentIMAPPartBlock,
                                                                          PrefetchImageIMAPPartBlock prefetchImageIMAPPartBlock,
-                                                                         const void* userInfo);
+                                                                         const void* userInfo)
+                                        CF_SWIFT_NAME(CAbstractMessageRendererCallback.init(canPreviewPartBlock:shouldShowPartBlock:templateValuesForHeaderBlock:templateValuesForPartBlock:templateForMainHeaderBlock:templateForImageBlock:templateForAttachmentBlock:templateForMessageBlock:templateForEmbeddedMessageBlock:templateForEmbeddedMessageHeaderBlock:templateForAttachmentSeparatorBlock:cleanHTMLForPartBlock:filterHTMLForPartBlock:filterHTMLForMessageBlock:dataForIMAPPartBlock:prefetchAttachmentIMAPPartBlock:prefetchImageIMAPPartBlock:userInfo:));
     
-    void deleteCAbstractMessageRendererCallback(CAbstractMessageRendererCallback self);
+    void    CAbstractMessageRendererCallback_release(CAbstractMessageRendererCallback self)
+            CF_SWIFT_NAME(CAbstractMessageRendererCallback.release(self:));
     
 #ifdef __cplusplus
 }

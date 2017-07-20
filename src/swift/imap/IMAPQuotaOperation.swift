@@ -1,4 +1,5 @@
 import Foundation
+import CCore
 
 public class IMAPQuotaOperation : IMAPBaseOperation {
     
@@ -33,7 +34,7 @@ public class IMAPQuotaOperation : IMAPBaseOperation {
         
         let errorCode = error();
         if errorCode == ErrorNone {
-            completionBlock!(nil, operation.usage(operation), operation.limit(operation));
+            completionBlock!(nil, operation.usage(), operation.limit());
         }
         else {
             completionBlock!(MailCoreError(code: errorCode), 0, 0);

@@ -1,4 +1,5 @@
 import Foundation
+import CCore
 
 public class IMAPFetchContentToFileOperation : IMAPBaseOperation {
     
@@ -17,18 +18,18 @@ public class IMAPFetchContentToFileOperation : IMAPBaseOperation {
     }
     
     public var isLoadingByChunksEnabled : Bool {
-        get { return operation.isLoadingByChunksEnabled(operation) }
-        set { operation.setLoadingByChunksEnabled(operation, newValue) }
+        get { return operation.isLoadingByChunksEnabled }
+        set { operation.isLoadingByChunksEnabled = newValue }
     }
     
     public var chunksSize : UInt32 {
-        get { return operation.chunksSize(operation) }
-        set { operation.setChunksSize(operation, newValue) }
+        get { return operation.chunksSize }
+        set { operation.chunksSize = newValue }
     }
     
     public var estimatedSize : UInt32 {
-        get { return operation.estimatedSize(operation) }
-        set { operation.setEstimatedSize(operation, newValue) }
+        get { return operation.estimatedSize }
+        set { operation.estimatedSize = newValue }
     }
     
     public func start(completionBlock: CompletionBlock?) {

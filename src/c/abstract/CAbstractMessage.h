@@ -5,6 +5,8 @@
 
 #include "CBase.h"
 #include "CArray.h"
+#include "CMessageHeader.h"
+#include "CAbstractPart.h"
 
 #ifdef __cplusplus
 
@@ -15,32 +17,43 @@ namespace mailcore {
 extern "C" {
 #endif
     
-    struct CMessageHeader;
-    struct CAbstractPart;
-    
     struct CAbstractMessage {
 #ifdef __cplusplus
         mailcore::AbstractMessage*  instance;
 #else
         void*                       instance;
 #endif
-        
-        struct CMessageHeader   (*header)(struct CAbstractMessage self);
-        void                    (*setHeader)(struct CAbstractMessage self, struct CMessageHeader header);
-        struct CAbstractPart    (*partForContentID)(struct CAbstractMessage self, const UChar* contentID);
-        struct CAbstractPart    (*partForUniqueID)(struct CAbstractMessage self, const UChar* uniqueID);
-        CArray                  (*attachments)(struct CAbstractMessage self);
-        CArray                  (*htmlInlineAttachments)(struct CAbstractMessage self);
-        CArray                  (*requiredPartsForRendering)(struct CAbstractMessage self);
     };
     typedef struct CAbstractMessage CAbstractMessage;
     
-    void deleteCAbstractMessage(CAbstractMessage self);
+    struct CMessageHeader   CAbstractMessage_header(struct CAbstractMessage self)
+                            CF_SWIFT_NAME(getter:CAbstractMessage.header(self:));
+    
+    void                    CAbstractMessage_setHeader(struct CAbstractMessage self, struct CMessageHeader header)
+                            CF_SWIFT_NAME(setter:CAbstractMessage.header(self:newValue:));
+    
+    struct CAbstractPart    CAbstractMessage_partForContentID(struct CAbstractMessage self, const UChar* contentID)
+                            CF_SWIFT_NAME(CAbstractMessage.part(self:forContentID:));
+    
+    struct CAbstractPart    CAbstractMessage_partForUniqueID(struct CAbstractMessage self, const UChar* uniqueID)
+                            CF_SWIFT_NAME(CAbstractMessage.part(self:forUniqueID:));
+    
+    CArray                  CAbstractMessage_attachments(struct CAbstractMessage self)
+                            CF_SWIFT_NAME(CAbstractMessage.attachments(self:));
+    
+    CArray                  CAbstractMessage_htmlInlineAttachments(struct CAbstractMessage self)
+                            CF_SWIFT_NAME(CAbstractMessage.htmlInlineAttachments(self:));
+    
+    CArray                  CAbstractMessage_requiredPartsForRendering(struct CAbstractMessage self)
+                            CF_SWIFT_NAME(CAbstractMessage.requiredPartsForRendering(self:));
+    
+    void                    CAbstractMessage_release(CAbstractMessage self)
+                            CF_SWIFT_NAME(CAbstractMessage.release(self:));
     
 #ifdef __cplusplus
 }
 
-CAbstractMessage newCAbstractMessage(mailcore::AbstractMessage *msg);
+CAbstractMessage CAbstractMessage_new(mailcore::AbstractMessage *msg);
 #endif
 
 #endif

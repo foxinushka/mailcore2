@@ -1,4 +1,5 @@
 import Foundation
+import CCore
 
 public class IMAPCheckAccountOperation : IMAPBaseOperation {
     
@@ -37,13 +38,13 @@ public class IMAPCheckAccountOperation : IMAPBaseOperation {
         }
         else {
             let error = MailCoreError(code: errorCode)
-            if operation.loginResponse(operation) != nil || operation.loginUnparsedResponseData(operation).bytes != nil {
+            if operation.loginResponse() != nil || operation.loginUnparsedResponseData().bytes != nil {
                 var userInfo = Dictionary<String, Any>()
-                if operation.loginResponse(operation) != nil {
-                    userInfo["IMAPResponseKey"] = String(utf16: operation.loginResponse(operation))
+                if operation.loginResponse() != nil {
+                    userInfo["IMAPResponseKey"] = String(utf16: operation.loginResponse())
                 }
-                if operation.loginUnparsedResponseData(operation).bytes != nil {
-                    userInfo["IMAPUnparsedResponseDataKey"] = Data.init(cdata: operation.loginUnparsedResponseData(operation))
+                if operation.loginUnparsedResponseData().bytes != nil {
+                    userInfo["IMAPUnparsedResponseDataKey"] = Data.init(cdata: operation.loginUnparsedResponseData())
                 }
                 error.userInfo = userInfo
             }

@@ -7,11 +7,12 @@
 
 
 #include "CSMTPSession.h"
-#include "CBase+Private.h"
 #include "CSMTPOperation.h"
 
 #define nativeType mailcore::SMTPAsyncSession
 #define structName CSMTPSession
+
+#include "CBase+Private.h"
 
 C_SYNTHESIZE_STRING(setHostname, hostname)
 C_SYNTHESIZE_SCALAR(unsigned int, unsigned int, setPort, port)
@@ -25,7 +26,8 @@ C_SYNTHESIZE_ENUM(AuthType, mailcore::AuthType, setAuthType, authType)
 C_SYNTHESIZE_BOOL(setUseHeloIPEnabled, useHeloIPEnabled)
 C_SYNTHESIZE_SCALAR(dispatch_queue_t, dispatch_queue_t, setDispatchQueue, dispatchQueue)
 
-bool isOperationQueueRunning(struct CSMTPSession self);
+#undef nativeType
+#undef structName
 
 typedef ConnectionLogger CConnectionLogger;
 
@@ -33,7 +35,7 @@ class CSMTPCallbackBridge : public mailcore::Object, public mailcore::Connection
 public:
     CSMTPCallbackBridge()
     {
-
+        
     }
     
     virtual void log(void * sender, mailcore::ConnectionLogType logType, mailcore::Data *data)
@@ -61,11 +63,11 @@ public:
     OperationQueueRunningChangeBlock mQueueRunningChangeBlock;
 };
 
-bool isOperationQueueRunning(struct CSMTPSession self) {
+bool CSMTPSession_isOperationQueueRunning(struct CSMTPSession self) {
     return self.instance->isOperationQueueRunning();
 }
 
-void setConnectionLogger(struct CSMTPSession self, ConnectionLogger logger) {
+void CSMTPSession_setConnectionLogger(struct CSMTPSession self, ConnectionLogger logger) {
     self._callback->mLogger = logger;
     if (logger != NULL) {
         self.instance->setConnectionLogger(self._callback);
@@ -75,7 +77,11 @@ void setConnectionLogger(struct CSMTPSession self, ConnectionLogger logger) {
     }
 }
 
-void setOperationQueueRunningChangeBlock(struct CSMTPSession self, OperationQueueRunningChangeBlock queueRunningChangeBlock) {
+ConnectionLogger CSMTPSession_connectionLogger(struct CSMTPSession self) {
+    return self._callback->mLogger;
+}
+
+void CSMTPSession_setOperationQueueRunningChangeBlock(struct CSMTPSession self, OperationQueueRunningChangeBlock queueRunningChangeBlock) {
     self._callback->mQueueRunningChangeBlock = queueRunningChangeBlock;
     if (queueRunningChangeBlock != NULL) {
         self.instance->setOperationQueueCallback(self._callback);
@@ -85,78 +91,46 @@ void setOperationQueueRunningChangeBlock(struct CSMTPSession self, OperationQueu
     }
 }
 
-CSMTPOperation loginOperation(struct CSMTPSession self) {
-    return newCSMTPOperation(self.instance->loginOperation());
+OperationQueueRunningChangeBlock CSMTPSession_operationQueueRunningChangeBlock(struct CSMTPSession self) {
+    return self._callback->mQueueRunningChangeBlock;
 }
 
-CSMTPOperation sendOperationWithData(struct CSMTPSession self, const char* messageDataBytes, unsigned int messageDataLenght){
-    return newCSMTPOperation(self.instance->sendMessageOperation(new mailcore::Data(messageDataBytes, messageDataLenght)));
+CSMTPOperation CSMTPSession_loginOperation(struct CSMTPSession self) {
+    return CSMTPOperation_new(self.instance->loginOperation());
 }
 
-CSMTPOperation sendOperationWithDataAndForm(struct CSMTPSession self, const char* messageDataBytes, unsigned int messageDataLenght, CAddress from , CArray recipients) {
-    return newCSMTPOperation(self.instance->sendMessageOperation(from.instance, recipients.instance, new mailcore::Data(messageDataBytes, messageDataLenght)));
+CSMTPOperation CSMTPSession_sendOperationWithData(struct CSMTPSession self, const char* messageDataBytes, unsigned int messageDataLenght){
+    return CSMTPOperation_new(self.instance->sendMessageOperation(new mailcore::Data(messageDataBytes, messageDataLenght)));
 }
 
-CSMTPOperation sendOperationWithContentsOfFile(struct CSMTPSession self, const UChar* path,  CAddress from,  CArray recipients) {
-    return newCSMTPOperation(self.instance->sendMessageOperation(from.instance, recipients.instance, new mailcore::String(path)));
+CSMTPOperation CSMTPSession_sendOperationWithDataAndFromAndRecipients(struct CSMTPSession self, const char* messageDataBytes, unsigned int messageDataLenght, CAddress from , CArray recipients) {
+    return CSMTPOperation_new(self.instance->sendMessageOperation(from.instance, recipients.instance, new mailcore::Data(messageDataBytes, messageDataLenght)));
 }
 
-CSMTPOperation checkAccountOperationWithFrom(struct CSMTPSession self, CAddress from) {
-    return newCSMTPOperation(self.instance->checkAccountOperation(from.instance));
+CSMTPOperation CSMTPSession_sendOperationWithContentsOfFile(struct CSMTPSession self, const UChar* path,  CAddress from,  CArray recipients) {
+    return CSMTPOperation_new(self.instance->sendMessageOperation(from.instance, recipients.instance, new mailcore::String(path)));
 }
 
-CSMTPOperation noopOperation(struct CSMTPSession self) {
-    return newCSMTPOperation(self.instance->noopOperation());
+CSMTPOperation CSMTPSession_checkAccountOperationWithFrom(struct CSMTPSession self, CAddress from) {
+    return CSMTPOperation_new(self.instance->checkAccountOperation(from.instance));
 }
 
-void cancelAllOperations(struct CSMTPSession self) {
+CSMTPOperation CSMTPSession_noopOperation(struct CSMTPSession self) {
+    return CSMTPOperation_new(self.instance->noopOperation());
+}
+
+void CSMTPSession_cancelAllOperations(struct CSMTPSession self) {
     self.instance->cancelAllOperations();
 }
 
-CSMTPSession newCSMTPSession() {
+CSMTPSession CSMTPSession_new() {
     CSMTPSession self;
     self.instance = new mailcore::SMTPAsyncSession();
     self._callback = new CSMTPCallbackBridge();
-    
-    self.hostname = &hostname;
-    self.port = &port;
-    self.username = &username;
-    self.password = &password;
-    self.OAuth2Token = &OAuth2Token;
-    self.authType = &authType;
-    self.connectionType = &connectionType;
-    self.timeout = &timeout;
-    self.isCheckCertificateEnabled = &isCheckCertificateEnabled;
-    self.useHeloIPEnabled = &useHeloIPEnabled;
-    self.isOperationQueueRunning = &isOperationQueueRunning;
-    self.setHostname = &setHostname;
-    self.setPort = &setPort;
-    self.setUsername = &setUsername;
-    self.setPassword = &setPassword;
-    self.setOAuth2Token = &setOAuth2Token;
-    self.setAuthType = &setAuthType;
-    self.setConnectionType = &setConnectionType;
-    self.setTimeout = &setTimeout;
-    self.setCheckCertificateEnabled = &setCheckCertificateEnabled;
-    self.setUseHeloIPEnabled = &setUseHeloIPEnabled;
-    self.dispatchQueue = &dispatchQueue;
-    self.setDispatchQueue = &setDispatchQueue;
-    
-    self.loginOperation = &loginOperation;
-    self.sendOperationWithData = &sendOperationWithData;
-    self.sendOperationWithDataAndFromAndRecipients = &sendOperationWithDataAndForm;
-    self.sendOperationWithContentsOfFile = &sendOperationWithContentsOfFile;
-    self.checkAccountOperationWithFrom = &checkAccountOperationWithFrom;
-    self.noopOperation = &noopOperation;
-    
-    self.setOperationQueueRunningChangeBlock = &setOperationQueueRunningChangeBlock;
-    self.setConnectionLogger = &setConnectionLogger;
-    self.cancelAllOperations = &cancelAllOperations;
-    
     return self;
 }
 
-void deleteCSMTPSession(CSMTPSession self) {
+void CSMTPSession_release(CSMTPSession self) {
     C_SAFE_RELEASE(self._callback);
     self.instance->setConnectionLogger(NULL);
     self.instance->release();

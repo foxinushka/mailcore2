@@ -20,18 +20,22 @@ extern "C" {
         void*                       instance;
 #endif
         CAbstractMessagePart abstractMessagePart;
-        
-        const UChar*    (*partID)(struct CIMAPMessagePart self);
-        void            (*setPartID)(struct CIMAPMessagePart self, const UChar* partID);
     };
     typedef struct CIMAPMessagePart CIMAPMessagePart;
     
-    void deleteCIMAPMessagePart(CIMAPMessagePart self);
+    const UChar*    CIMAPMessagePart_partID(struct CIMAPMessagePart self)
+                    CF_SWIFT_NAME(getter:CIMAPMessagePart.partID(self:));
+    
+    void            CIMAPMessagePart_setPartID(struct CIMAPMessagePart self, const UChar* partID)
+                    CF_SWIFT_NAME(setter:CIMAPMessagePart.partID(self:newValue:));
+    
+    void            CIMAPMessagePart_release(CIMAPMessagePart self)
+                    CF_SWIFT_NAME(CIMAPMessagePart.release(self:));
     
 #ifdef __cplusplus
 }
 
-CIMAPMessagePart newCIMAPMessagePart(mailcore::IMAPMessagePart *part);
+CIMAPMessagePart CIMAPMessagePart_new(mailcore::IMAPMessagePart *part);
 #endif
 
 #endif /* CIMAPMessagePart_h */

@@ -5,45 +5,37 @@
 #define nativeType mailcore::IMAPFetchContentToFileOperation
 #define structName CIMAPFetchContentToFileOperation
 
-bool isLoadingByChunksEnabled(struct CIMAPFetchContentToFileOperation self) {
+bool CIMAPFetchContentToFileOperation_isLoadingByChunksEnabled(struct CIMAPFetchContentToFileOperation self) {
     return self.instance->isLoadingByChunksEnabled();
 }
 
-uint32_t chunksSize(struct CIMAPFetchContentToFileOperation self) {
+uint32_t CIMAPFetchContentToFileOperation_chunksSize(struct CIMAPFetchContentToFileOperation self) {
     return self.instance->chunksSize();
 }
 
-uint32_t estimatedSize(struct CIMAPFetchContentToFileOperation self) {
+uint32_t CIMAPFetchContentToFileOperation_estimatedSize(struct CIMAPFetchContentToFileOperation self) {
     return self.instance->estimatedSize();
 }
 
-void setLoadingByChunksEnabled(struct CIMAPFetchContentToFileOperation self, bool newValue) {
+void CIMAPFetchContentToFileOperation_setLoadingByChunksEnabled(struct CIMAPFetchContentToFileOperation self, bool newValue) {
     self.instance->setLoadingByChunksEnabled(newValue);
 }
 
-void setChunksSize(struct CIMAPFetchContentToFileOperation self, uint32_t newValue) {
+void CIMAPFetchContentToFileOperation_setChunksSize(struct CIMAPFetchContentToFileOperation self, uint32_t newValue) {
     self.instance->setChunksSize(newValue);
 }
 
-void setEstimatedSize(struct CIMAPFetchContentToFileOperation self, uint32_t newValue) {
+void CIMAPFetchContentToFileOperation_setEstimatedSize(struct CIMAPFetchContentToFileOperation self, uint32_t newValue) {
     self.instance->setEstimatedSize(newValue);
 }
 
-CIMAPFetchContentToFileOperation newCIMAPFetchContentToFileOperation(mailcore::IMAPFetchContentToFileOperation *operationRef){
+CIMAPFetchContentToFileOperation CIMAPFetchContentToFileOperation_new(mailcore::IMAPFetchContentToFileOperation *operationRef){
     CIMAPFetchContentToFileOperation self;
-    self.baseOperation = newCIMAPBaseOperation(operationRef);
+    self.baseOperation = CIMAPBaseOperation_new(operationRef);
     self.instance = operationRef;
-    
-    self.isLoadingByChunksEnabled = &isLoadingByChunksEnabled;
-    self.chunksSize = &chunksSize;
-    self.estimatedSize = &estimatedSize;
-    self.setLoadingByChunksEnabled = &setLoadingByChunksEnabled;
-    self.setChunksSize = &setChunksSize;
-    self.setEstimatedSize = &setEstimatedSize;
-    
     return self;
 }
 
-void deleteCIMAPFetchContentToFileOperation(CIMAPFetchContentToFileOperation operation) {
+void CIMAPFetchContentToFileOperation_release(CIMAPFetchContentToFileOperation operation) {
     
 }

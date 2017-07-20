@@ -26,43 +26,94 @@ extern "C" {
         void*                   instance;
 #endif
         CAbstractMessage abstractMessage;
-        
-        
-        uint32_t        (*uid)(struct CIMAPMessage self);
-        void            (*setUid)(struct CIMAPMessage self, uint32_t uid);
-        uint32_t        (*sequenceNumber)(struct CIMAPMessage self);
-        void            (*setSequenceNumber)(struct CIMAPMessage self, uint32_t sequenceNumber);
-        uint32_t        (*size)(struct CIMAPMessage self);
-        void            (*setSize)(struct CIMAPMessage self, uint32_t size);
-        MessageFlag     (*flags)(struct CIMAPMessage self);
-        void            (*setFlags)(struct CIMAPMessage self, MessageFlag flags);
-        MessageFlag     (*originalFlags)(struct CIMAPMessage self);
-        void            (*setOriginalFlags)(struct CIMAPMessage self, MessageFlag originalFlags);
-        CArray          (*customFlags)(struct CIMAPMessage self);
-        void            (*setCustomFlags)(struct CIMAPMessage self, CArray customFlags);
-        uint64_t        (*modSeqValue)(struct CIMAPMessage self);
-        void            (*setModSeqValue)(struct CIMAPMessage self, uint64_t modSeqValue);
-        CAbstractPart   (*mainPart)(struct CIMAPMessage self);
-        void            (*setMainPart)(struct CIMAPMessage self, CAbstractPart mainPart);
-        CArray          (*gmailLabels)(struct CIMAPMessage self);
-        void            (*setGmailLabels)(struct CIMAPMessage self, CArray gmailLabels);
-        uint64_t        (*gmailMessageID)(struct CIMAPMessage self);
-        void            (*setGmailMessageID)(struct CIMAPMessage self, uint64_t gmailMessageID);
-        uint64_t        (*gmailThreadID)(struct CIMAPMessage self);
-        void            (*setGmailThreadID)(struct CIMAPMessage self, uint64_t gmailThreadID);
-        
-        CAbstractPart   (*partForPartID)(struct CIMAPMessage self, const UChar* partID);
-        const UChar*    (*htmlRendering)(struct CIMAPMessage self, const UChar* folder, CAbstractMessageRendererCallback rendererCallback);
-        CObject         (*castToCObject)(struct CIMAPMessage self);
     };
     typedef struct CIMAPMessage CIMAPMessage;
-    CIMAPMessage castCIMAPMessage(CObject obj);
-    void deleteCIMAPMessage(CIMAPMessage self);
+    
+    uint32_t        CIMAPMessage_uid(struct CIMAPMessage self)
+                    CF_SWIFT_NAME(getter:CIMAPMessage.uid(self:));
+
+    void            CIMAPMessage_setUid(struct CIMAPMessage self, uint32_t uid)
+                    CF_SWIFT_NAME(setter:CIMAPMessage.uid(self:newValue:));
+
+    uint32_t        CIMAPMessage_sequenceNumber(struct CIMAPMessage self)
+                    CF_SWIFT_NAME(getter:CIMAPMessage.sequenceNumber(self:));
+
+    void            CIMAPMessage_setSequenceNumber(struct CIMAPMessage self, uint32_t sequenceNumber)
+                    CF_SWIFT_NAME(setter:CIMAPMessage.sequenceNumber(self:newValue:));
+
+    uint32_t        CIMAPMessage_size(struct CIMAPMessage self)
+                    CF_SWIFT_NAME(getter:CIMAPMessage.size(self:));
+
+    void            CIMAPMessage_setSize(struct CIMAPMessage self, uint32_t size)
+                    CF_SWIFT_NAME(setter:CIMAPMessage.size(self:newValue:));
+
+    MessageFlag     CIMAPMessage_flags(struct CIMAPMessage self)
+                    CF_SWIFT_NAME(getter:CIMAPMessage.flags(self:));
+
+    void            CIMAPMessage_setFlags(struct CIMAPMessage self, MessageFlag flags)
+                    CF_SWIFT_NAME(setter:CIMAPMessage.flags(self:newValue:));
+
+    MessageFlag     CIMAPMessage_originalFlags(struct CIMAPMessage self)
+                    CF_SWIFT_NAME(getter:CIMAPMessage.originalFlags(self:));
+
+    void            CIMAPMessage_setOriginalFlags(struct CIMAPMessage self, MessageFlag originalFlags)
+                    CF_SWIFT_NAME(setter:CIMAPMessage.originalFlags(self:newValue:));
+
+    CArray          CIMAPMessage_customFlags(struct CIMAPMessage self)
+                    CF_SWIFT_NAME(getter:CIMAPMessage.customFlags(self:));
+
+    void            CIMAPMessage_setCustomFlags(struct CIMAPMessage self, CArray customFlags)
+                    CF_SWIFT_NAME(setter:CIMAPMessage.customFlags(self:newValue:));
+
+    uint64_t        CIMAPMessage_modSeqValue(struct CIMAPMessage self)
+                    CF_SWIFT_NAME(getter:CIMAPMessage.modSeqValue(self:));
+
+    void            CIMAPMessage_setModSeqValue(struct CIMAPMessage self, uint64_t modSeqValue)
+                    CF_SWIFT_NAME(setter:CIMAPMessage.modSeqValue(self:newValue:));
+
+    CAbstractPart   CIMAPMessage_mainPart(struct CIMAPMessage self)
+                    CF_SWIFT_NAME(getter:CIMAPMessage.mainPart(self:));
+
+    void            CIMAPMessage_setMainPart(struct CIMAPMessage self, CAbstractPart mainPart)
+                    CF_SWIFT_NAME(setter:CIMAPMessage.mainPart(self:newValue:));
+
+    CArray          CIMAPMessage_gmailLabels(struct CIMAPMessage self)
+                    CF_SWIFT_NAME(getter:CIMAPMessage.gmailLabels(self:));
+
+    void            CIMAPMessage_setGmailLabels(struct CIMAPMessage self, CArray gmailLabels)
+                    CF_SWIFT_NAME(setter:CIMAPMessage.gmailLabels(self:newValue:));
+
+    uint64_t        CIMAPMessage_gmailMessageID(struct CIMAPMessage self)
+                    CF_SWIFT_NAME(getter:CIMAPMessage.gmailMessageID(self:));
+
+    void            CIMAPMessage_setGmailMessageID(struct CIMAPMessage self, uint64_t gmailMessageID)
+                    CF_SWIFT_NAME(setter:CIMAPMessage.gmailMessageID(self:newValue:));
+
+    uint64_t        CIMAPMessage_gmailThreadID(struct CIMAPMessage self)
+                    CF_SWIFT_NAME(getter:CIMAPMessage.gmailThreadID(self:));
+
+    void            CIMAPMessage_setGmailThreadID(struct CIMAPMessage self, uint64_t gmailThreadID)
+                    CF_SWIFT_NAME(setter:CIMAPMessage.gmailThreadID(self:newValue:));
+
+    CAbstractPart   CIMAPMessage_partForPartID(struct CIMAPMessage self, const UChar* partID)
+                    CF_SWIFT_NAME(CIMAPMessage.partForPartID(self:partID:));
+
+    const UChar*    CIMAPMessage_htmlRendering(struct CIMAPMessage self, const UChar* folder, CAbstractMessageRendererCallback rendererCallback)
+                    CF_SWIFT_NAME(CIMAPMessage.htmlRendering(self:folder:rendererCallback:));
+
+    CObject         CIMAPMessage_castToCObject(struct CIMAPMessage self)
+                    CF_SWIFT_NAME(CIMAPMessage.castToCObject(self:));
+    
+    CIMAPMessage    CIMAPMessage_castFromCObject(CObject obj)
+                    CF_SWIFT_NAME(CIMAPMessage.init(cobject:));
+
+    void            CIMAPMessage_release(CIMAPMessage self)
+                    CF_SWIFT_NAME(CIMAPMessage.release(self:));
     
 #ifdef __cplusplus
 }
 
-CIMAPMessage newCIMAPMessage(mailcore::IMAPMessage *msg);
+CIMAPMessage CIMAPMessage_new(mailcore::IMAPMessage *msg);
 #endif
 
 #endif /* CIMAPMessage_h */

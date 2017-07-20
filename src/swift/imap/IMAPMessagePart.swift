@@ -1,4 +1,5 @@
 import Foundation
+import CCore
 
 public class IMAPMessagePart : AbstractMessagePart {
     
@@ -15,8 +16,8 @@ public class IMAPMessagePart : AbstractMessagePart {
     
     /** A part identifier is of the form 1.2.1*/
     public var partID: String? {
-        get { return String(utf16: nativeInstance.partID(nativeInstance)); }
-        set { String.utf16(newValue, { nativeInstance.setPartID(nativeInstance, $0) }) }
+        get { return String(utf16: nativeInstance.partID); }
+        set { String.utf16(newValue, { nativeInstance.partID = $0 }) }
     }
     
 }

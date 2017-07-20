@@ -21,17 +21,19 @@ extern "C" {
 #else
         void*                           instance;
 #endif
-        
-        CIndexSet (*uids)(struct CIMAPSearchOperation self);
     };
     typedef struct CIMAPSearchOperation CIMAPSearchOperation;
     
-    void deleteCIMAPSearchOperation(CIMAPSearchOperation self);
+    CIndexSet   CIMAPSearchOperation_uids(struct CIMAPSearchOperation self)
+                CF_SWIFT_NAME(CIMAPSearchOperation.uids(self:));
+
+    void        CIMAPSearchOperation_release(CIMAPSearchOperation self)
+                CF_SWIFT_NAME(CIMAPSearchOperation.release(self:));
     
 #ifdef __cplusplus
 }
 
-CIMAPSearchOperation newCIMAPSearchOperation(mailcore::IMAPSearchOperation *operation);
+CIMAPSearchOperation CIMAPSearchOperation_new(mailcore::IMAPSearchOperation *operation);
 #endif
 
 #endif

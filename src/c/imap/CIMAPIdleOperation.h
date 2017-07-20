@@ -21,15 +21,16 @@ extern "C" {
 #else
         void*                           instance;
 #endif
-
-        void    (*interruptIdle)(struct CIMAPIdleOperation self);
     };
     typedef struct CIMAPIdleOperation CIMAPIdleOperation;
+    
+    void        CIMAPIdleOperation_interruptIdle(struct CIMAPIdleOperation self)
+                CF_SWIFT_NAME(CIMAPIdleOperation.interruptIdle(self:));
     
 #ifdef __cplusplus
 }
 
-CIMAPIdleOperation newCIMAPIdleOperation(mailcore::IMAPIdleOperation *operation);
+CIMAPIdleOperation CIMAPIdleOperation_new(mailcore::IMAPIdleOperation *operation);
 #endif
 
 #endif /* CIMAPIdleOperation_h */

@@ -1,4 +1,5 @@
 import Foundation
+import CCore
 
 public class IMAPCustomCommandOperation : IMAPBaseOperation {
     
@@ -33,7 +34,7 @@ public class IMAPCustomCommandOperation : IMAPBaseOperation {
         
         let errorCode = error()
         if errorCode == ErrorNone {
-            completionBlock!(String(utf16: operation.response(operation)), nil)
+            completionBlock!(String(utf16: operation.response()), nil)
         }
         else {
             completionBlock!(nil, MailCoreError(code: errorCode))

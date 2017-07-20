@@ -1,4 +1,5 @@
 import Foundation
+import CCore
 
 public class SMTPOperation: Operation {
     
@@ -14,7 +15,7 @@ public class SMTPOperation: Operation {
     }
     
     deinit {
-        deleteCSMTPOperation(self.operation);
+        self.operation.release();
     }
     
     public func start(completionBlock: CompletionBlock?) {
@@ -32,19 +33,19 @@ public class SMTPOperation: Operation {
             return;
         }
         
-        let errorCode = operation.error(operation);
+        let errorCode = operation.error;
         if errorCode == ErrorNone {
             completionBlock!(nil);
         }
         else {
             let error = MailCoreError(code: errorCode)
-            if operation.lastSMTPResponse(operation) != nil || operation.lastSMTPResponseCode(operation) != 0 {
+            if operation.lastSMTPResponse != nil || operation.lastSMTPResponseCode != 0 {
                 var userInfo = Dictionary<String, Any>()
-                if operation.lastSMTPResponse(operation) != nil {
-                    userInfo["MCOSMTPResponseKey"] = String(utf16: operation.lastSMTPResponse(operation))
+                if operation.lastSMTPResponse != nil {
+                    userInfo["MCOSMTPResponseKey"] = String(utf16: operation.lastSMTPResponse)
                 }
-                if operation.lastSMTPResponseCode(operation) != 0 {
-                    userInfo["MCOSMTPResponseCodeKey"] = operation.lastSMTPResponseCode(operation)
+                if operation.lastSMTPResponseCode != 0 {
+                    userInfo["MCOSMTPResponseCodeKey"] = operation.lastSMTPResponseCode
                 }
                 error.userInfo = userInfo
             }

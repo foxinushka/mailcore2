@@ -21,17 +21,19 @@ extern "C" {
         void*                                           instance;
 #endif
         
-        CMessageParser (*parser)(struct CIMAPFetchParsedContentOperation self);
-        
     };
     typedef struct CIMAPFetchParsedContentOperation CIMAPFetchParsedContentOperation;
     
-    void deleteCIMAPFetchParsedContentOperation(CIMAPFetchParsedContentOperation self);
+    CMessageParser  CIMAPFetchParsedContentOperation_parser(struct CIMAPFetchParsedContentOperation self)
+                    CF_SWIFT_NAME(CIMAPFetchParsedContentOperation.parser(self:));
+    
+    void            CIMAPFetchParsedContentOperation_release(CIMAPFetchParsedContentOperation self)
+                    CF_SWIFT_NAME(CIMAPFetchParsedContentOperation.release(self:));
     
 #ifdef __cplusplus
 }
 
-CIMAPFetchParsedContentOperation newCIMAPFetchParsedContentOperation(mailcore::IMAPFetchParsedContentOperation *operation);
+CIMAPFetchParsedContentOperation CIMAPFetchParsedContentOperation_new(mailcore::IMAPFetchParsedContentOperation *operation);
 #endif
 
 #endif /* CIMAPFetchParsedContentOperation_hpp */

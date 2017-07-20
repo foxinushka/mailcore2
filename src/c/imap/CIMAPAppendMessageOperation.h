@@ -21,19 +21,25 @@ extern "C" {
 #else
         void*                                   instance;
 #endif
-        
-        void        (*setDate)(struct CIMAPAppendMessageOperation self, time_t date);
-        time_t      (*date)(struct CIMAPAppendMessageOperation self);
-        uint32_t    (*createdUID)(struct CIMAPAppendMessageOperation self);
     };
     typedef struct CIMAPAppendMessageOperation CIMAPAppendMessageOperation;
-
-    void deleteIMAPAppendMessageOperation(CIMAPAppendMessageOperation self);
+    
+    void        CIMAPAppendMessageOperation_setDate(struct CIMAPAppendMessageOperation self, time_t date)
+                CF_SWIFT_NAME(setter:CIMAPAppendMessageOperation.date(self:newValue:));
+    
+    time_t      CIMAPAppendMessageOperation_date(struct CIMAPAppendMessageOperation self)
+                CF_SWIFT_NAME(getter:CIMAPAppendMessageOperation.date(self:));
+    
+    uint32_t    CIMAPAppendMessageOperation_createdUID(struct CIMAPAppendMessageOperation self)
+                CF_SWIFT_NAME(CIMAPAppendMessageOperation.createdUID(self:));
+    
+    void        CIMAPAppendMessageOperation_release(CIMAPAppendMessageOperation self)
+                CF_SWIFT_NAME(CIMAPAppendMessageOperation.release(self:));
 
 #ifdef __cplusplus
 }
 
-CIMAPAppendMessageOperation newIMAPAppendMessageOperation(mailcore::IMAPAppendMessageOperation *operation);
+CIMAPAppendMessageOperation CIMAPAppendMessageOperation_new(mailcore::IMAPAppendMessageOperation *operation);
 #endif
 
 #endif

@@ -1,12 +1,13 @@
 import Foundation
 import Dispatch
+import CCore
 
 public class SMTPSession {
     
     var session:CSMTPSession;
     
     public init() {
-        self.session = newCSMTPSession();
+        self.session = CSMTPSession();
     }
     
     internal init(session: CSMTPSession) {
@@ -15,32 +16,32 @@ public class SMTPSession {
     
     /** This is the hostname of the SMTP server to connect to. */
     public var hostname : String? {
-        get { return String(utf16: self.session.hostname(self.session)); }
-        set { String.utf16(newValue, { self.session.setHostname(self.session, $0) }) }
+        get { return String(utf16: self.session.hostname) }
+        set { String.utf16(newValue, { self.session.hostname = $0 }) }
     }
     
     /** This is the port of the SMTP server to connect to. */
     public var port : UInt32 {
-        get { return self.session.port(self.session); }
-        set { self.session.setPort(self.session, newValue); }
+        get { return self.session.port }
+        set { self.session.port = newValue }
     }
     
     /** This is the username of the account. */
     public var username : String? {
-        get { return String(utf16: self.session.username(self.session)); }
-        set { String.utf16(newValue, { self.session.setUsername(self.session, $0) }) }
+        get { return String(utf16: self.session.username) }
+        set { String.utf16(newValue, { self.session.username = $0 }) }
     }
     
     /** This is the password of the account. */
     public var password : String? {
-        get { return String(utf16: self.session.password(self.session)); }
-        set { String.utf16(newValue, { self.session.setPassword(self.session, $0) }) }
+        get { return String(utf16: self.session.password) }
+        set { String.utf16(newValue, { self.session.password = $0 }) }
     }
     
     /** This is the OAuth2 token. */
     public var OAuth2Token : String? {
-        get { return String(utf16: self.session.OAuth2Token(self.session)); }
-        set { String.utf16(newValue, { self.session.setOAuth2Token(self.session, $0) }) }
+        get { return String(utf16: self.session.OAuth2Token) }
+        set { String.utf16(newValue, { self.session.OAuth2Token = $0 }) }
     }
     
     /**
@@ -49,8 +50,8 @@ public class SMTPSession {
      @warning *Important*: Over an encrypted connection like TLS, the password will still be secure
      */
     public var authType : AuthType {
-        get { return self.session.authType(self.session); }
-        set { self.session.setAuthType(self.session, newValue); }
+        get { return self.session.authType }
+        set { self.session.authType = newValue }
     }
     
     /**
@@ -58,20 +59,20 @@ public class SMTPSession {
      See MCOConnectionType for more information.
      */
     public var connectionType : ConnectionType {
-        get { return self.session.connectionType(self.session); }
-        set { self.session.setConnectionType(self.session, newValue); }
+        get { return self.session.connectionType }
+        set { self.session.connectionType = newValue }
     }
     
     /** This is the timeout of the connection. */
     public var timeout : TimeInterval {
-        get { return Double(self.session.timeout(self.session)); }
-        set { self.session.setTimeout(self.session, time_t(newValue)); }
+        get { return Double(self.session.timeout) }
+        set { self.session.timeout = time_t(newValue) }
     }
     
     /** When set to YES, the connection will fail if the certificate is incorrect. */
     public var checkCertificateEnabled : Bool {
-        get { return self.session.isCheckCertificateEnabled(self.session); }
-        set { self.session.setCheckCertificateEnabled(self.session, newValue); }
+        get { return self.session.isCheckCertificateEnabled }
+        set { self.session.isCheckCertificateEnabled = newValue }
     }
     
     /**
@@ -79,8 +80,8 @@ public class SMTPSession {
      Default is NO.
      */
     public var useHeloIPEnabled : Bool {
-        get { return self.session.useHeloIPEnabled(self.session); }
-        set { self.session.setUseHeloIPEnabled(self.session, newValue); }
+        get { return self.session.useHeloIPEnabled }
+        set { self.session.useHeloIPEnabled = newValue }
     }
     
     /**
@@ -91,8 +92,8 @@ public class SMTPSession {
      }];
      */
     public var connectionLogger : ConnectionLogger {
-        get { return self.connectionLogger; }
-        set { self.session.setConnectionLogger(self.session, newValue); }
+        get { return self.session.connectionLogger; }
+        set { self.session.connectionLogger = newValue }
     }
     
     /** This property provides some hints to MCOSMTPSession about where it's called from.
@@ -114,10 +115,10 @@ public class SMTPSession {
     #else
     public var dispatchQueue: DispatchQueue? {
         get {
-            return session.dispatchQueue(session);
+            return self.session.dispatchQueue()
         }
         set {
-            session.setDispatchQueue(session, newValue);
+            self.session.setDispatchQueue(newValue: newValue)
         }
     }
     #endif
@@ -127,7 +128,7 @@ public class SMTPSession {
      The value will be YES when asynchronous operations are running, else it will return NO.
      */
     public var operationQueueRunning : Bool {
-        get { return self.session.isOperationQueueRunning(self.session); }
+        get { return self.session.isOperationQueueRunning }
     }
     
     /**
@@ -143,8 +144,8 @@ public class SMTPSession {
      }];
      */
     public var operationQueueRunningChangeBlock : OperationQueueRunningChangeBlock {
-        get { return self.operationQueueRunningChangeBlock; }
-        set { self.session.setOperationQueueRunningChangeBlock(self.session, newValue); }
+        get { return self.session.operationQueueRunningChangeBlock; }
+        set { self.session.operationQueueRunningChangeBlock = newValue }
     }
     
     /**
@@ -152,7 +153,7 @@ public class SMTPSession {
      */
     //- (void) cancelAllOperations;
     public func cancelAllOperations() {
-        self.session.cancelAllOperations(self.session);
+        self.session.cancelAllOperations();
     }
     
     /** @name Operations */
@@ -166,7 +167,7 @@ public class SMTPSession {
      }];
      */
     public func loginOperation() -> SMTPOperation{
-        return SMTPOperation(self.session.loginOperation(self.session));
+        return SMTPOperation(self.session.loginOperation());
     }
     
     /**
@@ -185,7 +186,7 @@ public class SMTPSession {
         let bytes: UnsafePointer<Int8>? = messageData.withUnsafeBytes{(bytes: UnsafePointer<Int8>)-> UnsafePointer<Int8> in
             return bytes;
         }
-        return SMTPSendOperation(self.session.sendOperationWithData(self.session, bytes, UInt32(messageData.count)));
+        return SMTPSendOperation(self.session.sendOperationWithData(messageDataBytes: bytes, messageDataLenght: UInt32(messageData.count)));
     }
     
     /**
@@ -206,7 +207,7 @@ public class SMTPSession {
         let bytes: UnsafePointer<Int8>? = messageData.withUnsafeBytes{(bytes: UnsafePointer<Int8>)-> UnsafePointer<Int8> in
             return bytes;
         }
-        return SMTPSendOperation(self.session.sendOperationWithDataAndFromAndRecipients(self.session, bytes, UInt32(messageData.count), from.getNativeInstance(), recipients.cast()));
+        return SMTPSendOperation(self.session.sendOperationWithDataAndFromAndRecipients(messageDataBytes: bytes, messageDataLenght: UInt32(messageData.count), from: from.getNativeInstance(), recipients: recipients.cast()));
     }
     
     
@@ -224,7 +225,7 @@ public class SMTPSession {
      }];
      */
     public func sendOperationWithContentsOfFile(path: String, from: Address, recipients: Array<Address>) -> SMTPSendOperation {
-        return SMTPSendOperation(String.utf16(path, { self.session.sendOperationWithContentsOfFile(self.session, $0, from.getNativeInstance(), recipients.cast()) }));
+        return SMTPSendOperation(String.utf16(path, { self.session.sendOperationWithContentsOfFile(path: $0, from: from.getNativeInstance(), recipients: recipients.cast()) }));
     }
 
     
@@ -237,7 +238,7 @@ public class SMTPSession {
      }];
      */
     public func checkAccountOperationWithFrom(from: Address) -> SMTPOperation {
-        return SMTPOperation(self.session.checkAccountOperationWithFrom(self.session, from.getNativeInstance()));
+        return SMTPOperation(self.session.checkAccountOperationWithFrom(from: from.getNativeInstance()));
     }
     
     /**
@@ -249,7 +250,7 @@ public class SMTPSession {
      }];
      */
     public func noopOperation(from: Address) -> SMTPOperation {
-        return SMTPOperation(self.session.noopOperation(self.session));
+        return SMTPOperation(self.session.noopOperation());
     }
 
 }

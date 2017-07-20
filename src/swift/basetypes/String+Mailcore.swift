@@ -1,4 +1,5 @@
 import Foundation
+import CCore
 
 extension String : Convertible  {
     
@@ -11,11 +12,11 @@ extension String : Convertible  {
     }
     
     func cast() -> CObject {
-        return String.utf16(self, { newCObjectWithString($0) })
+        return String.utf16(self, { CObject(string: $0) })
     }
     
     init(_ str: CObject) {
-        self = String(utf16: str.castToString(str))!;
+        self = String(utf16: str.castToString())!;
     }
     
     static func utf16<T>(_ str1: String?, _ str2: String?, _ block: (_ ptr1: UnsafePointer<UInt16>?, _ ptr2: UnsafePointer<UInt16>?)->T ) -> T {

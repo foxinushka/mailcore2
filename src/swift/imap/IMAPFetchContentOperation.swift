@@ -1,4 +1,5 @@
 import Foundation
+import CCore
 
 public class IMAPFetchContentOperation : IMAPBaseOperation {
     
@@ -34,7 +35,7 @@ public class IMAPFetchContentOperation : IMAPBaseOperation {
         
         let errorCode = error();
         if errorCode == ErrorNone {
-            completionBlock!(nil, Data(cdata: operation.data(operation)));
+            completionBlock!(nil, Data(cdata: operation.data()));
         }
         else {
             completionBlock!(MailCoreError(code: errorCode), nil);

@@ -19,18 +19,19 @@ extern "C" {
 #else
         void*                                           instance;
 #endif
-        
-        const UChar*    (*result)(struct CIMAPMessageRenderingOperation self);
-        
     };
     typedef struct CIMAPMessageRenderingOperation CIMAPMessageRenderingOperation;
     
-    void deleteCIMAPMessageRenderingOperation(CIMAPMessageRenderingOperation self);
+    const UChar*    CIMAPMessageRenderingOperation_result(struct CIMAPMessageRenderingOperation self)
+                    CF_SWIFT_NAME(CIMAPMessageRenderingOperation.result(self:));
+    
+    void            CIMAPMessageRenderingOperation_release(CIMAPMessageRenderingOperation self)
+                    CF_SWIFT_NAME(CIMAPMessageRenderingOperation.release(self:));
     
 #ifdef __cplusplus
 }
 
-CIMAPMessageRenderingOperation newCIMAPMessageRenderingOperation(mailcore::IMAPMessageRenderingOperation *operation);
+CIMAPMessageRenderingOperation CIMAPMessageRenderingOperation_new(mailcore::IMAPMessageRenderingOperation *operation);
 #endif
 
 #endif /* CIMAPMessageRenderingOperation_hpp */

@@ -20,19 +20,28 @@ extern "C" {
 #else
         void*               instance;
 #endif
-    	void        (*addObject)(struct CArray self, CObject object);
-        uint32_t    (*size)(struct CArray self);
-        CObject     (*getObject)(struct CArray self, uint32_t index);
-        uint32_t    (*getUint)(struct CArray self, uint32_t index);
     };
     typedef struct CArray CArray;
-
-    CArray newCArray();
+    
+    void        CArray_addObject(struct CArray self, CObject object)
+                CF_SWIFT_NAME(CArray.addObject(self:cobject:));
+    
+    uint32_t    CArray_size(struct CArray self)
+                CF_SWIFT_NAME(getter:CArray.size(self:));
+    
+    CObject     CArray_getObject(struct CArray self, uint32_t index)
+                CF_SWIFT_NAME(CArray.getObject(self:index:));
+    
+    uint32_t    CArray_getUint(struct CArray self, uint32_t index)
+                CF_SWIFT_NAME(CArray.getUint(self:index:));
+    
+    CArray      CArray_new()
+                CF_SWIFT_NAME(CArray.init());
     
 #ifdef __cplusplus
 }
 
-CArray newCArray(mailcore::Array *array);
+CArray CArray_new(mailcore::Array *array);
 #endif
 
 #endif

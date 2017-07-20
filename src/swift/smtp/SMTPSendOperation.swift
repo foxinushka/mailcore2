@@ -1,4 +1,5 @@
 import Foundation
+import CCore
 
 public class SMTPSendOperation : SMTPOperation {
     
@@ -6,7 +7,7 @@ public class SMTPSendOperation : SMTPOperation {
     
     override init(_ operation: CSMTPOperation) {
         super.init(operation)
-        self.operation = self.operation.setProgressBlocks(self.operation, operationProgressCallback, Unmanaged.passUnretained(self).toOpaque())
+        self.operation = self.operation.setProgressBlocks(block: operationProgressCallback, userInfo: Unmanaged.passUnretained(self).toOpaque())
     }
     
     public var progressBlock: OperationProgressBlock?

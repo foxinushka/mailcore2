@@ -20,18 +20,19 @@ extern "C" {
 #else
         void*                                       instance;
 #endif
-        
-        CDictionary (*namespaces)(struct CIMAPFetchNamespaceOperation self);
-        
     };
     typedef struct CIMAPFetchNamespaceOperation CIMAPFetchNamespaceOperation;
     
-    void deleteCIMAPFetchNamespaceOperation(CIMAPFetchNamespaceOperation self);
+    CDictionary     CIMAPFetchNamespaceOperation_namespaces(struct CIMAPFetchNamespaceOperation self)
+                    CF_SWIFT_NAME(CIMAPFetchNamespaceOperation.namespaces(self:));
+    
+    void            CIMAPFetchNamespaceOperation_release(CIMAPFetchNamespaceOperation self)
+                    CF_SWIFT_NAME(CIMAPFetchNamespaceOperation.release(self:));
     
 #ifdef __cplusplus
 }
 
-CIMAPFetchNamespaceOperation newCIMAPFetchNamespaceOperation(mailcore::IMAPFetchNamespaceOperation *operation);
+CIMAPFetchNamespaceOperation CIMAPFetchNamespaceOperation_new(mailcore::IMAPFetchNamespaceOperation *operation);
 #endif
 
 #endif /* CIMAPFetchNamespaceOperation_hpp */

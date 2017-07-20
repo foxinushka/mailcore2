@@ -1,4 +1,5 @@
 import Foundation
+import CCore
 
 public class Attachment : AbstractPart {
 
@@ -10,7 +11,7 @@ public class Attachment : AbstractPart {
             let bytes: UnsafePointer<Int8>? = newValue.withUnsafeBytes{(bytes: UnsafePointer<Int8>)-> UnsafePointer<Int8> in
                 return bytes;
             }
-            nativeInstance.setData(nativeInstance, bytes, UInt32(newValue.count));
+            nativeInstance.setData(bytes: bytes, length: UInt32(newValue.count));
         }
     }
     
@@ -24,37 +25,37 @@ public class Attachment : AbstractPart {
     }
     
     public func decodedString() -> String? {
-        return String(utf16: nativeInstance.decodedString(nativeInstance));
+        return String(utf16: nativeInstance.decodedString());
     }
     
     /** Returns a MIME type for a filename.*/
     public static func mimeTypeForFilename(filename: String) -> String? {
-        return String(utf16: String.utf16(filename,{ CmimeTypeForFilename($0) }));
+        return String(utf16: String.utf16(filename,{ CAttachment.mimeType(forFilename: $0) }));
     }
     
     /** Returns a file attachment with the content of the given file.*/
     public static func attachmentWithContentsOfFile(filename: String) -> Attachment {
-        return Attachment(String.utf16(filename, { CattachmentWithContentsOfFile($0) }));
+        return Attachment(String.utf16(filename, { CAttachment(contentsOfFile: $0) }));
     }
     
     /** Returns a file attachment with the given data and filename.*/
     public static func attachmentWithData( data: Data, filename: String) -> Attachment {
-        return Attachment(String.utf16(filename, { CattachmentWithData(data.bytes(), data.length(), $0) }));
+        return Attachment(String.utf16(filename, { CAttachment(dataBytes: data.bytes(), length: data.length(), filename: $0) }));
     }
     
     /** Returns a part with an HTML content.*/
     public static func attachmentWithHTMLString(htmlString: String) -> Attachment {
-        return Attachment(String.utf16(htmlString, { CattachmentWithHTMLString($0) }));
+        return Attachment(String.utf16(htmlString, { CAttachment(htmlString: $0) }));
     }
     
     /** Returns a part with a RFC 822 messsage attachment.*/
     public static func attachmentWithRFC822Message(messageData: Data) -> Attachment {
-        return Attachment(CattachmentWithRFC822Message(messageData.bytes(), messageData.length()));
+        return Attachment(CAttachment(RFC822MessageBytes: messageData.bytes(), length: messageData.length()));
     }
     
     /** Returns a part with an plain text content.*/
     public static func attachmentWithText(text: String) -> Attachment {
-        return Attachment(String.utf16(text, { CattachmentWithText($0) }));
+        return Attachment(String.utf16(text, { CAttachment(text: $0) }));
     }
     
 }

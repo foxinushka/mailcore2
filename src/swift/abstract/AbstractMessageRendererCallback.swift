@@ -1,4 +1,5 @@
 import Foundation
+import CCore
 
 internal class AbstractMessageRendererCallback {
     
@@ -10,12 +11,24 @@ internal class AbstractMessageRendererCallback {
     
     internal init(message: AbstractMessage) {
         self.message = message;
-        self.nativeInstance = newCAbstractMessageRendererCallback(canPreviewPart, shouldShowPartBlock, templateValuesForHeaderBlock,
-                                                                  templateValuesForPartBlock, templateForMainHeaderBlock, templateForImageBlock,
-                                                                  templateForAttachmentBlock, templateForMessageBlock, templateForEmbeddedMessageBlock,
-                                                                  templateForEmbeddedMessageHeaderBlock, templateForAttachmentSeparatorBlock, cleanHTMLForPartBlock,
-                                                                  filterHTMLForPartBlock,filterHTMLForMessageBlock, dataForIMAPPart,
-                                                                  prefetchAttachmentIMAPPart, prefetchImageIMAPPart, Unmanaged.passUnretained(self).toOpaque());
+        self.nativeInstance = CAbstractMessageRendererCallback(canPreviewPartBlock: canPreviewPart,
+                                                               shouldShowPartBlock: shouldShowPartBlock,
+                                                               templateValuesForHeaderBlock: templateValuesForHeaderBlock,
+                                                               templateValuesForPartBlock: templateValuesForPartBlock,
+                                                               templateForMainHeaderBlock: templateForMainHeaderBlock,
+                                                               templateForImageBlock: templateForImageBlock,
+                                                               templateForAttachmentBlock: templateForAttachmentBlock,
+                                                               templateForMessageBlock: templateForMessageBlock,
+                                                               templateForEmbeddedMessageBlock: templateForEmbeddedMessageBlock,
+                                                               templateForEmbeddedMessageHeaderBlock: templateForEmbeddedMessageHeaderBlock,
+                                                               templateForAttachmentSeparatorBlock: templateForAttachmentSeparatorBlock,
+                                                               cleanHTMLForPartBlock: cleanHTMLForPartBlock,
+                                                               filterHTMLForPartBlock: filterHTMLForPartBlock,
+                                                               filterHTMLForMessageBlock: filterHTMLForMessageBlock,
+                                                               dataForIMAPPartBlock: dataForIMAPPart,
+                                                               prefetchAttachmentIMAPPartBlock: prefetchAttachmentIMAPPart,
+                                                               prefetchImageIMAPPartBlock: prefetchImageIMAPPart,
+                                                               userInfo: Unmanaged.passUnretained(self).toOpaque());
     }
     
     internal func setHtmlRenderDelegate(delegate: HTMLRendererDelegate) {
@@ -105,7 +118,7 @@ func filterHTMLForMessageBlock(ref: UnsafeRawPointer?, html: UnsafePointer<UInt1
 func dataForIMAPPart(ref: UnsafeRawPointer?, folder: UnsafePointer<UInt16>?, part: CIMAPPart) -> CData {
     let selfRef = Unmanaged<AbstractMessageRendererCallback>.fromOpaque(ref!).takeUnretainedValue()
     let data = selfRef.imapDelegate!.abstractMessage(selfRef.message, dataForIMAPPart: IMAPPart(part: part), folder: String(utf16: folder));
-    return newCData(data.bytes(), data.length());
+    return CData(bytes: data.bytes(), length: data.length());
 }
 
 func prefetchAttachmentIMAPPart(ref: UnsafeRawPointer?, folder: UnsafePointer<UInt16>?, part: CIMAPPart) {

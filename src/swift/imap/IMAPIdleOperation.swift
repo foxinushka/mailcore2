@@ -1,4 +1,5 @@
 import Foundation
+import CCore
 
 public class IMAPIdleOperation : IMAPBaseOperation {
     
@@ -38,7 +39,7 @@ public class IMAPIdleOperation : IMAPBaseOperation {
     }
 
     public func interruptIdle() {
-        idleOperation.interruptIdle(idleOperation);
+        idleOperation.interruptIdle();
     }
     
 }

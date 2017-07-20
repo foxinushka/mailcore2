@@ -5,6 +5,12 @@
 #include <stdint.h>
 #include <MailCore/MCICUTypes.h>
 
+#if __has_attribute(swift_name)
+# define CF_SWIFT_NAME(_name) __attribute__((swift_name(#_name)))
+#else
+# define CF_SWIFT_NAME(_name)
+#endif
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -15,7 +21,8 @@ extern "C" {
     };
     typedef struct CData CData;
     
-    CData newCData(const char* bytes, unsigned int length);
+    CData   CData_new(const char* bytes, unsigned int length)
+            CF_SWIFT_NAME(CData.init(bytes:length:));
     
 #ifdef __cplusplus
 }
@@ -24,7 +31,7 @@ namespace mailcore {
     class Data;
 }
 
-CData newCData(mailcore::Data data);
+CData CData_new(mailcore::Data data);
 #endif
 
 #endif

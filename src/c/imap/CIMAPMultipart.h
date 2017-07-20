@@ -20,18 +20,22 @@ extern "C" {
         void*                       instance;
 #endif
         CAbstractMultipart abstractMultipart;
-        
-        const UChar*    (*partID)(struct CIMAPMultipart self);
-        void            (*setPartID)(struct CIMAPMultipart self, const UChar* partID);
     };
     typedef struct CIMAPMultipart CIMAPMultipart;
     
-    void deleteCIMAPMultipart(CIMAPMultipart self);
+    const UChar*    CIMAPMultipart_partID(struct CIMAPMultipart self)
+                    CF_SWIFT_NAME(getter:CIMAPMultipart.partID(self:));
+    
+    void            CIMAPMultipart_setPartID(struct CIMAPMultipart self, const UChar* partID)
+                    CF_SWIFT_NAME(setter:CIMAPMultipart.partID(self:newValue:));
+    
+    void            CIMAPMultipart_release(CIMAPMultipart self);
+                    CF_SWIFT_NAME(CIMAPMultipart.release(self:));
     
 #ifdef __cplusplus
 }
 
-CIMAPMultipart newCIMAPMultipart(mailcore::IMAPMultipart *part);
+CIMAPMultipart CIMAPMultipart_new(mailcore::IMAPMultipart *part);
 #endif
 
 #endif /* CIMAPMultipart_h */

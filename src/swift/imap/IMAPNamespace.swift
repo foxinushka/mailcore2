@@ -1,10 +1,11 @@
 import Foundation
+import CCore
 
 public class IMAPNamespace : Convertible {
 
 	private var nativeInstance:CIMAPNamespace;
     
-    internal func CIMAPNamespace() -> CIMAPNamespace {
+    internal func _CIMAPNamespace() -> CIMAPNamespace {
         return nativeInstance;
     }
 
@@ -13,29 +14,29 @@ public class IMAPNamespace : Convertible {
     }
     
     deinit {
-        deleteCIMAPNamespace(self.nativeInstance);
+        self.nativeInstance.release()
     }
     
     /**
      Returns a simple namespace with only one item.
      */
     static func namespace(prefix: String, delimiter: CChar) -> IMAPNamespace {
-        return IMAPNamespace(namespace: String.utf16(prefix, { newCIMAPNamespace($0, delimiter) }));
+        return IMAPNamespace(namespace: String.utf16(prefix, { CIMAPNamespace(prefix: $0, delimiter: delimiter) }));
     }
     
     /** Returns the prefix of the main item of this namespace. */
     public func mainPrefix() -> String? {
-        return String(utf16: nativeInstance.mainPrefix(nativeInstance));
+        return String(utf16: nativeInstance.mainPrefix());
     }
     
     /** Returns the path delimiter of the main item of this namespace */
     public func mainDelimiter() -> CChar {
-        return nativeInstance.mainDelimiter(nativeInstance);
+        return nativeInstance.mainDelimiter();
     }
     
     /** Returns the list of prefixes of this namespace. */
     public func prefixes() -> Array<String> {
-        return Array<String>.cast(nativeInstance.prefixes(nativeInstance));
+        return Array<String>.cast(nativeInstance.prefixes());
     }
     
     /**
@@ -43,7 +44,7 @@ public class IMAPNamespace : Convertible {
      of the main item of the namespace.
      */
     public func path(components: Array<String>) -> String? {
-        return String(utf16: nativeInstance.pathForComponents(nativeInstance, Array<String>.cast(components)));
+        return String(utf16: nativeInstance.pathForComponents(components: Array<String>.cast(components)));
     }
     
     /**
@@ -51,24 +52,24 @@ public class IMAPNamespace : Convertible {
      It will use the best item matching the prefix to compute the path.
      */
     public func path(components: Array<String>, prefix: String) -> String? {
-        return String(utf16: String.utf16(prefix, { nativeInstance.pathForComponentsAndPrefix(nativeInstance, Array<String>.cast(components), $0) }));
+        return String(utf16: String.utf16(prefix, { nativeInstance.pathForComponentsAndPrefix(components: Array<String>.cast(components), prefix: $0) }));
     }
     
     /** Returns the components given a folder path. */
     public func componentsFromPath(path: String) -> Array<String> {
-        return Array<String>.cast(String.utf16(path, { nativeInstance.componentsFromPath(nativeInstance, $0) }));
+        return Array<String>.cast(String.utf16(path, { nativeInstance.componentsFromPath(path: $0) }));
     }
     
     /** Returns YES if the namespace contains the given folder path. */
     public func containsFolderPath(path: String) -> Bool {
-        return String.utf16(path, { nativeInstance.containsFolderPath(nativeInstance, $0) })
+        return String.utf16(path, { nativeInstance.containsFolderPath(path: $0) })
     }
     
     func cast() -> CObject {
-        return nativeInstance.castToCObject(nativeInstance)
+        return nativeInstance.castToCObject()
     }
     
     public required init(_ obj: CObject) {
-        self.nativeInstance = CIMAPNamespaceCastFromCObject(obj)
+        self.nativeInstance = CIMAPNamespace(cobject: obj)
     }
 }

@@ -5,51 +5,44 @@
 #define nativeType mailcore::Attachment
 #define structName CAttachment
 
-const UChar* decodedString(struct CAttachment self);
-void         setData(struct CAttachment self, const char* bytes, unsigned int length);
-
-CAttachment newCAttachment(mailcore::Attachment *attachment){
+CAttachment CAttachment_new(mailcore::Attachment *attachment){
     CAttachment self;
-    self.abstractPart = newCAbstractPart(attachment);
+    self.abstractPart = CAbstractPart_new(attachment);
     self.instance = attachment;
     self.instance->release();
-    
-    self.decodedString = &decodedString;
-    self.setData = &setData;
-    
     return self;
 }
 
-const UChar* decodedString(struct CAttachment self) {
+const UChar* CAttachment_decodedString(struct CAttachment self) {
     return self.instance->description()->unicodeCharacters();
 }
 
-void setData(struct CAttachment self, const char* bytes, unsigned int length) {
+void CAttachment_setData(struct CAttachment self, const char* bytes, unsigned int length) {
     self.instance->setData(new mailcore::Data(bytes, length));
 }
 
-const UChar* CmimeTypeForFilename(const UChar* filename) {
+const UChar* CAttachment_mimeTypeForFilename(const UChar* filename) {
     return mailcore::Attachment::mimeTypeForFilename(new mailcore::String(filename))->unicodeCharacters();
 }
 
-CAttachment CattachmentWithContentsOfFile(const UChar* filename) {
-    return newCAttachment(mailcore::Attachment::attachmentWithContentsOfFile(new mailcore::String(filename)));
+CAttachment CAttachment_WithContentsOfFile(const UChar* filename) {
+    return CAttachment_new(mailcore::Attachment::attachmentWithContentsOfFile(new mailcore::String(filename)));
 }
 
-CAttachment CattachmentWithData(const char* bytes, unsigned int length, const UChar* filename) {
-    return newCAttachment(mailcore::Attachment::attachmentWithData(new mailcore::String(filename), new mailcore::Data(bytes, length)));
+CAttachment CAttachment_WithData(const char* bytes, unsigned int length, const UChar* filename) {
+    return CAttachment_new(mailcore::Attachment::attachmentWithData(new mailcore::String(filename), new mailcore::Data(bytes, length)));
 }
 
-CAttachment CattachmentWithHTMLString(const UChar* htmlString) {
-    return newCAttachment(mailcore::Attachment::attachmentWithHTMLString(new mailcore::String(htmlString)));
+CAttachment CAttachment_WithHTMLString(const UChar* htmlString) {
+    return CAttachment_new(mailcore::Attachment::attachmentWithHTMLString(new mailcore::String(htmlString)));
 }
 
-CAttachment CattachmentWithRFC822Message(const char* bytes, unsigned int length) {
-    return newCAttachment(mailcore::Attachment::attachmentWithRFC822Message(new mailcore::Data(bytes, length)));
+CAttachment CAttachment_WithRFC822Message(const char* bytes, unsigned int length) {
+    return CAttachment_new(mailcore::Attachment::attachmentWithRFC822Message(new mailcore::Data(bytes, length)));
 }
 
-CAttachment CattachmentWithText(const UChar* text) {
-    return newCAttachment(mailcore::Attachment::attachmentWithText(new mailcore::String(text)));
+CAttachment CAttachment_WithText(const UChar* text) {
+    return CAttachment_new(mailcore::Attachment::attachmentWithText(new mailcore::String(text)));
 }
 
 

@@ -5,22 +5,17 @@
 #define nativeType mailcore::IMAPSearchOperation
 #define structName CIMAPSearchOperation
 
-CIndexSet uids(struct CIMAPSearchOperation self);
-
-CIMAPSearchOperation newCIMAPSearchOperation(mailcore::IMAPSearchOperation *operation){
+CIMAPSearchOperation CIMAPSearchOperation_new(mailcore::IMAPSearchOperation *operation){
     CIMAPSearchOperation self;
-    self.baseOperation = newCIMAPBaseOperation(operation);
+    self.baseOperation = CIMAPBaseOperation_new(operation);
     self.instance = operation;
-    
-    self.uids = &uids;
-    
     return self;
 }
 
-void deleteCIMAPSearchOperation(CIMAPSearchOperation operation) {
+void CIMAPSearchOperation_release(CIMAPSearchOperation operation) {
 
 }
 
-CIndexSet uids(CIMAPSearchOperation self) {
-    return newCIndexSet(self.instance->uids());
+CIndexSet CIMAPSearchOperation_uids(CIMAPSearchOperation self) {
+    return CIndexSet_new(self.instance->uids());
 }

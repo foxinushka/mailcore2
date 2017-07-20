@@ -21,20 +21,28 @@ extern "C" {
 #else
         void*               instance;
 #endif
-        
-        CArray          (*allKeys)(struct CDictionary self);
-        CObject         (*getValue)(struct CDictionary self, CObject key);
-        void            (*setValue)(struct CDictionary self, CObject key, CObject value);
     };
     typedef struct CDictionary CDictionary;
     
-    CDictionary newCDictionary();
-    void deleteCDictionary(CDictionary self);
+    CArray          CDictionary_allKeys(struct CDictionary self)
+                    CF_SWIFT_NAME(CDictionary.allKeys(self:));
+    
+    CObject         CDictionary_getValue(struct CDictionary self, CObject key)
+                    CF_SWIFT_NAME(CDictionary.getValue(self:key:));
+    
+    void            CDictionary_setValue(struct CDictionary self, CObject key, CObject value)
+                    CF_SWIFT_NAME(CDictionary.setValue(self:key:value:));
+    
+    CDictionary     CDictionary_new()
+                    CF_SWIFT_NAME(CDictionary.init());
+    
+    void            CDictionary_release(CDictionary self)
+                    CF_SWIFT_NAME(CDictionary.release(self:));
     
 #ifdef __cplusplus
 }
 
-CDictionary newCDictionary(mailcore::HashMap *dict);
+CDictionary CDictionary_new(mailcore::HashMap *dict);
 #endif
 
 #endif /* CDictionary_hpp */

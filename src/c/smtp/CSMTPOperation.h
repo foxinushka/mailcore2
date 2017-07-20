@@ -29,20 +29,28 @@ extern "C" {
         void*                                       _callback;
 #endif
         COperation                                  cOperation;
-        
-        ErrorCode                   (*error)(struct CSMTPOperation self);
-        struct CSMTPOperation       (*setProgressBlocks)(struct CSMTPOperation self, CProgressBlock progressBlock, const void* userInfo);
-        const UChar*                (*lastSMTPResponse)(struct CSMTPOperation self);
-        int                         (*lastSMTPResponseCode)(struct CSMTPOperation self);
     };
     typedef struct CSMTPOperation CSMTPOperation;
     
-    void deleteCSMTPOperation(CSMTPOperation operation);
+    ErrorCode                   CSMTPOperation_error(struct CSMTPOperation self)
+                                CF_SWIFT_NAME(getter:CSMTPOperation.error(self:));
+    
+    struct CSMTPOperation       CSMTPOperation_setProgressBlocks(struct CSMTPOperation self, CProgressBlock progressBlock, const void* userInfo)
+                                CF_SWIFT_NAME(CSMTPOperation.setProgressBlocks(self:block:userInfo:));
+    
+    const UChar*                CSMTPOperation_lastSMTPResponse(struct CSMTPOperation self)
+                                CF_SWIFT_NAME(getter:CSMTPOperation.lastSMTPResponse(self:));
+    
+    int                         CSMTPOperation_lastSMTPResponseCode(struct CSMTPOperation self)
+                                CF_SWIFT_NAME(getter:CSMTPOperation.lastSMTPResponseCode(self:));
+    
+    void                        CSMTPOperation_release(CSMTPOperation operation)
+                                CF_SWIFT_NAME(CSMTPOperation.release(self:));
     
 #ifdef __cplusplus
 }
 
-CSMTPOperation newCSMTPOperation(mailcore::SMTPOperation* operation);
+CSMTPOperation CSMTPOperation_new(mailcore::SMTPOperation* operation);
 #endif
 
 #endif /* CSMTPOperation_h */

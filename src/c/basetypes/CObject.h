@@ -19,20 +19,28 @@ extern "C" {
 #else
         void*               instance;
 #endif
-        
-        const UChar*    (*castToString)(struct CObject self);
-        uint32_t        (*castToUInt32)(struct CObject self);
     };
     typedef struct CObject CObject;
-
-    CObject newCObjectWithString(const UChar* string);
-    CObject newCObjectWithUInt32(uint32_t string);
-    void deleteCObject(CObject self);
+    
+    const UChar*    CObject_castToString(struct CObject self)
+                    CF_SWIFT_NAME(CObject.castToString(self:));
+    
+    uint32_t        CObject_castToUInt32(struct CObject self)
+                    CF_SWIFT_NAME(CObject.castToUInt32(self:));
+    
+    CObject         CObject_new_WithString(const UChar* string)
+                    CF_SWIFT_NAME(CObject.init(string:));
+    
+    CObject         CObject_new_WithUInt32(uint32_t string)
+                    CF_SWIFT_NAME(CObject.init(uint32:));
+    
+    void            CObject_release(CObject self)
+                    CF_SWIFT_NAME(CObject.release(self:));
     
 #ifdef __cplusplus
 }
 
-CObject newCObject(mailcore::Object *obj);
+CObject CObject_new(mailcore::Object *obj);
 #endif
 
 #endif

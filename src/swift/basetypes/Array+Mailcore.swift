@@ -1,28 +1,29 @@
 import Foundation
+import CCore
 
 extension Array {
     
     static func cast<T: Convertible>(_ cArray: CArray) -> Array<T> {
         var array = Array<T>();
-        let size = cArray.size(cArray);
+        let size = cArray.size
         for index in 0..<size {
-            array.append(T(cArray.getObject(cArray, index)));
+            array.append(T(cArray.getObject(index: index)));
         }
         return array;
     }
     
     static func cast<T: Convertible>(_ array: Array<T>) -> CArray {
-        let cArray = newCArray();
+        let cArray = CArray();
         for convertable in array {
-            cArray.addObject(cArray, convertable.cast());
+            cArray.addObject(cobject: convertable.cast());
         }
         return cArray;
     }
     
     func cast() -> CArray {
-        let cArray = newCArray();
+        let cArray = CArray();
         for convertable in self {
-            cArray.addObject(cArray, (convertable as! Convertible).cast());
+            cArray.addObject(cobject: (convertable as! Convertible).cast());
         }
         return cArray;
     }

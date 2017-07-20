@@ -1,4 +1,5 @@
 import Foundation
+import CCore
 
 public class IMAPFetchFoldersOperation : IMAPBaseOperation {
     
@@ -33,7 +34,7 @@ public class IMAPFetchFoldersOperation : IMAPBaseOperation {
         
         let errorCode = error()
         if errorCode == ErrorNone {
-            completionBlock!(nil, Array<IMAPFolder>.cast(operation.folders(operation)))
+            completionBlock!(nil, Array<IMAPFolder>.cast(operation.folders()))
         }
         else {
             completionBlock!(MailCoreError(code: errorCode), nil)

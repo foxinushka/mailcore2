@@ -20,18 +20,19 @@ extern "C" {
 #else
         void*                                   instance;
 #endif
-        
-        CIndexSet (*capabilities)(struct CIMAPCapabilityOperation self);
-        
     };
     typedef struct CIMAPCapabilityOperation CIMAPCapabilityOperation;
     
-    void deleteCIMAPCapabilityOperation(CIMAPCapabilityOperation self);
+    CIndexSet   CIMAPCapabilityOperation_capabilities(struct CIMAPCapabilityOperation self)
+                CF_SWIFT_NAME(CIMAPCapabilityOperation.capabilities(self:));
+    
+    void        CIMAPCapabilityOperation_release(CIMAPCapabilityOperation self)
+                CF_SWIFT_NAME(CIMAPCapabilityOperation.release(self:));
     
 #ifdef __cplusplus
 }
 
-CIMAPCapabilityOperation newCIMAPCapabilityOperation(mailcore::IMAPCapabilityOperation *operation);
+CIMAPCapabilityOperation CIMAPCapabilityOperation_new(mailcore::IMAPCapabilityOperation *operation);
 #endif
 
 #endif /* CIMAPCapabilityOperation_hpp */

@@ -7,24 +7,17 @@
 
 C_SYNTHESIZE_SCALAR(time_t, time_t, setDate, date)
 
-uint32_t    createdUID(struct CIMAPAppendMessageOperation self);
-
-CIMAPAppendMessageOperation newIMAPAppendMessageOperation(mailcore::IMAPAppendMessageOperation *op){
+CIMAPAppendMessageOperation CIMAPAppendMessageOperation_new(mailcore::IMAPAppendMessageOperation *op){
     CIMAPAppendMessageOperation self;
-    self.baseOperation = newCIMAPBaseOperation(op);
+    self.baseOperation = CIMAPBaseOperation_new(op);
     self.instance = op;
-    
-    self.setDate = &setDate;
-    self.date = &date;
-    self.createdUID = &createdUID;
-    
     return self;
 }
 
-uint32_t createdUID(struct CIMAPAppendMessageOperation self) {
+uint32_t CIMAPAppendMessageOperation_createdUID(struct CIMAPAppendMessageOperation self) {
     return self.instance->createdUID();
 }
 
-void deleteIMAPAppendMessageOperation(CIMAPAppendMessageOperation operation) {
+void CIMAPAppendMessageOperation_release(CIMAPAppendMessageOperation operation) {
 
 }

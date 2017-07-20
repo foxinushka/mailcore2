@@ -1,4 +1,5 @@
 import Foundation
+import CCore
 
 /**
  The class is used to get folder metadata (like UIDVALIDITY, UIDNEXT, etc).
@@ -47,7 +48,7 @@ public class IMAPFolderInfoOperation : IMAPBaseOperation {
         
         let errorCode = error();
         if errorCode == ErrorNone {
-            completionBlock!(nil, IMAPFolderInfo(info: operation.info(operation)));
+            completionBlock!(nil, IMAPFolderInfo(info: operation.info()));
         }
         else {
             completionBlock!(MailCoreError(code: errorCode), nil);

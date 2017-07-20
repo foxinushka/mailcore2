@@ -1,4 +1,5 @@
 import Foundation
+import CCore
 
 public class IMAPOperation : IMAPBaseOperation {
     

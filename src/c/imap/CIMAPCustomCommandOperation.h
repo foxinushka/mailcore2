@@ -20,18 +20,19 @@ extern "C" {
 #else
         void*                                   instance;
 #endif
-        
-        const UChar*    (*response)(struct CIMAPCustomCommandOperation self);
-        
     };
     typedef struct CIMAPCustomCommandOperation CIMAPCustomCommandOperation;
     
-    void deleteCIMAPCustomCommandOperation(CIMAPCustomCommandOperation self);
+    const UChar*    CIMAPCustomCommandOperation_response(struct CIMAPCustomCommandOperation self)
+                    CF_SWIFT_NAME(CIMAPCustomCommandOperation.response(self:));
+    
+    void            CIMAPCustomCommandOperation_release(CIMAPCustomCommandOperation self)
+                    CF_SWIFT_NAME(CIMAPCustomCommandOperation.release(self:));
     
 #ifdef __cplusplus
 }
 
-CIMAPCustomCommandOperation newCIMAPCustomCommandOperation(mailcore::IMAPCustomCommandOperation *operation);
+CIMAPCustomCommandOperation CIMAPCustomCommandOperation_new(mailcore::IMAPCustomCommandOperation *operation);
 #endif
 
 #endif /* CIMAPCustomCommandOperation_hpp */

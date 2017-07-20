@@ -9,13 +9,9 @@
 
 C_SYNTHESIZE_STRING(setPartID, partID);
 
-CIMAPMessagePart newCIMAPMessage(mailcore::IMAPMessagePart *part) {
+CIMAPMessagePart CIMAPMessage_new(mailcore::IMAPMessagePart *part) {
     CIMAPMessagePart self;
-    self.abstractMessagePart = newCAbstractMessagePart(part);
+    self.abstractMessagePart = CAbstractMessagePart_new(part);
     self.instance = part;
-    
-    self.partID = &partID;
-    self.setPartID = &setPartID;
-    
     return self;
 }

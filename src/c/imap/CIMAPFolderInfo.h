@@ -20,28 +20,52 @@ extern "C" {
 #else
         void*                       instance;
 #endif
-        
-        uint32_t        (*uidNext)(struct CIMAPFolderInfo self);
-        void            (*setUidNext)(struct CIMAPFolderInfo self, uint32_t uid);
-        uint32_t        (*uidValidity)(struct CIMAPFolderInfo self);
-        void            (*setUidValidity)(struct CIMAPFolderInfo self, uint32_t uid);
-        uint64_t        (*modSequenceValue)(struct CIMAPFolderInfo self);
-        void            (*setModSequenceValue)(struct CIMAPFolderInfo self, uint64_t modSequenceValue);
-        int             (*messageCount)(struct CIMAPFolderInfo self);
-        void            (*setMessageCount)(struct CIMAPFolderInfo self, int messageCount);
-        uint32_t        (*firstUnseenUid)(struct CIMAPFolderInfo self);
-        void            (*setFirstUnseenUid)(struct CIMAPFolderInfo self, uint32_t firstUnseenUid);
-        bool            (*allowsNewPermanentFlags)(struct CIMAPFolderInfo self);
-        void            (*setAllowsNewPermanentFlags)(struct CIMAPFolderInfo self, bool allowsNewPermanentFlags);
     };
     typedef struct CIMAPFolderInfo CIMAPFolderInfo;
     
-    void deleteCIMAPFolderInfo(CIMAPFolderInfo self);
+    uint32_t        CIMAPFolderInfo_uidNext(struct CIMAPFolderInfo self)
+                    CF_SWIFT_NAME(getter:CIMAPFolderInfo.uidNext(self:));
+    
+    void            CIMAPFolderInfo_setUidNext(struct CIMAPFolderInfo self, uint32_t uid)
+                    CF_SWIFT_NAME(setter:CIMAPFolderInfo.uidNext(self:newValue:));
+    
+    uint32_t        CIMAPFolderInfo_uidValidity(struct CIMAPFolderInfo self)
+                    CF_SWIFT_NAME(getter:CIMAPFolderInfo.uidValidity(self:));
+    
+    void            CIMAPFolderInfo_setUidValidity(struct CIMAPFolderInfo self, uint32_t uid)
+                    CF_SWIFT_NAME(setter:CIMAPFolderInfo.uidValidity(self:newValue:));
+    
+    uint64_t        CIMAPFolderInfo_modSequenceValue(struct CIMAPFolderInfo self)
+                    CF_SWIFT_NAME(getter:CIMAPFolderInfo.modSequenceValue(self:));
+    
+    void            CIMAPFolderInfo_setModSequenceValue(struct CIMAPFolderInfo self, uint64_t modSequenceValue)
+                    CF_SWIFT_NAME(setter:CIMAPFolderInfo.modSequenceValue(self:newValue:));
+    
+    int             CIMAPFolderInfo_messageCount(struct CIMAPFolderInfo self)
+                    CF_SWIFT_NAME(getter:CIMAPFolderInfo.messageCount(self:));
+    
+    void            CIMAPFolderInfo_setMessageCount(struct CIMAPFolderInfo self, int messageCount)
+                    CF_SWIFT_NAME(setter:CIMAPFolderInfo.messageCount(self:newValue:));
+    
+    uint32_t        CIMAPFolderInfo_firstUnseenUid(struct CIMAPFolderInfo self)
+                    CF_SWIFT_NAME(getter:CIMAPFolderInfo.firstUnseenUid(self:));
+    
+    void            CIMAPFolderInfo_setFirstUnseenUid(struct CIMAPFolderInfo self, uint32_t firstUnseenUid)
+                    CF_SWIFT_NAME(setter:CIMAPFolderInfo.firstUnseenUid(self:newValue:));
+    
+    bool            CIMAPFolderInfo_allowsNewPermanentFlags(struct CIMAPFolderInfo self)
+                    CF_SWIFT_NAME(getter:CIMAPFolderInfo.allowsNewPermanentFlags(self:));
+    
+    void            CIMAPFolderInfo_setAllowsNewPermanentFlags(struct CIMAPFolderInfo self, bool allowsNewPermanentFlags)
+                    CF_SWIFT_NAME(setter:CIMAPFolderInfo.allowsNewPermanentFlags(self:newValue:));
+    
+    void            CIMAPFolderInfo_release(CIMAPFolderInfo self)
+                    CF_SWIFT_NAME(CIMAPFolderInfo.release(self:));
     
 #ifdef __cplusplus
 }
 
-CIMAPFolderInfo newCIMAPFolderInfo(mailcore::IMAPFolderInfo *folder);
+CIMAPFolderInfo CIMAPFolderInfo_new(mailcore::IMAPFolderInfo *folder);
 #endif
 
 #endif /* CIMAPFolderInfo_h */

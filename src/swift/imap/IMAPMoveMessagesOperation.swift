@@ -1,4 +1,5 @@
 import Foundation
+import CCore
 
 public class IMAPMoveMessagesOperation : IMAPBaseOperation {
     
@@ -33,7 +34,7 @@ public class IMAPMoveMessagesOperation : IMAPBaseOperation {
         
         let errorCode = error();
         if errorCode == ErrorNone {
-            completionBlock!(nil, Dictionary<UInt32, UInt32>.cast(operation.uidMapping(operation)));
+            completionBlock!(nil, Dictionary<UInt32, UInt32>.cast(operation.uidMapping()));
         }
         else {
             completionBlock!(MailCoreError(code: errorCode), nil);

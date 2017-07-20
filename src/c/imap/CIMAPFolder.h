@@ -22,25 +22,39 @@ extern "C" {
 #else
         void*                   instance;
 #endif
-        
-        const UChar*    (*path)(struct CIMAPFolder self);
-        void            (*setPath)(struct CIMAPFolder self, const UChar* path);
-        char            (*delimiter)(struct CIMAPFolder self);
-        void            (*setDelimiter)(struct CIMAPFolder self, char delimiter);
-        IMAPFolderFlag  (*flags)(struct CIMAPFolder self);
-        void            (*setFlags)(struct CIMAPFolder self, IMAPFolderFlag flags);
-        
-        CObject         (*castToCObject)(struct CIMAPFolder self);
     };
     typedef struct CIMAPFolder CIMAPFolder;
     
-    CIMAPFolder CIMAPFolderCastFromCObject(CObject obj);
-    void deleteCIMAPFolder(CIMAPFolder self);
+    const UChar*    CIMAPFolder_path(struct CIMAPFolder self)
+                    CF_SWIFT_NAME(getter:CIMAPFolder.path(self:));
     
+    void            CIMAPFolder_setPath(struct CIMAPFolder self, const UChar* path)
+                    CF_SWIFT_NAME(setter:CIMAPFolder.path(self:newValue:));
+    
+    char            CIMAPFolder_delimiter(struct CIMAPFolder self)
+                    CF_SWIFT_NAME(getter:CIMAPFolder.delimiter(self:));
+    
+    void            CIMAPFolder_setDelimiter(struct CIMAPFolder self, char delimiter)
+                    CF_SWIFT_NAME(setter:CIMAPFolder.delimiter(self:newValue:));
+    
+    IMAPFolderFlag  CIMAPFolder_flags(struct CIMAPFolder self)
+                    CF_SWIFT_NAME(getter:CIMAPFolder.flags(self:));
+    
+    void            CIMAPFolder_setFlags(struct CIMAPFolder self, IMAPFolderFlag flags)
+                    CF_SWIFT_NAME(setter:CIMAPFolder.flags(self:newValue:));
+    
+    CObject         CIMAPFolder_castToCObject(struct CIMAPFolder self)
+                    CF_SWIFT_NAME(CIMAPFolder.castToCObject(self:));
+    
+    CIMAPFolder     CIMAPFolder_castFromCObject(CObject obj)
+                    CF_SWIFT_NAME(CIMAPFolder.init(cobject:));
+    
+    void            CIMAPFolder_release(CIMAPFolder self)
+                    CF_SWIFT_NAME(CIMAPFolder.release(self:));
 #ifdef __cplusplus
 }
 
-CIMAPFolder newCIMAPFolder(mailcore::IMAPFolder *folder);
+CIMAPFolder CIMAPFolder_new(mailcore::IMAPFolder *folder);
 #endif
 
 #endif /* CIMAPFolder_h */

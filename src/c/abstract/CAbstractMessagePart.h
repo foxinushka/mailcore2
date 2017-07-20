@@ -6,6 +6,7 @@
 #include "CBase.h"
 #include "CArray.h"
 #include "CAbstractPart.h"
+#include "CMessageHeader.h"
 
 #ifdef __cplusplus
 
@@ -16,28 +17,31 @@ namespace mailcore {
 extern "C" {
 #endif
     
-    struct CMessageHeader;
-    
-    struct CAbstractMessagePart {
+    typedef struct CAbstractMessagePart {
 #ifdef __cplusplus
         mailcore::AbstractMessagePart*  instance;
 #else
         void*                           instance;
 #endif
         CAbstractPart abstractPart;
-        
-        struct CMessageHeader           (*header)(struct CAbstractMessagePart self);
-        void                            (*setHeader)(struct CAbstractMessagePart self, struct CMessageHeader header);
-        struct CAbstractPart            (*mainPart)(struct CAbstractMessagePart self);
-        void                            (*setMainPart)(struct CAbstractMessagePart self, struct CAbstractPart part);
-        
-    };
-    typedef struct CAbstractMessagePart CAbstractMessagePart;
+    } CAbstractMessagePart;
+    
+    struct CMessageHeader           CAbstractMessagePart_header(struct CAbstractMessagePart self)
+                                    CF_SWIFT_NAME(getter:CAbstractMessagePart.header(self:));
+    
+    void                            CAbstractMessagePart_setHeader(struct CAbstractMessagePart self, struct CMessageHeader header)
+                                    CF_SWIFT_NAME(setter:CAbstractMessagePart.header(self:newValue:));
+    
+    struct CAbstractPart            CAbstractMessagePart_mainPart(struct CAbstractMessagePart self)
+                                    CF_SWIFT_NAME(getter:CAbstractMessagePart.mainPart(self:));
+    
+    void                            CAbstractMessagePart_setMainPart(struct CAbstractMessagePart self, struct CAbstractPart part)
+                                    CF_SWIFT_NAME(setter:CAbstractMessagePart.mainPart(self:newValue:));
     
 #ifdef __cplusplus
 }
 
-CAbstractMessagePart newCAbstractMessagePart(mailcore::AbstractMessagePart *part);
+CAbstractMessagePart CAbstractMessagePart_new(mailcore::AbstractMessagePart *part);
 #endif
 
 #endif

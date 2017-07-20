@@ -20,24 +20,37 @@ extern "C" {
         void*                   instance;
 #endif
         CAbstractPart abstractPart;
-        
-        const UChar*    (*partID)(struct CIMAPPart self);
-        void            (*setPartID)(struct CIMAPPart self, const UChar* partID);
-        unsigned int    (*size)(struct CIMAPPart self);
-        void            (*setSize)(struct CIMAPPart self, unsigned int size);
-        Encoding        (*encoding)(struct CIMAPPart self);
-        void            (*setEncoding)(struct CIMAPPart self, Encoding encoding);
-        
-        unsigned int    (*decodedSize)(struct CIMAPPart self);
     };
     typedef struct CIMAPPart CIMAPPart;
     
-    CIMAPPart castCIMAPPart(CObject obj);
+    const UChar*    CIMAPPart_partID(struct CIMAPPart self)
+                    CF_SWIFT_NAME(getter:CIMAPPart.partID(self:));
+    
+    void            CIMAPPart_setPartID(struct CIMAPPart self, const UChar* partID)
+                    CF_SWIFT_NAME(setter:CIMAPPart.partID(self:newValue:));
+    
+    unsigned int    CIMAPPart_size(struct CIMAPPart self)
+                    CF_SWIFT_NAME(getter:CIMAPPart.size(self:));
+    
+    void            CIMAPPart_setSize(struct CIMAPPart self, unsigned int size)
+                    CF_SWIFT_NAME(setter:CIMAPPart.size(self:newValue:));
+    
+    Encoding        CIMAPPart_encoding(struct CIMAPPart self)
+                    CF_SWIFT_NAME(getter:CIMAPPart.encoding(self:));
+    
+    void            CIMAPPart_setEncoding(struct CIMAPPart self, Encoding encoding)
+                    CF_SWIFT_NAME(setter:CIMAPPart.encoding(self:newValue:));
+    
+    unsigned int    CIMAPPart_decodedSize(struct CIMAPPart self)
+                    CF_SWIFT_NAME(CIMAPPart.decodedSize(self:));
+    
+    CIMAPPart       CIMAPPart_castCIMAPPart(CObject obj)
+                    CF_SWIFT_NAME(CIMAPPart.init(cobject:));
     
 #ifdef __cplusplus
 }
 
-CIMAPPart newCIMAPPart(mailcore::IMAPPart *part);
+CIMAPPart CIMAPPart_new(mailcore::IMAPPart *part);
 #endif
 
 #endif /* CIMAPPart_h */

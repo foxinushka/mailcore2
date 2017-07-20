@@ -9,38 +9,25 @@
 C_SYNTHESIZE_STRING(setPrefix, prefix);
 C_SYNTHESIZE_CHAR(setDelimiter, delimiter);
 
-const UChar*        pathForComponents(struct CIMAPNamespaceItem self, CArray components);
-CArray              componentForPath(struct CIMAPNamespaceItem self, const UChar* path);
-bool                containsFolder(struct CIMAPNamespaceItem self, const UChar* folder);
-
-CIMAPNamespaceItem newCIMAPNamespaceItem(mailcore::IMAPNamespaceItem *item) {
+CIMAPNamespaceItem CIMAPNamespaceItem_new(mailcore::IMAPNamespaceItem *item) {
     CIMAPNamespaceItem self;
     item->retain();
     self.instance = item;
-    
-    self.prefix = &prefix;
-    self.setPrefix = &setPrefix;
-    self.delimiter = &delimiter;
-    self.setDelimiter = &setDelimiter;
-    self.pathForComponents = &pathForComponents;
-	self.componentForPath = &componentForPath;
-	self.containsFolder = &containsFolder;
-    
     return self;
 }
 
-void deleteCIMAPNamespaceItem(CIMAPNamespaceItem self) {
+void CIMAPNamespaceItem_release(CIMAPNamespaceItem self) {
     C_SAFE_RELEASE(self.instance);
 }
 
-const UChar* pathForComponents(struct CIMAPNamespaceItem self, CArray components) {
+const UChar* CIMAPNamespaceItem_pathForComponents(struct CIMAPNamespaceItem self, CArray components) {
     return self.instance->pathForComponents(components.instance)->unicodeCharacters();
 }
 
-CArray componentForPath(struct CIMAPNamespaceItem self, const UChar* path) {
-    return newCArray(self.instance->componentsForPath(mailcore::String::stringWithCharacters(path)));
+CArray CIMAPNamespaceItem_componentForPath(struct CIMAPNamespaceItem self, const UChar* path) {
+    return CArray_new(self.instance->componentsForPath(mailcore::String::stringWithCharacters(path)));
 }
 
-bool containsFolder(struct CIMAPNamespaceItem self, const UChar* folder) {
+bool CIMAPNamespaceItem_containsFolder(struct CIMAPNamespaceItem self, const UChar* folder) {
     return self.instance->containsFolder(mailcore::String::stringWithCharacters(folder));
 }

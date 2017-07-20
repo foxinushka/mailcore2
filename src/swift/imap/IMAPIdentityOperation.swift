@@ -1,4 +1,5 @@
 import Foundation
+import CCore
 
 public class IMAPIdentityOperation : IMAPBaseOperation {
     
@@ -33,7 +34,7 @@ public class IMAPIdentityOperation : IMAPBaseOperation {
         
         let errorCode = error()
         if errorCode == ErrorNone {
-            completionBlock!(nil, IMAPIdentity.init(operation.serverIdentity(operation)))
+            completionBlock!(nil, IMAPIdentity.init(operation.serverIdentity()))
         }
         else {
             completionBlock!(MailCoreError(code: errorCode), nil)

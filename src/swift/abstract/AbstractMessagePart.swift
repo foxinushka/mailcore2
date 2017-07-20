@@ -1,4 +1,5 @@
 import Foundation
+import CCore
 
 public class AbstractMessagePart : AbstractPart {
     
@@ -15,15 +16,15 @@ public class AbstractMessagePart : AbstractPart {
     
     // Returns the header of the embedded message.
     public var header : MessageHeader {
-        set { nativeInstance.setHeader(nativeInstance, newValue.CMessageHeader()); }
-        get { return MessageHeader(nativeInstance.header(nativeInstance)); }
+        set { nativeInstance.header = newValue.CMessageHeader() }
+        get { return MessageHeader(nativeInstance.header) }
     }
     
     // Returns the main part of the embedded message. It can be MCOAbstractPart, MCOAbstractMultipart
     // or a MCOAbstractMessagePart.
     public var mainPart : AbstractPart {
-        set { nativeInstance.setMainPart(nativeInstance, newValue.CAbstractPart()); }
-        get { return AbstractPart(nativeInstance.mainPart(nativeInstance)); }
+        set { nativeInstance.mainPart = newValue._CAbstractPart() }
+        get { return AbstractPart(nativeInstance.mainPart) }
     }
 
 }

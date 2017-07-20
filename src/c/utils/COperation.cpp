@@ -24,50 +24,33 @@ public:
     }
 };
 
-struct COperation setCompletionBlock(COperation self, COperationCompletionBlock block, const void* userInfo);
-bool COperationIsCanceled(COperation self);
-void COperationCancel(COperation self);
-void COperationStart(COperation self);
-
-COperation newCOperation(mailcore::Operation *operationRef) {
+COperation COperation_new(mailcore::Operation *operationRef) {
     COperation self;
     self.instance = operationRef;
     self.instance->retain();
     self._callback = NULL;
-    
-    self.setCompletionBlock = &setCompletionBlock;
-    self.isCanceled = &COperationIsCanceled;
-    self.cancel = &COperationCancel;
-    self.start = &COperationStart;
-    self.shouldRunWhenCancelled = &shouldRunWhenCancelled;
-    self.setShouldRunWhenCancelled = &setShouldRunWhenCancelled;
-    self.callbackDispatchQueue = &callbackDispatchQueue;
-    self.setCallbackDispatchQueue = &setCallbackDispatchQueue;
-    
     return self;
 }
 
-struct COperation setCompletionBlock(COperation self, COperationCompletionBlock block, const void* userInfo) {
+struct COperation COperation_setCompletionBlock(COperation self, COperationCompletionBlock block, const void* userInfo) {
     self._callback = new COperationCompletionCallback(block, userInfo);
     self.instance->setCallback(self._callback);
     return self;
 }
 
-
-
-bool COperationIsCanceled(COperation self) {
+bool COperation_isCanceled(COperation self) {
     return self.instance->isCancelled();
 }
 
-void COperationCancel(COperation self) {
+void COperation_cancel(COperation self) {
     self.instance->cancel();
 }
 
-void COperationStart(COperation self) {
+void COperation_start(COperation self) {
     self.instance->start();
 }
 
-extern "C" void deleteCOperation(COperation self) {
+extern "C" void COperation_release(COperation self) {
     self.instance->release();
     if (self._callback != NULL) {
         self._callback->release();

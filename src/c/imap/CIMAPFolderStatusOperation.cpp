@@ -5,22 +5,17 @@
 #define nativeType mailcore::IMAPFolderStatusOperation
 #define structName CIMAPFolderStatusOperation
 
-CIMAPFolderStatus status(struct CIMAPFolderStatusOperation self);
-
-CIMAPFolderStatusOperation newCIMAPFolderStatusOperation(mailcore::IMAPFolderStatusOperation *operation){
+CIMAPFolderStatusOperation CIMAPFolderStatusOperation_new(mailcore::IMAPFolderStatusOperation *operation){
     CIMAPFolderStatusOperation self;
-    self.baseOperation = newCIMAPBaseOperation(operation);
+    self.baseOperation = CIMAPBaseOperation_new(operation);
     self.instance = operation;
-    
-    self.status = &status;
-    
     return self;
 }
 
-void deleteCIMAPFolderStatusOperation(CIMAPFolderStatusOperation operation) {
+void CIMAPFolderStatusOperation_release(CIMAPFolderStatusOperation operation) {
     
 }
 
-CIMAPFolderStatus status(CIMAPFolderStatusOperation self) {
-    return newCIMAPFolderStatus(self.instance->status());
+CIMAPFolderStatus CIMAPFolderStatusOperation_status(CIMAPFolderStatusOperation self) {
+    return CIMAPFolderStatus_new(self.instance->status());
 }

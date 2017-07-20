@@ -31,26 +31,58 @@ extern "C" {
 #else
         void*               instance;
 #endif
-        
-        unsigned int    (*count)(struct CIndexSet self);
-        void            (*addIndex)(struct CIndexSet self, uint64_t idx);
-        void            (*removeIndex)(struct CIndexSet self, uint64_t idx);
-        bool            (*containsIndex)(struct CIndexSet self, uint64_t idx);
-        void            (*addRange)(struct CIndexSet self, Range range);
-        void            (*removeRange)(struct CIndexSet self, Range range);
-        void            (*intersectsRange)(struct CIndexSet self, Range range);
-        void            (*addIndexSet)(struct CIndexSet self, struct CIndexSet indexSet);
-        void            (*removeIndexSet)(struct CIndexSet self, struct CIndexSet indexSet);
-        void            (*intersectsIndexSet)(struct CIndexSet self, struct CIndexSet indexSet);
-        Range           (*range)(struct CIndexSet self, unsigned int idx);
-        unsigned int    (*rangesCount)(struct CIndexSet self);
     };
     typedef struct CIndexSet CIndexSet;
+    
+    unsigned int    CIndexSet_count(struct CIndexSet self)
+                    CF_SWIFT_NAME(getter:CIndexSet.count(self:));
+    
+    void            CIndexSet_addIndex(struct CIndexSet self, uint64_t idx)
+                    CF_SWIFT_NAME(CIndexSet.addIndex(self:idx:));
+    
+    void            CIndexSet_removeIndex(struct CIndexSet self, uint64_t idx)
+                    CF_SWIFT_NAME(CIndexSet.removeIndex(self:idx:));
+    
+    bool            CIndexSet_containsIndex(struct CIndexSet self, uint64_t idx)
+                    CF_SWIFT_NAME(CIndexSet.containsIndex(self:idx:));
+    
+    void            CIndexSet_addRange(struct CIndexSet self, Range range)
+                    CF_SWIFT_NAME(CIndexSet.addRange(self:range:));
+    
+    void            CIndexSet_removeRange(struct CIndexSet self, Range range)
+                    CF_SWIFT_NAME(CIndexSet.removeRange(self:range:));
+    
+    void            CIndexSet_intersectsRange(struct CIndexSet self, Range range)
+                    CF_SWIFT_NAME(CIndexSet.intersectsRange(self:range:));
+    
+    void            CIndexSet_addIndexSet(struct CIndexSet self, struct CIndexSet indexSet)
+                    CF_SWIFT_NAME(CIndexSet.addIndexSet(self:indexSet:));
+    
+    void            CIndexSet_removeIndexSet(struct CIndexSet self, struct CIndexSet indexSet)
+                    CF_SWIFT_NAME(CIndexSet.removeIndexSet(self:indexSet:));
+    
+    void            CIndexSet_intersectsIndexSet(struct CIndexSet self, struct CIndexSet indexSet)
+                    CF_SWIFT_NAME(CIndexSet.intersectsIndexSet(self:indexSet:));
+    
+    Range           CIndexSet_range(struct CIndexSet self, unsigned int idx)
+                    CF_SWIFT_NAME(CIndexSet.range(self:idx:));
+    
+    unsigned int    CIndexSet_rangesCount(struct CIndexSet self)
+                    CF_SWIFT_NAME(CIndexSet.rangesCount(self:));
+    
+    
 
-    CIndexSet newCIndexSet();
-    CIndexSet newCIndexSetWithRange(Range range);
-    CIndexSet newCIndexSetWithIndex(uint64_t idx);
-    void deleteCIndexSet(CIndexSet self);
+    CIndexSet       CIndexSet_new()
+                    CF_SWIFT_NAME(CIndexSet.init());
+    
+    CIndexSet       CIndexSet_new_WithRange(Range range)
+                    CF_SWIFT_NAME(CIndexSet.init(range:));
+    
+    CIndexSet       CIndexSet_new_WithIndex(uint64_t idx)
+                    CF_SWIFT_NAME(CIndexSet.init(idx:));
+    
+    void            CIndexSet_release(CIndexSet self)
+                    CF_SWIFT_NAME(CIndexSet.release(self:));
     
 
     extern Range RangeEmpty;
@@ -67,7 +99,7 @@ extern "C" {
 #ifdef __cplusplus
 }
 
-CIndexSet newCIndexSet(mailcore::IndexSet *set);
+CIndexSet CIndexSet_new(mailcore::IndexSet *set);
 #endif
 
 #endif

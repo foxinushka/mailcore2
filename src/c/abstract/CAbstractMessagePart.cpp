@@ -8,37 +8,26 @@
 #define nativeType mailcore::AbstractMessagePart
 #define structName CAbstractMessagePart
 
-CMessageHeader          header(struct CAbstractMessagePart self);
-void                    setHeader(struct CAbstractMessagePart self, CMessageHeader header);
-CAbstractPart           mainPart(CAbstractMessagePart self);
-void                    setMainPart(struct CAbstractMessagePart self, CAbstractPart part);
-
-CAbstractMessagePart newCAbstractMessagePart(mailcore::AbstractMessagePart *part){
+CAbstractMessagePart CAbstractMessagePart_new(mailcore::AbstractMessagePart *part){
     CAbstractMessagePart self;
-    self.abstractPart = newCAbstractPart(part);
+    self.abstractPart = CAbstractPart_new(part);
     self.instance = part;
-    
-    self.header = &header;
-    self.setHeader = &setHeader;
-    self.mainPart = &mainPart;
-    self.setMainPart = &setMainPart;
-    
     return self;
 }
 
-CMessageHeader header(CAbstractMessagePart self){
-    return newCMessageHeader(self.instance->header());
+CMessageHeader CAbstractMessagePart_header(CAbstractMessagePart self){
+    return CMessageHeader_new(self.instance->header());
 }
 
-void setHeader(CAbstractMessagePart self, CMessageHeader header){
+void CAbstractMessagePart_setHeader(CAbstractMessagePart self, CMessageHeader header){
     self.instance->setHeader(header.instance);
 }
 
-CAbstractPart mainPart(CAbstractMessagePart self){
-    return newCAbstractPart(self.instance->mainPart());
+CAbstractPart CAbstractMessagePart_mainPart(CAbstractMessagePart self){
+    return CAbstractPart_new(self.instance->mainPart());
 }
 
-void setMainPart(struct CAbstractMessagePart self, CAbstractPart part){
+void CAbstractMessagePart_setMainPart(struct CAbstractMessagePart self, CAbstractPart part){
     self.instance->setMainPart(part.instance);
 }
 

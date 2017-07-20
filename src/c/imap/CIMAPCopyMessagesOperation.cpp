@@ -5,22 +5,17 @@
 #define nativeType mailcore::IMAPCopyMessagesOperation
 #define structName CIMAPCopyMessagesOperation
 
-CDictionary uidMapping(struct CIMAPCopyMessagesOperation self);
-
-CIMAPCopyMessagesOperation newCIMAPCopyMessagesOperation(mailcore::IMAPCopyMessagesOperation *ref){
+CIMAPCopyMessagesOperation CIMAPCopyMessagesOperation_new(mailcore::IMAPCopyMessagesOperation *ref){
     CIMAPCopyMessagesOperation self;
-    self.baseOperation = newCIMAPBaseOperation(ref);
+    self.baseOperation = CIMAPBaseOperation_new(ref);
     self.instance = ref;
-    
-    self.uidMapping = &uidMapping;
-    
     return self;
 }
 
-void deleteCIMAPCopyMessagesOperation(CIMAPCopyMessagesOperation operation) {
+void CIMAPCopyMessagesOperation_release(CIMAPCopyMessagesOperation operation) {
     
 }
 
-CDictionary uidMapping(struct CIMAPCopyMessagesOperation self) {
-    return newCDictionary(self.instance->uidMapping());
+CDictionary CIMAPCopyMessagesOperation_uidMapping(struct CIMAPCopyMessagesOperation self) {
+    return CDictionary_new(self.instance->uidMapping());
 }
