@@ -10,7 +10,7 @@
 
 #import <Foundation/Foundation.h>
 
-#import "NSData+MCO.h"
+//#import "NSData+MCO.h"
 
 using namespace mailcore;
 
@@ -30,5 +30,6 @@ MessageParser::MessageParser(CFDataRef data)
 
 Data * MessageParser::dataFromNSData()
 {
-    return [(NSData *) mNSData mco_mcData];
+    //FIXME
+    return NULL; //[(NSData *) mNSData mco_mcData];
 }

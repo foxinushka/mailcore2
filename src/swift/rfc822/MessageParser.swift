@@ -1,5 +1,5 @@
 import Foundation
-import CCore
+
 
 /**
  This class implements a parsed message.

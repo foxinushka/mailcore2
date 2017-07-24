@@ -12,6 +12,5 @@
 
 #include <MailCore/MCCore.h>
 #include <MailCore/MCAsync.h>
-#include <MailCore/MCObjC.h>
 
 #endif

@@ -1,5 +1,5 @@
 import Foundation
-import CCore
+
 
 /** Used to construct an IMAP search query */
 public class IMAPSearchExpression {

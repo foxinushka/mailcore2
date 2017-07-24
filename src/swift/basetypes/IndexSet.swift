@@ -1,5 +1,5 @@
 import Foundation
-import CCore
+
 
 /** similar to NSMutableIndexSet but supports int64_t.  MCRange has a location (uint64_t) and length (uint64_t). */
 public class IndexSet {
@@ -24,7 +24,7 @@ public class IndexSet {
     }
     
     /** Creates an index set that contains a range of integers.*/
-    public static func indexSet(range: CCore.Range) -> IndexSet {
+    public static func indexSet(range: MailCore.Range) -> IndexSet {
         return IndexSet(CIndexSet(range: range));
     }
     
@@ -54,17 +54,17 @@ public class IndexSet {
     }
     
     /** Adds a range of integers to the index set.*/
-    public func add(range: CCore.Range) {
+    public func add(range: MailCore.Range) {
         nativeInstance.addRange(range: range);
     }
     
     /** Removes a range of integers from the index set.*/
-    public func remove(range: CCore.Range) {
+    public func remove(range: MailCore.Range) {
         nativeInstance.removeRange(range: range);
     }
     
     /** Removes all integers that are not in the given range.*/
-    public func intersects(range: CCore.Range) {
+    public func intersects(range: MailCore.Range) {
         nativeInstance.intersectsRange(range: range);
     }
     
@@ -84,8 +84,8 @@ public class IndexSet {
     }
     
     /** Returns all the ranges of ths index set.*/
-    public func allRanges() -> Array<CCore.Range> {
-        var array  = Array<CCore.Range>();
+    public func allRanges() -> Array<MailCore.Range> {
+        var array  = Array<MailCore.Range>();
         for index in 1...self.rangesCount() {
             array.append(nativeInstance.range(idx: index));
         }

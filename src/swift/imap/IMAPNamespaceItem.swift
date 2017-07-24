@@ -1,5 +1,5 @@
 import Foundation
-import CCore
+
 
 public class IMAPNamespaceItem {
     

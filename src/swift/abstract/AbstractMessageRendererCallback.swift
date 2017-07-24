@@ -1,5 +1,5 @@
 import Foundation
-import CCore
+
 
 internal class AbstractMessageRendererCallback {
     

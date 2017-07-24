@@ -1,4 +1,4 @@
-module CCore [system] {
+module MCCore [system] {
     header "CCore.h"
     export *
 }

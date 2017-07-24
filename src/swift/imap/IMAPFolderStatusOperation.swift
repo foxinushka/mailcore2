@@ -1,5 +1,5 @@
 import Foundation
-import CCore
+
 
 /**
  The class is used to get folder metadata (like UIDVALIDITY, UIDNEXT, etc).

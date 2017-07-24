@@ -8,7 +8,7 @@
 
 #include "MCZipPrivate.h"
 
-#import "NSObject+MCO.h"
+//#import "NSObject+MCO.h"
 #import <Foundation/Foundation.h>
 
 using namespace mailcore;
@@ -26,5 +26,6 @@ String * mailcore::TemporaryDirectoryForZip()
         return nil;
     }
     
-    return MCO_FROM_OBJC(String, directoryString);
+    //FIXME
+    return NULL;//MCO_FROM_OBJC(String, directoryString);
 }

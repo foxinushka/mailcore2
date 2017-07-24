@@ -1,5 +1,5 @@
 import Foundation
-import CCore
+
 
 extension UInt32 : Convertible  {
     
