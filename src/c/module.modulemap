@@ -1,4 +1,0 @@
-module MCCore [system] {
-    header "CCore.h"
-    export *
-}

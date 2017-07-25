@@ -3,7 +3,7 @@ import Foundation
 
 public class IMAPSearchOperation : IMAPBaseOperation {
     
-    public typealias CompletionBlock = (Error?, IndexSet?) -> Void
+    public typealias CompletionBlock = (Error?, MCOIndexSet?) -> Void
 	
     private var operation: CIMAPSearchOperation;
     private var completionBlock : CompletionBlock?;
@@ -44,7 +44,7 @@ public class IMAPSearchOperation : IMAPBaseOperation {
         
         let errorCode = error();
         if errorCode == ErrorNone {
-            completionBlock!(nil, IndexSet(operation.uids()));
+            completionBlock!(nil, MCOIndexSet(operation.uids()));
         }
         else {
             completionBlock!(MailCoreError(code: errorCode), nil);

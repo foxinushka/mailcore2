@@ -2,7 +2,7 @@ import Foundation
 
 
 /** similar to NSMutableIndexSet but supports int64_t.  MCRange has a location (uint64_t) and length (uint64_t). */
-public class IndexSet {
+public class MCOIndexSet {
     
     internal var nativeInstance: CIndexSet;
     
@@ -19,18 +19,18 @@ public class IndexSet {
     }
     
     /** Creates an empty index set.*/
-    public static func indexSet() -> IndexSet {
-        return IndexSet();
+    public static func indexSet() -> MCOIndexSet {
+        return MCOIndexSet();
     }
     
     /** Creates an index set that contains a range of integers.*/
-    public static func indexSet(range: MailCore.Range) -> IndexSet {
-        return IndexSet(CIndexSet(range: range));
+    public static func indexSet(range: MailCore.Range) -> MCOIndexSet {
+        return MCOIndexSet(CIndexSet(range: range));
     }
     
     /** Creates an index set with a single integer.*/
-    public static func indexSet(index: UInt64) -> IndexSet {
-        return IndexSet(CIndexSet(idx: index));
+    public static func indexSet(index: UInt64) -> MCOIndexSet {
+        return MCOIndexSet(CIndexSet(idx: index));
     }
     
     /** Returns the number of integers in that index set.*/
@@ -69,17 +69,17 @@ public class IndexSet {
     }
     
     /** Adds all indexes from an other index set to the index set.*/
-    public func add(indexSet: IndexSet) {
+    public func add(indexSet: MCOIndexSet) {
         nativeInstance.addIndexSet(indexSet: indexSet.nativeInstance);
     }
     
     /** Remove all indexes from an other index set from the index set.*/
-    public func remove(indexSet: IndexSet) {
+    public func remove(indexSet: MCOIndexSet) {
         nativeInstance.removeIndexSet(indexSet: indexSet.nativeInstance);
     }
     
     /** Removes all integers that are not in the given index set.*/
-    public func intersects(indexSet: IndexSet) {
+    public func intersects(indexSet: MCOIndexSet) {
         nativeInstance.intersectsIndexSet(indexSet: indexSet.nativeInstance);
     }
     
@@ -102,8 +102,8 @@ public class IndexSet {
     
     /** Returns an NSIndexSet from a MCOIndexSet */
     //- (NSIndexSet *) nsIndexSet;
-    public func foundationIndexSet() -> Foundation.IndexSet {
-        var result = Foundation.IndexSet();
+    public func foundationIndexSet() -> IndexSet {
+        var result = IndexSet();
         let ranges = self.allRanges();
         for range in ranges {
             result.insert(integersIn: Int(range.location)...Int(range.location + range.length));

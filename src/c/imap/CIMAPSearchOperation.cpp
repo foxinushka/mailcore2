@@ -1,4 +1,4 @@
-#include "СIMAPSearchOperation.h"
+#include "CIMAPSearchOperation.h"
 #include "CBase+Private.h"
 #include <MailCore/MCAsync.h>
 

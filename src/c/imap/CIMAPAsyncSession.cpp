@@ -11,7 +11,7 @@
 #include "CIMAPFetchContentOperation.h"
 #include "CIMAPFolderInfoOperation.h"
 #include "CIMAPFolderStatusOperation.h"
-#include "СIMAPSearchOperation.h"
+#include "CIMAPSearchOperation.h"
 
 #include "CBase+Private.h"
 

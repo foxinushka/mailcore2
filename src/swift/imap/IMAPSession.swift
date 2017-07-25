@@ -341,7 +341,7 @@ public class IMAPSession {
         return IMAPOperation(operation: String.utf16(folder, { session.deleteFolderOperation(folder: $0) }))
     }
 
-    public func storeFlagsByUIDOperation(folder:String, uids:IndexSet, kind:IMAPStoreFlagsRequestKind, flags:MessageFlag, customFlags:Array<String>) -> IMAPOperation {
+    public func storeFlagsByUIDOperation(folder:String, uids:MCOIndexSet, kind:IMAPStoreFlagsRequestKind, flags:MessageFlag, customFlags:Array<String>) -> IMAPOperation {
         return IMAPOperation(operation: String.utf16(folder, { session.storeFlagsByUIDOperation(folder: $0, set: uids.cast(), kind: kind, flags: flags, customFlags: Array<String>.cast(customFlags)) }));
     }
     
@@ -358,7 +358,7 @@ public class IMAPSession {
      ...
      }];
      */
-    public func storeFlagsOperation(folder: String, uids: IndexSet, kind: IMAPStoreFlagsRequestKind, flags: MessageFlag) -> IMAPOperation {
+    public func storeFlagsOperation(folder: String, uids: MCOIndexSet, kind: IMAPStoreFlagsRequestKind, flags: MessageFlag) -> IMAPOperation {
         return IMAPOperation.init(operation: String.utf16(folder, { session.storeFlagsByUIDOperation(folder: $0, set: uids.nativeInstance, kind: kind, flags: flags, customFlags: CArray()) }))
     }
     
@@ -375,7 +375,7 @@ public class IMAPSession {
      ...
      }];
      */
-    public func storeFlagsOperation(folder: String, numbers: IndexSet, kind: IMAPStoreFlagsRequestKind, flags: MessageFlag) -> IMAPOperation {
+    public func storeFlagsOperation(folder: String, numbers: MCOIndexSet, kind: IMAPStoreFlagsRequestKind, flags: MessageFlag) -> IMAPOperation {
         return IMAPOperation.init(operation: String.utf16(folder, { session.storeFlagsByNumberOperation(folder: $0, numbers: numbers.nativeInstance, kind: kind, flags: flags, customFlags: CArray()) }))
     }
     
@@ -393,7 +393,7 @@ public class IMAPSession {
      ...
      }];
      */
-    public func storeFlagsOperation(folder: String, uids: IndexSet, kind: IMAPStoreFlagsRequestKind, flags: MessageFlag, customFlags: Array<String>) -> IMAPOperation {
+    public func storeFlagsOperation(folder: String, uids: MCOIndexSet, kind: IMAPStoreFlagsRequestKind, flags: MessageFlag, customFlags: Array<String>) -> IMAPOperation {
         return IMAPOperation.init(operation: String.utf16(folder, { session.storeFlagsByUIDOperation(folder: $0, set: uids.nativeInstance, kind: kind, flags: flags, customFlags: customFlags.cast()) }))
     }
     
@@ -411,7 +411,7 @@ public class IMAPSession {
      ...
      }];
      */
-    public func storeFlagsOperation(folder: String, numbers: IndexSet, kind: IMAPStoreFlagsRequestKind, flags: MessageFlag, customFlags: Array<String>) -> IMAPOperation {
+    public func storeFlagsOperation(folder: String, numbers: MCOIndexSet, kind: IMAPStoreFlagsRequestKind, flags: MessageFlag, customFlags: Array<String>) -> IMAPOperation {
         return IMAPOperation.init(operation: String.utf16(folder, { session.storeFlagsByNumberOperation(folder: $0, numbers: numbers.nativeInstance, kind: kind, flags: flags, customFlags: customFlags.cast()) }))
     }
     
@@ -428,7 +428,7 @@ public class IMAPSession {
      ...
      }];
      */
-    public func storeLabelsOperation(folder: String, numbers: IndexSet, kind: IMAPStoreFlagsRequestKind, labels: Array<String>) -> IMAPOperation {
+    public func storeLabelsOperation(folder: String, numbers: MCOIndexSet, kind: IMAPStoreFlagsRequestKind, labels: Array<String>) -> IMAPOperation {
         return IMAPOperation.init(operation: String.utf16(folder, { session.storeLabelsByNumberOperation(folder: $0, numbers: numbers.nativeInstance, kind: kind, labels: labels.cast()) }))
     }
     
@@ -445,7 +445,7 @@ public class IMAPSession {
      ...
      }];
      */
-    public func storeLabelsOperation(folder: String, uids: IndexSet, kind: IMAPStoreFlagsRequestKind, labels: Array<String>) -> IMAPOperation {
+    public func storeLabelsOperation(folder: String, uids: MCOIndexSet, kind: IMAPStoreFlagsRequestKind, labels: Array<String>) -> IMAPOperation {
         return IMAPOperation.init(operation: String.utf16(folder, { session.storeLabelsByUIDOperation(folder: $0, uids: uids.nativeInstance, kind: kind, labels: labels.cast()) }))
     }
     
@@ -517,7 +517,7 @@ public class IMAPSession {
      }];
      }];
      */
-    public func fetchMessagesByNumber(folder:String, type:IMAPMessagesRequestKind, numbers:IndexSet) -> IMAPFetchMessagesOperation {
+    public func fetchMessagesByNumber(folder:String, type:IMAPMessagesRequestKind, numbers:MCOIndexSet) -> IMAPFetchMessagesOperation {
         return IMAPFetchMessagesOperation(operation: String.utf16(folder, { session.fetchMessagesByNumberOperation(folder: $0, kind: type, numbers: numbers.cast()) }));
     }
 
@@ -543,7 +543,7 @@ public class IMAPSession {
      }];
      }];
      */
-    public func fetchMessagesOperation(folder:String, kind:IMAPMessagesRequestKind, numbers:IndexSet) -> IMAPFetchMessagesOperation {
+    public func fetchMessagesOperation(folder:String, kind:IMAPMessagesRequestKind, numbers:MCOIndexSet) -> IMAPFetchMessagesOperation {
         return IMAPFetchMessagesOperation(operation: String.utf16(folder, { session.fetchMessagesByUIDOperation(folder: $0, kind: kind, uids: numbers.cast()) }));
     }
 
@@ -562,7 +562,7 @@ public class IMAPSession {
      @warn *Important*: This is only for servers that support Conditional Store. See [RFC4551](http://tools.ietf.org/html/rfc4551)
      vanishedMessages will be set only for servers that support QRESYNC. See [RFC5162](http://tools.ietf.org/html/rfc5162)
      */
-    public func syncMessages(folder:String, kind:IMAPMessagesRequestKind, uids:IndexSet, modSeq:UInt64) -> IMAPFetchMessagesOperation {
+    public func syncMessages(folder:String, kind:IMAPMessagesRequestKind, uids:MCOIndexSet, modSeq:UInt64) -> IMAPFetchMessagesOperation {
         return IMAPFetchMessagesOperation(operation: String.utf16(folder, { session.syncMessagesByUIDOperation(folder: $0, kind: kind, uids: uids.cast(), modSeq: modSeq) }));
     }
 
@@ -757,7 +757,7 @@ public class IMAPSession {
      NSLog(@"copied to folder with UID mapping %@", uidMapping);
      }];
      */
-    public func copyMessagesOperation(folder:String, uids:IndexSet, destFolder:String) -> IMAPCopyMessagesOperation {
+    public func copyMessagesOperation(folder:String, uids:MCOIndexSet, destFolder:String) -> IMAPCopyMessagesOperation {
         return IMAPCopyMessagesOperation(operation: String.utf16(folder, destFolder, { folderPtr, destFolderPtr in
             session.copyMessagesOperation(folder: folderPtr, uids: uids.cast(), destFolder: destFolderPtr)
         }))
@@ -880,7 +880,7 @@ public class IMAPSession {
      NSLog(@"moved to folder with UID mapping %@", uidMapping);
      }];
      */
-    public func moveMessagesOperation(folder: String, uids: IndexSet, destFolder: String) -> IMAPMoveMessagesOperation {
+    public func moveMessagesOperation(folder: String, uids: MCOIndexSet, destFolder: String) -> IMAPMoveMessagesOperation {
         return IMAPMoveMessagesOperation.init(operation: String.utf16(folder, destFolder, { folderPtr, destFolderPtr in
             session.moveMessagesOperation(folder: folderPtr, uids: uids.nativeInstance, destFolder: destFolderPtr)
         }))

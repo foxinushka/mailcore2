@@ -8,44 +8,44 @@
 
 /* Begin PBXBuildFile section */
 		00922FC3F11869C3F7AB0A8A /* MCMessageBuilder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C64EA6E2169E847800778456 /* MCMessageBuilder.cpp */; };
-		00C58A9AA11F95A5499671DA /* MCPOPAsyncSession.h in Headers */ = {isa = PBXBuildFile; fileRef = C62C6EEE16A7B67600737497 /* MCPOPAsyncSession.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		00C58A9AA11F95A5499671DA /* MCPOPAsyncSession.h in Headers */ = {isa = PBXBuildFile; fileRef = C62C6EEE16A7B67600737497 /* MCPOPAsyncSession.h */; };
 		04738A6E274B7A530F34452C /* MCIMAPFetchContentOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C64EA81B16A29DC100778456 /* MCIMAPFetchContentOperation.cpp */; };
 		052AAA74C5D3B28F3167F974 /* MCAssert.c in Sources */ = {isa = PBXBuildFile; fileRef = C64EA6A7169E847800778456 /* MCAssert.c */; };
 		05907892CA96447EAB5C53E7 /* MCNetService.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6CF62C3175324F0006398B9 /* MCNetService.cpp */; };
 		05A17F9F27B495ED0F667572 /* MCAddress.h in Headers */ = {isa = PBXBuildFile; fileRef = C64EA69D169E847800778456 /* MCAddress.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		05AAF9D05587FD8969F5C6AD /* MCPOPAsyncSession.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C62C6EED16A7B67600737497 /* MCPOPAsyncSession.cpp */; };
 		05B449A377A3B80C86BD140F /* MCObjectMac.mm in Sources */ = {isa = PBXBuildFile; fileRef = C668E2C51735C8D500A2BB47 /* MCObjectMac.mm */; };
-		0687DC326F72F66453ABBB4D /* MCLibetpanTypes.h in Headers */ = {isa = PBXBuildFile; fileRef = C6AC1131171249DF00B715B7 /* MCLibetpanTypes.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		0687DC326F72F66453ABBB4D /* MCLibetpanTypes.h in Headers */ = {isa = PBXBuildFile; fileRef = C6AC1131171249DF00B715B7 /* MCLibetpanTypes.h */; };
 		06C96CA5C1753F6DEF464D23 /* MCRange.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C64EA6B3169E847800778456 /* MCRange.cpp */; };
 		07121054A1A84C9D546096FC /* MCObject.h in Headers */ = {isa = PBXBuildFile; fileRef = C64EA6B2169E847800778456 /* MCObject.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		0783C68E08E739D7B781E56B /* MCMailProvider.h in Headers */ = {isa = PBXBuildFile; fileRef = C6CF62C0175324F0006398B9 /* MCMailProvider.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		0783C68E08E739D7B781E56B /* MCMailProvider.h in Headers */ = {isa = PBXBuildFile; fileRef = C6CF62C0175324F0006398B9 /* MCMailProvider.h */; };
 		07CD65B1F75E76B5D7A6A1E1 /* MCSMTPSendWithDataOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C64EA79C169F29A700778456 /* MCSMTPSendWithDataOperation.cpp */; };
 		07DE281343371AAAB7375DF2 /* MCAsync.h in Headers */ = {isa = PBXBuildFile; fileRef = C64EA7E416A14A4500778456 /* MCAsync.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		07E0E590A13DD46EFF9D22D4 /* ucln_cmn.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BDCD7CBB1A70771B0001DCC3 /* ucln_cmn.cpp */; };
 		08B778137CC1EEB8B7C4ABC1 /* MCAbstractMultipart.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C64EA698169E847800778456 /* MCAbstractMultipart.cpp */; };
 		095E03511D3D3D7BB782BB6C /* MCIMAPIdentity.h in Headers */ = {isa = PBXBuildFile; fileRef = C63D315B17C9155C00A4D993 /* MCIMAPIdentity.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0B0829A867DE7C3A26599328 /* umutex.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BDCD7CED1A7079300001DCC3 /* umutex.cpp */; };
-		0B4D4247DCCA355F647485D3 /* MCMD5.h in Headers */ = {isa = PBXBuildFile; fileRef = C6D6F951171E5CB8006F5B28 /* MCMD5.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		0B4D4247DCCA355F647485D3 /* MCMD5.h in Headers */ = {isa = PBXBuildFile; fileRef = C6D6F951171E5CB8006F5B28 /* MCMD5.h */; };
 		0B87684F911F754579375354 /* MCNNTPFetchHeaderOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 84D73735199BF7F2005124E5 /* MCNNTPFetchHeaderOperation.cpp */; };
-		0BB3B1BDD6665F07D09DF42A /* MCIMAPCheckAccountOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = C64EA7F716A15A7800778456 /* MCIMAPCheckAccountOperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		0BB3B1BDD6665F07D09DF42A /* MCIMAPCheckAccountOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = C64EA7F716A15A7800778456 /* MCIMAPCheckAccountOperation.h */; };
 		0BF2B23FB724081E007CB7D8 /* MCAsyncIMAP.h in Headers */ = {isa = PBXBuildFile; fileRef = C64EA7F916A15A9200778456 /* MCAsyncIMAP.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0C6EE4C007B5FE22293F1844 /* MCString.h in Headers */ = {isa = PBXBuildFile; fileRef = C64EA6B8169E847800778456 /* MCString.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		0CF163C3A514931EA15A94F1 /* MCIMAPSyncResult.h in Headers */ = {isa = PBXBuildFile; fileRef = C64BB22016E34DCB000DB34C /* MCIMAPSyncResult.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		0DEBB177E93B2A28821635FB /* MCAbstractMultipart.h in Headers */ = {isa = PBXBuildFile; fileRef = C64EA699169E847800778456 /* MCAbstractMultipart.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		0CF163C3A514931EA15A94F1 /* MCIMAPSyncResult.h in Headers */ = {isa = PBXBuildFile; fileRef = C64BB22016E34DCB000DB34C /* MCIMAPSyncResult.h */; };
+		0DEBB177E93B2A28821635FB /* MCAbstractMultipart.h in Headers */ = {isa = PBXBuildFile; fileRef = C64EA699169E847800778456 /* MCAbstractMultipart.h */; };
 		0E4EAA748969A74A2F8AC40B /* MCZip.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6E665AA1796500B0063F2CF /* MCZip.cpp */; };
 		0EBCD5964A48085343093B7E /* ioapi.c in Sources */ = {isa = PBXBuildFile; fileRef = C6E665AD1796500B0063F2CF /* ioapi.c */; };
-		0F58BD3A93B79D70A72BAB38 /* MCAbstract.h in Headers */ = {isa = PBXBuildFile; fileRef = C64EA693169E847800778456 /* MCAbstract.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		0F58BD3A93B79D70A72BAB38 /* MCAbstract.h in Headers */ = {isa = PBXBuildFile; fileRef = C64EA693169E847800778456 /* MCAbstract.h */; };
 		0FDDF57D7053BA455E9BDD64 /* MCDataMac.mm in Sources */ = {isa = PBXBuildFile; fileRef = C6D4FD4219FB7DAA001F7E01 /* MCDataMac.mm */; };
 		10904693FA93BED3FF76253E /* MCJSON.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6D6F7F7171E595D006F5B28 /* MCJSON.cpp */; };
 		10B11B475533B0C7AD21CD90 /* MCIMAPIdleOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C64EA82716A29EF400778456 /* MCIMAPIdleOperation.cpp */; };
 		11C045EAE412D0EA3713DE5C /* MCJSONParser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6D6F965171FCF9F006F5B28 /* MCJSONParser.cpp */; };
-		121442C3EED1EA437FE04358 /* MCData.h in Headers */ = {isa = PBXBuildFile; fileRef = C64EA6AA169E847800778456 /* MCData.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		121442C3EED1EA437FE04358 /* MCData.h in Headers */ = {isa = PBXBuildFile; fileRef = C64EA6AA169E847800778456 /* MCData.h */; };
 		138571845D3FB15CED01175B /* MCPOPFetchMessageOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = C62C6EF416A7C6E900737497 /* MCPOPFetchMessageOperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		13C7C4080CC5DF60AC79E003 /* MCPOPAsyncSession.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C62C6EED16A7B67600737497 /* MCPOPAsyncSession.cpp */; };
 		14B99C0280A9FE59EAA0942A /* MCIMAPFetchFoldersOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C64EA7FA16A2959700778456 /* MCIMAPFetchFoldersOperation.cpp */; };
 		152BD5E7A7548C7AE07AF6DD /* MCPOPSession.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C64EA6DD169E847800778456 /* MCPOPSession.cpp */; };
 		153444EFB4CCB86F2CABAA6C /* MCSMTPLoginOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8B0095C71A00DDC500F84BC0 /* MCSMTPLoginOperation.cpp */; };
-		15B9D86694481EAF7D3629B6 /* MCSMTPOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = C64EA7D916A1386600778456 /* MCSMTPOperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		15B9D86694481EAF7D3629B6 /* MCSMTPOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = C64EA7D916A1386600778456 /* MCSMTPOperation.h */; };
 		15FBB468AE17AD7D04FF74DC /* MCIMAPDisconnectOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6081679177635D2001F1018 /* MCIMAPDisconnectOperation.cpp */; };
 		163FE32A65D83A98E41AD136 /* MCIMAPOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C64EA7EF16A15A4D00778456 /* MCIMAPOperation.cpp */; };
 		16C8E3A0A7EA58FE8155E49E /* uarrsort.c in Sources */ = {isa = PBXBuildFile; fileRef = BDCD7CBA1A70771B0001DCC3 /* uarrsort.c */; };
@@ -55,7 +55,7 @@
 		17CCD054BAEE51B7DF5F4ADC /* MCPOPFetchHeaderOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C62C6EF016A7C6DE00737497 /* MCPOPFetchHeaderOperation.cpp */; };
 		17D0AB66F5601442684FA08D /* MCIMAPMultiDisconnectOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6EFFBC6182BBF5700CFF656 /* MCIMAPMultiDisconnectOperation.cpp */; };
 		17E6289FBAC69CD514148080 /* MCNNTPCheckAccountOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 84D73744199BFA8C005124E5 /* MCNNTPCheckAccountOperation.cpp */; };
-		17E7E295C3F508352AC45B4E /* MCIMAPMessageRenderingOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = DA0F1C7A177C07B300F0D3B4 /* MCIMAPMessageRenderingOperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		17E7E295C3F508352AC45B4E /* MCIMAPMessageRenderingOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = DA0F1C7A177C07B300F0D3B4 /* MCIMAPMessageRenderingOperation.h */; };
 		17EE5F85CDACBCF56AEBB4E6 /* ucln_cmn.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BDCD7CBB1A70771B0001DCC3 /* ucln_cmn.cpp */; };
 		1820E7D51BD403ED00835D1E /* MCIMAPCustomCommandOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1820E7D31BD403ED00835D1E /* MCIMAPCustomCommandOperation.cpp */; };
 		1820E7D61BD403ED00835D1E /* MCIMAPCustomCommandOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1820E7D31BD403ED00835D1E /* MCIMAPCustomCommandOperation.cpp */; };
@@ -68,7 +68,7 @@
 		1A108F3A843C2059F3382AC3 /* MCIMAPFolderInfo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C673EBEB1A46B41000A53F7F /* MCIMAPFolderInfo.cpp */; };
 		1A47ED20F1693DE237671B75 /* MCNNTPFetchHeaderOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 84D73735199BF7F2005124E5 /* MCNNTPFetchHeaderOperation.cpp */; };
 		1A9C29BA400BFD1284B1F0EB /* MCIMAPSearchExpression.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C64EA6D4169E847800778456 /* MCIMAPSearchExpression.cpp */; };
-		1AD0E83FAC5BF79037F26F63 /* MCRenderer.h in Headers */ = {isa = PBXBuildFile; fileRef = C63CD68716BE1AB600DB18F1 /* MCRenderer.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1AD0E83FAC5BF79037F26F63 /* MCRenderer.h in Headers */ = {isa = PBXBuildFile; fileRef = C63CD68716BE1AB600DB18F1 /* MCRenderer.h */; };
 		1AE39966A02FFB7FB1F11512 /* MCAutoreleasePool.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C64EA6A2169E847800778456 /* MCAutoreleasePool.cpp */; };
 		1B2A94D60BE845DAA517B22E /* csrecog.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BDCD7C6D1A70771B0001DCC3 /* csrecog.cpp */; };
 		1B68E766F528F8EB6F8E675B /* MCPOPMessageInfo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C64EA6DA169E847800778456 /* MCPOPMessageInfo.cpp */; };
@@ -83,7 +83,7 @@
 		1FD0A71D29FFD452A3E2ACAC /* inputext.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BDCD7CB91A70771B0001DCC3 /* inputext.cpp */; };
 		1FF2CDE08DD91C05320CD8CF /* MCAbstractMultipart.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C64EA698169E847800778456 /* MCAbstractMultipart.cpp */; };
 		20995A38C1A7C39FC9C4EA0D /* MCIMAPPart.h in Headers */ = {isa = PBXBuildFile; fileRef = C64EA6D2169E847800778456 /* MCIMAPPart.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		20FAC3A40837DDE7B117A58B /* MCSet.h in Headers */ = {isa = PBXBuildFile; fileRef = C64EA6B6169E847800778456 /* MCSet.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		20FAC3A40837DDE7B117A58B /* MCSet.h in Headers */ = {isa = PBXBuildFile; fileRef = C64EA6B6169E847800778456 /* MCSet.h */; };
 		21426C6F22B5AD733A79661A /* MCMessageHeader.h in Headers */ = {isa = PBXBuildFile; fileRef = C64EA6A0169E847800778456 /* MCMessageHeader.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		22509B3CE33E5FF1F02C578A /* MCAddress.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C64EA69C169E847800778456 /* MCAddress.cpp */; };
 		22B4886524CCC93C1B72108D /* MCHTMLRendererIMAPDataCallback.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DAACAD4F17886807000B4517 /* MCHTMLRendererIMAPDataCallback.cpp */; };
@@ -93,7 +93,7 @@
 		246C6256FB3D2D45C060531C /* MCMultipart.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C64EA6E8169E847800778456 /* MCMultipart.cpp */; };
 		2470565C009E610B456AEBD9 /* MCAbstractMessage.h in Headers */ = {isa = PBXBuildFile; fileRef = C64EA695169E847800778456 /* MCAbstractMessage.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		2470AD3233C41BE5D914FDE3 /* MCNNTPFetchOverviewOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 84CFA98619F7159700FE35D2 /* MCNNTPFetchOverviewOperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		2505AB6A90F7484D3CE0B8CB /* MCNNTPFetchAllArticlesOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 84D73741199BF963005124E5 /* MCNNTPFetchAllArticlesOperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		2505AB6A90F7484D3CE0B8CB /* MCNNTPFetchAllArticlesOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 84D73741199BF963005124E5 /* MCNNTPFetchAllArticlesOperation.h */; };
 		258E3EB3B06E71D29AF6A4E1 /* MCSMTPSession.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C64EA6EE169E847800778456 /* MCSMTPSession.cpp */; };
 		26CA50680EBC1B1A27F9051E /* MCIMAPNamespaceItem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C64EA6CF169E847800778456 /* MCIMAPNamespaceItem.cpp */; };
 		2740D3722F3FB8E43C9927B3 /* udataswp.c in Sources */ = {isa = PBXBuildFile; fileRef = BDCD7CBD1A70771B0001DCC3 /* udataswp.c */; };
@@ -107,13 +107,13 @@
 		27780C3219CF9CD100C77E44 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6ED6D1917A1919500A4A14C /* Security.framework */; };
 		27780C3619CF9CD100C77E44 /* providers.json in Resources */ = {isa = PBXBuildFile; fileRef = 84AF9E7D172DBAF600E60AA3 /* providers.json */; };
 		27780C3D19CF9D9800C77E44 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27780C3C19CF9D9800C77E44 /* CFNetwork.framework */; };
-		27AA5A2F27A4C3B9C8B7332F /* MCIMAPIdentity.h in Headers */ = {isa = PBXBuildFile; fileRef = C63D315B17C9155C00A4D993 /* MCIMAPIdentity.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		27AA5A2F27A4C3B9C8B7332F /* MCIMAPIdentity.h in Headers */ = {isa = PBXBuildFile; fileRef = C63D315B17C9155C00A4D993 /* MCIMAPIdentity.h */; };
 		27E91D601A80D3F4005A3244 /* MCMXRecordResolverOperation.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2744B1691A7A4637009E9E67 /* MCMXRecordResolverOperation.h */; };
-		27EE03BBC916FB16424F9CF9 /* MCHashMap.h in Headers */ = {isa = PBXBuildFile; fileRef = C64EA6AE169E847800778456 /* MCHashMap.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		27EE03BBC916FB16424F9CF9 /* MCHashMap.h in Headers */ = {isa = PBXBuildFile; fileRef = C64EA6AE169E847800778456 /* MCHashMap.h */; };
 		28B9BBA6C95D246A0A2B1C0C /* MCIMAPConnectOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 943F1A9817D964F600F0C798 /* MCIMAPConnectOperation.cpp */; };
 		2971F87A8881733BCE4628CF /* MCNNTPSession.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8491899F18C93FB7002063A3 /* MCNNTPSession.cpp */; };
 		29E9736A4C4A3129ECA6F9C5 /* MCAddressDisplay.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C63CD67716BDCDD400DB18F1 /* MCAddressDisplay.cpp */; };
-		2A072B0DF7CE10C882876F13 /* MCOperationQueue.h in Headers */ = {isa = PBXBuildFile; fileRef = C64EA6C2169E847800778456 /* MCOperationQueue.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		2A072B0DF7CE10C882876F13 /* MCOperationQueue.h in Headers */ = {isa = PBXBuildFile; fileRef = C64EA6C2169E847800778456 /* MCOperationQueue.h */; };
 		2A37E055FE5EAAA415CB31F2 /* MCDataStreamDecoder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 81416BDC1CF8BB17000A4299 /* MCDataStreamDecoder.cpp */; };
 		2AB202A1680EBDDC41BC8853 /* MCIMAPFetchParsedContentOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 8199FBF019FAF1270040BBC3 /* MCIMAPFetchParsedContentOperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		2ADDB288E4999ACDEDACA50D /* MCPOPAsyncSession.h in Headers */ = {isa = PBXBuildFile; fileRef = C62C6EEE16A7B67600737497 /* MCPOPAsyncSession.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -130,27 +130,27 @@
 		3055EB3D5ABB36F4CCA25468 /* MCIMAPFolderStatusOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 9EF9AB0E175F30C20027FA3B /* MCIMAPFolderStatusOperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		31A2A745B3572CD9EFE0BC6B /* MCIMAPIdentityOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C62C6ED216A2A0E600737497 /* MCIMAPIdentityOperation.cpp */; };
 		31B494515F08125DC498E33E /* MCIMAPSyncResult.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C64BB21F16E34DCA000DB34C /* MCIMAPSyncResult.cpp */; };
-		32032AFB325A68BBDC17E2A9 /* MCNNTPAsyncSession.h in Headers */ = {isa = PBXBuildFile; fileRef = 84D7372B199BF66C005124E5 /* MCNNTPAsyncSession.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		32032AFB325A68BBDC17E2A9 /* MCNNTPAsyncSession.h in Headers */ = {isa = PBXBuildFile; fileRef = 84D7372B199BF66C005124E5 /* MCNNTPAsyncSession.h */; };
 		3206FD3ED89515925DA9BF3D /* MCIMAPCustomCommandOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 1820E7D41BD403ED00835D1E /* MCIMAPCustomCommandOperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		323CA434D479B1DA1065DBAE /* MCIMAPMessage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C64EA6C7169E847800778456 /* MCIMAPMessage.cpp */; };
 		328F2F0668D2477E714CD275 /* MCUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = C64EA6B9169E847800778456 /* MCUtils.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		3327648AE081FD3818B29E9F /* MCIMAPCopyMessagesOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = C64EA81316A29A1000778456 /* MCIMAPCopyMessagesOperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3327648AE081FD3818B29E9F /* MCIMAPCopyMessagesOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = C64EA81316A29A1000778456 /* MCIMAPCopyMessagesOperation.h */; };
 		33418C6B4CBA051E587F9A11 /* MCPOPSession.h in Headers */ = {isa = PBXBuildFile; fileRef = C64EA6DE169E847800778456 /* MCPOPSession.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		347C957CA245D0BA62CA9D1B /* MCIMAPSearchOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C64EA82416A29EE000778456 /* MCIMAPSearchOperation.cpp */; };
-		3503E423F8702DDC40450B6F /* MCIMAPMessagePart.h in Headers */ = {isa = PBXBuildFile; fileRef = C64EA6CA169E847800778456 /* MCIMAPMessagePart.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3503E423F8702DDC40450B6F /* MCIMAPMessagePart.h in Headers */ = {isa = PBXBuildFile; fileRef = C64EA6CA169E847800778456 /* MCIMAPMessagePart.h */; };
 		35A4FE25031081ADFD4C0698 /* MCIMAPMoveMessagesOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 8568A4121C610D9800FF4470 /* MCIMAPMoveMessagesOperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		35A95B39787BF973CF69C225 /* MCAbstractPart.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C64EA69A169E847800778456 /* MCAbstractPart.cpp */; };
 		363B2284B10774018DCE4B2C /* MCIMAPIdentity.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C63D315A17C9155C00A4D993 /* MCIMAPIdentity.cpp */; };
 		366F0B2B1441B6B76913C90D /* MCSMTPProgressCallback.h in Headers */ = {isa = PBXBuildFile; fileRef = C64EA6ED169E847800778456 /* MCSMTPProgressCallback.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3686A6EC7B3B16D6CF073851 /* MCHTMLRendererCallback.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C63CD68416BE148B00DB18F1 /* MCHTMLRendererCallback.cpp */; };
-		368A68E76FE5828719712501 /* MCValue.h in Headers */ = {isa = PBXBuildFile; fileRef = C64EA6BB169E847800778456 /* MCValue.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		36A952AB0AB7A7E7370AC019 /* MCMessageHeader.h in Headers */ = {isa = PBXBuildFile; fileRef = C64EA6A0169E847800778456 /* MCMessageHeader.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		36C730260AC040622F91CFE0 /* MCNNTPFetchServerTimeOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 84CFA98E19F724E500FE35D2 /* MCNNTPFetchServerTimeOperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		3701F6C365000E9D6F4087F8 /* MCNNTPFetchArticleOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 84D7373C199BF83B005124E5 /* MCNNTPFetchArticleOperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		368A68E76FE5828719712501 /* MCValue.h in Headers */ = {isa = PBXBuildFile; fileRef = C64EA6BB169E847800778456 /* MCValue.h */; };
+		36A952AB0AB7A7E7370AC019 /* MCMessageHeader.h in Headers */ = {isa = PBXBuildFile; fileRef = C64EA6A0169E847800778456 /* MCMessageHeader.h */; };
+		36C730260AC040622F91CFE0 /* MCNNTPFetchServerTimeOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 84CFA98E19F724E500FE35D2 /* MCNNTPFetchServerTimeOperation.h */; };
+		3701F6C365000E9D6F4087F8 /* MCNNTPFetchArticleOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 84D7373C199BF83B005124E5 /* MCNNTPFetchArticleOperation.h */; };
 		378720EB8B04256FE0E8BFE9 /* MCIMAPFetchParsedContentOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8199FBEF19FAF1270040BBC3 /* MCIMAPFetchParsedContentOperation.cpp */; };
 		3796429D231DB0384468F3A5 /* MCIMAPPart.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C64EA6D1169E847800778456 /* MCIMAPPart.cpp */; };
-		37CABFE41284A99A7B5C536C /* MCNNTPFetchHeaderOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 84D73736199BF7F2005124E5 /* MCNNTPFetchHeaderOperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		38ED0CA1511DD942B00B6DE5 /* MCAsyncIMAP.h in Headers */ = {isa = PBXBuildFile; fileRef = C64EA7F916A15A9200778456 /* MCAsyncIMAP.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		37CABFE41284A99A7B5C536C /* MCNNTPFetchHeaderOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 84D73736199BF7F2005124E5 /* MCNNTPFetchHeaderOperation.h */; };
+		38ED0CA1511DD942B00B6DE5 /* MCAsyncIMAP.h in Headers */ = {isa = PBXBuildFile; fileRef = C64EA7F916A15A9200778456 /* MCAsyncIMAP.h */; };
 		396EA1D46798EFCCB6BE03E6 /* MCIMAPCreateFolderOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C64EA80616A2999800778456 /* MCIMAPCreateFolderOperation.cpp */; };
 		3974E4AC43E9CC45C843E100 /* MCAbstract.h in Headers */ = {isa = PBXBuildFile; fileRef = C64EA693169E847800778456 /* MCAbstract.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		39A2E4CB28AE666834D20E60 /* MCIMAPQuotaOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4B3C1BDF17ABF4BB008BBF4C /* MCIMAPQuotaOperation.cpp */; };
@@ -158,13 +158,12 @@
 		3A3BC9EA3B314CB8185D1E11 /* ioapi.c in Sources */ = {isa = PBXBuildFile; fileRef = C6E665AD1796500B0063F2CF /* ioapi.c */; };
 		3A4EB6F1A1968F090A3712DA /* MCOperationCallback.h in Headers */ = {isa = PBXBuildFile; fileRef = C64EA6C0169E847800778456 /* MCOperationCallback.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3A78E3333C03F1EE466F8B61 /* MCBase64.c in Sources */ = {isa = PBXBuildFile; fileRef = C67597C117A8D65000DA69DF /* MCBase64.c */; };
-		3ABAFBB958CBDE353E5B057A /* MCIMAPFolderInfoOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = C62C6ED716A398FA00737497 /* MCIMAPFolderInfoOperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3ABAFBB958CBDE353E5B057A /* MCIMAPFolderInfoOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = C62C6ED716A398FA00737497 /* MCIMAPFolderInfoOperation.h */; };
 		3ABFC3DE00F422C0866FD2B6 /* MCIMAPFetchNamespaceOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = C64EA82B16A2A01400778456 /* MCIMAPFetchNamespaceOperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3AD29E8C23C53793D5AD6437 /* MCMessageHeader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C64EA69F169E847800778456 /* MCMessageHeader.cpp */; };
-		3AE87C548E91C091F13FE013 /* MCJSON.h in Headers */ = {isa = PBXBuildFile; fileRef = C6D6F7F8171E595D006F5B28 /* MCJSON.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		3B7A4C0C03E2097CF55E0C63 /* MCIMAPSearchOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = C64EA82516A29EE300778456 /* MCIMAPSearchOperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3AE87C548E91C091F13FE013 /* MCJSON.h in Headers */ = {isa = PBXBuildFile; fileRef = C6D6F7F8171E595D006F5B28 /* MCJSON.h */; };
 		3BA5DC055EE2FA934545729D /* MCNNTPOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 84D7372E199BF704005124E5 /* MCNNTPOperation.cpp */; };
-		3BA824E083E9A950365D795D /* MCIMAP.h in Headers */ = {isa = PBXBuildFile; fileRef = C64EA6C4169E847800778456 /* MCIMAP.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3BA824E083E9A950365D795D /* MCIMAP.h in Headers */ = {isa = PBXBuildFile; fileRef = C64EA6C4169E847800778456 /* MCIMAP.h */; };
 		3BBD6E38F8AE31A25B69FFED /* MCSMTPCheckAccountOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C64EA7E816A154B000778456 /* MCSMTPCheckAccountOperation.cpp */; };
 		3BD69427581B268E89557F81 /* MCPOPFetchMessagesOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = C62C6F0516A7E54400737497 /* MCPOPFetchMessagesOperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3BE174E097F4B40946B905CD /* MCMailProvidersManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6CF62C1175324F0006398B9 /* MCMailProvidersManager.cpp */; };
@@ -177,7 +176,7 @@
 		3F4516DAD95F1046385A2A53 /* csrecog.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BDCD7C6D1A70771B0001DCC3 /* csrecog.cpp */; };
 		3F610FE6FE6D4C7721ECCC1B /* MCAssert.h in Headers */ = {isa = PBXBuildFile; fileRef = C64EA6A8169E847800778456 /* MCAssert.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		404AB08B392A7DBF7E220FBF /* MCZipMac.mm in Sources */ = {isa = PBXBuildFile; fileRef = BD7C0F451B545CE2003337DF /* MCZipMac.mm */; };
-		406D21F6F7ACED90BCA795EB /* MCBaseTypes.h in Headers */ = {isa = PBXBuildFile; fileRef = C64EA6A4169E847800778456 /* MCBaseTypes.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		406D21F6F7ACED90BCA795EB /* MCBaseTypes.h in Headers */ = {isa = PBXBuildFile; fileRef = C64EA6A4169E847800778456 /* MCBaseTypes.h */; };
 		41502E4B6A93898EF53D2C21 /* MCMessageConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = C64EA69E169E847800778456 /* MCMessageConstants.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		42290C063351F439A7431B97 /* MCIMAPCapabilityOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C64BB22916E5C0A3000DB34C /* MCIMAPCapabilityOperation.cpp */; };
 		4262A77B543E2F33900B6904 /* MCNNTPSession.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8491899F18C93FB7002063A3 /* MCNNTPSession.cpp */; };
@@ -190,25 +189,25 @@
 		43E821EF0A9372B944A45782 /* csrsbcs.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BDCD7C6F1A70771B0001DCC3 /* csrsbcs.cpp */; };
 		444C845F5ABC2BDD0FD214C0 /* MCString.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C64EA6B7169E847800778456 /* MCString.cpp */; };
 		4483D4A0029BD3BD89406D58 /* MCPOPFetchMessageOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C62C6EF316A7C6E900737497 /* MCPOPFetchMessageOperation.cpp */; };
-		449B1115F410D11E124F7CF3 /* MCDateFormatter.h in Headers */ = {isa = PBXBuildFile; fileRef = C63CD67A16BDCDD400DB18F1 /* MCDateFormatter.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		449B1115F410D11E124F7CF3 /* MCDateFormatter.h in Headers */ = {isa = PBXBuildFile; fileRef = C63CD67A16BDCDD400DB18F1 /* MCDateFormatter.h */; };
 		44BFF1BFC4DA9635C093FC4D /* MCConnectionLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = C68B2AEB1778A589005E61EF /* MCConnectionLogger.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		454BB4D0CF639EACC8915385 /* MCNNTPFetchAllArticlesOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 84D73740199BF963005124E5 /* MCNNTPFetchAllArticlesOperation.cpp */; };
 		456E8A4046BFB656BF170DA3 /* MCRFC822.h in Headers */ = {isa = PBXBuildFile; fileRef = C64EA6EA169E847800778456 /* MCRFC822.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4632239A398A018B5896D5F3 /* MCDateFormatter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C63CD67916BDCDD400DB18F1 /* MCDateFormatter.cpp */; };
 		4704D4CDBEEE261C18482F22 /* MCHTMLBodyRendererTemplateCallback.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DAD28C891783CFFC00F2BB8F /* MCHTMLBodyRendererTemplateCallback.cpp */; };
 		478FBDA7C6B9C6AA0BC38E97 /* MCAttachment.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C64EA6E0169E847800778456 /* MCAttachment.cpp */; };
-		47FC8F983AFFF98F5BC72B38 /* MCSMTP.h in Headers */ = {isa = PBXBuildFile; fileRef = C64EA6EC169E847800778456 /* MCSMTP.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		47FC8F983AFFF98F5BC72B38 /* MCSMTP.h in Headers */ = {isa = PBXBuildFile; fileRef = C64EA6EC169E847800778456 /* MCSMTP.h */; };
 		482B491DC7FE3462B881899E /* MCNNTPFetchArticleOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 84D7373C199BF83B005124E5 /* MCNNTPFetchArticleOperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4895FCEAD620719B0F44579E /* MCCertificateUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6F7B19D17A1C15200BE78BB /* MCCertificateUtils.cpp */; };
 		49117180689B3BCDD3D3D898 /* MCPOPFetchMessageOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C62C6EF316A7C6E900737497 /* MCPOPFetchMessageOperation.cpp */; };
 		49168C0ECE85D17C4DCA6E78 /* MCIMAPFolder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C64EA6C5169E847800778456 /* MCIMAPFolder.cpp */; };
 		4A4A96DDCA43E40CA772C52C /* MCData.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C64EA6A9169E847800778456 /* MCData.cpp */; };
-		4A5ECD2D2F77DFB1F3F6BF11 /* MCObject.h in Headers */ = {isa = PBXBuildFile; fileRef = C64EA6B2169E847800778456 /* MCObject.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		4AB9BCB20EEC0AE915B9C236 /* MCIMAPProgressCallback.h in Headers */ = {isa = PBXBuildFile; fileRef = C64EA6D3169E847800778456 /* MCIMAPProgressCallback.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4A5ECD2D2F77DFB1F3F6BF11 /* MCObject.h in Headers */ = {isa = PBXBuildFile; fileRef = C64EA6B2169E847800778456 /* MCObject.h */; };
+		4AB9BCB20EEC0AE915B9C236 /* MCIMAPProgressCallback.h in Headers */ = {isa = PBXBuildFile; fileRef = C64EA6D3169E847800778456 /* MCIMAPProgressCallback.h */; };
 		4B3C1BE117ABF4BC008BBF4C /* MCIMAPQuotaOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4B3C1BDF17ABF4BB008BBF4C /* MCIMAPQuotaOperation.cpp */; };
 		4B3C1BE417AC0156008BBF4C /* MCIMAPQuotaOperation.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4B3C1BE017ABF4BC008BBF4C /* MCIMAPQuotaOperation.h */; };
 		4B3C1BE517AC0176008BBF4C /* MCIMAPQuotaOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4B3C1BDF17ABF4BB008BBF4C /* MCIMAPQuotaOperation.cpp */; };
-		4B711609CF722B1A49132323 /* MCNNTPOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 84D7372F199BF704005124E5 /* MCNNTPOperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4B711609CF722B1A49132323 /* MCNNTPOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 84D7372F199BF704005124E5 /* MCNNTPOperation.h */; };
 		4BE4029217B548D900ECC5E4 /* MCIMAPQuotaOperation.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4B3C1BE017ABF4BC008BBF4C /* MCIMAPQuotaOperation.h */; };
 		4C87BB31E2E17DDA01C657E4 /* MCZip.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6E665AA1796500B0063F2CF /* MCZip.cpp */; };
 		4DDA46346C360015991B7B83 /* MCNNTPFetchServerTimeOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 84CFA98E19F724E500FE35D2 /* MCNNTPFetchServerTimeOperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -218,11 +217,11 @@
 		4FDE7B5B08312093D99ACF0A /* MCIMAPStoreFlagsOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C64EA81E16A29E3D00778456 /* MCIMAPStoreFlagsOperation.cpp */; };
 		51FA844FCC46F6322814574A /* MCIMAPFetchMessagesOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C64EA81816A29AD400778456 /* MCIMAPFetchMessagesOperation.cpp */; };
 		52516BFEB3739590E779F6F5 /* MCAttachment.h in Headers */ = {isa = PBXBuildFile; fileRef = C64EA6E1169E847800778456 /* MCAttachment.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		52B5AAA92CA3DF9321990EA2 /* MCIMAPSession.h in Headers */ = {isa = PBXBuildFile; fileRef = C64EA6D7169E847800778456 /* MCIMAPSession.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		52B5AAA92CA3DF9321990EA2 /* MCIMAPSession.h in Headers */ = {isa = PBXBuildFile; fileRef = C64EA6D7169E847800778456 /* MCIMAPSession.h */; };
 		52D9CF5450D8FD99DF6C860A /* MCSMTPDisconnectOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C608167317759967001F1018 /* MCSMTPDisconnectOperation.cpp */; };
 		530B858E822277F7258D5FBD /* MCIMAPPart.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C64EA6D1169E847800778456 /* MCIMAPPart.cpp */; };
 		530D70D8375F5127126519D9 /* MCAbstractPart.h in Headers */ = {isa = PBXBuildFile; fileRef = C64EA69B169E847800778456 /* MCAbstractPart.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		532ACF171DBC91AEA85C1C67 /* MCPOPOperationCallback.h in Headers */ = {isa = PBXBuildFile; fileRef = C62C6EFC16A7CA1500737497 /* MCPOPOperationCallback.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		532ACF171DBC91AEA85C1C67 /* MCPOPOperationCallback.h in Headers */ = {isa = PBXBuildFile; fileRef = C62C6EFC16A7CA1500737497 /* MCPOPOperationCallback.h */; };
 		5361C01715EBFC70E99717D1 /* MCIMAPMessageRenderingOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DA0F1C79177C07B300F0D3B4 /* MCIMAPMessageRenderingOperation.cpp */; };
 		541318FB813F89BD5DC444BC /* unzip.c in Sources */ = {isa = PBXBuildFile; fileRef = C6E665B11796500B0063F2CF /* unzip.c */; };
 		5437000F37EEC0D87875BD15 /* MCPOPDeleteMessagesOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C62C6EF616A7C6F500737497 /* MCPOPDeleteMessagesOperation.cpp */; };
@@ -230,21 +229,21 @@
 		55DBD5240FC44C606C7DCECC /* MCAssert.c in Sources */ = {isa = PBXBuildFile; fileRef = C64EA6A7169E847800778456 /* MCAssert.c */; };
 		560304E655EADF6B709B6C6C /* MCMailProvidersManager.h in Headers */ = {isa = PBXBuildFile; fileRef = C6CF62C2175324F0006398B9 /* MCMailProvidersManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5642B88645291DCD5372E5FF /* MCIMAPAsyncSession.h in Headers */ = {isa = PBXBuildFile; fileRef = C62C6F0916A8F57700737497 /* MCIMAPAsyncSession.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		565A6ADC6EB2168A57C85958 /* MCIMAPSearchExpression.h in Headers */ = {isa = PBXBuildFile; fileRef = C64EA6D5169E847800778456 /* MCIMAPSearchExpression.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		56668306EDC2255654BF7CF2 /* MCAccountValidator.h in Headers */ = {isa = PBXBuildFile; fileRef = 27478E7F1A764698004AE621 /* MCAccountValidator.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		576F048DA0BFAC3086A5E508 /* MCRange.h in Headers */ = {isa = PBXBuildFile; fileRef = C64EA6B4169E847800778456 /* MCRange.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		565A6ADC6EB2168A57C85958 /* MCIMAPSearchExpression.h in Headers */ = {isa = PBXBuildFile; fileRef = C64EA6D5169E847800778456 /* MCIMAPSearchExpression.h */; };
+		56668306EDC2255654BF7CF2 /* MCAccountValidator.h in Headers */ = {isa = PBXBuildFile; fileRef = 27478E7F1A764698004AE621 /* MCAccountValidator.h */; };
+		576F048DA0BFAC3086A5E508 /* MCRange.h in Headers */ = {isa = PBXBuildFile; fileRef = C64EA6B4169E847800778456 /* MCRange.h */; };
 		583938F86AAC3065CF7852C3 /* MCNull.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6D6F952171E5CB8006F5B28 /* MCNull.cpp */; };
-		58CE4104E99120870C50B1C7 /* MCAsyncPOP.h in Headers */ = {isa = PBXBuildFile; fileRef = C62C6EFD16A7DD0300737497 /* MCAsyncPOP.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		590FBDEE991AAA6DDE8C9156 /* MCIMAPFetchFoldersOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = C64EA7FB16A2959700778456 /* MCIMAPFetchFoldersOperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		591F15D7F28AEE54A96AB497 /* MCAttachment.h in Headers */ = {isa = PBXBuildFile; fileRef = C64EA6E1169E847800778456 /* MCAttachment.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		58CE4104E99120870C50B1C7 /* MCAsyncPOP.h in Headers */ = {isa = PBXBuildFile; fileRef = C62C6EFD16A7DD0300737497 /* MCAsyncPOP.h */; };
+		590FBDEE991AAA6DDE8C9156 /* MCIMAPFetchFoldersOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = C64EA7FB16A2959700778456 /* MCIMAPFetchFoldersOperation.h */; };
+		591F15D7F28AEE54A96AB497 /* MCAttachment.h in Headers */ = {isa = PBXBuildFile; fileRef = C64EA6E1169E847800778456 /* MCAttachment.h */; };
 		59A56DD29C2F2E36EBFB090E /* MCIMAPCheckAccountOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = C64EA7F716A15A7800778456 /* MCIMAPCheckAccountOperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		59E4B8AC8383595C973A8270 /* MCAddressDisplay.h in Headers */ = {isa = PBXBuildFile; fileRef = C63CD67816BDCDD400DB18F1 /* MCAddressDisplay.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		59E4B8AC8383595C973A8270 /* MCAddressDisplay.h in Headers */ = {isa = PBXBuildFile; fileRef = C63CD67816BDCDD400DB18F1 /* MCAddressDisplay.h */; };
 		5A20312A0E17B134BFB8A03B /* MCIMAPFetchContentOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C64EA81B16A29DC100778456 /* MCIMAPFetchContentOperation.cpp */; };
 		5A9F19CAE4AE38D92DA6E6FD /* MCNNTPAsyncSession.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 84D7372A199BF66C005124E5 /* MCNNTPAsyncSession.cpp */; };
 		5AA24015F0C189BF2B629098 /* MCMessageParserMac.mm in Sources */ = {isa = PBXBuildFile; fileRef = C6D4FD3E19FB7534001F7E01 /* MCMessageParserMac.mm */; };
 		5AFB196AD715C42BAA585C22 /* MCIMAPCreateFolderOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C64EA80616A2999800778456 /* MCIMAPCreateFolderOperation.cpp */; };
 		5B39622D77ACA866E930893F /* MCObjectMac.mm in Sources */ = {isa = PBXBuildFile; fileRef = C668E2C51735C8D500A2BB47 /* MCObjectMac.mm */; };
-		5B71C571BA37F70BF2C94D5D /* MCPOPNoopOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 84B639E717F27EBD003B5BA2 /* MCPOPNoopOperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5B71C571BA37F70BF2C94D5D /* MCPOPNoopOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 84B639E717F27EBD003B5BA2 /* MCPOPNoopOperation.h */; };
 		5B74DAAA466655CF34F48703 /* MCIMAPFolderStatusOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9EF9AB10175F319A0027FA3B /* MCIMAPFolderStatusOperation.cpp */; };
 		5B9E3FB9EFE663DB4E66245D /* MCSizeFormatter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C63CD67D16BDCDD400DB18F1 /* MCSizeFormatter.cpp */; };
 		5BD9B883B3E4CAEBB43CD509 /* csdetect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BDCD7C6A1A70771B0001DCC3 /* csdetect.cpp */; };
@@ -258,11 +257,11 @@
 		5DD54C9EBF93E9EF57E9120A /* cmemory.c in Sources */ = {isa = PBXBuildFile; fileRef = BDCD7CEC1A7079300001DCC3 /* cmemory.c */; };
 		5E44C7C9D4447966F536A182 /* MCIMAPNamespaceItem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C64EA6CF169E847800778456 /* MCIMAPNamespaceItem.cpp */; };
 		5E764A9567D410F3E3522A6D /* uenum.c in Sources */ = {isa = PBXBuildFile; fileRef = BDCD7CBE1A70771B0001DCC3 /* uenum.c */; };
-		5E99F64225ADE38144D22CAC /* MCIMAPAsyncSession.h in Headers */ = {isa = PBXBuildFile; fileRef = C62C6F0916A8F57700737497 /* MCIMAPAsyncSession.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		5EB30CEC902B4F8DB2633B42 /* MCNNTP.h in Headers */ = {isa = PBXBuildFile; fileRef = 8491899C18C93F92002063A3 /* MCNNTP.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5E99F64225ADE38144D22CAC /* MCIMAPAsyncSession.h in Headers */ = {isa = PBXBuildFile; fileRef = C62C6F0916A8F57700737497 /* MCIMAPAsyncSession.h */; };
+		5EB30CEC902B4F8DB2633B42 /* MCNNTP.h in Headers */ = {isa = PBXBuildFile; fileRef = 8491899C18C93F92002063A3 /* MCNNTP.h */; };
 		5EB97FBAB7A58914351460B9 /* MCPOPCheckAccountOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6AC10FE17114DAF00B715B7 /* MCPOPCheckAccountOperation.cpp */; };
 		5FEF7A557A99C90EDF9E5287 /* MCHTMLCleaner.h in Headers */ = {isa = PBXBuildFile; fileRef = C63CD69016BE566E00DB18F1 /* MCHTMLCleaner.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		602DB41F397CBB627B421C7D /* MCLog.h in Headers */ = {isa = PBXBuildFile; fileRef = C64EA6B0169E847800778456 /* MCLog.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		602DB41F397CBB627B421C7D /* MCLog.h in Headers */ = {isa = PBXBuildFile; fileRef = C64EA6B0169E847800778456 /* MCLog.h */; };
 		605FD6AE213EF24708EB67D2 /* MCIMAPFolderStatus.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9E774D881767C7F60065EB9B /* MCIMAPFolderStatus.cpp */; };
 		60B5C74F1F7D19F7DFD1C378 /* zip.c in Sources */ = {isa = PBXBuildFile; fileRef = C6E665B31796500B0063F2CF /* zip.c */; };
 		614A927A0345AE6DA232DE0B /* ucln_in.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BDCD7CBC1A70771B0001DCC3 /* ucln_in.cpp */; };
@@ -283,36 +282,36 @@
 		6D087B36C2DEEBC1B737C044 /* MCNNTPGroupInfo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 849189A918C94986002063A3 /* MCNNTPGroupInfo.cpp */; };
 		6D5B01F0487DE0DB5F8E747C /* MCOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C64EA6BE169E847800778456 /* MCOperation.cpp */; };
 		6D695BAAFE4012D4C3F3A03C /* MCIMAPFetchMessagesOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = C64EA81916A29ADB00778456 /* MCIMAPFetchMessagesOperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		6D6A34E4C03FACA811040B10 /* MCNNTPOperationCallback.h in Headers */ = {isa = PBXBuildFile; fileRef = 84D7373F199BF887005124E5 /* MCNNTPOperationCallback.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6D6A34E4C03FACA811040B10 /* MCNNTPOperationCallback.h in Headers */ = {isa = PBXBuildFile; fileRef = 84D7373F199BF887005124E5 /* MCNNTPOperationCallback.h */; };
 		6DD55EC284E7CBF7413FAD92 /* MCOperationQueue.h in Headers */ = {isa = PBXBuildFile; fileRef = C64EA6C2169E847800778456 /* MCOperationQueue.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6E419468F107A702054A3EA2 /* inputext.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BDCD7CB91A70771B0001DCC3 /* inputext.cpp */; };
 		6E851F1A1D71DDA3D29FBBC8 /* MCPOPFetchMessagesOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C62C6F0416A7E54200737497 /* MCPOPFetchMessagesOperation.cpp */; };
 		6E9EF73E21D281C9E21F5A0B /* MCMessageParserMac.mm in Sources */ = {isa = PBXBuildFile; fileRef = C6D4FD3E19FB7534001F7E01 /* MCMessageParserMac.mm */; };
-		6F24645831A68DD3C7324610 /* MCIMAPFolderStatus.h in Headers */ = {isa = PBXBuildFile; fileRef = 9E774D871767C54E0065EB9B /* MCIMAPFolderStatus.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		6FB8D6BAFD2B7A3C98698089 /* MCUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = C64EA6B9169E847800778456 /* MCUtils.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6F24645831A68DD3C7324610 /* MCIMAPFolderStatus.h in Headers */ = {isa = PBXBuildFile; fileRef = 9E774D871767C54E0065EB9B /* MCIMAPFolderStatus.h */; };
+		6FB8D6BAFD2B7A3C98698089 /* MCUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = C64EA6B9169E847800778456 /* MCUtils.h */; };
 		6FD6BF3896CE4A2B2DB624EF /* MCAsyncSMTP.h in Headers */ = {isa = PBXBuildFile; fileRef = C64EA7E316A149EF00778456 /* MCAsyncSMTP.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		70008CC60AFB9D72874FEE6F /* MCAccountValidator.h in Headers */ = {isa = PBXBuildFile; fileRef = 27478E7F1A764698004AE621 /* MCAccountValidator.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		70A1E6C59071BFC4FA60DAA6 /* MCHTMLCleaner.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C63CD68F16BE566D00DB18F1 /* MCHTMLCleaner.cpp */; };
-		70A24CB346F979125CD6A125 /* MCIMAPFolderStatusOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 9EF9AB0E175F30C20027FA3B /* MCIMAPFolderStatusOperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		70A24CB346F979125CD6A125 /* MCIMAPFolderStatusOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 9EF9AB0E175F30C20027FA3B /* MCIMAPFolderStatusOperation.h */; };
 		70C2DD2F974E5EF1B9F5C3BA /* MCIMAPFolderInfoOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = C62C6ED716A398FA00737497 /* MCIMAPFolderInfoOperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		70CF9C6A42EE4CFD9F0CE1D2 /* MCIMAPFetchMessagesOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = C64EA81916A29ADB00778456 /* MCIMAPFetchMessagesOperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		70CF9C6A42EE4CFD9F0CE1D2 /* MCIMAPFetchMessagesOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = C64EA81916A29ADB00778456 /* MCIMAPFetchMessagesOperation.h */; };
 		722BEC743188F66A40E621EE /* MCNetService.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6CF62C3175324F0006398B9 /* MCNetService.cpp */; };
 		728B3A1B63AE74E68EFA4136 /* MCIMAPSession.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C64EA6D6169E847800778456 /* MCIMAPSession.cpp */; };
 		73314F9F8391B02F4EA41A20 /* MCMailProvider.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6CF62BF175324F0006398B9 /* MCMailProvider.cpp */; };
 		739596D31ABFE8BAB028CD84 /* MCJSONParser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6D6F965171FCF9F006F5B28 /* MCJSONParser.cpp */; };
 		73AEEB3582E3E1D89998FF91 /* csrsbcs.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BDCD7C6F1A70771B0001DCC3 /* csrsbcs.cpp */; };
-		7408F42E99C35541080C11DB /* MCIMAPPart.h in Headers */ = {isa = PBXBuildFile; fileRef = C64EA6D2169E847800778456 /* MCIMAPPart.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7408F42E99C35541080C11DB /* MCIMAPPart.h in Headers */ = {isa = PBXBuildFile; fileRef = C64EA6D2169E847800778456 /* MCIMAPPart.h */; };
 		7456401F6548E5F97E373D2F /* MCIMAPAsyncSession.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C62C6F0816A8F57000737497 /* MCIMAPAsyncSession.cpp */; };
 		748671E304E26CDF65B3C234 /* MCNNTPGroupInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 849189AA18C94986002063A3 /* MCNNTPGroupInfo.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		75DEED198A8C6658D671516D /* MCIMAPFolderInfo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C673EBEB1A46B41000A53F7F /* MCIMAPFolderInfo.cpp */; };
 		76E07173C48ADAC316AB8AD9 /* MCOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C64EA6BE169E847800778456 /* MCOperation.cpp */; };
 		77B4DC9F890092853F645F08 /* MCIMAPIdentity.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C63D315A17C9155C00A4D993 /* MCIMAPIdentity.cpp */; };
 		78A69024E148BE5615D38666 /* MCIMAPMessage.h in Headers */ = {isa = PBXBuildFile; fileRef = C64EA6C8169E847800778456 /* MCIMAPMessage.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		78E7B733CB813DC82C65364B /* MCNetService.h in Headers */ = {isa = PBXBuildFile; fileRef = C6CF62C4175324F0006398B9 /* MCNetService.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		793CD139BFC584B6D74026E6 /* MCIMAPConnectOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 943F1A9917D964F600F0C798 /* MCIMAPConnectOperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		78E7B733CB813DC82C65364B /* MCNetService.h in Headers */ = {isa = PBXBuildFile; fileRef = C6CF62C4175324F0006398B9 /* MCNetService.h */; };
+		793CD139BFC584B6D74026E6 /* MCIMAPConnectOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 943F1A9917D964F600F0C798 /* MCIMAPConnectOperation.h */; };
 		79450C97F762FED8C62ED18F /* MCErrorMessage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BDCD7C591A5B1C2C0001DCC3 /* MCErrorMessage.cpp */; };
 		7A5D6C8936879398260E5B7B /* MCSMTPSession.h in Headers */ = {isa = PBXBuildFile; fileRef = C64EA6EF169E847800778456 /* MCSMTPSession.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		7B0B78FF7316D63CB2FB15D2 /* MCIMAPFetchContentOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = C64EA81C16A29DC400778456 /* MCIMAPFetchContentOperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7B0B78FF7316D63CB2FB15D2 /* MCIMAPFetchContentOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = C64EA81C16A29DC400778456 /* MCIMAPFetchContentOperation.h */; };
 		7BD9728D5C6AFBD72802E569 /* MCObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C64EA6B1169E847800778456 /* MCObject.cpp */; };
 		7D7DD58E4ED5A38350C0D90A /* MCPOPOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C62C6EF916A7C93F00737497 /* MCPOPOperation.cpp */; };
 		7E6AD96802C15B38EC9AD220 /* MCOperationQueue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C64EA6C1169E847800778456 /* MCOperationQueue.cpp */; };
@@ -324,7 +323,7 @@
 		802A99231ECF83E500FFF0AB /* MailCore.h in Headers */ = {isa = PBXBuildFile; fileRef = 802A99221ECF838D00FFF0AB /* MailCore.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		802A99241ECF83E900FFF0AB /* MailCore.h in Headers */ = {isa = PBXBuildFile; fileRef = 802A99211ECF837800FFF0AB /* MailCore.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8044EF5EB5A7CBF984D536C8 /* MCIMAPNoopOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 84B639EB17F280F3003B5BA2 /* MCIMAPNoopOperation.cpp */; };
-		8076B4B619ABE454926FAFFB /* MCAsyncSMTP.h in Headers */ = {isa = PBXBuildFile; fileRef = C64EA7E316A149EF00778456 /* MCAsyncSMTP.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8076B4B619ABE454926FAFFB /* MCAsyncSMTP.h in Headers */ = {isa = PBXBuildFile; fileRef = C64EA7E316A149EF00778456 /* MCAsyncSMTP.h */; };
 		808B7BCFF308BB35D00D46DB /* MCSMTPSendWithDataOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C64EA79C169F29A700778456 /* MCSMTPSendWithDataOperation.cpp */; };
 		80C6D6A5646D1537926668C8 /* MCMD5.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6D6F950171E5CB8006F5B28 /* MCMD5.cpp */; };
 		80F639615326DC9F0CE40382 /* MCNNTPFetchHeaderOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 84D73736199BF7F2005124E5 /* MCNNTPFetchHeaderOperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -341,33 +340,33 @@
 		8199FBF219FAF1270040BBC3 /* MCIMAPFetchParsedContentOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8199FBEF19FAF1270040BBC3 /* MCIMAPFetchParsedContentOperation.cpp */; };
 		8199FBF819FAF3AF0040BBC3 /* MCIMAPFetchParsedContentOperation.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8199FBF019FAF1270040BBC3 /* MCIMAPFetchParsedContentOperation.h */; };
 		81F11A31B597D4AEC49F253E /* MCIMAPRenameFolderOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C64EA80016A295E200778456 /* MCIMAPRenameFolderOperation.cpp */; };
-		82EA488427194EB997FE4925 /* MCRFC822.h in Headers */ = {isa = PBXBuildFile; fileRef = C64EA6EA169E847800778456 /* MCRFC822.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		82EA488427194EB997FE4925 /* MCRFC822.h in Headers */ = {isa = PBXBuildFile; fileRef = C64EA6EA169E847800778456 /* MCRFC822.h */; };
 		8332234CB1374156B6B55824 /* MCNNTPDisconnectOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 84D73756199BFC8A005124E5 /* MCNNTPDisconnectOperation.cpp */; };
 		83D255B1AC1A46181454B02A /* MCSMTPLoginOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8B0095C71A00DDC500F84BC0 /* MCSMTPLoginOperation.cpp */; };
 		8408C6DB1F2634250003A816 /* MCOObjectWrapper.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8408C6DA1F2634250003A816 /* MCOObjectWrapper.mm */; };
-		8408C6DD1F26342B0003A816 /* MCOObjectWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = 8408C6DC1F26342B0003A816 /* MCOObjectWrapper.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		8408C6F51F26345C0003A816 /* MCOIndexSet.h in Headers */ = {isa = PBXBuildFile; fileRef = 8408C6DE1F26345C0003A816 /* MCOIndexSet.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8408C6DD1F26342B0003A816 /* MCOObjectWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = 8408C6DC1F26342B0003A816 /* MCOObjectWrapper.h */; };
+		8408C6F51F26345C0003A816 /* MCOIndexSet.h in Headers */ = {isa = PBXBuildFile; fileRef = 8408C6DE1F26345C0003A816 /* MCOIndexSet.h */; };
 		8408C6F61F26345C0003A816 /* MCOIndexSet.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8408C6DF1F26345C0003A816 /* MCOIndexSet.mm */; };
-		8408C6F71F26345C0003A816 /* MCOIndexSet+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 8408C6E01F26345C0003A816 /* MCOIndexSet+Private.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		8408C6F81F26345C0003A816 /* MCORange.h in Headers */ = {isa = PBXBuildFile; fileRef = 8408C6E11F26345C0003A816 /* MCORange.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8408C6F71F26345C0003A816 /* MCOIndexSet+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 8408C6E01F26345C0003A816 /* MCOIndexSet+Private.h */; };
+		8408C6F81F26345C0003A816 /* MCORange.h in Headers */ = {isa = PBXBuildFile; fileRef = 8408C6E11F26345C0003A816 /* MCORange.h */; };
 		8408C6F91F26345C0003A816 /* MCORange.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8408C6E21F26345C0003A816 /* MCORange.mm */; };
-		8408C6FA1F26345C0003A816 /* NSArray+MCO.h in Headers */ = {isa = PBXBuildFile; fileRef = 8408C6E31F26345C0003A816 /* NSArray+MCO.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8408C6FA1F26345C0003A816 /* NSArray+MCO.h in Headers */ = {isa = PBXBuildFile; fileRef = 8408C6E31F26345C0003A816 /* NSArray+MCO.h */; };
 		8408C6FB1F26345C0003A816 /* NSArray+MCO.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8408C6E41F26345C0003A816 /* NSArray+MCO.mm */; };
-		8408C6FC1F26345C0003A816 /* NSData+MCO.h in Headers */ = {isa = PBXBuildFile; fileRef = 8408C6E51F26345C0003A816 /* NSData+MCO.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8408C6FC1F26345C0003A816 /* NSData+MCO.h in Headers */ = {isa = PBXBuildFile; fileRef = 8408C6E51F26345C0003A816 /* NSData+MCO.h */; };
 		8408C6FD1F26345C0003A816 /* NSData+MCO.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8408C6E61F26345C0003A816 /* NSData+MCO.mm */; };
-		8408C6FE1F26345C0003A816 /* NSDictionary+MCO.h in Headers */ = {isa = PBXBuildFile; fileRef = 8408C6E71F26345C0003A816 /* NSDictionary+MCO.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8408C6FE1F26345C0003A816 /* NSDictionary+MCO.h in Headers */ = {isa = PBXBuildFile; fileRef = 8408C6E71F26345C0003A816 /* NSDictionary+MCO.h */; };
 		8408C6FF1F26345C0003A816 /* NSDictionary+MCO.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8408C6E81F26345C0003A816 /* NSDictionary+MCO.mm */; };
-		8408C7001F26345C0003A816 /* NSError+MCO.h in Headers */ = {isa = PBXBuildFile; fileRef = 8408C6E91F26345C0003A816 /* NSError+MCO.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8408C7001F26345C0003A816 /* NSError+MCO.h in Headers */ = {isa = PBXBuildFile; fileRef = 8408C6E91F26345C0003A816 /* NSError+MCO.h */; };
 		8408C7011F26345C0003A816 /* NSError+MCO.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8408C6EA1F26345C0003A816 /* NSError+MCO.mm */; };
-		8408C7021F26345C0003A816 /* NSIndexSet+MCO.h in Headers */ = {isa = PBXBuildFile; fileRef = 8408C6EB1F26345C0003A816 /* NSIndexSet+MCO.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8408C7021F26345C0003A816 /* NSIndexSet+MCO.h in Headers */ = {isa = PBXBuildFile; fileRef = 8408C6EB1F26345C0003A816 /* NSIndexSet+MCO.h */; };
 		8408C7031F26345C0003A816 /* NSIndexSet+MCO.m in Sources */ = {isa = PBXBuildFile; fileRef = 8408C6EC1F26345C0003A816 /* NSIndexSet+MCO.m */; };
-		8408C7041F26345C0003A816 /* NSObject+MCO.h in Headers */ = {isa = PBXBuildFile; fileRef = 8408C6ED1F26345C0003A816 /* NSObject+MCO.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8408C7041F26345C0003A816 /* NSObject+MCO.h in Headers */ = {isa = PBXBuildFile; fileRef = 8408C6ED1F26345C0003A816 /* NSObject+MCO.h */; };
 		8408C7051F26345C0003A816 /* NSObject+MCO.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8408C6EE1F26345C0003A816 /* NSObject+MCO.mm */; };
-		8408C7061F26345C0003A816 /* NSSet+MCO.h in Headers */ = {isa = PBXBuildFile; fileRef = 8408C6EF1F26345C0003A816 /* NSSet+MCO.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8408C7061F26345C0003A816 /* NSSet+MCO.h in Headers */ = {isa = PBXBuildFile; fileRef = 8408C6EF1F26345C0003A816 /* NSSet+MCO.h */; };
 		8408C7071F26345C0003A816 /* NSSet+MCO.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8408C6F01F26345C0003A816 /* NSSet+MCO.mm */; };
-		8408C7081F26345C0003A816 /* NSString+MCO.h in Headers */ = {isa = PBXBuildFile; fileRef = 8408C6F11F26345C0003A816 /* NSString+MCO.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8408C7081F26345C0003A816 /* NSString+MCO.h in Headers */ = {isa = PBXBuildFile; fileRef = 8408C6F11F26345C0003A816 /* NSString+MCO.h */; };
 		8408C7091F26345C0003A816 /* NSString+MCO.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8408C6F21F26345C0003A816 /* NSString+MCO.mm */; };
-		8408C70A1F26345C0003A816 /* NSValue+MCO.h in Headers */ = {isa = PBXBuildFile; fileRef = 8408C6F31F26345C0003A816 /* NSValue+MCO.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8408C70A1F26345C0003A816 /* NSValue+MCO.h in Headers */ = {isa = PBXBuildFile; fileRef = 8408C6F31F26345C0003A816 /* NSValue+MCO.h */; };
 		8408C70B1F26345C0003A816 /* NSValue+MCO.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8408C6F41F26345C0003A816 /* NSValue+MCO.mm */; };
 		8408C70C1F2634F70003A816 /* MCOIndexSet.h in Headers */ = {isa = PBXBuildFile; fileRef = 8408C6DE1F26345C0003A816 /* MCOIndexSet.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8408C70D1F2634FA0003A816 /* MCOIndexSet.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8408C6DF1F26345C0003A816 /* MCOIndexSet.mm */; };
@@ -395,100 +394,50 @@
 		8408C7231F2635300003A816 /* MCOObjectWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = 8408C6DC1F26342B0003A816 /* MCOObjectWrapper.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8408C7241F2635320003A816 /* MCOObjectWrapper.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8408C6DA1F2634250003A816 /* MCOObjectWrapper.mm */; };
 		8408C7251F2635930003A816 /* COperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 84B110A71D92924C0079C769 /* COperation.cpp */; };
-		8408C7261F2635930003A816 /* COperation.h in Sources */ = {isa = PBXBuildFile; fileRef = 84B110A81D92924C0079C769 /* COperation.h */; };
 		8408C7271F2635930003A816 /* CAbstractMessage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8498CCAA1D9511FC0074217C /* CAbstractMessage.cpp */; };
-		8408C7281F2635930003A816 /* CAbstractMessage.h in Sources */ = {isa = PBXBuildFile; fileRef = 8498CCAB1D9511FC0074217C /* CAbstractMessage.h */; };
 		8408C7291F2635930003A816 /* CAbstractMessagePart.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8498CCAD1D9519B40074217C /* CAbstractMessagePart.cpp */; };
-		8408C72A1F2635930003A816 /* CAbstractMessagePart.h in Sources */ = {isa = PBXBuildFile; fileRef = 8498CCAE1D9519B40074217C /* CAbstractMessagePart.h */; };
 		8408C72B1F2635930003A816 /* CAbstractMultipart.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8498CCB01D9520660074217C /* CAbstractMultipart.cpp */; };
-		8408C72C1F2635930003A816 /* CAbstractMultipart.h in Sources */ = {isa = PBXBuildFile; fileRef = 8498CCB11D9520660074217C /* CAbstractMultipart.h */; };
-		8408C72D1F2635930003A816 /* CMessageConstants.h in Sources */ = {isa = PBXBuildFile; fileRef = 84F7B43D1D9159E9005F83E8 /* CMessageConstants.h */; };
 		8408C72E1F2635930003A816 /* CAddress.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 84ECAD7E1D943B11006261FD /* CAddress.cpp */; };
-		8408C72F1F2635930003A816 /* CAddress.h in Sources */ = {isa = PBXBuildFile; fileRef = 84ECAD7F1D943B11006261FD /* CAddress.h */; };
 		8408C7301F2635930003A816 /* CAbstractPart.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 84ECAD761D93E9CD006261FD /* CAbstractPart.cpp */; };
-		8408C7311F2635930003A816 /* CAbstractPart.h in Sources */ = {isa = PBXBuildFile; fileRef = 84ECAD771D93E9CD006261FD /* CAbstractPart.h */; };
 		8408C7321F2635930003A816 /* CMessageHeader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 84ECAD7A1D93FF9E006261FD /* CMessageHeader.cpp */; };
-		8408C7331F2635930003A816 /* CMessageHeader.h in Sources */ = {isa = PBXBuildFile; fileRef = 84ECAD7B1D93FF9E006261FD /* CMessageHeader.h */; };
 		8408C7341F2635930003A816 /* CAbstractMessageRendererCallback.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 84A929171DA7BABF0020205B /* CAbstractMessageRendererCallback.cpp */; };
-		8408C7351F2635930003A816 /* CAbstractMessageRendererCallback.h in Sources */ = {isa = PBXBuildFile; fileRef = 84A929181DA7BABF0020205B /* CAbstractMessageRendererCallback.h */; };
 		8408C7361F2635930003A816 /* CIMAPFolder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 84E3DB471D9BB29E003B598F /* CIMAPFolder.cpp */; };
-		8408C7371F2635930003A816 /* CIMAPFolder.h in Sources */ = {isa = PBXBuildFile; fileRef = 84E3DB481D9BB29E003B598F /* CIMAPFolder.h */; };
 		8408C7381F2635930003A816 /* CIMAPMessage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 84E3DB4D1D9BBDAD003B598F /* CIMAPMessage.cpp */; };
-		8408C7391F2635930003A816 /* CIMAPMessage.h in Sources */ = {isa = PBXBuildFile; fileRef = 84E3DB4E1D9BBDAD003B598F /* CIMAPMessage.h */; };
 		8408C73A1F2635930003A816 /* CIMAPMessagePart.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 84E3DB531D9BDB41003B598F /* CIMAPMessagePart.cpp */; };
-		8408C73B1F2635930003A816 /* CIMAPMessagePart.h in Sources */ = {isa = PBXBuildFile; fileRef = 84E3DB541D9BDB41003B598F /* CIMAPMessagePart.h */; };
 		8408C73C1F2635930003A816 /* CIMAPMultipart.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 84CD9BDC1D9BE3AF000622CB /* CIMAPMultipart.cpp */; };
-		8408C73D1F2635930003A816 /* CIMAPMultipart.h in Sources */ = {isa = PBXBuildFile; fileRef = 84CD9BDD1D9BE3AF000622CB /* CIMAPMultipart.h */; };
 		8408C73E1F2635930003A816 /* CIMAPNamespace.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 84F7B4BD1D9178D3005F83E8 /* CIMAPNamespace.cpp */; };
-		8408C73F1F2635930003A816 /* CIMAPNamespace.h in Sources */ = {isa = PBXBuildFile; fileRef = 84F7B4681D915D88005F83E8 /* CIMAPNamespace.h */; };
 		8408C7401F2635930003A816 /* CIMAPNamespaceItem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 84CD9BE11D9BFB37000622CB /* CIMAPNamespaceItem.cpp */; };
-		8408C7411F2635930003A816 /* CIMAPNamespaceItem.h in Sources */ = {isa = PBXBuildFile; fileRef = 84CD9BE21D9BFB37000622CB /* CIMAPNamespaceItem.h */; };
 		8408C7421F2635930003A816 /* CIMAPPart.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8494D6CF1D9C03BB009EEE5E /* CIMAPPart.cpp */; };
-		8408C7431F2635930003A816 /* CIMAPPart.h in Sources */ = {isa = PBXBuildFile; fileRef = 8494D6D01D9C03BB009EEE5E /* CIMAPPart.h */; };
 		8408C7441F2635930003A816 /* CIMAPFolderInfo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8494D6D51D9C082E009EEE5E /* CIMAPFolderInfo.cpp */; };
-		8408C7451F2635930003A816 /* CIMAPFolderInfo.h in Sources */ = {isa = PBXBuildFile; fileRef = 8494D6D61D9C082E009EEE5E /* CIMAPFolderInfo.h */; };
 		8408C7461F2635930003A816 /* CIMAPFolderStatus.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8494D6DD1D9C0FE9009EEE5E /* CIMAPFolderStatus.cpp */; };
-		8408C7471F2635930003A816 /* CIMAPFolderStatus.h in Sources */ = {isa = PBXBuildFile; fileRef = 8494D6DE1D9C0FE9009EEE5E /* CIMAPFolderStatus.h */; };
 		8408C7481F2635930003A816 /* CIMAPSearchExpression.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8494D6E51D9C2274009EEE5E /* CIMAPSearchExpression.cpp */; };
-		8408C7491F2635930003A816 /* CIMAPSearchExpression.h in Sources */ = {isa = PBXBuildFile; fileRef = 8494D6E61D9C2274009EEE5E /* CIMAPSearchExpression.h */; };
 		8408C74A1F2635930003A816 /* CIMAPBaseOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 84B110AF1D929B560079C769 /* CIMAPBaseOperation.cpp */; };
-		8408C74B1F2635930003A816 /* CIMAPBaseOperation.h in Sources */ = {isa = PBXBuildFile; fileRef = 84B110B01D929B560079C769 /* CIMAPBaseOperation.h */; };
 		8408C74C1F2635930003A816 /* CIMAPAppendMessageOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 84F7B45A1D915D88005F83E8 /* CIMAPAppendMessageOperation.cpp */; };
-		8408C74D1F2635930003A816 /* CIMAPAppendMessageOperation.h in Sources */ = {isa = PBXBuildFile; fileRef = 84F7B45B1D915D88005F83E8 /* CIMAPAppendMessageOperation.h */; };
 		8408C74E1F2635930003A816 /* CIMAPCopyMessagesOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 84F7B45E1D915D88005F83E8 /* CIMAPCopyMessagesOperation.cpp */; };
-		8408C74F1F2635930003A816 /* CIMAPCopyMessagesOperation.h in Sources */ = {isa = PBXBuildFile; fileRef = 84F7B45F1D915D88005F83E8 /* CIMAPCopyMessagesOperation.h */; };
 		8408C7501F2635930003A816 /* CIMAPFetchContentOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 84F7B4601D915D88005F83E8 /* CIMAPFetchContentOperation.cpp */; };
-		8408C7511F2635930003A816 /* CIMAPFetchContentOperation.h in Sources */ = {isa = PBXBuildFile; fileRef = 84F7B4611D915D88005F83E8 /* CIMAPFetchContentOperation.h */; };
 		8408C7521F2635930003A816 /* CIMAPFetchMessagesOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 84F7B4621D915D88005F83E8 /* CIMAPFetchMessagesOperation.cpp */; };
-		8408C7531F2635930003A816 /* CIMAPFetchMessagesOperation.h in Sources */ = {isa = PBXBuildFile; fileRef = 84F7B4631D915D88005F83E8 /* CIMAPFetchMessagesOperation.h */; };
 		8408C7541F2635930003A816 /* CIMAPFolderInfoOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 84F7B4641D915D88005F83E8 /* CIMAPFolderInfoOperation.cpp */; };
-		8408C7551F2635930003A816 /* CIMAPFolderInfoOperation.h in Sources */ = {isa = PBXBuildFile; fileRef = 84F7B4651D915D88005F83E8 /* CIMAPFolderInfoOperation.h */; };
 		8408C7561F2635930003A816 /* CIMAPFolderStatusOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 84F7B4661D915D88005F83E8 /* CIMAPFolderStatusOperation.cpp */; };
-		8408C7571F2635930003A816 /* CIMAPFolderStatusOperation.h in Sources */ = {isa = PBXBuildFile; fileRef = 84F7B4671D915D88005F83E8 /* CIMAPFolderStatusOperation.h */; };
-		8408C7581F2635930003A816 /* СIMAPSearchOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 84F7B46C1D915D88005F83E8 /* СIMAPSearchOperation.cpp */; };
-		8408C7591F2635930003A816 /* СIMAPSearchOperation.h in Sources */ = {isa = PBXBuildFile; fileRef = 84F7B46D1D915D88005F83E8 /* СIMAPSearchOperation.h */; };
 		8408C75A1F2635930003A816 /* CIMAPIdleOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 84E3DB371D9A7C93003B598F /* CIMAPIdleOperation.cpp */; };
-		8408C75B1F2635930003A816 /* CIMAPIdleOperation.h in Sources */ = {isa = PBXBuildFile; fileRef = 84E3DB381D9A7C93003B598F /* CIMAPIdleOperation.h */; };
 		8408C75C1F2635930003A816 /* CIMAPAsyncSession.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 84F7B45C1D915D88005F83E8 /* CIMAPAsyncSession.cpp */; };
-		8408C75D1F2635930003A816 /* CIMAPAsyncSession.h in Sources */ = {isa = PBXBuildFile; fileRef = 84F7B45D1D915D88005F83E8 /* CIMAPAsyncSession.h */; };
 		8408C75E1F2635930003A816 /* CIMAPFetchFoldersOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 84E1E0251DF5D33B00D45A31 /* CIMAPFetchFoldersOperation.cpp */; };
-		8408C75F1F2635930003A816 /* CIMAPFetchFoldersOperation.h in Sources */ = {isa = PBXBuildFile; fileRef = 84E1E0261DF5D33B00D45A31 /* CIMAPFetchFoldersOperation.h */; };
 		8408C7601F2635930003A816 /* CIMAPCapabilityOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8491BB611DF6E74800E6D679 /* CIMAPCapabilityOperation.cpp */; };
-		8408C7611F2635930003A816 /* CIMAPCapabilityOperation.h in Sources */ = {isa = PBXBuildFile; fileRef = 8491BB621DF6E74800E6D679 /* CIMAPCapabilityOperation.h */; };
 		8408C7621F2635930003A816 /* CIMAPCheckAccountOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8491BB651DF6F64400E6D679 /* CIMAPCheckAccountOperation.cpp */; };
-		8408C7631F2635930003A816 /* CIMAPCheckAccountOperation.h in Sources */ = {isa = PBXBuildFile; fileRef = 8491BB661DF6F64400E6D679 /* CIMAPCheckAccountOperation.h */; };
 		8408C7641F2635930003A816 /* CIMAPCustomCommandOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8491BB6B1DF7028C00E6D679 /* CIMAPCustomCommandOperation.cpp */; };
-		8408C7651F2635930003A816 /* CIMAPCustomCommandOperation.h in Sources */ = {isa = PBXBuildFile; fileRef = 8491BB6C1DF7028C00E6D679 /* CIMAPCustomCommandOperation.h */; };
 		8408C7661F2635930003A816 /* CIMAPFetchContentToFileOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 84D344D91DF7090700B81A94 /* CIMAPFetchContentToFileOperation.cpp */; };
-		8408C7671F2635930003A816 /* CIMAPFetchContentToFileOperation.h in Sources */ = {isa = PBXBuildFile; fileRef = 84D344DA1DF7090700B81A94 /* CIMAPFetchContentToFileOperation.h */; };
 		8408C7681F2635930003A816 /* CIMAPFetchNamespaceOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 84D344DF1DF712D500B81A94 /* CIMAPFetchNamespaceOperation.cpp */; };
-		8408C7691F2635930003A816 /* CIMAPFetchNamespaceOperation.h in Sources */ = {isa = PBXBuildFile; fileRef = 84D344E01DF712D500B81A94 /* CIMAPFetchNamespaceOperation.h */; };
 		8408C76A1F2635930003A816 /* CIMAPFetchParsedContentOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 842D79991DF801AE00F9424C /* CIMAPFetchParsedContentOperation.cpp */; };
-		8408C76B1F2635930003A816 /* CIMAPFetchParsedContentOperation.h in Sources */ = {isa = PBXBuildFile; fileRef = 842D799A1DF801AE00F9424C /* CIMAPFetchParsedContentOperation.h */; };
 		8408C76C1F2635930003A816 /* CIMAPMessageRenderingOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 842D799D1DF8033100F9424C /* CIMAPMessageRenderingOperation.cpp */; };
-		8408C76D1F2635930003A816 /* CIMAPMessageRenderingOperation.h in Sources */ = {isa = PBXBuildFile; fileRef = 842D799E1DF8033100F9424C /* CIMAPMessageRenderingOperation.h */; };
 		8408C76E1F2635930003A816 /* CIMAPMoveMessagesOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 842D79A11DF8049D00F9424C /* CIMAPMoveMessagesOperation.cpp */; };
-		8408C76F1F2635930003A816 /* CIMAPMoveMessagesOperation.h in Sources */ = {isa = PBXBuildFile; fileRef = 842D79A21DF8049D00F9424C /* CIMAPMoveMessagesOperation.h */; };
 		8408C7701F2635930003A816 /* CIMAPQuotaOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 842D79A51DF8080200F9424C /* CIMAPQuotaOperation.cpp */; };
-		8408C7711F2635930003A816 /* CIMAPQuotaOperation.h in Sources */ = {isa = PBXBuildFile; fileRef = 842D79A61DF8080200F9424C /* CIMAPQuotaOperation.h */; };
 		8408C7721F2635930003A816 /* CIMAPIdentity.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 842D79B31DF876B600F9424C /* CIMAPIdentity.cpp */; };
-		8408C7731F2635930003A816 /* CIMAPIdentity.h in Sources */ = {isa = PBXBuildFile; fileRef = 842D79B41DF876B600F9424C /* CIMAPIdentity.h */; };
 		8408C7741F2635930003A816 /* CIMAPIdentityOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 842D79B91DF881A000F9424C /* CIMAPIdentityOperation.cpp */; };
-		8408C7751F2635930003A816 /* CIMAPIdentityOperation.h in Sources */ = {isa = PBXBuildFile; fileRef = 842D79BA1DF881A000F9424C /* CIMAPIdentityOperation.h */; };
 		8408C7761F2635930003A816 /* CSMTPSession.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 84B8920E1DA268F8008FD1C4 /* CSMTPSession.cpp */; };
-		8408C7771F2635930003A816 /* CSMTPSession.h in Sources */ = {isa = PBXBuildFile; fileRef = 84B8920F1DA268F8008FD1C4 /* CSMTPSession.h */; };
 		8408C7781F2635930003A816 /* CSMTPOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 84B892121DA27A54008FD1C4 /* CSMTPOperation.cpp */; };
-		8408C7791F2635930003A816 /* CSMTPOperation.h in Sources */ = {isa = PBXBuildFile; fileRef = 84B892131DA27A54008FD1C4 /* CSMTPOperation.h */; };
 		8408C77A1F2635930003A816 /* CArray.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 84F7B4101D915997005F83E8 /* CArray.cpp */; };
-		8408C77B1F2635930003A816 /* CArray.h in Sources */ = {isa = PBXBuildFile; fileRef = 84F7B4111D915997005F83E8 /* CArray.h */; };
 		8408C77C1F2635930003A816 /* CIndexSet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 84F7B4121D915997005F83E8 /* CIndexSet.cpp */; };
-		8408C77D1F2635930003A816 /* CIndexSet.h in Sources */ = {isa = PBXBuildFile; fileRef = 84F7B4131D915997005F83E8 /* CIndexSet.h */; };
 		8408C77E1F2635930003A816 /* CObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 84F7B4141D915997005F83E8 /* CObject.cpp */; };
-		8408C77F1F2635930003A816 /* CObject.h in Sources */ = {isa = PBXBuildFile; fileRef = 84F7B4151D915997005F83E8 /* CObject.h */; };
 		8408C7801F2635930003A816 /* CDictionary.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 84E3DB3F1D9AA676003B598F /* CDictionary.cpp */; };
-		8408C7811F2635930003A816 /* CDictionary.h in Sources */ = {isa = PBXBuildFile; fileRef = 84E3DB401D9AA676003B598F /* CDictionary.h */; };
-		8408C7821F2635930003A816 /* CBase.h in Sources */ = {isa = PBXBuildFile; fileRef = 84F7B40D1D915985005F83E8 /* CBase.h */; };
-		8408C7831F2635930003A816 /* CBase+Private.h in Sources */ = {isa = PBXBuildFile; fileRef = 847530611F2230B30011100D /* CBase+Private.h */; };
 		8408C7BB1F2637220003A816 /* COperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 84B110A81D92924C0079C769 /* COperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8408C7BC1F2637220003A816 /* CAbstractMessage.h in Headers */ = {isa = PBXBuildFile; fileRef = 8498CCAB1D9511FC0074217C /* CAbstractMessage.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8408C7BD1F2637220003A816 /* CAbstractMessagePart.h in Headers */ = {isa = PBXBuildFile; fileRef = 8498CCAE1D9519B40074217C /* CAbstractMessagePart.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -496,7 +445,6 @@
 		8408C7BF1F2637220003A816 /* CMessageConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = 84F7B43D1D9159E9005F83E8 /* CMessageConstants.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8408C7C01F2637220003A816 /* CAddress.h in Headers */ = {isa = PBXBuildFile; fileRef = 84ECAD7F1D943B11006261FD /* CAddress.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8408C7C11F2637220003A816 /* CAbstractPart.h in Headers */ = {isa = PBXBuildFile; fileRef = 84ECAD771D93E9CD006261FD /* CAbstractPart.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		8408C7C21F2637220003A816 /* CMessageHeader.cpp in Headers */ = {isa = PBXBuildFile; fileRef = 84ECAD7A1D93FF9E006261FD /* CMessageHeader.cpp */; settings = {ATTRIBUTES = (Public, ); }; };
 		8408C7C31F2637220003A816 /* CMessageHeader.h in Headers */ = {isa = PBXBuildFile; fileRef = 84ECAD7B1D93FF9E006261FD /* CMessageHeader.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8408C7C41F2637220003A816 /* CAbstractMessageRendererCallback.h in Headers */ = {isa = PBXBuildFile; fileRef = 84A929181DA7BABF0020205B /* CAbstractMessageRendererCallback.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8408C7C51F2637220003A816 /* CIMAPFolder.h in Headers */ = {isa = PBXBuildFile; fileRef = 84E3DB481D9BB29E003B598F /* CIMAPFolder.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -508,32 +456,22 @@
 		8408C7CB1F2637220003A816 /* CIMAPPart.h in Headers */ = {isa = PBXBuildFile; fileRef = 8494D6D01D9C03BB009EEE5E /* CIMAPPart.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8408C7CC1F2637220003A816 /* CIMAPFolderInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 8494D6D61D9C082E009EEE5E /* CIMAPFolderInfo.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8408C7CD1F2637220003A816 /* CIMAPFolderStatus.h in Headers */ = {isa = PBXBuildFile; fileRef = 8494D6DE1D9C0FE9009EEE5E /* CIMAPFolderStatus.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		8408C7CE1F2637220003A816 /* CIMAPSearchExpression.cpp in Headers */ = {isa = PBXBuildFile; fileRef = 8494D6E51D9C2274009EEE5E /* CIMAPSearchExpression.cpp */; settings = {ATTRIBUTES = (Public, ); }; };
 		8408C7CF1F2637220003A816 /* CIMAPSearchExpression.h in Headers */ = {isa = PBXBuildFile; fileRef = 8494D6E61D9C2274009EEE5E /* CIMAPSearchExpression.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8408C7D01F2637220003A816 /* CIMAPBaseOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 84B110B01D929B560079C769 /* CIMAPBaseOperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8408C7D11F2637220003A816 /* CIMAPAppendMessageOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 84F7B45B1D915D88005F83E8 /* CIMAPAppendMessageOperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8408C7D21F2637220003A816 /* CIMAPCopyMessagesOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 84F7B45F1D915D88005F83E8 /* CIMAPCopyMessagesOperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		8408C7D31F2637220003A816 /* CIMAPFetchContentOperation.cpp in Headers */ = {isa = PBXBuildFile; fileRef = 84F7B4601D915D88005F83E8 /* CIMAPFetchContentOperation.cpp */; settings = {ATTRIBUTES = (Public, ); }; };
 		8408C7D41F2637220003A816 /* CIMAPFetchContentOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 84F7B4611D915D88005F83E8 /* CIMAPFetchContentOperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		8408C7D51F2637220003A816 /* CIMAPFetchMessagesOperation.cpp in Headers */ = {isa = PBXBuildFile; fileRef = 84F7B4621D915D88005F83E8 /* CIMAPFetchMessagesOperation.cpp */; settings = {ATTRIBUTES = (Public, ); }; };
 		8408C7D61F2637220003A816 /* CIMAPFetchMessagesOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 84F7B4631D915D88005F83E8 /* CIMAPFetchMessagesOperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8408C7D71F2637220003A816 /* CIMAPFolderInfoOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 84F7B4651D915D88005F83E8 /* CIMAPFolderInfoOperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8408C7D81F2637220003A816 /* CIMAPFolderStatusOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 84F7B4671D915D88005F83E8 /* CIMAPFolderStatusOperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		8408C7D91F2637220003A816 /* СIMAPSearchOperation.cpp in Headers */ = {isa = PBXBuildFile; fileRef = 84F7B46C1D915D88005F83E8 /* СIMAPSearchOperation.cpp */; settings = {ATTRIBUTES = (Public, ); }; };
-		8408C7DA1F2637220003A816 /* СIMAPSearchOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 84F7B46D1D915D88005F83E8 /* СIMAPSearchOperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8408C7DB1F2637220003A816 /* CIMAPIdleOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 84E3DB381D9A7C93003B598F /* CIMAPIdleOperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8408C7DC1F2637220003A816 /* CIMAPAsyncSession.h in Headers */ = {isa = PBXBuildFile; fileRef = 84F7B45D1D915D88005F83E8 /* CIMAPAsyncSession.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		8408C7DD1F2637220003A816 /* CIMAPFetchFoldersOperation.cpp in Headers */ = {isa = PBXBuildFile; fileRef = 84E1E0251DF5D33B00D45A31 /* CIMAPFetchFoldersOperation.cpp */; settings = {ATTRIBUTES = (Public, ); }; };
 		8408C7DE1F2637220003A816 /* CIMAPFetchFoldersOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 84E1E0261DF5D33B00D45A31 /* CIMAPFetchFoldersOperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8408C7DF1F2637220003A816 /* CIMAPCapabilityOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 8491BB621DF6E74800E6D679 /* CIMAPCapabilityOperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		8408C7E01F2637220003A816 /* CIMAPCheckAccountOperation.cpp in Headers */ = {isa = PBXBuildFile; fileRef = 8491BB651DF6F64400E6D679 /* CIMAPCheckAccountOperation.cpp */; settings = {ATTRIBUTES = (Public, ); }; };
 		8408C7E11F2637220003A816 /* CIMAPCheckAccountOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 8491BB661DF6F64400E6D679 /* CIMAPCheckAccountOperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8408C7E21F2637220003A816 /* CIMAPCustomCommandOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 8491BB6C1DF7028C00E6D679 /* CIMAPCustomCommandOperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		8408C7E31F2637220003A816 /* CIMAPFetchContentToFileOperation.cpp in Headers */ = {isa = PBXBuildFile; fileRef = 84D344D91DF7090700B81A94 /* CIMAPFetchContentToFileOperation.cpp */; settings = {ATTRIBUTES = (Public, ); }; };
 		8408C7E41F2637220003A816 /* CIMAPFetchContentToFileOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 84D344DA1DF7090700B81A94 /* CIMAPFetchContentToFileOperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		8408C7E51F2637220003A816 /* CIMAPFetchNamespaceOperation.cpp in Headers */ = {isa = PBXBuildFile; fileRef = 84D344DF1DF712D500B81A94 /* CIMAPFetchNamespaceOperation.cpp */; settings = {ATTRIBUTES = (Public, ); }; };
 		8408C7E61F2637220003A816 /* CIMAPFetchNamespaceOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 84D344E01DF712D500B81A94 /* CIMAPFetchNamespaceOperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		8408C7E71F2637220003A816 /* CIMAPFetchParsedContentOperation.cpp in Headers */ = {isa = PBXBuildFile; fileRef = 842D79991DF801AE00F9424C /* CIMAPFetchParsedContentOperation.cpp */; settings = {ATTRIBUTES = (Public, ); }; };
 		8408C7E81F2637220003A816 /* CIMAPFetchParsedContentOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 842D799A1DF801AE00F9424C /* CIMAPFetchParsedContentOperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8408C7E91F2637220003A816 /* CIMAPMessageRenderingOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 842D799E1DF8033100F9424C /* CIMAPMessageRenderingOperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8408C7EA1F2637220003A816 /* CIMAPMoveMessagesOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 842D79A21DF8049D00F9424C /* CIMAPMoveMessagesOperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -547,8 +485,8 @@
 		8408C7F21F2637220003A816 /* CObject.h in Headers */ = {isa = PBXBuildFile; fileRef = 84F7B4151D915997005F83E8 /* CObject.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8408C7F31F2637220003A816 /* CDictionary.h in Headers */ = {isa = PBXBuildFile; fileRef = 84E3DB401D9AA676003B598F /* CDictionary.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8408C7F41F2637220003A816 /* CBase.h in Headers */ = {isa = PBXBuildFile; fileRef = 84F7B40D1D915985005F83E8 /* CBase.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		8408C7F51F2637220003A816 /* CBase+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 847530611F2230B30011100D /* CBase+Private.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		8408C7F61F2637220003A816 /* CCore.h in Headers */ = {isa = PBXBuildFile; fileRef = 84F7B40E1D915985005F83E8 /* CCore.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8408C7F51F2637220003A816 /* CBase+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 847530611F2230B30011100D /* CBase+Private.h */; };
+		8408C7F61F2637220003A816 /* CCore.h in Headers */ = {isa = PBXBuildFile; fileRef = 84F7B40E1D915985005F83E8 /* CCore.h */; };
 		8408C7FE1F26378D0003A816 /* CAttachment.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8408C7F81F26378D0003A816 /* CAttachment.cpp */; };
 		8408C7FF1F26378D0003A816 /* CAttachment.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8408C7F81F26378D0003A816 /* CAttachment.cpp */; };
 		8408C8001F26378D0003A816 /* CAttachment.h in Headers */ = {isa = PBXBuildFile; fileRef = 8408C7F91F26378D0003A816 /* CAttachment.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -586,7 +524,6 @@
 		8408C8351F263AD50003A816 /* CIMAPFetchMessagesOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 84F7B4621D915D88005F83E8 /* CIMAPFetchMessagesOperation.cpp */; };
 		8408C8361F263AD50003A816 /* CIMAPFolderInfoOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 84F7B4641D915D88005F83E8 /* CIMAPFolderInfoOperation.cpp */; };
 		8408C8371F263AD50003A816 /* CIMAPFolderStatusOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 84F7B4661D915D88005F83E8 /* CIMAPFolderStatusOperation.cpp */; };
-		8408C8381F263AD50003A816 /* СIMAPSearchOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 84F7B46C1D915D88005F83E8 /* СIMAPSearchOperation.cpp */; };
 		8408C8391F263AD50003A816 /* CIMAPIdleOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 84E3DB371D9A7C93003B598F /* CIMAPIdleOperation.cpp */; };
 		8408C83A1F263AD50003A816 /* CIMAPAsyncSession.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 84F7B45C1D915D88005F83E8 /* CIMAPAsyncSession.cpp */; };
 		8408C83B1F263AD50003A816 /* CIMAPFetchFoldersOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 84E1E0251DF5D33B00D45A31 /* CIMAPFetchFoldersOperation.cpp */; };
@@ -607,6 +544,10 @@
 		8408C84A1F263AD50003A816 /* CIndexSet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 84F7B4121D915997005F83E8 /* CIndexSet.cpp */; };
 		8408C84B1F263AD50003A816 /* CObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 84F7B4141D915997005F83E8 /* CObject.cpp */; };
 		8408C84C1F263AD50003A816 /* CDictionary.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 84E3DB3F1D9AA676003B598F /* CDictionary.cpp */; };
+		840CB4531F274AD60068E8E6 /* CIMAPSearchOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 840CB4501F274AD60068E8E6 /* CIMAPSearchOperation.cpp */; };
+		840CB4541F274AD60068E8E6 /* CIMAPSearchOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 840CB4511F274AD60068E8E6 /* CIMAPSearchOperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		840CB4551F274AD60068E8E6 /* CIMAPSearchOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 840CB4511F274AD60068E8E6 /* CIMAPSearchOperation.h */; };
+		84424A7E1F274CBA009B953B /* CIMAPSearchOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 840CB4501F274AD60068E8E6 /* CIMAPSearchOperation.cpp */; };
 		846E0FB6BB2F46B3574C761C /* MCMainThreadMac.mm in Sources */ = {isa = PBXBuildFile; fileRef = C64EA6BD169E847800778456 /* MCMainThreadMac.mm */; };
 		84915BB8199C4B0400EDDED9 /* MCNNTP.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8491899C18C93F92002063A3 /* MCNNTP.h */; };
 		849189A118C93FB7002063A3 /* MCNNTPSession.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8491899F18C93FB7002063A3 /* MCNNTPSession.cpp */; };
@@ -630,6 +571,7 @@
 		84CFA98819F7159700FE35D2 /* MCNNTPFetchOverviewOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 84CFA98519F7159700FE35D2 /* MCNNTPFetchOverviewOperation.cpp */; };
 		84CFA98F19F724E500FE35D2 /* MCNNTPFetchServerTimeOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 84CFA98D19F724E500FE35D2 /* MCNNTPFetchServerTimeOperation.cpp */; };
 		84CFA99019F724E500FE35D2 /* MCNNTPFetchServerTimeOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 84CFA98D19F724E500FE35D2 /* MCNNTPFetchServerTimeOperation.cpp */; };
+		84D064E41F27636C003D492E /* MessageConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D064E21F27636C003D492E /* MessageConstants.swift */; };
 		84D7372C199BF66C005124E5 /* MCNNTPAsyncSession.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 84D7372A199BF66C005124E5 /* MCNNTPAsyncSession.cpp */; };
 		84D7372D199BF66C005124E5 /* MCNNTPAsyncSession.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 84D7372A199BF66C005124E5 /* MCNNTPAsyncSession.cpp */; };
 		84D73730199BF704005124E5 /* MCNNTPOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 84D7372E199BF704005124E5 /* MCNNTPOperation.cpp */; };
@@ -804,7 +746,6 @@
 		84DBBF121F26413600F03A5F /* CIMAPFetchMessagesOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 84F7B4631D915D88005F83E8 /* CIMAPFetchMessagesOperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		84DBBF131F26413600F03A5F /* CIMAPFolderInfoOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 84F7B4651D915D88005F83E8 /* CIMAPFolderInfoOperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		84DBBF141F26413600F03A5F /* CIMAPFolderStatusOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 84F7B4671D915D88005F83E8 /* CIMAPFolderStatusOperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		84DBBF151F26413600F03A5F /* СIMAPSearchOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 84F7B46D1D915D88005F83E8 /* СIMAPSearchOperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		84DBBF161F26413600F03A5F /* CIMAPIdleOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 84E3DB381D9A7C93003B598F /* CIMAPIdleOperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		84DBBF171F26413600F03A5F /* CIMAPAsyncSession.h in Headers */ = {isa = PBXBuildFile; fileRef = 84F7B45D1D915D88005F83E8 /* CIMAPAsyncSession.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		84DBBF181F26413600F03A5F /* CIMAPFetchFoldersOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 84E1E0261DF5D33B00D45A31 /* CIMAPFetchFoldersOperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -830,35 +771,35 @@
 		84E65533199BE15500EC8CC4 /* MCNNTPSession.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 849189A018C93FB7002063A3 /* MCNNTPSession.h */; };
 		84E65534199BE2BF00EC8CC4 /* MCNNTPGroupInfo.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 849189AA18C94986002063A3 /* MCNNTPGroupInfo.h */; };
 		84E65535199BE2C300EC8CC4 /* MCNNTPGroupInfo.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 849189AA18C94986002063A3 /* MCNNTPGroupInfo.h */; };
-		84EDC6D3C8B582B4BDA39B3F /* MCNull.h in Headers */ = {isa = PBXBuildFile; fileRef = C6D6F953171E5CB8006F5B28 /* MCNull.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		84EDC6D3C8B582B4BDA39B3F /* MCNull.h in Headers */ = {isa = PBXBuildFile; fileRef = C6D6F953171E5CB8006F5B28 /* MCNull.h */; };
 		851682AD1C6A2484005B86C4 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 851682AC1C6A2484005B86C4 /* Default-568h@2x.png */; };
 		8568A4131C610D9800FF4470 /* MCIMAPMoveMessagesOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8568A4111C610D9800FF4470 /* MCIMAPMoveMessagesOperation.cpp */; };
 		8568A4141C610DA800FF4470 /* MCIMAPMoveMessagesOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8568A4111C610D9800FF4470 /* MCIMAPMoveMessagesOperation.cpp */; };
 		8568A41C1C61167F00FF4470 /* MCIMAPMoveMessagesOperation.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8568A4121C610D9800FF4470 /* MCIMAPMoveMessagesOperation.h */; };
 		8568A41F1C6116B600FF4470 /* MCIMAPMoveMessagesOperation.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8568A4121C610D9800FF4470 /* MCIMAPMoveMessagesOperation.h */; };
-		856A0FD349772C0508B70517 /* MCSMTPSession.h in Headers */ = {isa = PBXBuildFile; fileRef = C64EA6EF169E847800778456 /* MCSMTPSession.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		856A0FD349772C0508B70517 /* MCSMTPSession.h in Headers */ = {isa = PBXBuildFile; fileRef = C64EA6EF169E847800778456 /* MCSMTPSession.h */; };
 		867DF395CFCFC98C9A692CA0 /* MCIMAPDeleteFolderOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C64EA80316A2997B00778456 /* MCIMAPDeleteFolderOperation.cpp */; };
 		86826D824CA11A9D07E506CC /* MCMD5.h in Headers */ = {isa = PBXBuildFile; fileRef = C6D6F951171E5CB8006F5B28 /* MCMD5.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8742EDE467A07D548A294318 /* MCIMAPNamespace.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C64EA6CD169E847800778456 /* MCIMAPNamespace.cpp */; };
 		87732A5557EE97AA37ED35CF /* MCIMAPSearchExpression.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C64EA6D4169E847800778456 /* MCIMAPSearchExpression.cpp */; };
-		896A300E021C118CCD4DA8FC /* MCPOPSession.h in Headers */ = {isa = PBXBuildFile; fileRef = C64EA6DE169E847800778456 /* MCPOPSession.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		896A300E021C118CCD4DA8FC /* MCPOPSession.h in Headers */ = {isa = PBXBuildFile; fileRef = C64EA6DE169E847800778456 /* MCPOPSession.h */; };
 		89BFF372F06F06EE43F601EE /* MCMailProvider.h in Headers */ = {isa = PBXBuildFile; fileRef = C6CF62C0175324F0006398B9 /* MCMailProvider.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		89DAEABAF1BE96FDBECEDE15 /* MCNNTPListNewsgroupsOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 84D7375A199BFDCA005124E5 /* MCNNTPListNewsgroupsOperation.cpp */; };
 		8AB02545973F92F1FFECDAE6 /* MCAutoreleasePoolMac.mm in Sources */ = {isa = PBXBuildFile; fileRef = C668E2CA1735CB8900A2BB47 /* MCAutoreleasePoolMac.mm */; };
-		8AEA6CFEDE772561B10D77A2 /* MCMXRecordResolverOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 2744B1691A7A4637009E9E67 /* MCMXRecordResolverOperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8AEA6CFEDE772561B10D77A2 /* MCMXRecordResolverOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 2744B1691A7A4637009E9E67 /* MCMXRecordResolverOperation.h */; };
 		8B0095C91A00DDC500F84BC0 /* MCSMTPLoginOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8B0095C71A00DDC500F84BC0 /* MCSMTPLoginOperation.cpp */; };
 		8B0095CF1A00DE7700F84BC0 /* MCSMTPLoginOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8B0095C71A00DDC500F84BC0 /* MCSMTPLoginOperation.cpp */; };
 		8B39E1B92970F8B2B206BE33 /* MCPOPFetchHeaderOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = C62C6EF116A7C6DE00737497 /* MCPOPFetchHeaderOperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8B63FD72E8E31ABB1942FC95 /* MCNNTPPostOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F382219E1C7A626700E00721 /* MCNNTPPostOperation.cpp */; };
-		8CAFD77E7A692C20D31A8BAF /* MCPOPMessageInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = C64EA6DB169E847800778456 /* MCPOPMessageInfo.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8CAFD77E7A692C20D31A8BAF /* MCPOPMessageInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = C64EA6DB169E847800778456 /* MCPOPMessageInfo.h */; };
 		8CD733AB06B81BAB7C3E40E3 /* MCRange.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C64EA6B3169E847800778456 /* MCRange.cpp */; };
 		8CF5E712E3690395D0D51516 /* MCNNTPFetchOverviewOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 84CFA98519F7159700FE35D2 /* MCNNTPFetchOverviewOperation.cpp */; };
 		8D96BE9CABB92A9E4CA3228F /* MCIMAPFetchContentToFileOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 810DB78C1C68F4E200017B12 /* MCIMAPFetchContentToFileOperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8DE9F4E340CF1C374E516148 /* MCIMAPCustomCommandOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1820E7D31BD403ED00835D1E /* MCIMAPCustomCommandOperation.cpp */; };
 		8EF93A43DF9F8B859852D0CB /* MCNNTPFetchAllArticlesOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 84D73741199BF963005124E5 /* MCNNTPFetchAllArticlesOperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		8F4A6F0C97289F6DD9830459 /* MCMainThread.h in Headers */ = {isa = PBXBuildFile; fileRef = C64EA6BC169E847800778456 /* MCMainThread.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8F4A6F0C97289F6DD9830459 /* MCMainThread.h in Headers */ = {isa = PBXBuildFile; fileRef = C64EA6BC169E847800778456 /* MCMainThread.h */; };
 		8F58AC8081D4161832402EBE /* MCDataMac.mm in Sources */ = {isa = PBXBuildFile; fileRef = C6D4FD4219FB7DAA001F7E01 /* MCDataMac.mm */; };
-		8F6991D1F5D47C1EE53E0144 /* MCOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = C64EA6BF169E847800778456 /* MCOperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8F6991D1F5D47C1EE53E0144 /* MCOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = C64EA6BF169E847800778456 /* MCOperation.h */; };
 		8F8203937E43E84F3B71ADB1 /* MCDataDecoderUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 811320AE1D02388A004B7ECF /* MCDataDecoderUtils.cpp */; };
 		8FC62F3EBB05AAA6CB60FF7C /* MCIMAPFetchNamespaceOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C64EA82A16A29FAA00778456 /* MCIMAPFetchNamespaceOperation.cpp */; };
 		8FCB2EF3AB3714C3988A1125 /* MCMessageHeader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C64EA69F169E847800778456 /* MCMessageHeader.cpp */; };
@@ -866,39 +807,39 @@
 		9018BECB2B8C0DF224A15132 /* MCIMAPNamespace.h in Headers */ = {isa = PBXBuildFile; fileRef = C64EA6CE169E847800778456 /* MCIMAPNamespace.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		90A45B4FD6198433333A19CA /* cstring.c in Sources */ = {isa = PBXBuildFile; fileRef = BDCD7C721A70771B0001DCC3 /* cstring.c */; };
 		912A5DAAE7352F9C53F2C15F /* ustring.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BDCD7CC11A70771B0001DCC3 /* ustring.cpp */; };
-		915157868D0F017A7A1629CD /* MCIMAPIdentityOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = C62C6ED316A2A0E600737497 /* MCIMAPIdentityOperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		915157868D0F017A7A1629CD /* MCIMAPIdentityOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = C62C6ED316A2A0E600737497 /* MCIMAPIdentityOperation.h */; };
 		9152E0DB18EEF85D6FDBEA14 /* MCString.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C64EA6B7169E847800778456 /* MCString.cpp */; };
 		91F8E8ED4014B8C26821D247 /* MCPOPOperationCallback.h in Headers */ = {isa = PBXBuildFile; fileRef = C62C6EFC16A7CA1500737497 /* MCPOPOperationCallback.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		920C3F811C04A8DA655F794B /* MCMailProvidersManager.h in Headers */ = {isa = PBXBuildFile; fileRef = C6CF62C2175324F0006398B9 /* MCMailProvidersManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		920C3F811C04A8DA655F794B /* MCMailProvidersManager.h in Headers */ = {isa = PBXBuildFile; fileRef = C6CF62C2175324F0006398B9 /* MCMailProvidersManager.h */; };
 		9360BE7A652078955C7AE4C6 /* MCLibetpan.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BD637139177DFF080094121B /* MCLibetpan.cpp */; };
 		937170C4694EDF6630CC4DDA /* MCAddressDisplay.h in Headers */ = {isa = PBXBuildFile; fileRef = C63CD67816BDCDD400DB18F1 /* MCAddressDisplay.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		93D509F7FAE001720B9AFBB8 /* MCIMAPNoopOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 84B639EC17F280F3003B5BA2 /* MCIMAPNoopOperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		93D509F7FAE001720B9AFBB8 /* MCIMAPNoopOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 84B639EC17F280F3003B5BA2 /* MCIMAPNoopOperation.h */; };
 		943F1A9A17D964F600F0C798 /* MCIMAPConnectOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 943F1A9817D964F600F0C798 /* MCIMAPConnectOperation.cpp */; };
 		943F1A9E17D96C5500F0C798 /* MCIMAPConnectOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 943F1A9817D964F600F0C798 /* MCIMAPConnectOperation.cpp */; };
 		943F1AA017D9736100F0C798 /* MCIMAPConnectOperation.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 943F1A9917D964F600F0C798 /* MCIMAPConnectOperation.h */; };
 		94947F723AD04A0A36463CF3 /* MCIMAPFolderInfoOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C62C6ED616A398FA00737497 /* MCIMAPFolderInfoOperation.cpp */; };
-		9516EA863A64491B2C847078 /* MCIterator.h in Headers */ = {isa = PBXBuildFile; fileRef = C6D6F96D1721028D006F5B28 /* MCIterator.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9516EA863A64491B2C847078 /* MCIterator.h in Headers */ = {isa = PBXBuildFile; fileRef = C6D6F96D1721028D006F5B28 /* MCIterator.h */; };
 		960EF405CA617C29A584A0F7 /* MCLog.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C64EA6AF169E847800778456 /* MCLog.cpp */; };
 		9669A0FFA906CACCCAB2895D /* umutex.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BDCD7CED1A7079300001DCC3 /* umutex.cpp */; };
 		9760A8F16AE2C2BB7FC32D7A /* MCConnectionLoggerUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C68B2AF517797389005E61EF /* MCConnectionLoggerUtils.cpp */; };
 		97746DC826DB4886D163A572 /* MCIMAPOperationCallback.h in Headers */ = {isa = PBXBuildFile; fileRef = C64EA7F416A15A6300778456 /* MCIMAPOperationCallback.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		97A2356B6CB23A5CD859CF0D /* MCPOP.h in Headers */ = {isa = PBXBuildFile; fileRef = C64EA6D9169E847800778456 /* MCPOP.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		97A2356B6CB23A5CD859CF0D /* MCPOP.h in Headers */ = {isa = PBXBuildFile; fileRef = C64EA6D9169E847800778456 /* MCPOP.h */; };
 		9834D71F64B088E0C5E86BC5 /* csdetect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BDCD7C6A1A70771B0001DCC3 /* csdetect.cpp */; };
 		9927A59231F681695C392F45 /* cstring.c in Sources */ = {isa = PBXBuildFile; fileRef = BDCD7C721A70771B0001DCC3 /* cstring.c */; };
 		9AC1190D35512F25DC179E6A /* MCNNTPAsyncSession.h in Headers */ = {isa = PBXBuildFile; fileRef = 84D7372B199BF66C005124E5 /* MCNNTPAsyncSession.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		9AF0FDF184E1FF511D288E61 /* MCString.h in Headers */ = {isa = PBXBuildFile; fileRef = C64EA6B8169E847800778456 /* MCString.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9AF0FDF184E1FF511D288E61 /* MCString.h in Headers */ = {isa = PBXBuildFile; fileRef = C64EA6B8169E847800778456 /* MCString.h */; };
 		9B03A27FFCAA4583FDDBD347 /* csrutf8.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BDCD7C711A70771B0001DCC3 /* csrutf8.cpp */; };
-		9C5253B510321886FBF6B9F2 /* MCMultipart.h in Headers */ = {isa = PBXBuildFile; fileRef = C64EA6E9169E847800778456 /* MCMultipart.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9C5253B510321886FBF6B9F2 /* MCMultipart.h in Headers */ = {isa = PBXBuildFile; fileRef = C64EA6E9169E847800778456 /* MCMultipart.h */; };
 		9C57079671DCE1ACCDF3E8F0 /* MCPOPOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C62C6EF916A7C93F00737497 /* MCPOPOperation.cpp */; };
 		9C95572790276F512AEFDF23 /* MCNNTPGroupInfo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 849189A918C94986002063A3 /* MCNNTPGroupInfo.cpp */; };
-		9DAB085A9E14C50F0D96F8AA /* MCIMAPFolderInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = C673EBEC1A46B41000A53F7F /* MCIMAPFolderInfo.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9DAB085A9E14C50F0D96F8AA /* MCIMAPFolderInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = C673EBEC1A46B41000A53F7F /* MCIMAPFolderInfo.h */; };
 		9DCF912E373FEF77F81D772E /* MCSet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C64EA6B5169E847800778456 /* MCSet.cpp */; };
 		9DD5E50CD46DB05FEFA8D188 /* MCPOPNoopOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 84B639E617F27EBD003B5BA2 /* MCPOPNoopOperation.cpp */; };
 		9E774D891767C7F60065EB9B /* MCIMAPFolderStatus.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9E774D881767C7F60065EB9B /* MCIMAPFolderStatus.cpp */; };
 		9E774D8A1767C7F60065EB9B /* MCIMAPFolderStatus.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9E774D881767C7F60065EB9B /* MCIMAPFolderStatus.cpp */; };
 		9E774D8B1767CD3C0065EB9B /* MCIMAPFolderStatus.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9E774D871767C54E0065EB9B /* MCIMAPFolderStatus.h */; };
 		9E774D8C1767CD490065EB9B /* MCIMAPFolderStatus.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9E774D871767C54E0065EB9B /* MCIMAPFolderStatus.h */; };
-		9E7F63C23A73DE9951AB6082 /* MCIMAPMessage.h in Headers */ = {isa = PBXBuildFile; fileRef = C64EA6C8169E847800778456 /* MCIMAPMessage.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9E7F63C23A73DE9951AB6082 /* MCIMAPMessage.h in Headers */ = {isa = PBXBuildFile; fileRef = C64EA6C8169E847800778456 /* MCIMAPMessage.h */; };
 		9E8EE4564C84443EE6FA23C9 /* ucsdet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BDCD7CE91A7077680001DCC3 /* ucsdet.cpp */; };
 		9EF9AB11175F319A0027FA3B /* MCIMAPFolderStatusOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9EF9AB10175F319A0027FA3B /* MCIMAPFolderStatusOperation.cpp */; };
 		9EF9AB12175F319A0027FA3B /* MCIMAPFolderStatusOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9EF9AB10175F319A0027FA3B /* MCIMAPFolderStatusOperation.cpp */; };
@@ -906,7 +847,7 @@
 		9EF9AB25175F40C70027FA3B /* MCIMAPFolderStatusOperation.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9EF9AB0E175F30C20027FA3B /* MCIMAPFolderStatusOperation.h */; };
 		9F89C826D347517A53EFB827 /* uarrsort.c in Sources */ = {isa = PBXBuildFile; fileRef = BDCD7CBA1A70771B0001DCC3 /* uarrsort.c */; };
 		9FE4A7EADDB2DEB7EF72D156 /* MCHash.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C64EA6AB169E847800778456 /* MCHash.cpp */; };
-		A009D0B9C2A026D48A9EB564 /* MCAsync.h in Headers */ = {isa = PBXBuildFile; fileRef = C64EA7E416A14A4500778456 /* MCAsync.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A009D0B9C2A026D48A9EB564 /* MCAsync.h in Headers */ = {isa = PBXBuildFile; fileRef = C64EA7E416A14A4500778456 /* MCAsync.h */; };
 		A0A1ACAB18472711AC5704F5 /* MCSMTPOperationCallback.h in Headers */ = {isa = PBXBuildFile; fileRef = C64EA7E116A1425400778456 /* MCSMTPOperationCallback.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A0BF12275D4256FD6DAFBD3C /* MCBase64.c in Sources */ = {isa = PBXBuildFile; fileRef = C67597C117A8D65000DA69DF /* MCBase64.c */; };
 		A0FFF7352B1DCF658A4B66AB /* csrmbcs.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BDCD7C6E1A70771B0001DCC3 /* csrmbcs.cpp */; };
@@ -914,10 +855,10 @@
 		A11FA879FB152E0A5AA3E21B /* MCIMAPIdleOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C64EA82716A29EF400778456 /* MCIMAPIdleOperation.cpp */; };
 		A15C9FF7C392424E08ADC54E /* MCIMAPSyncResult.h in Headers */ = {isa = PBXBuildFile; fileRef = C64BB22016E34DCB000DB34C /* MCIMAPSyncResult.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A2821BEC0F171D2C7B1786A2 /* MCIMAPFolder.h in Headers */ = {isa = PBXBuildFile; fileRef = C64EA6C6169E847800778456 /* MCIMAPFolder.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		A3740975B467CCB6E8B45BF4 /* MCIMAPNamespaceItem.h in Headers */ = {isa = PBXBuildFile; fileRef = C64EA6D0169E847800778456 /* MCIMAPNamespaceItem.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A3740975B467CCB6E8B45BF4 /* MCIMAPNamespaceItem.h in Headers */ = {isa = PBXBuildFile; fileRef = C64EA6D0169E847800778456 /* MCIMAPNamespaceItem.h */; };
 		A3FA0952984E9F27D395EC6E /* MCIMAPDisconnectOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6081679177635D2001F1018 /* MCIMAPDisconnectOperation.cpp */; };
 		A42D0D576E54917ED0F730D8 /* MCIMAPFetchFoldersOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C64EA7FA16A2959700778456 /* MCIMAPFetchFoldersOperation.cpp */; };
-		A533D6485454C01302AEFFB7 /* MCProvider.h in Headers */ = {isa = PBXBuildFile; fileRef = C6CF62C5175324F0006398B9 /* MCProvider.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A533D6485454C01302AEFFB7 /* MCProvider.h in Headers */ = {isa = PBXBuildFile; fileRef = C6CF62C5175324F0006398B9 /* MCProvider.h */; };
 		A549CD214B203F1620CC0F77 /* uobject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BDCD7CC01A70771B0001DCC3 /* uobject.cpp */; };
 		A55D0A007FEB978C8B14BCDC /* MCDataStreamDecoder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 81416BDC1CF8BB17000A4299 /* MCDataStreamDecoder.cpp */; };
 		A59ECA8DDE5FD9BB200E2D9E /* MCPOPProgressCallback.h in Headers */ = {isa = PBXBuildFile; fileRef = C64EA6DC169E847800778456 /* MCPOPProgressCallback.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -927,40 +868,40 @@
 		A82FCADB37B75DC40B2F69AE /* MCHash.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C64EA6AB169E847800778456 /* MCHash.cpp */; };
 		A849B8D51A28615EEF2EABE3 /* MCIMAPMultipart.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C64EA6CB169E847800778456 /* MCIMAPMultipart.cpp */; };
 		A95ECF069F8855F2FAEBE187 /* MCMXRecordResolverOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2744B1681A7A4637009E9E67 /* MCMXRecordResolverOperation.cpp */; };
-		A9CA34D66C9C3F45BBEB98EB /* MCIMAPIdleOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = C64EA82816A29F0300778456 /* MCIMAPIdleOperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A9CA34D66C9C3F45BBEB98EB /* MCIMAPIdleOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = C64EA82816A29F0300778456 /* MCIMAPIdleOperation.h */; };
 		A9D52459D38E9DFFBFFD3530 /* MCNNTPFetchArticleOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 84D7373B199BF83B005124E5 /* MCNNTPFetchArticleOperation.cpp */; };
 		A9F258003F34845F30D30FB3 /* MCIMAPAsyncConnection.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C64EA7FD16A295B500778456 /* MCIMAPAsyncConnection.cpp */; };
-		AA62B1999E009E0FE4814FCF /* MCNNTPFetchOverviewOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 84CFA98619F7159700FE35D2 /* MCNNTPFetchOverviewOperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		AA830E979F6BFDC40649265E /* MCIMAPFetchContentToFileOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 810DB78C1C68F4E200017B12 /* MCIMAPFetchContentToFileOperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AA62B1999E009E0FE4814FCF /* MCNNTPFetchOverviewOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 84CFA98619F7159700FE35D2 /* MCNNTPFetchOverviewOperation.h */; };
+		AA830E979F6BFDC40649265E /* MCIMAPFetchContentToFileOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 810DB78C1C68F4E200017B12 /* MCIMAPFetchContentToFileOperation.h */; };
 		AAA1D2EBA7ACD7A7408B95B8 /* MCIMAPStoreLabelsOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C64EA82116A29E4F00778456 /* MCIMAPStoreLabelsOperation.cpp */; };
 		AAA5607C1DEF5AEB88EF5FBE /* MCIMAPFetchContentToFileOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 810DB78B1C68F4E200017B12 /* MCIMAPFetchContentToFileOperation.cpp */; };
 		AABA8E97D2671BB334A75754 /* MCOperationQueue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C64EA6C1169E847800778456 /* MCOperationQueue.cpp */; };
 		AAE6103C7EE49D55C36F5490 /* MCSet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C64EA6B5169E847800778456 /* MCSet.cpp */; };
-		AAEB91E93571116AF7B755D5 /* MCAbstractMessagePart.h in Headers */ = {isa = PBXBuildFile; fileRef = C64EA697169E847800778456 /* MCAbstractMessagePart.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AAEB91E93571116AF7B755D5 /* MCAbstractMessagePart.h in Headers */ = {isa = PBXBuildFile; fileRef = C64EA697169E847800778456 /* MCAbstractMessagePart.h */; };
 		AB594B926AA4F81F3F7545FC /* MCNull.h in Headers */ = {isa = PBXBuildFile; fileRef = C6D6F953171E5CB8006F5B28 /* MCNull.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AC6F99B5ECC7D61FE83BDE4E /* MCHTMLCleaner.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C63CD68F16BE566D00DB18F1 /* MCHTMLCleaner.cpp */; };
-		AC811A049DE2A602AE678A7E /* MCIMAPOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = C64EA7F016A15A4D00778456 /* MCIMAPOperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AC811A049DE2A602AE678A7E /* MCIMAPOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = C64EA7F016A15A4D00778456 /* MCIMAPOperation.h */; };
 		ACBE12776961DBE96F6E88CF /* MCMessagePart.h in Headers */ = {isa = PBXBuildFile; fileRef = C64EA6E7169E847800778456 /* MCMessagePart.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AD63521F7FED2DCD76765F00 /* MCIMAPMessageRenderingOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = DA0F1C7A177C07B300F0D3B4 /* MCIMAPMessageRenderingOperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		AE2E1DE7529590DE128A1143 /* MCSMTPProgressCallback.h in Headers */ = {isa = PBXBuildFile; fileRef = C64EA6ED169E847800778456 /* MCSMTPProgressCallback.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		AE5F1F0F75CB25015A0F3F11 /* MCOperationCallback.h in Headers */ = {isa = PBXBuildFile; fileRef = C64EA6C0169E847800778456 /* MCOperationCallback.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AE2E1DE7529590DE128A1143 /* MCSMTPProgressCallback.h in Headers */ = {isa = PBXBuildFile; fileRef = C64EA6ED169E847800778456 /* MCSMTPProgressCallback.h */; };
+		AE5F1F0F75CB25015A0F3F11 /* MCOperationCallback.h in Headers */ = {isa = PBXBuildFile; fileRef = C64EA6C0169E847800778456 /* MCOperationCallback.h */; };
 		AEDB88E1F9D52B022B1334A0 /* MCIMAPSession.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C64EA6D6169E847800778456 /* MCIMAPSession.cpp */; };
 		AF2B2DA5B20B882750859E34 /* MCAsyncNNTP.h in Headers */ = {isa = PBXBuildFile; fileRef = 84D73729199BF63F005124E5 /* MCAsyncNNTP.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B067722112DC35F007BDEC7A /* MCMessageParser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C64EA6E4169E847800778456 /* MCMessageParser.cpp */; };
 		B0D15802A099E9ACAC901523 /* MCPOPSession.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C64EA6DD169E847800778456 /* MCPOPSession.cpp */; };
 		B19960FEAC7C297D67F11FA4 /* MCIMAPCapabilityOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C64BB22916E5C0A3000DB34C /* MCIMAPCapabilityOperation.cpp */; };
-		B1E68F3C5C04001AA7D7C012 /* MCIMAPNamespace.h in Headers */ = {isa = PBXBuildFile; fileRef = C64EA6CE169E847800778456 /* MCIMAPNamespace.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		B1E68F3C5C04001AA7D7C012 /* MCIMAPNamespace.h in Headers */ = {isa = PBXBuildFile; fileRef = C64EA6CE169E847800778456 /* MCIMAPNamespace.h */; };
 		B2156F4CF16BF378D4F26B83 /* MCAbstractMessagePart.h in Headers */ = {isa = PBXBuildFile; fileRef = C64EA697169E847800778456 /* MCAbstractMessagePart.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		B271EA628771A97A43AEAAEB /* MCPOPFetchMessagesOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = C62C6F0516A7E54400737497 /* MCPOPFetchMessagesOperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		B271EA628771A97A43AEAAEB /* MCPOPFetchMessagesOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = C62C6F0516A7E54400737497 /* MCPOPFetchMessagesOperation.h */; };
 		B2CA7CEFFC4B937592A4E9B6 /* MCIMAPFetchContentToFileOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 810DB78B1C68F4E200017B12 /* MCIMAPFetchContentToFileOperation.cpp */; };
-		B2ECBB6C8357FE5DF87E2E8F /* MCSizeFormatter.h in Headers */ = {isa = PBXBuildFile; fileRef = C63CD67E16BDCDD400DB18F1 /* MCSizeFormatter.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		B3D4C10E5F2988F0EDFB9756 /* MCCore.h in Headers */ = {isa = PBXBuildFile; fileRef = C64EA782169F23AB00778456 /* MCCore.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		B46C309D546FCEEDED7DEAC2 /* MCHash.h in Headers */ = {isa = PBXBuildFile; fileRef = C64EA6AC169E847800778456 /* MCHash.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		B60E7F7B892BE16A4C1222A3 /* MCNNTPPostOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = F382219D1C7A60A800E00721 /* MCNNTPPostOperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		B2ECBB6C8357FE5DF87E2E8F /* MCSizeFormatter.h in Headers */ = {isa = PBXBuildFile; fileRef = C63CD67E16BDCDD400DB18F1 /* MCSizeFormatter.h */; };
+		B3D4C10E5F2988F0EDFB9756 /* MCCore.h in Headers */ = {isa = PBXBuildFile; fileRef = C64EA782169F23AB00778456 /* MCCore.h */; };
+		B46C309D546FCEEDED7DEAC2 /* MCHash.h in Headers */ = {isa = PBXBuildFile; fileRef = C64EA6AC169E847800778456 /* MCHash.h */; };
+		B60E7F7B892BE16A4C1222A3 /* MCNNTPPostOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = F382219D1C7A60A800E00721 /* MCNNTPPostOperation.h */; };
 		B617849103B64FEBA30975E9 /* MCIMAPNamespaceItem.h in Headers */ = {isa = PBXBuildFile; fileRef = C64EA6D0169E847800778456 /* MCIMAPNamespaceItem.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B697AA487FD38113BDCAD094 /* utrace.c in Sources */ = {isa = PBXBuildFile; fileRef = BDCD7CC21A70771B0001DCC3 /* utrace.c */; };
 		B6DAF3A5BC75C3131A3E5BB7 /* MCAddress.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C64EA69C169E847800778456 /* MCAddress.cpp */; };
-		B7AD69B7F705319F034C0158 /* MCSMTPOperationCallback.h in Headers */ = {isa = PBXBuildFile; fileRef = C64EA7E116A1425400778456 /* MCSMTPOperationCallback.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		B7AD69B7F705319F034C0158 /* MCSMTPOperationCallback.h in Headers */ = {isa = PBXBuildFile; fileRef = C64EA7E116A1425400778456 /* MCSMTPOperationCallback.h */; };
 		B7CC1BBDE98AB1841FF4D4BC /* MCIMAPFolderStatus.h in Headers */ = {isa = PBXBuildFile; fileRef = 9E774D871767C54E0065EB9B /* MCIMAPFolderStatus.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B808A967FC94D0E43BE4D183 /* MCNNTPPostOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F382219E1C7A626700E00721 /* MCNNTPPostOperation.cpp */; };
 		B877A3CFE9A48A87DDDDE151 /* MCMessagePart.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C64EA6E6169E847800778456 /* MCMessagePart.cpp */; };
@@ -1030,16 +971,16 @@
 		BDCD7CF11A7079300001DCC3 /* umutex.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BDCD7CED1A7079300001DCC3 /* umutex.cpp */; };
 		BE1BAA5139A95198A6F67BE5 /* MCNNTPFetchServerTimeOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 84CFA98D19F724E500FE35D2 /* MCNNTPFetchServerTimeOperation.cpp */; };
 		BE2643CC426804B08970F9AC /* MCErrorMessage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BDCD7C591A5B1C2C0001DCC3 /* MCErrorMessage.cpp */; };
-		BE62AAFC394F7FEE8C3DC861 /* MCMessagePart.h in Headers */ = {isa = PBXBuildFile; fileRef = C64EA6E7169E847800778456 /* MCMessagePart.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		BE62AAFC394F7FEE8C3DC861 /* MCMessagePart.h in Headers */ = {isa = PBXBuildFile; fileRef = C64EA6E7169E847800778456 /* MCMessagePart.h */; };
 		BF3FF231FF86423816F5A8E3 /* MCHTMLRendererCallback.h in Headers */ = {isa = PBXBuildFile; fileRef = C63CD68516BE148B00DB18F1 /* MCHTMLRendererCallback.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C0C6F07E9BC4EBA836D41A1A /* MCSMTPAsyncSession.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C64EA68F169E847800778456 /* MCSMTPAsyncSession.cpp */; };
 		C106E35490416D7690BAD87C /* MCNNTPDisconnectOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 84D73756199BFC8A005124E5 /* MCNNTPDisconnectOperation.cpp */; };
 		C166A8DA9CF7B11F5CFD6AA9 /* MCSMTPOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = C64EA7D916A1386600778456 /* MCSMTPOperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		C1F02797D0D5F21DFB70B212 /* MCAssert.h in Headers */ = {isa = PBXBuildFile; fileRef = C64EA6A8169E847800778456 /* MCAssert.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C1F02797D0D5F21DFB70B212 /* MCAssert.h in Headers */ = {isa = PBXBuildFile; fileRef = C64EA6A8169E847800778456 /* MCAssert.h */; };
 		C1F4B4B5A8F425EE2E7DCA66 /* MCMessageParser.h in Headers */ = {isa = PBXBuildFile; fileRef = C64EA6E5169E847800778456 /* MCMessageParser.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C2FEA9672C9CBBDC1BD51A6E /* MCIMAPFolderInfoOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C62C6ED616A398FA00737497 /* MCIMAPFolderInfoOperation.cpp */; };
 		C348F28EACEC0522D75ED8BD /* MCAttachment.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C64EA6E0169E847800778456 /* MCAttachment.cpp */; };
-		C3F2619662467DE55B14619B /* MCIMAPCapabilityOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = C64BB22A16E5C0A3000DB34C /* MCIMAPCapabilityOperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C3F2619662467DE55B14619B /* MCIMAPCapabilityOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = C64BB22A16E5C0A3000DB34C /* MCIMAPCapabilityOperation.h */; };
 		C437A833C190907BC1C5BA8F /* MCAbstractMessage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C64EA694169E847800778456 /* MCAbstractMessage.cpp */; };
 		C59D601A5C291B3652174757 /* MCIMAPIdleOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = C64EA82816A29F0300778456 /* MCIMAPIdleOperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C600B61C1A242C6A000728F1 /* unittest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C600B61B1A242C6A000728F1 /* unittest.cpp */; };
@@ -1485,23 +1426,23 @@
 		C760E846040C96F03B65C1BA /* ucln_in.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BDCD7CBC1A70771B0001DCC3 /* ucln_in.cpp */; };
 		C787961953BEC9FF6FC63FB8 /* MCLog.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C64EA6AF169E847800778456 /* MCLog.cpp */; };
 		C7B17FFEB54335D7D3C9F372 /* MCNetService.h in Headers */ = {isa = PBXBuildFile; fileRef = C6CF62C4175324F0006398B9 /* MCNetService.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		C7EBEED33BB065E0176842B1 /* MCNNTPProgressCallback.h in Headers */ = {isa = PBXBuildFile; fileRef = 84D73732199BF754005124E5 /* MCNNTPProgressCallback.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C7EBEED33BB065E0176842B1 /* MCNNTPProgressCallback.h in Headers */ = {isa = PBXBuildFile; fileRef = 84D73732199BF754005124E5 /* MCNNTPProgressCallback.h */; };
 		C82125D34DA7457D9D821383 /* MCArray.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C64EA6A5169E847800778456 /* MCArray.cpp */; };
 		C9E80F5628E359E5877E85AD /* csrutf8.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BDCD7C711A70771B0001DCC3 /* csrutf8.cpp */; };
 		CA33C2725EAF707610028644 /* MCIMAPMessage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C64EA6C7169E847800778456 /* MCIMAPMessage.cpp */; };
 		CA4271D9DA4EBFC95DB0625A /* MCAutoreleasePool.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C64EA6A2169E847800778456 /* MCAutoreleasePool.cpp */; };
-		CA854A8216AC9F34E5C2806D /* MCIMAPFetchParsedContentOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 8199FBF019FAF1270040BBC3 /* MCIMAPFetchParsedContentOperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		CA854A8216AC9F34E5C2806D /* MCIMAPFetchParsedContentOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 8199FBF019FAF1270040BBC3 /* MCIMAPFetchParsedContentOperation.h */; };
 		CB9B433B994B9C5C1BEF54DE /* MCNNTPFetchServerTimeOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 84CFA98D19F724E500FE35D2 /* MCNNTPFetchServerTimeOperation.cpp */; };
-		CC69356D9463512F75CB7845 /* MCPOPProgressCallback.h in Headers */ = {isa = PBXBuildFile; fileRef = C64EA6DC169E847800778456 /* MCPOPProgressCallback.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		CC69356D9463512F75CB7845 /* MCPOPProgressCallback.h in Headers */ = {isa = PBXBuildFile; fileRef = C64EA6DC169E847800778456 /* MCPOPProgressCallback.h */; };
 		CCA5CD78DEFEEC31E664ABD2 /* MCAsyncPOP.h in Headers */ = {isa = PBXBuildFile; fileRef = C62C6EFD16A7DD0300737497 /* MCAsyncPOP.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		CD5DD0E5979B53708E84B2CE /* MCIMAP.h in Headers */ = {isa = PBXBuildFile; fileRef = C64EA6C4169E847800778456 /* MCIMAP.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		CECC9D428F36B6695DFEB100 /* MCIMAPOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C64EA7EF16A15A4D00778456 /* MCIMAPOperation.cpp */; };
 		CF8A1210E467225019219A0B /* MCMultipart.h in Headers */ = {isa = PBXBuildFile; fileRef = C64EA6E9169E847800778456 /* MCMultipart.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		D001AE0AA293EA2F5E04BD68 /* MCIMAPFetchNamespaceOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = C64EA82B16A2A01400778456 /* MCIMAPFetchNamespaceOperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D001AE0AA293EA2F5E04BD68 /* MCIMAPFetchNamespaceOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = C64EA82B16A2A01400778456 /* MCIMAPFetchNamespaceOperation.h */; };
 		D10C246499923B5F19C5D7FF /* MCAutoreleasePool.h in Headers */ = {isa = PBXBuildFile; fileRef = C64EA6A3169E847800778456 /* MCAutoreleasePool.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		D15156687200D37E077EEF68 /* MCHTMLCleaner.h in Headers */ = {isa = PBXBuildFile; fileRef = C63CD69016BE566E00DB18F1 /* MCHTMLCleaner.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D15156687200D37E077EEF68 /* MCHTMLCleaner.h in Headers */ = {isa = PBXBuildFile; fileRef = C63CD69016BE566E00DB18F1 /* MCHTMLCleaner.h */; };
 		D1523D8529F92346D5447C31 /* MCPOPFetchHeaderOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C62C6EF016A7C6DE00737497 /* MCPOPFetchHeaderOperation.cpp */; };
-		D30894BC748088E5A37BB98A /* MCAddress.h in Headers */ = {isa = PBXBuildFile; fileRef = C64EA69D169E847800778456 /* MCAddress.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D30894BC748088E5A37BB98A /* MCAddress.h in Headers */ = {isa = PBXBuildFile; fileRef = C64EA69D169E847800778456 /* MCAddress.h */; };
 		D30BB30E13D6602990D32521 /* MCICUTypes.h in Headers */ = {isa = PBXBuildFile; fileRef = C6D6F9691720F8F4006F5B28 /* MCICUTypes.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D3A48A829DE8214CC305D72E /* MCCertificateUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6F7B19D17A1C15200BE78BB /* MCCertificateUtils.cpp */; };
 		D3B0E96454BA62D15FD3C5DC /* MCIMAPFetchFoldersOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = C64EA7FB16A2959700778456 /* MCIMAPFetchFoldersOperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -1510,12 +1451,11 @@
 		D45CE17E4FCECA90C8A0E2F4 /* MCSMTPSession.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C64EA6EE169E847800778456 /* MCSMTPSession.cpp */; };
 		D4B743E9EDC820583D156C34 /* MCIMAPSyncResult.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C64BB21F16E34DCA000DB34C /* MCIMAPSyncResult.cpp */; };
 		D4D1B23C6FFA21A5E56C0334 /* MCPOPDeleteMessagesOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C62C6EF616A7C6F500737497 /* MCPOPDeleteMessagesOperation.cpp */; };
-		D5257B3C7C35D0304F28B514 /* MCIMAPMultipart.h in Headers */ = {isa = PBXBuildFile; fileRef = C64EA6CC169E847800778456 /* MCIMAPMultipart.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D5257B3C7C35D0304F28B514 /* MCIMAPMultipart.h in Headers */ = {isa = PBXBuildFile; fileRef = C64EA6CC169E847800778456 /* MCIMAPMultipart.h */; };
 		D56F91E548F795B4B96B72B7 /* MCValue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C64EA6BA169E847800778456 /* MCValue.cpp */; };
 		D6178CFB22BE28FC8FAD881C /* MCIMAPExpungeOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C64EA81516A29A8500778456 /* MCIMAPExpungeOperation.cpp */; };
-		D6342D4E47B2FB7A8D5FB59F /* MCAbstractPart.h in Headers */ = {isa = PBXBuildFile; fileRef = C64EA69B169E847800778456 /* MCAbstractPart.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D6342D4E47B2FB7A8D5FB59F /* MCAbstractPart.h in Headers */ = {isa = PBXBuildFile; fileRef = C64EA69B169E847800778456 /* MCAbstractPart.h */; };
 		D67B97377839C6082AB846E5 /* MCHashMap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C64EA6AD169E847800778456 /* MCHashMap.cpp */; };
-		D7D3A4FCBB113251F27F9531 /* MCAbstractMessage.h in Headers */ = {isa = PBXBuildFile; fileRef = C64EA695169E847800778456 /* MCAbstractMessage.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D86938A1F1FF4A614B3E6F34 /* MCNNTP.h in Headers */ = {isa = PBXBuildFile; fileRef = 8491899C18C93F92002063A3 /* MCNNTP.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D8741C5A952EDC3B47BFA092 /* uinvchar.c in Sources */ = {isa = PBXBuildFile; fileRef = BDCD7CBF1A70771B0001DCC3 /* uinvchar.c */; };
 		D8D2BD7BA67058075A55F52F /* MCIndexSet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C64BB22C16E5C1EE000DB34C /* MCIndexSet.cpp */; };
@@ -1523,7 +1463,7 @@
 		D94C008FBB3C84281EAFFCC6 /* MCIMAPCopyMessagesOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C64EA81216A29A0A00778456 /* MCIMAPCopyMessagesOperation.cpp */; };
 		D95AFD6708C8B854E6D72D5C /* MCDataDecoderUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 811320AE1D02388A004B7ECF /* MCDataDecoderUtils.cpp */; };
 		D97097DC4E7CAC3960B45D70 /* csrmbcs.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BDCD7C6E1A70771B0001DCC3 /* csrmbcs.cpp */; };
-		D993E1633374DB4406A0C232 /* MCIndexSet.h in Headers */ = {isa = PBXBuildFile; fileRef = C64BB22D16E5C1EE000DB34C /* MCIndexSet.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D993E1633374DB4406A0C232 /* MCIndexSet.h in Headers */ = {isa = PBXBuildFile; fileRef = C64BB22D16E5C1EE000DB34C /* MCIndexSet.h */; };
 		D9BBE9C1F1605FD727C25032 /* MCAutoreleasePoolMac.mm in Sources */ = {isa = PBXBuildFile; fileRef = C668E2CA1735CB8900A2BB47 /* MCAutoreleasePoolMac.mm */; };
 		DA0F1C7B177C07B300F0D3B4 /* MCIMAPMessageRenderingOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DA0F1C79177C07B300F0D3B4 /* MCIMAPMessageRenderingOperation.cpp */; };
 		DA0F1C7C177C07B300F0D3B4 /* MCIMAPMessageRenderingOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DA0F1C79177C07B300F0D3B4 /* MCIMAPMessageRenderingOperation.cpp */; };
@@ -1532,16 +1472,16 @@
 		DAD28C8B1783CFFC00F2BB8F /* MCHTMLBodyRendererTemplateCallback.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DAD28C891783CFFC00F2BB8F /* MCHTMLBodyRendererTemplateCallback.cpp */; };
 		DAD28C8C1783CFFC00F2BB8F /* MCHTMLBodyRendererTemplateCallback.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DAD28C891783CFFC00F2BB8F /* MCHTMLBodyRendererTemplateCallback.cpp */; };
 		DB54F41EC568CBE43CE4AF84 /* csr2022.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BDCD7C6C1A70771B0001DCC3 /* csr2022.cpp */; };
-		DB5EB05E91908CE4D148EA7C /* MCMessageConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = C64EA69E169E847800778456 /* MCMessageConstants.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DB5EB05E91908CE4D148EA7C /* MCMessageConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = C64EA69E169E847800778456 /* MCMessageConstants.h */; };
 		DBB6159C2BC8A69649902CD0 /* MCNNTPCheckAccountOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 84D73744199BFA8C005124E5 /* MCNNTPCheckAccountOperation.cpp */; };
 		DC671EFFBD8F8490B04D4E5F /* MCIMAPIdentityOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C62C6ED216A2A0E600737497 /* MCIMAPIdentityOperation.cpp */; };
 		DCD2FF551E227414F2934B55 /* MCIMAPSearchOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C64EA82416A29EE000778456 /* MCIMAPSearchOperation.cpp */; };
-		DD3FBEB84CC28F8A7F03E170 /* MCNNTPSession.h in Headers */ = {isa = PBXBuildFile; fileRef = 849189A018C93FB7002063A3 /* MCNNTPSession.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DD3FBEB84CC28F8A7F03E170 /* MCNNTPSession.h in Headers */ = {isa = PBXBuildFile; fileRef = 849189A018C93FB7002063A3 /* MCNNTPSession.h */; };
 		DD9A2D80F9D252DBC985E54E /* MCHTMLRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C63CD67B16BDCDD400DB18F1 /* MCHTMLRenderer.cpp */; };
-		DDEABC43085EF35411698BEE /* MCNNTPGroupInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 849189AA18C94986002063A3 /* MCNNTPGroupInfo.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DDEABC43085EF35411698BEE /* MCNNTPGroupInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 849189AA18C94986002063A3 /* MCNNTPGroupInfo.h */; };
 		DDFE51EDDAD8BF3FA792223F /* MCData.h in Headers */ = {isa = PBXBuildFile; fileRef = C64EA6AA169E847800778456 /* MCData.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DE08D2132E7BD7733CFB7C8D /* MCIMAPMultipart.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C64EA6CB169E847800778456 /* MCIMAPMultipart.cpp */; };
-		DE4B37A0269ACFE0DAE64D7A /* MCIMAPCustomCommandOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 1820E7D41BD403ED00835D1E /* MCIMAPCustomCommandOperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DE4B37A0269ACFE0DAE64D7A /* MCIMAPCustomCommandOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 1820E7D41BD403ED00835D1E /* MCIMAPCustomCommandOperation.h */; };
 		DF10DD5B93EAC29A8965701B /* MCValue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C64EA6BA169E847800778456 /* MCValue.cpp */; };
 		E02BA87A589C4602DC1BF6D3 /* ConvertUTF.c in Sources */ = {isa = PBXBuildFile; fileRef = BD49963519FEC6DD000945BC /* ConvertUTF.c */; };
 		E090D52AD355AF74BDCDB3D4 /* MCIMAPMoveMessagesOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8568A4111C610D9800FF4470 /* MCIMAPMoveMessagesOperation.cpp */; };
@@ -1550,15 +1490,15 @@
 		E1E2DB71DA4056F1EAE6BFE0 /* MCConnectionLoggerUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C68B2AF517797389005E61EF /* MCConnectionLoggerUtils.cpp */; };
 		E1F3E33A32BEB2B2DA828F87 /* MCIMAPCopyMessagesOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = C64EA81316A29A1000778456 /* MCIMAPCopyMessagesOperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E21801E17B7410B529BE0B98 /* MCSMTP.h in Headers */ = {isa = PBXBuildFile; fileRef = C64EA6EC169E847800778456 /* MCSMTP.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		E231D8EDE90B3BFA038CCCED /* MCIMAPOperationCallback.h in Headers */ = {isa = PBXBuildFile; fileRef = C64EA7F416A15A6300778456 /* MCIMAPOperationCallback.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		E278C821C115C45FCF2AA061 /* MCAsyncNNTP.h in Headers */ = {isa = PBXBuildFile; fileRef = 84D73729199BF63F005124E5 /* MCAsyncNNTP.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E231D8EDE90B3BFA038CCCED /* MCIMAPOperationCallback.h in Headers */ = {isa = PBXBuildFile; fileRef = C64EA7F416A15A6300778456 /* MCIMAPOperationCallback.h */; };
+		E278C821C115C45FCF2AA061 /* MCAsyncNNTP.h in Headers */ = {isa = PBXBuildFile; fileRef = 84D73729199BF63F005124E5 /* MCAsyncNNTP.h */; };
 		E3833896CBAB914223D0C770 /* MCIMAPStoreLabelsOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C64EA82116A29E4F00778456 /* MCIMAPStoreLabelsOperation.cpp */; };
 		E3A3AEC9263725A938A466F5 /* MCPOP.h in Headers */ = {isa = PBXBuildFile; fileRef = C64EA6D9169E847800778456 /* MCPOP.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		E3A40B332CB95855F7A3566A /* MCNNTPListNewsgroupsOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 84D7375B199BFDCA005124E5 /* MCNNTPListNewsgroupsOperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E3A40B332CB95855F7A3566A /* MCNNTPListNewsgroupsOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 84D7375B199BFDCA005124E5 /* MCNNTPListNewsgroupsOperation.h */; };
 		E3DE9F2A66E4012DA85E8FFE /* MCIMAPFetchNamespaceOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C64EA82A16A29FAA00778456 /* MCIMAPFetchNamespaceOperation.cpp */; };
 		E41F3979096D48B949D3EEEA /* MCJSON.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6D6F7F7171E595D006F5B28 /* MCJSON.cpp */; };
 		E561F2B9C70CB9FA580C45E1 /* ucsdet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BDCD7CE91A7077680001DCC3 /* ucsdet.cpp */; };
-		E5889F3AC3D9F2EC8707DC61 /* MCIMAPQuotaOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 4B3C1BE017ABF4BC008BBF4C /* MCIMAPQuotaOperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E5889F3AC3D9F2EC8707DC61 /* MCIMAPQuotaOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 4B3C1BE017ABF4BC008BBF4C /* MCIMAPQuotaOperation.h */; };
 		E5EAACD5A925246D74292137 /* ConvertUTF.c in Sources */ = {isa = PBXBuildFile; fileRef = BD49963519FEC6DD000945BC /* ConvertUTF.c */; };
 		E64305426C38E02194E0D0BA /* MCAccountValidator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 27478E7E1A764698004AE621 /* MCAccountValidator.cpp */; };
 		E643FCDDB5B23CCA2C109C48 /* MCPOPOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = C62C6EFA16A7C94000737497 /* MCPOPOperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -1568,8 +1508,8 @@
 		E9A444F64FC1A907BB4E45DB /* MCIMAPCustomCommandOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1820E7D31BD403ED00835D1E /* MCIMAPCustomCommandOperation.cpp */; };
 		EA0A6F02FAEF34FB6D954CC2 /* MCNNTPListNewsgroupsOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 84D7375A199BFDCA005124E5 /* MCNNTPListNewsgroupsOperation.cpp */; };
 		EA9F51ED9039F90E5598DCEE /* MCIMAPCheckAccountOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C64EA7F616A15A7800778456 /* MCIMAPCheckAccountOperation.cpp */; };
-		EB55D749DA27944ADF357519 /* MCICUTypes.h in Headers */ = {isa = PBXBuildFile; fileRef = C6D6F9691720F8F4006F5B28 /* MCICUTypes.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		EC14DA4CAD7640A38DCEE52C /* MCIMAPMoveMessagesOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 8568A4121C610D9800FF4470 /* MCIMAPMoveMessagesOperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		EB55D749DA27944ADF357519 /* MCICUTypes.h in Headers */ = {isa = PBXBuildFile; fileRef = C6D6F9691720F8F4006F5B28 /* MCICUTypes.h */; };
+		EC14DA4CAD7640A38DCEE52C /* MCIMAPMoveMessagesOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 8568A4121C610D9800FF4470 /* MCIMAPMoveMessagesOperation.h */; };
 		EC8F7A75442E276BE3D5611E /* MCLog.h in Headers */ = {isa = PBXBuildFile; fileRef = C64EA6B0169E847800778456 /* MCLog.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		ED380ED7FC4ABD64D3EEF0BA /* MCIMAPAsyncSession.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C62C6F0816A8F57000737497 /* MCIMAPAsyncSession.cpp */; };
 		ED4BA7EA708C2886EF10F98E /* MCIMAPMultipart.h in Headers */ = {isa = PBXBuildFile; fileRef = C64EA6CC169E847800778456 /* MCIMAPMultipart.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -1577,44 +1517,44 @@
 		EE447F0391248A0BED44DC6D /* MCSMTPNoopOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 84B639E117F279BB003B5BA2 /* MCSMTPNoopOperation.cpp */; };
 		EE57D9B5BA6B4A704F8C83EE /* csmatch.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BDCD7C6B1A70771B0001DCC3 /* csmatch.cpp */; };
 		EEA31A44BB279E45E6634543 /* MCBaseTypes.h in Headers */ = {isa = PBXBuildFile; fileRef = C64EA6A4169E847800778456 /* MCBaseTypes.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		EED9D8AB123FA473B591E42D /* MCPOPOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = C62C6EFA16A7C94000737497 /* MCPOPOperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		EED9D8AB123FA473B591E42D /* MCPOPOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = C62C6EFA16A7C94000737497 /* MCPOPOperation.h */; };
 		EF22293B161ED77407798380 /* MCIMAPFetchParsedContentOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8199FBEF19FAF1270040BBC3 /* MCIMAPFetchParsedContentOperation.cpp */; };
-		EF2A3DD113C8EEDC56F6D56C /* MCHTMLRendererCallback.h in Headers */ = {isa = PBXBuildFile; fileRef = C63CD68516BE148B00DB18F1 /* MCHTMLRendererCallback.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		EF2A3DD113C8EEDC56F6D56C /* MCHTMLRendererCallback.h in Headers */ = {isa = PBXBuildFile; fileRef = C63CD68516BE148B00DB18F1 /* MCHTMLRendererCallback.h */; };
 		F068D3FBA077CA88AF63476C /* MCNNTPFetchAllArticlesOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 84D73740199BF963005124E5 /* MCNNTPFetchAllArticlesOperation.cpp */; };
-		F0D3A829A77BDD5A0FA78650 /* MCMessageParser.h in Headers */ = {isa = PBXBuildFile; fileRef = C64EA6E5169E847800778456 /* MCMessageParser.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		F0D3A829A77BDD5A0FA78650 /* MCMessageParser.h in Headers */ = {isa = PBXBuildFile; fileRef = C64EA6E5169E847800778456 /* MCMessageParser.h */; };
 		F0E1093EA9094DBBF1BE57FE /* utrace.c in Sources */ = {isa = PBXBuildFile; fileRef = BDCD7CC21A70771B0001DCC3 /* utrace.c */; };
 		F1911E8987CA5287C13C1821 /* MCIMAPCopyMessagesOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C64EA81216A29A0A00778456 /* MCIMAPCopyMessagesOperation.cpp */; };
 		F1FF4A91ACA778557482F3CC /* MCIMAPNoopOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 84B639EB17F280F3003B5BA2 /* MCIMAPNoopOperation.cpp */; };
-		F208F99072B44F6F9FA36C0D /* MCSMTPAsyncSession.h in Headers */ = {isa = PBXBuildFile; fileRef = C64EA690169E847800778456 /* MCSMTPAsyncSession.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		F34876CCDC19E877B964CDA9 /* MCArray.h in Headers */ = {isa = PBXBuildFile; fileRef = C64EA6A6169E847800778456 /* MCArray.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		F208F99072B44F6F9FA36C0D /* MCSMTPAsyncSession.h in Headers */ = {isa = PBXBuildFile; fileRef = C64EA690169E847800778456 /* MCSMTPAsyncSession.h */; };
+		F34876CCDC19E877B964CDA9 /* MCArray.h in Headers */ = {isa = PBXBuildFile; fileRef = C64EA6A6169E847800778456 /* MCArray.h */; };
 		F349C205E0481B42303DD0D0 /* MCLibetpan.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BD637139177DFF080094121B /* MCLibetpan.cpp */; };
 		F382219F1C7A626700E00721 /* MCNNTPPostOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F382219E1C7A626700E00721 /* MCNNTPPostOperation.cpp */; };
 		F38221A01C7A626700E00721 /* MCNNTPPostOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F382219E1C7A626700E00721 /* MCNNTPPostOperation.cpp */; };
 		F38221A51C7B629B00E00721 /* MCNNTPPostOperation.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = F382219D1C7A60A800E00721 /* MCNNTPPostOperation.h */; };
 		F38221A71C7B638200E00721 /* MCNNTPPostOperation.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = F382219D1C7A60A800E00721 /* MCNNTPPostOperation.h */; };
-		F3B08CFB60208C1C25314092 /* MCIMAPFolder.h in Headers */ = {isa = PBXBuildFile; fileRef = C64EA6C6169E847800778456 /* MCIMAPFolder.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		F3B08CFB60208C1C25314092 /* MCIMAPFolder.h in Headers */ = {isa = PBXBuildFile; fileRef = C64EA6C6169E847800778456 /* MCIMAPFolder.h */; };
 		F4B2AF31150B3DB1A6ECD0BC /* MCProvider.h in Headers */ = {isa = PBXBuildFile; fileRef = C6CF62C5175324F0006398B9 /* MCProvider.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F4B4641FC39D47DE75F2A762 /* csmatch.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BDCD7C6B1A70771B0001DCC3 /* csmatch.cpp */; };
-		F4D001D423C50FD1F127A951 /* MCSMTPNoopOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 84B639E217F279BB003B5BA2 /* MCSMTPNoopOperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		F4D001D423C50FD1F127A951 /* MCSMTPNoopOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 84B639E217F279BB003B5BA2 /* MCSMTPNoopOperation.h */; };
 		F5053416B933489D20A020A2 /* MCNNTPFetchOverviewOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 84CFA98519F7159700FE35D2 /* MCNNTPFetchOverviewOperation.cpp */; };
 		F5BA1F1C2F150A484726B921 /* uenum.c in Sources */ = {isa = PBXBuildFile; fileRef = BDCD7CBE1A70771B0001DCC3 /* uenum.c */; };
 		F6E7C83028F8E623B3643F64 /* MCIMAPCapabilityOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = C64BB22A16E5C0A3000DB34C /* MCIMAPCapabilityOperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F7C7910765AE6B8C568A3CFA /* MCIMAPQuotaOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4B3C1BDF17ABF4BB008BBF4C /* MCIMAPQuotaOperation.cpp */; };
 		F7D46F5FD7375DCDB597C940 /* MCJSON.h in Headers */ = {isa = PBXBuildFile; fileRef = C6D6F7F8171E595D006F5B28 /* MCJSON.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		F8DCBCEC6F0A48F92E827FED /* MCMessageBuilder.h in Headers */ = {isa = PBXBuildFile; fileRef = C64EA6E3169E847800778456 /* MCMessageBuilder.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		F8DCBCEC6F0A48F92E827FED /* MCMessageBuilder.h in Headers */ = {isa = PBXBuildFile; fileRef = C64EA6E3169E847800778456 /* MCMessageBuilder.h */; };
 		F948024B2C96BFB5B86B049D /* MCIMAPExpungeOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C64EA81516A29A8500778456 /* MCIMAPExpungeOperation.cpp */; };
-		FA0964410C32F307B02242B8 /* MCAutoreleasePool.h in Headers */ = {isa = PBXBuildFile; fileRef = C64EA6A3169E847800778456 /* MCAutoreleasePool.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		FA0964410C32F307B02242B8 /* MCAutoreleasePool.h in Headers */ = {isa = PBXBuildFile; fileRef = C64EA6A3169E847800778456 /* MCAutoreleasePool.h */; };
 		FA1EB2752E916FF386FCD3DD /* MCIMAPAppendMessageOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = C64EA81016A299EB00778456 /* MCIMAPAppendMessageOperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		FA59FC79FD386E420BFA138A /* MCIMAPSubscribeFolderOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C64EA80916A299B500778456 /* MCIMAPSubscribeFolderOperation.cpp */; };
 		FB29EF78E53370FFBB151956 /* MCIMAPIdentityOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = C62C6ED316A2A0E600737497 /* MCIMAPIdentityOperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		FB3AF3E32CAEF57DEC732CC8 /* MCPOPFetchMessageOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = C62C6EF416A7C6E900737497 /* MCPOPFetchMessageOperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		FB3AF3E32CAEF57DEC732CC8 /* MCPOPFetchMessageOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = C62C6EF416A7C6E900737497 /* MCPOPFetchMessageOperation.h */; };
 		FC2E4E860688FEC5315FA904 /* MCData.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C64EA6A9169E847800778456 /* MCData.cpp */; };
 		FC6E25B0B716CFA16397D5FD /* MCSMTPAsyncSession.h in Headers */ = {isa = PBXBuildFile; fileRef = C64EA690169E847800778456 /* MCSMTPAsyncSession.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		FD98CE73B8B5A9581AB0F6CC /* MCIMAPAppendMessageOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = C64EA81016A299EB00778456 /* MCIMAPAppendMessageOperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		FD98CE73B8B5A9581AB0F6CC /* MCIMAPAppendMessageOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = C64EA81016A299EB00778456 /* MCIMAPAppendMessageOperation.h */; };
 		FDFC8B4CA1048E6EA1D6F266 /* MCIMAPFolderInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = C673EBEC1A46B41000A53F7F /* MCIMAPFolderInfo.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		FF0DCFB615637D565E459980 /* MCConnectionLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = C68B2AEB1778A589005E61EF /* MCConnectionLogger.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		FF0DCFB615637D565E459980 /* MCConnectionLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = C68B2AEB1778A589005E61EF /* MCConnectionLogger.h */; };
 		FFAEEC4A7D538769F7D1289C /* MCIndexSet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C64BB22C16E5C1EE000DB34C /* MCIndexSet.cpp */; };
-		FFE5601D3A885140098DB014 /* MCPOPFetchHeaderOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = C62C6EF116A7C6DE00737497 /* MCPOPFetchHeaderOperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		FFE5601D3A885140098DB014 /* MCPOPFetchHeaderOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = C62C6EF116A7C6DE00737497 /* MCPOPFetchHeaderOperation.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -2006,6 +1946,8 @@
 		8408C80B1F2637B50003A816 /* Attachment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Attachment.swift; path = swift/rfc822/Attachment.swift; sourceTree = "<group>"; };
 		8408C80C1F2637B50003A816 /* MessageBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MessageBuilder.swift; path = swift/rfc822/MessageBuilder.swift; sourceTree = "<group>"; };
 		8408C80D1F2637B50003A816 /* MessageParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MessageParser.swift; path = swift/rfc822/MessageParser.swift; sourceTree = "<group>"; };
+		840CB4501F274AD60068E8E6 /* CIMAPSearchOperation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CIMAPSearchOperation.cpp; path = c/imap/CIMAPSearchOperation.cpp; sourceTree = "<group>"; };
+		840CB4511F274AD60068E8E6 /* CIMAPSearchOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CIMAPSearchOperation.h; path = c/imap/CIMAPSearchOperation.h; sourceTree = "<group>"; };
 		842D79991DF801AE00F9424C /* CIMAPFetchParsedContentOperation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CIMAPFetchParsedContentOperation.cpp; path = c/imap/CIMAPFetchParsedContentOperation.cpp; sourceTree = "<group>"; };
 		842D799A1DF801AE00F9424C /* CIMAPFetchParsedContentOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CIMAPFetchParsedContentOperation.h; path = c/imap/CIMAPFetchParsedContentOperation.h; sourceTree = "<group>"; };
 		842D799D1DF8033100F9424C /* CIMAPMessageRenderingOperation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CIMAPMessageRenderingOperation.cpp; path = c/imap/CIMAPMessageRenderingOperation.cpp; sourceTree = "<group>"; };
@@ -2102,6 +2044,7 @@
 		84CFA98619F7159700FE35D2 /* MCNNTPFetchOverviewOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCNNTPFetchOverviewOperation.h; sourceTree = "<group>"; };
 		84CFA98D19F724E500FE35D2 /* MCNNTPFetchServerTimeOperation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MCNNTPFetchServerTimeOperation.cpp; sourceTree = "<group>"; };
 		84CFA98E19F724E500FE35D2 /* MCNNTPFetchServerTimeOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCNNTPFetchServerTimeOperation.h; sourceTree = "<group>"; };
+		84D064E21F27636C003D492E /* MessageConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MessageConstants.swift; path = swift/abstract/MessageConstants.swift; sourceTree = "<group>"; };
 		84D344D91DF7090700B81A94 /* CIMAPFetchContentToFileOperation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CIMAPFetchContentToFileOperation.cpp; path = c/imap/CIMAPFetchContentToFileOperation.cpp; sourceTree = "<group>"; };
 		84D344DA1DF7090700B81A94 /* CIMAPFetchContentToFileOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CIMAPFetchContentToFileOperation.h; path = c/imap/CIMAPFetchContentToFileOperation.h; sourceTree = "<group>"; };
 		84D344DD1DF70DB600B81A94 /* IMAPFetchContentToFileOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = IMAPFetchContentToFileOperation.swift; path = swift/imap/IMAPFetchContentToFileOperation.swift; sourceTree = "<group>"; };
@@ -2181,8 +2124,6 @@
 		84F7B4661D915D88005F83E8 /* CIMAPFolderStatusOperation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CIMAPFolderStatusOperation.cpp; path = c/imap/CIMAPFolderStatusOperation.cpp; sourceTree = "<group>"; };
 		84F7B4671D915D88005F83E8 /* CIMAPFolderStatusOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CIMAPFolderStatusOperation.h; path = c/imap/CIMAPFolderStatusOperation.h; sourceTree = "<group>"; };
 		84F7B4681D915D88005F83E8 /* CIMAPNamespace.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CIMAPNamespace.h; path = c/imap/CIMAPNamespace.h; sourceTree = "<group>"; };
-		84F7B46C1D915D88005F83E8 /* СIMAPSearchOperation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = "СIMAPSearchOperation.cpp"; path = "c/imap/СIMAPSearchOperation.cpp"; sourceTree = "<group>"; };
-		84F7B46D1D915D88005F83E8 /* СIMAPSearchOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "СIMAPSearchOperation.h"; path = "c/imap/СIMAPSearchOperation.h"; sourceTree = "<group>"; };
 		84F7B4891D916CE7005F83E8 /* swiftmailcore2.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = swiftmailcore2.h; sourceTree = "<group>"; };
 		84F7B48A1D916CE7005F83E8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		84F7B4961D916D0B005F83E8 /* Convertible.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Convertible.swift; path = swift/basetypes/Convertible.swift; sourceTree = "<group>"; };
@@ -2770,6 +2711,7 @@
 				84A929111DA7B5BB0020205B /* HTMLRendererDelegate.swift */,
 				84A929131DA7B8480020205B /* HTMLRendererImapDelegate.swift */,
 				84A929151DA7B9790020205B /* AbstractMessageRendererCallback.swift */,
+				84D064E21F27636C003D492E /* MessageConstants.swift */,
 			);
 			name = abstract;
 			sourceTree = "<group>";
@@ -2927,6 +2869,8 @@
 				8494D6DE1D9C0FE9009EEE5E /* CIMAPFolderStatus.h */,
 				8494D6E51D9C2274009EEE5E /* CIMAPSearchExpression.cpp */,
 				8494D6E61D9C2274009EEE5E /* CIMAPSearchExpression.h */,
+				840CB4501F274AD60068E8E6 /* CIMAPSearchOperation.cpp */,
+				840CB4511F274AD60068E8E6 /* CIMAPSearchOperation.h */,
 				84B110AF1D929B560079C769 /* CIMAPBaseOperation.cpp */,
 				84B110B01D929B560079C769 /* CIMAPBaseOperation.h */,
 				84F7B45A1D915D88005F83E8 /* CIMAPAppendMessageOperation.cpp */,
@@ -2941,8 +2885,6 @@
 				84F7B4651D915D88005F83E8 /* CIMAPFolderInfoOperation.h */,
 				84F7B4661D915D88005F83E8 /* CIMAPFolderStatusOperation.cpp */,
 				84F7B4671D915D88005F83E8 /* CIMAPFolderStatusOperation.h */,
-				84F7B46C1D915D88005F83E8 /* СIMAPSearchOperation.cpp */,
-				84F7B46D1D915D88005F83E8 /* СIMAPSearchOperation.h */,
 				84E3DB371D9A7C93003B598F /* CIMAPIdleOperation.cpp */,
 				84E3DB381D9A7C93003B598F /* CIMAPIdleOperation.h */,
 				84F7B45C1D915D88005F83E8 /* CIMAPAsyncSession.cpp */,
@@ -3718,9 +3660,61 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8408C8041F26378D0003A816 /* CMessageBuilder.h in Headers */,
+				8408C8001F26378D0003A816 /* CAttachment.h in Headers */,
+				8408C8081F26378D0003A816 /* CMessageParser.h in Headers */,
+				8408C7E11F2637220003A816 /* CIMAPCheckAccountOperation.h in Headers */,
+				8408C7E41F2637220003A816 /* CIMAPFetchContentToFileOperation.h in Headers */,
+				8408C7E61F2637220003A816 /* CIMAPFetchNamespaceOperation.h in Headers */,
+				8408C7EC1F2637220003A816 /* CIMAPIdentity.h in Headers */,
+				8408C7ED1F2637220003A816 /* CIMAPIdentityOperation.h in Headers */,
+				8408C7EE1F2637220003A816 /* CSMTPSession.h in Headers */,
+				8408C7EF1F2637220003A816 /* CSMTPOperation.h in Headers */,
+				840CB4541F274AD60068E8E6 /* CIMAPSearchOperation.h in Headers */,
+				8408C7DE1F2637220003A816 /* CIMAPFetchFoldersOperation.h in Headers */,
+				8408C7EB1F2637220003A816 /* CIMAPQuotaOperation.h in Headers */,
+				8408C7E91F2637220003A816 /* CIMAPMessageRenderingOperation.h in Headers */,
+				8408C7E81F2637220003A816 /* CIMAPFetchParsedContentOperation.h in Headers */,
+				8408C7EA1F2637220003A816 /* CIMAPMoveMessagesOperation.h in Headers */,
+				8408C7E21F2637220003A816 /* CIMAPCustomCommandOperation.h in Headers */,
+				8408C7DF1F2637220003A816 /* CIMAPCapabilityOperation.h in Headers */,
+				8408C7D81F2637220003A816 /* CIMAPFolderStatusOperation.h in Headers */,
+				8408C7D71F2637220003A816 /* CIMAPFolderInfoOperation.h in Headers */,
+				8408C7D21F2637220003A816 /* CIMAPCopyMessagesOperation.h in Headers */,
+				8408C7D61F2637220003A816 /* CIMAPFetchMessagesOperation.h in Headers */,
+				8408C7D41F2637220003A816 /* CIMAPFetchContentOperation.h in Headers */,
+				8408C7D11F2637220003A816 /* CIMAPAppendMessageOperation.h in Headers */,
+				8408C7DC1F2637220003A816 /* CIMAPAsyncSession.h in Headers */,
+				8408C7CF1F2637220003A816 /* CIMAPSearchExpression.h in Headers */,
+				8408C7CD1F2637220003A816 /* CIMAPFolderStatus.h in Headers */,
+				8408C7CC1F2637220003A816 /* CIMAPFolderInfo.h in Headers */,
+				8408C7CA1F2637220003A816 /* CIMAPNamespaceItem.h in Headers */,
+				8408C7C91F2637220003A816 /* CIMAPNamespace.h in Headers */,
+				8408C7C81F2637220003A816 /* CIMAPMultipart.h in Headers */,
+				8408C7C71F2637220003A816 /* CIMAPMessagePart.h in Headers */,
+				8408C7C61F2637220003A816 /* CIMAPMessage.h in Headers */,
+				8408C7C51F2637220003A816 /* CIMAPFolder.h in Headers */,
+				8408C7DB1F2637220003A816 /* CIMAPIdleOperation.h in Headers */,
+				8408C7D01F2637220003A816 /* CIMAPBaseOperation.h in Headers */,
+				8408C7BB1F2637220003A816 /* COperation.h in Headers */,
+				8408C7CB1F2637220003A816 /* CIMAPPart.h in Headers */,
+				8408C7F31F2637220003A816 /* CDictionary.h in Headers */,
+				8408C7C41F2637220003A816 /* CAbstractMessageRendererCallback.h in Headers */,
+				8408C7C01F2637220003A816 /* CAddress.h in Headers */,
+				8408C7BE1F2637220003A816 /* CAbstractMultipart.h in Headers */,
+				8408C7BD1F2637220003A816 /* CAbstractMessagePart.h in Headers */,
+				8408C7BF1F2637220003A816 /* CMessageConstants.h in Headers */,
+				8408C7C11F2637220003A816 /* CAbstractPart.h in Headers */,
+				8408C7C31F2637220003A816 /* CMessageHeader.h in Headers */,
+				8408C7BC1F2637220003A816 /* CAbstractMessage.h in Headers */,
+				8408C7F21F2637220003A816 /* CObject.h in Headers */,
+				8408C7F01F2637220003A816 /* CArray.h in Headers */,
+				8408C7F41F2637220003A816 /* CBase.h in Headers */,
+				8408C7F11F2637220003A816 /* CIndexSet.h in Headers */,
 				802A99241ECF83E900FFF0AB /* MailCore.h in Headers */,
 				B60E7F7B892BE16A4C1222A3 /* MCNNTPPostOperation.h in Headers */,
 				AA830E979F6BFDC40649265E /* MCIMAPFetchContentToFileOperation.h in Headers */,
+				36A952AB0AB7A7E7370AC019 /* MCMessageHeader.h in Headers */,
 				D15156687200D37E077EEF68 /* MCHTMLCleaner.h in Headers */,
 				8AEA6CFEDE772561B10D77A2 /* MCMXRecordResolverOperation.h in Headers */,
 				56668306EDC2255654BF7CF2 /* MCAccountValidator.h in Headers */,
@@ -3765,7 +3759,6 @@
 				84EDC6D3C8B582B4BDA39B3F /* MCNull.h in Headers */,
 				3701F6C365000E9D6F4087F8 /* MCNNTPFetchArticleOperation.h in Headers */,
 				2505AB6A90F7484D3CE0B8CB /* MCNNTPFetchAllArticlesOperation.h in Headers */,
-				D7D3A4FCBB113251F27F9531 /* MCAbstractMessage.h in Headers */,
 				59E4B8AC8383595C973A8270 /* MCAddressDisplay.h in Headers */,
 				1AD0E83FAC5BF79037F26F63 /* MCRenderer.h in Headers */,
 				D993E1633374DB4406A0C232 /* MCIndexSet.h in Headers */,
@@ -3785,7 +3778,6 @@
 				00C58A9AA11F95A5499671DA /* MCPOPAsyncSession.h in Headers */,
 				3ABAFBB958CBDE353E5B057A /* MCIMAPFolderInfoOperation.h in Headers */,
 				70CF9C6A42EE4CFD9F0CE1D2 /* MCIMAPFetchMessagesOperation.h in Headers */,
-				3B7A4C0C03E2097CF55E0C63 /* MCIMAPSearchOperation.h in Headers */,
 				7B0B78FF7316D63CB2FB15D2 /* MCIMAPFetchContentOperation.h in Headers */,
 				915157868D0F017A7A1629CD /* MCIMAPIdentityOperation.h in Headers */,
 				FD98CE73B8B5A9581AB0F6CC /* MCIMAPAppendMessageOperation.h in Headers */,
@@ -3797,7 +3789,6 @@
 				EC14DA4CAD7640A38DCEE52C /* MCIMAPMoveMessagesOperation.h in Headers */,
 				D30894BC748088E5A37BB98A /* MCAddress.h in Headers */,
 				DB5EB05E91908CE4D148EA7C /* MCMessageConstants.h in Headers */,
-				36A952AB0AB7A7E7370AC019 /* MCMessageHeader.h in Headers */,
 				FA0964410C32F307B02242B8 /* MCAutoreleasePool.h in Headers */,
 				406D21F6F7ACED90BCA795EB /* MCBaseTypes.h in Headers */,
 				F34876CCDC19E877B964CDA9 /* MCArray.h in Headers */,
@@ -3837,72 +3828,11 @@
 				8408C6FA1F26345C0003A816 /* NSArray+MCO.h in Headers */,
 				8408C7041F26345C0003A816 /* NSObject+MCO.h in Headers */,
 				8408C7081F26345C0003A816 /* NSString+MCO.h in Headers */,
-				8408C8081F26378D0003A816 /* CMessageParser.h in Headers */,
 				8408C7021F26345C0003A816 /* NSIndexSet+MCO.h in Headers */,
-				8408C8001F26378D0003A816 /* CAttachment.h in Headers */,
 				8408C6FE1F26345C0003A816 /* NSDictionary+MCO.h in Headers */,
-				8408C8041F26378D0003A816 /* CMessageBuilder.h in Headers */,
 				8408C6DD1F26342B0003A816 /* MCOObjectWrapper.h in Headers */,
 				8408C7061F26345C0003A816 /* NSSet+MCO.h in Headers */,
 				8408C6F81F26345C0003A816 /* MCORange.h in Headers */,
-				8408C7BB1F2637220003A816 /* COperation.h in Headers */,
-				8408C7BC1F2637220003A816 /* CAbstractMessage.h in Headers */,
-				8408C7BD1F2637220003A816 /* CAbstractMessagePart.h in Headers */,
-				8408C7BE1F2637220003A816 /* CAbstractMultipart.h in Headers */,
-				8408C7BF1F2637220003A816 /* CMessageConstants.h in Headers */,
-				8408C7C01F2637220003A816 /* CAddress.h in Headers */,
-				8408C7C11F2637220003A816 /* CAbstractPart.h in Headers */,
-				8408C7C21F2637220003A816 /* CMessageHeader.cpp in Headers */,
-				8408C7C31F2637220003A816 /* CMessageHeader.h in Headers */,
-				8408C7C41F2637220003A816 /* CAbstractMessageRendererCallback.h in Headers */,
-				8408C7C51F2637220003A816 /* CIMAPFolder.h in Headers */,
-				8408C7C61F2637220003A816 /* CIMAPMessage.h in Headers */,
-				8408C7C71F2637220003A816 /* CIMAPMessagePart.h in Headers */,
-				8408C7C81F2637220003A816 /* CIMAPMultipart.h in Headers */,
-				8408C7C91F2637220003A816 /* CIMAPNamespace.h in Headers */,
-				8408C7CA1F2637220003A816 /* CIMAPNamespaceItem.h in Headers */,
-				8408C7CB1F2637220003A816 /* CIMAPPart.h in Headers */,
-				8408C7CC1F2637220003A816 /* CIMAPFolderInfo.h in Headers */,
-				8408C7CD1F2637220003A816 /* CIMAPFolderStatus.h in Headers */,
-				8408C7CE1F2637220003A816 /* CIMAPSearchExpression.cpp in Headers */,
-				8408C7CF1F2637220003A816 /* CIMAPSearchExpression.h in Headers */,
-				8408C7D01F2637220003A816 /* CIMAPBaseOperation.h in Headers */,
-				8408C7D11F2637220003A816 /* CIMAPAppendMessageOperation.h in Headers */,
-				8408C7D21F2637220003A816 /* CIMAPCopyMessagesOperation.h in Headers */,
-				8408C7D31F2637220003A816 /* CIMAPFetchContentOperation.cpp in Headers */,
-				8408C7D41F2637220003A816 /* CIMAPFetchContentOperation.h in Headers */,
-				8408C7D51F2637220003A816 /* CIMAPFetchMessagesOperation.cpp in Headers */,
-				8408C7D61F2637220003A816 /* CIMAPFetchMessagesOperation.h in Headers */,
-				8408C7D71F2637220003A816 /* CIMAPFolderInfoOperation.h in Headers */,
-				8408C7D81F2637220003A816 /* CIMAPFolderStatusOperation.h in Headers */,
-				8408C7D91F2637220003A816 /* СIMAPSearchOperation.cpp in Headers */,
-				8408C7DA1F2637220003A816 /* СIMAPSearchOperation.h in Headers */,
-				8408C7DB1F2637220003A816 /* CIMAPIdleOperation.h in Headers */,
-				8408C7DC1F2637220003A816 /* CIMAPAsyncSession.h in Headers */,
-				8408C7DD1F2637220003A816 /* CIMAPFetchFoldersOperation.cpp in Headers */,
-				8408C7DE1F2637220003A816 /* CIMAPFetchFoldersOperation.h in Headers */,
-				8408C7DF1F2637220003A816 /* CIMAPCapabilityOperation.h in Headers */,
-				8408C7E01F2637220003A816 /* CIMAPCheckAccountOperation.cpp in Headers */,
-				8408C7E11F2637220003A816 /* CIMAPCheckAccountOperation.h in Headers */,
-				8408C7E21F2637220003A816 /* CIMAPCustomCommandOperation.h in Headers */,
-				8408C7E31F2637220003A816 /* CIMAPFetchContentToFileOperation.cpp in Headers */,
-				8408C7E41F2637220003A816 /* CIMAPFetchContentToFileOperation.h in Headers */,
-				8408C7E51F2637220003A816 /* CIMAPFetchNamespaceOperation.cpp in Headers */,
-				8408C7E61F2637220003A816 /* CIMAPFetchNamespaceOperation.h in Headers */,
-				8408C7E71F2637220003A816 /* CIMAPFetchParsedContentOperation.cpp in Headers */,
-				8408C7E81F2637220003A816 /* CIMAPFetchParsedContentOperation.h in Headers */,
-				8408C7E91F2637220003A816 /* CIMAPMessageRenderingOperation.h in Headers */,
-				8408C7EA1F2637220003A816 /* CIMAPMoveMessagesOperation.h in Headers */,
-				8408C7EB1F2637220003A816 /* CIMAPQuotaOperation.h in Headers */,
-				8408C7EC1F2637220003A816 /* CIMAPIdentity.h in Headers */,
-				8408C7ED1F2637220003A816 /* CIMAPIdentityOperation.h in Headers */,
-				8408C7EE1F2637220003A816 /* CSMTPSession.h in Headers */,
-				8408C7EF1F2637220003A816 /* CSMTPOperation.h in Headers */,
-				8408C7F01F2637220003A816 /* CArray.h in Headers */,
-				8408C7F11F2637220003A816 /* CIndexSet.h in Headers */,
-				8408C7F21F2637220003A816 /* CObject.h in Headers */,
-				8408C7F31F2637220003A816 /* CDictionary.h in Headers */,
-				8408C7F41F2637220003A816 /* CBase.h in Headers */,
 				8408C7F51F2637220003A816 /* CBase+Private.h in Headers */,
 				8408C7F61F2637220003A816 /* CCore.h in Headers */,
 				FB3AF3E32CAEF57DEC732CC8 /* MCPOPFetchMessageOperation.h in Headers */,
@@ -3984,6 +3914,7 @@
 				D3B0E96454BA62D15FD3C5DC /* MCIMAPFetchFoldersOperation.h in Headers */,
 				07DE281343371AAAB7375DF2 /* MCAsync.h in Headers */,
 				B2156F4CF16BF378D4F26B83 /* MCAbstractMessagePart.h in Headers */,
+				840CB4551F274AD60068E8E6 /* CIMAPSearchOperation.h in Headers */,
 				18B2D32B4DFCDEB51F263FAC /* MCIMAPOperation.h in Headers */,
 				E643FCDDB5B23CCA2C109C48 /* MCPOPOperation.h in Headers */,
 				5BE0C29A3D053E2706044280 /* MCAbstractMultipart.h in Headers */,
@@ -4080,7 +4011,6 @@
 				84DBBF121F26413600F03A5F /* CIMAPFetchMessagesOperation.h in Headers */,
 				84DBBF131F26413600F03A5F /* CIMAPFolderInfoOperation.h in Headers */,
 				84DBBF141F26413600F03A5F /* CIMAPFolderStatusOperation.h in Headers */,
-				84DBBF151F26413600F03A5F /* СIMAPSearchOperation.h in Headers */,
 				84DBBF161F26413600F03A5F /* CIMAPIdleOperation.h in Headers */,
 				84DBBF171F26413600F03A5F /* CIMAPAsyncSession.h in Headers */,
 				84DBBF181F26413600F03A5F /* CIMAPFetchFoldersOperation.h in Headers */,
@@ -4515,7 +4445,6 @@
 				8408C8351F263AD50003A816 /* CIMAPFetchMessagesOperation.cpp in Sources */,
 				8408C8361F263AD50003A816 /* CIMAPFolderInfoOperation.cpp in Sources */,
 				8408C8371F263AD50003A816 /* CIMAPFolderStatusOperation.cpp in Sources */,
-				8408C8381F263AD50003A816 /* СIMAPSearchOperation.cpp in Sources */,
 				8408C8391F263AD50003A816 /* CIMAPIdleOperation.cpp in Sources */,
 				8408C83A1F263AD50003A816 /* CIMAPAsyncSession.cpp in Sources */,
 				8408C83B1F263AD50003A816 /* CIMAPFetchFoldersOperation.cpp in Sources */,
@@ -4619,6 +4548,7 @@
 				A549CD214B203F1620CC0F77 /* uobject.cpp in Sources */,
 				F948024B2C96BFB5B86B049D /* MCIMAPExpungeOperation.cpp in Sources */,
 				51FA844FCC46F6322814574A /* MCIMAPFetchMessagesOperation.cpp in Sources */,
+				840CB4531F274AD60068E8E6 /* CIMAPSearchOperation.cpp in Sources */,
 				5A20312A0E17B134BFB8A03B /* MCIMAPFetchContentOperation.cpp in Sources */,
 				DBB6159C2BC8A69649902CD0 /* MCNNTPCheckAccountOperation.cpp in Sources */,
 				230552946325FBC6CE50CD05 /* MCIMAPStoreFlagsOperation.cpp in Sources */,
@@ -4684,6 +4614,7 @@
 				6E9EF73E21D281C9E21F5A0B /* MCMessageParserMac.mm in Sources */,
 				BC47B8DB9BDE862640B003D4 /* MCSMTPDisconnectOperation.cpp in Sources */,
 				DB54F41EC568CBE43CE4AF84 /* csr2022.cpp in Sources */,
+				84D064E41F27636C003D492E /* MessageConstants.swift in Sources */,
 				1A108F3A843C2059F3382AC3 /* MCIMAPFolderInfo.cpp in Sources */,
 				17D0AB66F5601442684FA08D /* MCIMAPMultiDisconnectOperation.cpp in Sources */,
 				15FBB468AE17AD7D04FF74DC /* MCIMAPDisconnectOperation.cpp in Sources */,
@@ -5091,6 +5022,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				84424A7E1F274CBA009B953B /* CIMAPSearchOperation.cpp in Sources */,
 				84DBBE891F26400E00F03A5F /* Attachment.swift in Sources */,
 				84DBBE8A1F26400E00F03A5F /* MessageBuilder.swift in Sources */,
 				84DBBE8B1F26400E00F03A5F /* MessageParser.swift in Sources */,
@@ -5150,101 +5082,51 @@
 				84DBBEC11F26400E00F03A5F /* SMTPSendOperation.swift in Sources */,
 				8408C8061F26378D0003A816 /* CMessageParser.cpp in Sources */,
 				8408C7251F2635930003A816 /* COperation.cpp in Sources */,
-				8408C7261F2635930003A816 /* COperation.h in Sources */,
 				8408C7271F2635930003A816 /* CAbstractMessage.cpp in Sources */,
-				8408C7281F2635930003A816 /* CAbstractMessage.h in Sources */,
 				8408C7291F2635930003A816 /* CAbstractMessagePart.cpp in Sources */,
-				8408C72A1F2635930003A816 /* CAbstractMessagePart.h in Sources */,
 				8408C7FE1F26378D0003A816 /* CAttachment.cpp in Sources */,
 				8408C72B1F2635930003A816 /* CAbstractMultipart.cpp in Sources */,
-				8408C72C1F2635930003A816 /* CAbstractMultipart.h in Sources */,
-				8408C72D1F2635930003A816 /* CMessageConstants.h in Sources */,
 				8408C72E1F2635930003A816 /* CAddress.cpp in Sources */,
-				8408C72F1F2635930003A816 /* CAddress.h in Sources */,
 				8408C7301F2635930003A816 /* CAbstractPart.cpp in Sources */,
-				8408C7311F2635930003A816 /* CAbstractPart.h in Sources */,
 				8408C7321F2635930003A816 /* CMessageHeader.cpp in Sources */,
-				8408C7331F2635930003A816 /* CMessageHeader.h in Sources */,
 				8408C7341F2635930003A816 /* CAbstractMessageRendererCallback.cpp in Sources */,
-				8408C7351F2635930003A816 /* CAbstractMessageRendererCallback.h in Sources */,
 				8408C7361F2635930003A816 /* CIMAPFolder.cpp in Sources */,
-				8408C7371F2635930003A816 /* CIMAPFolder.h in Sources */,
 				8408C7381F2635930003A816 /* CIMAPMessage.cpp in Sources */,
-				8408C7391F2635930003A816 /* CIMAPMessage.h in Sources */,
 				8408C73A1F2635930003A816 /* CIMAPMessagePart.cpp in Sources */,
-				8408C73B1F2635930003A816 /* CIMAPMessagePart.h in Sources */,
 				8408C73C1F2635930003A816 /* CIMAPMultipart.cpp in Sources */,
-				8408C73D1F2635930003A816 /* CIMAPMultipart.h in Sources */,
 				8408C73E1F2635930003A816 /* CIMAPNamespace.cpp in Sources */,
-				8408C73F1F2635930003A816 /* CIMAPNamespace.h in Sources */,
 				8408C7401F2635930003A816 /* CIMAPNamespaceItem.cpp in Sources */,
-				8408C7411F2635930003A816 /* CIMAPNamespaceItem.h in Sources */,
 				8408C7421F2635930003A816 /* CIMAPPart.cpp in Sources */,
-				8408C7431F2635930003A816 /* CIMAPPart.h in Sources */,
 				8408C7441F2635930003A816 /* CIMAPFolderInfo.cpp in Sources */,
-				8408C7451F2635930003A816 /* CIMAPFolderInfo.h in Sources */,
 				8408C7461F2635930003A816 /* CIMAPFolderStatus.cpp in Sources */,
-				8408C7471F2635930003A816 /* CIMAPFolderStatus.h in Sources */,
 				8408C7481F2635930003A816 /* CIMAPSearchExpression.cpp in Sources */,
-				8408C7491F2635930003A816 /* CIMAPSearchExpression.h in Sources */,
 				8408C74A1F2635930003A816 /* CIMAPBaseOperation.cpp in Sources */,
-				8408C74B1F2635930003A816 /* CIMAPBaseOperation.h in Sources */,
 				8408C74C1F2635930003A816 /* CIMAPAppendMessageOperation.cpp in Sources */,
-				8408C74D1F2635930003A816 /* CIMAPAppendMessageOperation.h in Sources */,
 				8408C74E1F2635930003A816 /* CIMAPCopyMessagesOperation.cpp in Sources */,
-				8408C74F1F2635930003A816 /* CIMAPCopyMessagesOperation.h in Sources */,
 				8408C7501F2635930003A816 /* CIMAPFetchContentOperation.cpp in Sources */,
-				8408C7511F2635930003A816 /* CIMAPFetchContentOperation.h in Sources */,
 				8408C7521F2635930003A816 /* CIMAPFetchMessagesOperation.cpp in Sources */,
-				8408C7531F2635930003A816 /* CIMAPFetchMessagesOperation.h in Sources */,
 				8408C7541F2635930003A816 /* CIMAPFolderInfoOperation.cpp in Sources */,
-				8408C7551F2635930003A816 /* CIMAPFolderInfoOperation.h in Sources */,
 				8408C7561F2635930003A816 /* CIMAPFolderStatusOperation.cpp in Sources */,
-				8408C7571F2635930003A816 /* CIMAPFolderStatusOperation.h in Sources */,
-				8408C7581F2635930003A816 /* СIMAPSearchOperation.cpp in Sources */,
-				8408C7591F2635930003A816 /* СIMAPSearchOperation.h in Sources */,
 				8408C75A1F2635930003A816 /* CIMAPIdleOperation.cpp in Sources */,
-				8408C75B1F2635930003A816 /* CIMAPIdleOperation.h in Sources */,
 				8408C75C1F2635930003A816 /* CIMAPAsyncSession.cpp in Sources */,
-				8408C75D1F2635930003A816 /* CIMAPAsyncSession.h in Sources */,
 				8408C75E1F2635930003A816 /* CIMAPFetchFoldersOperation.cpp in Sources */,
-				8408C75F1F2635930003A816 /* CIMAPFetchFoldersOperation.h in Sources */,
 				8408C7601F2635930003A816 /* CIMAPCapabilityOperation.cpp in Sources */,
-				8408C7611F2635930003A816 /* CIMAPCapabilityOperation.h in Sources */,
 				8408C7621F2635930003A816 /* CIMAPCheckAccountOperation.cpp in Sources */,
-				8408C7631F2635930003A816 /* CIMAPCheckAccountOperation.h in Sources */,
 				8408C7641F2635930003A816 /* CIMAPCustomCommandOperation.cpp in Sources */,
-				8408C7651F2635930003A816 /* CIMAPCustomCommandOperation.h in Sources */,
 				8408C7661F2635930003A816 /* CIMAPFetchContentToFileOperation.cpp in Sources */,
-				8408C7671F2635930003A816 /* CIMAPFetchContentToFileOperation.h in Sources */,
 				8408C7681F2635930003A816 /* CIMAPFetchNamespaceOperation.cpp in Sources */,
-				8408C7691F2635930003A816 /* CIMAPFetchNamespaceOperation.h in Sources */,
 				8408C76A1F2635930003A816 /* CIMAPFetchParsedContentOperation.cpp in Sources */,
-				8408C76B1F2635930003A816 /* CIMAPFetchParsedContentOperation.h in Sources */,
 				8408C76C1F2635930003A816 /* CIMAPMessageRenderingOperation.cpp in Sources */,
-				8408C76D1F2635930003A816 /* CIMAPMessageRenderingOperation.h in Sources */,
 				8408C76E1F2635930003A816 /* CIMAPMoveMessagesOperation.cpp in Sources */,
-				8408C76F1F2635930003A816 /* CIMAPMoveMessagesOperation.h in Sources */,
 				8408C7701F2635930003A816 /* CIMAPQuotaOperation.cpp in Sources */,
-				8408C7711F2635930003A816 /* CIMAPQuotaOperation.h in Sources */,
 				8408C7721F2635930003A816 /* CIMAPIdentity.cpp in Sources */,
-				8408C7731F2635930003A816 /* CIMAPIdentity.h in Sources */,
 				8408C7741F2635930003A816 /* CIMAPIdentityOperation.cpp in Sources */,
-				8408C7751F2635930003A816 /* CIMAPIdentityOperation.h in Sources */,
 				8408C7761F2635930003A816 /* CSMTPSession.cpp in Sources */,
-				8408C7771F2635930003A816 /* CSMTPSession.h in Sources */,
 				8408C7781F2635930003A816 /* CSMTPOperation.cpp in Sources */,
-				8408C7791F2635930003A816 /* CSMTPOperation.h in Sources */,
 				8408C77A1F2635930003A816 /* CArray.cpp in Sources */,
-				8408C77B1F2635930003A816 /* CArray.h in Sources */,
 				8408C77C1F2635930003A816 /* CIndexSet.cpp in Sources */,
-				8408C77D1F2635930003A816 /* CIndexSet.h in Sources */,
 				8408C77E1F2635930003A816 /* CObject.cpp in Sources */,
-				8408C77F1F2635930003A816 /* CObject.h in Sources */,
 				8408C7801F2635930003A816 /* CDictionary.cpp in Sources */,
-				8408C7811F2635930003A816 /* CDictionary.h in Sources */,
-				8408C7821F2635930003A816 /* CBase.h in Sources */,
-				8408C7831F2635930003A816 /* CBase+Private.h in Sources */,
 				C6BD28AB170BDB6B00A91AC1 /* MCOFramework.mm in Sources */,
 				A9D52459D38E9DFFBFFD3530 /* MCNNTPFetchArticleOperation.cpp in Sources */,
 				2F864B35BD689A4500E0D43B /* MCAbstractMessage.cpp in Sources */,
@@ -5481,7 +5363,7 @@
 				PRODUCT_NAME = MailCore;
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
-				SWIFT_INCLUDE_PATHS = "\"$(SRCROOT)/../src/c";
+				SWIFT_INCLUDE_PATHS = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
@@ -5522,7 +5404,7 @@
 				PRODUCT_NAME = MailCore;
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "";
-				SWIFT_INCLUDE_PATHS = "\"$(SRCROOT)/../src/c";
+				SWIFT_INCLUDE_PATHS = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_VERSION = 3.0;
 				WRAPPER_EXTENSION = framework;

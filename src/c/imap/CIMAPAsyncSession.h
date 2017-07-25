@@ -15,7 +15,7 @@
 #include "CIMAPAppendMessageOperation.h"
 #include "CIMAPFetchContentOperation.h"
 #include "CIMAPFetchMessagesOperation.h"
-#include "СIMAPSearchOperation.h"
+#include "CIMAPSearchOperation.h"
 #include "CIMAPSearchExpression.h"
 #include "CIMAPCopyMessagesOperation.h"
 #include "CIMAPFolderInfoOperation.h"

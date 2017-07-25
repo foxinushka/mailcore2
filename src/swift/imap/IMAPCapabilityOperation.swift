@@ -3,7 +3,7 @@ import Foundation
 
 public class IMAPCapabilityOperation : IMAPBaseOperation {
     
-    public typealias CompletionBlock = (Error?,  IndexSet?) -> Void
+    public typealias CompletionBlock = (Error?,  MCOIndexSet?) -> Void
     
     internal var operation: CIMAPCapabilityOperation
     private var completionBlock : CompletionBlock?
@@ -34,7 +34,7 @@ public class IMAPCapabilityOperation : IMAPBaseOperation {
         
         let errorCode = error()
         if errorCode == ErrorNone {
-            completionBlock!(nil, IndexSet(operation.capabilities()))
+            completionBlock!(nil, MCOIndexSet(operation.capabilities()))
         }
         else {
             completionBlock!(MailCoreError(code: errorCode), nil)
