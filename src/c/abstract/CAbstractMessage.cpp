@@ -26,12 +26,12 @@ void CAbstractMessage_setHeader(CAbstractMessage self, CMessageHeader header){
     self.instance->setHeader(header.instance);
 }
 
-CAbstractPart CAbstractMessage_partForContentID(CAbstractMessage self, const UChar* contentID){
-    return CAbstractPart_new(self.instance->partForContentID(mailcore::String::stringWithCharacters(contentID)));
+CAbstractPart CAbstractMessage_partForContentID(CAbstractMessage self, MailCoreString contentID){
+    return CAbstractPart_new(self.instance->partForContentID(contentID.instance));
 }
 
-CAbstractPart CAbstractMessage_partForUniqueID(CAbstractMessage self, const UChar* uniqueID){
-    return CAbstractPart_new(self.instance->partForUniqueID(mailcore::String::stringWithCharacters(uniqueID)));
+CAbstractPart CAbstractMessage_partForUniqueID(CAbstractMessage self, MailCoreString uniqueID){
+    return CAbstractPart_new(self.instance->partForUniqueID(uniqueID.instance));
 }
 
 CArray CAbstractMessage_attachments(CAbstractMessage self){

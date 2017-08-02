@@ -36,7 +36,7 @@ extern "C" {
                 CF_SWIFT_NAME(CArray.getUint(self:index:));
     
     CArray      CArray_new()
-                CF_SWIFT_NAME(CArray.init());
+                /* CF_SWIFT_NAME(CArray.init()) */;
     
 #ifdef __cplusplus
 }

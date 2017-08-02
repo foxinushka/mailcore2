@@ -1,9 +1,9 @@
 import Foundation
 
 
-public class IMAPFetchNamespaceOperation : IMAPBaseOperation {
+public class MCOIMAPFetchNamespaceOperation : MCOIMAPBaseOperation {
     
-    public typealias CompletionBlock = (Error?,  Dictionary<String, IMAPNamespace>?) -> Void
+    public typealias CompletionBlock = (Error?,  Dictionary<String, MCOIMAPNamespace>?) -> Void
     
     internal var operation: CIMAPFetchNamespaceOperation
     private var completionBlock : CompletionBlock?
@@ -34,7 +34,7 @@ public class IMAPFetchNamespaceOperation : IMAPBaseOperation {
         
         let errorCode = error()
         if errorCode == ErrorNone {
-            completionBlock!(nil, Dictionary<String, IMAPNamespace>.cast(operation.namespaces()))
+            completionBlock!(nil, Dictionary<String, MCOIMAPNamespace>.cast(operation.namespaces()))
         }
         else {
             completionBlock!(MailCoreError(code: errorCode), nil)

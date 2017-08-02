@@ -10,7 +10,10 @@
 
 #import <Foundation/Foundation.h>
 
+//#import <MailCore/MailCore-Swift.h>
 //#import "NSData+MCO.h"
+
+#import "CBase.h"
 
 using namespace mailcore;
 
@@ -30,6 +33,7 @@ MessageParser::MessageParser(CFDataRef data)
 
 Data * MessageParser::dataFromNSData()
 {
-    //FIXME
-    return NULL; //[(NSData *) mNSData mco_mcData];
+    //return [(NSData *) mNSData mailCoreData];
+    NSData* data = (NSData *) mNSData;
+    return  mailcore::Data::dataWithBytes((const char *) data.bytes, (unsigned int) data.length);
 }

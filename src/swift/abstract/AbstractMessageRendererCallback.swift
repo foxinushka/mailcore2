@@ -1,15 +1,15 @@
 import Foundation
 
 
-internal class AbstractMessageRendererCallback {
+internal class MCOAbstractMessageRendererCallback {
     
-    internal var message: AbstractMessage;
+    internal var message: MCOAbstractMessage;
     
-    fileprivate var rendererDelegate: HTMLRendererDelegate?;
-    fileprivate var imapDelegate: HTMLRendererImapDelegate?;
+    fileprivate var rendererDelegate: MCOHTMLRendererDelegate?;
+    fileprivate var imapDelegate: MCOHTMLRendererIMAPDelegate?;
     private var nativeInstance: CAbstractMessageRendererCallback!;
     
-    internal init(message: AbstractMessage) {
+    internal init(message: MCOAbstractMessage) {
         self.message = message;
         self.nativeInstance = CAbstractMessageRendererCallback(canPreviewPartBlock: canPreviewPart,
                                                                shouldShowPartBlock: shouldShowPartBlock,
@@ -31,102 +31,150 @@ internal class AbstractMessageRendererCallback {
                                                                userInfo: Unmanaged.passUnretained(self).toOpaque());
     }
     
-    internal func setHtmlRenderDelegate(delegate: HTMLRendererDelegate) {
+    internal func setHtmlRenderDelegate(delegate: MCOHTMLRendererDelegate) {
         self.rendererDelegate = delegate;
     }
     
-    internal func setHtmlRenderImapDelegate(delegate: HTMLRendererImapDelegate) {
+    internal func setHtmlRenderImapDelegate(delegate: MCOHTMLRendererIMAPDelegate) {
         self.imapDelegate = delegate;
     }
     
     internal func cast() -> CAbstractMessageRendererCallback {
         return nativeInstance;
     }
+    
+    internal func release() {
+        self.nativeInstance.release()
+    }
 }
 
 //MARK: C-Functions
 func canPreviewPart(ref: UnsafeRawPointer?, part: CAbstractPart) -> UInt8 {
-    let selfRef = Unmanaged<AbstractMessageRendererCallback>.fromOpaque(ref!).takeUnretainedValue()
-    return selfRef.rendererDelegate!.abstractMessage(selfRef.message, canPreviewPart: AbstractPart(part)) ? 1 : 0;
+    let selfRef = Unmanaged<MCOAbstractMessageRendererCallback>.fromOpaque(ref!).takeUnretainedValue()
+    guard let rendererDelegate = selfRef.rendererDelegate else {
+        return 0
+    }
+    return rendererDelegate.abstractMessage(selfRef.message, canPreviewPart: MCOAbstractPart(part)) ? 1 : 0;
 }
 
 func shouldShowPartBlock(ref: UnsafeRawPointer?, part: CAbstractPart) -> UInt8 {
-    let selfRef = Unmanaged<AbstractMessageRendererCallback>.fromOpaque(ref!).takeUnretainedValue()
-    return selfRef.rendererDelegate!.abstractMessage(selfRef.message, shouldShowPart: AbstractPart(part)) ? 1 : 0;
+    let selfRef = Unmanaged<MCOAbstractMessageRendererCallback>.fromOpaque(ref!).takeUnretainedValue()
+    guard let rendererDelegate = selfRef.rendererDelegate else {
+        return 0
+    }
+    return rendererDelegate.abstractMessage(selfRef.message, shouldShowPart: MCOAbstractPart(part)) ? 1 : 0;
 }
 
 func templateValuesForHeaderBlock(ref: UnsafeRawPointer?, header: CMessageHeader) -> CDictionary {
-    let selfRef = Unmanaged<AbstractMessageRendererCallback>.fromOpaque(ref!).takeUnretainedValue()
-    return Dictionary<String, String>.cast(selfRef.rendererDelegate!.abstractMessage(selfRef.message, templateValuesForHeader: MessageHeader(header)));
+    let selfRef = Unmanaged<MCOAbstractMessageRendererCallback>.fromOpaque(ref!).takeUnretainedValue()
+    guard let rendererDelegate = selfRef.rendererDelegate else {
+        return CDictionary()
+    }
+    return Dictionary<String, String>.cast(rendererDelegate.abstractMessage(selfRef.message, templateValuesForHeader: MCOMessageHeader(header)));
 }
 
 func templateValuesForPartBlock(ref: UnsafeRawPointer?, part: CAbstractPart) -> CDictionary {
-    let selfRef = Unmanaged<AbstractMessageRendererCallback>.fromOpaque(ref!).takeUnretainedValue()
-    return Dictionary<String, String>.cast(selfRef.rendererDelegate!.abstractMessage(selfRef.message, templateValuesForPart: AbstractPart(part)));
+    let selfRef = Unmanaged<MCOAbstractMessageRendererCallback>.fromOpaque(ref!).takeUnretainedValue()
+    guard let rendererDelegate = selfRef.rendererDelegate else {
+        return CDictionary()
+    }
+    return Dictionary<String, String>.cast(rendererDelegate.abstractMessage(selfRef.message, templateValuesForPart: MCOAbstractPart(part)));
 }
 
 func templateForMainHeaderBlock(ref: UnsafeRawPointer?, header: CMessageHeader) -> CObject {
-    let selfRef = Unmanaged<AbstractMessageRendererCallback>.fromOpaque(ref!).takeUnretainedValue()
-    return selfRef.rendererDelegate!.abstractMessage(selfRef.message, templateForMainHeader: MessageHeader(header)).cast();
+    let selfRef = Unmanaged<MCOAbstractMessageRendererCallback>.fromOpaque(ref!).takeUnretainedValue()
+    guard let rendererDelegate = selfRef.rendererDelegate else {
+        return CObject()
+    }
+    return rendererDelegate.abstractMessage(selfRef.message, templateForMainHeader: MCOMessageHeader(header)).cast();
 }
 
 func templateForImageBlock(ref: UnsafeRawPointer?, part: CAbstractPart) -> CObject {
-    let selfRef = Unmanaged<AbstractMessageRendererCallback>.fromOpaque(ref!).takeUnretainedValue()
-    return selfRef.rendererDelegate!.abstractMessage(selfRef.message, templateForImage: AbstractPart(part)).cast()
+    let selfRef = Unmanaged<MCOAbstractMessageRendererCallback>.fromOpaque(ref!).takeUnretainedValue()
+    guard let rendererDelegate = selfRef.rendererDelegate else {
+        return CObject()
+    }
+    return rendererDelegate.abstractMessage(selfRef.message, templateForImage: MCOAbstractPart(part)).cast()
 }
 
 func templateForAttachmentBlock(ref: UnsafeRawPointer?, part: CAbstractPart) -> CObject {
-    let selfRef = Unmanaged<AbstractMessageRendererCallback>.fromOpaque(ref!).takeUnretainedValue()
-    return selfRef.rendererDelegate!.abstractMessage(selfRef.message, templateForAttachment: AbstractPart(part)).cast()
+    let selfRef = Unmanaged<MCOAbstractMessageRendererCallback>.fromOpaque(ref!).takeUnretainedValue()
+    guard let rendererDelegate = selfRef.rendererDelegate else {
+        return CObject()
+    }
+    return rendererDelegate.abstractMessage(selfRef.message, templateForAttachment: MCOAbstractPart(part)).cast()
 }
 
 func templateForMessageBlock(ref: UnsafeRawPointer?, msg: CAbstractMessage) -> CObject {
-    let selfRef = Unmanaged<AbstractMessageRendererCallback>.fromOpaque(ref!).takeUnretainedValue()
-    return selfRef.rendererDelegate!.abstractMessageTemplateForMessage(selfRef.message).cast()
+    let selfRef = Unmanaged<MCOAbstractMessageRendererCallback>.fromOpaque(ref!).takeUnretainedValue()
+    guard let rendererDelegate = selfRef.rendererDelegate else {
+        return CObject()
+    }
+    return rendererDelegate.abstractMessageTemplateForMessage(selfRef.message).cast()
 }
 
 func templateForEmbeddedMessageBlock(ref: UnsafeRawPointer?, part: CAbstractMessagePart) -> CObject {
-    let selfRef = Unmanaged<AbstractMessageRendererCallback>.fromOpaque(ref!).takeUnretainedValue()
-    return selfRef.rendererDelegate!.abstractMessage(selfRef.message, templateForEmbeddedMessage: AbstractMessagePart(abstractMessagePart: part)).cast();
+    let selfRef = Unmanaged<MCOAbstractMessageRendererCallback>.fromOpaque(ref!).takeUnretainedValue()
+    guard let rendererDelegate = selfRef.rendererDelegate else {
+        return CObject()
+    }
+    return rendererDelegate.abstractMessage(selfRef.message, templateForEmbeddedMessage: MCOAbstractMessagePart(abstractMessagePart: part)).cast();
 }
 
 func templateForEmbeddedMessageHeaderBlock(ref: UnsafeRawPointer?, header: CMessageHeader) -> CObject {
-    let selfRef = Unmanaged<AbstractMessageRendererCallback>.fromOpaque(ref!).takeUnretainedValue()
-    return selfRef.rendererDelegate!.abstractMessage(selfRef.message, templateForEmbeddedMessageHeader: MessageHeader(header)).cast();
+    let selfRef = Unmanaged<MCOAbstractMessageRendererCallback>.fromOpaque(ref!).takeUnretainedValue()
+    guard let rendererDelegate = selfRef.rendererDelegate else {
+        return CObject()
+    }
+    return rendererDelegate.abstractMessage(selfRef.message, templateForEmbeddedMessageHeader: MCOMessageHeader(header)).cast();
 }
 
 func templateForAttachmentSeparatorBlock(ref: UnsafeRawPointer?) -> CObject {
-    let selfRef = Unmanaged<AbstractMessageRendererCallback>.fromOpaque(ref!).takeUnretainedValue()
-    return selfRef.rendererDelegate!.abstractMessageTemplateForAttachmentSeparator(selfRef.message).cast();
+    let selfRef = Unmanaged<MCOAbstractMessageRendererCallback>.fromOpaque(ref!).takeUnretainedValue()
+    guard let rendererDelegate = selfRef.rendererDelegate else {
+        return CObject()
+    }
+    return rendererDelegate.abstractMessageTemplateForAttachmentSeparator(selfRef.message).cast();
 }
 
-func cleanHTMLForPartBlock(ref: UnsafeRawPointer?, html: UnsafePointer<UInt16>?) -> CObject {
-    let selfRef = Unmanaged<AbstractMessageRendererCallback>.fromOpaque(ref!).takeUnretainedValue()
-    return selfRef.rendererDelegate!.abstractMessage(selfRef.message, cleanHTMLForPart: String(utf16: html)).cast();
+func cleanHTMLForPartBlock(ref: UnsafeRawPointer?, html: MailCoreString) -> CObject {
+    let selfRef = Unmanaged<MCOAbstractMessageRendererCallback>.fromOpaque(ref!).takeUnretainedValue()
+    guard let rendererDelegate = selfRef.rendererDelegate else {
+        return CObject()
+    }
+    return rendererDelegate.abstractMessage(selfRef.message, cleanHTMLForPart: html.string()).cast();
 }
 
-func filterHTMLForPartBlock(ref: UnsafeRawPointer?, html: UnsafePointer<UInt16>?) -> CObject {
-    let selfRef = Unmanaged<AbstractMessageRendererCallback>.fromOpaque(ref!).takeUnretainedValue()
-    return selfRef.rendererDelegate!.abstractMessage(selfRef.message, filterHTMLForPart: String(utf16: html)).cast();
+func filterHTMLForPartBlock(ref: UnsafeRawPointer?, html: MailCoreString) -> CObject {
+    let selfRef = Unmanaged<MCOAbstractMessageRendererCallback>.fromOpaque(ref!).takeUnretainedValue()
+    guard let rendererDelegate = selfRef.rendererDelegate else {
+        return CObject()
+    }
+    return rendererDelegate.abstractMessage(selfRef.message, filterHTMLForPart: html.string()).cast();
 }
 
-func filterHTMLForMessageBlock(ref: UnsafeRawPointer?, html: UnsafePointer<UInt16>?) -> CObject {
-    let selfRef = Unmanaged<AbstractMessageRendererCallback>.fromOpaque(ref!).takeUnretainedValue()
-    return selfRef.rendererDelegate!.abstractMessage(selfRef.message, filterHTMLForMessage: String(utf16: html)).cast();
+func filterHTMLForMessageBlock(ref: UnsafeRawPointer?, html: MailCoreString) -> CObject {
+    let selfRef = Unmanaged<MCOAbstractMessageRendererCallback>.fromOpaque(ref!).takeUnretainedValue()
+    guard let rendererDelegate = selfRef.rendererDelegate else {
+        return CObject()
+    }
+    return rendererDelegate.abstractMessage(selfRef.message, filterHTMLForMessage: html.string()).cast();
 }
 
-func dataForIMAPPart(ref: UnsafeRawPointer?, folder: UnsafePointer<UInt16>?, part: CIMAPPart) -> CData {
-    let selfRef = Unmanaged<AbstractMessageRendererCallback>.fromOpaque(ref!).takeUnretainedValue()
-    let data = selfRef.imapDelegate!.abstractMessage(selfRef.message, dataForIMAPPart: IMAPPart(part: part), folder: String(utf16: folder));
-    return CData(bytes: data.bytes(), length: data.length());
+func dataForIMAPPart(ref: UnsafeRawPointer?, folder: MailCoreString, part: CIMAPPart) -> CData {
+    let selfRef = Unmanaged<MCOAbstractMessageRendererCallback>.fromOpaque(ref!).takeUnretainedValue()
+    if let data = selfRef.imapDelegate?.abstractMessage(selfRef.message, dataForIMAPPart: MCOIMAPPart(part: part), folder: folder.string()) {
+        return data.mailCoreData()
+    }
+    return CData();
 }
 
-func prefetchAttachmentIMAPPart(ref: UnsafeRawPointer?, folder: UnsafePointer<UInt16>?, part: CIMAPPart) {
-    let selfRef = Unmanaged<AbstractMessageRendererCallback>.fromOpaque(ref!).takeUnretainedValue()
-    selfRef.imapDelegate!.abstractMessage(selfRef.message, prefetchAttachmentIMAPPart: IMAPPart(part: part), folder: String(utf16: folder));
+func prefetchAttachmentIMAPPart(ref: UnsafeRawPointer?, folder: MailCoreString, part: CIMAPPart) {
+    let selfRef = Unmanaged<MCOAbstractMessageRendererCallback>.fromOpaque(ref!).takeUnretainedValue()
+    selfRef.imapDelegate?.abstractMessage(selfRef.message, prefetchAttachmentIMAPPart: MCOIMAPPart(part: part), folder: folder.string());
 }
 
-func prefetchImageIMAPPart(ref: UnsafeRawPointer?, folder: UnsafePointer<UInt16>?, part: CIMAPPart) {
-    let selfRef = Unmanaged<AbstractMessageRendererCallback>.fromOpaque(ref!).takeUnretainedValue()
-    selfRef.imapDelegate!.abstractMessage(selfRef.message, prefetchImageIMAPPart: IMAPPart(part: part), folder: String(utf16: folder));
+func prefetchImageIMAPPart(ref: UnsafeRawPointer?, folder: MailCoreString, part: CIMAPPart) {
+    let selfRef = Unmanaged<MCOAbstractMessageRendererCallback>.fromOpaque(ref!).takeUnretainedValue()
+    selfRef.imapDelegate?.abstractMessage(selfRef.message, prefetchImageIMAPPart: MCOIMAPPart(part: part), folder: folder.string());
 }

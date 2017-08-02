@@ -29,13 +29,13 @@ extern "C" {
     typedef CObject         (*TemplateForEmbeddedMessageBlock)(const void* userInfo, CAbstractMessagePart part);
     typedef CObject         (*TemplateForEmbeddedMessageHeaderBlock)(const void* userInfo, CMessageHeader header);
     typedef CObject         (*TemplateForAttachmentSeparatorBlock)(const void* userInfo);
-    typedef CObject         (*CleanHTMLForPartBlock)(const void* userInfo, const UChar* html);
-    typedef CObject         (*FilterHTMLForPartBlock)(const void* userInfo, const UChar* html);
-    typedef CObject         (*FilterHTMLForMessageBlock)(const void* userInfo, const UChar* html);
+    typedef CObject         (*CleanHTMLForPartBlock)(const void* userInfo, MailCoreString html);
+    typedef CObject         (*FilterHTMLForPartBlock)(const void* userInfo, MailCoreString html);
+    typedef CObject         (*FilterHTMLForMessageBlock)(const void* userInfo, MailCoreString html);
     
-    typedef CData           (*DataForIMAPPartBlock)(const void* userInfo, const UChar* folder, CIMAPPart part);
-    typedef void            (*PrefetchAttachmentIMAPPartBlock)(const void* userInfo, const UChar* folder, CIMAPPart part);
-    typedef void            (*PrefetchImageIMAPPartBlock)(const void* userInfo, const UChar* folder, CIMAPPart part);
+    typedef CData           (*DataForIMAPPartBlock)(const void* userInfo, MailCoreString folder, CIMAPPart part);
+    typedef void            (*PrefetchAttachmentIMAPPartBlock)(const void* userInfo, MailCoreString folder, CIMAPPart part);
+    typedef void            (*PrefetchImageIMAPPartBlock)(const void* userInfo, MailCoreString folder, CIMAPPart part);
     
     struct CAbstractMessageRendererCallback {
 #ifdef __cplusplus

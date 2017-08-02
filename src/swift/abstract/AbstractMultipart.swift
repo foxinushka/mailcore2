@@ -1,7 +1,7 @@
 import Foundation
 
 
-public class AbstractMultipart : AbstractPart {
+public class MCOAbstractMultipart : MCOAbstractPart {
     
     private var nativeInstance: CAbstractMultipart;
     
@@ -10,14 +10,14 @@ public class AbstractMultipart : AbstractPart {
         super.init(abstractMultipart.abstractPart);
     }
     
-    required public init(_ obj: CObject) {
+    required public init(cobject obj: CObject) {
         fatalError("init has not been implemented")
     }
     
     /** Returns the subparts of that multipart.*/
-    public var parts : Array<AbstractPart> {
-        set { nativeInstance.parts = Array<AbstractPart>.cast(newValue) }
-        get { return Array<AbstractPart>.cast(nativeInstance.parts) }
+    public var parts : Array<MCOAbstractPart> {
+        set { nativeInstance.parts = Array<MCOAbstractPart>.cast(newValue) }
+        get { return Array<MCOAbstractPart>.cast(nativeInstance.parts) }
     }
     
 }

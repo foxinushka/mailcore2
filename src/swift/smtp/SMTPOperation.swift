@@ -1,15 +1,15 @@
 import Foundation
 
 
-public class SMTPOperation: Operation {
+public class MCOSMTPOperation: MCOOperation {
     
     public typealias CompletionBlock = (Error?) -> Void
     
     internal var operation: CSMTPOperation;
-    public var session: SMTPSession?;
+    public var session: MCOSMTPSession?;
     private var completionBlock: CompletionBlock?;
     
-    internal init(_ operation: CSMTPOperation) {
+    internal init(operation: CSMTPOperation) {
         self.operation = operation;
         super.init(operation.cOperation);
     }
@@ -38,16 +38,14 @@ public class SMTPOperation: Operation {
             completionBlock!(nil);
         }
         else {
-            let error = MailCoreError(code: errorCode)
+            let error = MailCoreError(code: errorCode) as NSError
             if operation.lastSMTPResponse != nil || operation.lastSMTPResponseCode != 0 {
-                var userInfo = Dictionary<String, Any>()
-                if operation.lastSMTPResponse != nil {
-                    userInfo["MCOSMTPResponseKey"] = String(utf16: operation.lastSMTPResponse)
+                if let response = operation.lastSMTPResponse.string() {
+                    error.insertValue(response, inPropertyWithKey: "MCOSMTPResponseKey")
                 }
                 if operation.lastSMTPResponseCode != 0 {
-                    userInfo["MCOSMTPResponseCodeKey"] = operation.lastSMTPResponseCode
+                    error.insertValue(operation.lastSMTPResponseCode, inPropertyWithKey: "MCOSMTPResponseCodeKey")
                 }
-                error.userInfo = userInfo
             }
             completionBlock!(error)
         }

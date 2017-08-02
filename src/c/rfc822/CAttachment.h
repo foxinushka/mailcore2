@@ -26,28 +26,31 @@ extern "C" {
     };
     typedef struct CAttachment CAttachment;
     
-    void                CAttachment_setData(struct CAttachment self, const char* bytes, unsigned int length)
-                        CF_SWIFT_NAME(CAttachment.setData(self:bytes:length:));
+    CData               CAttachment_data(struct CAttachment self)
+                        CF_SWIFT_NAME(getter:CAttachment.data(self:));
     
-    const UChar*        CAttachment_decodedString(struct CAttachment self)
+    void                CAttachment_setData(struct CAttachment self, CData data)
+                        CF_SWIFT_NAME(setter:CAttachment.data(self:newValue:));
+    
+    MailCoreString      CAttachment_decodedString(struct CAttachment self)
                         CF_SWIFT_NAME(CAttachment.decodedString(self:));
     
-    const UChar*        CAttachment_mimeTypeForFilename(const UChar* filename)
+    MailCoreString      CAttachment_mimeTypeForFilename(MailCoreString filename)
                         CF_SWIFT_NAME(CAttachment.mimeType(forFilename:));
     
-    CAttachment         CAttachment_WithContentsOfFile(const UChar* filename)
+    CAttachment         CAttachment_WithContentsOfFile(MailCoreString filename)
                         CF_SWIFT_NAME(CAttachment.init(contentsOfFile:));
     
-    CAttachment         CAttachment_WithData(const char* bytes, unsigned int length, const UChar* filename)
-                        CF_SWIFT_NAME(CAttachment.init(dataBytes:length:filename:));
+    CAttachment         CAttachment_WithData(CData data, MailCoreString filename)
+                        CF_SWIFT_NAME(CAttachment.init(data:filename:));
     
-    CAttachment         CAttachment_WithHTMLString(const UChar* htmlString)
+    CAttachment         CAttachment_WithHTMLString(MailCoreString htmlString)
                         CF_SWIFT_NAME(CAttachment.init(htmlString:));
     
-    CAttachment         CAttachment_WithRFC822Message(const char* bytes, unsigned int length)
-                        CF_SWIFT_NAME(CAttachment.init(RFC822MessageBytes:length:));
+    CAttachment         CAttachment_WithRFC822Message(CData data)
+                        CF_SWIFT_NAME(CAttachment.init(RFC822MessageData:));
     
-    CAttachment         CAttachment_WithText(const UChar* text)
+    CAttachment         CAttachment_WithText(MailCoreString text)
                         CF_SWIFT_NAME(CAttachment.init(text:));
     
 #ifdef __cplusplus

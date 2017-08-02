@@ -1,7 +1,7 @@
 import Foundation
 
 
-public final class Address : Hashable, Convertible {
+public final class MCOAddress : NSObject, Convertible {
     
     private var nativeInstance:CAddress;
     
@@ -9,38 +9,40 @@ public final class Address : Hashable, Convertible {
         return self.nativeInstance;
     }
     
+    public func isNil() -> Bool {
+        return nativeInstance.instance == nil
+    }
+    
     /** Creates an address with a display name and a mailbox.
      
      Example: [MCOAddress addressWithDisplayName:@"DINH Viêt Hoà" mailbox:@"hoa@etpan.org"] */
-    public static func addressWithDisplayName(displayName: String, mailbox: String) -> Address? {
-        return String.utf16(displayName, mailbox, { displayNamePtr, mailboxPtr in
-            let address = Address(address: CAddress(displayName: displayNamePtr, mailbox: mailboxPtr));
-            return address.nativeInstance.instance != nil ? address : nil;
-        })
+    public convenience init?(displayName: String, mailbox: String) {
+        let addrss = CAddress(displayName: displayName.mailCoreString(), mailbox: mailbox.mailCoreString())
+        guard addrss.instance != nil else {
+            return nil
+        }
+        self.init(address: addrss)
     }
     
     /** Creates an address with only a mailbox.
      
      Example: [MCOAddress addressWithMailbox:@"hoa@etpan.org"]*/
-    public static func addressWithMailbox(mailbox: String) -> Address? {
-        let address = Address(address: String.utf16(mailbox, { CAddress(mailbox: $0) }));
-        return address.nativeInstance.instance != nil ? address : nil;
+    public convenience init?(mailbox: String) {
+        self.init(address: CAddress(mailbox: mailbox.mailCoreString()))
     }
 
     /** Creates an address with a RFC822 string.
      
      Example: [MCOAddress addressWithRFC822String:@"DINH Vi=C3=AAt Ho=C3=A0 <hoa@etpan.org>"]*/
-    public static func addressWithRFC822String(RFC822String: String) -> Address? {
-        let address = Address(address: String.utf16(RFC822String, { CAddress(RFC822String: $0) }));
-        return address.nativeInstance.instance != nil ? address : nil;
+    public convenience init?(RFC822String: String) {
+        self.init(address: CAddress(RFC822String: RFC822String.mailCoreString()))
     }
 
     /** Creates an address with a non-MIME-encoded RFC822 string.
      
      Example: [MCOAddress addressWithNonEncodedRFC822String:@"DINH Viêt Hoà <hoa@etpan.org>"]*/
-    public static func addressWithNonEncodedRFC822String(nonEncodedRFC822String: String) -> Address? {
-        let address = Address(address: String.utf16(nonEncodedRFC822String, { CAddress(nonEncodedRFC822String: $0) }));
-        return address.nativeInstance.instance != nil ? address : nil;
+    public convenience init?(nonEncodedRFC822String: String) {
+        self.init(address: CAddress(nonEncodedRFC822String: nonEncodedRFC822String.mailCoreString()))
     }
 
     /**
@@ -48,8 +50,8 @@ public final class Address : Hashable, Convertible {
      forms of the RFC822 encoded addresses.
      
      For example: @[ @"DINH Vi=C3=AAt Ho=C3=A0 <hoa@etpan.org>" ]*/
-    public static func addressesWithRFC822String(string: String) -> Array<Address> {
-        return Array<Address>.cast(String.utf16(string, { CAddress.addresses(RFC822String: $0) }));
+    public static func addressesWithRFC822String(string: String) -> Array<MCOAddress> {
+        return Array<MCOAddress>.cast(CAddress.addresses(RFC822String: string.mailCoreString()))
     }
 
     /**
@@ -57,15 +59,19 @@ public final class Address : Hashable, Convertible {
      forms of non-encoded RFC822 addresses.
      
      For example: @[ "DINH Viêt Hoà <hoa@etpan.org>" ]*/
-    public static func addressesWithNonEncodedRFC822String(string: String) -> Array<Address> {
-        return Array<Address>.cast(String.utf16(string, { CAddress.addresses(nonEncodedRFC822String: $0) }));
+    public static func addressesWithNonEncodedRFC822String(string: String) -> Array<MCOAddress> {
+        return Array<MCOAddress>.cast(CAddress.addresses(nonEncodedRFC822String: string.mailCoreString()))
     }
     
-    public init() {
-        self.nativeInstance = CAddress();
+    public override init() {
+        self.nativeInstance = CAddress_new();
+        super.init()
     }
     
-    internal init(address:CAddress) {
+    internal init?(address:CAddress?) {
+        guard let address = address else {
+            return nil
+        }
         self.nativeInstance = address;
     }
     
@@ -75,31 +81,31 @@ public final class Address : Hashable, Convertible {
     
     /** Returns the display name of the address.*/
     public var displayName : String? {
-        set { String.utf16(newValue, { self.nativeInstance.displayName = $0 }) }
-        get { return String(utf16: self.nativeInstance.displayName ); }
+        set { self.nativeInstance.displayName = newValue?.mailCoreString() ?? MailCoreString() }
+        get { return self.nativeInstance.displayName.string() }
     }
     
     /** Returns the mailbox of the address.*/
     public var mailbox : String? {
-        set { String.utf16(newValue, { self.nativeInstance.mailbox = $0 }) }
-        get { return String(utf16: self.nativeInstance.mailbox ); }
+        set { self.nativeInstance.mailbox = newValue?.mailCoreString() ?? MailCoreString() }
+        get { return self.nativeInstance.mailbox.string() }
     }
     
     /** Returns the RFC822 encoding of the address.
      
      For example: "DINH Vi=C3=AAt Ho=C3=A0 <hoa@etpan.org>"*/
     public func RFC822String() -> String? {
-        return String(utf16: nativeInstance.RFC822String );
+        return nativeInstance.RFC822String.string()
     }
     
     /** Returns the non-MIME-encoded RFC822 encoding of the address.
      
      For example: "DINH Viêt Hoà <hoa@etpan.org>"*/
     public func nonEncodedRFC822String() -> String? {
-        return String(utf16: nativeInstance.nonEncodedRFC822String );
+        return nativeInstance.nonEncodedRFC822String.string()
     }
     
-    public var hashValue: Int {
+    public override var hashValue: Int {
         if displayName != nil && mailbox != nil {
             return displayName!.hashValue ^ mailbox!.hashValue;
         }
@@ -112,11 +118,11 @@ public final class Address : Hashable, Convertible {
         return 0;
     }
     
-    public static func ==(lhs: Address, rhs: Address) -> Bool {
+    public static func ==(lhs: MCOAddress, rhs: MCOAddress) -> Bool {
         return lhs.displayName == rhs.displayName && lhs.mailbox == rhs.mailbox;
     }
     
-    internal init(_ obj: CObject) {
+    internal init(cobject obj: CObject) {
         self.nativeInstance = CAddress(cObject: obj);
     }
     

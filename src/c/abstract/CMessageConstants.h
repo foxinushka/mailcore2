@@ -23,7 +23,7 @@ extern "C" {
         AuthTypeSASLKerberosV4    = 1 << 7,
         AuthTypeXOAuth2           = 1 << 8,
         AuthTypeXOAuth2Outlook    = 1 << 9,
-    }AuthType;
+    }CAuthType;
     
     typedef enum {
         IMAPFolderFlagNone        = 0,
@@ -45,7 +45,7 @@ extern "C" {
         IMAPFolderFlagFlagged = IMAPFolderFlagStarred,
         IMAPFolderFlagFolderTypeMask = IMAPFolderFlagInbox | IMAPFolderFlagSentMail | IMAPFolderFlagStarred | IMAPFolderFlagAllMail |
           IMAPFolderFlagTrash| IMAPFolderFlagDrafts | IMAPFolderFlagSpam | IMAPFolderFlagImportant | IMAPFolderFlagArchive,
-    }IMAPFolderFlag;
+    }CIMAPFolderFlag;
     
     typedef enum {
         MessageFlagNone          = 0,
@@ -61,7 +61,7 @@ extern "C" {
         MessageFlagMaskAll = MessageFlagSeen | MessageFlagAnswered | MessageFlagFlagged |
         MessageFlagDeleted | MessageFlagDraft | MessageFlagMDNSent | MessageFlagForwarded |
         MessageFlagSubmitPending | MessageFlagSubmitted,
-    }MessageFlag;
+    }CMessageFlag;
     
     typedef enum {
         IMAPMessagesRequestKindUid           = 0, // This is the default and it's always fetched
@@ -76,7 +76,7 @@ extern "C" {
         IMAPMessagesRequestKindGmailThreadID  = 1 << 8,
         IMAPMessagesRequestKindExtraHeaders  = 1 << 9,
         IMAPMessagesRequestKindSize          = 1 << 10,
-    }IMAPMessagesRequestKind;
+    }CIMAPMessagesRequestKind;
     
     typedef enum {
         IMAPFetchRequestTypeUID = 0,

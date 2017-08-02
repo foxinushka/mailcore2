@@ -47,16 +47,16 @@ extern "C" {
     void            CIMAPMessage_setSize(struct CIMAPMessage self, uint32_t size)
                     CF_SWIFT_NAME(setter:CIMAPMessage.size(self:newValue:));
 
-    MessageFlag     CIMAPMessage_flags(struct CIMAPMessage self)
+    CMessageFlag     CIMAPMessage_flags(struct CIMAPMessage self)
                     CF_SWIFT_NAME(getter:CIMAPMessage.flags(self:));
 
-    void            CIMAPMessage_setFlags(struct CIMAPMessage self, MessageFlag flags)
+    void            CIMAPMessage_setFlags(struct CIMAPMessage self, CMessageFlag flags)
                     CF_SWIFT_NAME(setter:CIMAPMessage.flags(self:newValue:));
 
-    MessageFlag     CIMAPMessage_originalFlags(struct CIMAPMessage self)
+    CMessageFlag     CIMAPMessage_originalFlags(struct CIMAPMessage self)
                     CF_SWIFT_NAME(getter:CIMAPMessage.originalFlags(self:));
 
-    void            CIMAPMessage_setOriginalFlags(struct CIMAPMessage self, MessageFlag originalFlags)
+    void            CIMAPMessage_setOriginalFlags(struct CIMAPMessage self, CMessageFlag originalFlags)
                     CF_SWIFT_NAME(setter:CIMAPMessage.originalFlags(self:newValue:));
 
     CArray          CIMAPMessage_customFlags(struct CIMAPMessage self)
@@ -95,10 +95,10 @@ extern "C" {
     void            CIMAPMessage_setGmailThreadID(struct CIMAPMessage self, uint64_t gmailThreadID)
                     CF_SWIFT_NAME(setter:CIMAPMessage.gmailThreadID(self:newValue:));
 
-    CAbstractPart   CIMAPMessage_partForPartID(struct CIMAPMessage self, const UChar* partID)
+    CAbstractPart   CIMAPMessage_partForPartID(struct CIMAPMessage self, MailCoreString partID)
                     CF_SWIFT_NAME(CIMAPMessage.partForPartID(self:partID:));
 
-    const UChar*    CIMAPMessage_htmlRendering(struct CIMAPMessage self, const UChar* folder, CAbstractMessageRendererCallback rendererCallback)
+    MailCoreString    CIMAPMessage_htmlRendering(struct CIMAPMessage self, MailCoreString folder, CAbstractMessageRendererCallback rendererCallback)
                     CF_SWIFT_NAME(CIMAPMessage.htmlRendering(self:folder:rendererCallback:));
 
     CObject         CIMAPMessage_castToCObject(struct CIMAPMessage self)
@@ -109,6 +109,8 @@ extern "C" {
 
     void            CIMAPMessage_release(CIMAPMessage self)
                     CF_SWIFT_NAME(CIMAPMessage.release(self:));
+    
+    CIMAPMessage    CIMAPMessage_new();
     
 #ifdef __cplusplus
 }

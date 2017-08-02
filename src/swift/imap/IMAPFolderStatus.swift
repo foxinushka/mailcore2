@@ -1,7 +1,7 @@
 import Foundation
 
 
-public class IMAPFolderStatus {
+public class MCOIMAPFolderStatus {
     
     private var nativeInstance:CIMAPFolderStatus;
     

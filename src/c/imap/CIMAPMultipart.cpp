@@ -14,3 +14,7 @@ CIMAPMultipart CIMAPMultipart_new(mailcore::IMAPMultipart *part) {
     self.instance = part;
     return self;
 }
+
+void CIMAPMultipart_release(CIMAPMultipart self) {
+    C_SAFE_RELEASE(self.instance);
+}

@@ -7,15 +7,19 @@ extension Data {
         self = Data.init(bytes: cdata.bytes, count: Int(cdata.length));
     }
     
-    internal func bytes() -> UnsafePointer<Int8>?{
-        let bytes = self.withUnsafeBytes{(bytes: UnsafePointer<Int8>)-> UnsafePointer<Int8> in
-            return bytes;
+    public func mailCoreData() -> CData {
+        return self.withUnsafeBytes{(bytes: UnsafePointer<Int8>)-> CData in
+            return CData(bytes: bytes, length: UInt32(self.count))
         }
-        return bytes;
     }
     
-    internal func length() -> UInt32 {
-        return UInt32(self.count);
+}
+
+extension NSData {
+    
+    public func mailCoreData() -> CData {
+        let swiftData = self as Data
+        return swiftData.mailCoreData()
     }
     
 }

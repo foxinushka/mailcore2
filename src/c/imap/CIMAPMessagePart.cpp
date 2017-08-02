@@ -15,3 +15,7 @@ CIMAPMessagePart CIMAPMessage_new(mailcore::IMAPMessagePart *part) {
     self.instance = part;
     return self;
 }
+
+void CIMAPMessagePart_release(CIMAPMessagePart self) {
+    
+}

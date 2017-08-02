@@ -7,7 +7,7 @@ extension UInt32 : Convertible  {
         return CObject(uint32: self);
     }
     
-    init(_ obj: CObject) {
+    init(cobject obj: CObject) {
         self = obj.castToUInt32();
     }
 }

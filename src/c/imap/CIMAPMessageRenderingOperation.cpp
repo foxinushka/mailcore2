@@ -16,6 +16,6 @@ void CIMAPMessageRenderingOperation_release(CIMAPMessageRenderingOperation opera
     
 }
 
-const UChar* CIMAPMessageRenderingOperation_result(struct CIMAPMessageRenderingOperation self) {
-    return self.instance->result()->unicodeCharacters();
+MailCoreString CIMAPMessageRenderingOperation_result(struct CIMAPMessageRenderingOperation self) {
+    return MailCoreString_new(self.instance->result());
 }

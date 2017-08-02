@@ -10,7 +10,7 @@ extension Dictionary {
         for index in 1...size {
             let mcKey = keys.getObject(index: index);
             let mcValue = dict.getValue(key: mcKey);
-            result[K(mcKey)] = T(mcValue);
+            result[K(cobject: mcKey)] = T(cobject: mcValue);
         }
         return result;
     }

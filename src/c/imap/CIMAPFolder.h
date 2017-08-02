@@ -7,6 +7,8 @@
 #include "CMessageConstants.h"
 #include "CObject.h"
 
+#include "MailCoreString.h"
+
 #ifdef __cplusplus
 
 namespace mailcore {
@@ -25,10 +27,10 @@ extern "C" {
     };
     typedef struct CIMAPFolder CIMAPFolder;
     
-    const UChar*    CIMAPFolder_path(struct CIMAPFolder self)
+    MailCoreString    CIMAPFolder_path(struct CIMAPFolder self)
                     CF_SWIFT_NAME(getter:CIMAPFolder.path(self:));
     
-    void            CIMAPFolder_setPath(struct CIMAPFolder self, const UChar* path)
+    void            CIMAPFolder_setPath(struct CIMAPFolder self, MailCoreString path)
                     CF_SWIFT_NAME(setter:CIMAPFolder.path(self:newValue:));
     
     char            CIMAPFolder_delimiter(struct CIMAPFolder self)
@@ -37,10 +39,10 @@ extern "C" {
     void            CIMAPFolder_setDelimiter(struct CIMAPFolder self, char delimiter)
                     CF_SWIFT_NAME(setter:CIMAPFolder.delimiter(self:newValue:));
     
-    IMAPFolderFlag  CIMAPFolder_flags(struct CIMAPFolder self)
+    CIMAPFolderFlag  CIMAPFolder_flags(struct CIMAPFolder self)
                     CF_SWIFT_NAME(getter:CIMAPFolder.flags(self:));
     
-    void            CIMAPFolder_setFlags(struct CIMAPFolder self, IMAPFolderFlag flags)
+    void            CIMAPFolder_setFlags(struct CIMAPFolder self, CIMAPFolderFlag flags)
                     CF_SWIFT_NAME(setter:CIMAPFolder.flags(self:newValue:));
     
     CObject         CIMAPFolder_castToCObject(struct CIMAPFolder self)

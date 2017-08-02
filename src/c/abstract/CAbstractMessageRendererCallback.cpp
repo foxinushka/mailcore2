@@ -1,8 +1,9 @@
 #include "CAbstractMessageRendererCallback.h"
 #include <MailCore/MCAsync.h>
 #include <MailCore/MCRenderer.h>
+#include "CData.h"
 
-class AbstractMessageRendererCallback : public mailcore::Object, public mailcore::HTMLRendererTemplateCallback, public mailcore::HTMLRendererIMAPCallback {
+class AbstractMessageRendererCallback : public mailcore::HTMLRendererTemplateCallback, public mailcore::HTMLRendererIMAPCallback {
 public:
     AbstractMessageRendererCallback(CanPreviewPartBlock canPreviewPartBlock,
                                     ShouldShowPartBlock shouldShowPartBlock,
@@ -158,7 +159,7 @@ public:
     virtual mailcore::String * cleanHTMLForPart(mailcore::String * html) {
         mailcore::String * result = NULL;
         if (cleanHTMLForPartBlock != NULL) {
-            result = reinterpret_cast<mailcore::String*>(cleanHTMLForPartBlock(userInfo, html->unicodeCharacters()).instance);
+            result = reinterpret_cast<mailcore::String*>(cleanHTMLForPartBlock(userInfo, MailCoreString_new(html)).instance);
         }
         if (result == NULL) {
             result = HTMLRendererTemplateCallback::cleanHTMLForPart(html);
@@ -169,7 +170,7 @@ public:
     virtual mailcore::String * filterHTMLForPart(mailcore::String * html) {
         mailcore::String * result = NULL;
         if (filterHTMLForPartBlock != NULL) {
-            result = reinterpret_cast<mailcore::String*>(filterHTMLForPartBlock(userInfo, html->unicodeCharacters()).instance);
+            result = reinterpret_cast<mailcore::String*>(filterHTMLForPartBlock(userInfo, MailCoreString_new(html)).instance);
         }
         if (result == NULL) {
             result = HTMLRendererTemplateCallback::filterHTMLForPart(html);
@@ -180,7 +181,7 @@ public:
     virtual mailcore::String * filterHTMLForMessage(mailcore::String * html) {
         mailcore::String * result = NULL;
         if (filterHTMLForMessageBlock != NULL) {
-            result = reinterpret_cast<mailcore::String*>(filterHTMLForMessageBlock(userInfo, html->unicodeCharacters()).instance);
+            result = reinterpret_cast<mailcore::String*>(filterHTMLForMessageBlock(userInfo, MailCoreString_new(html)).instance);
         }
         if (result == NULL) {
             result = HTMLRendererTemplateCallback::filterHTMLForMessage(html);
@@ -191,21 +192,21 @@ public:
     virtual mailcore::Data * dataForIMAPPart(mailcore::String * folder, mailcore::IMAPPart * part) {
         mailcore::Data * result = NULL;
         if (dataForIMAPPartBlock != NULL) {
-            CData data = dataForIMAPPartBlock(userInfo, folder->unicodeCharacters(), CIMAPPart_new(part));
-            result = new mailcore::Data(data.bytes, data.length);
+            CData data = dataForIMAPPartBlock(userInfo, MailCoreString_new(folder), CIMAPPart_new(part));
+            result = data.instance;
         }
         return result;
     }
     
     virtual void prefetchAttachmentIMAPPart(mailcore::String * folder, mailcore::IMAPPart * part) {
         if (prefetchAttachmentIMAPPartBlock != NULL) {
-            prefetchAttachmentIMAPPartBlock(userInfo, folder->unicodeCharacters(), CIMAPPart_new(part));
+            prefetchAttachmentIMAPPartBlock(userInfo, MailCoreString_new(folder), CIMAPPart_new(part));
         }
     }
     
     virtual void prefetchImageIMAPPart(mailcore::String * folder, mailcore::IMAPPart * part) {
         if (prefetchImageIMAPPartBlock != NULL) {
-            prefetchImageIMAPPartBlock(userInfo, folder->unicodeCharacters(), CIMAPPart_new(part));
+            prefetchImageIMAPPartBlock(userInfo, MailCoreString_new(folder), CIMAPPart_new(part));
         }
     }
     
@@ -269,6 +270,7 @@ CAbstractMessageRendererCallback CAbstractMessageRendererCallback_new(CanPreview
                                                               prefetchAttachmentIMAPPartBlock,
                                                               prefetchImageIMAPPartBlock,
                                                               userInfo);
+    //self.callbackBridge->retain();
     
     return self;
 }

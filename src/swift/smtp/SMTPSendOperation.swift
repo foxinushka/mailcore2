@@ -1,21 +1,21 @@
 import Foundation
 
 
-public class SMTPSendOperation : SMTPOperation {
+public class MCOSMTPSendOperation : MCOSMTPOperation {
     
-    public typealias OperationProgressBlock = (UInt32, UInt32) -> Void
+    public typealias MCOOperationProgressBlock = (UInt32, UInt32) -> Void
     
-    override init(_ operation: CSMTPOperation) {
-        super.init(operation)
+    override init(operation: CSMTPOperation) {
+        super.init(operation: operation)
         self.operation = self.operation.setProgressBlocks(block: operationProgressCallback, userInfo: Unmanaged.passUnretained(self).toOpaque())
     }
     
-    public var progressBlock: OperationProgressBlock?
+    public var progressBlock: MCOOperationProgressBlock?
 }
 
 //MARK: C-Function
 func operationProgressCallback(_ ref: UnsafeRawPointer?, _ current: UInt32, _ max: UInt32) {
-    let selfRef = Unmanaged<SMTPSendOperation>.fromOpaque(ref!).takeUnretainedValue()
+    let selfRef = Unmanaged<MCOSMTPSendOperation>.fromOpaque(ref!).takeUnretainedValue()
     if selfRef.progressBlock != nil {
         selfRef.progressBlock!(current, max)
     }

@@ -1,7 +1,7 @@
 import Foundation
 
 
-public class IMAPCapabilityOperation : IMAPBaseOperation {
+public class MCOIMAPCapabilityOperation : MCOIMAPBaseOperation {
     
     public typealias CompletionBlock = (Error?,  MCOIndexSet?) -> Void
     

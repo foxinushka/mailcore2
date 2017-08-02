@@ -8,6 +8,7 @@
 CIMAPFetchMessagesOperation CIMAPFetchMessagesOperation_new(mailcore::IMAPFetchMessagesOperation *operationRef){
     CIMAPFetchMessagesOperation self;
     self.baseOperation = CIMAPBaseOperation_new(operationRef);
+    self.instance = operationRef;
     return self;
 }
 

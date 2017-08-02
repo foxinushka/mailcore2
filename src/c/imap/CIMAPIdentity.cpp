@@ -14,12 +14,12 @@ CArray CIMAPIdentity_allInfoKeys(struct CIMAPIdentity self) {
     return CArray_new(self.instance->allInfoKeys());
 }
 
-const UChar* CIMAPIdentity_infoForKey(struct CIMAPIdentity self, const UChar* key) {
-    return self.instance->infoForKey(new mailcore::String(key))->unicodeCharacters();
+MailCoreString CIMAPIdentity_infoForKey(struct CIMAPIdentity self, MailCoreString key) {
+    return MailCoreString_new(self.instance->infoForKey(key.instance));
 }
 
-void CIMAPIdentity_setInfoForKey(struct CIMAPIdentity self, const UChar* value, const UChar* key) {
-    self.instance->setInfoForKey(new mailcore::String(key), new mailcore::String(value));
+void CIMAPIdentity_setInfoForKey(struct CIMAPIdentity self, MailCoreString value, MailCoreString key) {
+    self.instance->setInfoForKey(key.instance, value.instance);
 }
 
 void CIMAPIdentity_removeAllInfos(struct CIMAPIdentity self){
@@ -34,7 +34,7 @@ CIMAPIdentity CIMAPIdentity_new(mailcore::IMAPIdentity *folder) {
     return self;
 }
 
-CIMAPIdentity CIMAPIdentity_new(const UChar* vendor, const UChar* name, const UChar* version) {
+CIMAPIdentity CIMAPIdentity_new(MailCoreString vendor, MailCoreString name, MailCoreString version) {
     CIMAPIdentity self = CIMAPIdentity_new(new mailcore::IMAPIdentity());
     CIMAPIdentity_setVendor(self, vendor);
     CIMAPIdentity_setName(self, name);

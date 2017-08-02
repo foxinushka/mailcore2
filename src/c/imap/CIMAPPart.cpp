@@ -13,6 +13,7 @@ C_SYNTHESIZE_ENUM(Encoding, mailcore::Encoding, setEncoding, encoding)
 CIMAPPart CIMAPPart_new(mailcore::IMAPPart *part) {
     CIMAPPart self;
     self.abstractPart = CAbstractPart_new(part);
+    self.instance = part;
     return self;
 }
 
@@ -20,7 +21,10 @@ unsigned int CIMAPPart_decodedSize(struct CIMAPPart self) {
     return self.instance->decodedSize();
 }
 
+void CIMAPPart_release(struct CIMAPPart self) {
+    return self.instance->release();
+}
 
 CIMAPPart CIMAPPart_castCIMAPPart(CObject obj) {
-    return CIMAPPart_new((mailcore::IMAPPart*) obj.instance);
+    return CIMAPPart_new(reinterpret_cast<mailcore::IMAPPart*>(obj.instance));
 }

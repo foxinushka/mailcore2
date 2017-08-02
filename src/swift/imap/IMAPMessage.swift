@@ -1,9 +1,13 @@
 import Foundation
 
 
-public final class IMAPMessage : AbstractMessage, Convertible {
+public final class MCOIMAPMessage : MCOAbstractMessage, Convertible {
     
     internal var nativeInstance:CIMAPMessage;
+    
+    public convenience init() {
+        self.init(message: CIMAPMessage_new())
+    }
     
     internal init(message:CIMAPMessage) {
         self.nativeInstance = message;
@@ -31,15 +35,15 @@ public final class IMAPMessage : AbstractMessage, Convertible {
     }
     
     /** Flags of the message, like if it is deleted, read, starred etc */
-    public var flags: MessageFlag {
-        get { return nativeInstance.flags }
-        set { nativeInstance.flags = newValue }
+    public var flags: MCOMessageFlag {
+        get { return MCOMessageFlag(cMessageFlag: nativeInstance.flags) }
+        set { nativeInstance.flags = newValue.toCMessageFlag() }
     }
     
     /** The contents of the message flags when it was fetched from the server */
-    public var originalFlags: MessageFlag {
-        get { return nativeInstance.originalFlags }
-        set { nativeInstance.originalFlags = newValue }
+    public var originalFlags: MCOMessageFlag {
+        get { return MCOMessageFlag(cMessageFlag: nativeInstance.originalFlags) }
+        set { nativeInstance.originalFlags = newValue.toCMessageFlag() }
     }
     
     /** Flag keywords of the message, mostly custom flags */
@@ -55,8 +59,8 @@ public final class IMAPMessage : AbstractMessage, Convertible {
     }
     
     /** Main MIME part of the message */
-    public var mainPart: AbstractPart {
-        get { return AbstractPart(nativeInstance.mainPart) }
+    public var mainPart: MCOAbstractPart {
+        get { return MCOAbstractPart(nativeInstance.mainPart) }
         set { nativeInstance.mainPart = newValue._CAbstractPart() }
     }
     
@@ -82,8 +86,8 @@ public final class IMAPMessage : AbstractMessage, Convertible {
      Returns the part with the given part identifier.
      @param partID A part identifier looks like 1.2.1
      */
-    public func partForPartID(partID: String) -> AbstractPart {
-        return AbstractPart( String.utf16(partID, { nativeInstance.partForPartID(partID: $0) }));
+    public func partForPartID(partID: String) -> MCOAbstractPart {
+        return MCOAbstractPart(nativeInstance.partForPartID(partID: partID.mailCoreString()))
     }
     
     /**
@@ -92,28 +96,28 @@ public final class IMAPMessage : AbstractMessage, Convertible {
      [MCOAbstractMessage:dataForIMAPPart:folder:]
      so that the complete HTML rendering can take place.
      */
-    public func htmlRendering(folder: String, delegate: HTMLRendererImapDelegate) -> String? {
-        let rendererCallback: AbstractMessageRendererCallback = AbstractMessageRendererCallback(message: self);
+    public func htmlRendering(folder: String, delegate: MCOHTMLRendererIMAPDelegate) -> String? {
+        let rendererCallback: MCOAbstractMessageRendererCallback = MCOAbstractMessageRendererCallback(message: self);
         rendererCallback.setHtmlRenderImapDelegate(delegate: delegate);
-        return String(utf16: String.utf16(folder, { self.nativeInstance.htmlRendering(folder: $0, rendererCallback: rendererCallback.cast()) }));
+        return self.nativeInstance.htmlRendering(folder: folder.mailCoreString(), rendererCallback: rendererCallback.cast()).string()
     }
     
     
     /** All attachments in the message. */
-    public func attachments() -> Array<IMAPPart> {
-        return Array<IMAPPart>.cast(nativeInstance.abstractMessage.attachments());
+    public func attachments() -> Array<MCOIMAPPart> {
+        return Array<MCOIMAPPart>.cast(nativeInstance.abstractMessage.attachments());
     }
     
     /** All image attachments included inline in the message through cid: URLs. */
-    public func htmlInlineAttachments() -> Array<IMAPPart> {
-        return Array<IMAPPart>.cast(nativeInstance.abstractMessage.htmlInlineAttachments());
+    public func htmlInlineAttachments() -> Array<MCOIMAPPart> {
+        return Array<MCOIMAPPart>.cast(nativeInstance.abstractMessage.htmlInlineAttachments());
     }
     
     internal func cast() -> CObject {
         return nativeInstance.castToCObject();
     }
     
-    internal init(_ obj: CObject){
+    internal init(cobject obj: CObject){
         let message = CIMAPMessage(cobject: obj);
         self.nativeInstance = message;
         super.init(message.abstractMessage);

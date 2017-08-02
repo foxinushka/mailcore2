@@ -2,6 +2,7 @@
 #define CIMAPMessageRenderingOperation_hpp
 
 #include "CIMAPBaseOperation.h"
+#include "MailCoreString.h"
 
 #ifdef __cplusplus
 
@@ -22,7 +23,7 @@ extern "C" {
     };
     typedef struct CIMAPMessageRenderingOperation CIMAPMessageRenderingOperation;
     
-    const UChar*    CIMAPMessageRenderingOperation_result(struct CIMAPMessageRenderingOperation self)
+    MailCoreString    CIMAPMessageRenderingOperation_result(struct CIMAPMessageRenderingOperation self)
                     CF_SWIFT_NAME(CIMAPMessageRenderingOperation.result(self:));
     
     void            CIMAPMessageRenderingOperation_release(CIMAPMessageRenderingOperation self)

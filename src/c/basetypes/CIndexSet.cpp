@@ -83,7 +83,9 @@ CIndexSet CIndexSet_new_WithIndex(uint64_t idx) {
 CIndexSet CIndexSet_new(mailcore::IndexSet *set) {
     CIndexSet self;
     self.instance = set;
-    self.instance->retain();
+    if (self.instance != NULL) {
+        self.instance->retain();
+    }
     return self;
 }
 
@@ -138,6 +140,10 @@ Range CIndexSet_range(struct CIndexSet self, unsigned int idx) {
 
 unsigned int CIndexSet_rangesCount(struct CIndexSet self) {
     return self.instance->rangesCount();
+}
+
+CIndexSet CIndexSet_copy(struct CIndexSet self) {
+    return CIndexSet_new(reinterpret_cast<mailcore::IndexSet *>(self.instance->copy()));
 }
 
 

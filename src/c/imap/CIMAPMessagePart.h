@@ -23,10 +23,10 @@ extern "C" {
     };
     typedef struct CIMAPMessagePart CIMAPMessagePart;
     
-    const UChar*    CIMAPMessagePart_partID(struct CIMAPMessagePart self)
+    MailCoreString    CIMAPMessagePart_partID(struct CIMAPMessagePart self)
                     CF_SWIFT_NAME(getter:CIMAPMessagePart.partID(self:));
     
-    void            CIMAPMessagePart_setPartID(struct CIMAPMessagePart self, const UChar* partID)
+    void            CIMAPMessagePart_setPartID(struct CIMAPMessagePart self, MailCoreString partID)
                     CF_SWIFT_NAME(setter:CIMAPMessagePart.partID(self:newValue:));
     
     void            CIMAPMessagePart_release(CIMAPMessagePart self)

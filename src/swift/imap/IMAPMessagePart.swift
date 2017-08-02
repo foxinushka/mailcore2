@@ -1,23 +1,24 @@
 import Foundation
 
 
-public class IMAPMessagePart : AbstractMessagePart {
+public class MCOIMAPMessagePart : MCOAbstractMessagePart {
     
     private var nativeInstance:CIMAPMessagePart;
     
-    internal init(part:CIMAPMessagePart) {
+    // public for smartmailcore
+    public init(part:CIMAPMessagePart) {
         self.nativeInstance = part;
         super.init(abstractMessagePart: part.abstractMessagePart);
     }
     
-    required public init(_ obj: CObject) {
+    required public init(cobject obj: CObject) {
         fatalError("init has not been implemented")
     }
     
     /** A part identifier is of the form 1.2.1*/
     public var partID: String? {
-        get { return String(utf16: nativeInstance.partID); }
-        set { String.utf16(newValue, { nativeInstance.partID = $0 }) }
+        get { return nativeInstance.partID.string() }
+        set { nativeInstance.partID = newValue?.mailCoreString() ?? MailCoreString() }
     }
     
 }

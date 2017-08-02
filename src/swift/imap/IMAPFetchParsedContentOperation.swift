@@ -1,9 +1,9 @@
 import Foundation
 
 
-public class IMAPFetchParsedContentOperation : IMAPBaseOperation {
+public class MCOIMAPFetchParsedContentOperation : MCOIMAPBaseOperation {
     
-    public typealias CompletionBlock = (Error?,  MessageParser?) -> Void
+    public typealias CompletionBlock = (Error?,  MCOMessageParser?) -> Void
     
     internal var operation: CIMAPFetchParsedContentOperation
     private var completionBlock : CompletionBlock?
@@ -34,7 +34,7 @@ public class IMAPFetchParsedContentOperation : IMAPBaseOperation {
         
         let errorCode = error()
         if errorCode == ErrorNone {
-            let parser = MessageParser(operation.parser())
+            let parser = MCOMessageParser(parser: operation.parser())
             if parser.nativeInstance.instance != nil {
                 completionBlock!(nil, parser)
             }

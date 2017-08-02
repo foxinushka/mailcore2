@@ -2,6 +2,7 @@
 #include "CBase+Private.h"
 
 #include <MailCore/MCCore.h>
+#include "CData.h"
 
 #define nativeType mailcore::MessageBuilder
 #define structName CMessageBuilder
@@ -39,32 +40,32 @@ CData CMessageBuilder_dataForEncryption(struct CMessageBuilder self) {
     return CData_new(self.instance->dataForEncryption());
 }
 
-ErrorCode CMessageBuilder_writeToFile(struct CMessageBuilder self, const UChar* filename) {
-    return static_cast<ErrorCode>((int)self.instance->writeToFile(new mailcore::String(filename)));
+ErrorCode CMessageBuilder_writeToFile(struct CMessageBuilder self, MailCoreString filename) {
+    return static_cast<ErrorCode>((int)self.instance->writeToFile(filename.instance));
 }
 
-CData CMessageBuilder_openPGPSignedMessageDataWithSignatureData(struct CMessageBuilder self, const char* bytes, unsigned int length) {
-    return CData_new(self.instance->openPGPSignedMessageDataWithSignatureData(new mailcore::Data(bytes, length)));
+CData CMessageBuilder_openPGPSignedMessageData(struct CMessageBuilder self, CData data) {
+    return CData_new(self.instance->openPGPSignedMessageDataWithSignatureData(data.instance));
 }
 
-CData CMessageBuilder_openPGPEncryptedMessageDataWithEncryptedData(struct CMessageBuilder self, const char* bytes, unsigned int length) {
-    return CData_new(self.instance->openPGPEncryptedMessageDataWithEncryptedData(new mailcore::Data(bytes, length)));
+CData CMessageBuilder_openPGPEncryptedMessageData(struct CMessageBuilder self, CData data) {
+    return CData_new(self.instance->openPGPEncryptedMessageDataWithEncryptedData(data.instance));
 }
 
-const UChar* CMessageBuilder_htmlBodyRendering(struct CMessageBuilder self) {
-    return self.instance->htmlBodyRendering()->unicodeCharacters();
+MailCoreString CMessageBuilder_htmlBodyRendering(struct CMessageBuilder self) {
+    return MailCoreString_new(self.instance->htmlBodyRendering());
 }
 
-const UChar* CMessageBuilder_plainTextRendering(struct CMessageBuilder self) {
-    return self.instance->plainTextRendering()->unicodeCharacters();
+MailCoreString CMessageBuilder_plainTextRendering(struct CMessageBuilder self) {
+    return MailCoreString_new(self.instance->plainTextRendering());
 }
 
-const UChar* CMessageBuilder_plainTextBodyRendering(struct CMessageBuilder self) {
-    return self.instance->plainTextBodyRendering(true)->unicodeCharacters();
+MailCoreString CMessageBuilder_plainTextBodyRendering(struct CMessageBuilder self) {
+    return MailCoreString_new(self.instance->plainTextBodyRendering(true));
 }
 
-const UChar* CMessageBuilder_plainTextBodyRenderingAndStripWhitespace(struct CMessageBuilder self, bool stripWhitespace) {
-    return self.instance->plainTextBodyRendering(stripWhitespace)->unicodeCharacters();
+MailCoreString CMessageBuilder_plainTextBodyRenderingAndStripWhitespace(struct CMessageBuilder self, bool stripWhitespace) {
+    return MailCoreString_new(self.instance->plainTextBodyRendering(stripWhitespace));
 }
 
 

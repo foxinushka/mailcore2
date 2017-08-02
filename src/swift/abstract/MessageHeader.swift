@@ -1,7 +1,7 @@
 import Foundation
 
 
-public class MessageHeader {
+public class MCOMessageHeader {
     private var nativeInstance:CMessageHeader;
     
     internal func CMessageHeader() -> CMessageHeader {
@@ -23,8 +23,8 @@ public class MessageHeader {
     
     /** Message-ID field.*/
     public var messageID : String? {
-        set { String.utf16(newValue, { self.nativeInstance.messageID = $0 }) }
-        get { return String(utf16: self.nativeInstance.messageID); }
+        set { self.nativeInstance.messageID = newValue?.mailCoreString() ?? MailCoreString() }
+        get { return self.nativeInstance.messageID.string() }
     }
     
     /** Message-ID auto-generated flag.*/
@@ -45,56 +45,82 @@ public class MessageHeader {
     }
     
     /** To field: recipient of the message. It's an array of MCOAddress.*/
-    public var to: Array<Address> {
-        set { self.nativeInstance.to = Array<Address>.cast(newValue) }
-        get { return Array<Address>.cast(self.nativeInstance.to) }
+    public var to: Array<MCOAddress> {
+        set { self.nativeInstance.to = Array<MCOAddress>.cast(newValue) }
+        get { return Array<MCOAddress>.cast(self.nativeInstance.to) }
     }
     
     /** Cc field: cc recipient of the message. It's an array of MCOAddress.*/
-    public var cc: Array<Address> {
-        set { self.nativeInstance.cc = Array<Address>.cast(newValue) }
-        get { return Array<Address>.cast(self.nativeInstance.cc) }
+    public var cc: Array<MCOAddress> {
+        set { self.nativeInstance.cc = Array<MCOAddress>.cast(newValue) }
+        get { return Array<MCOAddress>.cast(self.nativeInstance.cc) }
     }
     
     /** Bcc field: bcc recipient of the message. It's an array of MCOAddress.*/
-    public var bcc: Array<Address> {
-        set { self.nativeInstance.bcc = Array<Address>.cast(newValue) }
-        get { return Array<Address>.cast(self.nativeInstance.bcc) }
+    public var bcc: Array<MCOAddress> {
+        set { self.nativeInstance.bcc = Array<MCOAddress>.cast(newValue) }
+        get { return Array<MCOAddress>.cast(self.nativeInstance.bcc) }
     }
     
     /** Reply-To field. It's an array of MCOAddress.*/
-    public var replyTo: Array<Address> {
-        set { self.nativeInstance.replyTo = Array<Address>.cast(newValue) }
-        get { return Array<Address>.cast(self.nativeInstance.replyTo) }
+    public var replyTo: Array<MCOAddress> {
+        set { self.nativeInstance.replyTo = Array<MCOAddress>.cast(newValue) }
+        get { return Array<MCOAddress>.cast(self.nativeInstance.replyTo) }
     }
     
     /** Subject of the message.*/
     public var subject: String? {
-        set { String.utf16(newValue, { self.nativeInstance.subject = $0 }) }
-        get { return String(utf16: self.nativeInstance.subject) }
+        set { self.nativeInstance.subject = newValue?.mailCoreString() ?? MailCoreString() }
+        get { return self.nativeInstance.subject.string() }
     }
     
     /** Email user agent name: X-Mailer header.*/
     public var userAgent: String? {
-        set { String.utf16(newValue, { self.nativeInstance.userAgent = $0 }) }
-        get { return String(utf16: self.nativeInstance.userAgent) }
+        set { self.nativeInstance.userAgent = newValue?.mailCoreString() ?? MailCoreString() }
+        get { return self.nativeInstance.userAgent.string() }
+    }
+    
+    public var receivedDate: Date {
+        set { self.nativeInstance.receivedDate = time_t(newValue.timeIntervalSince1970) }
+        get { return Date.init(timeIntervalSince1970: TimeInterval(self.nativeInstance.receivedDate))}
+    }
+    
+    public var date: Date {
+        set { self.nativeInstance.date = time_t(newValue.timeIntervalSince1970) }
+        get { return Date.init(timeIntervalSince1970: TimeInterval(self.nativeInstance.date))}
+    }
+    
+    public var sender: MCOAddress? {
+        set {
+            if let address = newValue?.getNativeInstance() {
+                self.nativeInstance.sender = address
+            }
+        }
+        get { return MCOAddress.init(address: self.nativeInstance.sender)}
+    }
+    
+    public var from: MCOAddress? {
+        set {
+            if let address = newValue?.getNativeInstance() {
+                self.nativeInstance.from = address
+            }
+        }
+        get { return MCOAddress.init(address: self.nativeInstance.from)}
     }
     
     /** Adds a custom header.*/
     public func setExtraHeaderValue(value: String, name: String) {
-        String.utf16(value, name, { valuePtr, namePtr in
-            nativeInstance.setExtraHeaderValue(value: valuePtr, name: namePtr)
-        })
+        nativeInstance.setExtraHeaderValue(value: value.mailCoreString(), name: name.mailCoreString())
     }
     
     /** Remove a given custom header.*/
     public func removeExtraHeaderForName(name: String) {
-        String.utf16(name, { nativeInstance.removeExtraHeaderForName(name: $0) })
+        nativeInstance.removeExtraHeaderForName(name: name.mailCoreString())
     }
     
     /** Returns the value of a given custom header.*/
-    public func extraHeaderValueForName(name: String) -> String? {
-        return String(utf16: String.utf16(name, { nativeInstance.extraHeaderValueForName(name: $0)}))
+    public func extraHeaderValue(forName: String) -> String? {
+        return nativeInstance.extraHeaderValueForName(name: forName.mailCoreString()).string()
     }
     
     /** Returns an array with the names of all custom headers.*/
@@ -104,12 +130,12 @@ public class MessageHeader {
     
     /** Extracted subject (also remove square brackets).*/
     public func extractedSubject() -> String? {
-        return String(utf16: nativeInstance.extractedSubject());
+        return nativeInstance.extractedSubject().string()
     }
     
     /** Extracted subject (don't remove square brackets).*/
     public func partialExtractedSubject() -> String? {
-        return String(utf16: nativeInstance.partialExtractedSubject());
+        return nativeInstance.partialExtractedSubject().string()
     }
     
     /** Fill the header using the given RFC 822 data.*/
@@ -121,18 +147,18 @@ public class MessageHeader {
     }
     
     /** Returns a header that can be used as a base for a reply message.*/
-    public func replyHeaderWithExcludedRecipients(excludedRecipients: Array<Address>) -> MessageHeader {
-        return MessageHeader(nativeInstance.replyHeaderWithExcludedRecipients(excludedRecipients: Array<Address>.cast(excludedRecipients)));
+    public func replyHeaderWithExcludedRecipients(excludedRecipients: Array<MCOAddress>) -> MCOMessageHeader {
+        return MCOMessageHeader(nativeInstance.replyHeaderWithExcludedRecipients(excludedRecipients: Array<MCOAddress>.cast(excludedRecipients)));
     }
     
     /** Returns a header that can be used as a base for a reply all message.*/
-    public func replyAllHeaderWithExcludedRecipients(excludedRecipients: Array<Address>) -> MessageHeader {
-        return MessageHeader(nativeInstance.replyAllHeaderWithExcludedRecipients(excludedRecipients: Array<Address>.cast(excludedRecipients)));
+    public func replyAllHeaderWithExcludedRecipients(excludedRecipients: Array<MCOAddress>) -> MCOMessageHeader {
+        return MCOMessageHeader(nativeInstance.replyAllHeaderWithExcludedRecipients(excludedRecipients: Array<MCOAddress>.cast(excludedRecipients)));
     }
     
     /** Returns a header that can be used as a base for a forward message.*/
-    public func forwardHeader() -> MessageHeader {
-        return MessageHeader(nativeInstance.forwardHeader());
+    public func forwardHeader() -> MCOMessageHeader {
+        return MCOMessageHeader(nativeInstance.forwardHeader());
     }
     
 }

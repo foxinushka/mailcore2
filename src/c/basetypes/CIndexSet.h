@@ -11,7 +11,7 @@ namespace mailcore {
     class IndexSet;
 }
 
-#include <MailCore/MCBaseTypes.h>
+//#include <MailCore/MCBaseTypes.h>
 
 extern "C" {
 #endif
@@ -70,10 +70,13 @@ extern "C" {
     unsigned int    CIndexSet_rangesCount(struct CIndexSet self)
                     CF_SWIFT_NAME(CIndexSet.rangesCount(self:));
     
+    CIndexSet       CIndexSet_copy(struct CIndexSet self)
+                    CF_SWIFT_NAME(CIndexSet.copy(self:));
+    
     
 
     CIndexSet       CIndexSet_new()
-                    CF_SWIFT_NAME(CIndexSet.init());
+                    /*CF_SWIFT_NAME(CIndexSet.init())*/;
     
     CIndexSet       CIndexSet_new_WithRange(Range range)
                     CF_SWIFT_NAME(CIndexSet.init(range:));

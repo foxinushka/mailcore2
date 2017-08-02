@@ -1,17 +1,18 @@
 import Foundation
 
 
-public class IMAPBaseOperation : Operation {
+public class MCOIMAPBaseOperation : MCOOperation {
     
-    public typealias OperationProgressBlock = (UInt32, UInt32) -> Void
-    public typealias OperationItemProgressBlock = (UInt32) -> Void
+    public typealias MCOOperationProgressBlock = (UInt32, UInt32) -> Void
+    public typealias MCOOperationItemProgressBlock = (UInt32) -> Void
     
     internal var baseOperation: CIMAPBaseOperation;
-    public var session: IMAPSession?;
+    public var session: MCOIMAPSession?;
     
     internal init(baseOperation: CIMAPBaseOperation) {
         self.baseOperation = baseOperation;
         super.init(baseOperation.cOperation);
+        self.baseOperation.cOperation = super.nativeInstance
         self.baseOperation = self.baseOperation.setProgressBlocks(itemProgressBlock: itemProgressCallback,
                                                                   bodyProgressBlock: bodyProgressCallback,
                                                                   userInfo: Unmanaged.passUnretained(self).toOpaque());
@@ -36,12 +37,12 @@ public class IMAPBaseOperation : Operation {
 
 //MARK: C Functions
 public func itemProgressCallback(ref: UnsafeRawPointer?, current: UInt32, maximum: UInt32) {
-    let selfRef = Unmanaged<IMAPBaseOperation>.fromOpaque(ref!).takeUnretainedValue()
+    let selfRef = Unmanaged<MCOIMAPBaseOperation>.fromOpaque(ref!).takeUnretainedValue()
     selfRef.itemProgress(current: current, maximum: maximum)
 }
 
 public func bodyProgressCallback(ref: UnsafeRawPointer?, current: UInt32, maximum: UInt32) {
-    let selfRef = Unmanaged<IMAPBaseOperation>.fromOpaque(ref!).takeUnretainedValue()
+    let selfRef = Unmanaged<MCOIMAPBaseOperation>.fromOpaque(ref!).takeUnretainedValue()
     selfRef.bodyProgress(current: current, maximum: maximum)
 }
 

@@ -31,10 +31,10 @@ extern "C" {
     
     
     dispatch_queue_t    COperation_callbackDispatchQueue(struct COperation self)
-                        CF_SWIFT_NAME(getter:COperation.callbackDispatchQueue(self:));
+                        CF_SWIFT_NAME(COperation.callbackDispatchQueue(self:));
     
     void                COperation_setCallbackDispatchQueue(struct COperation self, dispatch_queue_t queue)
-                        CF_SWIFT_NAME(setter:COperation.callbackDispatchQueue(self:newValue:));
+                        CF_SWIFT_NAME(COperation.setCallbackDispatchQueue(self:newValue:));
     
     bool                COperation_shouldRunWhenCancelled(struct COperation self)
                         CF_SWIFT_NAME(getter:COperation.shouldRunWhenCancelled(self:));

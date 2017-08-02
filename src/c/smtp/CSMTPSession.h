@@ -8,6 +8,8 @@
 #include "CArray.h"
 #include "CSMTPOperation.h"
 
+#include "MailCoreString.h"
+
 #include <dispatch/dispatch.h>
 
 #ifdef __cplusplus
@@ -32,22 +34,22 @@ extern "C" {
     };
     typedef struct CSMTPSession CSMTPSession;
     
-    const UChar*        CSMTPSession_hostname(struct CSMTPSession self)
+    MailCoreString      CSMTPSession_hostname(struct CSMTPSession self)
                         CF_SWIFT_NAME(getter:CSMTPSession.hostname(self:));
 
     unsigned int        CSMTPSession_port(struct CSMTPSession self)
                         CF_SWIFT_NAME(getter:CSMTPSession.port(self:));
 
-    const UChar*        CSMTPSession_username(struct CSMTPSession self)
+    MailCoreString      CSMTPSession_username(struct CSMTPSession self)
                         CF_SWIFT_NAME(getter:CSMTPSession.username(self:));
 
-    const UChar*        CSMTPSession_password(struct CSMTPSession self)
+    MailCoreString      CSMTPSession_password(struct CSMTPSession self)
                         CF_SWIFT_NAME(getter:CSMTPSession.password(self:));
 
-    const UChar*        CSMTPSession_OAuth2Token(struct CSMTPSession self)
+    MailCoreString      CSMTPSession_OAuth2Token(struct CSMTPSession self)
                         CF_SWIFT_NAME(getter:CSMTPSession.OAuth2Token(self:));
 
-    AuthType            CSMTPSession_authType(struct CSMTPSession self)
+    CAuthType           CSMTPSession_authType(struct CSMTPSession self)
                         CF_SWIFT_NAME(getter:CSMTPSession.authType(self:));
 
     ConnectionType      CSMTPSession_connectionType(struct CSMTPSession self)
@@ -76,22 +78,22 @@ extern "C" {
 
 
     
-    void                CSMTPSession_setHostname(struct CSMTPSession self, const UChar *hostname)
+    void                CSMTPSession_setHostname(struct CSMTPSession self, MailCoreString hostname)
                         CF_SWIFT_NAME(setter:CSMTPSession.hostname(self:newValue:));
 
     void                CSMTPSession_setPort(struct CSMTPSession self, unsigned int port)
                         CF_SWIFT_NAME(setter:CSMTPSession.port(self:newValue:));
 
-    void                CSMTPSession_setUsername(struct CSMTPSession self, const UChar *username)
+    void                CSMTPSession_setUsername(struct CSMTPSession self, MailCoreString username)
                         CF_SWIFT_NAME(setter:CSMTPSession.username(self:newValue:));
 
-    void                CSMTPSession_setPassword(struct CSMTPSession self, const UChar *password)
+    void                CSMTPSession_setPassword(struct CSMTPSession self, MailCoreString password)
                         CF_SWIFT_NAME(setter:CSMTPSession.password(self:newValue:));
 
-    void                CSMTPSession_setOAuth2Token(struct CSMTPSession self, const UChar *token)
+    void                CSMTPSession_setOAuth2Token(struct CSMTPSession self, MailCoreString token)
                         CF_SWIFT_NAME(setter:CSMTPSession.OAuth2Token(self:newValue:));
 
-    void                CSMTPSession_setAuthType(struct CSMTPSession self, AuthType authType)
+    void                CSMTPSession_setAuthType(struct CSMTPSession self, CAuthType authType)
                         CF_SWIFT_NAME(setter:CSMTPSession.authType(self:newValue:));
 
     void                CSMTPSession_setConnectionType(struct CSMTPSession self, ConnectionType connectionType)
@@ -130,18 +132,21 @@ extern "C" {
                                                                                unsigned int messageDataLenght, CAddress from , CArray recipients)
                         CF_SWIFT_NAME(CSMTPSession.sendOperationWithDataAndFromAndRecipients(self:messageDataBytes:messageDataLenght:from:recipients:));
 
-    CSMTPOperation      CSMTPSession_sendOperationWithContentsOfFile(struct CSMTPSession self, const UChar* path,  CAddress from,  CArray recipients)
+    CSMTPOperation      CSMTPSession_sendOperationWithContentsOfFile(struct CSMTPSession self, MailCoreString path,  CAddress from,  CArray recipients)
                         CF_SWIFT_NAME(CSMTPSession.sendOperationWithContentsOfFile(self:path:from:recipients:));
 
     CSMTPOperation      CSMTPSession_checkAccountOperationWithFrom(struct CSMTPSession self, CAddress from)
                         CF_SWIFT_NAME(CSMTPSession.checkAccountOperationWithFrom(self:from:));
+    
+    CSMTPOperation      CSMTPSession_checkAccountOperation(struct CSMTPSession self, CAddress from, CAddress to)
+                        CF_SWIFT_NAME(CSMTPSession.checkAccountOperationWithFrom(self:from:to:));
 
     CSMTPOperation      CSMTPSession_noopOperation(struct CSMTPSession self)
                         CF_SWIFT_NAME(CSMTPSession.noopOperation(self:));
 
     
     CSMTPSession        CSMTPSession_new()
-                        CF_SWIFT_NAME(CSMTPSession.init());
+                        /*CF_SWIFT_NAME(CSMTPSession.init())*/;
 
     void                CSMTPSession_release(CSMTPSession self)
                         CF_SWIFT_NAME(CSMTPSession.release(self:));

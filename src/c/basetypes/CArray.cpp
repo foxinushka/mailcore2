@@ -20,7 +20,7 @@ CObject CArray_getObject(struct CArray self, uint32_t index) {
 }
 
 uint32_t CArray_getUint(struct CArray self, uint32_t index) {
-    return ((mailcore::Value*)self.instance->objectAtIndex(index))->unsignedIntValue();
+    return (reinterpret_cast<mailcore::Value*>(self.instance->objectAtIndex(index)))->unsignedIntValue();
 }
 
 CArray CArray_new() {

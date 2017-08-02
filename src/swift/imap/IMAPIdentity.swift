@@ -1,16 +1,12 @@
 import Foundation
 
 
-public class IMAPIdentity {
+public class MCOIMAPIdentity {
     
     internal var nativeInstance:CIMAPIdentity;
     
     public init(vendor: String, name: String, version: String) {
-        self.nativeInstance = String.utf16(vendor, name, { vendorPtr, namePtr in
-            String.utf16(version, { versionPtr in
-                CIMAPIdentity(vendor: vendorPtr, name: namePtr, version: versionPtr);
-            })
-        })
+        self.nativeInstance = CIMAPIdentity(vendor: vendor.mailCoreString(), name: name.mailCoreString(), version: version.mailCoreString())
     }
     
     internal init(_ identity:CIMAPIdentity) {
@@ -23,20 +19,20 @@ public class IMAPIdentity {
     
     /** Vendor of the IMAP client */
     public var vendor: String? {
-        get { return String(utf16: nativeInstance.vendor); }
-        set { String.utf16(newValue, { nativeInstance.vendor = $0 }) }
+        get { return nativeInstance.vendor.string() }
+        set { nativeInstance.vendor = newValue?.mailCoreString() ?? MailCoreString() }
     }
     
     /** Name of the IMAP client */
     public var name: String? {
-        get { return String(utf16: nativeInstance.name) }
-        set { String.utf16(newValue, { nativeInstance.name = $0 }) }
+        get { return nativeInstance.name.string() }
+        set { nativeInstance.name = newValue?.mailCoreString() ?? MailCoreString() }
     }
     
     /** Version of the IMAP client */
     public var version: String? {
-        get { return String(utf16: nativeInstance.version) }
-        set { String.utf16(newValue, { nativeInstance.version = $0 }) }
+        get { return nativeInstance.version.string() }
+        set { nativeInstance.version = newValue?.mailCoreString() ?? MailCoreString() }
     }
     
     /** All fields names of the identity of the client */
@@ -46,14 +42,12 @@ public class IMAPIdentity {
     
     /** Set a custom field in the identity */
     public func infoForKey(_ key: String) -> String? {
-        return String.utf16(key, { String(utf16: nativeInstance.infoForKey(key: $0)) })
+        return nativeInstance.infoForKey(key: key.mailCoreString()).string()
     }
     
     /** Retrieve a custom field in the identity */
     public func setInfo(_ value: String, forKey key: String) {
-        String.utf16(value, key, { valuePtr, keyPtr in
-            nativeInstance.setInfoForKey(value: valuePtr, key: keyPtr)
-        })
+        nativeInstance.setInfoForKey(value: value.mailCoreString(), key: key.mailCoreString())
     }
     
     /** Remove all info keys including vendor, name and version */

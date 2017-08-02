@@ -2,6 +2,7 @@
 #define CSMTPOperation_h
 
 #include "COperation.h"
+#include "MailCoreString.h"
 
 #ifdef __cplusplus
 
@@ -38,7 +39,7 @@ extern "C" {
     struct CSMTPOperation       CSMTPOperation_setProgressBlocks(struct CSMTPOperation self, CProgressBlock progressBlock, const void* userInfo)
                                 CF_SWIFT_NAME(CSMTPOperation.setProgressBlocks(self:block:userInfo:));
     
-    const UChar*                CSMTPOperation_lastSMTPResponse(struct CSMTPOperation self)
+    MailCoreString              CSMTPOperation_lastSMTPResponse(struct CSMTPOperation self)
                                 CF_SWIFT_NAME(getter:CSMTPOperation.lastSMTPResponse(self:));
     
     int                         CSMTPOperation_lastSMTPResponseCode(struct CSMTPOperation self)

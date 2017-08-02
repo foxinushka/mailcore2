@@ -1,7 +1,7 @@
 import Foundation
 
 
-public class IMAPNamespaceItem {
+public class MCOIMAPNamespaceItem {
     
     private var nativeInstance:CIMAPNamespaceItem;
     
@@ -19,8 +19,8 @@ public class IMAPNamespaceItem {
     
     /** This is the prefix for this namespace item */
     public var prefix: String? {
-        get { return String(utf16: nativeInstance.prefix) }
-        set { String.utf16(newValue, { nativeInstance.prefix = $0 }) }
+        get { return nativeInstance.prefix.string() }
+        set { nativeInstance.prefix = newValue?.mailCoreString() ?? MailCoreString() }
     }
     
     /** This is the delimiter of the path for this namespace item */
@@ -31,17 +31,17 @@ public class IMAPNamespaceItem {
     
     /** Returns folder path for given path components in the context of this namespace item */
     public func path(component: Array<String>) -> String? {
-        return String(utf16: nativeInstance.pathForComponents(components: Array<String>.cast(component)));
+        return nativeInstance.pathForComponents(components: Array<String>.cast(component)).string()
     }
     
     /** Returns components for the given path in the context of this namespace */
     public func components(path: String) -> Array<String> {
-        return Array<String>.cast( String.utf16(path, { nativeInstance.componentForPath(path: $0) }));
+        return Array<String>.cast(nativeInstance.componentForPath(path: path.mailCoreString()))
     }
     
     /** Returns YES if the namespace contains this folder path */
     public func containsFolder(folder: String) -> Bool {
-        return String.utf16(folder, { nativeInstance.containsFolder(folder: $0) })
+        return nativeInstance.containsFolder(folder: folder.mailCoreString())
     }
 
 }

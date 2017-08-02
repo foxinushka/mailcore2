@@ -10,6 +10,7 @@
 #include "CBase.h"
 #include "CIndexSet.h"
 #include "CArray.h"
+#include "MailCoreString.h"
 #include "CIMAPNamespace.h"
 #include "CIMAPBaseOperation.h"
 #include "CIMAPAppendMessageOperation.h"
@@ -57,16 +58,16 @@ extern "C" {
 #endif
     } CIMAPAsyncSession;
 
-    const UChar*        CIMAPAsyncSession_hostname(struct CIMAPAsyncSession self)
+    MailCoreString      CIMAPAsyncSession_hostname(struct CIMAPAsyncSession self)
                         CF_SWIFT_NAME(getter:CIMAPAsyncSession.hostname(self:));
 
     unsigned int        CIMAPAsyncSession_port(struct CIMAPAsyncSession self)
                         CF_SWIFT_NAME(getter:CIMAPAsyncSession.port(self:));
 
-    const UChar*        CIMAPAsyncSession_username(struct CIMAPAsyncSession self)
+    MailCoreString      CIMAPAsyncSession_username(struct CIMAPAsyncSession self)
                         CF_SWIFT_NAME(getter:CIMAPAsyncSession.username(self:));
 
-    const UChar*        CIMAPAsyncSession_password(struct CIMAPAsyncSession self)
+    MailCoreString      CIMAPAsyncSession_password(struct CIMAPAsyncSession self)
                         CF_SWIFT_NAME(getter:CIMAPAsyncSession.password(self:));
 
     ConnectionType      CIMAPAsyncSession_connectionType(struct CIMAPAsyncSession self)
@@ -78,10 +79,10 @@ extern "C" {
     bool                CIMAPAsyncSession_isCheckCertificateEnabled(struct CIMAPAsyncSession self)
                         CF_SWIFT_NAME(getter:CIMAPAsyncSession.isCheckCertificateEnabled(self:));
 
-    const UChar*        CIMAPAsyncSession_OAuth2Token(struct CIMAPAsyncSession self)
+    MailCoreString      CIMAPAsyncSession_OAuth2Token(struct CIMAPAsyncSession self)
                         CF_SWIFT_NAME(getter:CIMAPAsyncSession.OAuth2Token(self:));
 
-    AuthType            CIMAPAsyncSession_authType(struct CIMAPAsyncSession self)
+    CAuthType           CIMAPAsyncSession_authType(struct CIMAPAsyncSession self)
                         CF_SWIFT_NAME(getter:CIMAPAsyncSession.authType(self:));
 
     unsigned int        CIMAPAsyncSession_maximumConnections(struct CIMAPAsyncSession self)
@@ -113,16 +114,16 @@ extern "C" {
                         CF_SWIFT_NAME(getter:CIMAPAsyncSession.isOperationQueueRunning(self:));
 
         
-    void                CIMAPAsyncSession_setHostname(struct CIMAPAsyncSession self, const UChar *hostname)
+    void                CIMAPAsyncSession_setHostname(struct CIMAPAsyncSession self, MailCoreString hostname)
                         CF_SWIFT_NAME(setter:CIMAPAsyncSession.hostname(self:newValue:));
 
     void                CIMAPAsyncSession_setPort(struct CIMAPAsyncSession self, unsigned int port)
                         CF_SWIFT_NAME(setter:CIMAPAsyncSession.port(self:newValue:));
 
-    void                CIMAPAsyncSession_setUsername(struct CIMAPAsyncSession self, const UChar *username)
+    void                CIMAPAsyncSession_setUsername(struct CIMAPAsyncSession self, MailCoreString username)
                         CF_SWIFT_NAME(setter:CIMAPAsyncSession.username(self:newValue:));
 
-    void                CIMAPAsyncSession_setPassword(struct CIMAPAsyncSession self, const UChar *password)
+    void                CIMAPAsyncSession_setPassword(struct CIMAPAsyncSession self, MailCoreString password)
                         CF_SWIFT_NAME(setter:CIMAPAsyncSession.password(self:newValue:));
 
     void                CIMAPAsyncSession_setConnectionType(struct CIMAPAsyncSession self, ConnectionType connectionType)
@@ -134,10 +135,10 @@ extern "C" {
     void                CIMAPAsyncSession_setCheckCertificateEnabled(struct CIMAPAsyncSession self, bool checkCertificateEnabled)
                         CF_SWIFT_NAME(setter:CIMAPAsyncSession.isCheckCertificateEnabled(self:newValue:));
 
-    void                CIMAPAsyncSession_setOAuth2Token(struct CIMAPAsyncSession self, const UChar *token)
+    void                CIMAPAsyncSession_setOAuth2Token(struct CIMAPAsyncSession self, MailCoreString token)
                         CF_SWIFT_NAME(setter:CIMAPAsyncSession.OAuth2Token(self:newValue:));
 
-    void                CIMAPAsyncSession_setAuthType(struct CIMAPAsyncSession self, AuthType authType)
+    void                CIMAPAsyncSession_setAuthType(struct CIMAPAsyncSession self, CAuthType authType)
                         CF_SWIFT_NAME(setter:CIMAPAsyncSession.authType(self:newValue:));
 
     void                CIMAPAsyncSession_setMaximumConnections(struct CIMAPAsyncSession self, unsigned int maxConnections)
@@ -171,36 +172,36 @@ extern "C" {
     CIMAPBaseOperation      CIMAPAsyncSession_noopOperation(struct CIMAPAsyncSession self)
                             CF_SWIFT_NAME(CIMAPAsyncSession.noopOperation(self:));
 
-    CIMAPBaseOperation      CIMAPAsyncSession_expungeOperation(struct CIMAPAsyncSession self, const UChar *folder)
+    CIMAPBaseOperation      CIMAPAsyncSession_expungeOperation(struct CIMAPAsyncSession self, MailCoreString folder)
                             CF_SWIFT_NAME(CIMAPAsyncSession.expungeOperation(self:folder:));
 
-    CIMAPBaseOperation      CIMAPAsyncSession_createFolderOperation(struct CIMAPAsyncSession self, const UChar *folder)
+    CIMAPBaseOperation      CIMAPAsyncSession_createFolderOperation(struct CIMAPAsyncSession self, MailCoreString folder)
                             CF_SWIFT_NAME(CIMAPAsyncSession.createFolderOperation(self:folder:));
 
-    CIMAPBaseOperation      CIMAPAsyncSession_deleteFolderOperation(struct CIMAPAsyncSession self, const UChar *folder)
+    CIMAPBaseOperation      CIMAPAsyncSession_deleteFolderOperation(struct CIMAPAsyncSession self, MailCoreString folder)
                             CF_SWIFT_NAME(CIMAPAsyncSession.deleteFolderOperation(self:folder:));
 
-    CIMAPBaseOperation      CIMAPAsyncSession_storeFlagsByUIDOperation(struct CIMAPAsyncSession self, const UChar *folder, CIndexSet set,
-                                                                       IMAPStoreFlagsRequestKind kind, MessageFlag flags, CArray customFlags)
+    CIMAPBaseOperation      CIMAPAsyncSession_storeFlagsByUIDOperation(struct CIMAPAsyncSession self, MailCoreString folder, CIndexSet set,
+                                                                       IMAPStoreFlagsRequestKind kind, CMessageFlag flags, CArray customFlags)
                             CF_SWIFT_NAME(CIMAPAsyncSession.storeFlagsByUIDOperation(self:folder:set:kind:flags:customFlags:));
 
-    CIMAPBaseOperation      CIMAPAsyncSession_storeFlagsByNumberOperation(struct CIMAPAsyncSession self, const UChar *folder, CIndexSet numbers,
-                                                                          IMAPStoreFlagsRequestKind kind, MessageFlag flags, CArray customFlags)
+    CIMAPBaseOperation      CIMAPAsyncSession_storeFlagsByNumberOperation(struct CIMAPAsyncSession self, MailCoreString folder, CIndexSet numbers,
+                                                                          IMAPStoreFlagsRequestKind kind, CMessageFlag flags, CArray customFlags)
                             CF_SWIFT_NAME(CIMAPAsyncSession.storeFlagsByNumberOperation(self:folder:numbers:kind:flags:customFlags:));
 
-    CIMAPBaseOperation      CIMAPAsyncSession_storeLabelsByUIDOperation(struct CIMAPAsyncSession self, const UChar *folder, CIndexSet uids, IMAPStoreFlagsRequestKind kind, CArray labels)
+    CIMAPBaseOperation      CIMAPAsyncSession_storeLabelsByUIDOperation(struct CIMAPAsyncSession self, MailCoreString folder, CIndexSet uids, IMAPStoreFlagsRequestKind kind, CArray labels)
                             CF_SWIFT_NAME(CIMAPAsyncSession.storeLabelsByUIDOperation(self:folder:uids:kind:labels:));
 
-    CIMAPBaseOperation      CIMAPAsyncSession_storeLabelsByNumberOperation(struct CIMAPAsyncSession self, const UChar *folder, CIndexSet numbers, IMAPStoreFlagsRequestKind kind, CArray labels)
+    CIMAPBaseOperation      CIMAPAsyncSession_storeLabelsByNumberOperation(struct CIMAPAsyncSession self, MailCoreString folder, CIndexSet numbers, IMAPStoreFlagsRequestKind kind, CArray labels)
                             CF_SWIFT_NAME(CIMAPAsyncSession.storeLabelsByNumberOperation(self:folder:numbers:kind:labels:));
 
-    CIMAPBaseOperation      CIMAPAsyncSession_renameFolderOperation(struct CIMAPAsyncSession self, const UChar *folder, const UChar *otherName)
+    CIMAPBaseOperation      CIMAPAsyncSession_renameFolderOperation(struct CIMAPAsyncSession self, MailCoreString folder, MailCoreString otherName)
                             CF_SWIFT_NAME(CIMAPAsyncSession.renameFolderOperation(self:folder:otherName:));
 
-    CIMAPBaseOperation      CIMAPAsyncSession_subscribeFolderOperation(struct CIMAPAsyncSession self, const UChar *folder)
+    CIMAPBaseOperation      CIMAPAsyncSession_subscribeFolderOperation(struct CIMAPAsyncSession self, MailCoreString folder)
                             CF_SWIFT_NAME(CIMAPAsyncSession.subscribeFolderOperation(self:folder:));
 
-    CIMAPBaseOperation      CIMAPAsyncSession_unsubscribeFolderOperation(struct CIMAPAsyncSession self, const UChar *folder)
+    CIMAPBaseOperation      CIMAPAsyncSession_unsubscribeFolderOperation(struct CIMAPAsyncSession self, MailCoreString folder)
                             CF_SWIFT_NAME(CIMAPAsyncSession.unsubscribeFolderOperation(self:folder:));
 
 
@@ -208,14 +209,14 @@ extern "C" {
     CIMAPFetchFoldersOperation          CIMAPAsyncSession_fetchSubscribedFoldersOperation(struct CIMAPAsyncSession self)
                                         CF_SWIFT_NAME(CIMAPAsyncSession.fetchSubscribedFoldersOperation(self:));
 
-    CIMAPFetchContentToFileOperation    CIMAPAsyncSession_fetchMessageAttachmentToFileOperation(struct CIMAPAsyncSession self, const UChar* folder, uint32_t uid, const UChar* partID,
-                                                                                                Encoding encoding, const UChar* filename, bool urgent)
+    CIMAPFetchContentToFileOperation    CIMAPAsyncSession_fetchMessageAttachmentToFileOperation(struct CIMAPAsyncSession self, MailCoreString folder, uint32_t uid, MailCoreString partID,
+                                                                                                Encoding encoding, MailCoreString filename, bool urgent)
                                         CF_SWIFT_NAME(CIMAPAsyncSession.fetchMessageAttachmentToFileOperation(self:folder:uid:partID:encoding:filename:urgent:));
 
     CIMAPFetchNamespaceOperation        CIMAPAsyncSession_fetchNamespace(struct CIMAPAsyncSession self)
                                         CF_SWIFT_NAME(CIMAPAsyncSession.fetchNamespace(self:));
 
-    CIMAPCustomCommandOperation         CIMAPAsyncSession_customCommandOperation(struct CIMAPAsyncSession self, const UChar *command)
+    CIMAPCustomCommandOperation         CIMAPAsyncSession_customCommandOperation(struct CIMAPAsyncSession self, MailCoreString command)
                                         CF_SWIFT_NAME(CIMAPAsyncSession.customCommandOperation(self:command:));
 
     CIMAPCheckAccountOperation          CIMAPAsyncSession_checkAccountOperation(struct CIMAPAsyncSession self)
@@ -227,73 +228,73 @@ extern "C" {
     CIMAPFetchFoldersOperation          CIMAPAsyncSession_fetchAllFoldersOperation(struct CIMAPAsyncSession self)
                                         CF_SWIFT_NAME(CIMAPAsyncSession.fetchAllFoldersOperation(self:));
 
-    CIMAPAppendMessageOperation         CIMAPAsyncSession_appendMessageOperation(struct CIMAPAsyncSession session, const UChar *folder, const UChar *messagePath, MessageFlag flags, CArray array)
+    CIMAPAppendMessageOperation         CIMAPAsyncSession_appendMessageOperation(struct CIMAPAsyncSession session, MailCoreString folder, MailCoreString messagePath, CMessageFlag flags, CArray array)
                                         CF_SWIFT_NAME(CIMAPAsyncSession.appendMessageOperation(self:folder:messagePath:flags:array:));
 
-    CIMAPAppendMessageOperation         CIMAPAsyncSession_appendMessageOperationWithData(struct CIMAPAsyncSession session, const UChar *folder, CData messageData, MessageFlag flags, CArray array)
+    CIMAPAppendMessageOperation         CIMAPAsyncSession_appendMessageOperationWithData(struct CIMAPAsyncSession session, MailCoreString folder, CData messageData, CMessageFlag flags, CArray array)
                                         CF_SWIFT_NAME(CIMAPAsyncSession.appendMessageOperationWithData(self:folder:messageData:flags:array:));
 
-    CIMAPFetchMessagesOperation         CIMAPAsyncSession_fetchMessagesByNumberOperation(struct CIMAPAsyncSession session, const UChar *folder, IMAPMessagesRequestKind kind, CIndexSet numbers)
+    CIMAPFetchMessagesOperation         CIMAPAsyncSession_fetchMessagesByNumberOperation(struct CIMAPAsyncSession session, MailCoreString folder, CIMAPMessagesRequestKind kind, CIndexSet numbers)
                                         CF_SWIFT_NAME(CIMAPAsyncSession.fetchMessagesByNumberOperation(self:folder:kind:numbers:));
 
-    CIMAPFetchMessagesOperation         CIMAPAsyncSession_fetchMessagesByUIDOperation(struct CIMAPAsyncSession session, const UChar *folder, IMAPMessagesRequestKind kind, CIndexSet uids)
+    CIMAPFetchMessagesOperation         CIMAPAsyncSession_fetchMessagesByUIDOperation(struct CIMAPAsyncSession session, MailCoreString folder, CIMAPMessagesRequestKind kind, CIndexSet uids)
                                         CF_SWIFT_NAME(CIMAPAsyncSession.fetchMessagesByUIDOperation(self:folder:kind:uids:));
 
-    CIMAPFetchMessagesOperation         CIMAPAsyncSession_syncMessagesByUIDOperation(struct CIMAPAsyncSession session, const UChar *folder, IMAPMessagesRequestKind kind, CIndexSet uids, uint64_t modSeq)
+    CIMAPFetchMessagesOperation         CIMAPAsyncSession_syncMessagesByUIDOperation(struct CIMAPAsyncSession session, MailCoreString folder, CIMAPMessagesRequestKind kind, CIndexSet uids, uint64_t modSeq)
                                         CF_SWIFT_NAME(CIMAPAsyncSession.syncMessagesByUIDOperation(self:folder:kind:uids:modSeq:));
 
-    CIMAPFetchContentOperation          CIMAPAsyncSession_fetchMessageByUIDOperation(struct CIMAPAsyncSession self, const UChar *folder, uint32_t uid, bool urgent)
+    CIMAPFetchContentOperation          CIMAPAsyncSession_fetchMessageByUIDOperation(struct CIMAPAsyncSession self, MailCoreString folder, uint32_t uid, bool urgent)
                                         CF_SWIFT_NAME(CIMAPAsyncSession.fetchMessageByUIDOperation(self:folder:uid:urgent:));
 
-    CIMAPFetchContentOperation          CIMAPAsyncSession_fetchMessageByNumberOperation(struct CIMAPAsyncSession self, const UChar *folder, uint32_t uid, bool urgent)
+    CIMAPFetchContentOperation          CIMAPAsyncSession_fetchMessageByNumberOperation(struct CIMAPAsyncSession self, MailCoreString folder, uint32_t uid, bool urgent)
                                         CF_SWIFT_NAME(CIMAPAsyncSession.fetchMessageByNumberOperation(self:folder:uid:urgent:));
 
-    CIMAPFetchContentOperation          CIMAPAsyncSession_fetchMessageAttachmentByUIDOperation(struct CIMAPAsyncSession session, const UChar *folder, uint32_t uid,
-                                                                                               const UChar *partID, Encoding encoding, bool urgent)
+    CIMAPFetchContentOperation          CIMAPAsyncSession_fetchMessageAttachmentByUIDOperation(struct CIMAPAsyncSession session, MailCoreString folder, uint32_t uid,
+                                                                                               MailCoreString partID, Encoding encoding, bool urgent)
                                         CF_SWIFT_NAME(CIMAPAsyncSession.fetchMessageAttachmentByUIDOperation(self:folder:uid:partID:encoding:urgent:));
 
-    CIMAPFetchContentOperation          CIMAPAsyncSession_fetchMessageAttachmentByNumberOperation(struct CIMAPAsyncSession session, const UChar *folder, uint32_t number,
-                                                                                                  const UChar *partID, Encoding encoding, bool urgent)
+    CIMAPFetchContentOperation          CIMAPAsyncSession_fetchMessageAttachmentByNumberOperation(struct CIMAPAsyncSession session, MailCoreString folder, uint32_t number,
+                                                                                                  MailCoreString partID, Encoding encoding, bool urgent)
                                         CF_SWIFT_NAME(CIMAPAsyncSession.fetchMessageAttachmentByNumberOperation(self:folder:number:partID:encoding:urgent:));
 
-    CIMAPSearchOperation                CIMAPAsyncSession_searchOperationWithExpression(struct CIMAPAsyncSession self, const UChar *folder, CIMAPSearchExpression expression)
+    CIMAPSearchOperation                CIMAPAsyncSession_searchOperationWithExpression(struct CIMAPAsyncSession self, MailCoreString folder, CIMAPSearchExpression expression)
                                         CF_SWIFT_NAME(CIMAPAsyncSession.searchOperationWithExpression(self:folder:expression:));
 
-    CIMAPSearchOperation                CIMAPAsyncSession_searchOperation(struct CIMAPAsyncSession session, const UChar *folder, IMAPSearchKind kind, const UChar *str)
+    CIMAPSearchOperation                CIMAPAsyncSession_searchOperation(struct CIMAPAsyncSession session, MailCoreString folder, IMAPSearchKind kind, MailCoreString str)
                                         CF_SWIFT_NAME(CIMAPAsyncSession.searchOperation(self:folder:kind:str:));
 
-    CIMAPCopyMessagesOperation          CIMAPAsyncSession_copyMessagesOperation(struct CIMAPAsyncSession self, const UChar *folder, CIndexSet uids,const UChar *destFolder)
+    CIMAPCopyMessagesOperation          CIMAPAsyncSession_copyMessagesOperation(struct CIMAPAsyncSession self, MailCoreString folder, CIndexSet uids,MailCoreString destFolder)
                                         CF_SWIFT_NAME(CIMAPAsyncSession.copyMessagesOperation(self:folder:uids:destFolder:));
 
-    CIMAPFolderInfoOperation            CIMAPAsyncSession_folderInfoOperation(struct CIMAPAsyncSession self, const UChar *folder)
+    CIMAPFolderInfoOperation            CIMAPAsyncSession_folderInfoOperation(struct CIMAPAsyncSession self, MailCoreString folder)
                                         CF_SWIFT_NAME(CIMAPAsyncSession.folderInfoOperation(self:folder:));
 
-    CIMAPFolderStatusOperation          CIMAPAsyncSession_folderStatusOperation(struct CIMAPAsyncSession self, const UChar *folder)
+    CIMAPFolderStatusOperation          CIMAPAsyncSession_folderStatusOperation(struct CIMAPAsyncSession self, MailCoreString folder)
                                         CF_SWIFT_NAME(CIMAPAsyncSession.folderStatusOperation(self:folder:));
 
-    CIMAPIdleOperation                  CIMAPAsyncSession_idleOperation(struct CIMAPAsyncSession self, const UChar *folder, uint32_t lastKnownUID)
+    CIMAPIdleOperation                  CIMAPAsyncSession_idleOperation(struct CIMAPAsyncSession self, MailCoreString folder, uint32_t lastKnownUID)
                                         CF_SWIFT_NAME(CIMAPAsyncSession.idleOperation(self:folder:lastKnownUID:));
 
         
-    CIMAPMoveMessagesOperation          CIMAPAsyncSession_moveMessagesOperation(struct CIMAPAsyncSession self, const UChar *folder, CIndexSet uids, const UChar* destFolder)
+    CIMAPMoveMessagesOperation          CIMAPAsyncSession_moveMessagesOperation(struct CIMAPAsyncSession self, MailCoreString folder, CIndexSet uids, MailCoreString destFolder)
                                         CF_SWIFT_NAME(CIMAPAsyncSession.moveMessagesOperation(self:folder:uids:destFolder:));
 
-    CIMAPFetchParsedContentOperation    CIMAPAsyncSession_fetchParsedMessageOperationByUIDOperation(struct CIMAPAsyncSession self, const UChar* folder, uint32_t uid, bool urgent)
+    CIMAPFetchParsedContentOperation    CIMAPAsyncSession_fetchParsedMessageOperationByUIDOperation(struct CIMAPAsyncSession self, MailCoreString folder, uint32_t uid, bool urgent)
                                         CF_SWIFT_NAME(CIMAPAsyncSession.fetchParsedMessageOperationByUIDOperation(self:folder:uid:urgent:));
 
-    CIMAPFetchParsedContentOperation    CIMAPAsyncSession_fetchParsedMessageOperationByNumberOperation(struct CIMAPAsyncSession self, const UChar* folder, uint32_t number, bool urgent)
+    CIMAPFetchParsedContentOperation    CIMAPAsyncSession_fetchParsedMessageOperationByNumberOperation(struct CIMAPAsyncSession self, MailCoreString folder, uint32_t number, bool urgent)
                                         CF_SWIFT_NAME(CIMAPAsyncSession.fetchParsedMessageOperationByNumberOperation(self:folder:number:urgent:));
 
-    CIMAPMessageRenderingOperation      CIMAPAsyncSession_htmlRenderingOperation(struct CIMAPAsyncSession self, CIMAPMessage message, const UChar* folder)
+    CIMAPMessageRenderingOperation      CIMAPAsyncSession_htmlRenderingOperation(struct CIMAPAsyncSession self, CIMAPMessage message, MailCoreString folder)
                                         CF_SWIFT_NAME(CIMAPAsyncSession.htmlRenderingOperation(self:message:folder:));
 
-    CIMAPMessageRenderingOperation      CIMAPAsyncSession_htmlBodyRenderingOperation(struct CIMAPAsyncSession self, CIMAPMessage message, const UChar* folder)
+    CIMAPMessageRenderingOperation      CIMAPAsyncSession_htmlBodyRenderingOperation(struct CIMAPAsyncSession self, CIMAPMessage message, MailCoreString folder)
                                         CF_SWIFT_NAME(CIMAPAsyncSession.htmlBodyRenderingOperation(self:message:folder:));
 
-    CIMAPMessageRenderingOperation      CIMAPAsyncSession_plainTextRenderingOperation(struct CIMAPAsyncSession self, CIMAPMessage message, const UChar* folder)
+    CIMAPMessageRenderingOperation      CIMAPAsyncSession_plainTextRenderingOperation(struct CIMAPAsyncSession self, CIMAPMessage message, MailCoreString folder)
                                         CF_SWIFT_NAME(CIMAPAsyncSession.plainTextRenderingOperation(self:message:folder:));
 
-    CIMAPMessageRenderingOperation      CIMAPAsyncSession_plainTextBodyRenderingOperation(struct CIMAPAsyncSession self, CIMAPMessage message, const UChar* folder, bool stripWhitespace)
+    CIMAPMessageRenderingOperation      CIMAPAsyncSession_plainTextBodyRenderingOperation(struct CIMAPAsyncSession self, CIMAPMessage message, MailCoreString folder, bool stripWhitespace)
                                         CF_SWIFT_NAME(CIMAPAsyncSession.plainTextBodyRenderingOperation(self:message:folder:stripWhitespace:));
 
     CIMAPQuotaOperation                 CIMAPAsyncSession_quotaOperation(struct CIMAPAsyncSession self)
@@ -304,7 +305,7 @@ extern "C" {
 
 
     CIMAPAsyncSession                   CIMAPAsyncSession_new()
-                                        CF_SWIFT_NAME(CIMAPAsyncSession.init());
+                                        /*CF_SWIFT_NAME(CIMAPAsyncSession.init())*/;
 
     void                                CIMAPAsyncSession_release(CIMAPAsyncSession self)
                                         CF_SWIFT_NAME(CIMAPAsyncSession.release(self:));

@@ -1,7 +1,7 @@
 import Foundation
 
 
-public class IMAPFetchContentToFileOperation : IMAPBaseOperation {
+public class MCOIMAPFetchContentToFileOperation : MCOIMAPBaseOperation {
     
     public typealias CompletionBlock = (Error?) -> Void
     

@@ -1,16 +1,17 @@
 import Foundation
 
 
-public class IMAPPart : AbstractPart {
+public class MCOIMAPPart : MCOAbstractPart {
     
     private var nativeInstance:CIMAPPart;
     
-    internal init(part:CIMAPPart) {
+    // public for SmartMailCore
+    public init(part:CIMAPPart) {
         self.nativeInstance = part;
         super.init(part.abstractPart);
     }
     
-    required public init(_ obj: CObject) {
+    required public init(cobject obj: CObject) {
         let part = CIMAPPart(cobject: obj);
         self.nativeInstance = part;
         super.init(part.abstractPart);
@@ -18,8 +19,8 @@ public class IMAPPart : AbstractPart {
     
     /** A part identifier is of the form 1.2.1*/
     public var partID: String? {
-        get { return String(utf16: nativeInstance.partID) }
-        set { String.utf16(newValue, { nativeInstance.partID = $0 }) }
+        get { return nativeInstance.partID.string() }
+        set { nativeInstance.partID = newValue?.mailCoreString() ?? MailCoreString() }
     }
     
     /** The size of the single part in bytes */

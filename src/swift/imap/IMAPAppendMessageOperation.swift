@@ -1,13 +1,13 @@
 import Foundation
 
 
-public class IMAPAppendMessageOperation : IMAPBaseOperation {
+public class MCOIMAPAppendMessageOperation : MCOIMAPBaseOperation {
     
     public typealias CompletionBlock = (Error?, UInt32) -> Void
 	
 	internal var operation: CIMAPAppendMessageOperation;
     private var completionBlock : CompletionBlock?;
-    public var progressBlock : OperationProgressBlock?;
+    public var progressBlock : MCOOperationProgressBlock?;
 
 	internal init(operation:CIMAPAppendMessageOperation) {
         self.operation = operation;
@@ -18,6 +18,11 @@ public class IMAPAppendMessageOperation : IMAPBaseOperation {
         progressBlock = nil;
         completionBlock = nil;
 	}
+    
+    public var date: time_t {
+        get { return self.operation.date }
+        set { self.operation.date = newValue }
+    }
     
     public func start(completionBlock: CompletionBlock?) {
         self.completionBlock = completionBlock;

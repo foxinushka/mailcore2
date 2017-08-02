@@ -3,6 +3,7 @@
 
 #include "CIMAPBaseOperation.h"
 #include "CBase.h"
+#include "MailCoreString.h"
 
 #ifdef __cplusplus
 
@@ -23,7 +24,7 @@ extern "C" {
     };
     typedef struct CIMAPCheckAccountOperation CIMAPCheckAccountOperation;
     
-    const UChar*    CIMAPCheckAccountOperation_loginResponse(struct CIMAPCheckAccountOperation self)
+    MailCoreString    CIMAPCheckAccountOperation_loginResponse(struct CIMAPCheckAccountOperation self)
                     CF_SWIFT_NAME(CIMAPCheckAccountOperation.loginResponse(self:));
     
     CData           CIMAPCheckAccountOperation_loginUnparsedResponseData(struct CIMAPCheckAccountOperation self)

@@ -3,6 +3,7 @@
 
 #include "CBase.h"
 #include "CIndexSet.h"
+#include "MailCoreString.h"
 
 #ifdef __cplusplus
 
@@ -23,30 +24,30 @@ extern "C" {
     typedef struct CIMAPSearchExpression CIMAPSearchExpression;
 
     CIMAPSearchExpression   CIMAPSearchExpression_SearchAll()
-                            CF_SWIFT_NAME(CIMAPSearchExpression.searchAll());
+                            /*CF_SWIFT_NAME(CIMAPSearchExpression.searchAll())*/;
     
-    CIMAPSearchExpression   CIMAPSearchExpression_SearchFrom(const UChar* value)
+    CIMAPSearchExpression   CIMAPSearchExpression_SearchFrom(MailCoreString value)
                             CF_SWIFT_NAME(CIMAPSearchExpression.searchFrom(_:));
     
-    CIMAPSearchExpression   CIMAPSearchExpression_SearchRecipient(const UChar* value)
+    CIMAPSearchExpression   CIMAPSearchExpression_SearchRecipient(MailCoreString value)
                             CF_SWIFT_NAME(CIMAPSearchExpression.searchRecipient(_:));
     
-    CIMAPSearchExpression   CIMAPSearchExpression_SearchTo(const UChar* value)
+    CIMAPSearchExpression   CIMAPSearchExpression_SearchTo(MailCoreString value)
                             CF_SWIFT_NAME(CIMAPSearchExpression.searchTo(_:));
                             
-    CIMAPSearchExpression   CIMAPSearchExpression_SearchCc(const UChar* value)
+    CIMAPSearchExpression   CIMAPSearchExpression_SearchCc(MailCoreString value)
                             CF_SWIFT_NAME(CIMAPSearchExpression.searchCc(_:));
                             
-    CIMAPSearchExpression   CIMAPSearchExpression_SearchBcc(const UChar* value)
+    CIMAPSearchExpression   CIMAPSearchExpression_SearchBcc(MailCoreString value)
                             CF_SWIFT_NAME(CIMAPSearchExpression.searchBcc(_:));
                             
-    CIMAPSearchExpression   CIMAPSearchExpression_SearchSubject(const UChar* value)
+    CIMAPSearchExpression   CIMAPSearchExpression_SearchSubject(MailCoreString value)
                             CF_SWIFT_NAME(CIMAPSearchExpression.searchSubject(_:));
                             
-    CIMAPSearchExpression   CIMAPSearchExpression_SearchContent(const UChar* value)
+    CIMAPSearchExpression   CIMAPSearchExpression_SearchContent(MailCoreString value)
                             CF_SWIFT_NAME(CIMAPSearchExpression.searchContent(_:));
                             
-    CIMAPSearchExpression   CIMAPSearchExpression_SearchBody(const UChar* value)
+    CIMAPSearchExpression   CIMAPSearchExpression_SearchBody(MailCoreString value)
                             CF_SWIFT_NAME(CIMAPSearchExpression.searchBody(_:));
                             
     CIMAPSearchExpression   CIMAPSearchExpression_SearchUIDs(CIndexSet uids)
@@ -55,38 +56,38 @@ extern "C" {
     CIMAPSearchExpression   CIMAPSearchExpression_SearchNumbers(CIndexSet numbers)
                             CF_SWIFT_NAME(CIMAPSearchExpression.searchNumbers(_:));
                             
-    CIMAPSearchExpression   CIMAPSearchExpression_SearchHeader(const UChar* header, const UChar* value)
+    CIMAPSearchExpression   CIMAPSearchExpression_SearchHeader(MailCoreString header, MailCoreString value)
                             CF_SWIFT_NAME(CIMAPSearchExpression.searchHeader(_:_:));
                             
     CIMAPSearchExpression   CIMAPSearchExpression_SearchRead()
-                            CF_SWIFT_NAME(CIMAPSearchExpression.searchRead());
+                            /*CF_SWIFT_NAME(CIMAPSearchExpression.searchRead())*/;
                             
     CIMAPSearchExpression   CIMAPSearchExpression_SearchUnread()
-                            CF_SWIFT_NAME(CIMAPSearchExpression.searchUnread());
+                            /*CF_SWIFT_NAME(CIMAPSearchExpression.searchUnread())*/;
                             
     CIMAPSearchExpression   CIMAPSearchExpression_SearchFlagged()
-                            CF_SWIFT_NAME(CIMAPSearchExpression.searchFlagged());
+                            /*CF_SWIFT_NAME(CIMAPSearchExpression.searchFlagged())*/;
                             
     CIMAPSearchExpression   CIMAPSearchExpression_SearchUnflagged()
-                            CF_SWIFT_NAME(CIMAPSearchExpression.searchUnflagged());
+                            /*CF_SWIFT_NAME(CIMAPSearchExpression.searchUnflagged())*/;
                             
     CIMAPSearchExpression   CIMAPSearchExpression_SearchAnswered()
-                            CF_SWIFT_NAME(CIMAPSearchExpression.searchAnswered());
+                            /*CF_SWIFT_NAME(CIMAPSearchExpression.searchAnswered())*/;
                             
     CIMAPSearchExpression   CIMAPSearchExpression_SearchUnanswered()
-                            CF_SWIFT_NAME(CIMAPSearchExpression.searchUnanswered());
+                            /*CF_SWIFT_NAME(CIMAPSearchExpression.searchUnanswered())*/;
                             
     CIMAPSearchExpression   CIMAPSearchExpression_SearchDraft()
-                            CF_SWIFT_NAME(CIMAPSearchExpression.searchDraft());
+                            /*CF_SWIFT_NAME(CIMAPSearchExpression.searchDraft())*/;
                             
     CIMAPSearchExpression   CIMAPSearchExpression_SearchUndraft()
-                            CF_SWIFT_NAME(CIMAPSearchExpression.searchUndraft());
+                            /*CF_SWIFT_NAME(CIMAPSearchExpression.searchUndraft())*/;
                             
     CIMAPSearchExpression   CIMAPSearchExpression_SearchDeleted()
-                            CF_SWIFT_NAME(CIMAPSearchExpression.searchDeleted());
+                            /*CF_SWIFT_NAME(CIMAPSearchExpression.searchDeleted())*/;
                             
     CIMAPSearchExpression   CIMAPSearchExpression_SearchSpam()
-                            CF_SWIFT_NAME(CIMAPSearchExpression.searchSpam());
+                            /*CF_SWIFT_NAME(CIMAPSearchExpression.searchSpam())*/;
                             
     CIMAPSearchExpression   CIMAPSearchExpression_SearchBeforeDate(time_t date)
                             CF_SWIFT_NAME(CIMAPSearchExpression.searchBeforeDate(_:));
@@ -118,7 +119,7 @@ extern "C" {
     CIMAPSearchExpression   CIMAPSearchExpression_SearchGmailMessageID(uint64_t number)
                             CF_SWIFT_NAME(CIMAPSearchExpression.searchGmailMessageID(_:));
                             
-    CIMAPSearchExpression   CIMAPSearchExpression_SearchGmailRaw(const UChar* expr)
+    CIMAPSearchExpression   CIMAPSearchExpression_SearchGmailRaw(MailCoreString expr)
                             CF_SWIFT_NAME(CIMAPSearchExpression.searchGmailRaw(_:));
                             
     CIMAPSearchExpression   CIMAPSearchExpression_SearchAnd(CIMAPSearchExpression expression, CIMAPSearchExpression other)

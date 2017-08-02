@@ -2,6 +2,7 @@
 #include "CBase+Private.h"
 
 #include <MailCore/MCCore.h>
+#include "CAbstractMessageRendererCallbackWrapper.h"
 
 #define nativeType mailcore::IMAPMessage
 #define structName CIMAPMessage
@@ -9,8 +10,8 @@
 C_SYNTHESIZE_SCALAR(uint32_t, uint32_t, setUid, uid)
 C_SYNTHESIZE_SCALAR(uint32_t, uint32_t, setSequenceNumber, sequenceNumber)
 C_SYNTHESIZE_SCALAR(uint32_t, uint32_t, setSize, size)
-C_SYNTHESIZE_ENUM(MessageFlag, mailcore::MessageFlag, setFlags, flags)
-C_SYNTHESIZE_ENUM(MessageFlag, mailcore::MessageFlag, setOriginalFlags, originalFlags)
+C_SYNTHESIZE_ENUM(CMessageFlag, mailcore::MessageFlag, setFlags, flags)
+C_SYNTHESIZE_ENUM(CMessageFlag, mailcore::MessageFlag, setOriginalFlags, originalFlags)
 C_SYNTHESIZE_ARRAY(setCustomFlags, customFlags)
 C_SYNTHESIZE_SCALAR(uint64_t, uint64_t, setModSeqValue, modSeqValue)
 C_SYNTHESIZE_MAILCORE_OBJ(CAbstractPart, CAbstractPart_new, setMainPart, mainPart)
@@ -29,18 +30,22 @@ void CIMAPMessage_release(CIMAPMessage self) {
 
 }
 
-CAbstractPart CIMAPMessage_partForPartID(struct CIMAPMessage self, const UChar* partID) {
-    return CAbstractPart_new(self.instance->partForPartID(mailcore::String::stringWithCharacters(partID)));
+CAbstractPart CIMAPMessage_partForPartID(struct CIMAPMessage self, MailCoreString partID) {
+    return CAbstractPart_new(self.instance->partForPartID(partID.instance));
 }
 
-const UChar* CIMAPMessage_htmlRendering(struct CIMAPMessage self, const UChar* folder, CAbstractMessageRendererCallback rendererCallback) {
-    return self.instance->htmlRendering(new mailcore::String(folder), (mailcore::HTMLRendererIMAPCallback*) rendererCallback.callbackBridge)->unicodeCharacters();
+MailCoreString CIMAPMessage_htmlRendering(struct CIMAPMessage self, MailCoreString folder, CAbstractMessageRendererCallback rendererCallback) {
+    return MailCoreString_new(self.instance->htmlRendering(folder.instance, static_cast<mailcore::HTMLRendererIMAPCallback*>(rendererCallback.callbackBridge),  static_cast<mailcore::HTMLRendererTemplateCallback*>(rendererCallback.callbackBridge)));
 }
 
 CIMAPMessage CIMAPMessage_castFromCObject(CObject obj) {
-    return CIMAPMessage_new((mailcore::IMAPMessage*) obj.instance);
+    return CIMAPMessage_new(reinterpret_cast<mailcore::IMAPMessage*>(obj.instance));
 }
 
 CObject CIMAPMessage_castToCObject(struct CIMAPMessage self) {
     return CObject_new(self.instance);
+}
+
+CIMAPMessage CIMAPMessage_new() {
+    return CIMAPMessage_new(new mailcore::IMAPMessage());
 }

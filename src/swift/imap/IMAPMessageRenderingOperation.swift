@@ -1,7 +1,7 @@
 import Foundation
 
 
-public class IMAPMessageRenderingOperation : IMAPBaseOperation {
+public class MCOIMAPMessageRenderingOperation : MCOIMAPBaseOperation {
     
     public typealias CompletionBlock = (Error?,  String?) -> Void
     
@@ -34,7 +34,7 @@ public class IMAPMessageRenderingOperation : IMAPBaseOperation {
         
         let errorCode = error()
         if errorCode == ErrorNone {
-            completionBlock!(nil, String.init(utf16: operation.result()))
+            completionBlock!(nil, operation.result().string())
         }
         else {
             completionBlock!(MailCoreError(code: errorCode), nil)

@@ -22,7 +22,7 @@ C_SYNTHESIZE_ENUM(ConnectionType, mailcore::ConnectionType, setConnectionType, c
 C_SYNTHESIZE_SCALAR(time_t, time_t, setTimeout, timeout)
 C_SYNTHESIZE_BOOL(setCheckCertificateEnabled, isCheckCertificateEnabled)
 C_SYNTHESIZE_STRING(setOAuth2Token, OAuth2Token)
-C_SYNTHESIZE_ENUM(AuthType, mailcore::AuthType, setAuthType, authType)
+C_SYNTHESIZE_ENUM(CAuthType, mailcore::AuthType, setAuthType, authType)
 C_SYNTHESIZE_BOOL(setUseHeloIPEnabled, useHeloIPEnabled)
 C_SYNTHESIZE_SCALAR(dispatch_queue_t, dispatch_queue_t, setDispatchQueue, dispatchQueue)
 
@@ -107,12 +107,16 @@ CSMTPOperation CSMTPSession_sendOperationWithDataAndFromAndRecipients(struct CSM
     return CSMTPOperation_new(self.instance->sendMessageOperation(from.instance, recipients.instance, new mailcore::Data(messageDataBytes, messageDataLenght)));
 }
 
-CSMTPOperation CSMTPSession_sendOperationWithContentsOfFile(struct CSMTPSession self, const UChar* path,  CAddress from,  CArray recipients) {
-    return CSMTPOperation_new(self.instance->sendMessageOperation(from.instance, recipients.instance, new mailcore::String(path)));
+CSMTPOperation CSMTPSession_sendOperationWithContentsOfFile(struct CSMTPSession self, MailCoreString path,  CAddress from,  CArray recipients) {
+    return CSMTPOperation_new(self.instance->sendMessageOperation(from.instance, recipients.instance, path.instance));
 }
 
 CSMTPOperation CSMTPSession_checkAccountOperationWithFrom(struct CSMTPSession self, CAddress from) {
     return CSMTPOperation_new(self.instance->checkAccountOperation(from.instance));
+}
+
+CSMTPOperation CSMTPSession_checkAccountOperation(struct CSMTPSession self, CAddress from, CAddress to) {
+    return CSMTPOperation_new(self.instance->checkAccountOperation(from.instance, to.instance));
 }
 
 CSMTPOperation CSMTPSession_noopOperation(struct CSMTPSession self) {

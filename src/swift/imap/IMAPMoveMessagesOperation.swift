@@ -1,7 +1,7 @@
 import Foundation
 
 
-public class IMAPMoveMessagesOperation : IMAPBaseOperation {
+public class MCOIMAPMoveMessagesOperation : MCOIMAPBaseOperation {
     
     public typealias CompletionBlock = (Error?, Dictionary<UInt32, UInt32>?) -> Void
     

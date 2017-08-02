@@ -3,6 +3,7 @@
 
 #include "CBase.h"
 #include "CAbstractMessagePart.h"
+#include "MailCoreString.h"
 
 #ifdef __cplusplus
 
@@ -23,10 +24,10 @@ extern "C" {
     };
     typedef struct CIMAPPart CIMAPPart;
     
-    const UChar*    CIMAPPart_partID(struct CIMAPPart self)
+    MailCoreString    CIMAPPart_partID(struct CIMAPPart self)
                     CF_SWIFT_NAME(getter:CIMAPPart.partID(self:));
     
-    void            CIMAPPart_setPartID(struct CIMAPPart self, const UChar* partID)
+    void            CIMAPPart_setPartID(struct CIMAPPart self, MailCoreString partID)
                     CF_SWIFT_NAME(setter:CIMAPPart.partID(self:newValue:));
     
     unsigned int    CIMAPPart_size(struct CIMAPPart self)
@@ -46,6 +47,9 @@ extern "C" {
     
     CIMAPPart       CIMAPPart_castCIMAPPart(CObject obj)
                     CF_SWIFT_NAME(CIMAPPart.init(cobject:));
+    
+    void            CIMAPPart_release(struct CIMAPPart self)
+                    CF_SWIFT_NAME(CIMAPPart.release(self:));
     
 #ifdef __cplusplus
 }

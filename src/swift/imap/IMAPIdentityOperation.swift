@@ -1,9 +1,9 @@
 import Foundation
 
 
-public class IMAPIdentityOperation : IMAPBaseOperation {
+public class MCOIMAPIdentityOperation : MCOIMAPBaseOperation {
     
-    public typealias CompletionBlock = (Error?,  IMAPIdentity?) -> Void
+    public typealias CompletionBlock = (Error?,  MCOIMAPIdentity?) -> Void
     
     internal var operation: CIMAPIdentityOperation
     private var completionBlock : CompletionBlock?
@@ -34,7 +34,7 @@ public class IMAPIdentityOperation : IMAPBaseOperation {
         
         let errorCode = error()
         if errorCode == ErrorNone {
-            completionBlock!(nil, IMAPIdentity.init(operation.serverIdentity()))
+            completionBlock!(nil, MCOIMAPIdentity.init(operation.serverIdentity()))
         }
         else {
             completionBlock!(MailCoreError(code: errorCode), nil)

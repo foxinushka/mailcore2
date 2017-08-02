@@ -23,10 +23,10 @@ void CAddress_release(CAddress self){
     C_SAFE_RELEASE(self.instance);
 }
 
-CAddress CAddress_new_WithDisplayName(const UChar* displayName, const UChar* mailbox){
+CAddress CAddress_new_WithDisplayName(MailCoreString displayName, MailCoreString mailbox){
     CAddress self = CAddress_new();
     C_SAFE_RELEASE(self.instance);
-    self.instance = mailcore::Address::addressWithDisplayName(mailcore::String::stringWithCharacters(displayName), mailcore::String::stringWithCharacters(mailbox));
+    self.instance = mailcore::Address::addressWithDisplayName(displayName.instance, mailbox.instance);
     if (self.instance == NULL) {
         return self;
     }
@@ -34,10 +34,10 @@ CAddress CAddress_new_WithDisplayName(const UChar* displayName, const UChar* mai
     return self;
 }
 
-CAddress CAddress_new_WithMailbox(const UChar* mailbox){
+CAddress CAddress_new_WithMailbox(MailCoreString mailbox){
     CAddress self = CAddress_new();
     C_SAFE_RELEASE(self.instance);
-    self.instance = mailcore::Address::addressWithMailbox(mailcore::String::stringWithCharacters(mailbox));
+    self.instance = mailcore::Address::addressWithMailbox(mailbox.instance);
     if (self.instance == NULL) {
         return self;
     }
@@ -45,10 +45,10 @@ CAddress CAddress_new_WithMailbox(const UChar* mailbox){
     return self;
 }
 
-CAddress CAddress_new_WithRFC822String(const UChar* RFC822String){
+CAddress CAddress_new_WithRFC822String(MailCoreString RFC822String){
     CAddress self = CAddress_new();
     C_SAFE_RELEASE(self.instance);
-    self.instance = mailcore::Address::addressWithRFC822String(mailcore::String::stringWithCharacters(RFC822String));
+    self.instance = mailcore::Address::addressWithRFC822String(RFC822String.instance);
     if (self.instance == NULL) {
         return self;
     }
@@ -56,10 +56,10 @@ CAddress CAddress_new_WithRFC822String(const UChar* RFC822String){
     return self;
 }
 
-CAddress CAddress_new_WithNonEncodedRFC822String(const UChar* nonEncodedRFC822String){
+CAddress CAddress_new_WithNonEncodedRFC822String(MailCoreString nonEncodedRFC822String){
     CAddress self = CAddress_new();
     C_SAFE_RELEASE(self.instance);
-    self.instance = mailcore::Address::addressWithNonEncodedRFC822String(mailcore::String::stringWithCharacters(nonEncodedRFC822String));
+    self.instance = mailcore::Address::addressWithNonEncodedRFC822String(nonEncodedRFC822String.instance);
     if (self.instance == NULL) {
         return self;
     }
@@ -67,28 +67,28 @@ CAddress CAddress_new_WithNonEncodedRFC822String(const UChar* nonEncodedRFC822St
     return self;
 }
 
-CArray CAddresses_WithRFC822String(const UChar* string){
-    return CArray_new(mailcore::Address::addressesWithRFC822String(mailcore::String::stringWithCharacters(string)));
+CArray CAddresses_WithRFC822String(MailCoreString string){
+    return CArray_new(mailcore::Address::addressesWithRFC822String(string.instance));
 }
 
-CArray CAddresses_WithNonEncodedRFC822String(const UChar* string){
-    return CArray_new(mailcore::Address::addressesWithNonEncodedRFC822String(mailcore::String::stringWithCharacters(string)));
+CArray CAddresses_WithNonEncodedRFC822String(MailCoreString string){
+    return CArray_new(mailcore::Address::addressesWithNonEncodedRFC822String(string.instance));
 }
 
-const UChar* CAddress_RFC822String(struct CAddress self){
-    return self.instance->RFC822String()->unicodeCharacters();
+MailCoreString CAddress_RFC822String(struct CAddress self){
+    return MailCoreString_new(self.instance->RFC822String());
 }
 
-const UChar* CAddress_nonEncodedRFC822String(struct CAddress self){
-    return self.instance->nonEncodedRFC822String()->unicodeCharacters();
+MailCoreString CAddress_nonEncodedRFC822String(struct CAddress self){
+    return MailCoreString_new(self.instance->nonEncodedRFC822String());
 }
 
 CAddress CAddress_new_WithCObject(CObject obj) {
-    return CAddress_new((mailcore::Address*) obj.instance);
+    return CAddress_new(reinterpret_cast<mailcore::Address*>(obj.instance));
 }
 
 CObject CAddress_castToCObject(struct CAddress self) {
-    return CObject_new((mailcore::Object*) self.instance);
+    return CObject_new(reinterpret_cast<mailcore::Object*>(self.instance));
 }
 
 

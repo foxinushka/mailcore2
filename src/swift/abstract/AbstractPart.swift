@@ -1,7 +1,7 @@
 import Foundation
 
 
-public class AbstractPart : Convertible {
+public class MCOAbstractPart : Convertible {
     
     private var nativeInstance:CAbstractPart;
     
@@ -13,7 +13,7 @@ public class AbstractPart : Convertible {
         self.nativeInstance.release()
     }
     
-    internal func _CAbstractPart() -> CAbstractPart {
+    public func _CAbstractPart() -> CAbstractPart {
         return nativeInstance;
     }
     
@@ -26,46 +26,46 @@ public class AbstractPart : Convertible {
     
     /** Returns filename of the part.*/
     public var filename : String? {
-        set { String.utf16(newValue, { nativeInstance.filename = $0 }) }
-        get { return String(utf16: nativeInstance.filename) }
+        set { nativeInstance.filename = newValue?.mailCoreString() ?? MailCoreString() }
+        get { return nativeInstance.filename.string() }
     }
     
     /** Returns MIME type of the part. For example application/data.*/
     public var mimeType : String? {
-        set { String.utf16(newValue, { nativeInstance.mimeType = $0 }) }
-        get { return String(utf16: nativeInstance.mimeType) }
+        set { nativeInstance.mimeType = newValue?.mailCoreString() ?? MailCoreString() }
+        get { return nativeInstance.mimeType.string() }
     }
     
     /** Returns charset of the part in case it's a text single part.*/
     public var charset : String? {
-        set { String.utf16(newValue, { nativeInstance.charset = $0 }) }
-        get { return String(utf16: nativeInstance.charset) }
+        set { nativeInstance.charset = newValue?.mailCoreString() ?? MailCoreString() }
+        get { return nativeInstance.charset.string() }
     }
     
     /** Returns the unique ID generated for this part.
      It's a unique identifier that's created when the object is created manually
      or created by the parser.*/
     public var uniqueID : String? {
-        set { String.utf16(newValue, { nativeInstance.uniqueID = $0 }) }
-        get { return String(utf16: nativeInstance.uniqueID) }
+        set { nativeInstance.uniqueID = newValue?.mailCoreString() ?? MailCoreString() }
+        get { return nativeInstance.uniqueID.string() }
     }
     
     /** Returns the value of the Content-ID field of the part.*/
     public var contentID : String? {
-        set { String.utf16(newValue, { nativeInstance.contentID = $0 }) }
-        get { return String(utf16: nativeInstance.contentID) }
+        set { nativeInstance.contentID = newValue?.mailCoreString() ?? MailCoreString() }
+        get { return nativeInstance.contentID.string() }
     }
     
     /** Returns the value of the Content-Location field of the part.*/
     public var contentLocation : String? {
-        set { String.utf16(newValue, { nativeInstance.contentLocation = $0 }) }
-        get { return String(utf16: nativeInstance.contentLocation) }
+        set { nativeInstance.contentLocation = newValue?.mailCoreString() ?? MailCoreString() }
+        get { return nativeInstance.contentLocation.string() }
     }
     
     /** Returns the value of the Content-Description field of the part.*/
     public var contentDescription : String? {
-        set { String.utf16(newValue, { nativeInstance.contentDescription = $0 }) }
-        get { return String(utf16: nativeInstance.contentDescription) }
+        set { nativeInstance.contentDescription = newValue?.mailCoreString() ?? MailCoreString() }
+        get { return nativeInstance.contentDescription.string () }
     }
     
     /** Returns whether the part is an explicit inline attachment.*/
@@ -81,13 +81,13 @@ public class AbstractPart : Convertible {
     }
     
     /** Returns the part with the given Content-ID among this part and its subparts.*/
-    public func partForContentID(contentID: String) -> AbstractPart {
-        return AbstractPart(String.utf16(contentID, { nativeInstance.part(forContentID: $0) }));
+    public func partForContentID(contentID: String) -> MCOAbstractPart {
+        return MCOAbstractPart(nativeInstance.part(forContentID: contentID.mailCoreString()))
     }
     
     /** Returns the part with the given unique identifier among this part and its subparts.*/
-    public func partForUniqueID(uniqueID: String) -> AbstractPart {
-        return AbstractPart(String.utf16(uniqueID, { nativeInstance.part(forUniqueID: $0) }));
+    public func partForUniqueID(uniqueID: String) -> MCOAbstractPart {
+        return MCOAbstractPart(nativeInstance.part(forUniqueID: uniqueID.mailCoreString()))
     }
     
     /** Returns a string representation of the data according to charset.*/
@@ -95,24 +95,22 @@ public class AbstractPart : Convertible {
         let array = data.withUnsafeBytes {
             [UInt8](UnsafeBufferPointer(start: $0, count: data.count))
         }
-        return String(utf16: nativeInstance.decodedStringForData(bytes: array, lenght: UInt32(array.count)));
+        return nativeInstance.decodedStringForData(bytes: array, lenght: UInt32(array.count)).string()
     }
     
     /** Adds a content type parameter.*/
     public func setContentTypeParameterValue(value: String, name: String) {
-        String.utf16(value, name, { valuePtr, namePtr in
-            nativeInstance.setContentTypeParameterValue(value: valuePtr, name: namePtr)
-        })
+        nativeInstance.setContentTypeParameterValue(value: value.mailCoreString(), name: name.mailCoreString())
     }
     
     /** Remove a given content type parameter.*/
     public func removeContentTypeParameterForName(name: String) {
-        String.utf16(name, { nativeInstance.removeContentTypeParameter(forName: $0) })
+        nativeInstance.removeContentTypeParameter(forName: name.mailCoreString())
     }
     
     /** Returns the value of a given content type parameter.*/
     public func contentTypeParameterValueForName(name: String) -> String? {
-        return String.utf16(name, { String(utf16: nativeInstance.contentTypeParameterValue(forName: $0)) })
+        return nativeInstance.contentTypeParameterValue(forName: name.mailCoreString()).string()
     }
     
     /** Returns an array with the names of all content type parameters.*/
@@ -120,7 +118,7 @@ public class AbstractPart : Convertible {
         return Array<String>.cast(nativeInstance.allContentTypeParametersNames());
     }
     
-    required public init(_ obj: CObject) {
+    required public init(cobject obj: CObject) {
         self.nativeInstance = CAbstractPart(cObject: obj)
     }
     

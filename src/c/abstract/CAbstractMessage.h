@@ -32,10 +32,10 @@ extern "C" {
     void                    CAbstractMessage_setHeader(struct CAbstractMessage self, struct CMessageHeader header)
                             CF_SWIFT_NAME(setter:CAbstractMessage.header(self:newValue:));
     
-    struct CAbstractPart    CAbstractMessage_partForContentID(struct CAbstractMessage self, const UChar* contentID)
+    struct CAbstractPart    CAbstractMessage_partForContentID(struct CAbstractMessage self, MailCoreString contentID)
                             CF_SWIFT_NAME(CAbstractMessage.part(self:forContentID:));
     
-    struct CAbstractPart    CAbstractMessage_partForUniqueID(struct CAbstractMessage self, const UChar* uniqueID)
+    struct CAbstractPart    CAbstractMessage_partForUniqueID(struct CAbstractMessage self, MailCoreString uniqueID)
                             CF_SWIFT_NAME(CAbstractMessage.part(self:forUniqueID:));
     
     CArray                  CAbstractMessage_attachments(struct CAbstractMessage self)

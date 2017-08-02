@@ -3,6 +3,7 @@
 
 #include "CIMAPBaseOperation.h"
 #include "CBase.h"
+#include "MailCoreString.h"
 
 #ifdef __cplusplus
 
@@ -23,7 +24,7 @@ extern "C" {
     };
     typedef struct CIMAPCustomCommandOperation CIMAPCustomCommandOperation;
     
-    const UChar*    CIMAPCustomCommandOperation_response(struct CIMAPCustomCommandOperation self)
+    MailCoreString    CIMAPCustomCommandOperation_response(struct CIMAPCustomCommandOperation self)
                     CF_SWIFT_NAME(CIMAPCustomCommandOperation.response(self:));
     
     void            CIMAPCustomCommandOperation_release(CIMAPCustomCommandOperation self)

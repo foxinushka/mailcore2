@@ -1,13 +1,13 @@
 import Foundation
 
 
-public class IMAPFetchContentOperation : IMAPBaseOperation {
+public class MCOIMAPFetchContentOperation : MCOIMAPBaseOperation {
     
     public typealias CompletionBlock = (Error?,  Data?) -> Void
     
     internal var operation: CIMAPFetchContentOperation;
     private var completionBlock : CompletionBlock?;
-    public var progressBlock : OperationProgressBlock?;
+    public var progressBlock : MCOOperationProgressBlock?;
     
     internal init(operation:CIMAPFetchContentOperation) {
         self.operation = operation;

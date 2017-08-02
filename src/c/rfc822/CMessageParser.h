@@ -33,20 +33,24 @@ extern "C" {
     CData           CMessageParser_data(struct CMessageParser self)
                     CF_SWIFT_NAME(CMessageParser.data(self:));
     
-    const UChar*    CMessageParser_htmlBodyRendering(struct CMessageParser self)
+    MailCoreString    CMessageParser_htmlBodyRendering(struct CMessageParser self)
                     CF_SWIFT_NAME(CMessageParser.htmlBodyRendering(self:));
     
-    const UChar*    CMessageParser_plainTextRendering(struct CMessageParser self)
+    MailCoreString    CMessageParser_plainTextRendering(struct CMessageParser self)
                     CF_SWIFT_NAME(CMessageParser.plainTextRendering(self:));
     
-    const UChar*    CMessageParser_plainTextBodyRendering(struct CMessageParser self)
+    MailCoreString    CMessageParser_plainTextBodyRendering(struct CMessageParser self)
                     CF_SWIFT_NAME(CMessageParser.plainTextBodyRendering(self:));
     
-    const UChar*    CMessageParser_plainTextBodyRenderingAndStripWhitespace(struct CMessageParser self, bool stripWhitespace)
+    MailCoreString    CMessageParser_plainTextBodyRenderingAndStripWhitespace(struct CMessageParser self, bool stripWhitespace)
                     CF_SWIFT_NAME(CMessageParser.plainTextBodyRenderingAndStripWhitespace(self:stripWhitespace:));
     
-    CMessageParser  CMessageParser_new(const char* bytes, unsigned int length)
-                    CF_SWIFT_NAME(CMessageParser.init(bytes:length:));
+    CMessageParser  CMessageParser_new(CData data)
+                    CF_SWIFT_NAME(CMessageParser.init(data:));
+    
+    MailCoreString    CMessageParser_htmlRendering(struct CMessageParser self, struct CAbstractMessageRendererCallback htmlCallback)
+                    CF_SWIFT_NAME(CMessageParser.htmlRendering(self:delegate:));
+
     
 #ifdef __cplusplus
 }

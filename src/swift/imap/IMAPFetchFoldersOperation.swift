@@ -1,9 +1,9 @@
 import Foundation
 
 
-public class IMAPFetchFoldersOperation : IMAPBaseOperation {
+public class MCOIMAPFetchFoldersOperation : MCOIMAPBaseOperation {
     
-    public typealias CompletionBlock = (Error?,  [IMAPFolder]?) -> Void
+    public typealias CompletionBlock = (Error?,  [MCOIMAPFolder]?) -> Void
     
     internal var operation: CIMAPFetchFoldersOperation
     private var completionBlock : CompletionBlock?
@@ -34,7 +34,7 @@ public class IMAPFetchFoldersOperation : IMAPBaseOperation {
         
         let errorCode = error()
         if errorCode == ErrorNone {
-            completionBlock!(nil, Array<IMAPFolder>.cast(operation.folders()))
+            completionBlock!(nil, Array<MCOIMAPFolder>.cast(operation.folders()))
         }
         else {
             completionBlock!(MailCoreError(code: errorCode), nil)

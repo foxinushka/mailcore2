@@ -26,6 +26,6 @@ String * mailcore::TemporaryDirectoryForZip()
         return nil;
     }
     
-    //FIXME
-    return NULL;//MCO_FROM_OBJC(String, directoryString);
+    NSData *bytes = [directoryString dataUsingEncoding:NSUTF16StringEncoding];
+    return mailcore::String::stringWithCharacters((const UChar*) bytes.bytes, (unsigned int) bytes.length);
 }

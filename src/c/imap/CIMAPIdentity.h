@@ -6,6 +6,8 @@
 #include "CObject.h"
 #include "CArray.h"
 
+#include "MailCoreString.h"
+
 #ifdef __cplusplus
 
 namespace mailcore {
@@ -24,37 +26,37 @@ extern "C" {
     };
     typedef struct CIMAPIdentity CIMAPIdentity;
 
-    const UChar*    CIMAPIdentity_vendor(struct CIMAPIdentity self)
+    MailCoreString    CIMAPIdentity_vendor(struct CIMAPIdentity self)
                     CF_SWIFT_NAME(getter:CIMAPIdentity.vendor(self:));
 
-    void            CIMAPIdentity_setVendor(struct CIMAPIdentity self, const UChar* vendor)
+    void            CIMAPIdentity_setVendor(struct CIMAPIdentity self, MailCoreString vendor)
                     CF_SWIFT_NAME(setter:CIMAPIdentity.vendor(self:newValue:));
 
-    const UChar*    CIMAPIdentity_name(struct CIMAPIdentity self)
+    MailCoreString    CIMAPIdentity_name(struct CIMAPIdentity self)
                     CF_SWIFT_NAME(getter:CIMAPIdentity.name(self:));
 
-    void            CIMAPIdentity_setName(struct CIMAPIdentity self, const UChar* name)
+    void            CIMAPIdentity_setName(struct CIMAPIdentity self, MailCoreString name)
                     CF_SWIFT_NAME(setter:CIMAPIdentity.name(self:newValue:));
 
-    const UChar*    CIMAPIdentity_version(struct CIMAPIdentity self)
+    MailCoreString    CIMAPIdentity_version(struct CIMAPIdentity self)
                     CF_SWIFT_NAME(getter:CIMAPIdentity.version(self:));
 
-    void            CIMAPIdentity_setVersion(struct CIMAPIdentity self, const UChar* version)
+    void            CIMAPIdentity_setVersion(struct CIMAPIdentity self, MailCoreString version)
                     CF_SWIFT_NAME(setter:CIMAPIdentity.version(self:newValue:));
 
     CArray          CIMAPIdentity_allInfoKeys(struct CIMAPIdentity self)
                     CF_SWIFT_NAME(CIMAPIdentity.allInfoKeys(self:));
 
-    const UChar*    CIMAPIdentity_infoForKey(struct CIMAPIdentity self, const UChar* key)
+    MailCoreString    CIMAPIdentity_infoForKey(struct CIMAPIdentity self, MailCoreString key)
                     CF_SWIFT_NAME(CIMAPIdentity.infoForKey(self:key:));
 
-    void            CIMAPIdentity_setInfoForKey(struct CIMAPIdentity self, const UChar* value, const UChar* key)
+    void            CIMAPIdentity_setInfoForKey(struct CIMAPIdentity self, MailCoreString value, MailCoreString key)
                     CF_SWIFT_NAME(CIMAPIdentity.setInfoForKey(self:value:key:));
 
     void            CIMAPIdentity_removeAllInfos(struct CIMAPIdentity self)
                     CF_SWIFT_NAME(CIMAPIdentity.removeAllInfos(self:));
 
-    CIMAPIdentity   CIMAPIdentity_new(const UChar* vendor, const UChar* name, const UChar* version)
+    CIMAPIdentity   CIMAPIdentity_new(MailCoreString vendor, MailCoreString name, MailCoreString version)
                     CF_SWIFT_NAME(CIMAPIdentity.init(vendor:name:version:));
 
     void            CIMAPIdentity_release(CIMAPIdentity self)

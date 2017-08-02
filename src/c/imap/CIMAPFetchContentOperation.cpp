@@ -17,9 +17,5 @@ extern "C" void CIMAPFetchContentOperation_release(CIMAPFetchContentOperation op
 }
 
 CData CIMAPFetchContentOperation_data(struct CIMAPFetchContentOperation self){
-    mailcore::Data *data = self.instance->data();
-    CData cdata; 
-    cdata.bytes = data->bytes();
-    cdata.length = data->length();
-    return cdata;
+    return CData_new(self.instance->data());
 }

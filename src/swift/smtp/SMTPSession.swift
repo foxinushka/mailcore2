@@ -2,12 +2,13 @@ import Foundation
 import Dispatch
 
 
-public class SMTPSession {
+public class MCOSMTPSession: NSObject {
     
     var session:CSMTPSession;
     
-    public init() {
-        self.session = CSMTPSession();
+    public override init() {
+        self.session = CSMTPSession_new();
+        super.init()
     }
     
     internal init(session: CSMTPSession) {
@@ -16,8 +17,8 @@ public class SMTPSession {
     
     /** This is the hostname of the SMTP server to connect to. */
     public var hostname : String? {
-        get { return String(utf16: self.session.hostname) }
-        set { String.utf16(newValue, { self.session.hostname = $0 }) }
+        get { return self.session.hostname.string() }
+        set { self.session.hostname = newValue?.mailCoreString() ?? MailCoreString() }
     }
     
     /** This is the port of the SMTP server to connect to. */
@@ -28,20 +29,20 @@ public class SMTPSession {
     
     /** This is the username of the account. */
     public var username : String? {
-        get { return String(utf16: self.session.username) }
-        set { String.utf16(newValue, { self.session.username = $0 }) }
+        get { return self.session.username.string() }
+        set { self.session.username = newValue?.mailCoreString() ?? MailCoreString() }
     }
     
     /** This is the password of the account. */
     public var password : String? {
-        get { return String(utf16: self.session.password) }
-        set { String.utf16(newValue, { self.session.password = $0 }) }
+        get { return self.session.password.string() }
+        set { self.session.password = newValue?.mailCoreString() ?? MailCoreString() }
     }
     
     /** This is the OAuth2 token. */
     public var OAuth2Token : String? {
-        get { return String(utf16: self.session.OAuth2Token) }
-        set { String.utf16(newValue, { self.session.OAuth2Token = $0 }) }
+        get { return self.session.OAuth2Token.string() }
+        set { self.session.OAuth2Token = newValue?.mailCoreString() ?? MailCoreString() }
     }
     
     /**
@@ -49,9 +50,9 @@ public class SMTPSession {
      `MCOAuthTypeSASLNone` means that it uses the clear-text is used (and is the default).
      @warning *Important*: Over an encrypted connection like TLS, the password will still be secure
      */
-    public var authType : AuthType {
-        get { return self.session.authType }
-        set { self.session.authType = newValue }
+    public var authType : MCOAuthType {
+        get { return MCOAuthType(cAuthType: self.session.authType) }
+        set { self.session.authType = newValue.toCAuthType() }
     }
     
     /**
@@ -91,7 +92,7 @@ public class SMTPSession {
      ...
      }];
      */
-    public var connectionLogger : ConnectionLogger {
+    public var connectionLogger : ConnectionLogger? {
         get { return self.session.connectionLogger; }
         set { self.session.connectionLogger = newValue }
     }
@@ -156,7 +157,7 @@ public class SMTPSession {
         self.session.cancelAllOperations();
     }
     
-    /** @name Operations */
+    /** @name MCOOperations */
     
     /**
      Returns an operation that will perform a login.
@@ -166,8 +167,8 @@ public class SMTPSession {
      ...
      }];
      */
-    public func loginOperation() -> SMTPOperation{
-        return SMTPOperation(self.session.loginOperation());
+    public func loginOperation() -> MCOSMTPOperation{
+        return MCOSMTPOperation(operation: self.session.loginOperation());
     }
     
     /**
@@ -182,11 +183,11 @@ public class SMTPSession {
      ...
      }];
      */
-    public func sendOperationWithData(messageData: Data) -> SMTPSendOperation{
+    public func sendOperationWithData(messageData: Data) -> MCOSMTPSendOperation{
         let bytes: UnsafePointer<Int8>? = messageData.withUnsafeBytes{(bytes: UnsafePointer<Int8>)-> UnsafePointer<Int8> in
             return bytes;
         }
-        return SMTPSendOperation(self.session.sendOperationWithData(messageDataBytes: bytes, messageDataLenght: UInt32(messageData.count)));
+        return MCOSMTPSendOperation(operation: self.session.sendOperationWithData(messageDataBytes: bytes, messageDataLenght: UInt32(messageData.count)));
     }
     
     /**
@@ -203,11 +204,11 @@ public class SMTPSession {
      ...
      }];
      */
-    public func sendOperationWithData(messageData: Data, from: Address, recipients: Array<Address>) -> SMTPSendOperation {
+    public func sendOperationWithData(messageData: Data, from: MCOAddress, recipients: Array<MCOAddress>) -> MCOSMTPSendOperation {
         let bytes: UnsafePointer<Int8>? = messageData.withUnsafeBytes{(bytes: UnsafePointer<Int8>)-> UnsafePointer<Int8> in
             return bytes;
         }
-        return SMTPSendOperation(self.session.sendOperationWithDataAndFromAndRecipients(messageDataBytes: bytes, messageDataLenght: UInt32(messageData.count), from: from.getNativeInstance(), recipients: recipients.cast()));
+        return MCOSMTPSendOperation(operation: self.session.sendOperationWithDataAndFromAndRecipients(messageDataBytes: bytes, messageDataLenght: UInt32(messageData.count), from: from.getNativeInstance(), recipients: recipients.cast()));
     }
     
     
@@ -224,8 +225,8 @@ public class SMTPSession {
      ...
      }];
      */
-    public func sendOperationWithContentsOfFile(path: String, from: Address, recipients: Array<Address>) -> SMTPSendOperation {
-        return SMTPSendOperation(String.utf16(path, { self.session.sendOperationWithContentsOfFile(path: $0, from: from.getNativeInstance(), recipients: recipients.cast()) }));
+    public func sendOperationWithContentsOfFile(path: String, from: MCOAddress, recipients: Array<MCOAddress>) -> MCOSMTPSendOperation {
+        return MCOSMTPSendOperation(operation: self.session.sendOperationWithContentsOfFile(path: path.mailCoreString(), from: from.getNativeInstance(), recipients: recipients.cast()))
     }
 
     
@@ -237,8 +238,12 @@ public class SMTPSession {
      ...
      }];
      */
-    public func checkAccountOperationWithFrom(from: Address) -> SMTPOperation {
-        return SMTPOperation(self.session.checkAccountOperationWithFrom(from: from.getNativeInstance()));
+    public func checkAccountOperation(from: MCOAddress) -> MCOSMTPOperation {
+        return MCOSMTPOperation(operation: self.session.checkAccountOperationWithFrom(from: from.getNativeInstance()));
+    }
+    
+    @objc public func checkAccountOperation(from: MCOAddress, to: MCOAddress) -> MCOSMTPOperation {
+        return MCOSMTPOperation(operation: self.session.checkAccountOperationWithFrom(from: from.getNativeInstance(), to: to.getNativeInstance()));
     }
     
     /**
@@ -249,8 +254,8 @@ public class SMTPSession {
      ...
      }];
      */
-    public func noopOperation(from: Address) -> SMTPOperation {
-        return SMTPOperation(self.session.noopOperation());
+    public func noopOperation(from: MCOAddress) -> MCOSMTPOperation {
+        return MCOSMTPOperation(operation: self.session.noopOperation());
     }
 
 }

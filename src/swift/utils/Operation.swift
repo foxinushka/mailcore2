@@ -2,12 +2,13 @@ import Foundation
 import Dispatch
 
 
-public class Operation {
+public class MCOOperation: NSObject {
     
-    internal var nativeInstance: COperation;
-    private var _started: Bool = false;
+    internal var nativeInstance: COperation!
+    fileprivate var _started: Bool = false;
     
     internal init(_ cOperation: COperation) {
+        super.init()
         self.nativeInstance = cOperation;
         self.nativeInstance = cOperation.setCompletionBlock(block: operationCompletedCallback, userInfo: Unmanaged.passUnretained(self).toOpaque())
     }
@@ -19,15 +20,14 @@ public class Operation {
     /** The queue this operation dispatches the callback on.  Defaults to the main queue.
      This property should be used only if there's performance issue creating or calling the callback
      in the main thread. */
-    /*public var callbackDispatchQueue: DispatchQueue? {
+    public var callbackDispatchQueue: DispatchQueue? {
         get {
-            return nativeInstance.callbackDispatchQueue(nativeInstance);
+            return nativeInstance.callbackDispatchQueue()
         }
         set {
-            nativeInstance.setCallbackDispatchQueue(nativeInstance, newValue);
+            nativeInstance.setCallbackDispatchQueue(newValue: newValue)
         }
-        
-    }*/
+    }
     
     /** Returns whether the operation is cancelled.*/
     public var isCancelled: Bool {
@@ -50,18 +50,26 @@ public class Operation {
     public func cancel() {
         if (_started) {
             _started = false;
+            // Unbalanced release
+            Unmanaged<MCOOperation>.passUnretained(self).release()
         }
         nativeInstance.cancel();
     }
     
     internal func start(){
         _started = true;
+        // Unbalanced retain
+        let _ = Unmanaged<MCOOperation>.passRetained(self)
         nativeInstance.start();
     }
 }
 
 //MARK: C Functions
 public func operationCompletedCallback(ref: UnsafeRawPointer?) {
-    let selfRef = Unmanaged<Operation>.fromOpaque(ref!).takeUnretainedValue()
+    let unmanagedSelf = Unmanaged<MCOOperation>.fromOpaque(ref!)
+    let selfRef = unmanagedSelf.takeUnretainedValue()
+    selfRef._started = false
     selfRef.operationCompleted()
+    // Unbalanced release
+    unmanagedSelf.release()
 }

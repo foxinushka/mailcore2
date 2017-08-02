@@ -1,7 +1,7 @@
 import Foundation
 
 
-public class AbstractMessage {
+public class MCOAbstractMessage: NSObject {
 	
     private var nativeInstance:CAbstractMessage;
 
@@ -14,42 +14,51 @@ public class AbstractMessage {
     }
     
     /** Header of the message. */
-    public var header : MessageHeader {
-        set { nativeInstance.header =  newValue.CMessageHeader() }
-        get { return MessageHeader(nativeInstance.header) }
+    public var header : MCOMessageHeader? {
+        set {
+            if newValue != nil {
+                nativeInstance.header =  newValue!.CMessageHeader()
+            }
+        }
+        get {
+            guard (nativeInstance.header.instance) != nil else {
+                return nil
+            }
+            return MCOMessageHeader(nativeInstance.header)
+        }
     }
     
     /** Returns the part with the given Content-ID.*/
-    public func partForContentID(contentID: String) -> AbstractPart {
-        return AbstractPart(String.utf16(contentID, { nativeInstance.part(forContentID: $0) }));
+    public func partForContentID(contentID: String) -> MCOAbstractPart {
+        return MCOAbstractPart(nativeInstance.part(forContentID: contentID.mailCoreString()))
     }
     
     /** Returns the part with the given unique identifier.*/
-    public func partForUniqueID(uniqueID: String) -> AbstractPart {
-        return AbstractPart(String.utf16(uniqueID, { nativeInstance.part(forUniqueID: $0) }));
+    public func partForUniqueID(uniqueID: String) -> MCOAbstractPart {
+        return MCOAbstractPart(nativeInstance.part(forUniqueID: uniqueID.mailCoreString()))
     }
     
     /** All attachments in the message.
-     It will return an array of IMAPPart for IMAPMessage.
-     It will return an array of Attachment for MessageParser.
-     It will return an array of Attachment for MessageBuilder. */
-    public func attachments() -> Array<AbstractPart> {
-        return Array<AbstractPart>.cast(nativeInstance.attachments());
+     It will return an array of MCOIMAPPart for MCOIMAPMessage.
+     It will return an array of MCOAttachment for MCOMessageParser.
+     It will return an array of MCOAttachment for MCOMessageBuilder. */
+    public func attachments() -> Array<MCOAbstractPart> {
+        return Array<MCOAbstractPart>.cast(nativeInstance.attachments());
     }
     
     /** All image attachments included inline in the message through cid: URLs.
-     It will return an array of IMAPPart for IMAPMessage.
-     It will return an array of Attachment for MessageParser.
-     It will return an array of Attachment for MessageBuilder. */
-    public func htmlInlineAttachments() -> Array<AbstractPart> {
-        return Array<AbstractPart>.cast(nativeInstance.htmlInlineAttachments());
+     It will return an array of MCOIMAPPart for MCOIMAPMessage.
+     It will return an array of MCOAttachment for MCOMessageParser.
+     It will return an array of MCOAttachment for MCOMessageBuilder. */
+    public func htmlInlineAttachments() -> Array<MCOAbstractPart> {
+        return Array<MCOAbstractPart>.cast(nativeInstance.htmlInlineAttachments());
     }
     
     /**
      Returns parts required to render the message as plain text or html.
      This does not include inline images and attachments, but only the text content
      */
-    public func requiredPartsForRendering() -> Array<AbstractPart> {
-        return Array<AbstractPart>.cast(nativeInstance.requiredPartsForRendering());
+    public func requiredPartsForRendering() -> Array<MCOAbstractPart> {
+        return Array<MCOAbstractPart>.cast(nativeInstance.requiredPartsForRendering());
     }
 }

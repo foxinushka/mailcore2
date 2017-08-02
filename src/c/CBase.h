@@ -18,27 +18,4 @@ typedef uint16_t UChar;
 # define CF_SWIFT_NAME(_name)
 #endif
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-    
-    struct CData {
-        const char* bytes;
-        unsigned int length;
-    };
-    typedef struct CData CData;
-    
-    CData   CData_new(const char* bytes, unsigned int length)
-            CF_SWIFT_NAME(CData.init(bytes:length:));
-    
-#ifdef __cplusplus
-}
-
-namespace mailcore {
-    class Data;
-}
-
-CData CData_new(mailcore::Data data);
-#endif
-
 #endif

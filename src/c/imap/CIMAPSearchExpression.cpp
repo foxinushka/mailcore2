@@ -9,7 +9,7 @@
 
 CIMAPSearchExpression CIMAPSearchExpression_new(mailcore::IMAPSearchExpression *expr) {
     CIMAPSearchExpression self;
-    self.instance = (mailcore::IMAPSearchExpression *) expr->copy();
+    self.instance = reinterpret_cast<mailcore::IMAPSearchExpression*>(expr->copy());
     return self;
 }
 
@@ -21,36 +21,36 @@ CIMAPSearchExpression CIMAPSearchExpression_SearchAll() {
     return CIMAPSearchExpression_new(mailcore::IMAPSearchExpression::searchAll());
 }
 
-CIMAPSearchExpression CIMAPSearchExpression_SearchFrom(const UChar* value) {
-    return CIMAPSearchExpression_new(mailcore::IMAPSearchExpression::searchFrom(mailcore::String::stringWithCharacters(value)));
+CIMAPSearchExpression CIMAPSearchExpression_SearchFrom(MailCoreString value) {
+    return CIMAPSearchExpression_new(mailcore::IMAPSearchExpression::searchFrom(value.instance));
 }
 
-CIMAPSearchExpression CIMAPSearchExpression_SearchRecipient(const UChar* value){
-    return CIMAPSearchExpression_new(mailcore::IMAPSearchExpression::searchRecipient(mailcore::String::stringWithCharacters(value)));
+CIMAPSearchExpression CIMAPSearchExpression_SearchRecipient(MailCoreString value){
+    return CIMAPSearchExpression_new(mailcore::IMAPSearchExpression::searchRecipient(value.instance));
 }
 
-CIMAPSearchExpression CIMAPSearchExpression_SearchTo(const UChar* value) {
-    return CIMAPSearchExpression_new(mailcore::IMAPSearchExpression::searchTo(mailcore::String::stringWithCharacters(value)));
+CIMAPSearchExpression CIMAPSearchExpression_SearchTo(MailCoreString value) {
+    return CIMAPSearchExpression_new(mailcore::IMAPSearchExpression::searchTo(value.instance));
 }
 
-CIMAPSearchExpression CIMAPSearchExpression_SearchCc(const UChar* value) {
-    return CIMAPSearchExpression_new(mailcore::IMAPSearchExpression::searchCc(mailcore::String::stringWithCharacters(value)));
+CIMAPSearchExpression CIMAPSearchExpression_SearchCc(MailCoreString value) {
+    return CIMAPSearchExpression_new(mailcore::IMAPSearchExpression::searchCc(value.instance));
 }
 
-CIMAPSearchExpression CIMAPSearchExpression_SearchBcc(const UChar* value) {
-    return CIMAPSearchExpression_new(mailcore::IMAPSearchExpression::searchBcc(mailcore::String::stringWithCharacters(value)));
+CIMAPSearchExpression CIMAPSearchExpression_SearchBcc(MailCoreString value) {
+    return CIMAPSearchExpression_new(mailcore::IMAPSearchExpression::searchBcc(value.instance));
 }
 
-CIMAPSearchExpression CIMAPSearchExpression_SearchSubject(const UChar* value) {
-    return CIMAPSearchExpression_new(mailcore::IMAPSearchExpression::searchSubject(mailcore::String::stringWithCharacters(value)));
+CIMAPSearchExpression CIMAPSearchExpression_SearchSubject(MailCoreString value) {
+    return CIMAPSearchExpression_new(mailcore::IMAPSearchExpression::searchSubject(value.instance));
 }
 
-CIMAPSearchExpression CIMAPSearchExpression_SearchContent(const UChar* value) {
-    return CIMAPSearchExpression_new(mailcore::IMAPSearchExpression::searchContent(mailcore::String::stringWithCharacters(value)));
+CIMAPSearchExpression CIMAPSearchExpression_SearchContent(MailCoreString value) {
+    return CIMAPSearchExpression_new(mailcore::IMAPSearchExpression::searchContent(value.instance));
 }
 
-CIMAPSearchExpression CIMAPSearchExpression_SearchBody(const UChar* value) {
-    return CIMAPSearchExpression_new(mailcore::IMAPSearchExpression::searchBody(mailcore::String::stringWithCharacters(value)));
+CIMAPSearchExpression CIMAPSearchExpression_SearchBody(MailCoreString value) {
+    return CIMAPSearchExpression_new(mailcore::IMAPSearchExpression::searchBody(value.instance));
 }
 
 CIMAPSearchExpression CIMAPSearchExpression_SearchUIDs(CIndexSet uids) {
@@ -61,8 +61,8 @@ CIMAPSearchExpression CIMAPSearchExpression_SearchNumbers(CIndexSet numbers) {
     return CIMAPSearchExpression_new(mailcore::IMAPSearchExpression::searchNumbers(numbers.instance));
 }
 
-CIMAPSearchExpression CIMAPSearchExpression_SearchHeader(const UChar* header, const UChar* value) {
-    return CIMAPSearchExpression_new(mailcore::IMAPSearchExpression::searchHeader(mailcore::String::stringWithCharacters(header), mailcore::String::stringWithCharacters(value)));
+CIMAPSearchExpression CIMAPSearchExpression_SearchHeader(MailCoreString header, MailCoreString value) {
+    return CIMAPSearchExpression_new(mailcore::IMAPSearchExpression::searchHeader(header.instance, value.instance));
 }
 
 CIMAPSearchExpression CIMAPSearchExpression_SearchRead() {
@@ -145,8 +145,8 @@ CIMAPSearchExpression CIMAPSearchExpression_SearchGmailMessageID(uint64_t number
     return CIMAPSearchExpression_new(mailcore::IMAPSearchExpression::searchGmailMessageID(number));
 }
 
-CIMAPSearchExpression CIMAPSearchExpression_SearchGmailRaw(const UChar* expr) {
-    return CIMAPSearchExpression_new(mailcore::IMAPSearchExpression::searchGmailRaw(mailcore::String::stringWithCharacters(expr)));
+CIMAPSearchExpression CIMAPSearchExpression_SearchGmailRaw(MailCoreString expr) {
+    return CIMAPSearchExpression_new(mailcore::IMAPSearchExpression::searchGmailRaw(expr.instance));
 }
 
 CIMAPSearchExpression CIMAPSearchExpression_SearchAnd(CIMAPSearchExpression expression, CIMAPSearchExpression other) {

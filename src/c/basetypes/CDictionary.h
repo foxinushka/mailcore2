@@ -34,7 +34,7 @@ extern "C" {
                     CF_SWIFT_NAME(CDictionary.setValue(self:key:value:));
     
     CDictionary     CDictionary_new()
-                    CF_SWIFT_NAME(CDictionary.init());
+                    /*CF_SWIFT_NAME(CDictionary.init())*/;
     
     void            CDictionary_release(CDictionary self)
                     CF_SWIFT_NAME(CDictionary.release(self:));

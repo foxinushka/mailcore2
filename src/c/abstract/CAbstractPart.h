@@ -6,6 +6,7 @@
 #include "CBase.h"
 #include "CArray.h"
 #include "CMessageConstants.h"
+#include "MailCoreString.h"
 
 #ifdef __cplusplus
 
@@ -31,46 +32,46 @@ extern "C" {
     void                    CAbstractPart_setPartType(struct CAbstractPart self, PartType type)
                             CF_SWIFT_NAME(setter:CAbstractPart.partType(self:newValue:));
 
-    const UChar*            CAbstractPart_filename(struct CAbstractPart self)
+    MailCoreString            CAbstractPart_filename(struct CAbstractPart self)
                             CF_SWIFT_NAME(getter:CAbstractPart.filename(self:));
 
-    void                    CAbstractPart_setFilename(struct CAbstractPart self, const UChar* filename)
+    void                    CAbstractPart_setFilename(struct CAbstractPart self, MailCoreString filename)
                             CF_SWIFT_NAME(setter:CAbstractPart.filename(self:newValue:));
 
-    const UChar*            CAbstractPart_mimeType(struct CAbstractPart self)
+    MailCoreString            CAbstractPart_mimeType(struct CAbstractPart self)
                             CF_SWIFT_NAME(getter:CAbstractPart.mimeType(self:));
 
-    void                    CAbstractPart_setMimeType(struct CAbstractPart self, const UChar* mimeType)
+    void                    CAbstractPart_setMimeType(struct CAbstractPart self, MailCoreString mimeType)
                             CF_SWIFT_NAME(setter:CAbstractPart.mimeType(self:newValue:));
 
-    const UChar*            CAbstractPart_charset(struct CAbstractPart self)
+    MailCoreString            CAbstractPart_charset(struct CAbstractPart self)
                             CF_SWIFT_NAME(getter:CAbstractPart.charset(self:));
 
-    void                    CAbstractPart_setCharset(struct CAbstractPart self, const UChar* charset)
+    void                    CAbstractPart_setCharset(struct CAbstractPart self, MailCoreString charset)
                             CF_SWIFT_NAME(setter:CAbstractPart.charset(self:newValue:));
 
-    const UChar*            CAbstractPart_uniqueID(struct CAbstractPart self)
+    MailCoreString            CAbstractPart_uniqueID(struct CAbstractPart self)
                             CF_SWIFT_NAME(getter:CAbstractPart.uniqueID(self:));
 
-    void                    CAbstractPart_setUniqueID(struct CAbstractPart self, const UChar* uniqueID)
+    void                    CAbstractPart_setUniqueID(struct CAbstractPart self, MailCoreString uniqueID)
                             CF_SWIFT_NAME(setter:CAbstractPart.uniqueID(self:newValue:));
 
-    const UChar*            CAbstractPart_contentID(struct CAbstractPart self)
+    MailCoreString            CAbstractPart_contentID(struct CAbstractPart self)
                             CF_SWIFT_NAME(getter:CAbstractPart.contentID(self:));
 
-    void                    CAbstractPart_setContentID(struct CAbstractPart self, const UChar* contentID)
+    void                    CAbstractPart_setContentID(struct CAbstractPart self, MailCoreString contentID)
                             CF_SWIFT_NAME(setter:CAbstractPart.contentID(self:newValue:));
 
-    const UChar*            CAbstractPart_contentLocation(struct CAbstractPart self)
+    MailCoreString            CAbstractPart_contentLocation(struct CAbstractPart self)
                             CF_SWIFT_NAME(getter:CAbstractPart.contentLocation(self:));
 
-    void                    CAbstractPart_setContentLocation(struct CAbstractPart self, const UChar* contentLocation)
+    void                    CAbstractPart_setContentLocation(struct CAbstractPart self, MailCoreString contentLocation)
                             CF_SWIFT_NAME(setter:CAbstractPart.contentLocation(self:newValue:));
 
-    const UChar*            CAbstractPart_contentDescription(struct CAbstractPart self)
+    MailCoreString            CAbstractPart_contentDescription(struct CAbstractPart self)
                             CF_SWIFT_NAME(getter:CAbstractPart.contentDescription(self:));
 
-    void                    CAbstractPart_setContentDescription(struct CAbstractPart self, const UChar* contentDescription)
+    void                    CAbstractPart_setContentDescription(struct CAbstractPart self, MailCoreString contentDescription)
                             CF_SWIFT_NAME(setter:CAbstractPart.contentDescription(self:newValue:));
 
     bool                    CAbstractPart_isInlineAttachment(struct CAbstractPart self)
@@ -86,22 +87,22 @@ extern "C" {
                             CF_SWIFT_NAME(setter:CAbstractPart.isAttachment(self:newValue:));
 
     
-    struct CAbstractPart    CAbstractPart_partForContentID(struct CAbstractPart self, const UChar* contentID)
+    struct CAbstractPart    CAbstractPart_partForContentID(struct CAbstractPart self, MailCoreString contentID)
                             CF_SWIFT_NAME(CAbstractPart.part(self:forContentID:));
 
-    struct CAbstractPart    CAbstractPart_partForUniqueID(struct CAbstractPart self, const UChar* uniqueID)
+    struct CAbstractPart    CAbstractPart_partForUniqueID(struct CAbstractPart self, MailCoreString uniqueID)
                             CF_SWIFT_NAME(CAbstractPart.part(self:forUniqueID:));
 
-    const UChar*            CAbstractPart_decodedStringForData(struct CAbstractPart self, const uint8_t* bytes, uint32_t lenght)
+    MailCoreString            CAbstractPart_decodedStringForData(struct CAbstractPart self, const uint8_t* bytes, uint32_t lenght)
                             CF_SWIFT_NAME(CAbstractPart.decodedStringForData(self:bytes:lenght:));
 
-    void                    CAbstractPart_setContentTypeParameterValue(struct CAbstractPart self, const UChar* value, const UChar* name)
+    void                    CAbstractPart_setContentTypeParameterValue(struct CAbstractPart self, MailCoreString value, MailCoreString name)
                             CF_SWIFT_NAME(CAbstractPart.setContentTypeParameterValue(self:value:name:));
 
-    void                    CAbstractPart_removeContentTypeParameterForName(struct CAbstractPart self, const UChar* name)
+    void                    CAbstractPart_removeContentTypeParameterForName(struct CAbstractPart self, MailCoreString name)
                             CF_SWIFT_NAME(CAbstractPart.removeContentTypeParameter(self:forName:));
 
-    const UChar*            CAbstractPart_contentTypeParameterValueForName(struct CAbstractPart self, const UChar* name)
+    MailCoreString            CAbstractPart_contentTypeParameterValueForName(struct CAbstractPart self, MailCoreString name)
                             CF_SWIFT_NAME(CAbstractPart.contentTypeParameterValue(self:forName:));
 
     CArray                  CAbstractPart_allContentTypeParametersNames(struct CAbstractPart self)
@@ -116,7 +117,10 @@ extern "C" {
     
     void                    CAbstractPart_release(CAbstractPart self)
                             CF_SWIFT_NAME(CAbstractPart.release(self:));
-                            
+    
+    CData                   CAbstractPartHelper_getData(CAbstractPart part)
+                            CF_SWIFT_NAME(CAbstractPart.getData(part:));
+    
     
 #ifdef __cplusplus
 }

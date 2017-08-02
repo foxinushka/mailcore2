@@ -3,6 +3,15 @@
 
 #include <MailCore/MCCore.h>
 
+#include "MCDefines.h"
+#include "MCAttachment.h"
+#include "MCMessageHeader.h"
+#include "MCHTMLRenderer.h"
+#include "MCHTMLBodyRendererTemplateCallback.h"
+#include "CData.h"
+
+#include "CAbstractMessageRendererCallback.h"
+
 #define nativeType mailcore::MessageParser
 #define structName CMessageParser
 
@@ -13,8 +22,8 @@ CMessageParser CMessageParser_new(mailcore::MessageParser *parser) {
     return self;
 }
 
-CMessageParser CMessageParser_new(const char* bytes, unsigned int length) {
-    return CMessageParser_new(new mailcore::MessageParser(new mailcore::Data(bytes, length)));
+CMessageParser CMessageParser_new(CData data) {
+    return CMessageParser_new(new mailcore::MessageParser(data.instance));
 }
 
 CAbstractPart CMessageParser_mainPart(struct CMessageParser self) {
@@ -25,18 +34,23 @@ CData CMessageParser_data(struct CMessageParser self) {
     return CData_new(self.instance->data());
 }
 
-const UChar* CMessageParser_htmlBodyRendering(struct CMessageParser self) {
-    return self.instance->htmlBodyRendering()->unicodeCharacters();
+MailCoreString CMessageParser_htmlBodyRendering(struct CMessageParser self) {
+    return MailCoreString_new(self.instance->htmlBodyRendering());
 }
 
-const UChar* CMessageParser_plainTextRendering(struct CMessageParser self) {
-    return self.instance->plainTextRendering()->unicodeCharacters();
+MailCoreString CMessageParser_plainTextRendering(struct CMessageParser self) {
+    return MailCoreString_new(self.instance->plainTextRendering());
 }
 
-const UChar* CMessageParser_plainTextBodyRendering(struct CMessageParser self) {
-    return self.instance->plainTextBodyRendering(true)->unicodeCharacters();
+MailCoreString CMessageParser_plainTextBodyRendering(struct CMessageParser self) {
+    return MailCoreString_new(self.instance->plainTextBodyRendering(true));
 }
 
-const UChar* CMessageParser_plainTextBodyRenderingAndStripWhitespace(struct CMessageParser self, bool stripWhitespace) {
-    return self.instance->plainTextBodyRendering(stripWhitespace)->unicodeCharacters();
+MailCoreString CMessageParser_plainTextBodyRenderingAndStripWhitespace(struct CMessageParser self, bool stripWhitespace) {
+    return MailCoreString_new(self.instance->plainTextBodyRendering(stripWhitespace));
+}
+
+MailCoreString CMessageParser_htmlRendering(struct CMessageParser self, struct CAbstractMessageRendererCallback htmlCallback)
+{
+    return MailCoreString_new(self.instance->htmlRendering(reinterpret_cast<mailcore::HTMLRendererTemplateCallback*>(htmlCallback.callbackBridge)));
 }

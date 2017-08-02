@@ -3,11 +3,11 @@ import Foundation
 
 /**
  The class is used to get folder metadata (like UIDVALIDITY, UIDNEXT, etc).
- @see IMAPFolderStatus
+ @see MCOIMAPFolderStatus
  */
-public class IMAPFolderStatusOperation : IMAPBaseOperation {
+public class MCOIMAPFolderStatusOperation : MCOIMAPBaseOperation {
     
-    public typealias CompletionBlock = (Error?, IMAPFolderStatus?) -> Void
+    public typealias CompletionBlock = (Error?, MCOIMAPFolderStatus?) -> Void
     
     private var operation: CIMAPFolderStatusOperation;
     private var completionBlock : CompletionBlock?;
@@ -48,7 +48,7 @@ public class IMAPFolderStatusOperation : IMAPBaseOperation {
         
         let errorCode = error();
         if errorCode == ErrorNone {
-            completionBlock!(nil, IMAPFolderStatus(status: operation.status()));
+            completionBlock!(nil, MCOIMAPFolderStatus(status: operation.status()));
         }
         else {
             completionBlock!(MailCoreError(code: errorCode), nil);

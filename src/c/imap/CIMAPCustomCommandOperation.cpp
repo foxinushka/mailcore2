@@ -5,8 +5,8 @@
 #define nativeType mailcore::IMAPCheckAccountOperation
 #define structName CIMAPCheckAccountOperation
 
-const UChar* CIMAPCustomCommandOperation_response(struct CIMAPCustomCommandOperation self) {
-    return self.instance->response()->unicodeCharacters();
+MailCoreString CIMAPCustomCommandOperation_response(struct CIMAPCustomCommandOperation self) {
+    return MailCoreString_new(self.instance->response());
 }
 
 CIMAPCustomCommandOperation CIMAPCustomCommandOperation_new(mailcore::IMAPCustomCommandOperation *operationRef){

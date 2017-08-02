@@ -20,14 +20,14 @@ void CIMAPNamespaceItem_release(CIMAPNamespaceItem self) {
     C_SAFE_RELEASE(self.instance);
 }
 
-const UChar* CIMAPNamespaceItem_pathForComponents(struct CIMAPNamespaceItem self, CArray components) {
-    return self.instance->pathForComponents(components.instance)->unicodeCharacters();
+MailCoreString CIMAPNamespaceItem_pathForComponents(struct CIMAPNamespaceItem self, CArray components) {
+    return MailCoreString_new(self.instance->pathForComponents(components.instance));
 }
 
-CArray CIMAPNamespaceItem_componentForPath(struct CIMAPNamespaceItem self, const UChar* path) {
-    return CArray_new(self.instance->componentsForPath(mailcore::String::stringWithCharacters(path)));
+CArray CIMAPNamespaceItem_componentForPath(struct CIMAPNamespaceItem self, MailCoreString path) {
+    return CArray_new(self.instance->componentsForPath(path.instance));
 }
 
-bool CIMAPNamespaceItem_containsFolder(struct CIMAPNamespaceItem self, const UChar* folder) {
-    return self.instance->containsFolder(mailcore::String::stringWithCharacters(folder));
+bool CIMAPNamespaceItem_containsFolder(struct CIMAPNamespaceItem self, MailCoreString folder) {
+    return self.instance->containsFolder(folder.instance);
 }

@@ -2,7 +2,7 @@ import Foundation
 
 
 /** Used to construct an IMAP search query */
-public class IMAPSearchExpression {
+public class MCOIMAPSearchExpression: NSObject {
 	
     private var nativeInstance:CIMAPSearchExpression;
     
@@ -25,8 +25,8 @@ public class IMAPSearchExpression {
      
      MCOIMAPSearchExpression * expr = [MCOIMAPSearchExpression searchAll]
      */
-    public static func searchAll() -> IMAPSearchExpression {
-        return IMAPSearchExpression(CIMAPSearchExpression_SearchAll());
+    public static func searchAll() -> MCOIMAPSearchExpression {
+        return MCOIMAPSearchExpression(CIMAPSearchExpression_SearchAll());
     }
     
     /**
@@ -36,8 +36,8 @@ public class IMAPSearchExpression {
      
      MCOIMAPSearchExpression * expr = [MCOIMAPSearchExpression searchFrom:@"laura@etpan.org"]
      */
-    public static func searchFrom(value: String) -> IMAPSearchExpression {
-        return IMAPSearchExpression(String.utf16(value, { CIMAPSearchExpression.searchFrom($0) }));
+    public static func searchFrom(_ value: String) -> MCOIMAPSearchExpression {
+        return MCOIMAPSearchExpression(CIMAPSearchExpression.searchFrom(value.mailCoreString()))
     }
     
     /**
@@ -47,8 +47,8 @@ public class IMAPSearchExpression {
      
      MCOIMAPSearchExpression * expr = [MCOIMAPSearchExpression searchRecipient:@"ngan@etpan.org"]
      **/
-    public static func searchRecipient(value: String) -> IMAPSearchExpression {
-        return IMAPSearchExpression(String.utf16(value, { CIMAPSearchExpression.searchRecipient($0) }));
+    public static func searchRecipient(_ value: String) -> MCOIMAPSearchExpression {
+        return MCOIMAPSearchExpression(CIMAPSearchExpression.searchRecipient(value.mailCoreString()))
     }
     
     /**
@@ -58,8 +58,8 @@ public class IMAPSearchExpression {
      
      MCOIMAPSearchExpression * expr = [MCOIMAPSearchExpression searchTo:@"ngan@etpan.org"]
      **/
-    public static func searchTo(value: String) -> IMAPSearchExpression {
-        return IMAPSearchExpression(String.utf16(value, { CIMAPSearchExpression.searchTo($0) }));
+    public static func searchTo(_ value: String) -> MCOIMAPSearchExpression {
+        return MCOIMAPSearchExpression(CIMAPSearchExpression.searchTo(value.mailCoreString()))
     }
     
     /**
@@ -69,8 +69,8 @@ public class IMAPSearchExpression {
      
      MCOIMAPSearchExpression * expr = [MCOIMAPSearchExpression searchCc:@"ngan@etpan.org"]
      **/
-    public static func searchCc(value: String) -> IMAPSearchExpression {
-        return IMAPSearchExpression(String.utf16(value, { CIMAPSearchExpression.searchCc($0) }));
+    public static func searchCc(_ value: String) -> MCOIMAPSearchExpression {
+        return MCOIMAPSearchExpression(CIMAPSearchExpression.searchCc(value.mailCoreString()))
     }
     
     /**
@@ -80,8 +80,8 @@ public class IMAPSearchExpression {
      
      MCOIMAPSearchExpression * expr = [MCOIMAPSearchExpression searchBcc:@"ngan@etpan.org"]
      **/
-    public static func searchBcc(value: String) -> IMAPSearchExpression {
-        return IMAPSearchExpression(String.utf16(value, { CIMAPSearchExpression.searchBcc($0) }));
+    public static func searchBcc(_ value: String) -> MCOIMAPSearchExpression {
+        return MCOIMAPSearchExpression(CIMAPSearchExpression.searchBcc(value.mailCoreString()))
     }
     
     /*
@@ -91,8 +91,8 @@ public class IMAPSearchExpression {
      
      MCOIMAPSearchExpression * expr = [MCOIMAPSearchExpression searchSubject:@"airline"]
      **/
-    public static func searchSubject(value: String) -> IMAPSearchExpression {
-        return IMAPSearchExpression(String.utf16(value, { CIMAPSearchExpression.searchSubject($0) }));
+    public static func searchSubject(_ value: String) -> MCOIMAPSearchExpression {
+        return MCOIMAPSearchExpression(CIMAPSearchExpression.searchSubject(value.mailCoreString()))
     }
     
     /**
@@ -102,8 +102,8 @@ public class IMAPSearchExpression {
      
      MCOIMAPSearchExpression * expr = [MCOIMAPSearchExpression searchContent:@"meeting"]
      */
-    public static func searchContent(value: String) -> IMAPSearchExpression {
-        return IMAPSearchExpression(String.utf16(value, { CIMAPSearchExpression.searchContent($0) }));
+    public static func searchContent(_ value: String) -> MCOIMAPSearchExpression {
+        return MCOIMAPSearchExpression(CIMAPSearchExpression.searchContent(value.mailCoreString()))
     }
     
     /**
@@ -113,8 +113,8 @@ public class IMAPSearchExpression {
      
      MCOIMAPSearchExpression * expr = [MCOIMAPSearchExpression searchBody:@"building"]
      */
-    public static func searchBody(value: String) -> IMAPSearchExpression {
-        return IMAPSearchExpression(String.utf16(value, { CIMAPSearchExpression.searchBody($0) }));
+    public static func searchBody(_ value: String) -> MCOIMAPSearchExpression {
+        return MCOIMAPSearchExpression(CIMAPSearchExpression.searchBody(value.mailCoreString()))
     }
     
     /**
@@ -124,8 +124,8 @@ public class IMAPSearchExpression {
      
      MCOIMAPSearchExpression * expr = [MCOIMAPSearchExpression searchUids:uids]
      **/
-    public static func searchUIDs(uids: MCOIndexSet) -> IMAPSearchExpression {
-        return IMAPSearchExpression(CIMAPSearchExpression.searchUIDs(uids.cast()));
+    public static func searchUIDs(_ uids: MCOIndexSet) -> MCOIMAPSearchExpression {
+        return MCOIMAPSearchExpression(CIMAPSearchExpression.searchUIDs(uids.cast()));
     }
     
     /**
@@ -135,8 +135,8 @@ public class IMAPSearchExpression {
      
      MCOIMAPSearchExpression * expr = [MCOIMAPSearchExpression searchNumbers:numbers]
      **/
-    public static func searchNumbers(numbers: MCOIndexSet) -> IMAPSearchExpression {
-        return IMAPSearchExpression(CIMAPSearchExpression.searchNumbers(numbers.cast()));
+    public static func searchNumbers(_ numbers: MCOIndexSet) -> MCOIMAPSearchExpression {
+        return MCOIMAPSearchExpression(CIMAPSearchExpression.searchNumbers(numbers.cast()));
     }
     
     /**
@@ -146,10 +146,8 @@ public class IMAPSearchExpression {
      
      MCOIMAPSearchExpression * expr = [MCOIMAPSearchExpression searchHeader:@"List-Id" value:@"shoes"]
      **/
-    public static func searchHeader(header: String, value: String) -> IMAPSearchExpression {
-        return IMAPSearchExpression(String.utf16(header, value, { headerPtr, valuePtr in
-            CIMAPSearchExpression.searchHeader(headerPtr, valuePtr)
-        }))
+    public static func searchHeader(_ header: String, value: String) -> MCOIMAPSearchExpression {
+        return MCOIMAPSearchExpression(CIMAPSearchExpression.searchHeader(header.mailCoreString(), value.mailCoreString()))
     }
     
     /**
@@ -159,8 +157,8 @@ public class IMAPSearchExpression {
      
      MCOIMAPSearchExpression * expr = [MCOIMAPSearchExpression searchRead]
      **/
-    public static func searchRead() -> IMAPSearchExpression {
-        return IMAPSearchExpression(CIMAPSearchExpression_SearchRead());
+    public static func searchRead() -> MCOIMAPSearchExpression {
+        return MCOIMAPSearchExpression(CIMAPSearchExpression_SearchRead());
     }
     
     /**
@@ -170,8 +168,8 @@ public class IMAPSearchExpression {
      
      MCOIMAPSearchExpression * expr = [MCOIMAPSearchExpression searchUnread]
      **/
-    public static func searchUnread() -> IMAPSearchExpression {
-        return IMAPSearchExpression(CIMAPSearchExpression_SearchUnread());
+    public static func searchUnread() -> MCOIMAPSearchExpression {
+        return MCOIMAPSearchExpression(CIMAPSearchExpression_SearchUnread());
     }
     
     /**
@@ -181,8 +179,8 @@ public class IMAPSearchExpression {
      
      MCOIMAPSearchExpression * expr = [MCOIMAPSearchExpression searchFlagged]
      **/
-    public static func searchFlagged() -> IMAPSearchExpression {
-        return IMAPSearchExpression(CIMAPSearchExpression_SearchUnread());
+    public static func searchFlagged() -> MCOIMAPSearchExpression {
+        return MCOIMAPSearchExpression(CIMAPSearchExpression_SearchUnread());
     }
     
     /**
@@ -192,8 +190,8 @@ public class IMAPSearchExpression {
      
      MCOIMAPSearchExpression * expr = [MCOIMAPSearchExpression searchUnflagged]
      **/
-    public static func searchUnflagged() -> IMAPSearchExpression {
-        return IMAPSearchExpression(CIMAPSearchExpression_SearchUnflagged());
+    public static func searchUnflagged() -> MCOIMAPSearchExpression {
+        return MCOIMAPSearchExpression(CIMAPSearchExpression_SearchUnflagged());
     }
     
     /**
@@ -203,8 +201,8 @@ public class IMAPSearchExpression {
      
      MCOIMAPSearchExpression * expr = [MCOIMAPSearchExpression searchAnswered]
      **/
-    public static func searchAnswered() -> IMAPSearchExpression {
-        return IMAPSearchExpression(CIMAPSearchExpression_SearchAnswered());
+    public static func searchAnswered() -> MCOIMAPSearchExpression {
+        return MCOIMAPSearchExpression(CIMAPSearchExpression_SearchAnswered());
     }
     
     /**
@@ -214,8 +212,8 @@ public class IMAPSearchExpression {
      
      MCOIMAPSearchExpression * expr = [MCOIMAPSearchExpression searchUnanswered]
      **/
-    public static func searchUnanswered() -> IMAPSearchExpression {
-        return IMAPSearchExpression(CIMAPSearchExpression_SearchUnanswered());
+    public static func searchUnanswered() -> MCOIMAPSearchExpression {
+        return MCOIMAPSearchExpression(CIMAPSearchExpression_SearchUnanswered());
     }
     
     /**
@@ -225,8 +223,8 @@ public class IMAPSearchExpression {
      
      MCOIMAPSearchExpression * expr = [MCOIMAPSearchExpression searchDraft]
      **/
-    public static func searchDraft() -> IMAPSearchExpression {
-        return IMAPSearchExpression(CIMAPSearchExpression_SearchDraft());
+    public static func searchDraft() -> MCOIMAPSearchExpression {
+        return MCOIMAPSearchExpression(CIMAPSearchExpression_SearchDraft());
     }
     
     /**
@@ -236,8 +234,8 @@ public class IMAPSearchExpression {
      
      MCOIMAPSearchExpression * expr = [MCOIMAPSearchExpression searchUndraft]
      **/
-    public static func searchUndraft() -> IMAPSearchExpression {
-        return IMAPSearchExpression(CIMAPSearchExpression_SearchUndraft());
+    public static func searchUndraft() -> MCOIMAPSearchExpression {
+        return MCOIMAPSearchExpression(CIMAPSearchExpression_SearchUndraft());
     }
     
     /**
@@ -247,8 +245,8 @@ public class IMAPSearchExpression {
      
      MCOIMAPSearchExpression * expr = [MCOIMAPSearchExpression searchDeleted]
      **/
-    public static func searchDeleted() -> IMAPSearchExpression {
-        return IMAPSearchExpression(CIMAPSearchExpression_SearchDeleted());
+    public static func searchDeleted() -> MCOIMAPSearchExpression {
+        return MCOIMAPSearchExpression(CIMAPSearchExpression_SearchDeleted());
     }
     
     /**
@@ -258,8 +256,8 @@ public class IMAPSearchExpression {
      
      MCOIMAPSearchExpression * expr = [MCOIMAPSearchExpression searchSpam]
      **/
-    static func searchSpam() -> IMAPSearchExpression {
-        return IMAPSearchExpression(CIMAPSearchExpression_SearchSpam());
+    static func searchSpam() -> MCOIMAPSearchExpression {
+        return MCOIMAPSearchExpression(CIMAPSearchExpression_SearchSpam());
     }
     
     /**
@@ -270,8 +268,8 @@ public class IMAPSearchExpression {
      NSDate *yesterday = [NSDate dateWithTimeIntervalSinceNow:-(60.0 * 60.0 * 24.0)] -> ImapSearchExpression {
      MCOIMAPSearchExpression * expr = [MCOIMAPSearchExpression searchBeforeDate:yesterday]
      **/
-    public static func searchBeforeDate(date: Date) -> IMAPSearchExpression {
-        return IMAPSearchExpression(CIMAPSearchExpression.searchBeforeDate(time_t(date.timeIntervalSince1970)));
+    public static func searchBeforeDate(_ date: Date) -> MCOIMAPSearchExpression {
+        return MCOIMAPSearchExpression(CIMAPSearchExpression.searchBeforeDate(time_t(date.timeIntervalSince1970)));
     }
     
     /**
@@ -282,8 +280,8 @@ public class IMAPSearchExpression {
      NSDate *now = [NSDate date] -> ImapSearchExpression {
      MCOIMAPSearchExpression * expr = [MCOIMAPSearchExpression searchOnDate:now]
      **/
-    public static func searchOnDate(date: Date) -> IMAPSearchExpression {
-        return IMAPSearchExpression(CIMAPSearchExpression.searchOnDate(time_t(date.timeIntervalSince1970)));
+    public static func searchOnDate(_ date: Date) -> MCOIMAPSearchExpression {
+        return MCOIMAPSearchExpression(CIMAPSearchExpression.searchOnDate(time_t(date.timeIntervalSince1970)));
     }
     
     /**
@@ -294,8 +292,8 @@ public class IMAPSearchExpression {
      NSDate *now = [NSDate date] -> ImapSearchExpression {
      MCOIMAPSearchExpression * expr = [MCOIMAPSearchExpression searchSinceDate:now]
      **/
-    public static func searchSinceDate(date: Date) -> IMAPSearchExpression {
-        return IMAPSearchExpression(CIMAPSearchExpression.searchSinceDate(time_t(date.timeIntervalSince1970)));
+    public static func searchSinceDate(_ date: Date) -> MCOIMAPSearchExpression {
+        return MCOIMAPSearchExpression(CIMAPSearchExpression.searchSinceDate(time_t(date.timeIntervalSince1970)));
     }
     
     /**
@@ -306,8 +304,8 @@ public class IMAPSearchExpression {
      NSDate *yesterday = [NSDate dateWithTimeIntervalSinceNow:-(60.0 * 60.0 * 24.0)] -> ImapSearchExpression {
      MCOIMAPSearchExpression * expr = [MCOIMAPSearchExpression searchBeforeReceivedDate:yesterday]
      **/
-    public static func searchBeforeReceivedDate(date: Date) -> IMAPSearchExpression {
-        return IMAPSearchExpression(CIMAPSearchExpression.searchBeforeReceivedDate(time_t(date.timeIntervalSince1970)));
+    public static func searchBeforeReceivedDate(_ date: Date) -> MCOIMAPSearchExpression {
+        return MCOIMAPSearchExpression(CIMAPSearchExpression.searchBeforeReceivedDate(time_t(date.timeIntervalSince1970)));
     }
     
     /**
@@ -318,8 +316,8 @@ public class IMAPSearchExpression {
      NSDate *now = [NSDate date] -> ImapSearchExpression {
      MCOIMAPSearchExpression * expr = [MCOIMAPSearchExpression searchOnReceivedDate:now]
      **/
-    public static func searchOnReceivedDate(date: Date) -> IMAPSearchExpression {
-        return IMAPSearchExpression(CIMAPSearchExpression.searchOnReceivedDate(time_t(date.timeIntervalSince1970)));
+    public static func searchOnReceivedDate(_ date: Date) -> MCOIMAPSearchExpression {
+        return MCOIMAPSearchExpression(CIMAPSearchExpression.searchOnReceivedDate(time_t(date.timeIntervalSince1970)));
     }
     
     /**
@@ -330,8 +328,8 @@ public class IMAPSearchExpression {
      NSDate *yesterday = [NSDate dateWithTimeIntervalSinceNow:-(60.0 * 60.0 * 24.0)] -> ImapSearchExpression {
      MCOIMAPSearchExpression * expr = [MCOIMAPSearchExpression searchSinceReceivedDate:yesterday]
      **/
-    public static func searchSinceReceivedDate(date: Date) -> IMAPSearchExpression {
-        return IMAPSearchExpression(CIMAPSearchExpression.searchSinceReceivedDate(time_t(date.timeIntervalSince1970)));
+    public static func searchSinceReceivedDate(_ date: Date) -> MCOIMAPSearchExpression {
+        return MCOIMAPSearchExpression(CIMAPSearchExpression.searchSinceReceivedDate(time_t(date.timeIntervalSince1970)));
     }
     
     /**
@@ -342,8 +340,8 @@ public class IMAPSearchExpression {
      uint32_t minSize = 1024 * 10 -> ImapSearchExpression { // 10 KB
      MCOIMAPSearchExpression * expr = [MCOIMAPSearchExpression searchSizeLargerThan:minSize]
      **/
-    public static func searchSizeLargerThan(size: UInt32) -> IMAPSearchExpression {
-        return IMAPSearchExpression(CIMAPSearchExpression.searchSizeLargerThan(size));
+    public static func searchSizeLargerThan(_ size: UInt32) -> MCOIMAPSearchExpression {
+        return MCOIMAPSearchExpression(CIMAPSearchExpression.searchSizeLargerThan(size));
     }
     
     /**
@@ -354,8 +352,8 @@ public class IMAPSearchExpression {
      uint32_t maxSize = 1024 * 10 -> ImapSearchExpression { // 10 KB
      MCOIMAPSearchExpression * expr = [MCOIMAPSearchExpression searchSizeSmallerThan:maxSize]
      **/
-    public static func searchSizeSmallerThan(size: UInt32) -> IMAPSearchExpression {
-        return IMAPSearchExpression(CIMAPSearchExpression.searchSizeSmallerThan(size));
+    public static func searchSizeSmallerThan(_ size: UInt32) -> MCOIMAPSearchExpression {
+        return MCOIMAPSearchExpression(CIMAPSearchExpression.searchSizeSmallerThan(size));
     }
     
     /**
@@ -365,8 +363,8 @@ public class IMAPSearchExpression {
      
      MCOIMAPSearchExpression * expr = [MCOIMAPSearchExpression searchGmailThreadID:aThreadID]
      */
-    public static func searchGmailThreadID(size: UInt64) -> IMAPSearchExpression {
-        return IMAPSearchExpression(CIMAPSearchExpression.searchGmailThreadID(size));
+    public static func searchGmailThreadID(_ size: UInt64) -> MCOIMAPSearchExpression {
+        return MCOIMAPSearchExpression(CIMAPSearchExpression.searchGmailThreadID(size));
     }
     
     
@@ -377,8 +375,8 @@ public class IMAPSearchExpression {
      
      MCOIMAPSearchExpression * expr = [MCOIMAPSearchExpression searchGmailMessageID:aMessageID]
      */
-    public static func searchGmailMessageID(size: UInt64) -> IMAPSearchExpression {
-        return IMAPSearchExpression(CIMAPSearchExpression.searchGmailMessageID(size));
+    public static func searchGmailMessageID(_ size: UInt64) -> MCOIMAPSearchExpression {
+        return MCOIMAPSearchExpression(CIMAPSearchExpression.searchGmailMessageID(size));
     }
     
     /**
@@ -389,8 +387,8 @@ public class IMAPSearchExpression {
      
      MCOIMAPSearchExpression * expr = [MCOIMAPSearchExpression searchGmailRaw:@"from:bill has:attachment filename:cal meeting schedule"]
      */
-    public static func searchGmailRaw(expr: String) -> IMAPSearchExpression {
-        return IMAPSearchExpression(String.utf16(expr, { CIMAPSearchExpression.searchGmailRaw($0) }));
+    public static func searchGmailRaw(_ expr: String) -> MCOIMAPSearchExpression {
+        return MCOIMAPSearchExpression(CIMAPSearchExpression.searchGmailRaw(expr.mailCoreString()))
     }
     
     
@@ -404,8 +402,8 @@ public class IMAPSearchExpression {
      MCOIMAPSearchExpression * expr = [MCOIMAPSearchExpression searchAnd:exprFrom other:exprSubject] -> ImapSearchExpression {
      **/
     
-    public static func searchAnd(expression: IMAPSearchExpression, other: IMAPSearchExpression) -> IMAPSearchExpression {
-        return IMAPSearchExpression(CIMAPSearchExpression.searchAnd(expression.nativeInstance, other: other.nativeInstance));
+    public static func searchAnd(expression: MCOIMAPSearchExpression, other: MCOIMAPSearchExpression) -> MCOIMAPSearchExpression {
+        return MCOIMAPSearchExpression(CIMAPSearchExpression.searchAnd(expression.nativeInstance, other: other.nativeInstance));
     }
     /**
      Creates a search expression that's a conjunction of two search expressions.
@@ -416,8 +414,8 @@ public class IMAPSearchExpression {
      MCOIMAPSearchExpression * exprOtherFrom = [MCOIMAPSearchExpression searchRecipient:@"ngan@etpan.org"]
      MCOIMAPSearchExpression * expr = [MCOIMAPSearchExpression searchOr:exprFrom exprOtherFrom] -> ImapSearchExpression {
      */
-    public static func searchOr(expression: IMAPSearchExpression, other: IMAPSearchExpression) -> IMAPSearchExpression {
-        return IMAPSearchExpression(CIMAPSearchExpression.searchOr(expression.nativeInstance, other: other.nativeInstance));
+    public static func searchOr(expression: MCOIMAPSearchExpression, other: MCOIMAPSearchExpression) -> MCOIMAPSearchExpression {
+        return MCOIMAPSearchExpression(CIMAPSearchExpression.searchOr(expression.nativeInstance, other: other.nativeInstance));
     }
     
     /**
@@ -430,8 +428,8 @@ public class IMAPSearchExpression {
      The expression will match when the subject does not contain the word airline
      
      */
-    public static func searchNot(expression: IMAPSearchExpression) -> IMAPSearchExpression {
-        return IMAPSearchExpression(CIMAPSearchExpression.searchNot(expression.nativeInstance));
+    public static func searchNot(expression: MCOIMAPSearchExpression) -> MCOIMAPSearchExpression {
+        return MCOIMAPSearchExpression(CIMAPSearchExpression.searchNot(expression.nativeInstance));
     }
     
     

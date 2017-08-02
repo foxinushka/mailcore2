@@ -22,14 +22,8 @@ extern "C" {
     };
     typedef struct CObject CObject;
     
-    const UChar*    CObject_castToString(struct CObject self)
-                    CF_SWIFT_NAME(CObject.castToString(self:));
-    
     uint32_t        CObject_castToUInt32(struct CObject self)
                     CF_SWIFT_NAME(CObject.castToUInt32(self:));
-    
-    CObject         CObject_new_WithString(const UChar* string)
-                    CF_SWIFT_NAME(CObject.init(string:));
     
     CObject         CObject_new_WithUInt32(uint32_t string)
                     CF_SWIFT_NAME(CObject.init(uint32:));

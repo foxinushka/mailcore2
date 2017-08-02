@@ -1,5 +1,6 @@
 #include <MailCore/MCAsync.h>
 #include "CSMTPOperation.h"
+#include "MailCoreString.h"
 
 class CSMTPOperationCallback : public mailcore::SMTPOperationCallback {
 public:
@@ -34,8 +35,8 @@ CSMTPOperation CSMTPOperation_setProgressBlocks(struct CSMTPOperation self, CPro
     return self;
 }
 
-const UChar* CSMTPOperation_lastSMTPResponse(struct CSMTPOperation self) {
-    return self.instance->lastSMTPResponse()->unicodeCharacters();
+MailCoreString CSMTPOperation_lastSMTPResponse(struct CSMTPOperation self) {
+    return MailCoreString_new(self.instance->lastSMTPResponse());
 }
 
 int CSMTPOperation_lastSMTPResponseCode(struct CSMTPOperation self) {

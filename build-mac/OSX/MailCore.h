@@ -11,6 +11,8 @@
 #include <MailCore/CIndexSet.h>
 #include <MailCore/CArray.h>
 #include <MailCore/CObject.h>
+#include <MailCore/MailCoreString.h>
+#include <MailCore/CData.h>
 #include <MailCore/CAbstractMessage.h>
 #include <MailCore/CAbstractMessagePart.h>
 #include <MailCore/CAbstractMultipart.h>
@@ -60,3 +62,10 @@
 #include <MailCore/CAttachment.h>
 #include <MailCore/CMessageBuilder.h>
 #include <MailCore/CMessageParser.h>
+#include <MailCore/CMessagePart.h>
+
+#include <MailCore/CMailProvidersManager.h>
+#include <MailCore/CMailProvider.h>
+#include <MailCore/CNetService.h>
+
+#include <MailCore/RSMLibetpanHelper.h>

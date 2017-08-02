@@ -23,13 +23,13 @@ extern "C" {
     };
     typedef struct CIMAPMultipart CIMAPMultipart;
     
-    const UChar*    CIMAPMultipart_partID(struct CIMAPMultipart self)
+    MailCoreString    CIMAPMultipart_partID(struct CIMAPMultipart self)
                     CF_SWIFT_NAME(getter:CIMAPMultipart.partID(self:));
     
-    void            CIMAPMultipart_setPartID(struct CIMAPMultipart self, const UChar* partID)
+    void            CIMAPMultipart_setPartID(struct CIMAPMultipart self, MailCoreString partID)
                     CF_SWIFT_NAME(setter:CIMAPMultipart.partID(self:newValue:));
     
-    void            CIMAPMultipart_release(CIMAPMultipart self);
+    void            CIMAPMultipart_release(CIMAPMultipart self)
                     CF_SWIFT_NAME(CIMAPMultipart.release(self:));
     
 #ifdef __cplusplus

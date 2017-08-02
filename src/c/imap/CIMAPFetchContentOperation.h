@@ -2,6 +2,7 @@
 #define MAILCORE_CIMAP_FETCH_CONTENT_OPERATION_H
 
 #include "CIMAPBaseOperation.h"
+#include "CData.h"
 
 #ifdef __cplusplus
 

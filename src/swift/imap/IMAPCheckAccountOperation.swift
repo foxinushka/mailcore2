@@ -1,23 +1,23 @@
 import Foundation
 
 
-public class IMAPCheckAccountOperation : IMAPBaseOperation {
+public class MCOIMAPCheckAccountOperation : MCOIMAPOperation {
     
     public typealias CompletionBlock = (Error?) -> Void
     
     internal var operation: CIMAPCheckAccountOperation
     private var completionBlock : CompletionBlock?
     
-    internal init(operation:CIMAPCheckAccountOperation) {
+    internal init(checkAccountOperation operation:CIMAPCheckAccountOperation) {
         self.operation = operation
-        super.init(baseOperation: operation.baseOperation)
+        super.init(operation: operation.baseOperation)
     }
     
     deinit {
         completionBlock = nil;
     }
     
-    public func start(completionBlock: CompletionBlock?) {
+    @objc public override func start(completionBlock: CompletionBlock?) {
         self.completionBlock = completionBlock
         start()
     }
@@ -37,16 +37,15 @@ public class IMAPCheckAccountOperation : IMAPBaseOperation {
             completionBlock!(nil)
         }
         else {
-            let error = MailCoreError(code: errorCode)
+            let error = MailCoreError(code: errorCode) as NSError
             if operation.loginResponse() != nil || operation.loginUnparsedResponseData().bytes != nil {
-                var userInfo = Dictionary<String, Any>()
-                if operation.loginResponse() != nil {
-                    userInfo["IMAPResponseKey"] = String(utf16: operation.loginResponse())
+                if let response = operation.loginResponse().string() {
+                    error.insertValue(response, inPropertyWithKey: "IMAPResponseKey")
                 }
                 if operation.loginUnparsedResponseData().bytes != nil {
-                    userInfo["IMAPUnparsedResponseDataKey"] = Data.init(cdata: operation.loginUnparsedResponseData())
+                    error.insertValue(Data.init(cdata: operation.loginUnparsedResponseData()), inPropertyWithKey: "IMAPUnparsedResponseDataKey")
                 }
-                error.userInfo = userInfo
+                
             }
             completionBlock!(error)
         }
