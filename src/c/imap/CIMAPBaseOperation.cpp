@@ -6,6 +6,8 @@
 #define nativeType mailcore::IMAPOperation
 #define structName CIMAPBaseOperation
 
+C_SYNTHESIZE_COBJECT_CAST()
+
 class CIMAPBaseOperationIMAPCallback : public mailcore::IMAPOperationCallback {
 public:
     CIMAPBaseOperationIMAPCallback(const void* userInfo, CIMAPProgressBlock itemProgressBlock, CIMAPProgressBlock bodyProgressBlock)

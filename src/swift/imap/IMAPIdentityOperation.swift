@@ -10,10 +10,12 @@ public class MCOIMAPIdentityOperation : MCOIMAPBaseOperation {
     
     internal init(operation:CIMAPIdentityOperation) {
         self.operation = operation
-        super.init(baseOperation: operation.baseOperation)
+        self.operation.retain()
+        super.init(baseOperation: CIMAPBaseOperation.init(cobject: operation.toCObject()))
     }
     
     deinit {
+        self.operation.release()
         completionBlock = nil;
     }
     
@@ -34,7 +36,7 @@ public class MCOIMAPIdentityOperation : MCOIMAPBaseOperation {
         
         let errorCode = error()
         if errorCode == ErrorNone {
-            completionBlock!(nil, MCOIMAPIdentity.init(operation.serverIdentity()))
+            completionBlock!(nil, MCOIMAPIdentity.init(mailCoreObject: operation.serverIdentity().toCObject()))
         }
         else {
             completionBlock!(MailCoreError(code: errorCode), nil)

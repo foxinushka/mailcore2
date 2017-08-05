@@ -1,19 +1,21 @@
 import Foundation
 
 
-public class MCOMessageHeader {
-    private var nativeInstance:CMessageHeader;
+public class MCOMessageHeader: Convertible, NSCoding {
     
-    internal func CMessageHeader() -> CMessageHeader {
-        return nativeInstance;
+    var nativeInstance:CMessageHeader
+    
+    required public init(mailCoreObject obj: CObject) {
+        self.nativeInstance = CMessageHeader.init(cobject: obj)
+        self.nativeInstance.retain()
     }
     
-    internal init(_ header:CMessageHeader) {
-        self.nativeInstance = header;
+    internal func cast() -> CObject {
+        return nativeInstance.toCObject();
     }
     
     public init(data:Data) {
-        self.nativeInstance = CMessageHeader_new();
+        self.nativeInstance = CMessageHeader_init();
         self.importHeadersData(data: data);
     }
     
@@ -33,13 +35,13 @@ public class MCOMessageHeader {
     }
     
     /** References field. It's an array of message-ids.*/
-    public var references : Array<String> {
-        set { self.nativeInstance.references = Array<String>.cast(newValue) }
+    public var references : Array<String>? {
         get { return Array<String>.cast(self.nativeInstance.references) }
+        set { self.nativeInstance.references = Array<String>.cast(newValue) }
     }
     
     /** In-Reply-To field. It's an array of message-ids.*/
-    public var inReplyTo : Array<String> {
+    public var inReplyTo : Array<String>? {
         set { self.nativeInstance.inReplyTo = Array<String>.cast(newValue) }
         get { return Array<String>.cast(self.nativeInstance.inReplyTo) }
     }
@@ -91,36 +93,32 @@ public class MCOMessageHeader {
     }
     
     public var sender: MCOAddress? {
-        set {
-            if let address = newValue?.getNativeInstance() {
-                self.nativeInstance.sender = address
-            }
-        }
-        get { return MCOAddress.init(address: self.nativeInstance.sender)}
+        set { self.nativeInstance.sender = newValue?.nativeInstance ?? CAddress() }
+        get { return createMCOObject(from: self.nativeInstance.sender.toCObject())}
     }
     
     public var from: MCOAddress? {
-        set {
-            if let address = newValue?.getNativeInstance() {
-                self.nativeInstance.from = address
-            }
+        set { self.nativeInstance.from = newValue?.nativeInstance ?? CAddress() }
+        get {
+            let address = self.nativeInstance.from
+            let obj = address.toCObject()
+            return createMCOObject(from: obj)
         }
-        get { return MCOAddress.init(address: self.nativeInstance.from)}
     }
     
     /** Adds a custom header.*/
     public func setExtraHeaderValue(value: String, name: String) {
-        nativeInstance.setExtraHeaderValue(value: value.mailCoreString(), name: name.mailCoreString())
+        nativeInstance.setExtraHeader(value.mailCoreString(), name.mailCoreString())
     }
     
     /** Remove a given custom header.*/
     public func removeExtraHeaderForName(name: String) {
-        nativeInstance.removeExtraHeaderForName(name: name.mailCoreString())
+        nativeInstance.removeExtraHeader(name.mailCoreString())
     }
     
     /** Returns the value of a given custom header.*/
     public func extraHeaderValue(forName: String) -> String? {
-        return nativeInstance.extraHeaderValueForName(name: forName.mailCoreString()).string()
+        return nativeInstance.extraHeaderValueForName(forName.mailCoreString()).string()
     }
     
     /** Returns an array with the names of all custom headers.*/
@@ -140,25 +138,37 @@ public class MCOMessageHeader {
     
     /** Fill the header using the given RFC 822 data.*/
     public func importHeadersData(data: Data) {
-        let bytes: UnsafePointer<Int8>? = data.withUnsafeBytes{(bytes: UnsafePointer<Int8>)-> UnsafePointer<Int8> in
-            return bytes;
-        }
-        nativeInstance.importHeadersData(bytes: bytes, length: UInt32(data.count));
+        nativeInstance.importHeadersData(data.mailCoreData())
     }
     
     /** Returns a header that can be used as a base for a reply message.*/
-    public func replyHeaderWithExcludedRecipients(excludedRecipients: Array<MCOAddress>) -> MCOMessageHeader {
-        return MCOMessageHeader(nativeInstance.replyHeaderWithExcludedRecipients(excludedRecipients: Array<MCOAddress>.cast(excludedRecipients)));
+    public func replyHeaderWithExcludedRecipients(excludedRecipients: Array<MCOAddress>) -> MCOMessageHeader? {
+        return createMCOObject(from: nativeInstance.replyHeaderWithExcludedRecipients(Array<MCOAddress>.cast(excludedRecipients)).toCObject())
     }
     
     /** Returns a header that can be used as a base for a reply all message.*/
-    public func replyAllHeaderWithExcludedRecipients(excludedRecipients: Array<MCOAddress>) -> MCOMessageHeader {
-        return MCOMessageHeader(nativeInstance.replyAllHeaderWithExcludedRecipients(excludedRecipients: Array<MCOAddress>.cast(excludedRecipients)));
+    public func replyAllHeaderWithExcludedRecipients(excludedRecipients: Array<MCOAddress>) -> MCOMessageHeader? {
+        return createMCOObject(from: nativeInstance.replyAllHeaderWithExcludedRecipients(Array<MCOAddress>.cast(excludedRecipients)).toCObject())
     }
     
     /** Returns a header that can be used as a base for a forward message.*/
-    public func forwardHeader() -> MCOMessageHeader {
-        return MCOMessageHeader(nativeInstance.forwardHeader());
+    public func forwardHeader() -> MCOMessageHeader? {
+        return createMCOObject(from: nativeInstance.forwardHeader().toCObject())
+    }
+    
+    public convenience required init?(coder aDecoder: NSCoder) {
+        guard let dict = aDecoder.decodeObject(forKey: "info") as? Dictionary<AnyHashable, Any> else {
+            return nil
+        }
+        let serializable = dictionaryUnsafeCast(dict)
+        self.init(mailCoreObject: CObject.objectWithSerializable(serializable))
+        self.nativeInstance.retain()
+    }
+    
+    public func encode(with aCoder: NSCoder) {
+        let serialazable: CDictionary = self.cast().serializable()
+        let dict = dictionaryUnsafeCast(serialazable)
+        aCoder.encode(dict, forKey: "info")
     }
     
 }

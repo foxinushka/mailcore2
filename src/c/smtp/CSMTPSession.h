@@ -34,119 +34,35 @@ extern "C" {
     };
     typedef struct CSMTPSession CSMTPSession;
     
-    MailCoreString      CSMTPSession_hostname(struct CSMTPSession self)
-                        CF_SWIFT_NAME(getter:CSMTPSession.hostname(self:));
-
-    unsigned int        CSMTPSession_port(struct CSMTPSession self)
-                        CF_SWIFT_NAME(getter:CSMTPSession.port(self:));
-
-    MailCoreString      CSMTPSession_username(struct CSMTPSession self)
-                        CF_SWIFT_NAME(getter:CSMTPSession.username(self:));
-
-    MailCoreString      CSMTPSession_password(struct CSMTPSession self)
-                        CF_SWIFT_NAME(getter:CSMTPSession.password(self:));
-
-    MailCoreString      CSMTPSession_OAuth2Token(struct CSMTPSession self)
-                        CF_SWIFT_NAME(getter:CSMTPSession.OAuth2Token(self:));
-
-    CAuthType           CSMTPSession_authType(struct CSMTPSession self)
-                        CF_SWIFT_NAME(getter:CSMTPSession.authType(self:));
-
-    ConnectionType      CSMTPSession_connectionType(struct CSMTPSession self)
-                        CF_SWIFT_NAME(getter:CSMTPSession.connectionType(self:));
-
-    time_t              CSMTPSession_timeout(struct CSMTPSession self)
-                        CF_SWIFT_NAME(getter:CSMTPSession.timeout(self:));
-
-    bool                CSMTPSession_isCheckCertificateEnabled(struct CSMTPSession self)
-                        CF_SWIFT_NAME(getter:CSMTPSession.isCheckCertificateEnabled(self:));
-
-    bool                CSMTPSession_useHeloIPEnabled(struct CSMTPSession self)
-                        CF_SWIFT_NAME(getter:CSMTPSession.useHeloIPEnabled(self:));
-
-    bool                CSMTPSession_isOperationQueueRunning(struct CSMTPSession self)
-                        CF_SWIFT_NAME(getter:CSMTPSession.isOperationQueueRunning(self:));
+    C_SYNTHESIZE_PROPERTY_DEFINITION(CSMTPSession, MailCoreString, hostname, setHostname)
+    C_SYNTHESIZE_PROPERTY_DEFINITION(CSMTPSession, unsigned int, port, setPort)
+    C_SYNTHESIZE_PROPERTY_DEFINITION(CSMTPSession, MailCoreString, username, setUsername)
+    C_SYNTHESIZE_PROPERTY_DEFINITION(CSMTPSession, MailCoreString, password, setPassword)
+    C_SYNTHESIZE_PROPERTY_DEFINITION(CSMTPSession, MailCoreString, OAuth2Token, setOAuth2Token)
+    C_SYNTHESIZE_PROPERTY_DEFINITION(CSMTPSession, CAuthType, authType, setAuthType)
+    C_SYNTHESIZE_PROPERTY_DEFINITION(CSMTPSession, ConnectionType, connectionType, setConnectionType)
+    C_SYNTHESIZE_PROPERTY_DEFINITION(CSMTPSession, time_t, timeout, setTimeout)
+    C_SYNTHESIZE_PROPERTY_DEFINITION(CSMTPSession, bool, isCheckCertificateEnabled, setCheckCertificateEnabled)
+    C_SYNTHESIZE_PROPERTY_DEFINITION(CSMTPSession, bool, useHeloIPEnabled, setUseHeloIPEnabled)
+    C_SYNTHESIZE_PROPERTY_DEFINITION(CSMTPSession, bool, isOperationQueueRunning, setOperationQueueRunning)
+    C_SYNTHESIZE_FUNC_DEFINITION(CSMTPSession, void, setConnectionLogger, void*)
     
-    dispatch_queue_t    CSMTPSession_dispatchQueue(struct CSMTPSession self)
-                        CF_SWIFT_NAME(CSMTPSession.dispatchQueue(self:));
+    C_SYNTHESIZE_FUNC_DEFINITION(CSMTPSession, dispatch_queue_t, dispatchQueue)
+    C_SYNTHESIZE_FUNC_DEFINITION(CSMTPSession, void, setDispatchQueue, dispatch_queue_t)
     
-    ConnectionLogger    CSMTPSession_connectionLogger(struct CSMTPSession self)
-                        CF_SWIFT_NAME(getter:CSMTPSession.connectionLogger(self:));
+    C_SYNTHESIZE_PROPERTY_DEFINITION(CSMTPSession, OperationQueueRunningChangeBlock, operationQueueRunningChangeBlock, setOperationQueueRunningChangeBlock)
     
-    OperationQueueRunningChangeBlock    CSMTPSession_operationQueueRunningChangeBlock(struct CSMTPSession self)
-                                        CF_SWIFT_NAME(getter:CSMTPSession.operationQueueRunningChangeBlock(self:));
-
+    C_SYNTHESIZE_FUNC_DEFINITION(CSMTPSession, void, cancelAllOperations)
+    C_SYNTHESIZE_FUNC_DEFINITION(CSMTPSession, CSMTPOperation, loginOperation)
+    C_SYNTHESIZE_FUNC_DEFINITION(CSMTPSession, CSMTPOperation, sendMessageOperation, CData)
+    C_SYNTHESIZE_FUNC_DEFINITION(CSMTPSession, CSMTPOperation, sendOperationWithDataAndFromAndRecipients, CData, CAddress, CArray)
+    C_SYNTHESIZE_FUNC_DEFINITION(CSMTPSession, CSMTPOperation, sendOperationWithContentsOfFile, MailCoreString, CAddress, CArray)
+    C_SYNTHESIZE_FUNC_DEFINITION(CSMTPSession, CSMTPOperation, checkAccountOperation, CAddress)
+    C_SYNTHESIZE_FUNC_DEFINITION(CSMTPSession, CSMTPOperation, checkAccountOperationWithFromAndTo, CAddress, CAddress)
+    C_SYNTHESIZE_FUNC_DEFINITION(CSMTPSession, CSMTPOperation, noopOperation)
 
     
-    void                CSMTPSession_setHostname(struct CSMTPSession self, MailCoreString hostname)
-                        CF_SWIFT_NAME(setter:CSMTPSession.hostname(self:newValue:));
-
-    void                CSMTPSession_setPort(struct CSMTPSession self, unsigned int port)
-                        CF_SWIFT_NAME(setter:CSMTPSession.port(self:newValue:));
-
-    void                CSMTPSession_setUsername(struct CSMTPSession self, MailCoreString username)
-                        CF_SWIFT_NAME(setter:CSMTPSession.username(self:newValue:));
-
-    void                CSMTPSession_setPassword(struct CSMTPSession self, MailCoreString password)
-                        CF_SWIFT_NAME(setter:CSMTPSession.password(self:newValue:));
-
-    void                CSMTPSession_setOAuth2Token(struct CSMTPSession self, MailCoreString token)
-                        CF_SWIFT_NAME(setter:CSMTPSession.OAuth2Token(self:newValue:));
-
-    void                CSMTPSession_setAuthType(struct CSMTPSession self, CAuthType authType)
-                        CF_SWIFT_NAME(setter:CSMTPSession.authType(self:newValue:));
-
-    void                CSMTPSession_setConnectionType(struct CSMTPSession self, ConnectionType connectionType)
-                        CF_SWIFT_NAME(setter:CSMTPSession.connectionType(self:newValue:));
-
-    void                CSMTPSession_setTimeout(struct CSMTPSession self, time_t timeout)
-                        CF_SWIFT_NAME(setter:CSMTPSession.timeout(self:newValue:));
-
-    void                CSMTPSession_setCheckCertificateEnabled(struct CSMTPSession self, bool checkCertificateEnabled)
-                        CF_SWIFT_NAME(setter:CSMTPSession.isCheckCertificateEnabled(self:newValue:));
-
-    void                CSMTPSession_setUseHeloIPEnabled(struct CSMTPSession self, bool useHeloIPEnabled)
-                        CF_SWIFT_NAME(setter:CSMTPSession.useHeloIPEnabled(self:newValue:));
-    
-    void                CSMTPSession_setConnectionLogger(struct CSMTPSession self, ConnectionLogger logger)
-                        CF_SWIFT_NAME(setter:CSMTPSession.connectionLogger(self:newValue:));
-
-    void                CSMTPSession_setOperationQueueRunningChangeBlock(struct CSMTPSession self, OperationQueueRunningChangeBlock logger)
-                        CF_SWIFT_NAME(setter:CSMTPSession.operationQueueRunningChangeBlock(self:newValue:));
-    
-    void                CSMTPSession_setDispatchQueue(struct CSMTPSession self, dispatch_queue_t queue)
-                        CF_SWIFT_NAME(CSMTPSession.setDispatchQueue(self:newValue:));
-    
-    
-
-    void                CSMTPSession_cancelAllOperations(struct CSMTPSession self)
-                        CF_SWIFT_NAME(CSMTPSession.cancelAllOperations(self:));
-    
-    CSMTPOperation      CSMTPSession_loginOperation(struct CSMTPSession self)
-                        CF_SWIFT_NAME(CSMTPSession.loginOperation(self:));
-
-    CSMTPOperation      CSMTPSession_sendOperationWithData(struct CSMTPSession self, const char* messageDataBytes, unsigned int messageDataLenght)
-                        CF_SWIFT_NAME(CSMTPSession.sendOperationWithData(self:messageDataBytes:messageDataLenght:));
-
-    CSMTPOperation      CSMTPSession_sendOperationWithDataAndFromAndRecipients(struct CSMTPSession self, const char* messageDataBytes,
-                                                                               unsigned int messageDataLenght, CAddress from , CArray recipients)
-                        CF_SWIFT_NAME(CSMTPSession.sendOperationWithDataAndFromAndRecipients(self:messageDataBytes:messageDataLenght:from:recipients:));
-
-    CSMTPOperation      CSMTPSession_sendOperationWithContentsOfFile(struct CSMTPSession self, MailCoreString path,  CAddress from,  CArray recipients)
-                        CF_SWIFT_NAME(CSMTPSession.sendOperationWithContentsOfFile(self:path:from:recipients:));
-
-    CSMTPOperation      CSMTPSession_checkAccountOperationWithFrom(struct CSMTPSession self, CAddress from)
-                        CF_SWIFT_NAME(CSMTPSession.checkAccountOperationWithFrom(self:from:));
-    
-    CSMTPOperation      CSMTPSession_checkAccountOperation(struct CSMTPSession self, CAddress from, CAddress to)
-                        CF_SWIFT_NAME(CSMTPSession.checkAccountOperationWithFrom(self:from:to:));
-
-    CSMTPOperation      CSMTPSession_noopOperation(struct CSMTPSession self)
-                        CF_SWIFT_NAME(CSMTPSession.noopOperation(self:));
-
-    
-    CSMTPSession        CSMTPSession_new()
-                        /*CF_SWIFT_NAME(CSMTPSession.init())*/;
+    CSMTPSession        CSMTPSession_new(CConnectionLogger logger, CConnectionLoggerRelease releaseLoggerBlock);
 
     void                CSMTPSession_release(CSMTPSession self)
                         CF_SWIFT_NAME(CSMTPSession.release(self:));

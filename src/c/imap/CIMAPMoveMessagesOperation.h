@@ -13,26 +13,12 @@ namespace mailcore {
 extern "C" {
 #endif
     
-    struct CIMAPMoveMessagesOperation {
-        CIMAPBaseOperation baseOperation;
-#ifdef __cplusplus
-        mailcore::IMAPMoveMessagesOperation*      instance;
-#else
-        void*                                           instance;
-#endif
-    };
-    typedef struct CIMAPMoveMessagesOperation CIMAPMoveMessagesOperation;
-    
-    CDictionary     CIMAPMoveMessagesOperation_uidMapping(struct CIMAPMoveMessagesOperation self)
-                    CF_SWIFT_NAME(CIMAPMoveMessagesOperation.uidMapping(self:));
-    
-    void            CIMAPMoveMessagesOperation_release(CIMAPMoveMessagesOperation self)
-                    CF_SWIFT_NAME(CIMAPMoveMessagesOperation.release(self:));
+    C_SYNTHESIZE_STRUCT_DEFINITION(CIMAPMoveMessagesOperation, mailcore::IMAPMoveMessagesOperation)
+    C_SYNTHESIZE_COBJECT_CAST_DEFINITION(CIMAPMoveMessagesOperation)
+    C_SYNTHESIZE_FUNC_DEFINITION(CIMAPMoveMessagesOperation, CDictionary, uidMapping)
     
 #ifdef __cplusplus
 }
-
-CIMAPMoveMessagesOperation CIMAPMoveMessagesOperation_new(mailcore::IMAPMoveMessagesOperation *operation);
 #endif
 
 #endif /* CIMAPMoveMessagesOperation_hpp */

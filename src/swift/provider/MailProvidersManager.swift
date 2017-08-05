@@ -9,26 +9,25 @@
 import Foundation
 
 public class MCOMailProvidersManager: NSObject {
-        
-    internal var nativeInstance: CMailProvidersManager
     
-    private init(_ manger: CMailProvidersManager) {
-        self.nativeInstance = manger
-    }
+    public static let sharedManager = MCOMailProvidersManager()
     
-    public class func shared() -> MCOMailProvidersManager {
-        return MCOMailProvidersManager.init(CMailProvidersManager_shared())
+    private override init() {
+        super.init()
+        if let filename = Bundle.init(for: MCOMailProvidersManager.self).path(forResource: "providers", ofType: "json") {
+            CMailProvidersManager_shared().registerProvidersWithFilename(filename.mailCoreString())
+        }
     }
     
     public func provider(forEmail: String) -> MCOMailProvider? {
-        return MCOMailProvider.init(nativeInstance.provider(forEmail: forEmail.mailCoreString()))
+        return createMCOObject(from: CMailProvidersManager_shared().providerForEmail(forEmail.mailCoreString()).toCObject())
     }
     
     public func provider(forMX: String) -> MCOMailProvider? {
-        return MCOMailProvider.init(nativeInstance.provider(forMX: forMX.mailCoreString()))
+        return createMCOObject(from: CMailProvidersManager_shared().providerForMX(forMX.mailCoreString()).toCObject())
     }
     
     public func provider(forIdentifier: String) -> MCOMailProvider? {
-        return MCOMailProvider.init(nativeInstance.provider(forIdentifier: forIdentifier.mailCoreString()))
+        return createMCOObject(from: CMailProvidersManager_shared().providerForIdentifier(forIdentifier.mailCoreString()).toCObject())
     }
 }

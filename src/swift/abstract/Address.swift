@@ -1,12 +1,34 @@
 import Foundation
 
 
-public final class MCOAddress : NSObject, Convertible {
+public final class MCOAddress : NSObject, Convertible, NSCoding {
     
-    private var nativeInstance:CAddress;
+    var nativeInstance:CAddress
     
-    internal func getNativeInstance() -> CAddress {
-        return self.nativeInstance;
+    public override init() {
+        self.nativeInstance = CAddress_init();
+        super.init()
+    }
+    
+    private init?(address:CAddress) {
+        guard address.instance != nil else {
+            return nil
+        }
+        self.nativeInstance = address;
+        self.nativeInstance.retain()
+    }
+    
+    internal init(mailCoreObject obj: CObject) {
+        self.nativeInstance = CAddress.init(cobject: obj)
+        self.nativeInstance.retain()
+    }
+    
+    deinit {
+        self.nativeInstance.release();
+    }
+    
+    internal func cast() -> CObject {
+        return nativeInstance.toCObject()
     }
     
     public func isNil() -> Bool {
@@ -16,8 +38,8 @@ public final class MCOAddress : NSObject, Convertible {
     /** Creates an address with a display name and a mailbox.
      
      Example: [MCOAddress addressWithDisplayName:@"DINH Viêt Hoà" mailbox:@"hoa@etpan.org"] */
-    public convenience init?(displayName: String, mailbox: String) {
-        let addrss = CAddress(displayName: displayName.mailCoreString(), mailbox: mailbox.mailCoreString())
+    public convenience init?(displayName: String?, mailbox: String) {
+        let addrss = CAddress.addressWithDisplayName(displayName?.mailCoreString() ?? MailCoreString(), mailbox.mailCoreString())
         guard addrss.instance != nil else {
             return nil
         }
@@ -28,21 +50,21 @@ public final class MCOAddress : NSObject, Convertible {
      
      Example: [MCOAddress addressWithMailbox:@"hoa@etpan.org"]*/
     public convenience init?(mailbox: String) {
-        self.init(address: CAddress(mailbox: mailbox.mailCoreString()))
+        self.init(address: CAddress.addressWithMailbox(mailbox.mailCoreString()))
     }
 
     /** Creates an address with a RFC822 string.
      
      Example: [MCOAddress addressWithRFC822String:@"DINH Vi=C3=AAt Ho=C3=A0 <hoa@etpan.org>"]*/
     public convenience init?(RFC822String: String) {
-        self.init(address: CAddress(RFC822String: RFC822String.mailCoreString()))
+        self.init(address: CAddress.addressWithRFC822String(RFC822String.mailCoreString()))
     }
 
     /** Creates an address with a non-MIME-encoded RFC822 string.
      
      Example: [MCOAddress addressWithNonEncodedRFC822String:@"DINH Viêt Hoà <hoa@etpan.org>"]*/
     public convenience init?(nonEncodedRFC822String: String) {
-        self.init(address: CAddress(nonEncodedRFC822String: nonEncodedRFC822String.mailCoreString()))
+        self.init(address: CAddress.addressWithNonEncodedRFC822String(nonEncodedRFC822String.mailCoreString()))
     }
 
     /**
@@ -51,7 +73,7 @@ public final class MCOAddress : NSObject, Convertible {
      
      For example: @[ @"DINH Vi=C3=AAt Ho=C3=A0 <hoa@etpan.org>" ]*/
     public static func addressesWithRFC822String(string: String) -> Array<MCOAddress> {
-        return Array<MCOAddress>.cast(CAddress.addresses(RFC822String: string.mailCoreString()))
+        return Array<MCOAddress>.cast(CAddress.addressesWithRFC822String(string.mailCoreString()))
     }
 
     /**
@@ -60,23 +82,7 @@ public final class MCOAddress : NSObject, Convertible {
      
      For example: @[ "DINH Viêt Hoà <hoa@etpan.org>" ]*/
     public static func addressesWithNonEncodedRFC822String(string: String) -> Array<MCOAddress> {
-        return Array<MCOAddress>.cast(CAddress.addresses(nonEncodedRFC822String: string.mailCoreString()))
-    }
-    
-    public override init() {
-        self.nativeInstance = CAddress_new();
-        super.init()
-    }
-    
-    internal init?(address:CAddress?) {
-        guard let address = address else {
-            return nil
-        }
-        self.nativeInstance = address;
-    }
-    
-    deinit {
-        self.nativeInstance.release();
+        return Array<MCOAddress>.cast(CAddress.addressesWithNonEncodedRFC822String(string.mailCoreString()))
     }
     
     /** Returns the display name of the address.*/
@@ -86,8 +92,8 @@ public final class MCOAddress : NSObject, Convertible {
     }
     
     /** Returns the mailbox of the address.*/
-    public var mailbox : String? {
-        set { self.nativeInstance.mailbox = newValue?.mailCoreString() ?? MailCoreString() }
+    public var mailbox : String! {
+        set { self.nativeInstance.mailbox = newValue.mailCoreString() }
         get { return self.nativeInstance.mailbox.string() }
     }
     
@@ -122,12 +128,19 @@ public final class MCOAddress : NSObject, Convertible {
         return lhs.displayName == rhs.displayName && lhs.mailbox == rhs.mailbox;
     }
     
-    internal init(cobject obj: CObject) {
-        self.nativeInstance = CAddress(cObject: obj);
+    public convenience init?(coder aDecoder: NSCoder) {
+        guard let dict = aDecoder.decodeObject(forKey: "info") as? Dictionary<AnyHashable, Any> else {
+            return nil
+        }
+        let serializable = dictionaryUnsafeCast(dict)
+        self.init(mailCoreObject: CObject.objectWithSerializable(serializable))
+        self.nativeInstance.retain()
     }
     
-    internal func cast() -> CObject {
-        return nativeInstance.castToCObject()
+    public func encode(with aCoder: NSCoder) {
+        let serialazable: CDictionary = self.cast().serializable()
+        let dict = dictionaryUnsafeCast(serialazable)
+        aCoder.encode(dict, forKey: "info")
     }
     
 }

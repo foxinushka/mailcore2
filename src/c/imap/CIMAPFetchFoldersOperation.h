@@ -21,26 +21,12 @@ namespace mailcore {
 extern "C" {
 #endif
     
-    struct CIMAPFetchFoldersOperation {
-        CIMAPBaseOperation baseOperation;
-#ifdef __cplusplus
-        mailcore::IMAPFetchFoldersOperation*    instance;
-#else
-        void*                                   instance;
-#endif
-    };
-    typedef struct CIMAPFetchFoldersOperation CIMAPFetchFoldersOperation;
-    
-    CArray  CIMAPFetchFoldersOperation_folders(struct CIMAPFetchFoldersOperation self)
-            CF_SWIFT_NAME(CIMAPFetchFoldersOperation.folders(self:));
-
-    void    CIMAPFetchFoldersOperation_release(CIMAPFetchFoldersOperation self)
-            CF_SWIFT_NAME(CIMAPFetchFoldersOperation.release(self:));
+    C_SYNTHESIZE_STRUCT_DEFINITION(CIMAPFetchFoldersOperation, mailcore::IMAPFetchFoldersOperation)
+    C_SYNTHESIZE_COBJECT_CAST_DEFINITION(CIMAPFetchFoldersOperation)
+    C_SYNTHESIZE_FUNC_DEFINITION(CIMAPFetchFoldersOperation, CArray, folders)
     
 #ifdef __cplusplus
 }
-
-CIMAPFetchFoldersOperation CIMAPFetchFoldersOperation_new(mailcore::IMAPFetchFoldersOperation *operation);
 #endif
 
 #endif /* CIMAPFetchFoldersOperation_hpp */

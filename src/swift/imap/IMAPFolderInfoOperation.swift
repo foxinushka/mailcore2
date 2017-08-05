@@ -14,10 +14,12 @@ public class MCOIMAPFolderInfoOperation : MCOIMAPBaseOperation {
 
 	internal init(operation:CIMAPFolderInfoOperation) {
  		self.operation = operation
-        super.init(baseOperation: operation.baseOperation);
+        self.operation.retain()
+        super.init(baseOperation: CIMAPBaseOperation.init(cobject: operation.toCObject()))
 	}
 
     deinit {
+        self.operation.release()
         completionBlock = nil;
     }
     
@@ -48,7 +50,7 @@ public class MCOIMAPFolderInfoOperation : MCOIMAPBaseOperation {
         
         let errorCode = error();
         if errorCode == ErrorNone {
-            completionBlock!(nil, MCOIMAPFolderInfo(info: operation.info()));
+            completionBlock!(nil, createMCOObject(from: operation.info().toCObject()));
         }
         else {
             completionBlock!(MailCoreError(code: errorCode), nil);

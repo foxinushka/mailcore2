@@ -13,56 +13,28 @@ C_SYNTHESIZE_ARRAY(setAttachments, attachments)
 C_SYNTHESIZE_ARRAY(setRelatedAttachments, relatedAttachments)
 C_SYNTHESIZE_STRING(setBoundaryPrefix, boundaryPrefix)
 
-CMessageBuilder CMessageBuilder_new() {
+C_SYNTHESIZE_CONSTRUCTOR()
+C_SYNTHESIZE_COBJECT_CAST()
+
+CMessageBuilder CMessageBuilder_init() {
     return CMessageBuilder_new(new mailcore::MessageBuilder());
 }
 
-CMessageBuilder CMessageBuilder_new(mailcore::MessageBuilder *builder) {
-    CMessageBuilder self;
-    self.abstractMessage = CAbstractMessage_new(builder);
-    self.instance = builder;
-    return self;
-}
+C_SYNTHESIZE_FUNC_WITH_VOID(addAttachment, CAttachment)
+C_SYNTHESIZE_FUNC_WITH_VOID(addRelatedAttachment, CAttachment)
 
-void CMessageBuilder_addAttachment(struct CMessageBuilder self, CAttachment attachment) {
-    self.instance->addAttachment(attachment.instance);
-}
+C_SYNTHESIZE_FUNC_WITH_OBJ(CData, data)
+C_SYNTHESIZE_FUNC_WITH_OBJ(CData, dataForEncryption)
 
-void CMessageBuilder_addRelatedAttachment(struct CMessageBuilder self, CAttachment attachment) {
-    self.instance->addRelatedAttachment(attachment.instance);
-}
-
-CData CMessageBuilder_data(struct CMessageBuilder self) {
-    return CData_new(self.instance->data());
-}
-
-CData CMessageBuilder_dataForEncryption(struct CMessageBuilder self) {
-    return CData_new(self.instance->dataForEncryption());
-}
 
 ErrorCode CMessageBuilder_writeToFile(struct CMessageBuilder self, MailCoreString filename) {
     return static_cast<ErrorCode>((int)self.instance->writeToFile(filename.instance));
 }
 
-CData CMessageBuilder_openPGPSignedMessageData(struct CMessageBuilder self, CData data) {
-    return CData_new(self.instance->openPGPSignedMessageDataWithSignatureData(data.instance));
-}
-
-CData CMessageBuilder_openPGPEncryptedMessageData(struct CMessageBuilder self, CData data) {
-    return CData_new(self.instance->openPGPEncryptedMessageDataWithEncryptedData(data.instance));
-}
-
-MailCoreString CMessageBuilder_htmlBodyRendering(struct CMessageBuilder self) {
-    return MailCoreString_new(self.instance->htmlBodyRendering());
-}
-
-MailCoreString CMessageBuilder_plainTextRendering(struct CMessageBuilder self) {
-    return MailCoreString_new(self.instance->plainTextRendering());
-}
-
-MailCoreString CMessageBuilder_plainTextBodyRendering(struct CMessageBuilder self) {
-    return MailCoreString_new(self.instance->plainTextBodyRendering(true));
-}
+C_SYNTHESIZE_FUNC_WITH_OBJ(CData, openPGPSignedMessageDataWithSignatureData, CData)
+C_SYNTHESIZE_FUNC_WITH_OBJ(CData, openPGPEncryptedMessageDataWithEncryptedData, CData)
+C_SYNTHESIZE_FUNC_WITH_OBJ(MailCoreString, htmlBodyRendering)
+C_SYNTHESIZE_FUNC_WITH_OBJ(MailCoreString, plainTextRendering)
 
 MailCoreString CMessageBuilder_plainTextBodyRenderingAndStripWhitespace(struct CMessageBuilder self, bool stripWhitespace) {
     return MailCoreString_new(self.instance->plainTextBodyRendering(stripWhitespace));

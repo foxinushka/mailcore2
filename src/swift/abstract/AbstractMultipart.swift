@@ -5,13 +5,18 @@ public class MCOAbstractMultipart : MCOAbstractPart {
     
     private var nativeInstance: CAbstractMultipart;
     
-    internal init(abstractMultipart: CAbstractMultipart) {
-        self.nativeInstance = abstractMultipart;
-        super.init(abstractMultipart.abstractPart);
+    required public init(mailCoreObject obj: CObject) {
+        self.nativeInstance = CAbstractMultipart(cobject: obj)
+        self.nativeInstance.retain()
+        super.init(mailCoreObject: obj);
     }
     
-    required public init(cobject obj: CObject) {
-        fatalError("init has not been implemented")
+    deinit {
+        self.nativeInstance.release()
+    }
+    
+    internal override func cast() -> CObject {
+        return nativeInstance.toCObject();
     }
     
     /** Returns the subparts of that multipart.*/

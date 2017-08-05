@@ -1,6 +1,8 @@
 #ifndef MAILCORE_MESSAGE_CONSTANT
 #define MAILCORE_MESSAGE_CONSTANT
 
+#include "CData.h"
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -294,7 +296,8 @@ extern "C" {
      @param logType is the type of the log.
      @param bytes is the data related to the log.
      */
-    typedef void (*ConnectionLogger)(void* sender, ConnectionLogType logType, const char* bytes, unsigned int length);
+    typedef void (*CConnectionLogger)(void* sender, ConnectionLogType logType, CData data, void* logger);
+    typedef void (*CConnectionLoggerRelease)(void* logger);
     
 #ifdef __cplusplus
 }

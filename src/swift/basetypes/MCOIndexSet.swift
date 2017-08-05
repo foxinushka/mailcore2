@@ -2,7 +2,7 @@ import Foundation
 
 
 /** similar to NSMutableIndexSet but supports int64_t.  MCRange has a location (uint64_t) and length (uint64_t). */
-public class MCOIndexSet: NSObject, NSCopying {
+public class MCOIndexSet: NSObject, NSCopying, NSCoding {
     
     internal var nativeInstance: CIndexSet;
     
@@ -11,11 +11,15 @@ public class MCOIndexSet: NSObject, NSCopying {
     }
     
     public override init() {
-        self.nativeInstance = CIndexSet_new();
+        self.nativeInstance = CIndexSet_init();
     }
     
-    internal init(_ indexSet: CIndexSet) {
+    init?(_ indexSet: CIndexSet) {
+        guard  indexSet.instance != nil else {
+            return nil
+        }
         self.nativeInstance = indexSet;
+        self.nativeInstance.retain()
     }
     
     deinit {
@@ -24,12 +28,12 @@ public class MCOIndexSet: NSObject, NSCopying {
     
     /** Creates an index set that contains a range of integers.*/
     public convenience init(range: MailCore.Range) {
-        self.init(CIndexSet(range: range));
+        self.init(CIndexSet(range: range))!;
     }
     
     /** Creates an index set with a single integer.*/
     public convenience init(index: UInt64) {
-        self.init(CIndexSet(idx: index));
+        self.init(CIndexSet(idx: index))!;
     }
     
     /** Returns the number of integers in that index set.*/
@@ -38,55 +42,55 @@ public class MCOIndexSet: NSObject, NSCopying {
     }
     
     /** Adds an integer to the index set.*/
-    public func add(index: UInt64) {
-        nativeInstance.addIndex(idx: index);
+    public func add(_ index: UInt64) {
+        nativeInstance.addIndex(index);
     }
     
     /** Removes an integer from the index set.*/
-    public func remove(index: UInt64) {
-        nativeInstance.removeIndex(idx: index);
+    public func remove(_ index: UInt64) {
+        nativeInstance.removeIndex(index);
     }
     
     /** Returns YES if the index set contains the given integer.*/
-    public func contains(index: UInt64) -> Bool {
-        return nativeInstance.containsIndex(idx: index);
+    public func contains(_ index: UInt64) -> Bool {
+        return nativeInstance.containsIndex(index);
     }
     
     /** Adds a range of integers to the index set.*/
     public func add(range: MailCore.Range) {
-        nativeInstance.addRange(range: range);
+        nativeInstance.addRange(range);
     }
     
     /** Removes a range of integers from the index set.*/
     public func remove(range: MailCore.Range) {
-        nativeInstance.removeRange(range: range);
+        nativeInstance.removeRange(range);
     }
     
     /** Removes all integers that are not in the given range.*/
     public func intersects(range: MailCore.Range) {
-        nativeInstance.intersectsRange(range: range);
+        nativeInstance.intersectsRange(range);
     }
     
     /** Adds all indexes from an other index set to the index set.*/
     public func add(indexSet: MCOIndexSet) {
-        nativeInstance.addIndexSet(indexSet: indexSet.nativeInstance);
+        nativeInstance.addIndexSet(indexSet.nativeInstance);
     }
     
     /** Remove all indexes from an other index set from the index set.*/
     public func remove(indexSet: MCOIndexSet) {
-        nativeInstance.removeIndexSet(indexSet: indexSet.nativeInstance);
+        nativeInstance.removeIndexSet(indexSet.nativeInstance);
     }
     
     /** Removes all integers that are not in the given index set.*/
     public func intersects(indexSet: MCOIndexSet) {
-        nativeInstance.intersectsIndexSet(indexSet: indexSet.nativeInstance);
+        nativeInstance.intersectsIndexSet(indexSet.nativeInstance);
     }
     
     /** Returns all the ranges of ths index set.*/
     public func allRanges() -> Array<MailCore.Range> {
         var array  = Array<MailCore.Range>();
         for index in 0 ..< self.rangesCount() {
-            array.append(nativeInstance.range(idx: index));
+            array.append(nativeInstance.range(index));
         }
         return array;
     }
@@ -116,7 +120,7 @@ public class MCOIndexSet: NSObject, NSCopying {
     }
     
     public subscript(index: UInt32) -> MailCore.Range {
-        return nativeInstance.range(idx: index)
+        return nativeInstance.range(index)
     }
     
     public func copy(with zone: NSZone? = nil) -> Any {
@@ -124,8 +128,24 @@ public class MCOIndexSet: NSObject, NSCopying {
     }
     
     public func copyIndexSet() -> MCOIndexSet {
-        return MCOIndexSet.init(self.nativeInstance.copy())
+        return MCOIndexSet.init(CIndexSet.init(cobject: self.nativeInstance.copy()))!
     }
+    
+    public convenience required init?(coder aDecoder: NSCoder) {
+        guard let dict = aDecoder.decodeObject(forKey: "info") as? Dictionary<AnyHashable, Any> else {
+            return nil
+        }
+        let serializable = dictionaryUnsafeCast(dict)
+        self.init(CIndexSet.init(cobject: CObject.objectWithSerializable(serializable)))
+    }
+    
+    public func encode(with aCoder: NSCoder) {
+        let serialazable: CDictionary = self.nativeInstance.toCObject().serializable()
+        let dict = dictionaryUnsafeCast(serialazable)
+        aCoder.encode(dict, forKey: "info")
+    }
+    
+    
 }
 
 public extension IndexSet {

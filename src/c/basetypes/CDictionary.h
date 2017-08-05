@@ -15,34 +15,19 @@ namespace mailcore {
 extern "C" {
 #endif
     
-    struct CDictionary {
-#ifdef __cplusplus
-        mailcore::HashMap*  instance;
-#else
-        void*               instance;
-#endif
-    };
-    typedef struct CDictionary CDictionary;
+    C_SYNTHESIZE_STRUCT_DEFINITION(CDictionary, mailcore::HashMap)
     
-    CArray          CDictionary_allKeys(struct CDictionary self)
-                    CF_SWIFT_NAME(CDictionary.allKeys(self:));
+    C_SYNTHESIZE_FUNC_DEFINITION(CDictionary, CArray, allKeys)
+    C_SYNTHESIZE_FUNC_DEFINITION(CDictionary, CObject, objectForKey, CObject)
+    C_SYNTHESIZE_FUNC_DEFINITION(CDictionary, void, setObjectForKey, CObject, CObject)
     
-    CObject         CDictionary_getValue(struct CDictionary self, CObject key)
-                    CF_SWIFT_NAME(CDictionary.getValue(self:key:));
+    C_SYNTHESIZE_STATIC_FUNC_DEFINITION(CDictionary, CDictionary, init)
     
-    void            CDictionary_setValue(struct CDictionary self, CObject key, CObject value)
-                    CF_SWIFT_NAME(CDictionary.setValue(self:key:value:));
-    
-    CDictionary     CDictionary_new()
-                    /*CF_SWIFT_NAME(CDictionary.init())*/;
-    
-    void            CDictionary_release(CDictionary self)
-                    CF_SWIFT_NAME(CDictionary.release(self:));
+    C_SYNTHESIZE_FUNC_DEFINITION(CObject, CDictionary, serializable);
+    C_SYNTHESIZE_STATIC_FUNC_DEFINITION(CObject, CObject, objectWithSerializable, CDictionary);
     
 #ifdef __cplusplus
 }
-
-CDictionary CDictionary_new(mailcore::HashMap *dict);
 #endif
 
 #endif /* CDictionary_hpp */

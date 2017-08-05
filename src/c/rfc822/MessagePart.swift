@@ -12,14 +12,18 @@ public class MCOMessagePart : MCOAbstractMessagePart {
     
     private var nativeInstance:CMessagePart;
     
-    // public for smartmailcore
-    public init(part:CMessagePart) {
-        self.nativeInstance = part;
-        super.init(abstractMessagePart: part.abstractMessagePart);
+    public required init(mailCoreObject: CObject) {
+        self.nativeInstance = CMessagePart.init(cobject: mailCoreObject)
+        self.nativeInstance.retain()
+        super.init(mailCoreObject: mailCoreObject)
     }
     
-    required public init(cobject obj: CObject) {
-        fatalError("init has not been implemented")
+    deinit {
+        self.nativeInstance.release()
+    }
+    
+    override func cast() -> CObject {
+        return self.nativeInstance.toCObject()
     }
     
     /** A part identifier is of the form 1.2.1*/

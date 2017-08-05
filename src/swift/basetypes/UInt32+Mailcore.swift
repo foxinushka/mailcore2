@@ -7,7 +7,7 @@ extension UInt32 : Convertible  {
         return CObject(uint32: self);
     }
     
-    init(cobject obj: CObject) {
+    init(mailCoreObject obj: CObject) {
         self = obj.castToUInt32();
     }
 }

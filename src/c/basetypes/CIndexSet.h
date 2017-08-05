@@ -4,6 +4,7 @@
 #include "stdint.h"
 #include "CBase.h"
 #include "CArray.h"
+#include "CData.h"
 
 #ifdef __cplusplus
 
@@ -24,85 +25,42 @@ extern "C" {
         uint64_t length;
     };
     typedef struct Range Range;
-
-    struct CIndexSet {
-#ifdef __cplusplus
-        mailcore::IndexSet* instance;
-#else
-        void*               instance;
-#endif
-    };
-    typedef struct CIndexSet CIndexSet;
     
-    unsigned int    CIndexSet_count(struct CIndexSet self)
-                    CF_SWIFT_NAME(getter:CIndexSet.count(self:));
-    
-    void            CIndexSet_addIndex(struct CIndexSet self, uint64_t idx)
-                    CF_SWIFT_NAME(CIndexSet.addIndex(self:idx:));
-    
-    void            CIndexSet_removeIndex(struct CIndexSet self, uint64_t idx)
-                    CF_SWIFT_NAME(CIndexSet.removeIndex(self:idx:));
-    
-    bool            CIndexSet_containsIndex(struct CIndexSet self, uint64_t idx)
-                    CF_SWIFT_NAME(CIndexSet.containsIndex(self:idx:));
-    
-    void            CIndexSet_addRange(struct CIndexSet self, Range range)
-                    CF_SWIFT_NAME(CIndexSet.addRange(self:range:));
-    
-    void            CIndexSet_removeRange(struct CIndexSet self, Range range)
-                    CF_SWIFT_NAME(CIndexSet.removeRange(self:range:));
-    
-    void            CIndexSet_intersectsRange(struct CIndexSet self, Range range)
-                    CF_SWIFT_NAME(CIndexSet.intersectsRange(self:range:));
-    
-    void            CIndexSet_addIndexSet(struct CIndexSet self, struct CIndexSet indexSet)
-                    CF_SWIFT_NAME(CIndexSet.addIndexSet(self:indexSet:));
-    
-    void            CIndexSet_removeIndexSet(struct CIndexSet self, struct CIndexSet indexSet)
-                    CF_SWIFT_NAME(CIndexSet.removeIndexSet(self:indexSet:));
-    
-    void            CIndexSet_intersectsIndexSet(struct CIndexSet self, struct CIndexSet indexSet)
-                    CF_SWIFT_NAME(CIndexSet.intersectsIndexSet(self:indexSet:));
-    
-    Range           CIndexSet_range(struct CIndexSet self, unsigned int idx)
-                    CF_SWIFT_NAME(CIndexSet.range(self:idx:));
-    
-    unsigned int    CIndexSet_rangesCount(struct CIndexSet self)
-                    CF_SWIFT_NAME(CIndexSet.rangesCount(self:));
-    
-    CIndexSet       CIndexSet_copy(struct CIndexSet self)
-                    CF_SWIFT_NAME(CIndexSet.copy(self:));
-    
-    
-
-    CIndexSet       CIndexSet_new()
-                    /*CF_SWIFT_NAME(CIndexSet.init())*/;
-    
-    CIndexSet       CIndexSet_new_WithRange(Range range)
-                    CF_SWIFT_NAME(CIndexSet.init(range:));
-    
-    CIndexSet       CIndexSet_new_WithIndex(uint64_t idx)
-                    CF_SWIFT_NAME(CIndexSet.init(idx:));
-    
-    void            CIndexSet_release(CIndexSet self)
-                    CF_SWIFT_NAME(CIndexSet.release(self:));
-    
-
     extern Range RangeEmpty;
     Range RangeMake(uint64_t location, uint64_t length);
     Range RangeIntersection(Range range1, Range range2);
     bool RangeHasIntersection(Range range1, Range range2);
     uint64_t RangeLeftBound(Range range);
     uint64_t RangeRightBound(Range range);
-    //    CIndexSet RangeRemoveRange(Range range1, Range range2);
-    //    CIndexSet RangeUnion(Range range1, Range range2);
-    //    const UChar* MCORangeToString(Range range);
-    //    Range RangeFromString(const UChar* rangeString);
+    
+    C_SYNTHESIZE_STRUCT_DEFINITION(CIndexSet, mailcore::IndexSet)
+    
+    C_SYNTHESIZE_COBJECT_CAST_DEFINITION(CIndexSet)
+    
+    C_SYNTHESIZE_READONLY_PROPERTY_DEFINITION(CIndexSet, unsigned int, count)
+    
+    C_SYNTHESIZE_FUNC_DEFINITION(CIndexSet, void, addIndex, uint64_t)
+    C_SYNTHESIZE_FUNC_DEFINITION(CIndexSet, void, removeIndex, uint64_t)
+    C_SYNTHESIZE_FUNC_DEFINITION(CIndexSet, bool, containsIndex, uint64_t)
+    C_SYNTHESIZE_FUNC_DEFINITION(CIndexSet, void, addRange, Range)
+    C_SYNTHESIZE_FUNC_DEFINITION(CIndexSet, void, removeRange, Range)
+    C_SYNTHESIZE_FUNC_DEFINITION(CIndexSet, void, intersectsRange, Range)
+    C_SYNTHESIZE_FUNC_DEFINITION(CIndexSet, void, addIndexSet, CIndexSet)
+    C_SYNTHESIZE_FUNC_DEFINITION(CIndexSet, void, removeIndexSet, CIndexSet)
+    C_SYNTHESIZE_FUNC_DEFINITION(CIndexSet, void, intersectsIndexSet, CIndexSet)
+    C_SYNTHESIZE_FUNC_DEFINITION(CIndexSet, Range, range, unsigned int)
+    C_SYNTHESIZE_FUNC_DEFINITION(CIndexSet, unsigned int, rangesCount)
+    
+    C_SYNTHESIZE_STATIC_FUNC_DEFINITION(CIndexSet, CIndexSet, init)
+    
+    CIndexSet       CIndexSet_new_WithRange(Range range)
+                    CF_SWIFT_NAME(CIndexSet.init(range:));
+    
+    CIndexSet       CIndexSet_new_WithIndex(uint64_t idx)
+                    CF_SWIFT_NAME(CIndexSet.init(idx:));
 
 #ifdef __cplusplus
 }
-
-CIndexSet CIndexSet_new(mailcore::IndexSet *set);
 #endif
 
 #endif

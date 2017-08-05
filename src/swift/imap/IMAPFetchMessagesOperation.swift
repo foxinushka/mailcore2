@@ -11,10 +11,12 @@ public class MCOIMAPFetchMessagesOperation : MCOIMAPBaseOperation {
     
     internal init(operation:CIMAPFetchMessagesOperation) {
         self.operation = operation;
-        super.init(baseOperation: operation.baseOperation);
+        self.operation.retain()
+        super.init(baseOperation: CIMAPBaseOperation.init(cobject: operation.toCObject()))
     }
     
     deinit {
+        self.operation.release()
         completionBlock = nil;
     }
     

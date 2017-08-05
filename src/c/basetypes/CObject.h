@@ -12,29 +12,15 @@ namespace  mailcore {
 
 extern "C" {
 #endif
-
-    struct CObject {
-#ifdef __cplusplus
-        mailcore::Object*   instance;
-#else
-        void*               instance;
-#endif
-    };
-    typedef struct CObject CObject;
     
-    uint32_t        CObject_castToUInt32(struct CObject self)
-                    CF_SWIFT_NAME(CObject.castToUInt32(self:));
+    C_SYNTHESIZE_STRUCT_DEFINITION(CObject, mailcore::Object)
+    C_SYNTHESIZE_FUNC_DEFINITION(CObject, uint32_t, castToUInt32);
     
     CObject         CObject_new_WithUInt32(uint32_t string)
                     CF_SWIFT_NAME(CObject.init(uint32:));
     
-    void            CObject_release(CObject self)
-                    CF_SWIFT_NAME(CObject.release(self:));
-    
 #ifdef __cplusplus
 }
-
-CObject CObject_new(mailcore::Object *obj);
 #endif
 
 #endif

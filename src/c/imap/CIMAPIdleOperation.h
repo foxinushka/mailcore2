@@ -14,23 +14,12 @@ namespace mailcore {
 extern "C" {
 #endif
     
-    struct CIMAPIdleOperation {
-        CIMAPBaseOperation  operation;
-#ifdef __cplusplus
-        mailcore::IMAPIdleOperation*    instance;
-#else
-        void*                           instance;
-#endif
-    };
-    typedef struct CIMAPIdleOperation CIMAPIdleOperation;
-    
-    void        CIMAPIdleOperation_interruptIdle(struct CIMAPIdleOperation self)
-                CF_SWIFT_NAME(CIMAPIdleOperation.interruptIdle(self:));
+    C_SYNTHESIZE_STRUCT_DEFINITION(CIMAPIdleOperation, mailcore::IMAPIdleOperation)
+    C_SYNTHESIZE_COBJECT_CAST_DEFINITION(CIMAPIdleOperation)
+    C_SYNTHESIZE_FUNC_DEFINITION(CIMAPIdleOperation, void, interruptIdle)
     
 #ifdef __cplusplus
 }
-
-CIMAPIdleOperation CIMAPIdleOperation_new(mailcore::IMAPIdleOperation *operation);
 #endif
 
 #endif /* CIMAPIdleOperation_h */

@@ -13,26 +13,12 @@ namespace mailcore {
 extern "C" {
 #endif
     
-    struct CIMAPCapabilityOperation {
-        CIMAPBaseOperation baseOperation;
-#ifdef __cplusplus
-        mailcore::IMAPCapabilityOperation*      instance;
-#else
-        void*                                   instance;
-#endif
-    };
-    typedef struct CIMAPCapabilityOperation CIMAPCapabilityOperation;
-    
-    CIndexSet   CIMAPCapabilityOperation_capabilities(struct CIMAPCapabilityOperation self)
-                CF_SWIFT_NAME(CIMAPCapabilityOperation.capabilities(self:));
-    
-    void        CIMAPCapabilityOperation_release(CIMAPCapabilityOperation self)
-                CF_SWIFT_NAME(CIMAPCapabilityOperation.release(self:));
+    C_SYNTHESIZE_STRUCT_DEFINITION(CIMAPCapabilityOperation, mailcore::IMAPCapabilityOperation)
+    C_SYNTHESIZE_COBJECT_CAST_DEFINITION(CIMAPCapabilityOperation)
+    C_SYNTHESIZE_FUNC_DEFINITION(CIMAPCapabilityOperation, CIndexSet, capabilities)
     
 #ifdef __cplusplus
 }
-
-CIMAPCapabilityOperation CIMAPCapabilityOperation_new(mailcore::IMAPCapabilityOperation *operation);
 #endif
 
 #endif /* CIMAPCapabilityOperation_hpp */

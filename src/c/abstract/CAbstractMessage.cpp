@@ -7,45 +7,13 @@
 #define nativeType mailcore::AbstractMessage
 #define structName CAbstractMessage
 
-CAbstractMessage CAbstractMessage_new(mailcore::AbstractMessage *msg){
-    CAbstractMessage self;
-    self.instance = msg;
-    C_SAFE_RETAIN(self);
-    return self;
-}
+C_SYNTHESIZE_CONSTRUCTOR()
+C_SYNTHESIZE_COBJECT_CAST()
 
-void CAbstractMessage_release(CAbstractMessage self){
-    C_SAFE_RELEASE(self.instance);
-}
+C_SYNTHESIZE_MAILCORE_OBJ(CMessageHeader, CMessageHeader_new, setHeader, header)
 
-CMessageHeader CAbstractMessage_header(CAbstractMessage self){
-    return CMessageHeader_new(self.instance->header());
-}
-
-void CAbstractMessage_setHeader(CAbstractMessage self, CMessageHeader header){
-    self.instance->setHeader(header.instance);
-}
-
-CAbstractPart CAbstractMessage_partForContentID(CAbstractMessage self, MailCoreString contentID){
-    return CAbstractPart_new(self.instance->partForContentID(contentID.instance));
-}
-
-CAbstractPart CAbstractMessage_partForUniqueID(CAbstractMessage self, MailCoreString uniqueID){
-    return CAbstractPart_new(self.instance->partForUniqueID(uniqueID.instance));
-}
-
-CArray CAbstractMessage_attachments(CAbstractMessage self){
-    return CArray_new(self.instance->attachments());
-}
-
-CArray CAbstractMessage_htmlInlineAttachments(CAbstractMessage self){
-    return CArray_new(self.instance->htmlInlineAttachments());
-}
-
-CArray CAbstractMessage_requiredPartsForRendering(CAbstractMessage self){
-    return CArray_new(self.instance->requiredPartsForRendering());
-}
-
-
-
-
+C_SYNTHESIZE_FUNC_WITH_OBJ(CAbstractPart, partForContentID, MailCoreString)
+C_SYNTHESIZE_FUNC_WITH_OBJ(CAbstractPart, partForUniqueID, MailCoreString)
+C_SYNTHESIZE_FUNC_WITH_OBJ(CArray, attachments)
+C_SYNTHESIZE_FUNC_WITH_OBJ(CArray, htmlInlineAttachments)
+C_SYNTHESIZE_FUNC_WITH_OBJ(CArray, requiredPartsForRendering)

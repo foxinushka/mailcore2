@@ -7,7 +7,7 @@ public class MCOSMTPSendOperation : MCOSMTPOperation {
     
     override init(operation: CSMTPOperation) {
         super.init(operation: operation)
-        self.operation = self.operation.setProgressBlocks(block: operationProgressCallback, userInfo: Unmanaged.passUnretained(self).toOpaque())
+        self.operation = self.operation.setProgressBlocks(operationProgressCallback, Unmanaged.passUnretained(self).toOpaque())
     }
     
     public var progressBlock: MCOOperationProgressBlock?

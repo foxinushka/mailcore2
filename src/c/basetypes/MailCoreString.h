@@ -15,41 +15,19 @@ namespace  mailcore {
 extern "C" {
 #endif
     
-    struct MailCoreString {
-#ifdef __cplusplus
-        mailcore::String*   instance;
-#else
-        void*               instance;
-#endif
-    };
-    typedef struct MailCoreString MailCoreString;
+    C_SYNTHESIZE_STRUCT_DEFINITION(MailCoreString, mailcore::String)
+    
+    C_SYNTHESIZE_COBJECT_CAST_DEFINITION(MailCoreString)
+    
+    C_SYNTHESIZE_STATIC_FUNC_DEFINITION(MailCoreString, MailCoreString, stringWithCharacters, const char*, unsigned int)
 
+    C_SYNTHESIZE_READONLY_PROPERTY_DEFINITION(MailCoreString, const UChar*, unicodeCharacters)
+    C_SYNTHESIZE_READONLY_PROPERTY_DEFINITION(MailCoreString, unsigned int, length)
     
-    void                MailCoreString_release(MailCoreString self)
-                        CF_SWIFT_NAME(MailCoreString.release(self:));
-    
-    CObject             MailCoreString_toCObject(MailCoreString self)
-                        CF_SWIFT_NAME(MailCoreString.toCObject(self:));
-    
-    MailCoreString      MailCoreString_newWithCObject(struct CObject cobject)
-                        CF_SWIFT_NAME(MailCoreString.init(cobject:));
-    
-    MailCoreString      MailCoreString_new(const char* str, unsigned int length)
-                        CF_SWIFT_NAME(MailCoreString.init(uchar:length:));
-    
-    const UChar*        MailCoreString_unicodeCharacters(struct MailCoreString self)
-                        CF_SWIFT_NAME(getter:MailCoreString.unicodeCharacters(self:));
-    
-    unsigned int        MailCoreString_length(struct MailCoreString self)
-                        CF_SWIFT_NAME(getter:MailCoreString.length(self:));
-    
-    MailCoreString      CData_stringWithDetectedCharset(struct CData data, const char* charset)
-                        CF_SWIFT_NAME(CData.string(self:detectedCharset:));
+    C_SYNTHESIZE_FUNC_DEFINITION(CData, MailCoreString, stringWithDetectedCharset, MailCoreString)
     
 #ifdef __cplusplus
 }
-
-MailCoreString MailCoreString_new(mailcore::String *obj);
 #endif
 
 #endif

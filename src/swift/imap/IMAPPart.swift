@@ -1,20 +1,23 @@
 import Foundation
 
 
-public class MCOIMAPPart : MCOAbstractPart {
+public class MCOIMAPPart : MCOAbstractPart, NSCoding {
     
     private var nativeInstance:CIMAPPart;
     
-    // public for SmartMailCore
-    public init(part:CIMAPPart) {
-        self.nativeInstance = part;
-        super.init(part.abstractPart);
+    override func cast() -> CObject {
+        return self.nativeInstance.toCObject()
     }
     
-    required public init(cobject obj: CObject) {
+    required public init(mailCoreObject obj: CObject) {
         let part = CIMAPPart(cobject: obj);
         self.nativeInstance = part;
-        super.init(part.abstractPart);
+        self.nativeInstance.retain()
+        super.init(mailCoreObject: obj);
+    }
+    
+    deinit {
+        self.nativeInstance.release()
     }
     
     /** A part identifier is of the form 1.2.1*/
@@ -41,6 +44,21 @@ public class MCOIMAPPart : MCOAbstractPart {
      */
     public func decodedSize() -> UInt32 {
         return nativeInstance.decodedSize();
+    }
+    
+    public convenience required init?(coder aDecoder: NSCoder) {
+        guard let dict = aDecoder.decodeObject(forKey: "info") as? Dictionary<AnyHashable, Any> else {
+            return nil
+        }
+        let serializable = dictionaryUnsafeCast(dict)
+        self.init(mailCoreObject: CObject.objectWithSerializable(serializable))
+        self.nativeInstance.retain()
+    }
+    
+    public func encode(with aCoder: NSCoder) {
+        let serialazable: CDictionary = self.cast().serializable()
+        let dict = dictionaryUnsafeCast(serialazable)
+        aCoder.encode(dict, forKey: "info")
     }
     
 }

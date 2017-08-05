@@ -3,6 +3,8 @@
 
 #include "CBase.h"
 #include "CMessageConstants.h"
+#include "CObject.h"
+#include "CData.h"
 
 #include <dispatch/dispatch.h>
 
@@ -29,30 +31,22 @@ extern "C" {
 #endif
     } COperation;
     
+    C_SYNTHESIZE_COBJECT_CAST_DEFINITION(COperation)
     
-    dispatch_queue_t    COperation_callbackDispatchQueue(struct COperation self)
-                        CF_SWIFT_NAME(COperation.callbackDispatchQueue(self:));
+    // TODO: should be property, but swift doesn;t recognize dispatch_queue_t <--> DispatchQueue bridging
+    C_SYNTHESIZE_FUNC_DEFINITION(COperation, dispatch_queue_t, callbackDispatchQueue)
+    C_SYNTHESIZE_FUNC_DEFINITION(COperation, void, setCallbackDispatchQueue, dispatch_queue_t)
+
+    C_SYNTHESIZE_PROPERTY_DEFINITION(COperation, bool, shouldRunWhenCancelled, setShouldRunWhenCancelled)
     
-    void                COperation_setCallbackDispatchQueue(struct COperation self, dispatch_queue_t queue)
-                        CF_SWIFT_NAME(COperation.setCallbackDispatchQueue(self:newValue:));
+    C_SYNTHESIZE_FUNC_DEFINITION(COperation, COperation, setCompletionBlock, COperationCompletionBlock, const void*)
     
-    bool                COperation_shouldRunWhenCancelled(struct COperation self)
-                        CF_SWIFT_NAME(getter:COperation.shouldRunWhenCancelled(self:));
+    C_SYNTHESIZE_FUNC_DEFINITION(COperation, bool, isCancelled)
+    C_SYNTHESIZE_FUNC_DEFINITION(COperation, void, cancel)
+    C_SYNTHESIZE_FUNC_DEFINITION(COperation, void, start)
     
-    void                COperation_setShouldRunWhenCancelled(struct COperation self, bool shouldRunWhenCancelled)
-                        CF_SWIFT_NAME(setter:COperation.shouldRunWhenCancelled(self:newValue:));
-    
-    struct COperation   COperation_setCompletionBlock(struct COperation self, COperationCompletionBlock block, const void* userInfo)
-                        CF_SWIFT_NAME(COperation.setCompletionBlock(self:block:userInfo:));
-    
-    bool                COperation_isCanceled(struct COperation self)
-                        CF_SWIFT_NAME(COperation.isCanceled(self:));
-    
-    void                COperation_cancel(struct COperation self)
-                        CF_SWIFT_NAME(COperation.cancel(self:));
-    
-    void                COperation_start(struct COperation self)
-                        CF_SWIFT_NAME(COperation.start(self:));
+    void                COperation_retain(COperation self)
+                        CF_SWIFT_NAME(COperation.retain(self:));
     
     void                COperation_release(COperation self)
                         CF_SWIFT_NAME(COperation.release(self:));

@@ -23,16 +23,12 @@ extern "C" {
 #endif
     } CMailProvidersManager;
     
-    struct CMailProvidersManager    CMailProvidersManager_shared();
+    C_SYNTHESIZE_STATIC_FUNC_DEFINITION(CMailProvidersManager, CMailProvidersManager, shared)
     
-    CMailProvider   CMailProvidersManager_providerForEmail(struct CMailProvidersManager self, MailCoreString email)
-                    CF_SWIFT_NAME(CMailProvidersManager.provider(self:forEmail:));
-    
-    CMailProvider   CMailProvidersManager_providerForMX(struct CMailProvidersManager self, MailCoreString hostname)
-                    CF_SWIFT_NAME(CMailProvidersManager.provider(self:forMX:));
-    
-    CMailProvider   CMailProvidersManager_providerForIdentifier(struct CMailProvidersManager self, MailCoreString identifier)
-                    CF_SWIFT_NAME(CMailProvidersManager.provider(self:forIdentifier:));
+    C_SYNTHESIZE_FUNC_DEFINITION(CMailProvidersManager, CMailProvider, providerForEmail, MailCoreString)
+    C_SYNTHESIZE_FUNC_DEFINITION(CMailProvidersManager, CMailProvider, providerForMX, MailCoreString)
+    C_SYNTHESIZE_FUNC_DEFINITION(CMailProvidersManager, CMailProvider, providerForIdentifier, MailCoreString)
+    C_SYNTHESIZE_FUNC_DEFINITION(CMailProvidersManager, void, registerProvidersWithFilename, MailCoreString)
     
 #ifdef __cplusplus
 }

@@ -5,8 +5,13 @@ public class MCOIMAPFolder: NSObject, Convertible {
     
     internal var nativeInstance:CIMAPFolder;
     
-    internal init(nativeInstance folder:CIMAPFolder) {
-        self.nativeInstance = folder;
+    func cast() -> CObject {
+        return nativeInstance.toCObject()
+    }
+    
+    public required init(mailCoreObject obj: CObject) {
+        self.nativeInstance = CIMAPFolder.init(cobject: obj)
+        self.nativeInstance.retain()
     }
     
     deinit {
@@ -34,12 +39,5 @@ public class MCOIMAPFolder: NSObject, Convertible {
         set { nativeInstance.flags = newValue.toCIMAPFolderFlag() }
     }
     
-    func cast() -> CObject {
-        return nativeInstance.castToCObject()
-    }
-    
-    public required init(cobject obj: CObject) {
-        self.nativeInstance = CIMAPFolder.init(cobject: obj)
-    }
 
 }

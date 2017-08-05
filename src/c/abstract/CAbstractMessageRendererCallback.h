@@ -66,6 +66,9 @@ extern "C" {
                                                                          const void* userInfo)
                                         CF_SWIFT_NAME(CAbstractMessageRendererCallback.init(canPreviewPartBlock:shouldShowPartBlock:templateValuesForHeaderBlock:templateValuesForPartBlock:templateForMainHeaderBlock:templateForImageBlock:templateForAttachmentBlock:templateForMessageBlock:templateForEmbeddedMessageBlock:templateForEmbeddedMessageHeaderBlock:templateForAttachmentSeparatorBlock:cleanHTMLForPartBlock:filterHTMLForPartBlock:filterHTMLForMessageBlock:dataForIMAPPartBlock:prefetchAttachmentIMAPPartBlock:prefetchImageIMAPPartBlock:userInfo:));
     
+    void    CAbstractMessageRendererCallback_retain(CAbstractMessageRendererCallback self)
+    CF_SWIFT_NAME(CAbstractMessageRendererCallback.retain(self:));
+    
     void    CAbstractMessageRendererCallback_release(CAbstractMessageRendererCallback self)
             CF_SWIFT_NAME(CAbstractMessageRendererCallback.release(self:));
     

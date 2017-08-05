@@ -1,12 +1,17 @@
 import Foundation
 
 
-public class MCOIMAPFolderInfo {
+public class MCOIMAPFolderInfo: Convertible {
     
     private var nativeInstance:CIMAPFolderInfo;
     
-    internal init(info: CIMAPFolderInfo) {
-        self.nativeInstance = info;
+    public required init(mailCoreObject: CObject) {
+        self.nativeInstance = CIMAPFolderInfo.init(cobject: mailCoreObject)
+        self.nativeInstance.retain()
+    }
+    
+    func cast() -> CObject {
+        return self.nativeInstance.toCObject()
     }
     
     deinit {

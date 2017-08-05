@@ -6,41 +6,16 @@
 #define structName CAttachment
 
 C_SYNTHESIZE_MAILCORE_OBJ(CData, CData_new, setData, data);
+C_SYNTHESIZE_COBJECT_CAST()
+C_SYNTHESIZE_CONSTRUCTOR()
 
-CAttachment CAttachment_new(mailcore::Attachment *attachment){
-    CAttachment self;
-    self.abstractPart = CAbstractPart_new(attachment);
-    self.instance = attachment;
-    self.instance->release();
-    return self;
-}
+C_SYNTHESIZE_FUNC_WITH_OBJ(MailCoreString, decodedString)
 
-MailCoreString CAttachment_decodedString(struct CAttachment self) {
-    return MailCoreString_new(self.instance->description());
-}
-
-MailCoreString CAttachment_mimeTypeForFilename(MailCoreString filename) {
-    return MailCoreString_new(mailcore::Attachment::mimeTypeForFilename(filename.instance));
-}
-
-CAttachment CAttachment_WithContentsOfFile(MailCoreString filename) {
-    return CAttachment_new(mailcore::Attachment::attachmentWithContentsOfFile(filename.instance));
-}
-
-CAttachment CAttachment_WithData(CData data, MailCoreString filename) {
-    return CAttachment_new(mailcore::Attachment::attachmentWithData(filename.instance, data.instance));
-}
-
-CAttachment CAttachment_WithHTMLString(MailCoreString htmlString) {
-    return CAttachment_new(mailcore::Attachment::attachmentWithHTMLString(htmlString.instance));
-}
-
-CAttachment CAttachment_WithRFC822Message(CData data) {
-    return CAttachment_new(mailcore::Attachment::attachmentWithRFC822Message(data.instance));
-}
-
-CAttachment CAttachment_WithText(MailCoreString text) {
-    return CAttachment_new(mailcore::Attachment::attachmentWithText(text.instance));
-}
+C_SYNTHESIZE_STATIC_FUNC_WITH_OBJ(MailCoreString, mimeTypeForFilename, MailCoreString)
+C_SYNTHESIZE_STATIC_FUNC_WITH_OBJ(CAttachment, attachmentWithContentsOfFile, MailCoreString)
+C_SYNTHESIZE_STATIC_FUNC_WITH_OBJ(CAttachment, attachmentWithData, MailCoreString, CData)
+C_SYNTHESIZE_STATIC_FUNC_WITH_OBJ(CAttachment, attachmentWithHTMLString, MailCoreString)
+C_SYNTHESIZE_STATIC_FUNC_WITH_OBJ(CAttachment, attachmentWithRFC822Message, CData)
+C_SYNTHESIZE_STATIC_FUNC_WITH_OBJ(CAttachment, attachmentWithText, MailCoreString)
 
 

@@ -11,7 +11,7 @@ public class MCOIMAPSearchExpression: NSObject {
     }
 
     private init(_ expr: CIMAPSearchExpression) {
-        self.nativeInstance = expr;
+        self.nativeInstance = CIMAPSearchExpression(cobject: expr.copy())
 	}
 
 	deinit {
@@ -26,7 +26,7 @@ public class MCOIMAPSearchExpression: NSObject {
      MCOIMAPSearchExpression * expr = [MCOIMAPSearchExpression searchAll]
      */
     public static func searchAll() -> MCOIMAPSearchExpression {
-        return MCOIMAPSearchExpression(CIMAPSearchExpression_SearchAll());
+        return MCOIMAPSearchExpression(CIMAPSearchExpression_searchAll());
     }
     
     /**
@@ -158,7 +158,7 @@ public class MCOIMAPSearchExpression: NSObject {
      MCOIMAPSearchExpression * expr = [MCOIMAPSearchExpression searchRead]
      **/
     public static func searchRead() -> MCOIMAPSearchExpression {
-        return MCOIMAPSearchExpression(CIMAPSearchExpression_SearchRead());
+        return MCOIMAPSearchExpression(CIMAPSearchExpression_searchRead());
     }
     
     /**
@@ -169,7 +169,7 @@ public class MCOIMAPSearchExpression: NSObject {
      MCOIMAPSearchExpression * expr = [MCOIMAPSearchExpression searchUnread]
      **/
     public static func searchUnread() -> MCOIMAPSearchExpression {
-        return MCOIMAPSearchExpression(CIMAPSearchExpression_SearchUnread());
+        return MCOIMAPSearchExpression(CIMAPSearchExpression_searchUnread());
     }
     
     /**
@@ -180,7 +180,7 @@ public class MCOIMAPSearchExpression: NSObject {
      MCOIMAPSearchExpression * expr = [MCOIMAPSearchExpression searchFlagged]
      **/
     public static func searchFlagged() -> MCOIMAPSearchExpression {
-        return MCOIMAPSearchExpression(CIMAPSearchExpression_SearchUnread());
+        return MCOIMAPSearchExpression(CIMAPSearchExpression_searchUnread());
     }
     
     /**
@@ -191,7 +191,7 @@ public class MCOIMAPSearchExpression: NSObject {
      MCOIMAPSearchExpression * expr = [MCOIMAPSearchExpression searchUnflagged]
      **/
     public static func searchUnflagged() -> MCOIMAPSearchExpression {
-        return MCOIMAPSearchExpression(CIMAPSearchExpression_SearchUnflagged());
+        return MCOIMAPSearchExpression(CIMAPSearchExpression_searchUnflagged());
     }
     
     /**
@@ -202,7 +202,7 @@ public class MCOIMAPSearchExpression: NSObject {
      MCOIMAPSearchExpression * expr = [MCOIMAPSearchExpression searchAnswered]
      **/
     public static func searchAnswered() -> MCOIMAPSearchExpression {
-        return MCOIMAPSearchExpression(CIMAPSearchExpression_SearchAnswered());
+        return MCOIMAPSearchExpression(CIMAPSearchExpression_searchAnswered());
     }
     
     /**
@@ -213,7 +213,7 @@ public class MCOIMAPSearchExpression: NSObject {
      MCOIMAPSearchExpression * expr = [MCOIMAPSearchExpression searchUnanswered]
      **/
     public static func searchUnanswered() -> MCOIMAPSearchExpression {
-        return MCOIMAPSearchExpression(CIMAPSearchExpression_SearchUnanswered());
+        return MCOIMAPSearchExpression(CIMAPSearchExpression_searchUnanswered());
     }
     
     /**
@@ -224,7 +224,7 @@ public class MCOIMAPSearchExpression: NSObject {
      MCOIMAPSearchExpression * expr = [MCOIMAPSearchExpression searchDraft]
      **/
     public static func searchDraft() -> MCOIMAPSearchExpression {
-        return MCOIMAPSearchExpression(CIMAPSearchExpression_SearchDraft());
+        return MCOIMAPSearchExpression(CIMAPSearchExpression_searchDraft());
     }
     
     /**
@@ -235,7 +235,7 @@ public class MCOIMAPSearchExpression: NSObject {
      MCOIMAPSearchExpression * expr = [MCOIMAPSearchExpression searchUndraft]
      **/
     public static func searchUndraft() -> MCOIMAPSearchExpression {
-        return MCOIMAPSearchExpression(CIMAPSearchExpression_SearchUndraft());
+        return MCOIMAPSearchExpression(CIMAPSearchExpression_searchUndraft());
     }
     
     /**
@@ -246,7 +246,7 @@ public class MCOIMAPSearchExpression: NSObject {
      MCOIMAPSearchExpression * expr = [MCOIMAPSearchExpression searchDeleted]
      **/
     public static func searchDeleted() -> MCOIMAPSearchExpression {
-        return MCOIMAPSearchExpression(CIMAPSearchExpression_SearchDeleted());
+        return MCOIMAPSearchExpression(CIMAPSearchExpression_searchDeleted());
     }
     
     /**
@@ -257,7 +257,7 @@ public class MCOIMAPSearchExpression: NSObject {
      MCOIMAPSearchExpression * expr = [MCOIMAPSearchExpression searchSpam]
      **/
     static func searchSpam() -> MCOIMAPSearchExpression {
-        return MCOIMAPSearchExpression(CIMAPSearchExpression_SearchSpam());
+        return MCOIMAPSearchExpression(CIMAPSearchExpression_searchSpam());
     }
     
     /**
@@ -402,8 +402,8 @@ public class MCOIMAPSearchExpression: NSObject {
      MCOIMAPSearchExpression * expr = [MCOIMAPSearchExpression searchAnd:exprFrom other:exprSubject] -> ImapSearchExpression {
      **/
     
-    public static func searchAnd(expression: MCOIMAPSearchExpression, other: MCOIMAPSearchExpression) -> MCOIMAPSearchExpression {
-        return MCOIMAPSearchExpression(CIMAPSearchExpression.searchAnd(expression.nativeInstance, other: other.nativeInstance));
+    public static func searchAnd(_ expression: MCOIMAPSearchExpression, other: MCOIMAPSearchExpression) -> MCOIMAPSearchExpression {
+        return MCOIMAPSearchExpression(CIMAPSearchExpression.searchAnd(expression.nativeInstance, other.nativeInstance));
     }
     /**
      Creates a search expression that's a conjunction of two search expressions.
@@ -414,8 +414,8 @@ public class MCOIMAPSearchExpression: NSObject {
      MCOIMAPSearchExpression * exprOtherFrom = [MCOIMAPSearchExpression searchRecipient:@"ngan@etpan.org"]
      MCOIMAPSearchExpression * expr = [MCOIMAPSearchExpression searchOr:exprFrom exprOtherFrom] -> ImapSearchExpression {
      */
-    public static func searchOr(expression: MCOIMAPSearchExpression, other: MCOIMAPSearchExpression) -> MCOIMAPSearchExpression {
-        return MCOIMAPSearchExpression(CIMAPSearchExpression.searchOr(expression.nativeInstance, other: other.nativeInstance));
+    public static func searchOr(_ expression: MCOIMAPSearchExpression, other: MCOIMAPSearchExpression) -> MCOIMAPSearchExpression {
+        return MCOIMAPSearchExpression(CIMAPSearchExpression.searchOr(expression.nativeInstance, other.nativeInstance));
     }
     
     /**
@@ -428,7 +428,7 @@ public class MCOIMAPSearchExpression: NSObject {
      The expression will match when the subject does not contain the word airline
      
      */
-    public static func searchNot(expression: MCOIMAPSearchExpression) -> MCOIMAPSearchExpression {
+    public static func searchNot(_ expression: MCOIMAPSearchExpression) -> MCOIMAPSearchExpression {
         return MCOIMAPSearchExpression(CIMAPSearchExpression.searchNot(expression.nativeInstance));
     }
     

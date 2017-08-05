@@ -5,17 +5,9 @@
 #define nativeType mailcore::MailProvider
 #define structName CMailProvider
 
-CMailProvider CMailProvider_new(mailcore::MailProvider *provider) {
-    CMailProvider self;
-    self.instance = provider;
-    self.instance->release();
-    return self;
-}
+C_SYNTHESIZE_COBJECT_CAST()
 
-CArray  CMailProvider_imapServices(struct CMailProvider self) {
-    return CArray_new(self.instance->imapServices());
-}
+C_SYNTHESIZE_CONSTRUCTOR()
 
-CArray  CMailProvider_smtpServices(struct CMailProvider self) {
-    return CArray_new(self.instance->smtpServices());
-}
+C_SYNTHESIZE_FUNC_WITH_OBJ(CArray, imapServices)
+C_SYNTHESIZE_FUNC_WITH_OBJ(CArray, smtpServices)

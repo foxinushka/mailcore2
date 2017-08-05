@@ -2,20 +2,10 @@
 #include "CBase+Private.h"
 #include <MailCore/MCAsync.h>
 
-#define nativeType mailcore::IMAPCheckAccountOperation
-#define structName CIMAPCheckAccountOperation
+#define nativeType mailcore::IMAPCustomCommandOperation
+#define structName CIMAPCustomCommandOperation
 
-MailCoreString CIMAPCustomCommandOperation_response(struct CIMAPCustomCommandOperation self) {
-    return MailCoreString_new(self.instance->response());
-}
+C_SYNTHESIZE_CONSTRUCTOR()
+C_SYNTHESIZE_COBJECT_CAST()
+C_SYNTHESIZE_FUNC_WITH_OBJ(MailCoreString, response)
 
-CIMAPCustomCommandOperation CIMAPCustomCommandOperation_new(mailcore::IMAPCustomCommandOperation *operationRef){
-    CIMAPCustomCommandOperation self;
-    self.baseOperation = CIMAPBaseOperation_new(operationRef);
-    self.instance = operationRef;
-    return self;
-}
-
-void CIMAPCustomCommandOperation_release(CIMAPCustomCommandOperation operation) {
-    
-}

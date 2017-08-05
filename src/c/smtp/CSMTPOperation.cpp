@@ -2,6 +2,13 @@
 #include "CSMTPOperation.h"
 #include "MailCoreString.h"
 
+#include "CBase+Private.h"
+
+#define nativeType mailcore::SMTPOperation
+#define structName CSMTPOperation
+
+C_SYNTHESIZE_COBJECT_CAST()
+
 class CSMTPOperationCallback : public mailcore::SMTPOperationCallback {
 public:
     CSMTPOperationCallback()
@@ -35,13 +42,8 @@ CSMTPOperation CSMTPOperation_setProgressBlocks(struct CSMTPOperation self, CPro
     return self;
 }
 
-MailCoreString CSMTPOperation_lastSMTPResponse(struct CSMTPOperation self) {
-    return MailCoreString_new(self.instance->lastSMTPResponse());
-}
-
-int CSMTPOperation_lastSMTPResponseCode(struct CSMTPOperation self) {
-    return self.instance->lastSMTPResponseCode();
-}
+C_SYNTHESIZE_FUNC_WITH_OBJ(MailCoreString, lastSMTPResponse)
+C_SYNTHESIZE_FUNC_WITH_SCALAR(int, lastSMTPResponseCode)
 
 CSMTPOperation CSMTPOperation_new(mailcore::SMTPOperation* operation) {
     CSMTPOperation self;
@@ -52,6 +54,11 @@ CSMTPOperation CSMTPOperation_new(mailcore::SMTPOperation* operation) {
     return self;
 }
 
+void CSMTPOperation_retain(CSMTPOperation self) {
+    self.instance->retain();
+}
+
 void CSMTPOperation_release(CSMTPOperation self) {
+    self.instance->release();
     delete self._callback;
 }

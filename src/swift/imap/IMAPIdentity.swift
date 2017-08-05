@@ -1,16 +1,21 @@
 import Foundation
 
 
-public class MCOIMAPIdentity {
+public class MCOIMAPIdentity: Convertible {
     
     internal var nativeInstance:CIMAPIdentity;
     
     public init(vendor: String, name: String, version: String) {
-        self.nativeInstance = CIMAPIdentity(vendor: vendor.mailCoreString(), name: name.mailCoreString(), version: version.mailCoreString())
+        self.nativeInstance = CIMAPIdentity_init()
     }
     
-    internal init(_ identity:CIMAPIdentity) {
-        self.nativeInstance = identity;
+    func cast() -> CObject {
+        return self.nativeInstance.toCObject()
+    }
+    
+    required public init(mailCoreObject: CObject) {
+        self.nativeInstance = CIMAPIdentity.init(cobject: mailCoreObject)
+        self.nativeInstance.retain()
     }
     
     deinit {
@@ -42,12 +47,12 @@ public class MCOIMAPIdentity {
     
     /** Set a custom field in the identity */
     public func infoForKey(_ key: String) -> String? {
-        return nativeInstance.infoForKey(key: key.mailCoreString()).string()
+        return nativeInstance.infoForKey(key.mailCoreString()).string()
     }
     
     /** Retrieve a custom field in the identity */
     public func setInfo(_ value: String, forKey key: String) {
-        nativeInstance.setInfoForKey(value: value.mailCoreString(), key: key.mailCoreString())
+        nativeInstance.setInfoForKey(value.mailCoreString(), key.mailCoreString())
     }
     
     /** Remove all info keys including vendor, name and version */

@@ -13,26 +13,12 @@ namespace mailcore {
 extern "C" {
 #endif
     
-    struct CIMAPFetchContentOperation {
-        CIMAPBaseOperation baseOperation;
-#ifdef __cplusplus
-        mailcore::IMAPFetchContentOperation*    instance;
-#else
-        void*                                   instance;
-#endif
-    };
-    typedef struct CIMAPFetchContentOperation CIMAPFetchContentOperation;
-    
-    CData   CIMAPFetchContentOperation_data(struct CIMAPFetchContentOperation self)
-            CF_SWIFT_NAME(CIMAPFetchContentOperation.data(self:));
-    
-    void    CIMAPFetchContentOperation_release(CIMAPFetchContentOperation self)
-            CF_SWIFT_NAME(CIMAPFetchContentOperation.release(self:));
+    C_SYNTHESIZE_STRUCT_DEFINITION(CIMAPFetchContentOperation, mailcore::IMAPFetchContentOperation)
+    C_SYNTHESIZE_COBJECT_CAST_DEFINITION(CIMAPFetchContentOperation)
+    C_SYNTHESIZE_FUNC_DEFINITION(CIMAPFetchContentOperation, CData, data)
 
 #ifdef __cplusplus
 }
-
-CIMAPFetchContentOperation CIMAPFetchContentOperation_new(mailcore::IMAPFetchContentOperation *operation);
 #endif
 
 #endif

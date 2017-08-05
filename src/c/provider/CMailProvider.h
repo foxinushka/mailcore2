@@ -4,6 +4,7 @@
 #include "stdint.h"
 #include "CBase.h"
 #include "CArray.h"
+#include "CData.h"
 
 #ifdef __cplusplus
 
@@ -14,23 +15,14 @@ namespace mailcore {
 extern "C" {
 #endif
     
-    typedef struct CMailProvider {
-#ifdef __cplusplus
-        mailcore::MailProvider*  instance;
-#else
-        void*                           instance;
-#endif
-    } CMailProvider;
+    C_SYNTHESIZE_STRUCT_DEFINITION(CMailProvider, mailcore::MailProvider)    
+    C_SYNTHESIZE_COBJECT_CAST_DEFINITION(CMailProvider)
     
-    CArray  CMailProvider_imapServices(struct CMailProvider self)
-            CF_SWIFT_NAME(getter:CMailProvider.imapServices(self:));
-    
-    CArray  CMailProvider_smtpServices(struct CMailProvider self)
-            CF_SWIFT_NAME(getter:CMailProvider.smtpServices(self:));
+    C_SYNTHESIZE_READONLY_PROPERTY_DEFINITION(CMailProvider, CArray, imapServices)
+    C_SYNTHESIZE_READONLY_PROPERTY_DEFINITION(CMailProvider, CArray, smtpServices)
     
 #ifdef __cplusplus
 }
-
-CMailProvider CMailProvider_new(mailcore::MailProvider* provider);
 #endif
+
 #endif

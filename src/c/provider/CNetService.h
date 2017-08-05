@@ -17,45 +17,17 @@ namespace mailcore {
 extern "C" {
 #endif
     
-    typedef struct CNetService {
-#ifdef __cplusplus
-        mailcore::NetService*           instance;
-#else
-        void*                           instance;
-#endif
-    } CNetService;
+    C_SYNTHESIZE_STRUCT_DEFINITION(CNetService, mailcore::NetService)
+    C_SYNTHESIZE_COBJECT_CAST_DEFINITION(CNetService)
     
-    unsigned int        CNetService_port(struct CNetService self)
-                        CF_SWIFT_NAME(getter:CNetService.port(self:));
+    C_SYNTHESIZE_PROPERTY_DEFINITION(CNetService, unsigned int, port, setPort)
+    C_SYNTHESIZE_PROPERTY_DEFINITION(CNetService, MailCoreString, hostname, setHostname)
+    C_SYNTHESIZE_PROPERTY_DEFINITION(CNetService, ConnectionType, connectionType, setConnectionType)
     
-    void                CNetService_setPort(struct CNetService self, unsigned int port)
-                        CF_SWIFT_NAME(setter:CNetService.port(self:newValue:));
-    
-    MailCoreString        CNetService_hostname(struct CNetService self)
-                        CF_SWIFT_NAME(getter:CNetService.hostname(self:));
-    
-    void                CNetService_setHostname(struct CNetService self, MailCoreString hostname)
-                        CF_SWIFT_NAME(setter:CNetService.hostname(self:newValue:));
-    
-    MailCoreString        CNetService_normalizedHostnameWithEmail(struct CNetService self, MailCoreString email)
-                        CF_SWIFT_NAME(CNetService.normalizedHostname(self:email:));
-    
-    ConnectionType      CNetService_connectionType(struct CNetService self)
-                        CF_SWIFT_NAME(getter:CNetService.connectionType(self:));
-    
-    void                CNetService_setConnectionType(struct CNetService self, ConnectionType newValue)
-                        CF_SWIFT_NAME(setter:CNetService.connectionType(self:newValue:));
-    
-    CNetService         CNetService_fromCObject(CObject objc)
-                        CF_SWIFT_NAME(CNetService.init(cobject:));
-    
-    CObject             CNetService_toCObject(CNetService self)
-                        CF_SWIFT_NAME(CNetService.toCObject(self:));
+    C_SYNTHESIZE_FUNC_DEFINITION(CNetService, MailCoreString, normalizedHostnameWithEmail, MailCoreString)
     
 #ifdef __cplusplus
 }
-                                            
-    CNetService CNetService_new(mailcore::NetService *netService);
 #endif
 
 #endif

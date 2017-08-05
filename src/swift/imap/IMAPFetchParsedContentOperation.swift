@@ -10,10 +10,12 @@ public class MCOIMAPFetchParsedContentOperation : MCOIMAPBaseOperation {
     
     internal init(operation:CIMAPFetchParsedContentOperation) {
         self.operation = operation
-        super.init(baseOperation: operation.baseOperation)
+        self.operation.retain()
+        super.init(baseOperation: CIMAPBaseOperation.init(cobject: operation.toCObject()))
     }
     
     deinit {
+        self.operation.release()
         completionBlock = nil;
     }
     
@@ -34,8 +36,7 @@ public class MCOIMAPFetchParsedContentOperation : MCOIMAPBaseOperation {
         
         let errorCode = error()
         if errorCode == ErrorNone {
-            let parser = MCOMessageParser(parser: operation.parser())
-            if parser.nativeInstance.instance != nil {
+            if let parser: MCOMessageParser = createMCOObject(from: operation.parser().toCObject()) {
                 completionBlock!(nil, parser)
             }
             else {

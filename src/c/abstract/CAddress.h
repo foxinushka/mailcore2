@@ -15,67 +15,28 @@ namespace mailcore {
 
 extern "C" {
 #endif
+    
+    C_SYNTHESIZE_STRUCT_DEFINITION(CAddress, mailcore::Address)
 
-    typedef struct CAddress {
-#ifdef __cplusplus
-        mailcore::Address*  instance;
-#else
-        void*               instance;
-#endif       
-    } CAddress;
+    C_SYNTHESIZE_COBJECT_CAST_DEFINITION(CAddress)
     
-    MailCoreString    CAddress_displayName(struct CAddress self)
-                    CF_SWIFT_NAME(getter:CAddress.displayName(self:));
+    C_SYNTHESIZE_PROPERTY_DEFINITION(CAddress, MailCoreString, displayName, setDisplayName)
+    C_SYNTHESIZE_PROPERTY_DEFINITION(CAddress, MailCoreString, mailbox, setMailbox)
     
-    void            CAddress_setDisplayName(struct CAddress self, MailCoreString displayName)
-                    CF_SWIFT_NAME(setter:CAddress.displayName(self:newValue:));
+    C_SYNTHESIZE_READONLY_PROPERTY_DEFINITION(CAddress, MailCoreString, RFC822String)
+    C_SYNTHESIZE_READONLY_PROPERTY_DEFINITION(CAddress, MailCoreString, nonEncodedRFC822String)
     
-    MailCoreString    CAddress_mailbox(struct CAddress self)
-                    CF_SWIFT_NAME(getter:CAddress.mailbox(self:));
+    C_SYNTHESIZE_STATIC_FUNC_DEFINITION(CAddress, CAddress, addressWithDisplayName, MailCoreString, MailCoreString)
+    C_SYNTHESIZE_STATIC_FUNC_DEFINITION(CAddress, CAddress, addressWithMailbox, MailCoreString)
+    C_SYNTHESIZE_STATIC_FUNC_DEFINITION(CAddress, CAddress, addressWithRFC822String, MailCoreString)
+    C_SYNTHESIZE_STATIC_FUNC_DEFINITION(CAddress, CAddress, addressWithNonEncodedRFC822String, MailCoreString)
+    C_SYNTHESIZE_STATIC_FUNC_DEFINITION(CAddress, CArray, addressesWithRFC822String, MailCoreString)
+    C_SYNTHESIZE_STATIC_FUNC_DEFINITION(CAddress, CArray, addressesWithNonEncodedRFC822String, MailCoreString)
     
-    void            CAddress_setMailbox(struct CAddress self, MailCoreString mailbox)
-                    CF_SWIFT_NAME(setter:CAddress.mailbox(self:newValue:));
-    
-    MailCoreString    CAddress_RFC822String(struct CAddress self)
-                    CF_SWIFT_NAME(getter:CAddress.RFC822String(self:));
-    
-    MailCoreString    CAddress_nonEncodedRFC822String(struct CAddress self)
-                    CF_SWIFT_NAME(getter:CAddress.nonEncodedRFC822String(self:));
-    
-    CObject         CAddress_castToCObject(struct CAddress self)
-                    CF_SWIFT_NAME(CAddress.castToCObject(self:));
-    
-    CAddress        CAddress_new_WithDisplayName(MailCoreString displayName, MailCoreString mailbox)
-                    CF_SWIFT_NAME(CAddress.init(displayName:mailbox:));
-    
-    CAddress        CAddress_new_WithMailbox(MailCoreString mailbox)
-                    CF_SWIFT_NAME(CAddress.init(mailbox:));
-    
-    CAddress        CAddress_new_WithRFC822String(MailCoreString RFC822String)
-                    CF_SWIFT_NAME(CAddress.init(RFC822String:));
-    
-    CAddress        CAddress_new_WithNonEncodedRFC822String(MailCoreString nonEncodedRFC822String)
-                    CF_SWIFT_NAME(CAddress.init(nonEncodedRFC822String:));
-    
-    CAddress        CAddress_new_WithCObject(CObject obj)
-                    CF_SWIFT_NAME(CAddress.init(cObject:));
-    
-    void            CAddress_release(CAddress self)
-                    CF_SWIFT_NAME(CAddress.release(self:));
-    
-    CArray          CAddresses_WithRFC822String(MailCoreString string)
-                    CF_SWIFT_NAME(CAddress.addresses(RFC822String:));
-    
-    CArray          CAddresses_WithNonEncodedRFC822String(MailCoreString string)
-                    CF_SWIFT_NAME(CAddress.addresses(nonEncodedRFC822String:));
-    
-    CAddress        CAddress_new()
-                    /*CF_SWIFT_NAME(CAddress.init())*/;
+    C_SYNTHESIZE_STATIC_FUNC_DEFINITION(CAddress, CAddress, init)
     
 #ifdef __cplusplus
 }
-
-CAddress CAddress_new(mailcore::Address *address);
 #endif
 
 #endif

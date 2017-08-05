@@ -3,14 +3,15 @@ import Foundation
 
 public class MCOIMAPNamespace : Convertible {
 
-	private var nativeInstance:CIMAPNamespace;
+	var nativeInstance:CIMAPNamespace;
     
-    internal func _CIMAPNamespace() -> CIMAPNamespace {
-        return nativeInstance;
+    func cast() -> CObject {
+        return nativeInstance.toCObject()
     }
-
-    internal init(namespace:CIMAPNamespace) {
-        self.nativeInstance = namespace;
+    
+    public required init(mailCoreObject obj: CObject) {
+        self.nativeInstance = CIMAPNamespace(cobject: obj)
+        self.nativeInstance.retain()
     }
     
     deinit {
@@ -20,8 +21,12 @@ public class MCOIMAPNamespace : Convertible {
     /**
      Returns a simple namespace with only one item.
      */
-    static func namespace(prefix: String, delimiter: CChar) -> MCOIMAPNamespace {
-        return MCOIMAPNamespace(namespace: CIMAPNamespace(prefix: prefix.mailCoreString(), delimiter: delimiter))
+    static func namespace(prefix: String, delimiter: CChar) -> MCOIMAPNamespace? {
+        let namespace = CIMAPNamespace.namespaceWithPrefix(prefix.mailCoreString(), delimiter)
+        guard namespace.instance != nil else {
+            return nil
+        }
+        return MCOIMAPNamespace(mailCoreObject: namespace.toCObject())
     }
     
     /** Returns the prefix of the main item of this namespace. */
@@ -44,7 +49,7 @@ public class MCOIMAPNamespace : Convertible {
      of the main item of the namespace.
      */
     public func path(components: Array<String>) -> String? {
-        return nativeInstance.pathForComponents(components: Array<String>.cast(components)).string()
+        return nativeInstance.pathForComponents(Array<String>.cast(components)).string()
     }
     
     /**
@@ -52,24 +57,16 @@ public class MCOIMAPNamespace : Convertible {
      It will use the best item matching the prefix to compute the path.
      */
     public func path(components: Array<String>, prefix: String) -> String? {
-        return nativeInstance.pathForComponentsAndPrefix(components: Array<String>.cast(components), prefix: prefix.mailCoreString()).string()
+        return nativeInstance.pathForComponentsAndPrefix(Array<String>.cast(components), prefix.mailCoreString()).string()
     }
     
     /** Returns the components given a folder path. */
     public func componentsFromPath(path: String) -> Array<String> {
-        return Array<String>.cast(nativeInstance.componentsFromPath(path: path.mailCoreString()))
+        return Array<String>.cast(nativeInstance.componentsFromPath(path.mailCoreString()))
     }
     
     /** Returns YES if the namespace contains the given folder path. */
     public func containsFolderPath(path: String) -> Bool {
-        return nativeInstance.containsFolderPath(path: path.mailCoreString())
-    }
-    
-    func cast() -> CObject {
-        return nativeInstance.castToCObject()
-    }
-    
-    public required init(cobject obj: CObject) {
-        self.nativeInstance = CIMAPNamespace(cobject: obj)
+        return nativeInstance.containsFolderPath(path.mailCoreString())
     }
 }

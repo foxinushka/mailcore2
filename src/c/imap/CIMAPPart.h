@@ -14,47 +14,20 @@ namespace mailcore {
 extern "C" {
 #endif
     
-    struct CIMAPPart {
-#ifdef __cplusplus
-        mailcore::IMAPPart*     instance;
-#else
-        void*                   instance;
-#endif
-        CAbstractPart abstractPart;
-    };
-    typedef struct CIMAPPart CIMAPPart;
+    C_SYNTHESIZE_STRUCT_DEFINITION(CIMAPPart, mailcore::IMAPPart)
     
-    MailCoreString    CIMAPPart_partID(struct CIMAPPart self)
-                    CF_SWIFT_NAME(getter:CIMAPPart.partID(self:));
+    C_SYNTHESIZE_COBJECT_CAST_DEFINITION(CIMAPPart)
     
-    void            CIMAPPart_setPartID(struct CIMAPPart self, MailCoreString partID)
-                    CF_SWIFT_NAME(setter:CIMAPPart.partID(self:newValue:));
+    C_SYNTHESIZE_PROPERTY_DEFINITION(CIMAPPart, MailCoreString, partID, setPartID)
+    C_SYNTHESIZE_PROPERTY_DEFINITION(CIMAPPart, unsigned int, size, setSize)
+    C_SYNTHESIZE_PROPERTY_DEFINITION(CIMAPPart, Encoding, encoding, setEncoding)
     
-    unsigned int    CIMAPPart_size(struct CIMAPPart self)
-                    CF_SWIFT_NAME(getter:CIMAPPart.size(self:));
+    C_SYNTHESIZE_FUNC_DEFINITION(CIMAPPart, unsigned int, decodedSize)
     
-    void            CIMAPPart_setSize(struct CIMAPPart self, unsigned int size)
-                    CF_SWIFT_NAME(setter:CIMAPPart.size(self:newValue:));
-    
-    Encoding        CIMAPPart_encoding(struct CIMAPPart self)
-                    CF_SWIFT_NAME(getter:CIMAPPart.encoding(self:));
-    
-    void            CIMAPPart_setEncoding(struct CIMAPPart self, Encoding encoding)
-                    CF_SWIFT_NAME(setter:CIMAPPart.encoding(self:newValue:));
-    
-    unsigned int    CIMAPPart_decodedSize(struct CIMAPPart self)
-                    CF_SWIFT_NAME(CIMAPPart.decodedSize(self:));
-    
-    CIMAPPart       CIMAPPart_castCIMAPPart(CObject obj)
-                    CF_SWIFT_NAME(CIMAPPart.init(cobject:));
-    
-    void            CIMAPPart_release(struct CIMAPPart self)
-                    CF_SWIFT_NAME(CIMAPPart.release(self:));
+    C_SYNTHESIZE_STATIC_FUNC_DEFINITION(CIMAPPart, CIMAPPart, init)
     
 #ifdef __cplusplus
 }
-
-CIMAPPart CIMAPPart_new(mailcore::IMAPPart *part);
 #endif
 
 #endif /* CIMAPPart_h */

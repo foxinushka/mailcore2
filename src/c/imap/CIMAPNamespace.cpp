@@ -7,53 +7,18 @@
 #define nativeType mailcore::IMAPNamespace
 #define structName CIMAPNamespace
 
-CIMAPNamespace CIMAPNamespace_new(mailcore::IMAPNamespace *folder) {
-    CIMAPNamespace self;
-    folder->retain();
-    self.instance = folder;
-    return self;
-}
+C_SYNTHESIZE_CONSTRUCTOR()
+C_SYNTHESIZE_COBJECT_CAST()
 
-CIMAPNamespace CIMAPNamespace_new(MailCoreString prefix, char delimiter) {
+CIMAPNamespace CIMAPNamespace_namespaceWithPrefix(MailCoreString prefix, char delimiter) {
     return CIMAPNamespace_new(mailcore::IMAPNamespace::namespaceWithPrefix(prefix.instance, delimiter));
 }
 
-void CIMAPNamespace_release(CIMAPNamespace self) {
-    C_SAFE_RELEASE(self.instance);
-}
+C_SYNTHESIZE_FUNC_WITH_OBJ(MailCoreString, mainPrefix)
+C_SYNTHESIZE_FUNC_WITH_SCALAR(char, mainDelimiter)
+C_SYNTHESIZE_FUNC_WITH_OBJ(CArray, prefixes)
+C_SYNTHESIZE_FUNC_WITH_OBJ(MailCoreString, pathForComponents, CArray)
+C_SYNTHESIZE_FUNC_WITH_OBJ(MailCoreString, pathForComponentsAndPrefix, CArray, MailCoreString)
+C_SYNTHESIZE_FUNC_WITH_OBJ(CArray, componentsFromPath, MailCoreString)
+C_SYNTHESIZE_FUNC_WITH_SCALAR(bool, containsFolderPath, MailCoreString)
 
-MailCoreString CIMAPNamespace_mainPrefix(struct CIMAPNamespace self) {
-    return MailCoreString_new(self.instance->mainPrefix());
-}
-
-char CIMAPNamespace_mainDelimiter(struct CIMAPNamespace self) {
-    return self.instance->mainDelimiter();
-}
-
-CArray CIMAPNamespace_prefixes(struct CIMAPNamespace self) {
-    return CArray_new(self.instance->prefixes());
-}
-
-MailCoreString CIMAPNamespace_pathForComponents(struct CIMAPNamespace self, CArray components) {
-    return MailCoreString_new(self.instance->pathForComponents(components.instance));
-}
-
-MailCoreString CIMAPNamespace_pathForComponentsAndPrefix(struct CIMAPNamespace self, CArray components, MailCoreString prefix) {
-    return MailCoreString_new(self.instance->pathForComponentsAndPrefix(components.instance, prefix.instance));
-}
-
-CArray CIMAPNamespace_componentsFromPath(struct CIMAPNamespace self, MailCoreString path) {
-    return CArray_new(self.instance->componentsFromPath(path.instance));
-}
-
-bool CIMAPNamespace_containsFolderPath(struct CIMAPNamespace self, MailCoreString path) {
-    return self.instance->containsFolderPath(path.instance);
-}
-
-CIMAPNamespace CIMAPNamespace_castFromCObject(CObject obj) {
-    return CIMAPNamespace_new(reinterpret_cast<mailcore::IMAPNamespace*>(obj.instance));
-}
-
-CObject CIMAPNamespace_castToCObject(struct CIMAPNamespace self) {
-    return CObject_new(reinterpret_cast<mailcore::Object*>(self.instance));
-}

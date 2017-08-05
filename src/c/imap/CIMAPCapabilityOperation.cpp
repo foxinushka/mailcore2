@@ -5,17 +5,6 @@
 #define nativeType mailcore::IMAPCapabilityOperation
 #define structName CIMAPCapabilityOperation
 
-CIMAPCapabilityOperation CIMAPCapabilityOperation_new(mailcore::IMAPCapabilityOperation *operationRef){
-    CIMAPCapabilityOperation self;
-    self.baseOperation = CIMAPBaseOperation_new(operationRef);
-    self.instance = operationRef;
-    return self;
-}
-
-void CIMAPCapabilityOperation_release(CIMAPCapabilityOperation operation) {
-    
-}
-
-CIndexSet CIMAPCapabilityOperation_capabilities(struct CIMAPCapabilityOperation self) {
-    return CIndexSet_new(self.instance->capabilities());
-}
+C_SYNTHESIZE_CONSTRUCTOR()
+C_SYNTHESIZE_COBJECT_CAST()
+C_SYNTHESIZE_FUNC_WITH_OBJ(CIndexSet, capabilities)

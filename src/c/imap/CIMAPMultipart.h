@@ -13,29 +13,16 @@ namespace mailcore {
 extern "C" {
 #endif
     
-    struct CIMAPMultipart {
-#ifdef __cplusplus
-        mailcore::IMAPMultipart*    instance;
-#else
-        void*                       instance;
-#endif
-        CAbstractMultipart abstractMultipart;
-    };
-    typedef struct CIMAPMultipart CIMAPMultipart;
+    C_SYNTHESIZE_STRUCT_DEFINITION(CIMAPMultipart, mailcore::IMAPMultipart)
     
-    MailCoreString    CIMAPMultipart_partID(struct CIMAPMultipart self)
-                    CF_SWIFT_NAME(getter:CIMAPMultipart.partID(self:));
+    C_SYNTHESIZE_COBJECT_CAST_DEFINITION(CIMAPMultipart)
     
-    void            CIMAPMultipart_setPartID(struct CIMAPMultipart self, MailCoreString partID)
-                    CF_SWIFT_NAME(setter:CIMAPMultipart.partID(self:newValue:));
+    C_SYNTHESIZE_PROPERTY_DEFINITION(CIMAPMultipart, MailCoreString, partID, setPartID)
     
-    void            CIMAPMultipart_release(CIMAPMultipart self)
-                    CF_SWIFT_NAME(CIMAPMultipart.release(self:));
+    C_SYNTHESIZE_STATIC_FUNC_DEFINITION(CIMAPMultipart, CIMAPMultipart, init)
     
 #ifdef __cplusplus
 }
-
-CIMAPMultipart CIMAPMultipart_new(mailcore::IMAPMultipart *part);
 #endif
 
 #endif /* CIMAPMultipart_h */

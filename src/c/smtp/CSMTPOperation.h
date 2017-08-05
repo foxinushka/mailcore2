@@ -33,17 +33,16 @@ extern "C" {
     };
     typedef struct CSMTPOperation CSMTPOperation;
     
-    ErrorCode                   CSMTPOperation_error(struct CSMTPOperation self)
-                                CF_SWIFT_NAME(getter:CSMTPOperation.error(self:));
+    C_SYNTHESIZE_COBJECT_CAST_DEFINITION(CSMTPOperation)
     
-    struct CSMTPOperation       CSMTPOperation_setProgressBlocks(struct CSMTPOperation self, CProgressBlock progressBlock, const void* userInfo)
-                                CF_SWIFT_NAME(CSMTPOperation.setProgressBlocks(self:block:userInfo:));
+    C_SYNTHESIZE_READONLY_PROPERTY_DEFINITION(CSMTPOperation, ErrorCode, error)
+    C_SYNTHESIZE_READONLY_PROPERTY_DEFINITION(CSMTPOperation, MailCoreString, lastSMTPResponse)
+    C_SYNTHESIZE_READONLY_PROPERTY_DEFINITION(CSMTPOperation, int, lastSMTPResponseCode)
     
-    MailCoreString              CSMTPOperation_lastSMTPResponse(struct CSMTPOperation self)
-                                CF_SWIFT_NAME(getter:CSMTPOperation.lastSMTPResponse(self:));
+    C_SYNTHESIZE_FUNC_DEFINITION(CSMTPOperation, CSMTPOperation, setProgressBlocks, CProgressBlock, const void*)
     
-    int                         CSMTPOperation_lastSMTPResponseCode(struct CSMTPOperation self)
-                                CF_SWIFT_NAME(getter:CSMTPOperation.lastSMTPResponseCode(self:));
+    void                        CSMTPOperation_retain(CSMTPOperation operation)
+                                CF_SWIFT_NAME(CSMTPOperation.retain(self:));
     
     void                        CSMTPOperation_release(CSMTPOperation operation)
                                 CF_SWIFT_NAME(CSMTPOperation.release(self:));

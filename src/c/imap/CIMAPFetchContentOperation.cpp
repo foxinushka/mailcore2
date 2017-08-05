@@ -5,17 +5,6 @@
 #define nativeType mailcore::IMAPFetchContentOperation
 #define structName CIMAPFetchContentOperation
 
-CIMAPFetchContentOperation CIMAPFetchContentOperation_new(mailcore::IMAPFetchContentOperation *operationRef){
-    CIMAPFetchContentOperation self;
-    self.baseOperation = CIMAPBaseOperation_new(operationRef);
-    self.instance = operationRef;
-    return self;
-}
-
-extern "C" void CIMAPFetchContentOperation_release(CIMAPFetchContentOperation operation) {
-
-}
-
-CData CIMAPFetchContentOperation_data(struct CIMAPFetchContentOperation self){
-    return CData_new(self.instance->data());
-}
+C_SYNTHESIZE_CONSTRUCTOR()
+C_SYNTHESIZE_COBJECT_CAST()
+C_SYNTHESIZE_FUNC_WITH_OBJ(CData, data)

@@ -13,35 +13,19 @@ namespace mailcore {
 
 extern "C" {
 #endif
+    
+    C_SYNTHESIZE_STRUCT_DEFINITION(CArray, mailcore::Array)
+    
+    C_SYNTHESIZE_READONLY_PROPERTY_DEFINITION(CArray, uint32_t, count)
 
-    struct CArray {
-#ifdef __cplusplus
-        mailcore::Array*    instance;
-#else
-        void*               instance;
-#endif
-    };
-    typedef struct CArray CArray;
+    C_SYNTHESIZE_FUNC_DEFINITION(CArray, void, addObject, CObject)
+    C_SYNTHESIZE_FUNC_DEFINITION(CArray, CObject, getObject, uint32_t)
+    C_SYNTHESIZE_FUNC_DEFINITION(CArray, uint32_t, getUint, uint32_t)
     
-    void        CArray_addObject(struct CArray self, CObject object)
-                CF_SWIFT_NAME(CArray.addObject(self:cobject:));
-    
-    uint32_t    CArray_size(struct CArray self)
-                CF_SWIFT_NAME(getter:CArray.size(self:));
-    
-    CObject     CArray_getObject(struct CArray self, uint32_t index)
-                CF_SWIFT_NAME(CArray.getObject(self:index:));
-    
-    uint32_t    CArray_getUint(struct CArray self, uint32_t index)
-                CF_SWIFT_NAME(CArray.getUint(self:index:));
-    
-    CArray      CArray_new()
-                /* CF_SWIFT_NAME(CArray.init()) */;
+    C_SYNTHESIZE_STATIC_FUNC_DEFINITION(CArray, CArray, init)
     
 #ifdef __cplusplus
 }
-
-CArray CArray_new(mailcore::Array *array);
 #endif
 
 #endif

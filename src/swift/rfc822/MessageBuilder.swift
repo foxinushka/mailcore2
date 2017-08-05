@@ -1,17 +1,26 @@
 import Foundation
 
-
 public class MCOMessageBuilder : MCOAbstractMessage {
     
     private var nativeInstance: CMessageBuilder;
     
-    public convenience init() {
-        self.init(builder: CMessageBuilder_new())
+    public init() {
+        self.nativeInstance = CMessageBuilder_init()
+        super.init(mailCoreObject: self.nativeInstance.toCObject())
     }
     
-    internal init(builder: CMessageBuilder) {
-        self.nativeInstance = builder;
-        super.init(builder.abstractMessage);
+    required public init(mailCoreObject: CObject) {
+        self.nativeInstance = CMessageBuilder(cobject: mailCoreObject)
+        self.nativeInstance.retain()
+        super.init(mailCoreObject: mailCoreObject)
+    }
+    
+    deinit {
+        self.nativeInstance.release()
+    }
+    
+    override func cast() -> CObject {
+        return self.nativeInstance.toCObject()
     }
     
     /** Main HTML content of the message.*/
@@ -46,32 +55,31 @@ public class MCOMessageBuilder : MCOAbstractMessage {
     
     /** Add an attachment.*/
     public func addAttachment(attachment: MCOAttachment) {
-        nativeInstance.addAttachment(attachment: attachment.nativeInstance);
+        nativeInstance.addAttachment(attachment.nativeInstance);
     }
     
     /** Add a related attachment.*/
     public func addRelatedAttachment(attachment: MCOAttachment) {
-        nativeInstance.addRelatedAttachment(attachment: attachment.nativeInstance);
+        nativeInstance.addRelatedAttachment(attachment.nativeInstance);
     }
     
     /** RFC 822 formatted message.*/
-    public func data() -> Data {
+    public func data() -> Data? {
         return Data(cdata: nativeInstance.data());
     }
     
     /** RFC 822 formatted message for encryption.*/
-    public func dataForEncryption() -> Data {
+    public func dataForEncryption() -> Data? {
         return Data(cdata: nativeInstance.dataForEncryption());
     }
     
     /** Store RFC 822 formatted message to file. */
-    public func writeToFile(filename: String) -> (successful: Bool, error: Error?) {
-        let code = nativeInstance.writeToFile(filename: filename.mailCoreString())
-        var error: Error?
+    public func writeToFile(filename: String) throws -> Bool {
+        let code = nativeInstance.writeToFile(filename.mailCoreString())
         if code != ErrorNone {
-            error = MailCoreError(code: code);
+            throw MailCoreError(code: code);
         }
-        return (code == ErrorNone, error);
+        return true
     }
     
     /**
@@ -80,8 +88,8 @@ public class MCOMessageBuilder : MCOAbstractMessage {
      before calling this method.
      You could use http://www.netpgp.com to generate it.
      */
-    public func openPGPSignedMessageDataWithSignatureData(signature: Data) -> Data {
-        return Data(cdata: nativeInstance.openPGPSignedMessageData(signatureData: signature.mailCoreData()))
+    public func openPGPSignedMessageDataWithSignatureData(signature: Data) -> Data? {
+        return Data(cdata: nativeInstance.openPGPSignedMessageDataWithSignatureData(signature.mailCoreData()))
     }
     
     /**
@@ -89,8 +97,8 @@ public class MCOMessageBuilder : MCOAbstractMessage {
      The encrypted data needs to be computed before calling this method.
      You could use http://www.netpgp.com to generate it.
      */
-    public func openPGPEncryptedMessageDataWithEncryptedData(encryptedData: Data) -> Data {
-        return Data(cdata: nativeInstance.openPGPEncryptedMessageData(encryptedData: encryptedData.mailCoreData()))
+    public func openPGPEncryptedMessageDataWithEncryptedData(encryptedData: Data) -> Data? {
+        return Data(cdata: nativeInstance.openPGPEncryptedMessageDataWithEncryptedData(encryptedData.mailCoreData()))
     }
     
     /** HTML rendering of the message to be displayed in a web view. The delegate can be nil.*/
@@ -109,13 +117,13 @@ public class MCOMessageBuilder : MCOAbstractMessage {
     /** Text rendering of the body of the message. All end of line will be removed and white spaces cleaned up.
      This method can be used to generate the summary of the message.*/
     public func plainTextBodyRendering() -> String? {
-        return nativeInstance.plainTextBodyRendering().string()
+        return nativeInstance.plainTextBodyRenderingAndStripWhitespace(true).string()
     }
     
     /** Text rendering of the body of the message. All end of line will be removed and white spaces cleaned up if requested.
      This method can be used to generate the summary of the message.*/
     public func plainTextBodyRenderingAndStripWhitespace(stripWhitespace: Bool) -> String? {
-        return nativeInstance.plainTextBodyRenderingAndStripWhitespace(stripWhitespace: stripWhitespace).string()
+        return nativeInstance.plainTextBodyRenderingAndStripWhitespace(stripWhitespace).string()
     }
 
 }

@@ -14,36 +14,16 @@ namespace mailcore {
 extern "C" {
 #endif
     
-    struct CIMAPFetchMessagesOperation {
-        CIMAPBaseOperation baseOperation;
-#ifdef __cplusplus
-        mailcore::IMAPFetchMessagesOperation*   instance;
-#else
-        void*                                   instance;
-#endif
-    };
-    typedef struct CIMAPFetchMessagesOperation CIMAPFetchMessagesOperation;
-
-    CArray      CIMAPFetchMessagesOperation_messages(struct CIMAPFetchMessagesOperation self)
-    			CF_SWIFT_NAME(CIMAPFetchMessagesOperation.messages(self:));
-
-    CIndexSet   CIMAPFetchMessagesOperation_vanishedMessages(struct CIMAPFetchMessagesOperation self)
-    			CF_SWIFT_NAME(CIMAPFetchMessagesOperation.vanishedMessages(self:));
-
-    CArray      CIMAPFetchMessagesOperation_extraHeaders(struct CIMAPFetchMessagesOperation self)
-    			CF_SWIFT_NAME(getter:CIMAPFetchMessagesOperation.extraHeaders(self:));
-
-    void        CIMAPFetchMessagesOperation_setExtraHeaders(struct CIMAPFetchMessagesOperation self, CArray array)
-    			CF_SWIFT_NAME(setter:CIMAPFetchMessagesOperation.extraHeaders(self:newValue:));
-
-
-    void 		CIMAPFetchMessagesOperation_release(CIMAPFetchMessagesOperation self)
-    			CF_SWIFT_NAME(CIMAPFetchMessagesOperation.release(self:));
+    C_SYNTHESIZE_STRUCT_DEFINITION(CIMAPFetchMessagesOperation, mailcore::IMAPFetchMessagesOperation)
+    C_SYNTHESIZE_COBJECT_CAST_DEFINITION(CIMAPFetchMessagesOperation)
+    
+    C_SYNTHESIZE_PROPERTY_DEFINITION(CIMAPFetchMessagesOperation, CArray, extraHeaders, setExtraHeaders)
+    
+    C_SYNTHESIZE_FUNC_DEFINITION(CIMAPFetchMessagesOperation, CArray, messages)
+    C_SYNTHESIZE_FUNC_DEFINITION(CIMAPFetchMessagesOperation, CIndexSet, vanishedMessages)
 
 #ifdef __cplusplus
 }
-
-CIMAPFetchMessagesOperation CIMAPFetchMessagesOperation_new(mailcore::IMAPFetchMessagesOperation *operation);
 #endif
 
 #endif

@@ -1,23 +1,43 @@
 #include "CData.h"
 #include "MailCore/MCCore.h"
+#include "CBase+Private.h"
 
-CData CData_new(mailcore::Data* data) {
-    CData result;
-    result.instance = data;
-    return result;
-}
+#define nativeType mailcore::Data
+#define structName CData
 
-CData CData_new(const char* bytes, unsigned int length) {
+C_SYNTHESIZE_CONSTRUCTOR()
+C_SYNTHESIZE_COBJECT_CAST()
+
+CData CData_dataWithBytes(const char* bytes, unsigned int length) {
     CData result;
     result.instance = mailcore::Data::dataWithBytes(bytes, length);
     return result;
 }
 
-const char* CData_bytes(CData self) {
-    return self.instance->bytes();
+C_SYNTHESIZE_FUNC_WITH_SCALAR(const char*, bytes)
+C_SYNTHESIZE_FUNC_WITH_SCALAR(unsigned int, length)
+
+CData Value_mailCoreTypeInfo() {
+    return getTypeNameFromObject(&typeid(mailcore::Value));
 }
 
-unsigned int CData_length(CData self) {
-    return self.instance->length();
+CData getTypeNameFromObject(CObject obj) {
+    const std::type_info * info = &typeid(* obj.instance);
+    return getTypeNameFromObject(info);
+}
+
+CData getTypeNameFromObject(const std::type_info * info) {
+    CData result;
+#ifdef __LIBCPP_TYPEINFO
+    size_t hash_value = info->hash_code();
+    char* bytes = (char*)&hash_value;
+    unsigned int length = sizeof(hash_value);
+    result.instance = mailcore::Data::dataWithBytes(bytes, length);
+#else
+    char* bytes = info->name();
+    unsigned int length = (unsigned int) strlen(info->name());
+    result.instance = mailcore::Data::dataWithBytes(bytes, length);
+#endif
+    return result;
 }
 

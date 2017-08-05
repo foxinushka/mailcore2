@@ -13,26 +13,12 @@ namespace mailcore {
 extern "C" {
 #endif
     
-    struct CIMAPCopyMessagesOperation {
-        CIMAPBaseOperation baseOperation;
-#ifdef __cplusplus
-        mailcore::IMAPCopyMessagesOperation*    instance;
-#else
-        void*                                   instance;
-#endif
-    };
-    typedef struct CIMAPCopyMessagesOperation CIMAPCopyMessagesOperation;
-    
-    CDictionary     CIMAPCopyMessagesOperation_uidMapping(struct CIMAPCopyMessagesOperation self)
-                    CF_SWIFT_NAME(CIMAPCopyMessagesOperation.uidMapping(self:));
-    
-    void            CIMAPCopyMessagesOperation_release(CIMAPCopyMessagesOperation self)
-                    CF_SWIFT_NAME(CIMAPCopyMessagesOperation.release(self:));
+    C_SYNTHESIZE_STRUCT_DEFINITION(CIMAPCopyMessagesOperation, mailcore::IMAPCopyMessagesOperation)
+    C_SYNTHESIZE_COBJECT_CAST_DEFINITION(CIMAPCopyMessagesOperation)
+    C_SYNTHESIZE_FUNC_DEFINITION(CIMAPCopyMessagesOperation, CDictionary, uidMapping)
 
 #ifdef __cplusplus
 }
-
-CIMAPCopyMessagesOperation CIMAPCopyMessagesOperation_new(mailcore::IMAPCopyMessagesOperation *operation);
 #endif
 
 #endif

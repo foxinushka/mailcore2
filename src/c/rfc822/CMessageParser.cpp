@@ -15,36 +15,17 @@
 #define nativeType mailcore::MessageParser
 #define structName CMessageParser
 
-CMessageParser CMessageParser_new(mailcore::MessageParser *parser) {
-    CMessageParser self;
-    self.abstractMessage = CAbstractMessage_new(parser);
-    self.instance = parser;
-    return self;
-}
+C_SYNTHESIZE_CONSTRUCTOR()
+C_SYNTHESIZE_COBJECT_CAST()
 
-CMessageParser CMessageParser_new(CData data) {
+CMessageParser CMessageParser_init(CData data) {
     return CMessageParser_new(new mailcore::MessageParser(data.instance));
 }
 
-CAbstractPart CMessageParser_mainPart(struct CMessageParser self) {
-    return CAbstractPart_new(self.instance->mainPart());
-}
-
-CData CMessageParser_data(struct CMessageParser self) {
-    return CData_new(self.instance->data());
-}
-
-MailCoreString CMessageParser_htmlBodyRendering(struct CMessageParser self) {
-    return MailCoreString_new(self.instance->htmlBodyRendering());
-}
-
-MailCoreString CMessageParser_plainTextRendering(struct CMessageParser self) {
-    return MailCoreString_new(self.instance->plainTextRendering());
-}
-
-MailCoreString CMessageParser_plainTextBodyRendering(struct CMessageParser self) {
-    return MailCoreString_new(self.instance->plainTextBodyRendering(true));
-}
+C_SYNTHESIZE_FUNC_WITH_OBJ(CAbstractPart, mainPart)
+C_SYNTHESIZE_FUNC_WITH_OBJ(CData, data)
+C_SYNTHESIZE_FUNC_WITH_OBJ(MailCoreString, htmlBodyRendering)
+C_SYNTHESIZE_FUNC_WITH_OBJ(MailCoreString, plainTextRendering)
 
 MailCoreString CMessageParser_plainTextBodyRenderingAndStripWhitespace(struct CMessageParser self, bool stripWhitespace) {
     return MailCoreString_new(self.instance->plainTextBodyRendering(stripWhitespace));

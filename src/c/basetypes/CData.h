@@ -7,6 +7,8 @@
 
 #ifdef __cplusplus
 
+#include <typeinfo>
+
 namespace mailcore {
     class Data;
 }
@@ -14,28 +16,20 @@ namespace mailcore {
 extern "C" {
 #endif
     
-    struct CData {
-#ifdef __cplusplus
-        mailcore::Data*   instance;
-#else
-        void*               instance;
-#endif
-    };
-    typedef struct CData CData;
+    C_SYNTHESIZE_STRUCT_DEFINITION(CData, mailcore::Data)
+    C_SYNTHESIZE_COBJECT_CAST_DEFINITION(CData)
     
-    CData               CData_new(const char* bytes, unsigned int length)
-                        CF_SWIFT_NAME(CData.init(bytes:length:));
+    C_SYNTHESIZE_READONLY_PROPERTY_DEFINITION(CData, const char*, bytes)
+    C_SYNTHESIZE_READONLY_PROPERTY_DEFINITION(CData, unsigned int, length)
     
-    const char*         CData_bytes(CData self)
-                        CF_SWIFT_NAME(getter:CData.bytes(self:));
-    
-    unsigned int        CData_length(CData self)
-                        CF_SWIFT_NAME(getter:CData.length(self:));
+    C_SYNTHESIZE_STATIC_FUNC_DEFINITION(CData, CData, dataWithBytes, const char*, unsigned int)
+
+    CData               Value_mailCoreTypeInfo();
+    CData               getTypeNameFromObject(CObject obj);
     
 #ifdef __cplusplus
 }
-
-CData CData_new(mailcore::Data* data);
+CData getTypeNameFromObject(const std::type_info * info);
 #endif
 
 #endif

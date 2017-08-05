@@ -10,10 +10,12 @@ public class MCOIMAPFetchFoldersOperation : MCOIMAPBaseOperation {
     
     internal init(operation:CIMAPFetchFoldersOperation) {
         self.operation = operation
-        super.init(baseOperation: operation.baseOperation)
+        self.operation.retain()
+        super.init(baseOperation: CIMAPBaseOperation.init(cobject: operation.toCObject()))
     }
     
     deinit {
+        self.operation.release()
         completionBlock = nil;
     }
     

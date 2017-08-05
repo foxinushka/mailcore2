@@ -2,6 +2,9 @@
 #include "CIndexSet.h"
 #include "CBase+Private.h"
 
+#define nativeType mailcore::IndexSet
+#define structName CIndexSet
+
 Range RangeEmpty = {UINT64_MAX, 0};
 
 Range RangeMake(uint64_t location, uint64_t length)
@@ -68,7 +71,7 @@ uint64_t RangeRightBound(Range range)
     return mailcore::RangeRightBound(mcRange);
 }
 
-CIndexSet CIndexSet_new() {
+CIndexSet CIndexSet_init() {
     return CIndexSet_new(new mailcore::IndexSet());
 }
 
@@ -80,18 +83,8 @@ CIndexSet CIndexSet_new_WithIndex(uint64_t idx) {
     return CIndexSet_new(mailcore::IndexSet::indexSetWithIndex(idx));
 }
 
-CIndexSet CIndexSet_new(mailcore::IndexSet *set) {
-    CIndexSet self;
-    self.instance = set;
-    if (self.instance != NULL) {
-        self.instance->retain();
-    }
-    return self;
-}
-
-void CIndexSet_release(CIndexSet indexSet) {
-    C_SAFE_RELEASE(indexSet.instance);
-}
+C_SYNTHESIZE_CONSTRUCTOR()
+C_SYNTHESIZE_COBJECT_CAST()
 
 unsigned int CIndexSet_count(struct CIndexSet self) {
     return self.instance->count();
@@ -141,9 +134,3 @@ Range CIndexSet_range(struct CIndexSet self, unsigned int idx) {
 unsigned int CIndexSet_rangesCount(struct CIndexSet self) {
     return self.instance->rangesCount();
 }
-
-CIndexSet CIndexSet_copy(struct CIndexSet self) {
-    return CIndexSet_new(reinterpret_cast<mailcore::IndexSet *>(self.instance->copy()));
-}
-
-

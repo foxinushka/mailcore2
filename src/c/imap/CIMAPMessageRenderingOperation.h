@@ -13,26 +13,12 @@ namespace mailcore {
 extern "C" {
 #endif
     
-    struct CIMAPMessageRenderingOperation {
-        CIMAPBaseOperation baseOperation;
-#ifdef __cplusplus
-        mailcore::IMAPMessageRenderingOperation*      instance;
-#else
-        void*                                           instance;
-#endif
-    };
-    typedef struct CIMAPMessageRenderingOperation CIMAPMessageRenderingOperation;
-    
-    MailCoreString    CIMAPMessageRenderingOperation_result(struct CIMAPMessageRenderingOperation self)
-                    CF_SWIFT_NAME(CIMAPMessageRenderingOperation.result(self:));
-    
-    void            CIMAPMessageRenderingOperation_release(CIMAPMessageRenderingOperation self)
-                    CF_SWIFT_NAME(CIMAPMessageRenderingOperation.release(self:));
+    C_SYNTHESIZE_STRUCT_DEFINITION(CIMAPMessageRenderingOperation, mailcore::IMAPMessageRenderingOperation)
+    C_SYNTHESIZE_COBJECT_CAST_DEFINITION(CIMAPMessageRenderingOperation)
+    C_SYNTHESIZE_FUNC_DEFINITION(CIMAPMessageRenderingOperation, MailCoreString, result)
     
 #ifdef __cplusplus
 }
-
-CIMAPMessageRenderingOperation CIMAPMessageRenderingOperation_new(mailcore::IMAPMessageRenderingOperation *operation);
 #endif
 
 #endif /* CIMAPMessageRenderingOperation_hpp */

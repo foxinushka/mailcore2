@@ -5,17 +5,7 @@
 #define nativeType mailcore::IMAPFolderInfoOperation
 #define structName CIMAPFolderInfoOperation
 
-CIMAPFolderInfoOperation CIMAPFolderInfoOperation_new(mailcore::IMAPFolderInfoOperation *operation){
-    CIMAPFolderInfoOperation self;
-    self.baseOperation = CIMAPBaseOperation_new(operation);
-    self.instance = operation;
-    return self;
-}
+C_SYNTHESIZE_CONSTRUCTOR()
+C_SYNTHESIZE_COBJECT_CAST()
 
-void CIMAPFolderInfoOperation_release(CIMAPFolderInfoOperation operation) {
-    
-}
-
-CIMAPFolderInfo CIMAPFolderInfoOperation_info(CIMAPFolderInfoOperation self) {
-    return CIMAPFolderInfo_new(self.instance->info());
-}
+C_SYNTHESIZE_FUNC_WITH_OBJ(CIMAPFolderInfo, info)

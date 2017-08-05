@@ -3,7 +3,7 @@
 #include <MailCore/MCRenderer.h>
 #include "CData.h"
 
-class AbstractMessageRendererCallback : public mailcore::HTMLRendererTemplateCallback, public mailcore::HTMLRendererIMAPCallback {
+class AbstractMessageRendererCallback : public mailcore::Object, public mailcore::HTMLRendererTemplateCallback, public mailcore::HTMLRendererIMAPCallback {
 public:
     AbstractMessageRendererCallback(CanPreviewPartBlock canPreviewPartBlock,
                                     ShouldShowPartBlock shouldShowPartBlock,
@@ -270,11 +270,13 @@ CAbstractMessageRendererCallback CAbstractMessageRendererCallback_new(CanPreview
                                                               prefetchAttachmentIMAPPartBlock,
                                                               prefetchImageIMAPPartBlock,
                                                               userInfo);
-    //self.callbackBridge->retain();
-    
     return self;
 }
 
+void CAbstractMessageRendererCallback_rerain(CAbstractMessageRendererCallback self) {
+    self.callbackBridge->retain();
+}
+
 void CAbstractMessageRendererCallback_release(CAbstractMessageRendererCallback self) {
-    
+    self.callbackBridge->release();
 }

@@ -5,17 +5,6 @@
 #define nativeType mailcore::IMAPFetchNamespaceOperation
 #define structName CIMAPFetchNamespaceOperation
 
-CIMAPFetchNamespaceOperation CIMAPFetchNamespaceOperation_new(mailcore::IMAPFetchNamespaceOperation *operationRef){
-    CIMAPFetchNamespaceOperation self;
-    self.baseOperation = CIMAPBaseOperation_new(operationRef);
-    self.instance = operationRef;
-    return self;
-}
-
-void CIMAPFetchNamespaceOperation_release(CIMAPFetchNamespaceOperation operation) {
-    
-}
-
-CDictionary CIMAPFetchNamespaceOperation_namespaces(struct CIMAPFetchNamespaceOperation self) {
-    return CDictionary_new(self.instance->namespaces());
-}
+C_SYNTHESIZE_CONSTRUCTOR()
+C_SYNTHESIZE_COBJECT_CAST()
+C_SYNTHESIZE_FUNC_WITH_OBJ(CDictionary, namespaces)

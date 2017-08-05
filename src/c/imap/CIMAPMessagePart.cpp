@@ -3,19 +3,10 @@
 
 #include <MailCore/MCCore.h>
 
-#define nativeInstance abstractMessagePart.abstractPart.nativeInstance
 #define nativeType mailcore::IMAPMessagePart
 #define structName CIMAPMessagePart
 
-C_SYNTHESIZE_STRING(setPartID, partID);
+C_SYNTHESIZE_CONSTRUCTOR()
+C_SYNTHESIZE_COBJECT_CAST()
 
-CIMAPMessagePart CIMAPMessage_new(mailcore::IMAPMessagePart *part) {
-    CIMAPMessagePart self;
-    self.abstractMessagePart = CAbstractMessagePart_new(part);
-    self.instance = part;
-    return self;
-}
-
-void CIMAPMessagePart_release(CIMAPMessagePart self) {
-    
-}
+C_SYNTHESIZE_STRING(setPartID, partID)

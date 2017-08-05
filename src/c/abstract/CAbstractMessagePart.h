@@ -17,31 +17,15 @@ namespace mailcore {
 extern "C" {
 #endif
     
-    typedef struct CAbstractMessagePart {
-#ifdef __cplusplus
-        mailcore::AbstractMessagePart*  instance;
-#else
-        void*                           instance;
-#endif
-        CAbstractPart abstractPart;
-    } CAbstractMessagePart;
+    C_SYNTHESIZE_STRUCT_DEFINITION(CAbstractMessagePart, mailcore::AbstractMessagePart)
     
-    struct CMessageHeader           CAbstractMessagePart_header(struct CAbstractMessagePart self)
-                                    CF_SWIFT_NAME(getter:CAbstractMessagePart.header(self:));
+    C_SYNTHESIZE_COBJECT_CAST_DEFINITION(CAbstractMessagePart)
     
-    void                            CAbstractMessagePart_setHeader(struct CAbstractMessagePart self, struct CMessageHeader header)
-                                    CF_SWIFT_NAME(setter:CAbstractMessagePart.header(self:newValue:));
-    
-    struct CAbstractPart            CAbstractMessagePart_mainPart(struct CAbstractMessagePart self)
-                                    CF_SWIFT_NAME(getter:CAbstractMessagePart.mainPart(self:));
-    
-    void                            CAbstractMessagePart_setMainPart(struct CAbstractMessagePart self, struct CAbstractPart part)
-                                    CF_SWIFT_NAME(setter:CAbstractMessagePart.mainPart(self:newValue:));
+    C_SYNTHESIZE_PROPERTY_DEFINITION(CAbstractMessagePart, CMessageHeader, header, setHeader)
+    C_SYNTHESIZE_PROPERTY_DEFINITION(CAbstractMessagePart, CAbstractPart, mainPart, setMainPart)
     
 #ifdef __cplusplus
 }
-
-CAbstractMessagePart CAbstractMessagePart_new(mailcore::AbstractMessagePart *part);
 #endif
 
 #endif

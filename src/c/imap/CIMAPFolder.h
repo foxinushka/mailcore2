@@ -18,45 +18,15 @@ namespace mailcore {
 extern "C" {
 #endif
     
-    struct CIMAPFolder {
-#ifdef __cplusplus
-        mailcore::IMAPFolder*   instance;
-#else
-        void*                   instance;
-#endif
-    };
-    typedef struct CIMAPFolder CIMAPFolder;
+    C_SYNTHESIZE_STRUCT_DEFINITION(CIMAPFolder, mailcore::IMAPFolder)
+    C_SYNTHESIZE_COBJECT_CAST_DEFINITION(CIMAPFolder)
     
-    MailCoreString    CIMAPFolder_path(struct CIMAPFolder self)
-                    CF_SWIFT_NAME(getter:CIMAPFolder.path(self:));
+    C_SYNTHESIZE_PROPERTY_DEFINITION(CIMAPFolder, MailCoreString, path, setPath)
+    C_SYNTHESIZE_PROPERTY_DEFINITION(CIMAPFolder, char, delimiter, setDelimiter)
+    C_SYNTHESIZE_PROPERTY_DEFINITION(CIMAPFolder, CIMAPFolderFlag, flags, setFlags)
     
-    void            CIMAPFolder_setPath(struct CIMAPFolder self, MailCoreString path)
-                    CF_SWIFT_NAME(setter:CIMAPFolder.path(self:newValue:));
-    
-    char            CIMAPFolder_delimiter(struct CIMAPFolder self)
-                    CF_SWIFT_NAME(getter:CIMAPFolder.delimiter(self:));
-    
-    void            CIMAPFolder_setDelimiter(struct CIMAPFolder self, char delimiter)
-                    CF_SWIFT_NAME(setter:CIMAPFolder.delimiter(self:newValue:));
-    
-    CIMAPFolderFlag  CIMAPFolder_flags(struct CIMAPFolder self)
-                    CF_SWIFT_NAME(getter:CIMAPFolder.flags(self:));
-    
-    void            CIMAPFolder_setFlags(struct CIMAPFolder self, CIMAPFolderFlag flags)
-                    CF_SWIFT_NAME(setter:CIMAPFolder.flags(self:newValue:));
-    
-    CObject         CIMAPFolder_castToCObject(struct CIMAPFolder self)
-                    CF_SWIFT_NAME(CIMAPFolder.castToCObject(self:));
-    
-    CIMAPFolder     CIMAPFolder_castFromCObject(CObject obj)
-                    CF_SWIFT_NAME(CIMAPFolder.init(cobject:));
-    
-    void            CIMAPFolder_release(CIMAPFolder self)
-                    CF_SWIFT_NAME(CIMAPFolder.release(self:));
 #ifdef __cplusplus
 }
-
-CIMAPFolder CIMAPFolder_new(mailcore::IMAPFolder *folder);
 #endif
 
 #endif /* CIMAPFolder_h */

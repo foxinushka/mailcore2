@@ -1,16 +1,17 @@
 import Foundation
 
 
-public class MCOIMAPNamespaceItem {
+public class MCOIMAPNamespaceItem: Convertible {
     
-    private var nativeInstance:CIMAPNamespaceItem;
+    var nativeInstance:CIMAPNamespaceItem;
     
-    internal func CIMAPNamespaceItem() -> CIMAPNamespaceItem {
-        return nativeInstance;
+    public required init(mailCoreObject: CObject) {
+        self.nativeInstance = CIMAPNamespaceItem.init(cobject: mailCoreObject)
+        self.nativeInstance.retain()
     }
     
-    internal init(namespace:CIMAPNamespaceItem) {
-        self.nativeInstance = namespace;
+    func cast() -> CObject {
+        return self.nativeInstance.toCObject()
     }
     
     deinit {
@@ -31,17 +32,17 @@ public class MCOIMAPNamespaceItem {
     
     /** Returns folder path for given path components in the context of this namespace item */
     public func path(component: Array<String>) -> String? {
-        return nativeInstance.pathForComponents(components: Array<String>.cast(component)).string()
+        return nativeInstance.pathForComponents(Array<String>.cast(component)).string()
     }
     
     /** Returns components for the given path in the context of this namespace */
     public func components(path: String) -> Array<String> {
-        return Array<String>.cast(nativeInstance.componentForPath(path: path.mailCoreString()))
+        return Array<String>.cast(nativeInstance.componentsForPath(path.mailCoreString()))
     }
     
     /** Returns YES if the namespace contains this folder path */
     public func containsFolder(folder: String) -> Bool {
-        return nativeInstance.containsFolder(folder: folder.mailCoreString())
+        return nativeInstance.containsFolder(folder.mailCoreString())
     }
 
 }

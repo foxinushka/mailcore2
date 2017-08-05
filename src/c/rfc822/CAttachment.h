@@ -14,49 +14,22 @@ namespace mailcore {
 extern "C" {
 #endif
     
+    C_SYNTHESIZE_STRUCT_DEFINITION(CAttachment, mailcore::Attachment)
     
-    struct CAttachment {
-#ifdef __cplusplus
-        mailcore::Attachment*           instance;
-#else
-        void*                           instance;
-#endif
-        CAbstractPart abstractPart;
-        
-    };
-    typedef struct CAttachment CAttachment;
+    C_SYNTHESIZE_COBJECT_CAST_DEFINITION(CAttachment)
     
-    CData               CAttachment_data(struct CAttachment self)
-                        CF_SWIFT_NAME(getter:CAttachment.data(self:));
+    C_SYNTHESIZE_PROPERTY_DEFINITION(CAttachment, CData, data, setData)
+    C_SYNTHESIZE_READONLY_PROPERTY_DEFINITION(CAttachment, MailCoreString, decodedString)
     
-    void                CAttachment_setData(struct CAttachment self, CData data)
-                        CF_SWIFT_NAME(setter:CAttachment.data(self:newValue:));
-    
-    MailCoreString      CAttachment_decodedString(struct CAttachment self)
-                        CF_SWIFT_NAME(CAttachment.decodedString(self:));
-    
-    MailCoreString      CAttachment_mimeTypeForFilename(MailCoreString filename)
-                        CF_SWIFT_NAME(CAttachment.mimeType(forFilename:));
-    
-    CAttachment         CAttachment_WithContentsOfFile(MailCoreString filename)
-                        CF_SWIFT_NAME(CAttachment.init(contentsOfFile:));
-    
-    CAttachment         CAttachment_WithData(CData data, MailCoreString filename)
-                        CF_SWIFT_NAME(CAttachment.init(data:filename:));
-    
-    CAttachment         CAttachment_WithHTMLString(MailCoreString htmlString)
-                        CF_SWIFT_NAME(CAttachment.init(htmlString:));
-    
-    CAttachment         CAttachment_WithRFC822Message(CData data)
-                        CF_SWIFT_NAME(CAttachment.init(RFC822MessageData:));
-    
-    CAttachment         CAttachment_WithText(MailCoreString text)
-                        CF_SWIFT_NAME(CAttachment.init(text:));
+    C_SYNTHESIZE_STATIC_FUNC_DEFINITION(CAttachment, MailCoreString, mimeTypeForFilename, MailCoreString)
+    C_SYNTHESIZE_STATIC_FUNC_DEFINITION(CAttachment, CAttachment, attachmentWithContentsOfFile, MailCoreString)
+    C_SYNTHESIZE_STATIC_FUNC_DEFINITION(CAttachment, CAttachment, attachmentWithData, MailCoreString, CData)
+    C_SYNTHESIZE_STATIC_FUNC_DEFINITION(CAttachment, CAttachment, attachmentWithHTMLString, MailCoreString)
+    C_SYNTHESIZE_STATIC_FUNC_DEFINITION(CAttachment, CAttachment, attachmentWithRFC822Message, CData)
+    C_SYNTHESIZE_STATIC_FUNC_DEFINITION(CAttachment, CAttachment, attachmentWithText, MailCoreString)
     
 #ifdef __cplusplus
 }
-
-CAttachment CAttachment_new(mailcore::Attachment *attachment);
 #endif
 
 #endif /* CAttachment_h */

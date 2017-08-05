@@ -9,8 +9,9 @@ public class MCOOperation: NSObject {
     
     internal init(_ cOperation: COperation) {
         super.init()
-        self.nativeInstance = cOperation;
-        self.nativeInstance = cOperation.setCompletionBlock(block: operationCompletedCallback, userInfo: Unmanaged.passUnretained(self).toOpaque())
+        self.nativeInstance = cOperation
+        self.nativeInstance.retain()
+        self.nativeInstance = cOperation.setCompletionBlock(operationCompletedCallback, Unmanaged.passUnretained(self).toOpaque())
     }
     
     deinit {
@@ -25,13 +26,13 @@ public class MCOOperation: NSObject {
             return nativeInstance.callbackDispatchQueue()
         }
         set {
-            nativeInstance.setCallbackDispatchQueue(newValue: newValue)
+            nativeInstance.setCallbackDispatchQueue(newValue)
         }
     }
     
     /** Returns whether the operation is cancelled.*/
     public var isCancelled: Bool {
-        get { return nativeInstance.isCanceled(); }
+        get { return nativeInstance.isCancelled(); }
     }
     
     /** Returns whether the operation should run even if it's cancelled.*/

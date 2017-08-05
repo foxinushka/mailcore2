@@ -8,15 +8,21 @@
 
 import Foundation
 
-public class MCOMailProvider: NSObject {
+public class MCOMailProvider: NSObject, Convertible {
     
     internal var nativeInstance: CMailProvider
     
-    internal init?(_ provider: CMailProvider) {
-        guard provider.instance != nil else {
-            return nil
-        }
-        self.nativeInstance = provider
+    required public init(mailCoreObject: CObject) {
+        self.nativeInstance = CMailProvider(cobject: mailCoreObject)
+        self.nativeInstance.retain()
+    }
+    
+    deinit {
+        self.nativeInstance.release()
+    }
+    
+    func cast() -> CObject {
+        return nativeInstance.toCObject()
     }
     
     public var imapServices: [MCONetService] {

@@ -18,25 +18,12 @@ namespace mailcore {
 extern "C" {
 #endif
     
-    typedef struct CMessagePart {
-#ifdef __cplusplus
-        mailcore::MessagePart*          instance;
-#else
-        void*                           instance;
-#endif
-        CAbstractMessagePart abstractMessagePart;
-    } CMessagePart;
-    
-    MailCoreString                  CMessagePart_partID(struct CMessagePart self)
-                                    CF_SWIFT_NAME(getter:CMessagePart.partID(self:));
-    
-    void                            CMessagePart_setPartID(struct CMessagePart self, MailCoreString  partID)
-                                    CF_SWIFT_NAME(setter:CMessagePart.partID(self:newValue:));
+    C_SYNTHESIZE_STRUCT_DEFINITION(CMessagePart, mailcore::MessagePart)
+    C_SYNTHESIZE_COBJECT_CAST_DEFINITION(CMessagePart)
+    C_SYNTHESIZE_PROPERTY_DEFINITION(CMessagePart, MailCoreString, partID, setPartID)
     
 #ifdef __cplusplus
 }
-
-CMessagePart CMessagePart_new(mailcore::MessagePart *part);
 #endif
 
 #endif

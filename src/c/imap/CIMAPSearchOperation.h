@@ -14,26 +14,12 @@ namespace mailcore {
 extern "C" {
 #endif
     
-    struct CIMAPSearchOperation {
-        CIMAPBaseOperation baseOperation;
-#ifdef __cplusplus
-        mailcore::IMAPSearchOperation*  instance;
-#else
-        void*                           instance;
-#endif
-    };
-    typedef struct CIMAPSearchOperation CIMAPSearchOperation;
-    
-    CIndexSet   CIMAPSearchOperation_uids(struct CIMAPSearchOperation self)
-                CF_SWIFT_NAME(CIMAPSearchOperation.uids(self:));
-
-    void        CIMAPSearchOperation_release(CIMAPSearchOperation self)
-                CF_SWIFT_NAME(CIMAPSearchOperation.release(self:));
+    C_SYNTHESIZE_STRUCT_DEFINITION(CIMAPSearchOperation, mailcore::IMAPSearchOperation)
+    C_SYNTHESIZE_COBJECT_CAST_DEFINITION(CIMAPSearchOperation)
+    C_SYNTHESIZE_FUNC_DEFINITION(CIMAPSearchOperation, CIndexSet, uids)
     
 #ifdef __cplusplus
 }
-
-CIMAPSearchOperation CIMAPSearchOperation_new(mailcore::IMAPSearchOperation *operation);
 #endif
 
 #endif

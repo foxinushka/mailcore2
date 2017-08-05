@@ -7,6 +7,7 @@
 
 C_SYNTHESIZE_BOOL(setShouldRunWhenCancelled, shouldRunWhenCancelled);
 C_SYNTHESIZE_SCALAR(dispatch_queue_t, dispatch_queue_t, setCallbackDispatchQueue, callbackDispatchQueue)
+C_SYNTHESIZE_COBJECT_CAST()
 
 class COperationCompletionCallback : public mailcore::Object, public mailcore::OperationCallback {
 private:
@@ -38,21 +39,18 @@ struct COperation COperation_setCompletionBlock(COperation self, COperationCompl
     return self;
 }
 
-bool COperation_isCanceled(COperation self) {
-    return self.instance->isCancelled();
-}
+C_SYNTHESIZE_FUNC_WITH_SCALAR(bool, isCancelled)
+C_SYNTHESIZE_FUNC_WITH_VOID(cancel)
+C_SYNTHESIZE_FUNC_WITH_VOID(start)
 
-void COperation_cancel(COperation self) {
-    self.instance->cancel();
-}
 
-void COperation_start(COperation self) {
-    self.instance->start();
-}
-
-extern "C" void COperation_release(COperation self) {
+void COperation_release(COperation self) {
     self.instance->release();
     if (self._callback != NULL) {
         self._callback->release();
     }
+}
+
+void COperation_retain(COperation self) {
+    self.instance->retain();
 }

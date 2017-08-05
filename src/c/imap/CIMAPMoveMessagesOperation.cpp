@@ -5,17 +5,6 @@
 #define nativeType mailcore::IMAPMoveMessagesOperation
 #define structName CIMAPMoveMessagesOperation
 
-CIMAPMoveMessagesOperation CIMAPMoveMessagesOperation_new(mailcore::IMAPMoveMessagesOperation *operationRef){
-    CIMAPMoveMessagesOperation self;
-    self.baseOperation = CIMAPBaseOperation_new(operationRef);
-    self.instance = operationRef;
-    return self;
-}
-
-void CIMAPMoveMessagesOperation_release(CIMAPMoveMessagesOperation operation) {
-    
-}
-
-CDictionary CIMAPMoveMessagesOperation_uidMapping(struct CIMAPMoveMessagesOperation self) {
-    return CDictionary_new(self.instance->uidMapping());
-}
+C_SYNTHESIZE_CONSTRUCTOR()
+C_SYNTHESIZE_COBJECT_CAST()
+C_SYNTHESIZE_FUNC_WITH_OBJ(CDictionary, uidMapping)

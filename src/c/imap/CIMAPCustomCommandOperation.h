@@ -14,26 +14,12 @@ namespace mailcore {
 extern "C" {
 #endif
     
-    struct CIMAPCustomCommandOperation {
-        CIMAPBaseOperation baseOperation;
-#ifdef __cplusplus
-        mailcore::IMAPCustomCommandOperation*    instance;
-#else
-        void*                                   instance;
-#endif
-    };
-    typedef struct CIMAPCustomCommandOperation CIMAPCustomCommandOperation;
-    
-    MailCoreString    CIMAPCustomCommandOperation_response(struct CIMAPCustomCommandOperation self)
-                    CF_SWIFT_NAME(CIMAPCustomCommandOperation.response(self:));
-    
-    void            CIMAPCustomCommandOperation_release(CIMAPCustomCommandOperation self)
-                    CF_SWIFT_NAME(CIMAPCustomCommandOperation.release(self:));
+    C_SYNTHESIZE_STRUCT_DEFINITION(CIMAPCustomCommandOperation, mailcore::IMAPCustomCommandOperation)
+    C_SYNTHESIZE_COBJECT_CAST_DEFINITION(CIMAPCustomCommandOperation)
+    C_SYNTHESIZE_FUNC_DEFINITION(CIMAPCustomCommandOperation, MailCoreString, response)
     
 #ifdef __cplusplus
 }
-
-CIMAPCustomCommandOperation CIMAPCustomCommandOperation_new(mailcore::IMAPCustomCommandOperation *operation);
 #endif
 
 #endif /* CIMAPCustomCommandOperation_hpp */

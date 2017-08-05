@@ -5,21 +5,8 @@
 #define nativeType mailcore::IMAPQuotaOperation
 #define structName CIMAPQuotaOperation
 
-uint32_t CIMAPQuotaOperation_usage(struct CIMAPQuotaOperation self) {
-    return self.instance->usage();
-}
+C_SYNTHESIZE_CONSTRUCTOR()
+C_SYNTHESIZE_COBJECT_CAST()
 
-uint32_t CIMAPQuotaOperation_limit(struct CIMAPQuotaOperation self) {
-    return self.instance->limit();
-}
-
-CIMAPQuotaOperation CIMAPQuotaOperation_new(mailcore::IMAPQuotaOperation *operationRef){
-    CIMAPQuotaOperation self;
-    self.baseOperation = CIMAPBaseOperation_new(operationRef);
-    self.instance = operationRef;
-    return self;
-}
-
-void CIMAPQuotaOperation_release(CIMAPQuotaOperation operation) {
-    
-}
+C_SYNTHESIZE_FUNC_WITH_SCALAR(uint32_t, usage)
+C_SYNTHESIZE_FUNC_WITH_SCALAR(uint32_t, limit)

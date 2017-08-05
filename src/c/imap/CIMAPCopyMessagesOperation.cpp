@@ -5,17 +5,6 @@
 #define nativeType mailcore::IMAPCopyMessagesOperation
 #define structName CIMAPCopyMessagesOperation
 
-CIMAPCopyMessagesOperation CIMAPCopyMessagesOperation_new(mailcore::IMAPCopyMessagesOperation *ref){
-    CIMAPCopyMessagesOperation self;
-    self.baseOperation = CIMAPBaseOperation_new(ref);
-    self.instance = ref;
-    return self;
-}
-
-void CIMAPCopyMessagesOperation_release(CIMAPCopyMessagesOperation operation) {
-    
-}
-
-CDictionary CIMAPCopyMessagesOperation_uidMapping(struct CIMAPCopyMessagesOperation self) {
-    return CDictionary_new(self.instance->uidMapping());
-}
+C_SYNTHESIZE_CONSTRUCTOR()
+C_SYNTHESIZE_COBJECT_CAST()
+C_SYNTHESIZE_FUNC_WITH_OBJ(CDictionary, uidMapping)

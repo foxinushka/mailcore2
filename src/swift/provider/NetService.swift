@@ -12,12 +12,13 @@ public class MCONetService: NSObject, Convertible {
     
     internal var nativeInstance: CNetService
     
-    internal init(service: CNetService) {
-        self.nativeInstance = service
+    public required init(mailCoreObject obj: CObject) {
+        self.nativeInstance = CNetService.init(cobject: obj)
+        self.nativeInstance.retain()
     }
     
-    public required init(cobject obj: CObject) {
-        self.nativeInstance = CNetService(cobject: obj)
+    deinit {
+        self.nativeInstance.release()
     }
     
     func cast() -> CObject {
@@ -40,7 +41,7 @@ public class MCONetService: NSObject, Convertible {
     }
     
     public func hostname(email: String) -> String? {
-        return nativeInstance.normalizedHostname(email: email.mailCoreString()).string()
+        return nativeInstance.normalizedHostnameWithEmail(email.mailCoreString()).string()
     }
     
 }

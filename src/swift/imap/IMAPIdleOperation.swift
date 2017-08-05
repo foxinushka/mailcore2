@@ -10,7 +10,13 @@ public class MCOIMAPIdleOperation : MCOIMAPBaseOperation {
     
     internal init(idleOperation: CIMAPIdleOperation) {
         self.idleOperation = idleOperation;
-        super.init(baseOperation: idleOperation.operation);
+        self.idleOperation.retain()
+        super.init(baseOperation: CIMAPBaseOperation.init(cobject: idleOperation.toCObject()))
+    }
+    
+    deinit {
+        self.idleOperation.release()
+        self.completionBlock = nil
     }
 
     public func start(completionBlock: CompletionBlock?) {

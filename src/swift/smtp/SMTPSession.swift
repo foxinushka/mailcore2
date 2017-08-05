@@ -7,12 +7,12 @@ public class MCOSMTPSession: NSObject {
     var session:CSMTPSession;
     
     public override init() {
-        self.session = CSMTPSession_new();
+        self.session = CSMTPSession_new(MCOConnectionLoggerLog, MCOConnectionLoggerRelease);
         super.init()
     }
     
-    internal init(session: CSMTPSession) {
-        self.session = session;
+    deinit {
+        self.session.release()
     }
     
     /** This is the hostname of the SMTP server to connect to. */
@@ -71,7 +71,7 @@ public class MCOSMTPSession: NSObject {
     }
     
     /** When set to YES, the connection will fail if the certificate is incorrect. */
-    public var checkCertificateEnabled : Bool {
+    public var isCheckCertificateEnabled : Bool {
         get { return self.session.isCheckCertificateEnabled }
         set { self.session.isCheckCertificateEnabled = newValue }
     }
@@ -80,7 +80,7 @@ public class MCOSMTPSession: NSObject {
      If set to YES, when sending the EHLO or HELO command, use IP address instead of hostname.
      Default is NO.
      */
-    public var useHeloIPEnabled : Bool {
+    public var isUseHeloIPEnabled : Bool {
         get { return self.session.useHeloIPEnabled }
         set { self.session.useHeloIPEnabled = newValue }
     }
@@ -92,9 +92,13 @@ public class MCOSMTPSession: NSObject {
      ...
      }];
      */
-    public var connectionLogger : ConnectionLogger? {
-        get { return self.session.connectionLogger; }
-        set { self.session.connectionLogger = newValue }
+    public func setConnectionLogger(_ newValue: MCOConnectionLogger?) {
+        if let newValue = newValue {
+            self.session.setConnectionLogger(newValue.getRetainedPointer())
+        }
+        else {
+            self.session.setConnectionLogger(nil)
+        }
     }
     
     /** This property provides some hints to MCOSMTPSession about where it's called from.
@@ -119,7 +123,7 @@ public class MCOSMTPSession: NSObject {
             return self.session.dispatchQueue()
         }
         set {
-            self.session.setDispatchQueue(newValue: newValue)
+            self.session.setDispatchQueue(newValue)
         }
     }
     #endif
@@ -128,7 +132,7 @@ public class MCOSMTPSession: NSObject {
     /**
      The value will be YES when asynchronous operations are running, else it will return NO.
      */
-    public var operationQueueRunning : Bool {
+    public var isOperationQueueRunning : Bool {
         get { return self.session.isOperationQueueRunning }
     }
     
@@ -184,10 +188,7 @@ public class MCOSMTPSession: NSObject {
      }];
      */
     public func sendOperationWithData(messageData: Data) -> MCOSMTPSendOperation{
-        let bytes: UnsafePointer<Int8>? = messageData.withUnsafeBytes{(bytes: UnsafePointer<Int8>)-> UnsafePointer<Int8> in
-            return bytes;
-        }
-        return MCOSMTPSendOperation(operation: self.session.sendOperationWithData(messageDataBytes: bytes, messageDataLenght: UInt32(messageData.count)));
+        return MCOSMTPSendOperation(operation: self.session.sendMessageOperation(messageData.mailCoreData()))
     }
     
     /**
@@ -205,10 +206,7 @@ public class MCOSMTPSession: NSObject {
      }];
      */
     public func sendOperationWithData(messageData: Data, from: MCOAddress, recipients: Array<MCOAddress>) -> MCOSMTPSendOperation {
-        let bytes: UnsafePointer<Int8>? = messageData.withUnsafeBytes{(bytes: UnsafePointer<Int8>)-> UnsafePointer<Int8> in
-            return bytes;
-        }
-        return MCOSMTPSendOperation(operation: self.session.sendOperationWithDataAndFromAndRecipients(messageDataBytes: bytes, messageDataLenght: UInt32(messageData.count), from: from.getNativeInstance(), recipients: recipients.cast()));
+        return MCOSMTPSendOperation(operation: self.session.sendOperationWithDataAndFromAndRecipients(messageData.mailCoreData(), from.nativeInstance, recipients.cast()));
     }
     
     
@@ -226,7 +224,7 @@ public class MCOSMTPSession: NSObject {
      }];
      */
     public func sendOperationWithContentsOfFile(path: String, from: MCOAddress, recipients: Array<MCOAddress>) -> MCOSMTPSendOperation {
-        return MCOSMTPSendOperation(operation: self.session.sendOperationWithContentsOfFile(path: path.mailCoreString(), from: from.getNativeInstance(), recipients: recipients.cast()))
+        return MCOSMTPSendOperation(operation: self.session.sendOperationWithContentsOfFile(path.mailCoreString(), from.nativeInstance, recipients.cast()))
     }
 
     
@@ -239,11 +237,11 @@ public class MCOSMTPSession: NSObject {
      }];
      */
     public func checkAccountOperation(from: MCOAddress) -> MCOSMTPOperation {
-        return MCOSMTPOperation(operation: self.session.checkAccountOperationWithFrom(from: from.getNativeInstance()));
+        return MCOSMTPOperation(operation: self.session.checkAccountOperation(from.nativeInstance));
     }
     
     @objc public func checkAccountOperation(from: MCOAddress, to: MCOAddress) -> MCOSMTPOperation {
-        return MCOSMTPOperation(operation: self.session.checkAccountOperationWithFrom(from: from.getNativeInstance(), to: to.getNativeInstance()));
+        return MCOSMTPOperation(operation: self.session.checkAccountOperationWithFromAndTo(from.nativeInstance, to.nativeInstance));
     }
     
     /**

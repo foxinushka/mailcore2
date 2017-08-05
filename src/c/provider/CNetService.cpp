@@ -8,22 +8,9 @@
 C_SYNTHESIZE_STRING(setHostname, hostname);
 C_SYNTHESIZE_SCALAR(unsigned int, unsigned int, setPort, port);
 C_SYNTHESIZE_ENUM(ConnectionType, mailcore::ConnectionType, setConnectionType, connectionType);
+C_SYNTHESIZE_COBJECT_CAST()
 
-CNetService CNetService_new(mailcore::NetService *netService) {
-    CNetService self;
-    self.instance = netService;
-    self.instance->release();
-    return self;
-}
+C_SYNTHESIZE_CONSTRUCTOR()
 
-MailCoreString CNetService_normalizedHostnameWithEmail(struct CNetService self, MailCoreString email) {
-    return MailCoreString_new(self.instance->normalizedHostnameWithEmail(email.instance));
-}
+C_SYNTHESIZE_FUNC_WITH_OBJ(MailCoreString, normalizedHostnameWithEmail, MailCoreString)
 
-CNetService CNetService_fromCObject(CObject objc) {
-    return CNetService_new(reinterpret_cast<mailcore::NetService*>(objc.instance));
-}
-
-CObject CNetService_toCObject(CNetService self) {
-    return CObject_new(reinterpret_cast<mailcore::Object*>(self.instance));
-}

@@ -1,17 +1,27 @@
 import Foundation
 
-
-public final class MCOIMAPMessage : MCOAbstractMessage, Convertible {
+public final class MCOIMAPMessage : MCOAbstractMessage, NSCoding {
     
     internal var nativeInstance:CIMAPMessage;
     
-    public convenience init() {
-        self.init(message: CIMAPMessage_new())
+    internal override func cast() -> CObject {
+        return nativeInstance.toCObject();
     }
     
-    internal init(message:CIMAPMessage) {
+    public required init(mailCoreObject obj: CObject){
+        let message = CIMAPMessage(cobject: obj);
         self.nativeInstance = message;
-        super.init(message.abstractMessage);
+        self.nativeInstance.retain()
+        super.init(mailCoreObject: obj);
+    }
+    
+    public init() {
+        self.nativeInstance = CIMAPMessage_init()
+        super.init(mailCoreObject: self.nativeInstance.toCObject())
+    }
+    
+    deinit {
+        self.nativeInstance.release()
     }
     
     /** IMAP UID of the message. */
@@ -59,9 +69,9 @@ public final class MCOIMAPMessage : MCOAbstractMessage, Convertible {
     }
     
     /** Main MIME part of the message */
-    public var mainPart: MCOAbstractPart {
-        get { return MCOAbstractPart(nativeInstance.mainPart) }
-        set { nativeInstance.mainPart = newValue._CAbstractPart() }
+    public var mainPart: MCOAbstractPart? {
+        get { return createMCOObject(from: nativeInstance.mainPart.toCObject()) }
+        set { nativeInstance.mainPart = newValue?._CAbstractPart() ?? CAbstractPart() }
     }
     
     /** All Gmail labels of the message */
@@ -86,8 +96,8 @@ public final class MCOIMAPMessage : MCOAbstractMessage, Convertible {
      Returns the part with the given part identifier.
      @param partID A part identifier looks like 1.2.1
      */
-    public func partForPartID(partID: String) -> MCOAbstractPart {
-        return MCOAbstractPart(nativeInstance.partForPartID(partID: partID.mailCoreString()))
+    public func partForPartID(partID: String) -> MCOAbstractPart? {
+        return createMCOObject(from: nativeInstance.partForPartID(partID.mailCoreString()).toCObject())
     }
     
     /**
@@ -96,31 +106,38 @@ public final class MCOIMAPMessage : MCOAbstractMessage, Convertible {
      [MCOAbstractMessage:dataForIMAPPart:folder:]
      so that the complete HTML rendering can take place.
      */
-    public func htmlRendering(folder: String, delegate: MCOHTMLRendererIMAPDelegate) -> String? {
+    public func htmlRendering(folder: String, delegate: MCOHTMLRendererIMAPDelegate & MCOHTMLRendererDelegate) -> String? {
         let rendererCallback: MCOAbstractMessageRendererCallback = MCOAbstractMessageRendererCallback(message: self);
-        rendererCallback.setHtmlRenderImapDelegate(delegate: delegate);
-        return self.nativeInstance.htmlRendering(folder: folder.mailCoreString(), rendererCallback: rendererCallback.cast()).string()
+        rendererCallback.setHtmlRenderDelegate(delegate: delegate)
+        rendererCallback.setHtmlRenderImapDelegate(delegate: delegate)
+        let result = self.nativeInstance.htmlRendering(folder.mailCoreString(), rendererCallback.cast()).string()
+        return result
     }
     
     
     /** All attachments in the message. */
     public func attachments() -> Array<MCOIMAPPart> {
-        return Array<MCOIMAPPart>.cast(nativeInstance.abstractMessage.attachments());
+        return Array<MCOIMAPPart>.cast(super.attachments().cast());
     }
     
     /** All image attachments included inline in the message through cid: URLs. */
     public func htmlInlineAttachments() -> Array<MCOIMAPPart> {
-        return Array<MCOIMAPPart>.cast(nativeInstance.abstractMessage.htmlInlineAttachments());
+        return Array<MCOIMAPPart>.cast(super.htmlInlineAttachments().cast());
     }
     
-    internal func cast() -> CObject {
-        return nativeInstance.castToCObject();
+    public convenience init?(coder aDecoder: NSCoder) {
+        guard let dict = aDecoder.decodeObject(forKey: "info") as? Dictionary<AnyHashable, Any> else {
+            return nil
+        }
+        let serializable = dictionaryUnsafeCast(dict)
+        self.init(mailCoreObject: CObject.objectWithSerializable(serializable))
+        self.nativeInstance.retain()
     }
     
-    internal init(cobject obj: CObject){
-        let message = CIMAPMessage(cobject: obj);
-        self.nativeInstance = message;
-        super.init(message.abstractMessage);
+    public func encode(with aCoder: NSCoder) {
+        let serialazable: CDictionary = self.cast().serializable()
+        let dict = dictionaryUnsafeCast(serialazable)
+        aCoder.encode(dict, forKey: "info")
     }
     
 }

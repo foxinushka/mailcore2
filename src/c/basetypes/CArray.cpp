@@ -1,14 +1,15 @@
 #include <MailCore/MCCore.h>
 #include <MailCore/MCValue.h>
 #include "CArray.h"
+#include "CBase+Private.h"
 
-void CArray_addObject(struct CArray array, CObject object) {
-    array.instance->addObject(reinterpret_cast<mailcore::Object *>(object.instance));
-}
+#define nativeType mailcore::Array
+#define structName CArray
 
-uint32_t CArray_size(struct CArray self) {
-    return self.instance->count();
-}
+C_SYNTHESIZE_CONSTRUCTOR()
+
+C_SYNTHESIZE_FUNC_WITH_VOID(addObject, CObject)
+C_SYNTHESIZE_FUNC_WITH_SCALAR(uint32_t, count)
 
 mailcore::Object* CArray_getObj(struct CArray self, uint32_t index) {
     return self.instance->objectAtIndex(index);
@@ -23,16 +24,7 @@ uint32_t CArray_getUint(struct CArray self, uint32_t index) {
     return (reinterpret_cast<mailcore::Value*>(self.instance->objectAtIndex(index)))->unsignedIntValue();
 }
 
-CArray CArray_new() {
+CArray CArray_init() {
     return CArray_new(new mailcore::Array());
 }
 
-void deleteCArray(CArray array) {
-
-}
-
-CArray CArray_new(mailcore::Array *array) {
-    CArray self;
-    self.instance = array;
-    return self;
-}

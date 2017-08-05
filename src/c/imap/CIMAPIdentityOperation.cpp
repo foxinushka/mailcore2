@@ -5,17 +5,6 @@
 #define nativeType mailcore::IMAPIdentityOperation
 #define structName CIMAPIdentityOperation
 
-CIMAPIdentity CIMAPIdentityOperation_serverIdentity(struct CIMAPIdentityOperation self) {
-    return CIMAPIdentity_new(self.instance->serverIdentity());
-}
-
-CIMAPIdentityOperation CIMAPIdentityOperation_new(mailcore::IMAPIdentityOperation *operationRef){
-    CIMAPIdentityOperation self;
-    self.baseOperation = CIMAPBaseOperation_new(operationRef);
-    self.instance = operationRef;
-    return self;
-}
-
-void CIMAPIdentityOperation_release(CIMAPIdentityOperation operation) {
-    
-}
+C_SYNTHESIZE_CONSTRUCTOR()
+C_SYNTHESIZE_COBJECT_CAST()
+C_SYNTHESIZE_FUNC_WITH_OBJ(CIMAPIdentity, serverIdentity)

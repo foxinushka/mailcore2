@@ -12,29 +12,14 @@ namespace mailcore {
 extern "C" {
 #endif
     
-    struct CIMAPQuotaOperation {
-        CIMAPBaseOperation baseOperation;
-#ifdef __cplusplus
-        mailcore::IMAPQuotaOperation*      instance;
-#else
-        void*                                           instance;
-#endif
-    };
-    typedef struct CIMAPQuotaOperation CIMAPQuotaOperation;
+    C_SYNTHESIZE_STRUCT_DEFINITION(CIMAPQuotaOperation, mailcore::IMAPQuotaOperation)
+    C_SYNTHESIZE_COBJECT_CAST_DEFINITION(CIMAPQuotaOperation)
     
-    uint32_t    CIMAPQuotaOperation_usage(struct CIMAPQuotaOperation self)
-                CF_SWIFT_NAME(CIMAPQuotaOperation.usage(self:));
-    
-    uint32_t    CIMAPQuotaOperation_limit(struct CIMAPQuotaOperation self)
-                CF_SWIFT_NAME(CIMAPQuotaOperation.limit(self:));
-    
-    void        CIMAPQuotaOperation_release(CIMAPQuotaOperation self)
-                CF_SWIFT_NAME(CIMAPQuotaOperation.result(self:));
+    C_SYNTHESIZE_FUNC_DEFINITION(CIMAPQuotaOperation, uint32_t, usage)
+    C_SYNTHESIZE_FUNC_DEFINITION(CIMAPQuotaOperation, uint32_t, limit)
     
 #ifdef __cplusplus
 }
-
-CIMAPQuotaOperation CIMAPQuotaOperation_new(mailcore::IMAPQuotaOperation *operation);
 #endif
 
 #endif /* CIMAPQuotaOperation_hpp */

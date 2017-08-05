@@ -13,27 +13,12 @@ namespace mailcore {
 extern "C" {
 #endif
     
-    struct CIMAPIdentityOperation {
-        CIMAPBaseOperation baseOperation;
-#ifdef __cplusplus
-        mailcore::IMAPIdentityOperation*      instance;
-#else
-        void*                                 instance;
-#endif
-        
-    };
-    typedef struct CIMAPIdentityOperation CIMAPIdentityOperation;
-    
-    CIMAPIdentity   CIMAPIdentityOperation_serverIdentity(struct CIMAPIdentityOperation self)
-                    CF_SWIFT_NAME(CIMAPIdentityOperation.serverIdentity(self:));
-    
-    void            CIMAPIdentityOperation_release(CIMAPIdentityOperation self)
-                    CF_SWIFT_NAME(CIMAPIdentityOperation.release(self:));
+    C_SYNTHESIZE_STRUCT_DEFINITION(CIMAPIdentityOperation, mailcore::IMAPIdentityOperation)
+    C_SYNTHESIZE_COBJECT_CAST_DEFINITION(CIMAPIdentityOperation)
+    C_SYNTHESIZE_FUNC_DEFINITION(CIMAPIdentityOperation, CIMAPIdentity, serverIdentity)
     
 #ifdef __cplusplus
 }
-
-CIMAPIdentityOperation CIMAPIdentityOperation_new(mailcore::IMAPIdentityOperation *operation);
 #endif
 
 #endif /* CIMAPIdentityOperation_hpp */

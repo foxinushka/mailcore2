@@ -5,8 +5,13 @@ public class MCOAbstractPart : Convertible {
     
     private var nativeInstance:CAbstractPart;
     
-    internal init(_ abstractPart:CAbstractPart) {
-        self.nativeInstance = abstractPart;
+    required public init(mailCoreObject obj: CObject) {
+        self.nativeInstance = CAbstractPart.init(cobject: obj)
+        self.nativeInstance.retain()
+    }
+    
+    internal func cast() -> CObject {
+        return nativeInstance.toCObject();
     }
     
     deinit {
@@ -81,36 +86,33 @@ public class MCOAbstractPart : Convertible {
     }
     
     /** Returns the part with the given Content-ID among this part and its subparts.*/
-    public func partForContentID(contentID: String) -> MCOAbstractPart {
-        return MCOAbstractPart(nativeInstance.part(forContentID: contentID.mailCoreString()))
+    public func partForContentID(contentID: String) -> MCOAbstractPart? {
+        return createMCOObject(from: nativeInstance.partForContentID(contentID.mailCoreString()).toCObject())
     }
     
     /** Returns the part with the given unique identifier among this part and its subparts.*/
-    public func partForUniqueID(uniqueID: String) -> MCOAbstractPart {
-        return MCOAbstractPart(nativeInstance.part(forUniqueID: uniqueID.mailCoreString()))
+    public func partForUniqueID(uniqueID: String) -> MCOAbstractPart? {
+        return createMCOObject(from: nativeInstance.partForUniqueID(uniqueID.mailCoreString()).toCObject())
     }
     
     /** Returns a string representation of the data according to charset.*/
     public func decodedStringForData(data: Data) -> String? {
-        let array = data.withUnsafeBytes {
-            [UInt8](UnsafeBufferPointer(start: $0, count: data.count))
-        }
-        return nativeInstance.decodedStringForData(bytes: array, lenght: UInt32(array.count)).string()
+        return nativeInstance.decodedStringForData(data.mailCoreData()).string()
     }
     
     /** Adds a content type parameter.*/
-    public func setContentTypeParameterValue(value: String, name: String) {
-        nativeInstance.setContentTypeParameterValue(value: value.mailCoreString(), name: name.mailCoreString())
+    public func setContentTypeParameterValue(_ value: String, name: String) {
+        nativeInstance.setContentTypeParameter(value.mailCoreString(), name.mailCoreString())
     }
     
     /** Remove a given content type parameter.*/
     public func removeContentTypeParameterForName(name: String) {
-        nativeInstance.removeContentTypeParameter(forName: name.mailCoreString())
+        nativeInstance.removeContentTypeParameter(name.mailCoreString())
     }
     
     /** Returns the value of a given content type parameter.*/
     public func contentTypeParameterValueForName(name: String) -> String? {
-        return nativeInstance.contentTypeParameterValue(forName: name.mailCoreString()).string()
+        return nativeInstance.contentTypeParameterValueForName(name.mailCoreString()).string()
     }
     
     /** Returns an array with the names of all content type parameters.*/
@@ -118,13 +120,8 @@ public class MCOAbstractPart : Convertible {
         return Array<String>.cast(nativeInstance.allContentTypeParametersNames());
     }
     
-    required public init(cobject obj: CObject) {
-        self.nativeInstance = CAbstractPart(cObject: obj)
+    public static func getData(_ part: MCOAbstractPart) -> Data? {
+        return Data(cdata: CAbstractPart.getData(part.nativeInstance))
     }
-    
-    internal func cast() -> CObject {
-        return nativeInstance.castToCObject();
-    }
-
 }
 

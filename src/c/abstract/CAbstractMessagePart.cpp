@@ -8,31 +8,9 @@
 #define nativeType mailcore::AbstractMessagePart
 #define structName CAbstractMessagePart
 
-CAbstractMessagePart CAbstractMessagePart_new(mailcore::AbstractMessagePart *part){
-    CAbstractMessagePart self;
-    self.abstractPart = CAbstractPart_new(part);
-    self.instance = part;
-    return self;
-}
+C_SYNTHESIZE_MAILCORE_OBJ(CMessageHeader, CMessageHeader_new, setHeader, header)
+C_SYNTHESIZE_MAILCORE_OBJ(CAbstractPart, CAbstractPart_new, setMainPart, mainPart)
 
-CMessageHeader CAbstractMessagePart_header(CAbstractMessagePart self){
-    return CMessageHeader_new(self.instance->header());
-}
-
-void CAbstractMessagePart_setHeader(CAbstractMessagePart self, CMessageHeader header){
-    self.instance->setHeader(header.instance);
-}
-
-CAbstractPart CAbstractMessagePart_mainPart(CAbstractMessagePart self){
-    return CAbstractPart_new(self.instance->mainPart());
-}
-
-void CAbstractMessagePart_setMainPart(struct CAbstractMessagePart self, CAbstractPart part){
-    self.instance->setMainPart(part.instance);
-}
-
-
-
-
-
+C_SYNTHESIZE_CONSTRUCTOR()
+C_SYNTHESIZE_COBJECT_CAST()
 

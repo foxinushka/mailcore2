@@ -13,9 +13,9 @@ public class MCOIMAPBaseOperation : MCOOperation {
         self.baseOperation = baseOperation;
         super.init(baseOperation.cOperation);
         self.baseOperation.cOperation = super.nativeInstance
-        self.baseOperation = self.baseOperation.setProgressBlocks(itemProgressBlock: itemProgressCallback,
-                                                                  bodyProgressBlock: bodyProgressCallback,
-                                                                  userInfo: Unmanaged.passUnretained(self).toOpaque());
+        self.baseOperation = self.baseOperation.setProgressBlocks(itemProgressCallback,
+                                                                  bodyProgressCallback,
+                                                                  Unmanaged.passUnretained(self).toOpaque());
     }
     
     deinit {

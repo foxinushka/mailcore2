@@ -5,28 +5,10 @@
 #define nativeType mailcore::IMAPFetchMessagesOperation
 #define structName CIMAPFetchMessagesOperation
 
-CIMAPFetchMessagesOperation CIMAPFetchMessagesOperation_new(mailcore::IMAPFetchMessagesOperation *operationRef){
-    CIMAPFetchMessagesOperation self;
-    self.baseOperation = CIMAPBaseOperation_new(operationRef);
-    self.instance = operationRef;
-    return self;
-}
+C_SYNTHESIZE_CONSTRUCTOR()
+C_SYNTHESIZE_COBJECT_CAST()
 
-void CIMAPFetchMessagesOperation_release(CIMAPFetchMessagesOperation operation) {
+C_SYNTHESIZE_MAILCORE_OBJ(CArray, CArray_new, setExtraHeaders, extraHeaders)
 
-}
-
-CArray CIMAPFetchMessagesOperation_messages(struct CIMAPFetchMessagesOperation self){
-    return CArray_new(self.instance->messages());
-}
-
-CIndexSet CIMAPFetchMessagesOperation_vanishedMessages(struct CIMAPFetchMessagesOperation self){
-    return CIndexSet_new(self.instance->vanishedMessages());
-}
-
-CArray CIMAPFetchMessagesOperation_extraHeaders(struct CIMAPFetchMessagesOperation self){
-    return CArray_new(self.instance->extraHeaders());
-}
-void CIMAPFetchMessagesOperation_setExtraHeaders(struct CIMAPFetchMessagesOperation self, CArray array){
-    self.instance->setExtraHeaders(array.instance);
-}
+C_SYNTHESIZE_FUNC_WITH_OBJ(CArray, messages)
+C_SYNTHESIZE_FUNC_WITH_OBJ(CIndexSet, vanishedMessages)

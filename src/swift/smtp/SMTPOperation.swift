@@ -11,11 +11,12 @@ public class MCOSMTPOperation: MCOOperation {
     
     internal init(operation: CSMTPOperation) {
         self.operation = operation;
+        self.operation.retain()
         super.init(operation.cOperation);
     }
     
     deinit {
-        self.operation.release();
+        self.operation.release()
     }
     
     public func start(completionBlock: CompletionBlock?) {
@@ -39,7 +40,7 @@ public class MCOSMTPOperation: MCOOperation {
         }
         else {
             let error = MailCoreError(code: errorCode) as NSError
-            if operation.lastSMTPResponse != nil || operation.lastSMTPResponseCode != 0 {
+            if operation.lastSMTPResponse.instance != nil || operation.lastSMTPResponseCode != 0 {
                 if let response = operation.lastSMTPResponse.string() {
                     error.insertValue(response, inPropertyWithKey: "MCOSMTPResponseKey")
                 }

@@ -6,26 +6,31 @@ extension Array {
     static func cast<T: Convertible>(_ cArray: CArray) -> Array<T> {
         var array = Array<T>()
         if cArray.instance != nil {
-            let size = cArray.size
+            let size = cArray.count
             for index in 0 ..< size {
-                array.append(T(cobject: cArray.getObject(index: index)))
+                if let obj: T = createMCOObject(from: cArray.getObject(index)) {
+                    array.append(obj)
+                }
             }
         }
         return array;
     }
     
-    static func cast<T: Convertible>(_ array: Array<T>) -> CArray {
-        let cArray = CArray_new();
+    static func cast<T: Convertible>(_ array: Array<T>?) -> CArray {
+        guard let array = array else {
+            return CArray()
+        }
+        let cArray = CArray_init();
         for convertable in array {
-            cArray.addObject(cobject: convertable.cast());
+            cArray.addObject(convertable.cast());
         }
         return cArray;
     }
     
     func cast() -> CArray {
-        let cArray = CArray_new();
+        let cArray = CArray_init();
         for convertable in self {
-            cArray.addObject(cobject: (convertable as! Convertible).cast());
+            cArray.addObject((convertable as! Convertible).cast());
         }
         return cArray;
     }

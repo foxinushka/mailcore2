@@ -1,41 +1,37 @@
 import Foundation
 
 
-public class MCOAbstractMessage: NSObject {
+public class MCOAbstractMessage: NSObject, Convertible {
 	
     private var nativeInstance:CAbstractMessage;
-
-    internal init(_ abstractMessage:CAbstractMessage) {
-        self.nativeInstance = abstractMessage;
-	}
+    
+    public required init(mailCoreObject: CObject) {
+        self.nativeInstance = CAbstractMessage.init(cobject: mailCoreObject)
+        self.nativeInstance.retain()
+    }
+    
+    func cast() -> CObject {
+        return self.nativeInstance.toCObject()
+    }
     
     deinit {
         nativeInstance.release()
     }
     
     /** Header of the message. */
-    public var header : MCOMessageHeader? {
-        set {
-            if newValue != nil {
-                nativeInstance.header =  newValue!.CMessageHeader()
-            }
-        }
-        get {
-            guard (nativeInstance.header.instance) != nil else {
-                return nil
-            }
-            return MCOMessageHeader(nativeInstance.header)
-        }
+    public var header : MCOMessageHeader! {
+        set { nativeInstance.header =  newValue?.nativeInstance ?? CMessageHeader() }
+        get { return createMCOObject(from: nativeInstance.header.toCObject()) }
     }
     
     /** Returns the part with the given Content-ID.*/
-    public func partForContentID(contentID: String) -> MCOAbstractPart {
-        return MCOAbstractPart(nativeInstance.part(forContentID: contentID.mailCoreString()))
+    public func partForContentID(contentID: String) -> MCOAbstractPart? {
+        return createMCOObject(from: nativeInstance.partForContentID(contentID.mailCoreString()).toCObject())
     }
     
     /** Returns the part with the given unique identifier.*/
-    public func partForUniqueID(uniqueID: String) -> MCOAbstractPart {
-        return MCOAbstractPart(nativeInstance.part(forUniqueID: uniqueID.mailCoreString()))
+    public func partForUniqueID(uniqueID: String) -> MCOAbstractPart? {
+        return createMCOObject(from: nativeInstance.partForUniqueID(uniqueID.mailCoreString()).toCObject())
     }
     
     /** All attachments in the message.

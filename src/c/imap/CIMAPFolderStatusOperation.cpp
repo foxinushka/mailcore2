@@ -5,17 +5,7 @@
 #define nativeType mailcore::IMAPFolderStatusOperation
 #define structName CIMAPFolderStatusOperation
 
-CIMAPFolderStatusOperation CIMAPFolderStatusOperation_new(mailcore::IMAPFolderStatusOperation *operation){
-    CIMAPFolderStatusOperation self;
-    self.baseOperation = CIMAPBaseOperation_new(operation);
-    self.instance = operation;
-    return self;
-}
+C_SYNTHESIZE_CONSTRUCTOR()
+C_SYNTHESIZE_COBJECT_CAST()
 
-void CIMAPFolderStatusOperation_release(CIMAPFolderStatusOperation operation) {
-    
-}
-
-CIMAPFolderStatus CIMAPFolderStatusOperation_status(CIMAPFolderStatusOperation self) {
-    return CIMAPFolderStatus_new(self.instance->status());
-}
+C_SYNTHESIZE_FUNC_WITH_OBJ(CIMAPFolderStatus, status)

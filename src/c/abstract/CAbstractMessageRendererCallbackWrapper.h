@@ -9,7 +9,7 @@
 #ifndef CAbstractMessageRendererCallbackWrapper_h
 #define CAbstractMessageRendererCallbackWrapper_h
 
-class AbstractMessageRendererCallback : public mailcore::HTMLRendererTemplateCallback, public mailcore::HTMLRendererIMAPCallback {
+class AbstractMessageRendererCallback : public mailcore::Object, public mailcore::HTMLRendererTemplateCallback, public mailcore::HTMLRendererIMAPCallback {
 public:
 private:
 };

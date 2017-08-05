@@ -14,29 +14,14 @@ namespace mailcore {
 extern "C" {
 #endif
     
-    struct CIMAPCheckAccountOperation {
-        CIMAPBaseOperation baseOperation;
-#ifdef __cplusplus
-        mailcore::IMAPCheckAccountOperation*    instance;
-#else
-        void*                                   instance;
-#endif
-    };
-    typedef struct CIMAPCheckAccountOperation CIMAPCheckAccountOperation;
+    C_SYNTHESIZE_STRUCT_DEFINITION(CIMAPCheckAccountOperation, mailcore::IMAPCheckAccountOperation)
+    C_SYNTHESIZE_COBJECT_CAST_DEFINITION(CIMAPCheckAccountOperation)
     
-    MailCoreString    CIMAPCheckAccountOperation_loginResponse(struct CIMAPCheckAccountOperation self)
-                    CF_SWIFT_NAME(CIMAPCheckAccountOperation.loginResponse(self:));
-    
-    CData           CIMAPCheckAccountOperation_loginUnparsedResponseData(struct CIMAPCheckAccountOperation self)
-                    CF_SWIFT_NAME(CIMAPCheckAccountOperation.loginUnparsedResponseData(self:));
-    
-    void            CIMAPCheckAccountOperation_release(CIMAPCheckAccountOperation self)
-                    CF_SWIFT_NAME(CIMAPCheckAccountOperation.release(self:));
+    C_SYNTHESIZE_FUNC_DEFINITION(CIMAPCheckAccountOperation, MailCoreString, loginResponse)
+    C_SYNTHESIZE_FUNC_DEFINITION(CIMAPCheckAccountOperation, CData, loginUnparsedResponseData)
     
 #ifdef __cplusplus
 }
-
-CIMAPCheckAccountOperation CIMAPCheckAccountOperation_new(mailcore::IMAPCheckAccountOperation *operation);
 #endif
 
 #endif /* CIMAPCheckAccountOperation_hpp */

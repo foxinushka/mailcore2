@@ -14,26 +14,13 @@ namespace mailcore {
 extern "C" {
 #endif
     
-    struct CIMAPFolderInfoOperation {
-        CIMAPBaseOperation baseOperation;
-#ifdef __cplusplus
-        mailcore::IMAPFolderInfoOperation*  instance;
-#else
-        void*                               instance;
-#endif
-    };
-    typedef struct CIMAPFolderInfoOperation CIMAPFolderInfoOperation;
-
-    CIMAPFolderInfo 	CIMAPFolderInfoOperation_info(struct CIMAPFolderInfoOperation self)
-    					CF_SWIFT_NAME(CIMAPFolderInfoOperation.info(self:));
-
-    void 				CIMAPFolderInfoOperation_release(CIMAPFolderInfoOperation self)
-    					CF_SWIFT_NAME(CIMAPFolderInfoOperation.release(self:));
+    C_SYNTHESIZE_STRUCT_DEFINITION(CIMAPFolderInfoOperation, mailcore::IMAPFolderInfoOperation)
+    C_SYNTHESIZE_COBJECT_CAST_DEFINITION(CIMAPFolderInfoOperation)
+    
+    C_SYNTHESIZE_FUNC_DEFINITION(CIMAPFolderInfoOperation, CIMAPFolderInfo, info)
 
 #ifdef __cplusplus
 }
-
-CIMAPFolderInfoOperation CIMAPFolderInfoOperation_new(mailcore::IMAPFolderInfoOperation *operation);
 #endif
 
 #endif

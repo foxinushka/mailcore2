@@ -3,7 +3,7 @@ import Foundation
 
 internal protocol Convertible {
     func cast() -> CObject
-    init(cobject: CObject)
+    init(mailCoreObject: CObject)
 }
 
 
