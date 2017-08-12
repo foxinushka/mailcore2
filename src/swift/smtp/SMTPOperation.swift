@@ -39,14 +39,16 @@ public class MCOSMTPOperation: MCOOperation {
             completionBlock!(nil);
         }
         else {
-            let error = MailCoreError(code: errorCode) as NSError
+            var error = MailCoreError(code: errorCode) as NSError
             if operation.lastSMTPResponse.instance != nil || operation.lastSMTPResponseCode != 0 {
+                var userInfo = [AnyHashable: Any]()
                 if let response = operation.lastSMTPResponse.string() {
-                    error.insertValue(response, inPropertyWithKey: "MCOSMTPResponseKey")
+                    userInfo["MCOSMTPResponseKey"] = response
                 }
                 if operation.lastSMTPResponseCode != 0 {
-                    error.insertValue(operation.lastSMTPResponseCode, inPropertyWithKey: "MCOSMTPResponseCodeKey")
+                    userInfo["MCOSMTPResponseCodeKey"] = operation.lastSMTPResponseCode
                 }
+                error = NSError(domain: "MailCoreErrorDomain", code: error.code, userInfo: userInfo)
             }
             completionBlock!(error)
         }

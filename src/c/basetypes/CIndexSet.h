@@ -12,8 +12,6 @@ namespace mailcore {
     class IndexSet;
 }
 
-//#include <MailCore/MCBaseTypes.h>
-
 extern "C" {
 #endif
     

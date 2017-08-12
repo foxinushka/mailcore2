@@ -294,7 +294,7 @@ extern "C" {
      It's a network traffic logger.
      @param sender is the identifier of the underlaying network socket.
      @param logType is the type of the log.
-     @param bytes is the data related to the log.
+     @param data is the data related to the log.
      */
     typedef void (*CConnectionLogger)(void* sender, ConnectionLogType logType, CData data, void* logger);
     typedef void (*CConnectionLoggerRelease)(void* logger);

@@ -19,14 +19,16 @@
     mailcore::Object * mObject;
 }
 
+#ifndef SWIFT
 + (void) load
-{
+{    
     MCORegisterClass([NSValue class], &typeid(mailcore::Value));
     MCORegisterClass([NSData class], &typeid(mailcore::Data));
     MCORegisterClass([NSString class], &typeid(mailcore::String));
     MCORegisterClass([NSDictionary class], &typeid(mailcore::HashMap));
     MCORegisterClass([NSArray class], &typeid(mailcore::Array));
 }
+#endif
 
 - (void) dealloc
 {

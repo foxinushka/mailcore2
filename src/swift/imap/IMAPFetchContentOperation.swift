@@ -37,7 +37,7 @@ public class MCOIMAPFetchContentOperation : MCOIMAPBaseOperation {
         
         let errorCode = error();
         if errorCode == ErrorNone {
-            completionBlock!(nil, Data(cdata: operation.data()));
+            completionBlock!(nil, Data.init(desctructiveCData: operation.data()));
         }
         else {
             completionBlock!(MailCoreError(code: errorCode), nil);

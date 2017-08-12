@@ -17,6 +17,14 @@ CData CData_dataWithBytes(const char* bytes, unsigned int length) {
 C_SYNTHESIZE_FUNC_WITH_SCALAR(const char*, bytes)
 C_SYNTHESIZE_FUNC_WITH_SCALAR(unsigned int, length)
 
+bool CData_externallyAllocatedMemory(CData self) {
+    return self.instance->mExternallyAllocatedMemory;
+}
+
+CBytesDeallocator CData_bytesDeallocator(CData self) {
+    return self.instance->mBytesDeallocator;
+}
+
 CData Value_mailCoreTypeInfo() {
     return getTypeNameFromObject(&typeid(mailcore::Value));
 }

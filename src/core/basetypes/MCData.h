@@ -61,7 +61,9 @@ namespace mailcore {
         void takeBytesOwnership(char * bytes, unsigned int length, BytesDeallocator bytesDeallocator);
 
 #ifdef __APPLE__
+#ifndef SWIFT
         virtual CFDataRef destructiveNSData();
+#endif
 #endif
         
     public: // subclass behavior
@@ -72,13 +74,18 @@ namespace mailcore {
         virtual unsigned int hash();
         virtual HashMap * serializable();
         virtual void importSerializable(HashMap * serializable);
-        
+#ifdef SWIFT
+        bool mExternallyAllocatedMemory;
+        BytesDeallocator mBytesDeallocator;
+#endif
     private:
         char * mBytes;
         unsigned int mLength;
         unsigned int mAllocated;
+#ifndef SWIFT
         bool mExternallyAllocatedMemory;
         BytesDeallocator mBytesDeallocator;
+#endif
         void allocate(unsigned int length, bool force = false);
         void init();
         void reset();

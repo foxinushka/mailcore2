@@ -33,7 +33,9 @@ void MessageParser::init()
     mData = NULL;
     mMainPart = NULL;
 #if __APPLE__
+#ifndef SWIFT
     mNSData = NULL;
+#endif
 #endif
 }
 
@@ -104,9 +106,11 @@ MessageParser::~MessageParser()
     MC_SAFE_RELEASE(mMainPart);
     MC_SAFE_RELEASE(mData);
 #if __APPLE__
+#ifndef SWIFT
     if (mNSData != NULL) {
         CFRelease(mNSData);
     }
+#endif
 #endif
 }
 
@@ -118,9 +122,11 @@ AbstractPart * MessageParser::mainPart()
 Data * MessageParser::data()
 {
 #if __APPLE__
+#ifndef SWIFT
     if (mNSData != NULL) {
         return dataFromNSData();
     }
+#endif
 #endif
     return mData;
 }

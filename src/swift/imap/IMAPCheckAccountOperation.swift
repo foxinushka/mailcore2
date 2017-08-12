@@ -39,15 +39,16 @@ public class MCOIMAPCheckAccountOperation : MCOIMAPOperation {
             completionBlock!(nil)
         }
         else {
-            let error = MailCoreError(code: errorCode) as NSError
+            var error = MailCoreError(code: errorCode) as NSError
             if operation.loginResponse().instance != nil || operation.loginUnparsedResponseData().bytes != nil {
+                var userInfo = [AnyHashable: Any]()
                 if let response = operation.loginResponse().string() {
-                    error.insertValue(response, inPropertyWithKey: "IMAPResponseKey")
+                    userInfo["IMAPResponseKey"] = response
                 }
                 if operation.loginUnparsedResponseData().bytes != nil {
-                    error.insertValue(Data.init(cdata: operation.loginUnparsedResponseData()), inPropertyWithKey: "IMAPUnparsedResponseDataKey")
+                    userInfo["IMAPUnparsedResponseDataKey"] = Data(cdata: operation.loginUnparsedResponseData())
                 }
-                
+                error = NSError(domain: "MailCoreErrorDomain", code: error.code, userInfo: userInfo)
             }
             completionBlock!(error)
         }

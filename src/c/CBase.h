@@ -4,6 +4,7 @@
 #include <stdbool.h>
 #include <stdint.h>
 
+//TODO: fix ICUBasetypes
 #ifdef _MSC_VER
 typedef wchar_t UChar;
 #elif defined(__CHAR16_TYPE__)
