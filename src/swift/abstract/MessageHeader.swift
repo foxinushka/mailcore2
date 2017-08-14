@@ -107,7 +107,7 @@ public class MCOMessageHeader: Convertible, NSCoding {
     }
     
     /** Adds a custom header.*/
-    public func setExtraHeaderValue(value: String, name: String) {
+    public func setExtraHeaderValue(_ value: String, forName name: String) {
         nativeInstance.setExtraHeader(value.mailCoreString(), name.mailCoreString())
     }
     
