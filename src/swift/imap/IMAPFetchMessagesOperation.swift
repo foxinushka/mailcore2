@@ -37,7 +37,7 @@ public class MCOIMAPFetchMessagesOperation : MCOIMAPBaseOperation {
         
         let errorCode = error();
         if errorCode == ErrorNone {
-            completionBlock!(nil, Array<MCOIMAPMessage>.cast(operation.messages()), MCOIndexSet(operation.vanishedMessages()));
+            completionBlock!(nil, Array<MCOIMAPMessage>(mailCoreArray: operation.messages()), MCOIndexSet(operation.vanishedMessages()));
         }
         else {
             completionBlock!(MailCoreError(code: errorCode), nil, nil);
@@ -51,9 +51,9 @@ public class MCOIMAPFetchMessagesOperation : MCOIMAPBaseOperation {
         }
     }
     
-    public var extraHeaders: Array<String> {
-        get { return Array<String>.cast(operation.extraHeaders) }
-        set { operation.extraHeaders = Array<String>.cast(newValue) }
+    public var extraHeaders: Array<String>? {
+        get { return Array<String>(mailCoreArray: operation.extraHeaders) }
+        set { operation.extraHeaders = newValue?.mailCoreArray() ?? CArray() }
     }
     
 }

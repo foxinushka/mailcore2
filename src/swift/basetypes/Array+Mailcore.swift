@@ -1,38 +1,25 @@
 import Foundation
 
-
-extension Array {
+extension Array where Element: Convertible {
     
-    static func cast<T: Convertible>(_ cArray: CArray) -> Array<T> {
-        var array = Array<T>()
-        if cArray.instance != nil {
-            let size = cArray.count
-            for index in 0 ..< size {
-                if let obj: T = createMCOObject(from: cArray.getObject(index)) {
-                    array.append(obj)
-                }
+    init?(mailCoreArray cArray: CArray) {
+        guard cArray.instance != nil else {
+            return nil
+        }
+        self.init()
+        let size = cArray.count
+        for index in 0 ..< size {
+            if let obj: Element = createMCOObject(from: cArray.getObject(index)) {
+                self.append(obj)
             }
         }
-        return array;
     }
     
-    static func cast<T: Convertible>(_ array: Array<T>?) -> CArray {
-        guard let array = array else {
-            return CArray()
-        }
+    func mailCoreArray() -> CArray {
         let cArray = CArray_init();
-        for convertable in array {
+        for convertable in self {
             cArray.addObject(convertable.cast());
         }
         return cArray;
     }
-    
-    func cast() -> CArray {
-        let cArray = CArray_init();
-        for convertable in self {
-            cArray.addObject((convertable as! Convertible).cast());
-        }
-        return cArray;
-    }
-    
 }

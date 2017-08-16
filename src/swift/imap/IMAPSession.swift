@@ -345,7 +345,7 @@ public class MCOIMAPSession: NSObject {
     }
 
     public func storeFlagsByUIDOperation(folder:String, uids:MCOIndexSet, kind:IMAPStoreFlagsRequestKind, flags:MCOMessageFlag, customFlags:Array<String>) -> MCOIMAPOperation {
-        return MCOIMAPOperation(operation: session.storeFlagsByUIDOperation(folder.mailCoreString(), uids.cast(), kind, flags.toCMessageFlag(), Array<String>.cast(customFlags)))
+        return MCOIMAPOperation(operation: session.storeFlagsByUIDOperation(folder.mailCoreString(), uids.cast(), kind, flags.toCMessageFlag(), customFlags.mailCoreArray()))
     }
     
     /**
@@ -397,7 +397,7 @@ public class MCOIMAPSession: NSObject {
      }];
      */
     public func storeFlagsOperation(folder: String, uids: MCOIndexSet, kind: IMAPStoreFlagsRequestKind, flags: MCOMessageFlag, customFlags: Array<String>) -> MCOIMAPOperation {
-        return MCOIMAPOperation.init(operation: session.storeFlagsByUIDOperation(folder.mailCoreString(), uids.nativeInstance, kind, flags.toCMessageFlag(), customFlags.cast()))
+        return MCOIMAPOperation.init(operation: session.storeFlagsByUIDOperation(folder.mailCoreString(), uids.nativeInstance, kind, flags.toCMessageFlag(), customFlags.mailCoreArray()))
     }
     
     /**
@@ -415,7 +415,7 @@ public class MCOIMAPSession: NSObject {
      }];
      */
     public func storeFlagsOperation(folder: String, numbers: MCOIndexSet, kind: IMAPStoreFlagsRequestKind, flags: MCOMessageFlag, customFlags: Array<String>) -> MCOIMAPOperation {
-        return MCOIMAPOperation.init(operation: session.storeFlagsByNumberOperation(folder.mailCoreString(), numbers.nativeInstance, kind, flags.toCMessageFlag(), customFlags.cast()))
+        return MCOIMAPOperation.init(operation: session.storeFlagsByNumberOperation(folder.mailCoreString(), numbers.nativeInstance, kind, flags.toCMessageFlag(), customFlags.mailCoreArray()))
     }
     
     /**
@@ -432,7 +432,7 @@ public class MCOIMAPSession: NSObject {
      }];
      */
     public func storeLabelsOperation(folder: String, numbers: MCOIndexSet, kind: IMAPStoreFlagsRequestKind, labels: Array<String>) -> MCOIMAPOperation {
-        return MCOIMAPOperation.init(operation: session.storeLabelsByNumberOperation(folder.mailCoreString(), numbers.nativeInstance, kind, labels.cast()))
+        return MCOIMAPOperation.init(operation: session.storeLabelsByNumberOperation(folder.mailCoreString(), numbers.nativeInstance, kind, labels.mailCoreArray()))
     }
     
     /**
@@ -449,7 +449,7 @@ public class MCOIMAPSession: NSObject {
      }];
      */
     public func storeLabelsOperation(folder: String, uids: MCOIndexSet, kind: IMAPStoreFlagsRequestKind, labels: Array<String>) -> MCOIMAPOperation {
-        return MCOIMAPOperation.init(operation: session.storeLabelsByUIDOperation(folder.mailCoreString(), uids.nativeInstance, kind, labels.cast()))
+        return MCOIMAPOperation.init(operation: session.storeLabelsByUIDOperation(folder.mailCoreString(), uids.nativeInstance, kind, labels.mailCoreArray()))
     }
     
     /**
@@ -477,7 +477,7 @@ public class MCOIMAPSession: NSObject {
      }];
      */
     public func appendMessageOperation(folder: String, messageData: Data, flags: MCOMessageFlag, customFlags:Array<String>) -> MCOIMAPAppendMessageOperation {
-        return MCOIMAPAppendMessageOperation.init(operation: session.appendMessageOperationWithData(folder.mailCoreString(), messageData.mailCoreData(), flags.toCMessageFlag(), Array<String>.cast(customFlags)))
+        return MCOIMAPAppendMessageOperation.init(operation: session.appendMessageOperationWithData(folder.mailCoreString(), messageData.mailCoreData(), flags.toCMessageFlag(), customFlags.mailCoreArray()))
     }
 
     /**
@@ -491,7 +491,7 @@ public class MCOIMAPSession: NSObject {
      }];
      */
     public func appendMessageOperation(folder:String, contentsAtPath path:String, flags:MCOMessageFlag, customFlags:Array<String>) -> MCOIMAPAppendMessageOperation {
-        return MCOIMAPAppendMessageOperation(operation: session.appendMessageOperation(folder.mailCoreString(), path.mailCoreString(), flags.toCMessageFlag(), Array<String>.cast(customFlags)))
+        return MCOIMAPAppendMessageOperation(operation: session.appendMessageOperation(folder.mailCoreString(), path.mailCoreString(), flags.toCMessageFlag(), customFlags.mailCoreArray()))
     }
 
     /**

@@ -20,9 +20,9 @@ public class MCOAbstractMultipart : MCOAbstractPart {
     }
     
     /** Returns the subparts of that multipart.*/
-    public var parts : Array<MCOAbstractPart> {
-        set { nativeInstance.parts = Array<MCOAbstractPart>.cast(newValue) }
-        get { return Array<MCOAbstractPart>.cast(nativeInstance.parts) }
+    public var parts : Array<MCOAbstractPart>? {
+        set { nativeInstance.parts = newValue?.mailCoreArray() ?? CArray() }
+        get { return Array<MCOAbstractPart>(mailCoreArray: nativeInstance.parts) }
     }
     
 }

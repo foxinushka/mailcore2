@@ -116,8 +116,8 @@ public class MCOAbstractPart : Convertible {
     }
     
     /** Returns an array with the names of all content type parameters.*/
-    public func allContentTypeParametersNames() -> Array<String> {
-        return Array<String>.cast(nativeInstance.allContentTypeParametersNames());
+    public func allContentTypeParametersNames() -> Array<String>? {
+        return Array<String>(mailCoreArray: nativeInstance.allContentTypeParametersNames());
     }
     
     public static func getData(_ part: MCOAbstractPart) -> Data? {

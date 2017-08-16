@@ -25,12 +25,12 @@ public class MCOMailProvider: NSObject, Convertible {
         return nativeInstance.toCObject()
     }
     
-    public var imapServices: [MCONetService] {
-        return Array<MCONetService>.cast(self.nativeInstance.imapServices)
+    public var imapServices: [MCONetService]? {
+        return Array<MCONetService>(mailCoreArray: self.nativeInstance.imapServices)
     }
     
-    public var smtpServices: [MCONetService] {
-        return Array<MCONetService>.cast(self.nativeInstance.smtpServices)
+    public var smtpServices: [MCONetService]? {
+        return Array<MCONetService>(mailCoreArray: self.nativeInstance.smtpServices)
     }
     
     public var identifier: String? {

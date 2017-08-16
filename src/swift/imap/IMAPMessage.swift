@@ -57,9 +57,9 @@ public final class MCOIMAPMessage : MCOAbstractMessage, NSCoding {
     }
     
     /** Flag keywords of the message, mostly custom flags */
-    public var customFlags: Array<String> {
-        get { return Array<String>.cast(nativeInstance.customFlags) }
-        set { nativeInstance.customFlags = Array<String>.cast(newValue) }
+    public var customFlags: Array<String>? {
+        get { return Array<String>(mailCoreArray: nativeInstance.customFlags) }
+        set { nativeInstance.customFlags = newValue?.mailCoreArray() ?? CArray() }
     }
     
     /** It's the last modification sequence value of the message synced from the server. See RFC4551 */
@@ -75,9 +75,9 @@ public final class MCOIMAPMessage : MCOAbstractMessage, NSCoding {
     }
     
     /** All Gmail labels of the message */
-    public var gmailLabels: Array<String> {
-        get { return Array<String>.cast(nativeInstance.gmailLabels) }
-        set { nativeInstance.gmailLabels = Array<String>.cast(newValue) }
+    public var gmailLabels: Array<String>? {
+        get { return Array<String>(mailCoreArray: nativeInstance.gmailLabels) }
+        set { nativeInstance.gmailLabels = newValue?.mailCoreArray() ?? CArray() }
     }
     
     /** Gmail message ID of the message */
@@ -116,13 +116,19 @@ public final class MCOIMAPMessage : MCOAbstractMessage, NSCoding {
     
     
     /** All attachments in the message. */
-    public func attachments() -> Array<MCOIMAPPart> {
-        return Array<MCOIMAPPart>.cast(super.attachments().cast());
+    public func attachments() -> Array<MCOIMAPPart>? {
+        guard let attachments = super.attachments() else {
+            return nil
+        }
+        return Array<MCOIMAPPart>(mailCoreArray: attachments.mailCoreArray());
     }
     
     /** All image attachments included inline in the message through cid: URLs. */
-    public func htmlInlineAttachments() -> Array<MCOIMAPPart> {
-        return Array<MCOIMAPPart>.cast(super.htmlInlineAttachments().cast());
+    public func htmlInlineAttachments() -> Array<MCOIMAPPart>? {
+        guard let htmlInlineAttachments = super.htmlInlineAttachments() else {
+            return nil
+        }
+        return Array<MCOIMAPPart>(mailCoreArray: htmlInlineAttachments.mailCoreArray());
     }
     
     public convenience init?(coder aDecoder: NSCoder) {

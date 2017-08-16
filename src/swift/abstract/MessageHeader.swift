@@ -36,38 +36,38 @@ public class MCOMessageHeader: Convertible, NSCoding {
     
     /** References field. It's an array of message-ids.*/
     public var references : Array<String>? {
-        get { return Array<String>.cast(self.nativeInstance.references) }
-        set { self.nativeInstance.references = Array<String>.cast(newValue) }
+        get { return Array<String>(mailCoreArray: self.nativeInstance.references) }
+        set { self.nativeInstance.references = newValue?.mailCoreArray() ?? CArray() }
     }
     
     /** In-Reply-To field. It's an array of message-ids.*/
     public var inReplyTo : Array<String>? {
-        set { self.nativeInstance.inReplyTo = Array<String>.cast(newValue) }
-        get { return Array<String>.cast(self.nativeInstance.inReplyTo) }
+        set { self.nativeInstance.inReplyTo = newValue?.mailCoreArray() ?? CArray() }
+        get { return Array<String>(mailCoreArray: self.nativeInstance.inReplyTo) }
     }
     
     /** To field: recipient of the message. It's an array of MCOAddress.*/
-    public var to: Array<MCOAddress> {
-        set { self.nativeInstance.to = Array<MCOAddress>.cast(newValue) }
-        get { return Array<MCOAddress>.cast(self.nativeInstance.to) }
+    public var to: Array<MCOAddress>? {
+        set { self.nativeInstance.to = newValue?.mailCoreArray() ?? CArray() }
+        get { return Array<MCOAddress>(mailCoreArray: self.nativeInstance.to) }
     }
     
     /** Cc field: cc recipient of the message. It's an array of MCOAddress.*/
-    public var cc: Array<MCOAddress> {
-        set { self.nativeInstance.cc = Array<MCOAddress>.cast(newValue) }
-        get { return Array<MCOAddress>.cast(self.nativeInstance.cc) }
+    public var cc: Array<MCOAddress>? {
+        set { self.nativeInstance.cc = newValue?.mailCoreArray() ?? CArray() }
+        get { return Array<MCOAddress>(mailCoreArray: self.nativeInstance.cc) }
     }
     
     /** Bcc field: bcc recipient of the message. It's an array of MCOAddress.*/
-    public var bcc: Array<MCOAddress> {
-        set { self.nativeInstance.bcc = Array<MCOAddress>.cast(newValue) }
-        get { return Array<MCOAddress>.cast(self.nativeInstance.bcc) }
+    public var bcc: Array<MCOAddress>? {
+        set { self.nativeInstance.bcc = newValue?.mailCoreArray() ?? CArray() }
+        get { return Array<MCOAddress>(mailCoreArray: self.nativeInstance.bcc) }
     }
     
     /** Reply-To field. It's an array of MCOAddress.*/
-    public var replyTo: Array<MCOAddress> {
-        set { self.nativeInstance.replyTo = Array<MCOAddress>.cast(newValue) }
-        get { return Array<MCOAddress>.cast(self.nativeInstance.replyTo) }
+    public var replyTo: Array<MCOAddress>? {
+        set { self.nativeInstance.replyTo = newValue?.mailCoreArray() ?? CArray() }
+        get { return Array<MCOAddress>(mailCoreArray: self.nativeInstance.replyTo) }
     }
     
     /** Subject of the message.*/
@@ -122,8 +122,8 @@ public class MCOMessageHeader: Convertible, NSCoding {
     }
     
     /** Returns an array with the names of all custom headers.*/
-    public func allExtraHeadersNames() -> Array<String> {
-        return Array<String>.cast(nativeInstance.allExtraHeadersNames());
+    public func allExtraHeadersNames() -> Array<String>? {
+        return Array<String>(mailCoreArray: nativeInstance.allExtraHeadersNames());
     }
     
     /** Extracted subject (also remove square brackets).*/
@@ -143,12 +143,12 @@ public class MCOMessageHeader: Convertible, NSCoding {
     
     /** Returns a header that can be used as a base for a reply message.*/
     public func replyHeaderWithExcludedRecipients(excludedRecipients: Array<MCOAddress>) -> MCOMessageHeader? {
-        return createMCOObject(from: nativeInstance.replyHeaderWithExcludedRecipients(Array<MCOAddress>.cast(excludedRecipients)).toCObject())
+        return createMCOObject(from: nativeInstance.replyHeaderWithExcludedRecipients(excludedRecipients.mailCoreArray()).toCObject())
     }
     
     /** Returns a header that can be used as a base for a reply all message.*/
     public func replyAllHeaderWithExcludedRecipients(excludedRecipients: Array<MCOAddress>) -> MCOMessageHeader? {
-        return createMCOObject(from: nativeInstance.replyAllHeaderWithExcludedRecipients(Array<MCOAddress>.cast(excludedRecipients)).toCObject())
+        return createMCOObject(from: nativeInstance.replyAllHeaderWithExcludedRecipients(excludedRecipients.mailCoreArray()).toCObject())
     }
     
     /** Returns a header that can be used as a base for a forward message.*/

@@ -36,7 +36,7 @@ public class MCOIMAPFetchFoldersOperation : MCOIMAPBaseOperation {
         
         let errorCode = error()
         if errorCode == ErrorNone {
-            completionBlock!(nil, Array<MCOIMAPFolder>.cast(operation.folders()))
+            completionBlock!(nil, Array<MCOIMAPFolder>(mailCoreArray: operation.folders()))
         }
         else {
             completionBlock!(MailCoreError(code: errorCode), nil)

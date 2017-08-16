@@ -32,12 +32,12 @@ public class MCOIMAPNamespaceItem: Convertible {
     
     /** Returns folder path for given path components in the context of this namespace item */
     public func path(component: Array<String>) -> String? {
-        return nativeInstance.pathForComponents(Array<String>.cast(component)).string()
+        return nativeInstance.pathForComponents(component.mailCoreArray()).string()
     }
     
     /** Returns components for the given path in the context of this namespace */
-    public func components(path: String) -> Array<String> {
-        return Array<String>.cast(nativeInstance.componentsForPath(path.mailCoreString()))
+    public func components(path: String) -> Array<String>? {
+        return Array<String>(mailCoreArray: nativeInstance.componentsForPath(path.mailCoreString()))
     }
     
     /** Returns YES if the namespace contains this folder path */

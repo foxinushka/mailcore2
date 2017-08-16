@@ -72,8 +72,8 @@ public final class MCOAddress : NSObject, Convertible, NSCoding {
      forms of the RFC822 encoded addresses.
      
      For example: @[ @"DINH Vi=C3=AAt Ho=C3=A0 <hoa@etpan.org>" ]*/
-    public static func addressesWithRFC822String(string: String) -> Array<MCOAddress> {
-        return Array<MCOAddress>.cast(CAddress.addressesWithRFC822String(string.mailCoreString()))
+    public static func addressesWithRFC822String(string: String) -> Array<MCOAddress>? {
+        return Array<MCOAddress>(mailCoreArray: CAddress.addressesWithRFC822String(string.mailCoreString()))
     }
 
     /**
@@ -81,8 +81,8 @@ public final class MCOAddress : NSObject, Convertible, NSCoding {
      forms of non-encoded RFC822 addresses.
      
      For example: @[ "DINH Viêt Hoà <hoa@etpan.org>" ]*/
-    public static func addressesWithNonEncodedRFC822String(string: String) -> Array<MCOAddress> {
-        return Array<MCOAddress>.cast(CAddress.addressesWithNonEncodedRFC822String(string.mailCoreString()))
+    public static func addressesWithNonEncodedRFC822String(string: String) -> Array<MCOAddress>? {
+        return Array<MCOAddress>(mailCoreArray: CAddress.addressesWithNonEncodedRFC822String(string.mailCoreString()))
     }
     
     /** Returns the display name of the address.*/
@@ -148,11 +148,11 @@ public final class MCOAddress : NSObject, Convertible, NSCoding {
 public extension Array where Element: MCOAddress {
     
     public func mco_RFC822StringForAddresses() -> String? {
-        return CAddress.RFC822StringForAddresses(Array.cast(self)).string()
+        return CAddress.RFC822StringForAddresses(self.mailCoreArray()).string()
     }
     
     public func mco_nonEncodedRFC822StringForAddresses() -> String? {
-        return CAddress.nonEncodedRFC822StringForAddresses(Array.cast(self)).string()
+        return CAddress.nonEncodedRFC822StringForAddresses(self.mailCoreArray()).string()
     }
 
 }

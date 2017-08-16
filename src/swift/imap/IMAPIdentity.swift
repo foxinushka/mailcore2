@@ -41,8 +41,8 @@ public class MCOIMAPIdentity: Convertible {
     }
     
     /** All fields names of the identity of the client */
-    public func allInfoKeys() -> [String] {
-        return Array<String>.cast(nativeInstance.allInfoKeys())
+    public func allInfoKeys() -> [String]? {
+        return Array<String>(mailCoreArray: nativeInstance.allInfoKeys())
     }
     
     /** Set a custom field in the identity */

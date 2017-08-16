@@ -36,15 +36,15 @@ public class MCOMessageBuilder : MCOAbstractMessage {
     }
     
     /** List of file attachments.*/
-    public var attachments: Array<MCOAttachment> {
-        get { return Array<MCOAttachment>.cast(nativeInstance.attachments); }
-        set { nativeInstance.attachments = newValue.cast() }
+    public var attachments: Array<MCOAttachment>? {
+        get { return Array<MCOAttachment>(mailCoreArray: nativeInstance.attachments); }
+        set { nativeInstance.attachments = newValue?.mailCoreArray() ?? CArray() }
     }
     
     /** List of related file attachments (included as cid: link in the HTML part).*/
-    public var relatedAttachments: Array<MCOAttachment> {
-        get { return Array<MCOAttachment>.cast(nativeInstance.relatedAttachments) }
-        set { nativeInstance.relatedAttachments = newValue.cast() }
+    public var relatedAttachments: Array<MCOAttachment>? {
+        get { return Array<MCOAttachment>(mailCoreArray: nativeInstance.relatedAttachments) }
+        set { nativeInstance.relatedAttachments = newValue?.mailCoreArray() ?? CArray() }
     }
     
     /** Prefix for the boundary identifier. Default value is nil.*/

@@ -206,7 +206,7 @@ public class MCOSMTPSession: NSObject {
      }];
      */
     public func sendOperationWithData(messageData: Data, from: MCOAddress, recipients: Array<MCOAddress>) -> MCOSMTPSendOperation {
-        return MCOSMTPSendOperation(operation: self.session.sendOperationWithDataAndFromAndRecipients(messageData.mailCoreData(), from.nativeInstance, recipients.cast()));
+        return MCOSMTPSendOperation(operation: self.session.sendOperationWithDataAndFromAndRecipients(messageData.mailCoreData(), from.nativeInstance, recipients.mailCoreArray()));
     }
     
     
@@ -224,7 +224,7 @@ public class MCOSMTPSession: NSObject {
      }];
      */
     public func sendOperationWithContentsOfFile(path: String, from: MCOAddress, recipients: Array<MCOAddress>) -> MCOSMTPSendOperation {
-        return MCOSMTPSendOperation(operation: self.session.sendOperationWithContentsOfFile(path.mailCoreString(), from.nativeInstance, recipients.cast()))
+        return MCOSMTPSendOperation(operation: self.session.sendOperationWithContentsOfFile(path.mailCoreString(), from.nativeInstance, recipients.mailCoreArray()))
     }
 
     
