@@ -22,6 +22,14 @@ public class MCOIndexSet: NSObject, NSCopying, NSCoding {
         self.nativeInstance.retain()
     }
     
+    public convenience init(foundationIndexSet: IndexSet) {
+        self.init()
+        
+        for range in foundationIndexSet.rangeView {
+            self.add(range: RangeMake(UInt64(range.lowerBound), UInt64(range.upperBound - range.lowerBound)))
+        }
+    }
+    
     deinit {
         self.nativeInstance.release()
     }

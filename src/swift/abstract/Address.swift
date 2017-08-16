@@ -145,3 +145,14 @@ public final class MCOAddress : NSObject, Convertible, NSCoding {
     
 }
 
+public extension Array where Element: MCOAddress {
+    
+    public func mco_RFC822StringForAddresses() -> String? {
+        return CAddress.RFC822StringForAddresses(Array.cast(self)).string()
+    }
+    
+    public func mco_nonEncodedRFC822StringForAddresses() -> String? {
+        return CAddress.nonEncodedRFC822StringForAddresses(Array.cast(self)).string()
+    }
+
+}

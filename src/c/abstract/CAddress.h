@@ -33,6 +33,9 @@ extern "C" {
     C_SYNTHESIZE_STATIC_FUNC_DEFINITION(CAddress, CArray, addressesWithRFC822String, MailCoreString)
     C_SYNTHESIZE_STATIC_FUNC_DEFINITION(CAddress, CArray, addressesWithNonEncodedRFC822String, MailCoreString)
     
+    C_SYNTHESIZE_STATIC_FUNC_DEFINITION(CAddress, MailCoreString, RFC822StringForAddresses, CArray)
+    C_SYNTHESIZE_STATIC_FUNC_DEFINITION(CAddress, MailCoreString, nonEncodedRFC822StringForAddresses, CArray)
+    
     C_SYNTHESIZE_STATIC_FUNC_DEFINITION(CAddress, CAddress, init)
     
 #ifdef __cplusplus

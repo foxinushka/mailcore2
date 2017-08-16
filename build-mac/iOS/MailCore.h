@@ -61,6 +61,7 @@
 #include <MailCore/CMessageBuilder.h>
 #include <MailCore/CMessageParser.h>
 #include <MailCore/CMessagePart.h>
+#include <MailCore/CMultipart.h>
 
 #include <MailCore/CMailProvidersManager.h>
 #include <MailCore/CMailProvider.h>

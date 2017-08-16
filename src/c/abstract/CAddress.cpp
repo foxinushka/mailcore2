@@ -22,6 +22,9 @@ C_SYNTHESIZE_STATIC_FUNC_WITH_OBJ(CAddress, addressWithNonEncodedRFC822String, M
 C_SYNTHESIZE_STATIC_FUNC_WITH_OBJ(CArray, addressesWithRFC822String, MailCoreString)
 C_SYNTHESIZE_STATIC_FUNC_WITH_OBJ(CArray, addressesWithNonEncodedRFC822String, MailCoreString)
 
+C_SYNTHESIZE_STATIC_FUNC_WITH_OBJ(MailCoreString, RFC822StringForAddresses, CArray)
+C_SYNTHESIZE_STATIC_FUNC_WITH_OBJ(MailCoreString, nonEncodedRFC822StringForAddresses, CArray)
+
 C_SYNTHESIZE_FUNC_WITH_OBJ(MailCoreString, RFC822String)
 C_SYNTHESIZE_FUNC_WITH_OBJ(MailCoreString, nonEncodedRFC822String)
 

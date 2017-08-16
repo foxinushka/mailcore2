@@ -5,6 +5,7 @@
 #include "CBase.h"
 #include "CArray.h"
 #include "CData.h"
+#include "MailCoreString.h"
 
 #ifdef __cplusplus
 
@@ -20,6 +21,7 @@ extern "C" {
     
     C_SYNTHESIZE_READONLY_PROPERTY_DEFINITION(CMailProvider, CArray, imapServices)
     C_SYNTHESIZE_READONLY_PROPERTY_DEFINITION(CMailProvider, CArray, smtpServices)
+    C_SYNTHESIZE_READONLY_PROPERTY_DEFINITION(CMailProvider, MailCoreString, identifier)
     
 #ifdef __cplusplus
 }

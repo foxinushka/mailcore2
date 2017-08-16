@@ -33,5 +33,5 @@ MailCoreString CMessageParser_plainTextBodyRenderingAndStripWhitespace(struct CM
 
 MailCoreString CMessageParser_htmlRendering(struct CMessageParser self, struct CAbstractMessageRendererCallback htmlCallback)
 {
-    return MailCoreString_new(self.instance->htmlRendering(reinterpret_cast<mailcore::HTMLRendererTemplateCallback*>(htmlCallback.callbackBridge)));
+    return MailCoreString_new(self.instance->htmlRendering(static_cast<mailcore::HTMLRendererTemplateCallback*>(htmlCallback.callbackBridge)));
 }

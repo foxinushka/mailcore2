@@ -32,6 +32,10 @@ public class MCOMailProvider: NSObject, Convertible {
     public var smtpServices: [MCONetService] {
         return Array<MCONetService>.cast(self.nativeInstance.smtpServices)
     }
+    
+    public var identifier: String? {
+        return self.nativeInstance.identifier.string()
+    }
 
     
 }
