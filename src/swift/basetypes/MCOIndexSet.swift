@@ -24,9 +24,9 @@ public class MCOIndexSet: NSObject, NSCopying, NSCoding {
     
     public convenience init(foundationIndexSet: IndexSet) {
         self.init()
-        
         for range in foundationIndexSet.rangeView {
-            self.add(range: RangeMake(UInt64(range.lowerBound), UInt64(range.upperBound - range.lowerBound)))
+            let range = RangeMake(UInt64(range.lowerBound), UInt64(range.upperBound - range.lowerBound - 1))
+            self.add(range: range)
         }
     }
     
@@ -159,11 +159,7 @@ public class MCOIndexSet: NSObject, NSCopying, NSCoding {
 public extension IndexSet {
 
     public func mcoIndexSet() -> MCOIndexSet {
-        let mcoIndexSet = MCOIndexSet()
-        for range in self.rangeView {
-            mcoIndexSet.add(range: RangeMake(UInt64(range.lowerBound), UInt64(range.upperBound - range.lowerBound)))
-        }
-        return mcoIndexSet
+        return MCOIndexSet(foundationIndexSet: self)
     }
 }
 
