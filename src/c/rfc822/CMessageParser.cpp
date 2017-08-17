@@ -11,6 +11,7 @@
 #include "CData.h"
 
 #include "CAbstractMessageRendererCallback.h"
+#include "CAbstractMessageRendererCallbackWrapper.h"
 
 #define nativeType mailcore::MessageParser
 #define structName CMessageParser

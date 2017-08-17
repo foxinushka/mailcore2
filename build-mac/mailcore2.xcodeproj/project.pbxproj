@@ -500,6 +500,8 @@
 		840CB4531F274AD60068E8E6 /* CIMAPSearchOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 840CB4501F274AD60068E8E6 /* CIMAPSearchOperation.cpp */; };
 		840CB4541F274AD60068E8E6 /* CIMAPSearchOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 840CB4511F274AD60068E8E6 /* CIMAPSearchOperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		840CB4551F274AD60068E8E6 /* CIMAPSearchOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 840CB4511F274AD60068E8E6 /* CIMAPSearchOperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8435684F1F45A2F200FCFF33 /* CAbstractMessageRendererCallbackWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = 84C95C1D1F3208580056A543 /* CAbstractMessageRendererCallbackWrapper.h */; };
+		843568501F45A2F200FCFF33 /* CAbstractMessageRendererCallbackWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = 84C95C1D1F3208580056A543 /* CAbstractMessageRendererCallbackWrapper.h */; };
 		843E49FC1F2F9A4700D78022 /* ConnectionLoggerHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843E49FB1F2F9A4700D78022 /* ConnectionLoggerHelper.swift */; };
 		843E49FD1F2F9A4700D78022 /* ConnectionLoggerHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843E49FB1F2F9A4700D78022 /* ConnectionLoggerHelper.swift */; };
 		843E4A821F30716300D78022 /* MCOObjectWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = 843E4A7E1F306F2600D78022 /* MCOObjectWrapper.h */; };
@@ -566,8 +568,6 @@
 		84C87A211F41DCEC0018398E /* MCAbstractMessage.h in Headers */ = {isa = PBXBuildFile; fileRef = C64EA695169E847800778456 /* MCAbstractMessage.h */; };
 		84C87A221F41DD000018398E /* MCIMAPSearchOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = C64EA82516A29EE300778456 /* MCIMAPSearchOperation.h */; };
 		84C87A231F41DFCF0018398E /* CCore.h in Headers */ = {isa = PBXBuildFile; fileRef = 84F7B40E1D915985005F83E8 /* CCore.h */; };
-		84C95C1E1F3208580056A543 /* CAbstractMessageRendererCallbackWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = 84C95C1D1F3208580056A543 /* CAbstractMessageRendererCallbackWrapper.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		84C95C1F1F3208580056A543 /* CAbstractMessageRendererCallbackWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = 84C95C1D1F3208580056A543 /* CAbstractMessageRendererCallbackWrapper.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		84CD9BDE1D9BE3AF000622CB /* CIMAPMultipart.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 84CD9BDC1D9BE3AF000622CB /* CIMAPMultipart.cpp */; };
 		84CFA98719F7159700FE35D2 /* MCNNTPFetchOverviewOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 84CFA98519F7159700FE35D2 /* MCNNTPFetchOverviewOperation.cpp */; };
 		84CFA98819F7159700FE35D2 /* MCNNTPFetchOverviewOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 84CFA98519F7159700FE35D2 /* MCNNTPFetchOverviewOperation.cpp */; };
@@ -4063,6 +4063,7 @@
 				CA854A8216AC9F34E5C2806D /* MCIMAPFetchParsedContentOperation.h in Headers */,
 				36C730260AC040622F91CFE0 /* MCNNTPFetchServerTimeOperation.h in Headers */,
 				AA62B1999E009E0FE4814FCF /* MCNNTPFetchOverviewOperation.h in Headers */,
+				843568501F45A2F200FCFF33 /* CAbstractMessageRendererCallbackWrapper.h in Headers */,
 				5EB30CEC902B4F8DB2633B42 /* MCNNTP.h in Headers */,
 				DE4B37A0269ACFE0DAE64D7A /* MCIMAPCustomCommandOperation.h in Headers */,
 				DD3FBEB84CC28F8A7F03E170 /* MCNNTPSession.h in Headers */,
@@ -4160,7 +4161,6 @@
 				844D9CE21F28F1F500E470A8 /* CMessagePart.h in Headers */,
 				7408F42E99C35541080C11DB /* MCIMAPPart.h in Headers */,
 				4AB9BCB20EEC0AE915B9C236 /* MCIMAPProgressCallback.h in Headers */,
-				84C95C1E1F3208580056A543 /* CAbstractMessageRendererCallbackWrapper.h in Headers */,
 				565A6ADC6EB2168A57C85958 /* MCIMAPSearchExpression.h in Headers */,
 				58CE4104E99120870C50B1C7 /* MCAsyncPOP.h in Headers */,
 				532ACF171DBC91AEA85C1C67 /* MCPOPOperationCallback.h in Headers */,
@@ -4202,7 +4202,6 @@
 				845FB84B1F29057A00A29DA8 /* CNetService.h in Headers */,
 				845FB8451F29031400A29DA8 /* CMailProvidersManager.h in Headers */,
 				844D9CE31F28F1F500E470A8 /* CMessagePart.h in Headers */,
-				84C95C1F1F3208580056A543 /* CAbstractMessageRendererCallbackWrapper.h in Headers */,
 				845FB8511F2909A000A29DA8 /* CMailProvider.h in Headers */,
 				8408C8011F26378D0003A816 /* CAttachment.h in Headers */,
 				8408C8091F26378D0003A816 /* CMessageParser.h in Headers */,
@@ -4264,6 +4263,7 @@
 				D8E5F7445B5A9AA13625897A /* MCPOPMessageInfo.h in Headers */,
 				A59ECA8DDE5FD9BB200E2D9E /* MCPOPProgressCallback.h in Headers */,
 				8408C71D1F2635210003A816 /* NSSet+MCO.h in Headers */,
+				8435684F1F45A2F200FCFF33 /* CAbstractMessageRendererCallbackWrapper.h in Headers */,
 				8408C7151F26350D0003A816 /* NSDictionary+MCO.h in Headers */,
 				8408C71F1F2635250003A816 /* NSString+MCO.h in Headers */,
 				8408C71B1F26351C0003A816 /* NSObject+MCO.h in Headers */,

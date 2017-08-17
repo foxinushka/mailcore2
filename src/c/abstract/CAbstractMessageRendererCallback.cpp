@@ -3,6 +3,8 @@
 #include <MailCore/MCRenderer.h>
 #include "CData.h"
 
+#include "CAbstractMessageRendererCallbackWrapper.h"
+
 AbstractMessageRendererCallback::AbstractMessageRendererCallback(CanPreviewPartBlock canPreviewPartBlock,
                                     ShouldShowPartBlock shouldShowPartBlock,
                                     TemplateValuesForHeaderBlock templateValuesForHeaderBlock,
