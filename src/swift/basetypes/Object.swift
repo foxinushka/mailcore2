@@ -48,9 +48,9 @@ func createMCOObject<T: Convertible>(from cobject: CObject) -> T? {
     if cobject.instance == nil {
         return nil
     }
-    guard let typeInfo = Data.init(cdata: getTypeNameFromObject(cobject)),
-        let type = typeHash[typeInfo] else {
+    guard let typeInfo = Data.init(cdata: getTypeNameFromObject(cobject)), let type = typeHash[typeInfo] else {
         assert(false, "MCO Unknown type")
+        return nil
     }
     return type.init(mailCoreObject: cobject) as? T
 }
@@ -59,9 +59,9 @@ func createMCOObjectWithoutConversion(from cobject: CObject) -> Convertible? {
     if cobject.instance == nil {
         return nil
     }
-    guard let typeInfo = Data.init(cdata: getTypeNameFromObject(cobject)),
-        let type = typeHash[typeInfo] else {
-            assert(false, "MCO Unknown type")
+    guard let typeInfo = Data.init(cdata: getTypeNameFromObject(cobject)), let type = typeHash[typeInfo] else {
+        assert(false, "MCO Unknown type")
+        return nil
     }
     return type.init(mailCoreObject: cobject)
 }
