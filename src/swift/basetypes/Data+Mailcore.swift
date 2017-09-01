@@ -7,7 +7,12 @@ extension Data {
         guard cdata.instance != nil else {
             return nil
         }
-        self = Data.init(bytes: cdata.bytes, count: Int(cdata.length));
+        if let bytes = cdata.bytes {
+            self = Data(bytes: bytes, count: Int(cdata.length))
+        }
+        else {
+            self = Data()
+        }
     }
     
     public func mailCoreData() -> CData {

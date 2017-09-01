@@ -27,10 +27,16 @@ extension String : Convertible  {
 extension MailCoreString {
 
     public func string() -> String? {
-        guard self.instance != nil && self.unicodeCharacters != nil else {
+        guard self.instance != nil else {
             return nil
         }
-        return String(utf16CodeUnits: self.unicodeCharacters, count: Int(self.length))
+        if let unicodeCharacters = self.unicodeCharacters {
+            return String(utf16CodeUnits: unicodeCharacters, count: Int(self.length))
+        }
+        else {
+            return String()
+        }
+        
     }
     
 }

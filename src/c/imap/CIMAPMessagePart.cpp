@@ -10,3 +10,7 @@ C_SYNTHESIZE_CONSTRUCTOR()
 C_SYNTHESIZE_COBJECT_CAST()
 
 C_SYNTHESIZE_STRING(setPartID, partID)
+
+CIMAPMessagePart CIMAPMessagePart_init(){
+    return CIMAPMessagePart_new(new mailcore::IMAPMessagePart());
+}

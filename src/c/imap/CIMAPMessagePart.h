@@ -17,6 +17,8 @@ extern "C" {
     C_SYNTHESIZE_COBJECT_CAST_DEFINITION(CIMAPMessagePart)
     C_SYNTHESIZE_PROPERTY_DEFINITION(CIMAPMessagePart, MailCoreString, partID, setPartID)
     
+    C_SYNTHESIZE_STATIC_FUNC_DEFINITION(CIMAPMessagePart, CIMAPMessagePart, init)
+    
 #ifdef __cplusplus
 }
 #endif
