@@ -607,7 +607,8 @@ void SMTPSession::login(ErrorCode * pError)
                                     MCUTF8(mPassword), NULL /* realm */);
             break;
             
-        case AuthTypeXOAuth2: {
+        case AuthTypeXOAuth2:
+        case AuthTypeXOAuth2Outlook: {
             const char * utf8Username = MCUTF8(mUsername);
             if (utf8Username == NULL) {
                 utf8Username = "";
@@ -618,21 +619,6 @@ void SMTPSession::login(ErrorCode * pError)
             }
             else {
                 r = mailsmtp_oauth2_authenticate(mSmtp, utf8Username, MCUTF8(mOAuth2Token));
-            }
-            break;
-        }
-        
-        case AuthTypeXOAuth2Outlook: {
-            const char * utf8Username = MCUTF8(mUsername);
-            if (utf8Username == NULL) {
-                utf8Username = "";
-            }
-            
-            if (mOAuth2Token == NULL) {
-                r = MAILSMTP_ERROR_STREAM;
-            } 
-            else {
-                r = mailsmtp_oauth2_outlook_authenticate(mSmtp, utf8Username, MCUTF8(mOAuth2Token));
             }
             break;
         }
