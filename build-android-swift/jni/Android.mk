@@ -112,25 +112,21 @@ include $(PREBUILT_STATIC_LIBRARY)
 
 include $(CLEAR_VARS)
 LOCAL_MODULE    := dispatch
-LOCAL_EXPORT_C_INCLUDES := $(CURRENT_DIR)/../third-party/libdispatch-android-1/include
-LOCAL_SRC_FILES := $(CURRENT_DIR)/../third-party/libdispatch-android-1/libs/$(TARGET_ARCH_ABI)/libdispatch.so
+LOCAL_EXPORT_C_INCLUDES := $(SWIFT_LIB)
+LOCAL_SRC_FILES := $(SWIFT_LIB)/android/libdispatch.so
 include $(PREBUILT_SHARED_LIBRARY)
 
 include $(CLEAR_VARS)
 LOCAL_MODULE    := MailCore
-LOCAL_C_INCLUDES := $(includes)
+LOCAL_C_INCLUDES += $(includes)
 LOCAL_SRC_FILES := \
 	$(jni_src_files) \
 	$(core_src_files) $(abstract_src_files) $(imap_src_files) $(nntp_src_files) \
 	$(pop_src_files) $(provider_src_files) $(renderer_src_files) $(rfc822_src_files) \
 	$(security_src_files) $(smtp_src_files) $(zip_src_files) $(minizip_src_files) \
 	$(async_imap_src_files) $(async_nntp_src_files) $(async_pop_src_files) $(async_smtp_src_files)
-LOCAL_CPPFLAGS := -frtti
 LOCAL_CFLAGS := -DNOCRYPT -fblocks
-# LOCAL_LDLIBS := -lz -llog \
-#      -lc++_shared -L$(ANDROID_NDK)/sources/cxx-stl/llvm-libc++/libs/$(TARGET_ARCH_ABI)
-LOCAL_LDLIBS := -lz -llog \
-	 -lgnustl_shared -L$(ANDROID_NDK)/sources/cxx-stl/gnu-libstdc++/4.9/libs/$(TARGET_ARCH_ABI)
+LOCAL_LDLIBS := -lz -llog
 LOCAL_DISABLE_FATAL_LINKER_WARNINGS := true
 LOCAL_STATIC_LIBRARIES := etpan sasl2 ssl crypto icu4c xml2 tidy ctemplate
 LOCAL_SHARED_LIBRARIES := dispatch
@@ -158,6 +154,8 @@ LOCAL_SRC_FILES  := $(src_dir)/c/utils/COperation.cpp \
 					$(src_dir)/c/basetypes/CObject.cpp \
 					$(src_dir)/c/basetypes/CIndexSet.cpp \
 					$(src_dir)/c/basetypes/CDictionary.cpp \
+					$(src_dir)/c/basetypes/CData.cpp \
+					$(src_dir)/c/basetypes/MailCoreString.cpp \
 					$(src_dir)/c/imap/CIMAPAsyncSession.cpp \
 					$(src_dir)/c/imap/CIMAPFolder.cpp \
 					$(src_dir)/c/imap/CIMAPMessage.cpp \
@@ -171,7 +169,6 @@ LOCAL_SRC_FILES  := $(src_dir)/c/utils/COperation.cpp \
 					$(src_dir)/c/imap/CIMAPSearchExpression.cpp \
 					$(src_dir)/c/imap/CIMAPAppendMessageOperation.cpp \
 					$(src_dir)/c/imap/CIMAPFetchContentOperation.cpp \
-					$(src_dir)/c/imap/СIMAPSearchOperation.cpp \
 					$(src_dir)/c/imap/CIMAPCopyMessagesOperation.cpp \
 					$(src_dir)/c/imap/CIMAPFolderInfoOperation.cpp \
 					$(src_dir)/c/imap/CIMAPFolderStatusOperation.cpp \
@@ -189,14 +186,14 @@ LOCAL_SRC_FILES  := $(src_dir)/c/utils/COperation.cpp \
 					$(src_dir)/c/imap/CIMAPMessageRenderingOperation.cpp \
 					$(src_dir)/c/imap/CIMAPIdentityOperation.cpp \
 					$(src_dir)/c/imap/CIMAPQuotaOperation.cpp \
+					$(src_dir)/c/imap/CIMAPSearchOperation.cpp \
 					$(src_dir)/c/smtp/CSMTPOperation.cpp \
 					$(src_dir)/c/smtp/CSMTPSession.cpp \
 					$(src_dir)/c/rfc822/CAttachment.cpp \
 					$(src_dir)/c/rfc822/CMessageBuilder.cpp \
 					$(src_dir)/c/rfc822/CMessageParser.cpp \
 
-					
-LOCAL_CFLAGS := -fblocks
-LOCAL_LDLIBS := -llog				
+LOCAL_LDLIBS := -lz -llog
+LOCAL_CFLAGS := -fblocks -DSWIFT
 LOCAL_SHARED_LIBRARIES := MailCore
 include $(BUILD_SHARED_LIBRARY)

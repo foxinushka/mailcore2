@@ -2,7 +2,7 @@
 #define MAILCORE_CBASE_PRIVATE_H
 
 #include "CBase.h"
-#include <MailCore/MailCoreString.h>
+#include "MailCoreString.h"
 
 #ifdef __cplusplus
 #include <typeinfo>

@@ -565,6 +565,18 @@
 		84B639F417F2839C003B5BA2 /* MCIMAPNoopOperation.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 84B639EC17F280F3003B5BA2 /* MCIMAPNoopOperation.h */; };
 		84B639F517F2839C003B5BA2 /* MCPOPNoopOperation.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 84B639E717F27EBD003B5BA2 /* MCPOPNoopOperation.h */; };
 		84B639F617F2839C003B5BA2 /* MCSMTPNoopOperation.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 84B639E217F279BB003B5BA2 /* MCSMTPNoopOperation.h */; };
+		84C36C361F62EC8B003E1399 /* MCOperationQueueCallback.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C6081678177625AD001F1018 /* MCOperationQueueCallback.h */; };
+		84C36C371F62EC93003E1399 /* MCOperationQueueCallback.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C6081678177625AD001F1018 /* MCOperationQueueCallback.h */; };
+		84C36C381F62ECA5003E1399 /* MCDefines.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = BD62729A1A158DA000129AA8 /* MCDefines.h */; };
+		84C36C391F62ECAC003E1399 /* MCDefines.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = BD62729A1A158DA000129AA8 /* MCDefines.h */; };
+		84C36C3A1F62EE87003E1399 /* MCDefines.h in Headers */ = {isa = PBXBuildFile; fileRef = BD62729A1A158DA000129AA8 /* MCDefines.h */; };
+		84C36C3B1F62EE88003E1399 /* MCDefines.h in Headers */ = {isa = PBXBuildFile; fileRef = BD62729A1A158DA000129AA8 /* MCDefines.h */; };
+		84C36C3C1F62F02F003E1399 /* MCOperationQueueCallback.h in Headers */ = {isa = PBXBuildFile; fileRef = C6081678177625AD001F1018 /* MCOperationQueueCallback.h */; };
+		84C36C3D1F62F030003E1399 /* MCOperationQueueCallback.h in Headers */ = {isa = PBXBuildFile; fileRef = C6081678177625AD001F1018 /* MCOperationQueueCallback.h */; };
+		84C36C3E1F62F078003E1399 /* MCHTMLRenderer.h in Headers */ = {isa = PBXBuildFile; fileRef = C63CD67C16BDCDD400DB18F1 /* MCHTMLRenderer.h */; };
+		84C36C3F1F62F078003E1399 /* MCHTMLRenderer.h in Headers */ = {isa = PBXBuildFile; fileRef = C63CD67C16BDCDD400DB18F1 /* MCHTMLRenderer.h */; };
+		84C36C401F62F087003E1399 /* MCHTMLBodyRendererTemplateCallback.h in Headers */ = {isa = PBXBuildFile; fileRef = DAD28C8A1783CFFC00F2BB8F /* MCHTMLBodyRendererTemplateCallback.h */; };
+		84C36C411F62F087003E1399 /* MCHTMLBodyRendererTemplateCallback.h in Headers */ = {isa = PBXBuildFile; fileRef = DAD28C8A1783CFFC00F2BB8F /* MCHTMLBodyRendererTemplateCallback.h */; };
 		84C87A211F41DCEC0018398E /* MCAbstractMessage.h in Headers */ = {isa = PBXBuildFile; fileRef = C64EA695169E847800778456 /* MCAbstractMessage.h */; };
 		84C87A221F41DD000018398E /* MCIMAPSearchOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = C64EA82516A29EE300778456 /* MCIMAPSearchOperation.h */; };
 		84C87A231F41DFCF0018398E /* CCore.h in Headers */ = {isa = PBXBuildFile; fileRef = 84F7B40E1D915985005F83E8 /* CCore.h */; };
@@ -1621,6 +1633,8 @@
 			dstPath = include/MailCore;
 			dstSubfolderSpec = 16;
 			files = (
+				84C36C381F62ECA5003E1399 /* MCDefines.h in CopyFiles */,
+				84C36C361F62EC8B003E1399 /* MCOperationQueueCallback.h in CopyFiles */,
 				F38221A71C7B638200E00721 /* MCNNTPPostOperation.h in CopyFiles */,
 				817FA5281C69016A006146BD /* MCIMAPFetchContentToFileOperation.h in CopyFiles */,
 				C6BEC1AB1B1256C100546519 /* MCHTMLCleaner.h in CopyFiles */,
@@ -1769,6 +1783,8 @@
 			dstPath = include/MailCore;
 			dstSubfolderSpec = 16;
 			files = (
+				84C36C391F62ECAC003E1399 /* MCDefines.h in CopyFiles */,
+				84C36C371F62EC93003E1399 /* MCOperationQueueCallback.h in CopyFiles */,
 				F38221A51C7B629B00E00721 /* MCNNTPPostOperation.h in CopyFiles */,
 				817FA5271C69013C006146BD /* MCIMAPFetchContentToFileOperation.h in CopyFiles */,
 				C6BEC1AA1B1256BA00546519 /* MCHTMLCleaner.h in CopyFiles */,
@@ -4011,6 +4027,7 @@
 				8408C7EB1F2637220003A816 /* CIMAPQuotaOperation.h in Headers */,
 				8408C7E91F2637220003A816 /* CIMAPMessageRenderingOperation.h in Headers */,
 				8408C7E81F2637220003A816 /* CIMAPFetchParsedContentOperation.h in Headers */,
+				84C36C3C1F62F02F003E1399 /* MCOperationQueueCallback.h in Headers */,
 				8408C7EA1F2637220003A816 /* CIMAPMoveMessagesOperation.h in Headers */,
 				8408C7E21F2637220003A816 /* CIMAPCustomCommandOperation.h in Headers */,
 				8408C7DF1F2637220003A816 /* CIMAPCapabilityOperation.h in Headers */,
@@ -4080,6 +4097,7 @@
 				E3A40B332CB95855F7A3566A /* MCNNTPListNewsgroupsOperation.h in Headers */,
 				17E7E295C3F508352AC45B4E /* MCIMAPMessageRenderingOperation.h in Headers */,
 				6D6A34E4C03FACA811040B10 /* MCNNTPOperationCallback.h in Headers */,
+				84C36C3E1F62F078003E1399 /* MCHTMLRenderer.h in Headers */,
 				27AA5A2F27A4C3B9C8B7332F /* MCIMAPIdentity.h in Headers */,
 				6F24645831A68DD3C7324610 /* MCIMAPFolderStatus.h in Headers */,
 				70A24CB346F979125CD6A125 /* MCIMAPFolderStatusOperation.h in Headers */,
@@ -4140,6 +4158,7 @@
 				27EE03BBC916FB16424F9CF9 /* MCHashMap.h in Headers */,
 				602DB41F397CBB627B421C7D /* MCLog.h in Headers */,
 				4A5ECD2D2F77DFB1F3F6BF11 /* MCObject.h in Headers */,
+				84C36C3A1F62EE87003E1399 /* MCDefines.h in Headers */,
 				576F048DA0BFAC3086A5E508 /* MCRange.h in Headers */,
 				20FAC3A40837DDE7B117A58B /* MCSet.h in Headers */,
 				9AF0FDF184E1FF511D288E61 /* MCString.h in Headers */,
@@ -4171,6 +4190,7 @@
 				52B5AAA92CA3DF9321990EA2 /* MCIMAPSession.h in Headers */,
 				97A2356B6CB23A5CD859CF0D /* MCPOP.h in Headers */,
 				8CAFD77E7A692C20D31A8BAF /* MCPOPMessageInfo.h in Headers */,
+				84C36C401F62F087003E1399 /* MCHTMLBodyRendererTemplateCallback.h in Headers */,
 				845FB8441F29031400A29DA8 /* CMailProvidersManager.h in Headers */,
 				CC69356D9463512F75CB7845 /* MCPOPProgressCallback.h in Headers */,
 				896A300E021C118CCD4DA8FC /* MCPOPSession.h in Headers */,
@@ -4211,6 +4231,7 @@
 				84DBBEFE1F26413600F03A5F /* CAbstractMultipart.h in Headers */,
 				84DBBEFF1F26413600F03A5F /* CMessageConstants.h in Headers */,
 				84DBBF001F26413600F03A5F /* CAddress.h in Headers */,
+				84C36C3D1F62F030003E1399 /* MCOperationQueueCallback.h in Headers */,
 				84DBBF011F26413600F03A5F /* CAbstractPart.h in Headers */,
 				84DBBF021F26413600F03A5F /* CMessageHeader.h in Headers */,
 				84DBBF031F26413600F03A5F /* CAbstractMessageRendererCallback.h in Headers */,
@@ -4280,6 +4301,7 @@
 				ACBE12776961DBE96F6E88CF /* MCMessagePart.h in Headers */,
 				CF8A1210E467225019219A0B /* MCMultipart.h in Headers */,
 				456E8A4046BFB656BF170DA3 /* MCRFC822.h in Headers */,
+				84C36C3F1F62F078003E1399 /* MCHTMLRenderer.h in Headers */,
 				E21801E17B7410B529BE0B98 /* MCSMTP.h in Headers */,
 				366F0B2B1441B6B76913C90D /* MCSMTPProgressCallback.h in Headers */,
 				7A5D6C8936879398260E5B7B /* MCSMTPSession.h in Headers */,
@@ -4340,6 +4362,7 @@
 				AF2B2DA5B20B882750859E34 /* MCAsyncNNTP.h in Headers */,
 				5CBAB2ECE15269A85DE903A2 /* MCIMAPQuotaOperation.h in Headers */,
 				748671E304E26CDF65B3C234 /* MCNNTPGroupInfo.h in Headers */,
+				84C36C3B1F62EE88003E1399 /* MCDefines.h in Headers */,
 				1BDBD4A8C43EE9E7536E021E /* MCNNTPOperation.h in Headers */,
 				9AC1190D35512F25DC179E6A /* MCNNTPAsyncSession.h in Headers */,
 				80F639615326DC9F0CE40382 /* MCNNTPFetchHeaderOperation.h in Headers */,
@@ -4371,6 +4394,7 @@
 				937170C4694EDF6630CC4DDA /* MCAddressDisplay.h in Headers */,
 				BA9EE0254B07D265D628EB0D /* MCRenderer.h in Headers */,
 				7F796F927EF5CDFB3BB43E38 /* MCIndexSet.h in Headers */,
+				84C36C411F62F087003E1399 /* MCHTMLBodyRendererTemplateCallback.h in Headers */,
 				F6E7C83028F8E623B3643F64 /* MCIMAPCapabilityOperation.h in Headers */,
 				0BF2B23FB724081E007CB7D8 /* MCAsyncIMAP.h in Headers */,
 				3974E4AC43E9CC45C843E100 /* MCAbstract.h in Headers */,

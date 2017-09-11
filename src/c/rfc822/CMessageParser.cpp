@@ -2,14 +2,13 @@
 #include "CBase+Private.h"
 
 #include <MailCore/MCCore.h>
+#include <MailCore/MCDefines.h>
+#include <MailCore/MCAttachment.h>
+#include <MailCore/MCMessageHeader.h>
+#include <MailCore/MCHTMLRenderer.h>
+#include <MailCore/MCHTMLBodyRendererTemplateCallback.h>
 
-#include "MCDefines.h"
-#include "MCAttachment.h"
-#include "MCMessageHeader.h"
-#include "MCHTMLRenderer.h"
-#include "MCHTMLBodyRendererTemplateCallback.h"
 #include "CData.h"
-
 #include "CAbstractMessageRendererCallback.h"
 #include "CAbstractMessageRendererCallbackWrapper.h"
 

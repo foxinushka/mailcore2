@@ -1,9 +1,5 @@
 #include <MailCore/MCAsync.h>
-#ifdef __ANDROID__
 #include <MailCore/MCOperationQueueCallback.h>
-#else
-#include "MCOperationQueueCallback.h"
-#endif
 
 #include "CIMAPAsyncSession.h"
 #include "CIMAPAppendMessageOperation.h"

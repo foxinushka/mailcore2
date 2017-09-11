@@ -35,21 +35,6 @@ function download_dep {
     fi
 }
 
-function build {
-    rm -rf "$current_dir/obj"
-  
-    cd "$current_dir/jni"
-    $ANDROID_NDK/ndk-build TARGET_PLATFORM=$ANDROID_PLATFORM TARGET_ARCH_ABI=$TARGET_ARCH_ABI \
-        NDK_TOOLCHAIN_VERSION=clang \
-        CTEMPLATE_PATH=$current_dir/third-party/ctemplate-android-$ctemplate_build_version \
-        ICU4C_PATH=$current_dir/third-party/icu4c-android-$icu4c_build_version \
-        LIBETPAN_PATH=$current_dir/third-party/libetpan-android-$libetpan_build_version \
-        LIBXML2_PATH=$current_dir/third-party/libxml2-android-$libxml2_build_version \
-        TIDY_HTML5_PATH=$current_dir/third-party/tidy-html5-android-$tidy_html5_build_version \
-        OPENSSL_PATH=$current_dir/third-party/openssl-android-$openssl_build_version \
-        CYRUS_SASL_PATH=$current_dir/third-party/cyrus-sasl-android-$cyrus_sasl_build_version
-}
-
 mkdir -p "$current_dir/cmake-build"
 cd "$current_dir/cmake-build"
 cmake -D ANDROID=1 ../..
@@ -68,9 +53,14 @@ download_dep "openssl-android" $openssl_build_version
 download_dep "cyrus-sasl-android" $cyrus_sasl_build_version
 
 # Start building.
-ANDROID_PLATFORM=android-21
-archs="armeabi-v7a"
-for arch in $archs ; do
-  TARGET_ARCH_ABI=$arch
-  build
-done
+rm -rf "$current_dir/obj"
+  
+cd "$current_dir/jni"
+$ANDROID_NDK/ndk-build \
+        CTEMPLATE_PATH=$current_dir/third-party/ctemplate-android-$ctemplate_build_version \
+        ICU4C_PATH=$current_dir/third-party/icu4c-android-$icu4c_build_version \
+        LIBETPAN_PATH=$current_dir/third-party/libetpan-android-$libetpan_build_version \
+        LIBXML2_PATH=$current_dir/third-party/libxml2-android-$libxml2_build_version \
+        TIDY_HTML5_PATH=$current_dir/third-party/tidy-html5-android-$tidy_html5_build_version \
+        OPENSSL_PATH=$current_dir/third-party/openssl-android-$openssl_build_version \
+        CYRUS_SASL_PATH=$current_dir/third-party/cyrus-sasl-android-$cyrus_sasl_build_version

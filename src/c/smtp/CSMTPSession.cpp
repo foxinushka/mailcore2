@@ -1,10 +1,5 @@
 #include <MailCore/MCAsyncSMTP.h>
-#ifdef __ANDROID__
 #include <MailCore/MCOperationQueueCallback.h>
-#else
-#include "MCOperationQueueCallback.h"
-#endif
-
 
 #include "CSMTPSession.h"
 #include "CSMTPOperation.h"

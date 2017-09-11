@@ -14,6 +14,8 @@ core/basetypes/MCICUTypes.h
 core/basetypes/MCData.h
 core/basetypes/MCDataDecoderUtils.h
 core/basetypes/MCDataStreamDecoder.h
+core/basetypes/MCOperationQueueCallback.h
+core/basetypes/MCDefines.h
 core/abstract/MCMessageConstants.h
 core/basetypes/MCArray.h
 core/basetypes/MCHashMap.h
@@ -72,6 +74,8 @@ core/renderer/MCRenderer.h
 core/renderer/MCHTMLRendererCallback.h
 core/renderer/MCDateFormatter.h
 core/renderer/MCAddressDisplay.h
+core/renderer/MCHTMLRenderer.h
+core/renderer/MCHTMLBodyRendererTemplateCallback.h
 core/provider/MCProvider.h
 core/provider/MCMailProvidersManager.h
 core/provider/MCMailProvider.h

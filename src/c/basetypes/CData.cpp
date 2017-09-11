@@ -2,6 +2,8 @@
 #include "MailCore/MCCore.h"
 #include "CBase+Private.h"
 
+#include <typeinfo>
+
 #define nativeType mailcore::Data
 #define structName CData
 
@@ -38,11 +40,11 @@ CData getTypeNameFromObject(const std::type_info * info) {
     CData result;
 #ifdef __LIBCPP_TYPEINFO
     size_t hash_value = info->hash_code();
-    char* bytes = (char*)&hash_value;
+    const char* bytes = (char*)&hash_value;
     unsigned int length = sizeof(hash_value);
     result.instance = mailcore::Data::dataWithBytes(bytes, length);
 #else
-    char* bytes = info->name();
+    const char* bytes = info->name();
     unsigned int length = (unsigned int) strlen(info->name());
     result.instance = mailcore::Data::dataWithBytes(bytes, length);
 #endif
