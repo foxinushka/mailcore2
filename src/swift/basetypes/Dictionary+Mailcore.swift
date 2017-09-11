@@ -10,7 +10,7 @@ extension Dictionary {
         }
         let keys = dict.allKeys();
         let size = keys.count
-        for index in 1...size {
+        for index in 0 ..< size {
             let mcKey = keys.getObject(index)
             if let key: K = createMCOObject(from: keys.getObject(index)),
                 let value: T = createMCOObject(from: dict.objectForKey(mcKey)) {
@@ -39,7 +39,7 @@ func dictionaryUnsafeCast(_ dict:CDictionary) -> Dictionary<AnyHashable, Any> {
     }
     let keys = dict.allKeys();
     let size = keys.count
-    for index in 1...size {
+    for index in  0 ..< size {
         let mcKey = keys.getObject(index)
         if let key = createMCOObjectWithoutConversion(from: keys.getObject(index)) as? AnyHashable,
             let value = createMCOObjectWithoutConversion(from: dict.objectForKey(mcKey)) {
