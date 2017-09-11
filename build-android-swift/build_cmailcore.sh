@@ -44,13 +44,22 @@ cp -R "$current_dir/cmake-build/src/include/MailCore" "$current_dir/include"
 
 mkdir -p "$current_dir/third-party"
 cd "$current_dir/third-party"
-download_dep "ctemplate-android" $ctemplate_build_version
+#download_dep "ctemplate-android" $ctemplate_build_version
 download_dep "icu4c-android" $icu4c_build_version
 download_dep "libetpan-android" $libetpan_build_version
 download_dep "libxml2-android" $libxml2_build_version
 download_dep "tidy-html5-android" $tidy_html5_build_version
 download_dep "openssl-android" $openssl_build_version
 download_dep "cyrus-sasl-android" $cyrus_sasl_build_version
+
+# Build ctemplate-android from source
+if test ! -d "$current_dir/third-party/ctemplate-android-$ctemplate_build_version" ; then
+      git clone https://github.com/andriydruk/ctemplate.git
+      cd "ctemplate/build-android"
+      sh build.sh
+      cp -R "ctemplate-android-$ctemplate_build_version" "../../ctemplate-android-$ctemplate_build_version"
+      cd "../../"
+fi
 
 # Start building.
 rm -rf "$current_dir/obj"

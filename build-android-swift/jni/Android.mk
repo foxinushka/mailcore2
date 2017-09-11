@@ -28,11 +28,7 @@ includes = \
     $(LIBXML2_PATH)/include \
     $(TIDY_HTML5_PATH)/include \
     $(OPENSSL_PATH)/include \
-    $(ANDROID_NDK)/sources/cxx-stl/gnu-libstdc++/4.9/include \
-    $(ANDROID_NDK)/sources/cxx-stl/gnu-libstdc++/4.9/libs/$(TARGET_ARCH_ABI)/include \
 	$(addprefix $(src_dir)/, $(subdirs))
-#     $(ANDROID_NDK)/sources/cxx-stl/llvm-libc++/libcxx/include
-# $(ANDROID_NDK)/sources/cxx-stl/llvm-libc++abi/libcxxabi/include
 
 core_excludes = MCWin32.cpp MCStringWin32.cpp MCMainThreadWin32.cpp MCMainThreadGTK.cpp
 core_src_files := $(filter-out \
@@ -126,8 +122,8 @@ LOCAL_SRC_FILES := \
 	$(security_src_files) $(smtp_src_files) $(zip_src_files) $(minizip_src_files) \
 	$(async_imap_src_files) $(async_nntp_src_files) $(async_pop_src_files) $(async_smtp_src_files)
 LOCAL_CFLAGS := -DNOCRYPT -fblocks
+LOCAL_CPPFLAGS := -frtti
 LOCAL_LDLIBS := -lz -llog
-LOCAL_DISABLE_FATAL_LINKER_WARNINGS := true
 LOCAL_STATIC_LIBRARIES := etpan sasl2 ssl crypto icu4c xml2 tidy ctemplate
 LOCAL_SHARED_LIBRARIES := dispatch
 include $(BUILD_SHARED_LIBRARY)
@@ -195,5 +191,6 @@ LOCAL_SRC_FILES  := $(src_dir)/c/utils/COperation.cpp \
 
 LOCAL_LDLIBS := -lz -llog
 LOCAL_CFLAGS := -fblocks -DSWIFT
+LOCAL_CPPFLAGS := -frtti
 LOCAL_SHARED_LIBRARIES := MailCore
 include $(BUILD_SHARED_LIBRARY)
