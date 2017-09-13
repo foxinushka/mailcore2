@@ -6,17 +6,21 @@
 //  Copyright © 2016 MailCore. All rights reserved.
 //
 
-#if os(Android)
-// We use own XCTestCase for Android
 import Foundation
-import SwiftMailCore
 import Dispatch
-#else
 import XCTest
-@testable import SwiftMailCore
+
+import MailCore
+
+#if os(Android)
+    import CMailCore
+    import CDispatch
 #endif
 
-class SwiftMailCoreTest : XCTestCase {
+fileprivate let TEST_EMAIL = "comscams@gmail.com"
+fileprivate let TEST_PASSWORD = "l4 d3 e2 r1"
+
+class unittest : XCTestCase {
     
     var _mainPath: URL?
     var _builderPath: URL?
@@ -44,11 +48,6 @@ class SwiftMailCoreTest : XCTestCase {
         super.tearDown()
     }
     
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-    }
-    
     func testMessageBuilder1() {
 //        MCOMessageBuilder * builder = [[MCOMessageBuilder alloc] init];
 //        [[builder header] setFrom:[MCOAddress addressWithRFC822String:@"Hoà <dinh.viet.hoa@gmail.com>"]];
@@ -62,59 +61,43 @@ class SwiftMailCoreTest : XCTestCase {
 //        [builder _setBoundaries:@[@"1", @"2", @"3", @"4", @"5"]];
 //        XCTAssertEqualObjects([[NSString alloc] initWithData:[builder data] encoding:NSUTF8StringEncoding], [[NSString alloc] initWithData:expectedData encoding:NSUTF8StringEncoding], @"Pass");
         
-        var builder = MessageBuilder()
-        builder.header.to = [Address.addressWithRFC822String(RFC822String: "Foo Bar <dinh.viet.hoa@gmail.com>")!]
+        var builder = MCOMessageBuilder()
+        builder.header.to = MCOAddress.addressesWithRFC822String(string: "Foo Bar <dinh.viet.hoa@gmail.com>")
         builder.header.messageID = "MyMessageID123@mail.gmail.com"
         builder.htmlBody = "<html><body>This is a HTML content</body></html>"
         var path = _builderOutputPath?.appendingPathComponent("builder1.eml")
     }
     
     func testIMAP(){
-        #if os(Android)
-        let queue = dispatch_queue_create("dispatch_queue_#1", nil);
-        #else
         let queue = DispatchQueue.global()
-        #endif
-
         let semaphore = DispatchSemaphore(value: 0)
         
-        let session = IMAPSession();
-        session.username = "adruk@readdle.com"
-        session.password = ""
+        let session = MCOIMAPSession();
+        session.username = TEST_EMAIL
+        session.password = TEST_PASSWORD
         session.hostname = "imap.gmail.com"
         session.port = 993
-        session.connectionType = ConnectionType.init(rawValue: 1 << 2)
+        session.connectionType = ConnectionType(rawValue: 1 << 2)
         session.dispatchQueue = queue
         
-        var checkOp: IMAPCheckAccountOperation? = session.checkAccountOperation()
-        var foldersOp: IMAPFetchFoldersOperation?
-        
-        print("START testIMAP")
-        checkOp?.start(completionBlock: { err in
-            print("check account done")
+        session.checkAccountOperation().start(completionBlock: { err in
             if err != nil {
-                print("Oh crap, an error \(err!.localizedDescription)")
+                XCTFail(err!.localizedDescription)
                 semaphore.signal()
             }
             else {
-                print("CONNECTED")
-                print("fetch all folders")
-                foldersOp = session.fetchAllFoldersOperation()
-                foldersOp?.start(completionBlock: { err, folders in
+                session.fetchAllFoldersOperation().start(completionBlock: { err, folders in
                     if err != nil {
-                        print("Oh crap, an error \(err!.localizedDescription)")
+                        XCTFail(err!.localizedDescription)
                     }
                     else {
-                        print("folders \(folders?.map({ $0.path }))")
+                        print("folders \(folders!.map({ $0.path }))")
                     }
                     semaphore.signal()
                 })
             }
         })
         semaphore.wait()
-        
-        checkOp = nil
-        print("FINISH testIMAP")
     }
     
 //    func testAllWrappersIntegrity(){
@@ -153,58 +136,39 @@ class SwiftMailCoreTest : XCTestCase {
 //    }
     
     func testSMTP() {
-        #if os(Android)
-            let queue = dispatch_queue_create("dispatch_queue_#1", nil);
-        #else
-            let queue = DispatchQueue.global()
-        #endif
-        
+        let queue = DispatchQueue.global()
         let semaphore = DispatchSemaphore(value: 0)
         
-        let session = SMTPSession()
-        session.username = "adruk@readdle.com"
-        session.password = ""
+        let session = MCOSMTPSession()
+        session.username = TEST_EMAIL
+        session.password = TEST_PASSWORD
         session.hostname = "smtp.gmail.com"
         session.port = 465
-        session.connectionType = ConnectionType.init(rawValue: 1 << 2)
+        session.connectionType = ConnectionType(rawValue: 1 << 2)
         session.dispatchQueue = queue
         
-        var loginOp: SMTPOperation? = session.loginOperation()
-        var sendOp: SMTPSendOperation?
-        loginOp!.start(completionBlock: { err in
+        session.loginOperation().start(completionBlock: { err in
             if err != nil {
-                print("Oh crap, an error \(err!.localizedDescription)")
+                XCTFail(err!.localizedDescription)
                 semaphore.signal()
             }
             else {
-                print("CONNECTED")
-                sendOp = session.sendOperationWithData(messageData: "Hello".data(using: .utf8)!, from: Address.addressWithMailbox(mailbox: "adruk@readdle.com")!, recipients: [Address.addressWithMailbox(mailbox: "adruk@readdle.com")!])
-                sendOp!.start(completionBlock: { err in
-                    if err != nil {
-                        print("Oh crap, an error \(err!.localizedDescription)")
-                        semaphore.signal()
-                    }
-                    else {
-                        print("COMPLETED")
-                        semaphore.signal()
-                    }
+                session.sendOperationWithData(messageData: "Hello".data(using: .utf8)!,
+                                              from: MCOAddress(mailbox: TEST_EMAIL)!,
+                                              recipients: [MCOAddress(mailbox: TEST_EMAIL)!])
+                    .start(completionBlock: { err in
+                        if err != nil {
+                            XCTFail(err!.localizedDescription)
+                            semaphore.signal()
+                        }
+                        else {
+                            semaphore.signal()
+                        }
                 })
             }
         })
         
         semaphore.wait()
-        
-        loginOp = nil
-        sendOp = nil
-        
-    }
-    
-    
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
     }
     
 }

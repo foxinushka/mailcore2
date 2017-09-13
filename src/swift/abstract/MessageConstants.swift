@@ -8,6 +8,10 @@
 
 import Foundation
 
+#if os(Android)
+    import CMailCore
+#endif
+
 public struct MCOIMAPMessagesRequestKind : OptionSet {
     
     public let rawValue: Int

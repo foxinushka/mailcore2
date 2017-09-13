@@ -1,6 +1,10 @@
 import Foundation
 import Dispatch
 
+#if os(Android)
+    import CMailCore
+    import CDispatch
+#endif
 
 public class MCOOperation: NSObject {
     
@@ -23,12 +27,13 @@ public class MCOOperation: NSObject {
      in the main thread. */
     public var callbackDispatchQueue: DispatchQueue? {
         get {
-            return nativeInstance.callbackDispatchQueue()
+            return DispatchQueue.queueFromWrapped(nativeInstance.callbackDispatchQueue())
         }
         set {
-            nativeInstance.setCallbackDispatchQueue(newValue)
+            nativeInstance.setCallbackDispatchQueue(newValue?.wrapped)
         }
     }
+
     
     /** Returns whether the operation is cancelled.*/
     public var isCancelled: Bool {

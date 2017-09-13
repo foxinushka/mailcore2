@@ -128,6 +128,14 @@ LOCAL_STATIC_LIBRARIES := etpan sasl2 ssl crypto icu4c xml2 tidy ctemplate
 LOCAL_SHARED_LIBRARIES := dispatch
 include $(BUILD_SHARED_LIBRARY)
 
+abstract_src_files := $(wildcard $(src_dir)/c/abstract/*.cpp)
+basetypes_src_files := $(wildcard $(src_dir)/c/basetypes/*.cpp)
+imap_src_files := $(wildcard $(src_dir)/c/imap/*.cpp)
+provider_src_files := $(wildcard $(src_dir)/c/provider/*.cpp)
+rfc822_src_files := $(wildcard $(src_dir)/c/rfc822/*.cpp)
+smtp_src_files := $(wildcard $(src_dir)/c/smtp/*.cpp)
+utils_src_files := $(wildcard $(src_dir)/c/utils/*.cpp)
+
 include $(CLEAR_VARS)
 NDK_TOOLCHAIN_VERSION := clang
 LOCAL_MODULE     := cmailcore
@@ -138,56 +146,13 @@ LOCAL_C_INCLUDES += $(CURRENT_DIR)/../../src/c/abstract
 LOCAL_C_INCLUDES += $(CURRENT_DIR)/../../src/c/utils
 LOCAL_C_INCLUDES += $(CURRENT_DIR)/../../src/c/rfc822
 LOCAL_C_INCLUDES += $(CURRENT_DIR)/../include
-LOCAL_SRC_FILES  := $(src_dir)/c/utils/COperation.cpp \
-					$(src_dir)/c/abstract/CAbstractPart.cpp \
-					$(src_dir)/c/abstract/CMessageHeader.cpp \
-					$(src_dir)/c/abstract/CAbstractMessage.cpp \
-					$(src_dir)/c/abstract/CAbstractMessagePart.cpp \
-					$(src_dir)/c/abstract/CAbstractMultipart.cpp \
-					$(src_dir)/c/abstract/CAddress.cpp \
-					$(src_dir)/c/abstract/CAbstractMessageRendererCallback.cpp \
-					$(src_dir)/c/basetypes/CArray.cpp \
-					$(src_dir)/c/basetypes/CObject.cpp \
-					$(src_dir)/c/basetypes/CIndexSet.cpp \
-					$(src_dir)/c/basetypes/CDictionary.cpp \
-					$(src_dir)/c/basetypes/CData.cpp \
-					$(src_dir)/c/basetypes/MailCoreString.cpp \
-					$(src_dir)/c/imap/CIMAPAsyncSession.cpp \
-					$(src_dir)/c/imap/CIMAPFolder.cpp \
-					$(src_dir)/c/imap/CIMAPMessage.cpp \
-					$(src_dir)/c/imap/CIMAPMessagePart.cpp \
-					$(src_dir)/c/imap/CIMAPNamespace.cpp \
-					$(src_dir)/c/imap/CIMAPNamespaceItem.cpp \
-					$(src_dir)/c/imap/CIMAPPart.cpp \
-					$(src_dir)/c/imap/CIMAPIdentity.cpp \
-					$(src_dir)/c/imap/CIMAPFolderInfo.cpp \
-					$(src_dir)/c/imap/CIMAPFolderStatus.cpp \
-					$(src_dir)/c/imap/CIMAPSearchExpression.cpp \
-					$(src_dir)/c/imap/CIMAPAppendMessageOperation.cpp \
-					$(src_dir)/c/imap/CIMAPFetchContentOperation.cpp \
-					$(src_dir)/c/imap/CIMAPCopyMessagesOperation.cpp \
-					$(src_dir)/c/imap/CIMAPFolderInfoOperation.cpp \
-					$(src_dir)/c/imap/CIMAPFolderStatusOperation.cpp \
-					$(src_dir)/c/imap/CIMAPFetchMessagesOperation.cpp \
-					$(src_dir)/c/imap/CIMAPBaseOperation.cpp \
-					$(src_dir)/c/imap/CIMAPIdleOperation.cpp \
-					$(src_dir)/c/imap/CIMAPFetchFoldersOperation.cpp \
-					$(src_dir)/c/imap/CIMAPFetchNamespaceOperation.cpp \
-					$(src_dir)/c/imap/CIMAPFetchContentToFileOperation.cpp \
-					$(src_dir)/c/imap/CIMAPCustomCommandOperation.cpp \
-					$(src_dir)/c/imap/CIMAPCheckAccountOperation.cpp \
-					$(src_dir)/c/imap/CIMAPCapabilityOperation.cpp \
-					$(src_dir)/c/imap/CIMAPMoveMessagesOperation.cpp \
-					$(src_dir)/c/imap/CIMAPFetchParsedContentOperation.cpp \
-					$(src_dir)/c/imap/CIMAPMessageRenderingOperation.cpp \
-					$(src_dir)/c/imap/CIMAPIdentityOperation.cpp \
-					$(src_dir)/c/imap/CIMAPQuotaOperation.cpp \
-					$(src_dir)/c/imap/CIMAPSearchOperation.cpp \
-					$(src_dir)/c/smtp/CSMTPOperation.cpp \
-					$(src_dir)/c/smtp/CSMTPSession.cpp \
-					$(src_dir)/c/rfc822/CAttachment.cpp \
-					$(src_dir)/c/rfc822/CMessageBuilder.cpp \
-					$(src_dir)/c/rfc822/CMessageParser.cpp \
+LOCAL_SRC_FILES  := $(abstract_src_files) \
+					$(basetypes_src_files) \
+					$(imap_src_files) \
+					$(provider_src_files) \
+					$(rfc822_src_files) \
+					$(smtp_src_files) \
+					$(utils_src_files)
 
 LOCAL_LDLIBS := -lz -llog
 LOCAL_CFLAGS := -fblocks -DSWIFT

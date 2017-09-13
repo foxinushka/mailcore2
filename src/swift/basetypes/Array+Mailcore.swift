@@ -1,5 +1,9 @@
 import Foundation
 
+#if os(Android)
+    import CMailCore
+#endif
+
 extension Array where Element: Convertible {
     
     init?(mailCoreArray cArray: CArray) {

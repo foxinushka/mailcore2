@@ -1,5 +1,9 @@
 import Foundation
 
+#if os(Android)
+    import CMailCore
+#endif
+
 public class MCOMessageBuilder : MCOAbstractMessage {
     
     private var nativeInstance: CMessageBuilder;

@@ -500,6 +500,9 @@
 		840CB4531F274AD60068E8E6 /* CIMAPSearchOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 840CB4501F274AD60068E8E6 /* CIMAPSearchOperation.cpp */; };
 		840CB4541F274AD60068E8E6 /* CIMAPSearchOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 840CB4511F274AD60068E8E6 /* CIMAPSearchOperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		840CB4551F274AD60068E8E6 /* CIMAPSearchOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 840CB4511F274AD60068E8E6 /* CIMAPSearchOperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		841E64F51F6833EA007BB736 /* MailCore.framework in Resources */ = {isa = PBXBuildFile; fileRef = C6BD288D170BD71100A91AC1 /* MailCore.framework */; };
+		841E64FF1F683440007BB736 /* MailCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6BD288D170BD71100A91AC1 /* MailCore.framework */; };
+		841E65071F68348B007BB736 /* unittest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841E65061F68348B007BB736 /* unittest.swift */; };
 		8435684F1F45A2F200FCFF33 /* CAbstractMessageRendererCallbackWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = 84C95C1D1F3208580056A543 /* CAbstractMessageRendererCallbackWrapper.h */; };
 		843568501F45A2F200FCFF33 /* CAbstractMessageRendererCallbackWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = 84C95C1D1F3208580056A543 /* CAbstractMessageRendererCallbackWrapper.h */; };
 		843E49FC1F2F9A4700D78022 /* ConnectionLoggerHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843E49FB1F2F9A4700D78022 /* ConnectionLoggerHelper.swift */; };
@@ -510,13 +513,13 @@
 		843E4A881F30838500D78022 /* MailCoreString.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 843E4A851F30838500D78022 /* MailCoreString.cpp */; };
 		843E4A891F30838500D78022 /* MailCoreString.h in Headers */ = {isa = PBXBuildFile; fileRef = 843E4A861F30838500D78022 /* MailCoreString.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		843E4A8A1F30838500D78022 /* MailCoreString.h in Headers */ = {isa = PBXBuildFile; fileRef = 843E4A861F30838500D78022 /* MailCoreString.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		843E58151F6927DA00AE681B /* DispatchQueue+Mailcore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843E58141F6927D900AE681B /* DispatchQueue+Mailcore.swift */; };
+		843E58161F6927DA00AE681B /* DispatchQueue+Mailcore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843E58141F6927D900AE681B /* DispatchQueue+Mailcore.swift */; };
 		84424A7E1F274CBA009B953B /* CIMAPSearchOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 840CB4501F274AD60068E8E6 /* CIMAPSearchOperation.cpp */; };
 		844D9CE01F28F1F500E470A8 /* CMessagePart.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 844D9CDE1F28F1F500E470A8 /* CMessagePart.cpp */; };
 		844D9CE11F28F1F500E470A8 /* CMessagePart.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 844D9CDE1F28F1F500E470A8 /* CMessagePart.cpp */; };
 		844D9CE21F28F1F500E470A8 /* CMessagePart.h in Headers */ = {isa = PBXBuildFile; fileRef = 844D9CDF1F28F1F500E470A8 /* CMessagePart.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		844D9CE31F28F1F500E470A8 /* CMessagePart.h in Headers */ = {isa = PBXBuildFile; fileRef = 844D9CDF1F28F1F500E470A8 /* CMessagePart.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		844D9CE51F28F3CE00E470A8 /* MessagePart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844D9CE41F28F3CE00E470A8 /* MessagePart.swift */; };
-		844D9CE61F28F3CE00E470A8 /* MessagePart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844D9CE41F28F3CE00E470A8 /* MessagePart.swift */; };
 		8458F9521F3F505B0066C70C /* MCOObjectWrapper.mm in Sources */ = {isa = PBXBuildFile; fileRef = 843E4A7F1F306F2600D78022 /* MCOObjectWrapper.mm */; };
 		8458F9531F3F505E0066C70C /* MCOObjectWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = 843E4A7E1F306F2600D78022 /* MCOObjectWrapper.h */; };
 		845FB82C1F28FFC200A29DA8 /* RSMLibetpanHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = 845FB82A1F28FFC200A29DA8 /* RSMLibetpanHelper.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -541,6 +544,8 @@
 		845FB85B1F2910D700A29DA8 /* MailProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845FB8591F2910D700A29DA8 /* MailProvider.swift */; };
 		845FB85D1F2914D200A29DA8 /* MailProvidersManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845FB85C1F2914D200A29DA8 /* MailProvidersManager.swift */; };
 		845FB85E1F2914D200A29DA8 /* MailProvidersManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845FB85C1F2914D200A29DA8 /* MailProvidersManager.swift */; };
+		846693051F6829AA0020C6C9 /* MessagePart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846693041F6829A90020C6C9 /* MessagePart.swift */; };
+		846693061F6829AA0020C6C9 /* MessagePart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846693041F6829A90020C6C9 /* MessagePart.swift */; };
 		846E0FB6BB2F46B3574C761C /* MCMainThreadMac.mm in Sources */ = {isa = PBXBuildFile; fileRef = C64EA6BD169E847800778456 /* MCMainThreadMac.mm */; };
 		84915BB8199C4B0400EDDED9 /* MCNNTP.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8491899C18C93F92002063A3 /* MCNNTP.h */; };
 		849189A118C93FB7002063A3 /* MCNNTPSession.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8491899F18C93FB7002063A3 /* MCNNTPSession.cpp */; };
@@ -1214,7 +1219,6 @@
 		C6AC110117114DAF00B715B7 /* MCPOPCheckAccountOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6AC10FE17114DAF00B715B7 /* MCPOPCheckAccountOperation.cpp */; };
 		C6AC113417124D0600B715B7 /* MCLibetpanTypes.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C6AC1131171249DF00B715B7 /* MCLibetpanTypes.h */; };
 		C6AC113517124D0A00B715B7 /* MCLibetpanTypes.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C6AC1131171249DF00B715B7 /* MCLibetpanTypes.h */; };
-		C6B5AE0719F630B3001352A6 /* unittest.mm in Sources */ = {isa = PBXBuildFile; fileRef = C6B5AE0619F630B3001352A6 /* unittest.mm */; };
 		C6B5B09119F6359B001352A6 /* data in Resources */ = {isa = PBXBuildFile; fileRef = C6B5B08F19F63542001352A6 /* data */; };
 		C6B5B09219F6FFB5001352A6 /* MailCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6BD288D170BD71100A91AC1 /* MailCore.framework */; };
 		C6BA2B0C1705F4E6003F0E9E /* MCHTMLRendererCallback.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C63CD68516BE148B00DB18F1 /* MCHTMLRendererCallback.h */; };
@@ -1577,6 +1581,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		841E65001F683440007BB736 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C64EA52E169E772200778456 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = C6BD288C170BD71100A91AC1;
+			remoteInfo = "mailcore osx";
+		};
 		C600B61E1A244BD8000728F1 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = C64EA52E169E772200778456 /* Project object */;
@@ -1969,6 +1980,10 @@
 		8408C80D1F2637B50003A816 /* MessageParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MessageParser.swift; path = swift/rfc822/MessageParser.swift; sourceTree = "<group>"; };
 		840CB4501F274AD60068E8E6 /* CIMAPSearchOperation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CIMAPSearchOperation.cpp; path = c/imap/CIMAPSearchOperation.cpp; sourceTree = "<group>"; };
 		840CB4511F274AD60068E8E6 /* CIMAPSearchOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = CIMAPSearchOperation.h; path = c/imap/CIMAPSearchOperation.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		841E64FA1F683440007BB736 /* MailCoreTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MailCoreTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		841E64FE1F683440007BB736 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		841E65051F683481007BB736 /* data */ = {isa = PBXFileReference; lastKnownFileType = folder; name = data; path = ../../unittest/data; sourceTree = "<group>"; };
+		841E65061F68348B007BB736 /* unittest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = unittest.swift; path = ../../unittest/unittest.swift; sourceTree = "<group>"; };
 		842D79991DF801AE00F9424C /* CIMAPFetchParsedContentOperation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CIMAPFetchParsedContentOperation.cpp; path = c/imap/CIMAPFetchParsedContentOperation.cpp; sourceTree = "<group>"; };
 		842D799A1DF801AE00F9424C /* CIMAPFetchParsedContentOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = CIMAPFetchParsedContentOperation.h; path = c/imap/CIMAPFetchParsedContentOperation.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		842D799D1DF8033100F9424C /* CIMAPMessageRenderingOperation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CIMAPMessageRenderingOperation.cpp; path = c/imap/CIMAPMessageRenderingOperation.cpp; sourceTree = "<group>"; };
@@ -2114,9 +2129,9 @@
 		843E4A801F306F3D00D78022 /* MCOUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MCOUtils.h; path = objc/utils/MCOUtils.h; sourceTree = "<group>"; };
 		843E4A851F30838500D78022 /* MailCoreString.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MailCoreString.cpp; path = c/basetypes/MailCoreString.cpp; sourceTree = "<group>"; };
 		843E4A861F30838500D78022 /* MailCoreString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MailCoreString.h; path = c/basetypes/MailCoreString.h; sourceTree = "<group>"; };
+		843E58141F6927D900AE681B /* DispatchQueue+Mailcore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "DispatchQueue+Mailcore.swift"; path = "swift/utils/DispatchQueue+Mailcore.swift"; sourceTree = "<group>"; };
 		844D9CDE1F28F1F500E470A8 /* CMessagePart.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CMessagePart.cpp; path = c/rfc822/CMessagePart.cpp; sourceTree = "<group>"; };
 		844D9CDF1F28F1F500E470A8 /* CMessagePart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CMessagePart.h; path = c/rfc822/CMessagePart.h; sourceTree = "<group>"; };
-		844D9CE41F28F3CE00E470A8 /* MessagePart.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MessagePart.swift; path = c/rfc822/MessagePart.swift; sourceTree = "<group>"; };
 		84501D0C1DA511A400A9FF4D /* MCOIndexSet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MCOIndexSet.swift; path = swift/basetypes/MCOIndexSet.swift; sourceTree = "<group>"; };
 		845FB82A1F28FFC200A29DA8 /* RSMLibetpanHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RSMLibetpanHelper.h; path = swift/utils/RSMLibetpanHelper.h; sourceTree = "<group>"; };
 		845FB82B1F28FFC200A29DA8 /* RSMLibetpanHelper.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = RSMLibetpanHelper.mm; path = swift/utils/RSMLibetpanHelper.mm; sourceTree = "<group>"; };
@@ -2129,8 +2144,7 @@
 		845FB8561F290CF000A29DA8 /* NetService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NetService.swift; path = swift/provider/NetService.swift; sourceTree = "<group>"; };
 		845FB8591F2910D700A29DA8 /* MailProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MailProvider.swift; path = swift/provider/MailProvider.swift; sourceTree = "<group>"; };
 		845FB85C1F2914D200A29DA8 /* MailProvidersManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MailProvidersManager.swift; path = swift/provider/MailProvidersManager.swift; sourceTree = "<group>"; };
-		84714BC31DF569F000280704 /* unittest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = unittest.swift; sourceTree = "<group>"; };
-		84714BC51DF56ACC00280704 /* data */ = {isa = PBXFileReference; lastKnownFileType = folder; name = data; path = ../../unittest/data; sourceTree = "<group>"; };
+		846693041F6829A90020C6C9 /* MessagePart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MessagePart.swift; path = swift/rfc822/MessagePart.swift; sourceTree = "<group>"; };
 		847530611F2230B30011100D /* CBase+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "CBase+Private.h"; path = "c/CBase+Private.h"; sourceTree = "<group>"; };
 		848F95371D9D568B00058351 /* UInt32+Mailcore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UInt32+Mailcore.swift"; path = "swift/basetypes/UInt32+Mailcore.swift"; sourceTree = "<group>"; };
 		8491899C18C93F92002063A3 /* MCNNTP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCNNTP.h; path = nntp/MCNNTP.h; sourceTree = "<group>"; };
@@ -2254,8 +2268,6 @@
 		84E3DB541D9BDB41003B598F /* CIMAPMessagePart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CIMAPMessagePart.h; path = c/imap/CIMAPMessagePart.h; sourceTree = "<group>"; };
 		84E3DB571D9BDD62003B598F /* IMAPMessagePart.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = IMAPMessagePart.swift; path = swift/imap/IMAPMessagePart.swift; sourceTree = "<group>"; };
 		84E52F6D1F3350CA00233DA3 /* Object.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Object.swift; path = swift/basetypes/Object.swift; sourceTree = "<group>"; };
-		84E71FB41DF5694C00000F88 /* swiftmailcore2Test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = swiftmailcore2Test.swift; sourceTree = "<group>"; };
-		84E71FB61DF5694C00000F88 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		84ECAD761D93E9CD006261FD /* CAbstractPart.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CAbstractPart.cpp; path = c/abstract/CAbstractPart.cpp; sourceTree = "<group>"; };
 		84ECAD771D93E9CD006261FD /* CAbstractPart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CAbstractPart.h; path = c/abstract/CAbstractPart.h; sourceTree = "<group>"; };
 		84ECAD7A1D93FF9E006261FD /* CMessageHeader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CMessageHeader.cpp; path = c/abstract/CMessageHeader.cpp; sourceTree = "<group>"; };
@@ -2701,6 +2713,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		841E64F71F683440007BB736 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				841E64FF1F683440007BB736 /* MailCore.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		C600B6111A242C3F000728F1 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -2857,10 +2877,20 @@
 				8408C80B1F2637B50003A816 /* Attachment.swift */,
 				8408C80C1F2637B50003A816 /* MessageBuilder.swift */,
 				8408C80D1F2637B50003A816 /* MessageParser.swift */,
-				844D9CE41F28F3CE00E470A8 /* MessagePart.swift */,
+				846693041F6829A90020C6C9 /* MessagePart.swift */,
 				84AD84951F435F9A000361A3 /* Multipart.swift */,
 			);
 			name = rfc822;
+			sourceTree = "<group>";
+		};
+		841E64FB1F683440007BB736 /* MailCoreTests */ = {
+			isa = PBXGroup;
+			children = (
+				841E65051F683481007BB736 /* data */,
+				841E65061F68348B007BB736 /* unittest.swift */,
+				841E64FE1F683440007BB736 /* Info.plist */,
+			);
+			path = MailCoreTests;
 			sourceTree = "<group>";
 		};
 		843E4A071F306D4600D78022 /* abstract */ = {
@@ -3143,19 +3173,9 @@
 				84E3DB331D997D32003B598F /* Operation.swift */,
 				845FB82A1F28FFC200A29DA8 /* RSMLibetpanHelper.h */,
 				845FB82B1F28FFC200A29DA8 /* RSMLibetpanHelper.mm */,
+				843E58141F6927D900AE681B /* DispatchQueue+Mailcore.swift */,
 			);
 			name = utils;
-			sourceTree = "<group>";
-		};
-		84E71FB31DF5694C00000F88 /* swiftmailcore2Test */ = {
-			isa = PBXGroup;
-			children = (
-				84714BC51DF56ACC00280704 /* data */,
-				84E71FB41DF5694C00000F88 /* swiftmailcore2Test.swift */,
-				84E71FB61DF5694C00000F88 /* Info.plist */,
-				84714BC31DF569F000280704 /* unittest.swift */,
-			);
-			path = swiftmailcore2Test;
 			sourceTree = "<group>";
 		};
 		84F7B4081D915971005F83E8 /* c */ = {
@@ -3512,7 +3532,7 @@
 				C64EA7A916A00AF400778456 /* tests */,
 				C6A81BB517068C0600882C15 /* tests-ios */,
 				C6B5AE0319F630B3001352A6 /* unittest */,
-				84E71FB31DF5694C00000F88 /* swiftmailcore2Test */,
+				841E64FB1F683440007BB736 /* MailCoreTests */,
 				C64EA78E169F259200778456 /* Frameworks */,
 				C64EA538169E772200778456 /* Products */,
 			);
@@ -3529,6 +3549,7 @@
 				27780C3A19CF9CD100C77E44 /* MailCore.framework */,
 				C6B5AE0219F630B3001352A6 /* unittest.xctest */,
 				C600B6141A242C3F000728F1 /* unittestcpp */,
+				841E64FA1F683440007BB736 /* MailCoreTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -4437,6 +4458,24 @@
 			productReference = 27780C3A19CF9CD100C77E44 /* MailCore.framework */;
 			productType = "com.apple.product-type.framework";
 		};
+		841E64F91F683440007BB736 /* MailCoreTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 841E65021F683440007BB736 /* Build configuration list for PBXNativeTarget "MailCoreTests" */;
+			buildPhases = (
+				841E64F61F683440007BB736 /* Sources */,
+				841E64F71F683440007BB736 /* Frameworks */,
+				841E64F81F683440007BB736 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				841E65011F683440007BB736 /* PBXTargetDependency */,
+			);
+			name = MailCoreTests;
+			productName = MailCoreTests;
+			productReference = 841E64FA1F683440007BB736 /* MailCoreTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		C600B6131A242C3F000728F1 /* unittestcpp */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = C600B61A1A242C3F000728F1 /* Build configuration list for PBXNativeTarget "unittestcpp" */;
@@ -4573,12 +4612,16 @@
 		C64EA52E169E772200778456 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0810;
+				LastSwiftUpdateCheck = 0900;
 				LastUpgradeCheck = 0800;
 				ORGANIZATIONNAME = MailCore;
 				TargetAttributes = {
 					27780C2A19CF9CD100C77E44 = {
 						LastSwiftMigration = 0830;
+					};
+					841E64F91F683440007BB736 = {
+						CreatedOnToolsVersion = 9.0;
+						ProvisioningStyle = Automatic;
 					};
 					C600B6131A242C3F000728F1 = {
 						CreatedOnToolsVersion = 6.0;
@@ -4588,6 +4631,7 @@
 					};
 					C6B5AE0119F630B3001352A6 = {
 						CreatedOnToolsVersion = 6.0;
+						LastSwiftMigration = 0900;
 					};
 				};
 			};
@@ -4611,6 +4655,7 @@
 				27780C2A19CF9CD100C77E44 /* mailcore ios */,
 				C6B5AE0119F630B3001352A6 /* unittest */,
 				C600B6131A242C3F000728F1 /* unittestcpp */,
+				841E64F91F683440007BB736 /* MailCoreTests */,
 			);
 		};
 /* End PBXProject section */
@@ -4621,6 +4666,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				27780C3619CF9CD100C77E44 /* providers.json in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		841E64F81F683440007BB736 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4651,6 +4703,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				841E64F51F6833EA007BB736 /* MailCore.framework in Resources */,
 				C6B5B09119F6359B001352A6 /* data in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -4786,6 +4839,7 @@
 				84DBBEF81F26411500F03A5F /* SMTPSession.swift in Sources */,
 				84DBBEF91F26411500F03A5F /* SMTPOperation.swift in Sources */,
 				84DBBEFA1F26411500F03A5F /* SMTPSendOperation.swift in Sources */,
+				846693051F6829AA0020C6C9 /* MessagePart.swift in Sources */,
 				8408C81F1F263AD50003A816 /* COperation.cpp in Sources */,
 				8408C8201F263AD50003A816 /* CAbstractMessage.cpp in Sources */,
 				8408C8211F263AD50003A816 /* CAbstractMessagePart.cpp in Sources */,
@@ -4796,7 +4850,6 @@
 				8408C8261F263AD50003A816 /* CAbstractMessageRendererCallback.cpp in Sources */,
 				8408C8271F263AD50003A816 /* CIMAPFolder.cpp in Sources */,
 				8408C8281F263AD50003A816 /* CIMAPMessage.cpp in Sources */,
-				844D9CE61F28F3CE00E470A8 /* MessagePart.swift in Sources */,
 				8408C8291F263AD50003A816 /* CIMAPMessagePart.cpp in Sources */,
 				8408C82A1F263AD50003A816 /* CIMAPMultipart.cpp in Sources */,
 				8408C82B1F263AD50003A816 /* CIMAPNamespace.cpp in Sources */,
@@ -4853,6 +4906,7 @@
 				EE447F0391248A0BED44DC6D /* MCSMTPNoopOperation.cpp in Sources */,
 				052AAA74C5D3B28F3167F974 /* MCAssert.c in Sources */,
 				4A4A96DDCA43E40CA772C52C /* MCData.cpp in Sources */,
+				843E58151F6927DA00AE681B /* DispatchQueue+Mailcore.swift in Sources */,
 				9FE4A7EADDB2DEB7EF72D156 /* MCHash.cpp in Sources */,
 				63808A80CC695018058077F4 /* MCHashMap.cpp in Sources */,
 				C787961953BEC9FF6FC63FB8 /* MCLog.cpp in Sources */,
@@ -5007,6 +5061,14 @@
 				4704D4CDBEEE261C18482F22 /* MCHTMLBodyRendererTemplateCallback.cpp in Sources */,
 				22B4886524CCC93C1B72108D /* MCHTMLRendererIMAPDataCallback.cpp in Sources */,
 				39A2E4CB28AE666834D20E60 /* MCIMAPQuotaOperation.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		841E64F61F683440007BB736 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				841E65071F68348B007BB736 /* unittest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -5211,7 +5273,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C6B5AE0719F630B3001352A6 /* unittest.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -5446,6 +5507,7 @@
 				84DBBEBE1F26400E00F03A5F /* IMAPIdentityOperation.swift in Sources */,
 				84DBBEBF1F26400E00F03A5F /* SMTPSession.swift in Sources */,
 				84DBBEC01F26400E00F03A5F /* SMTPOperation.swift in Sources */,
+				846693061F6829AA0020C6C9 /* MessagePart.swift in Sources */,
 				84DBBEC11F26400E00F03A5F /* SMTPSendOperation.swift in Sources */,
 				8408C8061F26378D0003A816 /* CMessageParser.cpp in Sources */,
 				8408C7251F2635930003A816 /* COperation.cpp in Sources */,
@@ -5456,7 +5518,6 @@
 				8408C72E1F2635930003A816 /* CAddress.cpp in Sources */,
 				8408C7301F2635930003A816 /* CAbstractPart.cpp in Sources */,
 				8408C7321F2635930003A816 /* CMessageHeader.cpp in Sources */,
-				844D9CE51F28F3CE00E470A8 /* MessagePart.swift in Sources */,
 				8408C7341F2635930003A816 /* CAbstractMessageRendererCallback.cpp in Sources */,
 				8408C7361F2635930003A816 /* CIMAPFolder.cpp in Sources */,
 				8408C7381F2635930003A816 /* CIMAPMessage.cpp in Sources */,
@@ -5513,6 +5574,7 @@
 				CA4271D9DA4EBFC95DB0625A /* MCAutoreleasePool.cpp in Sources */,
 				C82125D34DA7457D9D821383 /* MCArray.cpp in Sources */,
 				0E4EAA748969A74A2F8AC40B /* MCZip.cpp in Sources */,
+				843E58161F6927DA00AE681B /* DispatchQueue+Mailcore.swift in Sources */,
 				69C47A83A8E38FC5A0E09D6B /* MCSMTPNoopOperation.cpp in Sources */,
 				55DBD5240FC44C606C7DCECC /* MCAssert.c in Sources */,
 				FC2E4E860688FEC5315FA904 /* MCData.cpp in Sources */,
@@ -5673,6 +5735,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		841E65011F683440007BB736 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = C6BD288C170BD71100A91AC1 /* mailcore osx */;
+			targetProxy = 841E65001F683440007BB736 /* PBXContainerItemProxy */;
+		};
 		C600B61F1A244BD8000728F1 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = C64EA536169E772200778456 /* static mailcore2 osx */;
@@ -5782,6 +5849,85 @@
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_VERSION = 3.0;
 				WRAPPER_EXTENSION = framework;
+			};
+			name = Release;
+		};
+		841E65031F683440007BB736 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				INFOPLIST_FILE = MailCoreTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = readdle.MailCoreTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.0;
+			};
+			name = Debug;
+		};
+		841E65041F683440007BB736 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = NO;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				INFOPLIST_FILE = MailCoreTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = readdle.MailCoreTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Release;
 		};
@@ -6135,6 +6281,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.libmailcore.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -6168,6 +6316,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.libmailcore.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
+				SWIFT_VERSION = 3.0;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -6295,6 +6444,15 @@
 			buildConfigurations = (
 				27780C3819CF9CD100C77E44 /* Debug */,
 				27780C3919CF9CD100C77E44 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		841E65021F683440007BB736 /* Build configuration list for PBXNativeTarget "MailCoreTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				841E65031F683440007BB736 /* Debug */,
+				841E65041F683440007BB736 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

@@ -8,6 +8,10 @@
 
 import Foundation
 
+#if os(Android)
+    import CMailCore
+#endif
+
 var typeHash: [Data: Convertible.Type] = [Data(cdata: Value_mailCoreTypeInfo())!: UInt32.self,
                                           Data(cdata: MailCoreString_mailCoreTypeInfo())!: String.self,
                                           Data(cdata: CMailProvider_mailCoreTypeInfo())!: MCOMailProvider.self,

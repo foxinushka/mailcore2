@@ -8,6 +8,10 @@
 
 import Foundation
 
+#if os(Android)
+    import CMailCore
+#endif
+
 public class MCOMultipart : MCOAbstractMultipart {
     
     private var nativeInstance: CMultipart

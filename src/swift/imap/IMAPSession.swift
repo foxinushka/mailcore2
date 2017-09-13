@@ -1,6 +1,10 @@
 import Foundation
 import Dispatch
 
+#if os(Android)
+    import CMailCore
+    import CDispatch
+#endif
 
 /**
  This is the main IMAP class from which all operations are created
@@ -125,28 +129,14 @@ public class MCOIMAPSession: NSObject {
      It will make MCOIMAPSession safe. It will also set all the callbacks of operations to run on this given queue.
      Defaults to the main queue.
      This property should be used only if there's performance issue using MCOIMAPSession in the main thread. */
-
-    
-    #if os(Android)
-    public var dispatchQueue: dispatch_queue_t? {
-        get {
-            return session.dispatchQueue(session);
-        }
-        set {
-            session.setDispatchQueue(newValue);
-        }
-    }
-    #else
     public var dispatchQueue: DispatchQueue? {
         get {
-            return session.dispatchQueue()
+            return DispatchQueue.queueFromWrapped(session.dispatchQueue())
         }
         set {
-            session.setDispatchQueue(newValue)
+            session.setDispatchQueue(newValue?.wrapped)
         }
     }
-    #endif
-
     
     public var isVoIPEnabled: Bool {
         get { return session.isVoIPEnabled }
@@ -239,7 +229,7 @@ public class MCOIMAPSession: NSObject {
      ...
      }];
      */
-    @objc public func checkAccountOperation() -> MCOIMAPCheckAccountOperation {
+    public func checkAccountOperation() -> MCOIMAPCheckAccountOperation {
     	return MCOIMAPCheckAccountOperation(checkAccountOperation: session.checkAccountOperation())
     }
 

@@ -1,5 +1,9 @@
 import Foundation
 
+#if os(Android)
+    import CMailCore
+#endif
+
 public final class MCOIMAPMessage : MCOAbstractMessage, NSCoding {
     
     internal var nativeInstance:CIMAPMessage;

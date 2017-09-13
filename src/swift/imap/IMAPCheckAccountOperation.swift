@@ -1,5 +1,8 @@
 import Foundation
 
+#if os(Android)
+    import CMailCore
+#endif
 
 public class MCOIMAPCheckAccountOperation : MCOIMAPOperation {
     
@@ -19,7 +22,7 @@ public class MCOIMAPCheckAccountOperation : MCOIMAPOperation {
         completionBlock = nil;
     }
     
-    @objc public override func start(completionBlock: CompletionBlock?) {
+    public override func start(completionBlock: CompletionBlock?) {
         self.completionBlock = completionBlock
         start()
     }
@@ -39,16 +42,17 @@ public class MCOIMAPCheckAccountOperation : MCOIMAPOperation {
             completionBlock!(nil)
         }
         else {
-            var error = MailCoreError(code: errorCode) as NSError
+            var error = MailCoreError(code: errorCode).asNSError()
             if operation.loginResponse().instance != nil || operation.loginUnparsedResponseData().bytes != nil {
-                var userInfo = [AnyHashable: Any]()
+                var userInfo = [String: Any]()
                 if let response = operation.loginResponse().string() {
                     userInfo["IMAPResponseKey"] = response
                 }
-                if operation.loginUnparsedResponseData().bytes != nil {
-                    userInfo["IMAPUnparsedResponseDataKey"] = Data(cdata: operation.loginUnparsedResponseData())
+                let data = operation.loginUnparsedResponseData()
+                if data.instance != nil && data.bytes != nil {
+                    userInfo["IMAPUnparsedResponseDataKey"] = Data(cdata: data)
                 }
-                error = NSError(domain: "MailCoreErrorDomain", code: error.code, userInfo: userInfo)
+                error = MailCoreError(code: errorCode).asNSError(userInfo: userInfo)
             }
             completionBlock!(error)
         }

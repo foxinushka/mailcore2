@@ -1,5 +1,9 @@
 import Foundation
 
+#if os(Android)
+    import CMailCore
+#endif
+
 public protocol MCOHTMLRendererIMAPDelegate {
     
     /**

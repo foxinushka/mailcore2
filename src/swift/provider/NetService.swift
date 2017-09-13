@@ -8,6 +8,10 @@
 
 import Foundation
 
+#if os(Android)
+    import CMailCore
+#endif
+
 public class MCONetService: NSObject, Convertible {
     
     internal var nativeInstance: CNetService

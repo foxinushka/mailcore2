@@ -1,6 +1,10 @@
 import Foundation
 import Dispatch
 
+#if os(Android)
+    import CMailCore
+    import CDispatch
+#endif
 
 public class MCOSMTPSession: NSObject {
     
@@ -108,25 +112,14 @@ public class MCOSMTPSession: NSObject {
     /** The queue this operation dispatches the callback on.  Defaults to the main queue.
      This property should be used only if there's performance issue creating or calling the callback
      in the main thread. */
-    #if os(Android)
-    public var dispatchQueue: dispatch_queue_t? {
-        get {
-            return session.dispatchQueue(session);
-        }
-        set {
-            session.setDispatchQueue(session, newValue);
-        }
-    }
-    #else
     public var dispatchQueue: DispatchQueue? {
         get {
-            return self.session.dispatchQueue()
+            return DispatchQueue.queueFromWrapped(self.session.dispatchQueue())
         }
         set {
-            self.session.setDispatchQueue(newValue)
+            self.session.setDispatchQueue(newValue?.wrapped)
         }
     }
-    #endif
     
     
     /**
@@ -240,7 +233,7 @@ public class MCOSMTPSession: NSObject {
         return MCOSMTPOperation(operation: self.session.checkAccountOperation(from.nativeInstance));
     }
     
-    @objc public func checkAccountOperation(from: MCOAddress, to: MCOAddress) -> MCOSMTPOperation {
+    public func checkAccountOperation(from: MCOAddress, to: MCOAddress) -> MCOSMTPOperation {
         return MCOSMTPOperation(operation: self.session.checkAccountOperationWithFromAndTo(from.nativeInstance, to.nativeInstance));
     }
     

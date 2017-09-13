@@ -8,6 +8,10 @@
 
 import Foundation
 
+#if os(Android)
+    import CMailCore
+#endif
+
 public class MCOMessagePart : MCOAbstractMessagePart {
     
     private var nativeInstance:CMessagePart;

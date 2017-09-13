@@ -8,6 +8,10 @@
 
 import Foundation
 
+#if os(Android)
+    import CMailCore
+#endif
+
 public typealias ConnectionLogger = (_:UnsafeMutableRawPointer?, _:ConnectionLogType, _:Data?) -> Void
 
 public class MCOConnectionLogger: NSObject {

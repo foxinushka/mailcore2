@@ -1,5 +1,8 @@
 import Foundation
 
+#if os(Android)
+    import CMailCore
+#endif
 
 public class MCOSMTPOperation: MCOOperation {
     
@@ -39,16 +42,16 @@ public class MCOSMTPOperation: MCOOperation {
             completionBlock!(nil);
         }
         else {
-            var error = MailCoreError(code: errorCode) as NSError
+            var error = MailCoreError(code: errorCode).asNSError()
             if operation.lastSMTPResponse.instance != nil || operation.lastSMTPResponseCode != 0 {
-                var userInfo = [AnyHashable: Any]()
+                var userInfo = [String: Any]()
                 if let response = operation.lastSMTPResponse.string() {
                     userInfo["MCOSMTPResponseKey"] = response
                 }
                 if operation.lastSMTPResponseCode != 0 {
                     userInfo["MCOSMTPResponseCodeKey"] = operation.lastSMTPResponseCode
                 }
-                error = NSError(domain: "MailCoreErrorDomain", code: error.code, userInfo: userInfo)
+                error = MailCoreError(code: errorCode).asNSError(userInfo: userInfo)
             }
             completionBlock!(error)
         }

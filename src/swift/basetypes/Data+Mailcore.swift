@@ -1,5 +1,8 @@
 import Foundation
 
+#if os(Android)
+    import CMailCore
+#endif
 
 extension Data {
     
@@ -38,6 +41,9 @@ extension Data {
     
 }
 
+#if os(Android)
+#else
+    
 extension NSData {
     
     public func mailCoreData() -> CData {
@@ -46,3 +52,5 @@ extension NSData {
     }
     
 }
+    
+#endif

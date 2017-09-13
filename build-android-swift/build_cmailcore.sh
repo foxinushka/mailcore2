@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 build_version=4
 package_name=mailcore2-android
@@ -73,3 +73,27 @@ $ANDROID_NDK/ndk-build \
         TIDY_HTML5_PATH=$current_dir/third-party/tidy-html5-android-$tidy_html5_build_version \
         OPENSSL_PATH=$current_dir/third-party/openssl-android-$openssl_build_version \
         CYRUS_SASL_PATH=$current_dir/third-party/cyrus-sasl-android-$cyrus_sasl_build_version
+
+
+# Swift module magic
+pushd "$current_dir/CMailCore"
+  rm -rf include
+  rm -rf libs
+  rm -rf .git
+
+  mkdir include
+  # copy MailCore headers
+  cp -R ../include/MailCore ./include
+  # copy CMailCore headers
+  cp -R ../../src/c/*.h ./include
+  cp -R ../../src/c/**/*.h ./include
+
+  # copy libs
+  mkdir libs
+  cp -a ../libs/armeabi-v7a/. ./libs
+
+  # create git repo
+  git init
+  git add *
+  git commit -m 'prepeare CMailCore framework'
+popd

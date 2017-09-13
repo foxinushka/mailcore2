@@ -1,5 +1,12 @@
 import Foundation
 
+// TODO: create CMailCore module for iOS/macOS
+#if os(Android)
+    import CMailCore
+    public typealias MailCoreRange = CMailCore.Range
+#else
+    public typealias MailCoreRange = MailCore.Range
+#endif
 
 /** similar to NSMutableIndexSet but supports int64_t.  MCRange has a location (uint64_t) and length (uint64_t). */
 public class MCOIndexSet: NSObject, NSCopying, NSCoding {
@@ -35,7 +42,7 @@ public class MCOIndexSet: NSObject, NSCopying, NSCoding {
     }
     
     /** Creates an index set that contains a range of integers.*/
-    public convenience init(range: MailCore.Range) {
+    public convenience init(range: MailCoreRange) {
         self.init(CIndexSet(range: range))!;
     }
     
@@ -65,17 +72,17 @@ public class MCOIndexSet: NSObject, NSCopying, NSCoding {
     }
     
     /** Adds a range of integers to the index set.*/
-    public func add(range: MailCore.Range) {
+    public func add(range: MailCoreRange) {
         nativeInstance.addRange(range);
     }
     
     /** Removes a range of integers from the index set.*/
-    public func remove(range: MailCore.Range) {
+    public func remove(range: MailCoreRange) {
         nativeInstance.removeRange(range);
     }
     
     /** Removes all integers that are not in the given range.*/
-    public func intersects(range: MailCore.Range) {
+    public func intersects(range: MailCoreRange) {
         nativeInstance.intersectsRange(range);
     }
     
@@ -95,8 +102,8 @@ public class MCOIndexSet: NSObject, NSCopying, NSCoding {
     }
     
     /** Returns all the ranges of ths index set.*/
-    public func allRanges() -> Array<MailCore.Range> {
-        var array  = Array<MailCore.Range>();
+    public func allRanges() -> Array<MailCoreRange> {
+        var array  = Array<MailCoreRange>();
         for index in 0 ..< self.rangesCount() {
             array.append(nativeInstance.range(index));
         }
@@ -127,7 +134,7 @@ public class MCOIndexSet: NSObject, NSCopying, NSCoding {
         }
     }
     
-    public subscript(index: UInt32) -> MailCore.Range {
+    public subscript(index: UInt32) -> MailCoreRange {
         return nativeInstance.range(index)
     }
     

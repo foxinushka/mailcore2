@@ -1,5 +1,9 @@
 import Foundation
 
+#if os(Android)
+    import CMailCore
+#endif
+
 public protocol MCOHTMLRendererDelegate {
     
     //func abstractMessage(_ msg: MCOAbstractMessage, canPreviewPart: MCOAbstractPart?) -> Bool;

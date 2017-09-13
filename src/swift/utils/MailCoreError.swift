@@ -1,5 +1,9 @@
 import Foundation
 
+#if os(Android)
+    import CMailCore
+#endif
+
 //public let ErrorDomain = "MailCoreErrorDomain"
 //
 //public class MailCoreError : Error {
@@ -15,6 +19,8 @@ import Foundation
 //    }
 //
 //}
+
+fileprivate let MailCoreErrorDomain = "MailCoreErrorDomain"
 
 @objc public enum MailCoreError : Int, Error {
     case errorNone // 0
@@ -67,6 +73,10 @@ import Foundation
     
     internal init(code: ErrorCode) {
         self.init(rawValue: Int(code.rawValue))!
+    }
+    
+    internal func asNSError(userInfo: [String: Any]? = nil) -> NSError {
+        return NSError(domain: "MailCoreErrorDomain", code: self.rawValue, userInfo: userInfo)
     }
 
 }

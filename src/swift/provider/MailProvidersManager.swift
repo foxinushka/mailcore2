@@ -8,6 +8,10 @@
 
 import Foundation
 
+#if os(Android)
+    import CMailCore
+#endif
+
 public class MCOMailProvidersManager: NSObject {
     
     public static let sharedManager = MCOMailProvidersManager()

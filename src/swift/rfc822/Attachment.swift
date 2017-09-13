@@ -1,5 +1,9 @@
 import Foundation
 
+#if os(Android)
+    import CMailCore
+#endif
+
 public class MCOAttachment : MCOAbstractPart {
 
     internal var nativeInstance: CAttachment;

@@ -1,5 +1,8 @@
 import Foundation
 
+#if os(Android)
+    import CMailCore
+#endif
 
 public class MCOIMAPSearchOperation : MCOIMAPBaseOperation {
     
