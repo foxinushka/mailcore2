@@ -7,10 +7,7 @@
 //
 
 import Foundation
-
-#if os(Android)
-    import CMailCore
-#endif
+import CMailCore
 
 public class MCOMailProvidersManager: NSObject {
     

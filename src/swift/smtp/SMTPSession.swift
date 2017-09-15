@@ -1,10 +1,6 @@
 import Foundation
 import Dispatch
-
-#if os(Android)
-    import CMailCore
-    import CDispatch
-#endif
+import CMailCore
 
 public class MCOSMTPSession: NSObject {
     

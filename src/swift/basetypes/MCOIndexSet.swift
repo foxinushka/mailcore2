@@ -1,8 +1,7 @@
 import Foundation
+import CMailCore
 
-// TODO: create CMailCore module for iOS/macOS
 #if os(Android)
-    import CMailCore
     public typealias MailCoreRange = CMailCore.Range
 #else
     public typealias MailCoreRange = MailCore.Range

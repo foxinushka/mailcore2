@@ -44,6 +44,8 @@ extern "C" {
     
     C_SYNTHESIZE_FUNC_DEFINITION(CMessageBuilder, MailCoreString, plainTextBodyRenderingAndStripWhitespace, bool)
     
+    C_SYNTHESIZE_FUNC_DEFINITION(CMessageBuilder, void, setBoundaries, CArray)
+    
     C_SYNTHESIZE_STATIC_FUNC_DEFINITION(CMessageBuilder, CMessageBuilder, init)
     
 #ifdef __cplusplus

@@ -7,9 +7,12 @@
 #define structName CArray
 
 C_SYNTHESIZE_CONSTRUCTOR()
+C_SYNTHESIZE_COBJECT_CAST()
 
 C_SYNTHESIZE_FUNC_WITH_VOID(addObject, CObject)
 C_SYNTHESIZE_FUNC_WITH_SCALAR(uint32_t, count)
+
+C_SYNTHESIZE_FUNC_WITH_OBJ(MailCoreString, description)
 
 mailcore::Object* CArray_getObj(struct CArray self, uint32_t index) {
     return self.instance->objectAtIndex(index);

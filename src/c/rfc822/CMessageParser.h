@@ -7,6 +7,7 @@
 #include "CAbstractMessage.h"
 #include "CArray.h"
 #include "CAttachment.h"
+#include "CDictionary.h"
 
 #ifdef __cplusplus
 
@@ -25,6 +26,8 @@ extern "C" {
     C_SYNTHESIZE_FUNC_DEFINITION(CMessageParser, MailCoreString, htmlBodyRendering)
     C_SYNTHESIZE_FUNC_DEFINITION(CMessageParser, MailCoreString, plainTextRendering)
     C_SYNTHESIZE_FUNC_DEFINITION(CMessageParser, MailCoreString, plainTextBodyRenderingAndStripWhitespace, bool)
+    
+    C_SYNTHESIZE_FUNC_DEFINITION(CMessageParser, CDictionary, serializable)
     
     C_SYNTHESIZE_FUNC_DEFINITION(CMessageParser, MailCoreString, htmlRendering, struct CAbstractMessageRendererCallback)
     

@@ -1,8 +1,5 @@
 import Foundation
-
-#if os(Android)
-    import CMailCore
-#endif
+import CMailCore
 
 extension Dictionary {
     
@@ -32,6 +29,17 @@ extension Dictionary {
             result.setObjectForKey(key.cast(), value.cast());
         }
         return result;
+    }
+}
+
+extension Dictionary: Convertible {
+    
+    func cast() -> CObject {
+        return dictionaryUnsafeCast(self).toCObject()
+    }
+    
+    init(mailCoreObject: CObject) {
+        self = dictionaryUnsafeCast(CDictionary(cobject: mailCoreObject)) as! Dictionary
     }
 }
 

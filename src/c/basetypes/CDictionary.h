@@ -5,6 +5,7 @@
 #include "CBase.h"
 #include "CObject.h"
 #include "CArray.h"
+#include "CData.h"
 
 #ifdef __cplusplus
 
@@ -16,6 +17,7 @@ extern "C" {
 #endif
     
     C_SYNTHESIZE_STRUCT_DEFINITION(CDictionary, mailcore::HashMap)
+    C_SYNTHESIZE_COBJECT_CAST_DEFINITION(CDictionary)
     
     C_SYNTHESIZE_FUNC_DEFINITION(CDictionary, CArray, allKeys)
     C_SYNTHESIZE_FUNC_DEFINITION(CDictionary, CObject, objectForKey, CObject)

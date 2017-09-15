@@ -1,8 +1,5 @@
 import Foundation
-
-#if os(Android)
-    import CMailCore
-#endif
+import CMailCore
 
 /** Used to construct an IMAP search query */
 public class MCOIMAPSearchExpression: NSObject {

@@ -1,0 +1,4 @@
+module CMailCore {
+    header "CMailCore.h"
+    export *
+}

@@ -59,6 +59,7 @@ void CSMTPOperation_retain(CSMTPOperation self) {
 }
 
 void CSMTPOperation_release(CSMTPOperation self) {
-    self.instance->release();
+    self.instance->setSmtpCallback(NULL);
     delete self._callback;
+    self.instance->release();
 }

@@ -7,6 +7,7 @@
 #define structName CDictionary
 
 C_SYNTHESIZE_CONSTRUCTOR()
+C_SYNTHESIZE_COBJECT_CAST()
 
 C_SYNTHESIZE_FUNC_WITH_OBJ(CArray, allKeys)
 C_SYNTHESIZE_FUNC_WITH_OBJ(CObject, objectForKey, CObject)

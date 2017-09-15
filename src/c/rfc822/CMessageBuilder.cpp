@@ -36,6 +36,8 @@ C_SYNTHESIZE_FUNC_WITH_OBJ(CData, openPGPEncryptedMessageDataWithEncryptedData, 
 C_SYNTHESIZE_FUNC_WITH_OBJ(MailCoreString, htmlBodyRendering)
 C_SYNTHESIZE_FUNC_WITH_OBJ(MailCoreString, plainTextRendering)
 
+C_SYNTHESIZE_FUNC_WITH_VOID(setBoundaries, CArray)
+
 MailCoreString CMessageBuilder_plainTextBodyRenderingAndStripWhitespace(struct CMessageBuilder self, bool stripWhitespace) {
     return MailCoreString_new(self.instance->plainTextBodyRendering(stripWhitespace));
 }

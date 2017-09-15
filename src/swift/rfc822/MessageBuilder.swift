@@ -1,8 +1,5 @@
 import Foundation
-
-#if os(Android)
-    import CMailCore
-#endif
+import CMailCore
 
 public class MCOMessageBuilder : MCOAbstractMessage {
     
@@ -128,6 +125,11 @@ public class MCOMessageBuilder : MCOAbstractMessage {
      This method can be used to generate the summary of the message.*/
     public func plainTextBodyRenderingAndStripWhitespace(stripWhitespace: Bool) -> String? {
         return nativeInstance.plainTextBodyRenderingAndStripWhitespace(stripWhitespace).string()
+    }
+    
+    /** Method for testing purpose **/
+    internal func setBoundaries(_ boundaries: [String]) {
+        nativeInstance.setBoundaries(boundaries.mailCoreArray())
     }
 
 }

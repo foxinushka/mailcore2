@@ -7,10 +7,7 @@
 //
 
 import Foundation
-
-#if os(Android)
-    import CMailCore
-#endif
+import CMailCore
 
 public typealias ConnectionLogger = (_:UnsafeMutableRawPointer?, _:ConnectionLogType, _:Data?) -> Void
 

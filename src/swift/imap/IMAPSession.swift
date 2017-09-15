@@ -1,10 +1,6 @@
 import Foundation
 import Dispatch
-
-#if os(Android)
-    import CMailCore
-    import CDispatch
-#endif
+import CMailCore
 
 /**
  This is the main IMAP class from which all operations are created

@@ -7,10 +7,7 @@
 //
 
 import Foundation
-
-#if os(Android)
-    import CMailCore
-#endif
+import CMailCore
 
 var typeHash: [Data: Convertible.Type] = [Data(cdata: Value_mailCoreTypeInfo())!: UInt32.self,
                                           Data(cdata: MailCoreString_mailCoreTypeInfo())!: String.self,
@@ -36,7 +33,9 @@ var typeHash: [Data: Convertible.Type] = [Data(cdata: Value_mailCoreTypeInfo())!
                                           Data(cdata: CIMAPNamespace_mailCoreTypeInfo())!: MCOIMAPNamespace.self,
                                           Data(cdata: CIMAPNamespaceItem_mailCoreTypeInfo())!: MCOIMAPNamespaceItem.self,
                                           Data(cdata: CIMAPPart_mailCoreTypeInfo())!: MCOIMAPPart.self,
-                                          Data(cdata: CMultipart_mailCoreTypeInfo())!: MCOMultipart.self]
+                                          Data(cdata: CMultipart_mailCoreTypeInfo())!: MCOMultipart.self,
+                                          Data(cdata: CDictionary_mailCoreTypeInfo())!: Dictionary<AnyHashable, Any>.self,
+                                          Data(cdata: CArray_mailCoreTypeInfo())!: Array<Any>.self]
 
 func MCORegisterType(_ type: Convertible.Type, typeInfo: Data) {
     typeHash[typeInfo] = type

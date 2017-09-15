@@ -1,4 +1,0 @@
-module CMailCore [system] {
-    header "../../src/c/CCore.h"
-    export *
-}

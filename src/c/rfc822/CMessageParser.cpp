@@ -26,6 +26,7 @@ C_SYNTHESIZE_FUNC_WITH_OBJ(CAbstractPart, mainPart)
 C_SYNTHESIZE_FUNC_WITH_OBJ(CData, data)
 C_SYNTHESIZE_FUNC_WITH_OBJ(MailCoreString, htmlBodyRendering)
 C_SYNTHESIZE_FUNC_WITH_OBJ(MailCoreString, plainTextRendering)
+C_SYNTHESIZE_FUNC_WITH_OBJ(CDictionary, serializable)
 
 MailCoreString CMessageParser_plainTextBodyRenderingAndStripWhitespace(struct CMessageParser self, bool stripWhitespace) {
     return MailCoreString_new(self.instance->plainTextBodyRendering(stripWhitespace));

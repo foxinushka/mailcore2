@@ -1,8 +1,5 @@
 import Foundation
-
-#if os(Android)
-    import CMailCore
-#endif
+import CMailCore
 
 /**
  This class implements a parsed message.

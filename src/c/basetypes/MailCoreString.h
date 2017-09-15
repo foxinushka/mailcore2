@@ -24,7 +24,13 @@ extern "C" {
     C_SYNTHESIZE_READONLY_PROPERTY_DEFINITION(MailCoreString, const UChar*, unicodeCharacters)
     C_SYNTHESIZE_READONLY_PROPERTY_DEFINITION(MailCoreString, unsigned int, length)
     
+    C_SYNTHESIZE_FUNC_DEFINITION(MailCoreString, MailCoreString, mUTF7DecodedString)
+    C_SYNTHESIZE_FUNC_DEFINITION(MailCoreString, MailCoreString, mUTF7EncodedString)
+    
+    C_SYNTHESIZE_FUNC_DEFINITION(MailCoreString, bool, isEqual, MailCoreString)
+    
     C_SYNTHESIZE_FUNC_DEFINITION(CData, MailCoreString, stringWithDetectedCharset, MailCoreString)
+    C_SYNTHESIZE_FUNC_DEFINITION(CData, MailCoreString, charsetWithFilteredHTML, bool)
     
 #ifdef __cplusplus
 }
