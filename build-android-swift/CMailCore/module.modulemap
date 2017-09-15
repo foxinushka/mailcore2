@@ -1,0 +1,5 @@
+module CMailCore [system] {
+    header "CMailCore.h"
+    
+    link "cmailcore"
+}
