@@ -40,7 +40,7 @@ pushd "$base_dir"
     mkdir -p "cmake-build"
     pushd "cmake-build"
         cmake -D ANDROID=1 ../..
-        cp -R "src/include/MailCore" "$SWIFT_PM_EXTERNAL_INCLUDE"
+        rsync -t -r "src/include/MailCore" "$SWIFT_PM_EXTERNAL_INCLUDE"
     popd
 
 
