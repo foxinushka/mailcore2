@@ -1,0 +1,1 @@
+../../../src/c//imap/CIMAPNamespaceItem.h

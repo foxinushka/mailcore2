@@ -247,7 +247,7 @@ class unittest : XCTestCase {
                 path = _parserOutputPath.appendingPathComponent(name)
                 expectedData = try Data(contentsOf: path, options: [])
                 let expectedResult = try JSONSerialization.jsonObject(with: expectedData, options: []) as! [AnyHashable: Any]
-                
+
                 XCTAssertTrue(equalDictionaries(result, expectedResult), "file \(name)");
             }
         }

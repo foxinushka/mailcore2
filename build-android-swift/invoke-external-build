@@ -1,0 +1,77 @@
+#!/bin/bash
+
+build_version=4
+package_name=mailcore2-android
+ctemplate_build_version=3
+cyrus_sasl_build_version=4
+icu4c_build_version=3
+libetpan_build_version=6
+libxml2_build_version=3
+tidy_html5_build_version=3
+openssl_build_version=3
+
+
+if ! which ndk-build > /dev/null ; then
+  echo Android NDK should be installed and ndk-build in PATH
+  exit 1
+fi
+
+function download_dep {
+    local name="$1"
+    local version="$2"
+
+    if test ! -f "$name-$version.zip" ; then
+        if curl -f -O "http://d.etpan.org/mailcore2-deps/$name/$name-$version.zip" ; then
+            unzip "$name-$version.zip"
+        else
+            echo Could not download $name-$version.zip
+            exit 1
+        fi
+    fi
+}
+
+# Specify libs output
+export NDK_OUT="$SWIFT_PM_EXTERNAL_LIBS"
+export NDK_LIBS_OUT="$SWIFT_PM_EXTERNAL_LIBS"
+
+base_dir="$(realpath $(dirname $0))"
+pushd "$base_dir"
+    # collect public headers
+    mkdir -p "cmake-build"
+    pushd "cmake-build"
+        cmake -D ANDROID=1 ../..
+        rsync -t -r "src/include/MailCore" "$SWIFT_PM_EXTERNAL_INCLUDE"
+    popd
+
+
+    # download dependencies
+    download_dir="$PWD/third-party"
+    mkdir -p "$download_dir"
+    pushd "$download_dir"
+        download_dep "icu4c-android" $icu4c_build_version
+        download_dep "libetpan-android" $libetpan_build_version
+        download_dep "libxml2-android" $libxml2_build_version
+        download_dep "tidy-html5-android" $tidy_html5_build_version
+        download_dep "openssl-android" $openssl_build_version
+        download_dep "cyrus-sasl-android" $cyrus_sasl_build_version
+
+        # Build ctemplate-android from source
+        if test ! -d "$download_dir/ctemplate-android-$ctemplate_build_version" ; then
+            git clone https://github.com/andriydruk/ctemplate.git
+            pushd "ctemplate/build-android"
+                sh build.sh
+                cp -R "ctemplate-android-$ctemplate_build_version" "$download_dir/"
+            popd
+        fi
+    popd
+
+    # build C/C++ to libcmailcore.so
+    ndk-build \
+        CTEMPLATE_PATH="$download_dir/ctemplate-android-$ctemplate_build_version" \
+        ICU4C_PATH="$download_dir/icu4c-android-$icu4c_build_version" \
+        LIBETPAN_PATH="$download_dir/libetpan-android-$libetpan_build_version" \
+        LIBXML2_PATH="$download_dir/libxml2-android-$libxml2_build_version" \
+        TIDY_HTML5_PATH="$download_dir/tidy-html5-android-$tidy_html5_build_version" \
+        OPENSSL_PATH="$download_dir/openssl-android-$openssl_build_version" \
+        CYRUS_SASL_PATH="$download_dir/cyrus-sasl-android-$cyrus_sasl_build_version"
+popd

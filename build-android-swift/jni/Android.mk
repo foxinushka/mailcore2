@@ -1,6 +1,7 @@
-CURRENT_DIR := $(call my-dir)
+CURRENT_DIR := $(realpath $(call my-dir))
+BASE_DIR := $(realpath $(CURRENT_DIR)/../..)
 
-src_dir := $(CURRENT_DIR)/../../src
+src_dir := $(realpath $(BASE_DIR)/src)
 subdirs = \
 	core \
 	core/basetypes \
@@ -20,51 +21,6 @@ subdirs = \
 	async/pop \
 	async/smtp \
 	java java/native
-includes = \
-	$(CURRENT_DIR)/../include \
-    $(CTEMPLATE_PATH)/include \
-    $(ICU4C_PATH)/include \
-    $(LIBETPAN_PATH)/include \
-    $(LIBXML2_PATH)/include \
-    $(TIDY_HTML5_PATH)/include \
-    $(OPENSSL_PATH)/include \
-	$(addprefix $(src_dir)/, $(subdirs))
-
-core_excludes = MCWin32.cpp MCStringWin32.cpp MCMainThreadWin32.cpp MCMainThreadGTK.cpp
-core_src_files := $(filter-out \
-	$(addprefix $(src_dir)/core/basetypes/, $(core_excludes)), \
-	$(wildcard $(src_dir)/core/basetypes/*.cpp) $(wildcard $(src_dir)/core/basetypes/*.c))
-
-abstract_src_files := $(wildcard $(src_dir)/core/abstract/*.cpp)
-imap_src_files := $(wildcard $(src_dir)/core/imap/*.cpp)
-nntp_src_files := $(wildcard $(src_dir)/core/nntp/*.cpp)
-pop_src_files := $(wildcard $(src_dir)/core/pop/*.cpp)
-provider_src_files := $(wildcard $(src_dir)/core/provider/*.cpp)
-renderer_src_files := $(wildcard $(src_dir)/core/renderer/*.cpp)
-rfc822_src_files := $(wildcard $(src_dir)/core/rfc822/*.cpp)
-security_src_files := $(wildcard $(src_dir)/core/security/*.cpp)
-smtp_src_files := $(wildcard $(src_dir)/core/smtp/*.cpp)
-zip_src_files := $(wildcard $(src_dir)/core/zip/*.cpp)
-minizip_src_files := \
-	$(src_dir)/core/zip/MiniZip/ioapi.c \
-	$(src_dir)/core/zip/MiniZip/unzip.c \
-	$(src_dir)/core/zip/MiniZip/zip.c
-async_imap_src_files := $(wildcard $(src_dir)/async/imap/*.cpp)
-async_nntp_src_files := $(wildcard $(src_dir)/async/nntp/*.cpp)
-async_pop_src_files := $(wildcard $(src_dir)/async/pop/*.cpp)
-async_smtp_src_files := $(wildcard $(src_dir)/async/smtp/*.cpp)
-jni_src_files := $(wildcard $(src_dir)/java/native/*.cpp) $(wildcard $(src_dir)/java/*.cpp)
-
-# include $(CLEAR_VARS)
-# LOCAL_MODULE    := MailCore
-# LOCAL_C_INCLUDES := $(includes)
-# LOCAL_SRC_FILES := $(core_src_files) $(abstract_src_files) $(imap_src_files) $(nntp_src_files) \
-# 	$(pop_src_files) $(provider_src_files) $(renderer_src_files) $(rfc822_src_files) \
-# 	$(security_src_files) $(smtp_src_files) $(zip_src_files) $(minizip_src_files) \
-# 	$(async_imap_src_files) $(async_nntp_src_files) $(async_pop_src_files) $(async_smtp_src_files)
-# LOCAL_CPPFLAGS := -frtti
-# LOCAL_CFLAGS := -DNOCRYPT
-# include $(BUILD_STATIC_LIBRARY)
 
 include $(CLEAR_VARS)
 LOCAL_MODULE    := etpan
@@ -113,14 +69,68 @@ LOCAL_SRC_FILES := $(SWIFT_LIB)/android/libdispatch.so
 include $(PREBUILT_SHARED_LIBRARY)
 
 include $(CLEAR_VARS)
-LOCAL_MODULE    := MailCore
-LOCAL_C_INCLUDES += $(includes)
+core_excludes = MCWin32.cpp MCStringWin32.cpp MCMainThreadWin32.cpp MCMainThreadGTK.cpp
+core_src_files := $(filter-out \
+	$(addprefix $(src_dir)/core/basetypes/, $(core_excludes)), \
+	$(wildcard $(src_dir)/core/basetypes/*.cpp) \
+	$(wildcard $(src_dir)/core/basetypes/*.c) \
+)
+
+abstract_src_files := $(wildcard $(src_dir)/core/abstract/*.cpp)
+imap_src_files     := $(wildcard $(src_dir)/core/imap/*.cpp)
+nntp_src_files     := $(wildcard $(src_dir)/core/nntp/*.cpp)
+pop_src_files      := $(wildcard $(src_dir)/core/pop/*.cpp)
+provider_src_files := $(wildcard $(src_dir)/core/provider/*.cpp)
+renderer_src_files := $(wildcard $(src_dir)/core/renderer/*.cpp)
+rfc822_src_files   := $(wildcard $(src_dir)/core/rfc822/*.cpp)
+security_src_files := $(wildcard $(src_dir)/core/security/*.cpp)
+smtp_src_files     := $(wildcard $(src_dir)/core/smtp/*.cpp)
+zip_src_files      := $(wildcard $(src_dir)/core/zip/*.cpp)
+
+async_imap_src_files := $(wildcard $(src_dir)/async/imap/*.cpp)
+async_nntp_src_files := $(wildcard $(src_dir)/async/nntp/*.cpp)
+async_pop_src_files  := $(wildcard $(src_dir)/async/pop/*.cpp)
+async_smtp_src_files := $(wildcard $(src_dir)/async/smtp/*.cpp)
+
+minizip_src_files := \
+	$(src_dir)/core/zip/MiniZip/ioapi.c \
+	$(src_dir)/core/zip/MiniZip/unzip.c \
+	$(src_dir)/core/zip/MiniZip/zip.c
+
+jni_src_files := \
+	$(wildcard $(src_dir)/java/native/*.cpp) \
+	$(wildcard $(src_dir)/java/*.cpp)
+
+LOCAL_MODULE := MailCore
+LOCAL_C_INCLUDES += \
+	$(SWIFT_PM_EXTERNAL_INCLUDE) \
+    $(CTEMPLATE_PATH)/include \
+    $(ICU4C_PATH)/include \
+    $(LIBETPAN_PATH)/include \
+    $(LIBXML2_PATH)/include \
+    $(TIDY_HTML5_PATH)/include \
+    $(OPENSSL_PATH)/include \
+	$(addprefix $(src_dir)/, $(subdirs))
+
 LOCAL_SRC_FILES := \
 	$(jni_src_files) \
-	$(core_src_files) $(abstract_src_files) $(imap_src_files) $(nntp_src_files) \
-	$(pop_src_files) $(provider_src_files) $(renderer_src_files) $(rfc822_src_files) \
-	$(security_src_files) $(smtp_src_files) $(zip_src_files) $(minizip_src_files) \
-	$(async_imap_src_files) $(async_nntp_src_files) $(async_pop_src_files) $(async_smtp_src_files)
+	$(core_src_files) \
+	$(abstract_src_files) \
+	$(imap_src_files) \
+	$(nntp_src_files) \
+	$(pop_src_files) \
+	$(provider_src_files) \
+	$(renderer_src_files) \
+	$(rfc822_src_files) \
+	$(security_src_files) \
+	$(smtp_src_files) \
+	$(zip_src_files) \
+	$(minizip_src_files) \
+	$(async_imap_src_files) \
+	$(async_nntp_src_files) \
+	$(async_pop_src_files) \
+	$(async_smtp_src_files)
+
 LOCAL_CFLAGS := -DNOCRYPT -fblocks
 LOCAL_CPPFLAGS := -frtti
 LOCAL_LDLIBS := -lz -llog
@@ -128,31 +138,32 @@ LOCAL_STATIC_LIBRARIES := etpan sasl2 ssl crypto icu4c xml2 tidy ctemplate
 LOCAL_SHARED_LIBRARIES := dispatch
 include $(BUILD_SHARED_LIBRARY)
 
-abstract_src_files := $(wildcard $(src_dir)/c/abstract/*.cpp)
-basetypes_src_files := $(wildcard $(src_dir)/c/basetypes/*.cpp)
-imap_src_files := $(wildcard $(src_dir)/c/imap/*.cpp)
-provider_src_files := $(wildcard $(src_dir)/c/provider/*.cpp)
-rfc822_src_files := $(wildcard $(src_dir)/c/rfc822/*.cpp)
-smtp_src_files := $(wildcard $(src_dir)/c/smtp/*.cpp)
-utils_src_files := $(wildcard $(src_dir)/c/utils/*.cpp)
-
 include $(CLEAR_VARS)
-NDK_TOOLCHAIN_VERSION := clang
-LOCAL_MODULE     := cmailcore
-LOCAL_C_INCLUDES += $(CURRENT_DIR)/../../src/c
-LOCAL_C_INCLUDES += $(CURRENT_DIR)/../../src/c/basetypes
-LOCAL_C_INCLUDES += $(CURRENT_DIR)/../../src/c/imap
-LOCAL_C_INCLUDES += $(CURRENT_DIR)/../../src/c/abstract
-LOCAL_C_INCLUDES += $(CURRENT_DIR)/../../src/c/utils
-LOCAL_C_INCLUDES += $(CURRENT_DIR)/../../src/c/rfc822
-LOCAL_C_INCLUDES += $(CURRENT_DIR)/../include
-LOCAL_SRC_FILES  := $(abstract_src_files) \
-					$(basetypes_src_files) \
-					$(imap_src_files) \
-					$(provider_src_files) \
-					$(rfc822_src_files) \
-					$(smtp_src_files) \
-					$(utils_src_files)
+abstract_src_files  := $(wildcard $(src_dir)/c/abstract/*.cpp)
+basetypes_src_files := $(wildcard $(src_dir)/c/basetypes/*.cpp)
+imap_src_files      := $(wildcard $(src_dir)/c/imap/*.cpp)
+provider_src_files  := $(wildcard $(src_dir)/c/provider/*.cpp)
+rfc822_src_files    := $(wildcard $(src_dir)/c/rfc822/*.cpp)
+smtp_src_files      := $(wildcard $(src_dir)/c/smtp/*.cpp)
+utils_src_files     := $(wildcard $(src_dir)/c/utils/*.cpp)
+
+LOCAL_MODULE     := CMailCore
+LOCAL_C_INCLUDES += $(src_dir)/c
+LOCAL_C_INCLUDES += $(src_dir)/c/basetypes
+LOCAL_C_INCLUDES += $(src_dir)/c/imap
+LOCAL_C_INCLUDES += $(src_dir)/c/abstract
+LOCAL_C_INCLUDES += $(src_dir)/c/utils
+LOCAL_C_INCLUDES += $(src_dir)/c/rfc822
+LOCAL_C_INCLUDES += $(SWIFT_PM_EXTERNAL_INCLUDE)
+
+LOCAL_SRC_FILES  := \
+	$(abstract_src_files) \
+	$(basetypes_src_files) \
+	$(imap_src_files) \
+	$(provider_src_files) \
+	$(rfc822_src_files) \
+	$(smtp_src_files) \
+	$(utils_src_files)
 
 LOCAL_LDLIBS := -lz -llog
 LOCAL_CFLAGS := -fblocks -DSWIFT

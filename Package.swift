@@ -6,16 +6,14 @@ import PackageDescription
 // TODO: move to toolchain
 import Foundation
 
-//fileprivate let exludedFiles = Set([])
-
 private func files(in folder: String, withExtension ext: Set<String>, anchor: String = #file) -> [String] {
     let baseURL = URL(fileURLWithPath: anchor)
-                .deletingLastPathComponent()
-                .appendingPathComponent(folder)
+        .deletingLastPathComponent()
+        .appendingPathComponent(folder)
 
     let allFiles = FileManager.default
-              .enumerator(atPath: baseURL.path)?
-              .allObjects ?? []
+        .enumerator(atPath: baseURL.path)?
+        .allObjects ?? []
 
     return allFiles
         .flatMap { $0 as? String }
@@ -34,13 +32,17 @@ let package = Package(
         ),
     ],
     dependencies: [
-        .package(url: "./build-android-swift/CMailCore", .branch("master")),
     ],
     targets: [
         .target(
             name: "MailCore",
+					  dependencies: ["CMailCore"],
             path: "src/swift",
             exclude: files(in: "src/swift", withExtension: ["mm"])
+        ),
+        .target(
+            name: "CMailCore",
+            path: "build-android-swift/CMailCore"
         ),
         .testTarget(name: "MailCoreTests", 
             dependencies: ["MailCore"],
