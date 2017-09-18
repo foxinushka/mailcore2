@@ -1,0 +1,1 @@
+../../../src/c//basetypes/MailCoreString.h

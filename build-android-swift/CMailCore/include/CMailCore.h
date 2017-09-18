@@ -15,7 +15,6 @@
 #include "CArray.h"
 #include "CAttachment.h"
 #include "CBase.h"
-#include "CBase+Private.h"
 #include "CData.h"
 #include "CDictionary.h"
 #include "CIMAPAppendMessageOperation.h"
