@@ -133,10 +133,9 @@ LOCAL_SRC_FILES := \
 
 LOCAL_CFLAGS := -DNOCRYPT -fblocks
 LOCAL_CPPFLAGS := -frtti
-LOCAL_LDLIBS := -lz -llog
 LOCAL_STATIC_LIBRARIES := etpan sasl2 ssl crypto icu4c xml2 tidy ctemplate
 LOCAL_SHARED_LIBRARIES := dispatch
-include $(BUILD_SHARED_LIBRARY)
+include $(BUILD_STATIC_LIBRARY)
 
 include $(CLEAR_VARS)
 abstract_src_files  := $(wildcard $(src_dir)/c/abstract/*.cpp)
@@ -168,5 +167,5 @@ LOCAL_SRC_FILES  := \
 LOCAL_LDLIBS := -lz -llog
 LOCAL_CFLAGS := -fblocks -DSWIFT
 LOCAL_CPPFLAGS := -frtti
-LOCAL_SHARED_LIBRARIES := MailCore
+LOCAL_STATIC_LIBRARIES := MailCore
 include $(BUILD_SHARED_LIBRARY)

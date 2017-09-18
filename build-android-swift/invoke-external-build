@@ -57,7 +57,7 @@ pushd "$base_dir"
 
         # Build ctemplate-android from source
         if test ! -d "$download_dir/ctemplate-android-$ctemplate_build_version" ; then
-            git clone https://github.com/andriydruk/ctemplate.git
+            git clone --depth 1 --branch master https://github.com/andriydruk/ctemplate.git
             pushd "ctemplate/build-android"
                 sh build.sh
                 cp -R "ctemplate-android-$ctemplate_build_version" "$download_dir/"
@@ -66,7 +66,7 @@ pushd "$base_dir"
     popd
 
     # build C/C++ to libcmailcore.so
-    ndk-build \
+    ndk-build -j "$@" \
         CTEMPLATE_PATH="$download_dir/ctemplate-android-$ctemplate_build_version" \
         ICU4C_PATH="$download_dir/icu4c-android-$icu4c_build_version" \
         LIBETPAN_PATH="$download_dir/libetpan-android-$libetpan_build_version" \
