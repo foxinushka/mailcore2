@@ -28,6 +28,6 @@ uint32_t CArray_getUint(struct CArray self, uint32_t index) {
 }
 
 CArray CArray_init() {
-    return CArray_new(new mailcore::Array());
+    return CArray_new(mailcore::Array::array());
 }
 

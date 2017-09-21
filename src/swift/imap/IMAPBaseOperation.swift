@@ -11,6 +11,7 @@ public class MCOIMAPBaseOperation : MCOOperation {
     
     internal init(baseOperation: CIMAPBaseOperation) {
         self.baseOperation = baseOperation;
+        self.baseOperation.retain()
         super.init(baseOperation.cOperation);
         self.baseOperation.cOperation = super.nativeInstance
         self.baseOperation = self.baseOperation.setProgressBlocks(itemProgressCallback,

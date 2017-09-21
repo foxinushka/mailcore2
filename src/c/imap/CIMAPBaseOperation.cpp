@@ -56,9 +56,18 @@ CIMAPBaseOperation CIMAPBaseOperation_setProgressBlocks(struct CIMAPBaseOperatio
     return self;
 }
 
+void CIMAPBaseOperation_retain(CIMAPBaseOperation operation) {
+    operation.instance->retain();
+}
+
 void CIMAPBaseOperation_release(CIMAPBaseOperation self) {
+    self.instance->setImapCallback(NULL);
+    self.instance->release();
     if (self._callback != NULL) {
-        self.instance->setImapCallback(NULL);
         delete self._callback;
     }
+}
+
+int CIMAPBaseOperation_retainCount(CIMAPBaseOperation self) {
+    return self.instance->retainCount();
 }

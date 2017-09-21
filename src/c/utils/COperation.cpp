@@ -28,7 +28,6 @@ public:
 COperation COperation_new(mailcore::Operation *operationRef) {
     COperation self;
     self.instance = operationRef;
-    self.instance->retain();
     self._callback = NULL;
     return self;
 }
@@ -53,4 +52,8 @@ void COperation_release(COperation self) {
 
 void COperation_retain(COperation self) {
     self.instance->retain();
+}
+
+int COperation_retainCount(COperation self) {
+    return self.instance->retainCount();
 }

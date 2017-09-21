@@ -14,5 +14,5 @@ C_SYNTHESIZE_FUNC_WITH_OBJ(CObject, objectForKey, CObject)
 C_SYNTHESIZE_FUNC_WITH_VOID(setObjectForKey, CObject, CObject)
 
 CDictionary CDictionary_init() {
-    return CDictionary_new(new mailcore::HashMap());
+    return CDictionary_new(mailcore::HashMap::hashMap());
 }

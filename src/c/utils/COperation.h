@@ -50,6 +50,9 @@ extern "C" {
     
     void                COperation_release(COperation self)
                         CF_SWIFT_NAME(COperation.release(self:));
+    
+    int                 COperation_retainCount(COperation self)
+                        CF_SWIFT_NAME(COperation.retainCount(self:));;
 
 #ifdef __cplusplus
 }

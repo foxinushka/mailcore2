@@ -142,7 +142,10 @@ public class MCOIndexSet: NSObject, NSCopying, NSCoding {
     }
     
     public func copyIndexSet() -> MCOIndexSet {
-        return MCOIndexSet.init(CIndexSet.init(cobject: self.nativeInstance.copy()))!
+        let nativeIndexSet = CIndexSet(cobject: self.nativeInstance.copy())
+        let mcoIndexSet =  MCOIndexSet(nativeIndexSet)!
+        nativeIndexSet.release()
+        return mcoIndexSet
     }
     
     public convenience required init?(coder aDecoder: NSCoder) {
