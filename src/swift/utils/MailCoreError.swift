@@ -17,7 +17,11 @@ import CMailCore
 //
 //}
 
-fileprivate let MailCoreErrorDomain = "MailCoreErrorDomain"
+#if os(Android)
+    public let MailCoreErrorDomain = "MailCoreErrorDomain"
+#else
+    fileprivate let MailCoreErrorDomain = "MailCoreErrorDomain"
+#endif
 
 @objc public enum MailCoreError : Int, Error {
     case errorNone // 0
