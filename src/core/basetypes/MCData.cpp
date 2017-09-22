@@ -843,9 +843,6 @@ INITIALIZE(Data)
 #endif
 }
 
-#ifdef SWIFT
 void Data::destructiveDataClear() {
     this->init();
 }
-#endif
-
