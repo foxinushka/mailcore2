@@ -74,10 +74,10 @@ namespace mailcore {
         virtual unsigned int hash();
         virtual HashMap * serializable();
         virtual void importSerializable(HashMap * serializable);
+        void destructiveDataClear();
 #ifdef SWIFT
         bool mExternallyAllocatedMemory;
         BytesDeallocator mBytesDeallocator;
-        void destructiveDataClear();
 #endif
     private:
         char * mBytes;
