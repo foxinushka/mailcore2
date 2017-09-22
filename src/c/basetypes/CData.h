@@ -26,6 +26,8 @@ extern "C" {
     C_SYNTHESIZE_READONLY_PROPERTY_DEFINITION(CData, bool, externallyAllocatedMemory)
     C_SYNTHESIZE_READONLY_PROPERTY_DEFINITION(CData, CBytesDeallocator, bytesDeallocator)
     
+    C_SYNTHESIZE_FUNC_DEFINITION(CData, void, destructiveDataClear)
+    
     C_SYNTHESIZE_STATIC_FUNC_DEFINITION(CData, CData, dataWithBytes, const char*, unsigned int)
 
     CData               Value_mailCoreTypeInfo();

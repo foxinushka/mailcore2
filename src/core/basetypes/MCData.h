@@ -77,6 +77,7 @@ namespace mailcore {
 #ifdef SWIFT
         bool mExternallyAllocatedMemory;
         BytesDeallocator mBytesDeallocator;
+        void destructiveDataClear();
 #endif
     private:
         char * mBytes;

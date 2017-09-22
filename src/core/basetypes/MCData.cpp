@@ -842,3 +842,10 @@ INITIALIZE(Data)
     extended_charconv = lepMixedConv;
 #endif
 }
+
+#ifdef SWIFT
+void Data::destructiveDataClear() {
+    this->init();
+}
+#endif
+

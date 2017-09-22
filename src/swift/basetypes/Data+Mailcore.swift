@@ -34,6 +34,9 @@ extension Data {
             bytesDeallocator?(pointer.assumingMemoryBound(to: Int8.self), UInt32(length))
         })
         self = Data.init(bytesNoCopy: pointer, count: length, deallocator: deallocator)
+        // Swift take ownership of byte buffer allocated at mailcore
+        // That's why we clear bytes pointer at mailcore::Data to prevent freeing memory there
+        data.destructiveDataClear()
     }
     
 }
