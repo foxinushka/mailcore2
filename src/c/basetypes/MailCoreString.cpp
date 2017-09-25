@@ -1,8 +1,11 @@
 #include "MailCoreString.h"
 #include <MailCore/MCCore.h>
+#include <MailCore/MCLibetpan.h>
+
 #include "CData.h"
 
 #include "CBase+Private.h"
+#include "time.h"
 
 #define nativeType mailcore::String
 #define structName MailCoreString
@@ -31,6 +34,18 @@ MailCoreString CData_stringWithDetectedCharset(struct CData self, MailCoreString
 
 MailCoreString CData_charsetWithFilteredHTML(struct CData self, bool filterHTML) {
     return MailCoreString_new(self.instance->charsetWithFilteredHTML(filterHTML));
+}
+
+extern "C" {
+
+    time_t MailCoreTimestampFromDate(struct mailimf_date_time * date_time) {
+        return mailcore::timestampFromDate(date_time);
+    }
+    
+    time_t MailCoreTimestampFromIMAPDate(struct mailimap_date_time * imap_date) {
+        return mailcore::timestampFromIMAPDate(imap_date);
+    }
+    
 }
 
 

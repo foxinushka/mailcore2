@@ -154,6 +154,7 @@ LOCAL_C_INCLUDES += $(src_dir)/c/abstract
 LOCAL_C_INCLUDES += $(src_dir)/c/utils
 LOCAL_C_INCLUDES += $(src_dir)/c/rfc822
 LOCAL_C_INCLUDES += $(SWIFT_PM_EXTERNAL_INCLUDE)
+LOCAL_C_INCLUDES += $(LIBETPAN_PATH)/include
 
 LOCAL_SRC_FILES  := \
 	$(abstract_src_files) \

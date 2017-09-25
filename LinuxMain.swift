@@ -19,6 +19,13 @@ extension unittest {
   ]
 }
 
+extension LibetpanHelperTests {
+  static var allTests = [
+    ("testDates", testDates)
+  ]
+}
+
 XCTMain([
-  testCase(unittest.allTests)
+  testCase(unittest.allTests),
+  testCase(LibetpanHelperTests.allTests),
 ])

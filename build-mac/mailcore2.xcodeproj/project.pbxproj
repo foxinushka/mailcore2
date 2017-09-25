@@ -515,6 +515,11 @@
 		843E58151F6927DA00AE681B /* DispatchQueue+Mailcore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843E58141F6927D900AE681B /* DispatchQueue+Mailcore.swift */; };
 		843E58161F6927DA00AE681B /* DispatchQueue+Mailcore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843E58141F6927D900AE681B /* DispatchQueue+Mailcore.swift */; };
 		843E58171F69554300AE681B /* data in Resources */ = {isa = PBXBuildFile; fileRef = C6B5B08F19F63542001352A6 /* data */; };
+		843EA47C1F795A5400861123 /* LibetpanHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843EA47B1F795A5400861123 /* LibetpanHelper.swift */; };
+		843EA47D1F795A5400861123 /* LibetpanHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843EA47B1F795A5400861123 /* LibetpanHelper.swift */; };
+		843EA47F1F7966A500861123 /* LibetpanHelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843EA47E1F7966A400861123 /* LibetpanHelperTests.swift */; };
+		843EA4801F79730400861123 /* MCLibetpan.h in Headers */ = {isa = PBXBuildFile; fileRef = BD63713A177DFF080094121B /* MCLibetpan.h */; };
+		843EA4811F79730500861123 /* MCLibetpan.h in Headers */ = {isa = PBXBuildFile; fileRef = BD63713A177DFF080094121B /* MCLibetpan.h */; };
 		84424A7E1F274CBA009B953B /* CIMAPSearchOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 840CB4501F274AD60068E8E6 /* CIMAPSearchOperation.cpp */; };
 		844D9CE01F28F1F500E470A8 /* CMessagePart.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 844D9CDE1F28F1F500E470A8 /* CMessagePart.cpp */; };
 		844D9CE11F28F1F500E470A8 /* CMessagePart.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 844D9CDE1F28F1F500E470A8 /* CMessagePart.cpp */; };
@@ -522,10 +527,6 @@
 		844D9CE31F28F1F500E470A8 /* CMessagePart.h in Headers */ = {isa = PBXBuildFile; fileRef = 844D9CDF1F28F1F500E470A8 /* CMessagePart.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8458F9521F3F505B0066C70C /* MCOObjectWrapper.mm in Sources */ = {isa = PBXBuildFile; fileRef = 843E4A7F1F306F2600D78022 /* MCOObjectWrapper.mm */; };
 		8458F9531F3F505E0066C70C /* MCOObjectWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = 843E4A7E1F306F2600D78022 /* MCOObjectWrapper.h */; };
-		845FB82C1F28FFC200A29DA8 /* RSMLibetpanHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = 845FB82A1F28FFC200A29DA8 /* RSMLibetpanHelper.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		845FB82D1F28FFC200A29DA8 /* RSMLibetpanHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = 845FB82A1F28FFC200A29DA8 /* RSMLibetpanHelper.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		845FB82E1F28FFC200A29DA8 /* RSMLibetpanHelper.mm in Sources */ = {isa = PBXBuildFile; fileRef = 845FB82B1F28FFC200A29DA8 /* RSMLibetpanHelper.mm */; };
-		845FB82F1F28FFC200A29DA8 /* RSMLibetpanHelper.mm in Sources */ = {isa = PBXBuildFile; fileRef = 845FB82B1F28FFC200A29DA8 /* RSMLibetpanHelper.mm */; };
 		845FB8421F29031400A29DA8 /* CMailProvidersManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 845FB8401F29031400A29DA8 /* CMailProvidersManager.cpp */; };
 		845FB8431F29031400A29DA8 /* CMailProvidersManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 845FB8401F29031400A29DA8 /* CMailProvidersManager.cpp */; };
 		845FB8441F29031400A29DA8 /* CMailProvidersManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 845FB8411F29031400A29DA8 /* CMailProvidersManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -2131,11 +2132,11 @@
 		843E4A851F30838500D78022 /* MailCoreString.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MailCoreString.cpp; path = c/basetypes/MailCoreString.cpp; sourceTree = "<group>"; };
 		843E4A861F30838500D78022 /* MailCoreString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MailCoreString.h; path = c/basetypes/MailCoreString.h; sourceTree = "<group>"; };
 		843E58141F6927D900AE681B /* DispatchQueue+Mailcore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "DispatchQueue+Mailcore.swift"; path = "swift/utils/DispatchQueue+Mailcore.swift"; sourceTree = "<group>"; };
+		843EA47B1F795A5400861123 /* LibetpanHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LibetpanHelper.swift; path = swift/utils/LibetpanHelper.swift; sourceTree = "<group>"; };
+		843EA47E1F7966A400861123 /* LibetpanHelperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LibetpanHelperTests.swift; path = ../../unittest/LibetpanHelperTests.swift; sourceTree = "<group>"; };
 		844D9CDE1F28F1F500E470A8 /* CMessagePart.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CMessagePart.cpp; path = c/rfc822/CMessagePart.cpp; sourceTree = "<group>"; };
 		844D9CDF1F28F1F500E470A8 /* CMessagePart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CMessagePart.h; path = c/rfc822/CMessagePart.h; sourceTree = "<group>"; };
 		84501D0C1DA511A400A9FF4D /* MCOIndexSet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MCOIndexSet.swift; path = swift/basetypes/MCOIndexSet.swift; sourceTree = "<group>"; };
-		845FB82A1F28FFC200A29DA8 /* RSMLibetpanHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RSMLibetpanHelper.h; path = swift/utils/RSMLibetpanHelper.h; sourceTree = "<group>"; };
-		845FB82B1F28FFC200A29DA8 /* RSMLibetpanHelper.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = RSMLibetpanHelper.mm; path = swift/utils/RSMLibetpanHelper.mm; sourceTree = "<group>"; };
 		845FB8401F29031400A29DA8 /* CMailProvidersManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CMailProvidersManager.cpp; path = c/provider/CMailProvidersManager.cpp; sourceTree = "<group>"; };
 		845FB8411F29031400A29DA8 /* CMailProvidersManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = CMailProvidersManager.h; path = c/provider/CMailProvidersManager.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		845FB8461F29057A00A29DA8 /* CNetService.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CNetService.cpp; path = c/provider/CNetService.cpp; sourceTree = "<group>"; };
@@ -2891,6 +2892,7 @@
 			children = (
 				841E65051F683481007BB736 /* data */,
 				841E65061F68348B007BB736 /* unittest.swift */,
+				843EA47E1F7966A400861123 /* LibetpanHelperTests.swift */,
 				841E64FE1F683440007BB736 /* Info.plist */,
 			);
 			path = MailCoreTests;
@@ -3183,9 +3185,8 @@
 				843E49FB1F2F9A4700D78022 /* ConnectionLoggerHelper.swift */,
 				84E3DB3B1D9A8459003B598F /* MailCoreError.swift */,
 				84E3DB331D997D32003B598F /* Operation.swift */,
-				845FB82A1F28FFC200A29DA8 /* RSMLibetpanHelper.h */,
-				845FB82B1F28FFC200A29DA8 /* RSMLibetpanHelper.mm */,
 				843E58141F6927D900AE681B /* DispatchQueue+Mailcore.swift */,
+				843EA47B1F795A5400861123 /* LibetpanHelper.swift */,
 			);
 			name = utils;
 			sourceTree = "<group>";
@@ -4124,6 +4125,7 @@
 				F4D001D423C50FD1F127A951 /* MCSMTPNoopOperation.h in Headers */,
 				DDEABC43085EF35411698BEE /* MCNNTPGroupInfo.h in Headers */,
 				793CD139BFC584B6D74026E6 /* MCIMAPConnectOperation.h in Headers */,
+				843EA4801F79730400861123 /* MCLibetpan.h in Headers */,
 				E5889F3AC3D9F2EC8707DC61 /* MCIMAPQuotaOperation.h in Headers */,
 				37CABFE41284A99A7B5C536C /* MCNNTPFetchHeaderOperation.h in Headers */,
 				4B711609CF722B1A49132323 /* MCNNTPOperation.h in Headers */,
@@ -4235,7 +4237,6 @@
 				F8DCBCEC6F0A48F92E827FED /* MCMessageBuilder.h in Headers */,
 				F0D3A829A77BDD5A0FA78650 /* MCMessageParser.h in Headers */,
 				BE62AAFC394F7FEE8C3DC861 /* MCMessagePart.h in Headers */,
-				845FB82C1F28FFC200A29DA8 /* RSMLibetpanHelper.h in Headers */,
 				9C5253B510321886FBF6B9F2 /* MCMultipart.h in Headers */,
 				82EA488427194EB997FE4925 /* MCRFC822.h in Headers */,
 				47FC8F983AFFF98F5BC72B38 /* MCSMTP.h in Headers */,
@@ -4251,7 +4252,6 @@
 			files = (
 				802A99231ECF83E500FFF0AB /* MailCore.h in Headers */,
 				843E4A821F30716300D78022 /* MCOObjectWrapper.h in Headers */,
-				845FB82D1F28FFC200A29DA8 /* RSMLibetpanHelper.h in Headers */,
 				840CB4551F274AD60068E8E6 /* CIMAPSearchOperation.h in Headers */,
 				845FB84B1F29057A00A29DA8 /* CNetService.h in Headers */,
 				845FB8451F29031400A29DA8 /* CMailProvidersManager.h in Headers */,
@@ -4329,6 +4329,7 @@
 				3BD69427581B268E89557F81 /* MCPOPFetchMessagesOperation.h in Headers */,
 				52516BFEB3739590E779F6F5 /* MCAttachment.h in Headers */,
 				C166A8DA9CF7B11F5CFD6AA9 /* MCSMTPOperation.h in Headers */,
+				843EA4811F79730500861123 /* MCLibetpan.h in Headers */,
 				FC6E25B0B716CFA16397D5FD /* MCSMTPAsyncSession.h in Headers */,
 				2CCB64F93013A0B4A5D86A8D /* MCMessageBuilder.h in Headers */,
 				C1F4B4B5A8F425EE2E7DCA66 /* MCMessageParser.h in Headers */,
@@ -4827,7 +4828,7 @@
 				84DBBEDF1F26411500F03A5F /* IMAPFolderStatus.swift in Sources */,
 				84DBBEE01F26411500F03A5F /* IMAPSearchExpression.swift in Sources */,
 				84DBBEE11F26411500F03A5F /* IMAPBaseOperation.swift in Sources */,
-				845FB82F1F28FFC200A29DA8 /* RSMLibetpanHelper.mm in Sources */,
+				843EA47D1F795A5400861123 /* LibetpanHelper.swift in Sources */,
 				84DBBEE21F26411500F03A5F /* IMAPOperation.swift in Sources */,
 				84DBBEE31F26411500F03A5F /* IMAPAppendMessageOperation.swift in Sources */,
 				84DBBEE41F26411500F03A5F /* IMAPCopyMessagesOperation.swift in Sources */,
@@ -5083,6 +5084,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				846021D81F6BE26D0032EF37 /* unittest.swift in Sources */,
+				843EA47F1F7966A500861123 /* LibetpanHelperTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -5495,7 +5497,7 @@
 				84DBBEA51F26400E00F03A5F /* IMAPFolderInfo.swift in Sources */,
 				84DBBEA61F26400E00F03A5F /* IMAPFolderStatus.swift in Sources */,
 				84DBBEA71F26400E00F03A5F /* IMAPSearchExpression.swift in Sources */,
-				845FB82E1F28FFC200A29DA8 /* RSMLibetpanHelper.mm in Sources */,
+				843EA47C1F795A5400861123 /* LibetpanHelper.swift in Sources */,
 				84DBBEA81F26400E00F03A5F /* IMAPBaseOperation.swift in Sources */,
 				84DBBEA91F26400E00F03A5F /* IMAPOperation.swift in Sources */,
 				84DBBEAA1F26400E00F03A5F /* IMAPAppendMessageOperation.swift in Sources */,

@@ -63,6 +63,10 @@ pushd "$base_dir"
                 cp -R "ctemplate-android-$ctemplate_build_version" "$download_dir/"
             popd
         fi
+
+        # Copy libetpan headers
+        rsync -t -r "libetpan-android-$libetpan_build_version/include/libetpan" "$SWIFT_PM_EXTERNAL_INCLUDE"
+
     popd
 
     # build C/C++ to libcmailcore.so

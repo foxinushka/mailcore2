@@ -34,6 +34,7 @@ core/basetypes/MCOperationCallback.h
 core/basetypes/MCIterator.h
 core/basetypes/MCConnectionLogger.h
 core/basetypes/MCHTMLCleaner.h
+core/basetypes/MCLibetpan.h
 core/abstract/MCAbstractMessagePart.h
 core/abstract/MCAbstractPart.h
 core/abstract/MCAbstractMultipart.h
