@@ -31,8 +31,8 @@ function download_dep {
 }
 
 # Specify libs output
-export NDK_OUT="$SWIFT_PM_EXTERNAL_LIBS"
-export NDK_LIBS_OUT="$SWIFT_PM_EXTERNAL_LIBS"
+# export NDK_OUT="$SWIFT_PM_EXTERNAL_LIBS"
+# export NDK_LIBS_OUT="$SWIFT_PM_EXTERNAL_LIBS"
 
 base_dir="$(realpath $(dirname $0))"
 pushd "$base_dir"
@@ -78,4 +78,7 @@ pushd "$base_dir"
         TIDY_HTML5_PATH="$download_dir/tidy-html5-android-$tidy_html5_build_version" \
         OPENSSL_PATH="$download_dir/openssl-android-$openssl_build_version" \
         CYRUS_SASL_PATH="$download_dir/cyrus-sasl-android-$cyrus_sasl_build_version"
+
+    # Copy all libraries
+    rsync -t -r "libs/armeabi-v7a" "$SWIFT_PM_EXTERNAL_LIBS"
 popd
