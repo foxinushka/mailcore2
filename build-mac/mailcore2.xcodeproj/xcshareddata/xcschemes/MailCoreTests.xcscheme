@@ -42,7 +42,7 @@
       <EnvironmentVariables>
          <EnvironmentVariable
             key = "TZ"
-            value = "us/pacific"
+            value = "America/Los_Angeles"
             isEnabled = "YES">
          </EnvironmentVariable>
       </EnvironmentVariables>
