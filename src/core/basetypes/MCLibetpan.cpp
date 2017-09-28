@@ -38,7 +38,17 @@ time_t mailcore::timestampFromDate(struct mailimf_date_time * date_time)
     tmval.tm_mon  = date_time->dt_month - 1;
     if (date_time->dt_year < 1000) {
         // workaround when century is not given in year
-        tmval.tm_year = date_time->dt_year + 2000 - 1900;
+        #if __APPLE__
+            tmval.tm_year = date_time->dt_year + 2000 - 1900;
+        #else
+            // Fix for 2038 issue on Android: https://en.wikipedia.org/wiki/Year_2038_problem
+            if (date_time->dt_year >= 30) {
+                // If date_time->dt_year > 30, assume that it 1930 < date_time->dt_year
+                tmval.tm_year = date_time->dt_year;
+            } else {
+                tmval.tm_year = date_time->dt_year + 2000 - 1900;
+            }
+        #endif
     }
     else {
         tmval.tm_year = date_time->dt_year - 1900;
@@ -177,12 +187,13 @@ static int tmcomp(struct tm * atmp, struct tm * btmp)
     return result;
 }
 
+
 time_t mailcore::mkgmtime(struct tm * tmp)
 {
     int            dir;
     int            bits;
     int            saved_seconds;
-    time_t                t;
+    time_t         t;
     struct tm            yourtm, mytm;
     
     yourtm = *tmp;

@@ -52,6 +52,7 @@ fileprivate func equalDictionaries(_ lhs: Dictionary<AnyHashable, Any>, _ rhs: D
         }
         if equalAny(lhsValue, rhsValue) == false {
             //print("EqualDictionaries: equalAny(\(lhsValue), \(rhsValue))")
+            print("Check for \(key) failed")
             return false
         }
     }
@@ -143,7 +144,7 @@ class unittest : XCTestCase {
         super.setUp()
         
         #if os(Android)
-        _mainPath = Bundle.main.bundleURL.appendingPathComponent("resources/data")
+        _mainPath = Bundle.main.bundleURL.appendingPathComponent("resources/data-android")
         #else
         NSTimeZone.default = TimeZone.init(abbreviation: "PST")!
         _mainPath = Bundle.init(for: unittest.self).resourceURL!.appendingPathComponent("data")
@@ -247,8 +248,13 @@ class unittest : XCTestCase {
                 path = _parserOutputPath.appendingPathComponent(name)
                 expectedData = try Data(contentsOf: path, options: [])
                 let expectedResult = try JSONSerialization.jsonObject(with: expectedData, options: []) as! [AnyHashable: Any]
-
-                XCTAssertTrue(equalDictionaries(result, expectedResult), "file \(name)");
+                
+                let equal = equalDictionaries(result, expectedResult)
+                if !equal {
+                    print("Parsed Result: \(result)")
+                    print("Expected Result: \(expectedResult)")
+                }
+                XCTAssertTrue(equal, "file \(name)");
             }
         }
         catch let e {
