@@ -342,7 +342,6 @@
 		8408C7111F2635030003A816 /* NSArray+MCO.h in Headers */ = {isa = PBXBuildFile; fileRef = 8408C6E31F26345C0003A816 /* NSArray+MCO.h */; };
 		8408C7131F2635090003A816 /* NSData+MCO.h in Headers */ = {isa = PBXBuildFile; fileRef = 8408C6E51F26345C0003A816 /* NSData+MCO.h */; };
 		8408C7151F26350D0003A816 /* NSDictionary+MCO.h in Headers */ = {isa = PBXBuildFile; fileRef = 8408C6E71F26345C0003A816 /* NSDictionary+MCO.h */; };
-		8408C71B1F26351C0003A816 /* NSObject+MCO.h in Headers */ = {isa = PBXBuildFile; fileRef = 8408C6ED1F26345C0003A816 /* NSObject+MCO.h */; };
 		8408C71D1F2635210003A816 /* NSSet+MCO.h in Headers */ = {isa = PBXBuildFile; fileRef = 8408C6EF1F26345C0003A816 /* NSSet+MCO.h */; };
 		8408C71F1F2635250003A816 /* NSString+MCO.h in Headers */ = {isa = PBXBuildFile; fileRef = 8408C6F11F26345C0003A816 /* NSString+MCO.h */; };
 		8408C7211F26352A0003A816 /* NSValue+MCO.h in Headers */ = {isa = PBXBuildFile; fileRef = 8408C6F31F26345C0003A816 /* NSValue+MCO.h */; };
@@ -1011,7 +1010,6 @@
 		C437A833C190907BC1C5BA8F /* MCAbstractMessage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C64EA694169E847800778456 /* MCAbstractMessage.cpp */; };
 		C59D601A5C291B3652174757 /* MCIMAPIdleOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = C64EA82816A29F0300778456 /* MCIMAPIdleOperation.h */; };
 		C600B61C1A242C6A000728F1 /* unittest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C600B61B1A242C6A000728F1 /* unittest.cpp */; };
-		C600B61D1A244BD1000728F1 /* libMailCore.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C64EA537169E772200778456 /* libMailCore.a */; };
 		C600B6201A244C9A000728F1 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6ED6D1917A1919500A4A14C /* Security.framework */; };
 		C600B6211A244CB2000728F1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6BD2893170BD71100A91AC1 /* Foundation.framework */; };
 		C600B6231A244CC3000728F1 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C600B6221A244CC3000728F1 /* CFNetwork.framework */; };
@@ -1467,6 +1465,15 @@
 		D10C246499923B5F19C5D7FF /* MCAutoreleasePool.h in Headers */ = {isa = PBXBuildFile; fileRef = C64EA6A3169E847800778456 /* MCAutoreleasePool.h */; };
 		D15156687200D37E077EEF68 /* MCHTMLCleaner.h in Headers */ = {isa = PBXBuildFile; fileRef = C63CD69016BE566E00DB18F1 /* MCHTMLCleaner.h */; };
 		D1523D8529F92346D5447C31 /* MCPOPFetchHeaderOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C62C6EF016A7C6DE00737497 /* MCPOPFetchHeaderOperation.cpp */; };
+		D2B458D81F7D1C2C0005B335 /* libMailCore.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C64EA537169E772200778456 /* libMailCore.a */; };
+		D2B458DF1F7D1D110005B335 /* NSObject+MCO.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8408C6EE1F26345C0003A816 /* NSObject+MCO.mm */; };
+		D2B458E01F7D1D120005B335 /* NSObject+MCO.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8408C6EE1F26345C0003A816 /* NSObject+MCO.mm */; };
+		D2B458E11F7D1D410005B335 /* NSObject+MCO.h in Headers */ = {isa = PBXBuildFile; fileRef = 8408C6ED1F26345C0003A816 /* NSObject+MCO.h */; };
+		D2B458E21F7D1D420005B335 /* NSObject+MCO.h in Headers */ = {isa = PBXBuildFile; fileRef = 8408C6ED1F26345C0003A816 /* NSObject+MCO.h */; };
+		D2B458E31F7D1D4B0005B335 /* NSObject+MCO.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8408C6EE1F26345C0003A816 /* NSObject+MCO.mm */; };
+		D2B458E41F7D1D4C0005B335 /* NSObject+MCO.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8408C6EE1F26345C0003A816 /* NSObject+MCO.mm */; };
+		D2B458E61F7D1DB80005B335 /* MCOObjectWrapper.mm in Sources */ = {isa = PBXBuildFile; fileRef = 843E4A7F1F306F2600D78022 /* MCOObjectWrapper.mm */; };
+		D2B458E71F7D1DB90005B335 /* MCOObjectWrapper.mm in Sources */ = {isa = PBXBuildFile; fileRef = 843E4A7F1F306F2600D78022 /* MCOObjectWrapper.mm */; };
 		D30894BC748088E5A37BB98A /* MCAddress.h in Headers */ = {isa = PBXBuildFile; fileRef = C64EA69D169E847800778456 /* MCAddress.h */; };
 		D30BB30E13D6602990D32521 /* MCICUTypes.h in Headers */ = {isa = PBXBuildFile; fileRef = C6D6F9691720F8F4006F5B28 /* MCICUTypes.h */; };
 		D3A48A829DE8214CC305D72E /* MCCertificateUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6F7B19D17A1C15200BE78BB /* MCCertificateUtils.cpp */; };
@@ -2697,6 +2704,7 @@
 		C6EFFBC7182BBF5700CFF656 /* MCIMAPMultiDisconnectOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCIMAPMultiDisconnectOperation.h; sourceTree = "<group>"; };
 		C6F7B19D17A1C15200BE78BB /* MCCertificateUtils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MCCertificateUtils.cpp; sourceTree = "<group>"; };
 		C6F7B19E17A1C15200BE78BB /* MCCertificateUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCCertificateUtils.h; sourceTree = "<group>"; };
+		D2B458D61F7D18C80005B335 /* libapple_crypto.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libapple_crypto.tbd; path = usr/lib/libapple_crypto.tbd; sourceTree = SDKROOT; };
 		DA0F1C79177C07B300F0D3B4 /* MCIMAPMessageRenderingOperation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MCIMAPMessageRenderingOperation.cpp; sourceTree = "<group>"; };
 		DA0F1C7A177C07B300F0D3B4 /* MCIMAPMessageRenderingOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCIMAPMessageRenderingOperation.h; sourceTree = "<group>"; };
 		DAACAD4F17886807000B4517 /* MCHTMLRendererIMAPDataCallback.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MCHTMLRendererIMAPDataCallback.cpp; sourceTree = "<group>"; };
@@ -2729,10 +2737,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D2B458D81F7D1C2C0005B335 /* libMailCore.a in Frameworks */,
 				C600B6231A244CC3000728F1 /* CFNetwork.framework in Frameworks */,
 				C600B6211A244CB2000728F1 /* Foundation.framework in Frameworks */,
 				C600B6201A244C9A000728F1 /* Security.framework in Frameworks */,
-				C600B61D1A244BD1000728F1 /* libMailCore.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3917,6 +3925,7 @@
 		C64EA78E169F259200778456 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D2B458D61F7D18C80005B335 /* libapple_crypto.tbd */,
 				84F7B4C11D917B1D005F83E8 /* libc++.tbd */,
 				C600B6221A244CC3000728F1 /* CFNetwork.framework */,
 				C6B5AE1119F63496001352A6 /* Foundation.framework */,
@@ -4174,6 +4183,7 @@
 				00C58A9AA11F95A5499671DA /* MCPOPAsyncSession.h in Headers */,
 				3ABAFBB958CBDE353E5B057A /* MCIMAPFolderInfoOperation.h in Headers */,
 				70CF9C6A42EE4CFD9F0CE1D2 /* MCIMAPFetchMessagesOperation.h in Headers */,
+				D2B458E11F7D1D410005B335 /* NSObject+MCO.h in Headers */,
 				7B0B78FF7316D63CB2FB15D2 /* MCIMAPFetchContentOperation.h in Headers */,
 				915157868D0F017A7A1629CD /* MCIMAPIdentityOperation.h in Headers */,
 				FD98CE73B8B5A9581AB0F6CC /* MCIMAPAppendMessageOperation.h in Headers */,
@@ -4321,7 +4331,6 @@
 				8435684F1F45A2F200FCFF33 /* CAbstractMessageRendererCallbackWrapper.h in Headers */,
 				8408C7151F26350D0003A816 /* NSDictionary+MCO.h in Headers */,
 				8408C71F1F2635250003A816 /* NSString+MCO.h in Headers */,
-				8408C71B1F26351C0003A816 /* NSObject+MCO.h in Headers */,
 				8408C7131F2635090003A816 /* NSData+MCO.h in Headers */,
 				8408C7111F2635030003A816 /* NSArray+MCO.h in Headers */,
 				8408C7211F26352A0003A816 /* NSValue+MCO.h in Headers */,
@@ -4386,6 +4395,7 @@
 				D40E3CC7F484F98F04054C31 /* MCNNTPPostOperation.h in Headers */,
 				8D96BE9CABB92A9E4CA3228F /* MCIMAPFetchContentToFileOperation.h in Headers */,
 				5FEF7A557A99C90EDF9E5287 /* MCHTMLCleaner.h in Headers */,
+				D2B458E21F7D1D420005B335 /* NSObject+MCO.h in Headers */,
 				70008CC60AFB9D72874FEE6F /* MCAccountValidator.h in Headers */,
 				FDFC8B4CA1048E6EA1D6F266 /* MCIMAPFolderInfo.h in Headers */,
 				59A56DD29C2F2E36EBFB090E /* MCIMAPCheckAccountOperation.h in Headers */,
@@ -4922,6 +4932,7 @@
 				052AAA74C5D3B28F3167F974 /* MCAssert.c in Sources */,
 				4A4A96DDCA43E40CA772C52C /* MCData.cpp in Sources */,
 				843E58151F6927DA00AE681B /* DispatchQueue+Mailcore.swift in Sources */,
+				D2B458E41F7D1D4C0005B335 /* NSObject+MCO.mm in Sources */,
 				9FE4A7EADDB2DEB7EF72D156 /* MCHash.cpp in Sources */,
 				63808A80CC695018058077F4 /* MCHashMap.cpp in Sources */,
 				C787961953BEC9FF6FC63FB8 /* MCLog.cpp in Sources */,
@@ -5181,6 +5192,7 @@
 				C64EA82016A29E4100778456 /* MCIMAPStoreFlagsOperation.cpp in Sources */,
 				C64EA82316A29E5300778456 /* MCIMAPStoreLabelsOperation.cpp in Sources */,
 				C64EA82616A29EE500778456 /* MCIMAPSearchOperation.cpp in Sources */,
+				D2B458E71F7D1DB90005B335 /* MCOObjectWrapper.mm in Sources */,
 				C6E665BD1796500C0063F2CF /* zip.c in Sources */,
 				C64EA82916A29F2200778456 /* MCIMAPIdleOperation.cpp in Sources */,
 				C64EA82C16A2A08B00778456 /* MCIMAPFetchNamespaceOperation.cpp in Sources */,
@@ -5261,6 +5273,7 @@
 				BD63713B177DFF080094121B /* MCLibetpan.cpp in Sources */,
 				DAACAD5117886807000B4517 /* MCHTMLRendererIMAPDataCallback.cpp in Sources */,
 				4B3C1BE117ABF4BC008BBF4C /* MCIMAPQuotaOperation.cpp in Sources */,
+				D2B458DF1F7D1D110005B335 /* NSObject+MCO.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -5303,6 +5316,7 @@
 				84B639EE17F280F3003B5BA2 /* MCIMAPNoopOperation.cpp in Sources */,
 				C6BA2B9B1705F4E6003F0E9E /* MCAbstractMultipart.cpp in Sources */,
 				C6BA2B9C1705F4E6003F0E9E /* MCAbstractPart.cpp in Sources */,
+				D2B458E01F7D1D120005B335 /* NSObject+MCO.mm in Sources */,
 				C6BA2B9D1705F4E6003F0E9E /* MCAddress.cpp in Sources */,
 				C6BA2B9E1705F4E6003F0E9E /* MCMessageHeader.cpp in Sources */,
 				C6BA2B9F1705F4E6003F0E9E /* MCAutoreleasePool.cpp in Sources */,
@@ -5319,6 +5333,7 @@
 				C6BA2BA81705F4E6003F0E9E /* MCSet.cpp in Sources */,
 				C6BA2BA91705F4E6003F0E9E /* MCString.cpp in Sources */,
 				C6BA2BAA1705F4E6003F0E9E /* MCValue.cpp in Sources */,
+				D2B458E61F7D1DB80005B335 /* MCOObjectWrapper.mm in Sources */,
 				C6BA2BAB1705F4E6003F0E9E /* MCMainThreadMac.mm in Sources */,
 				C6BA2BAC1705F4E6003F0E9E /* MCOperation.cpp in Sources */,
 				C6BA2BAD1705F4E6003F0E9E /* MCOperationQueue.cpp in Sources */,
@@ -5591,6 +5606,7 @@
 				C82125D34DA7457D9D821383 /* MCArray.cpp in Sources */,
 				0E4EAA748969A74A2F8AC40B /* MCZip.cpp in Sources */,
 				843E58161F6927DA00AE681B /* DispatchQueue+Mailcore.swift in Sources */,
+				D2B458E31F7D1D4B0005B335 /* NSObject+MCO.mm in Sources */,
 				69C47A83A8E38FC5A0E09D6B /* MCSMTPNoopOperation.cpp in Sources */,
 				55DBD5240FC44C606C7DCECC /* MCAssert.c in Sources */,
 				FC2E4E860688FEC5315FA904 /* MCData.cpp in Sources */,
@@ -5981,8 +5997,6 @@
 					"-lc++",
 					"-stdlib=libc++",
 					"-ObjC",
-					"-lcrypto",
-					"-lssl",
 					"-lresolv",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -6021,8 +6035,6 @@
 					"-lc++",
 					"-stdlib=libc++",
 					"-ObjC",
-					"-lcrypto",
-					"-lssl",
 					"-lresolv",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -6086,6 +6098,7 @@
 				"LIBRARY_SEARCH_PATHS[sdk=iphoneos*]" = "$(IOS_LIBRARY_SEARCH_PATHS)";
 				"LIBRARY_SEARCH_PATHS[sdk=iphonesimulator*]" = "$(IOS_LIBRARY_SEARCH_PATHS)";
 				"LIBRARY_SEARCH_PATHS[sdk=macosx*]" = "$(OSX_LIBRARY_SEARCH_PATHS)";
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				ONLY_ACTIVE_ARCH = YES;
 				OSX_HEADERS_SEARCH_PATHS = "\"$(SRCROOT)/../src/core/basetypes/icu-ucsdet/include\" \"$(SRCROOT)/../Externals/libetpan-osx/include\" \"$(SRCROOT)/../Externals/ctemplate-osx/include\" /usr/include/tidy /usr/include/libxml2";
 				OSX_LIBRARY_SEARCH_PATHS = "\"$(SRCROOT)/../Externals/libetpan-osx/lib\" \"$(SRCROOT)/../Externals/ctemplate-osx/lib\"";
@@ -6141,6 +6154,7 @@
 				"LIBRARY_SEARCH_PATHS[sdk=iphoneos*]" = "$(IOS_LIBRARY_SEARCH_PATHS)";
 				"LIBRARY_SEARCH_PATHS[sdk=iphonesimulator*]" = "$(IOS_LIBRARY_SEARCH_PATHS)";
 				"LIBRARY_SEARCH_PATHS[sdk=macosx*]" = "$(OSX_LIBRARY_SEARCH_PATHS)";
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				OSX_HEADERS_SEARCH_PATHS = "\"$(SRCROOT)/../src/core/basetypes/icu-ucsdet/include\" \"$(SRCROOT)/../Externals/libetpan-osx/include\" \"$(SRCROOT)/../Externals/ctemplate-osx/include\" /usr/include/tidy /usr/include/libxml2";
 				OSX_LIBRARY_SEARCH_PATHS = "\"$(SRCROOT)/../Externals/libetpan-osx/lib\" \"$(SRCROOT)/../Externals/ctemplate-osx/lib\"";
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";

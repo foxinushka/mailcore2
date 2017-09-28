@@ -2,6 +2,14 @@
 #include <dirent.h>
 #include <math.h>
 #include <time.h>
+#include "MCMessageBuilder.h"
+#include "MCMessageHeader.h"
+#include "MCAddress.h"
+#include "MCAttachment.h"
+#include "MCMessageParser.h"
+#include "MCMessagePart.h"
+#include "MCMultiPart.h"
+#include "MCIMAPNamespace.h"
 
 using namespace mailcore;
 
@@ -336,7 +344,7 @@ static void testMUTF7(void)
 int main(int argc, char ** argv)
 {
     tzset();
-
+    
     if (argc < 2) {
         fprintf(stderr, "syntax: unittestcpp [unittestdatadir]\n");
         exit(EXIT_FAILURE);
