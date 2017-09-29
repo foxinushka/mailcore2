@@ -75,7 +75,7 @@ public class MCOMessageParser : MCOAbstractMessage {
         return nativeInstance.plainTextBodyRenderingAndStripWhitespace(stripWhitespace).string()
     }
     
-    
-    
-    
+    public func saveToFile(fileName: String) {
+        self.nativeInstance.saveToFile(fileName.mailCoreString())
+    }
 }

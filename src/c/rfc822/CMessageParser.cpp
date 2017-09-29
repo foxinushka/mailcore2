@@ -36,3 +36,7 @@ MailCoreString CMessageParser_htmlRendering(struct CMessageParser self, struct C
 {
     return MailCoreString_new(self.instance->htmlRendering(static_cast<mailcore::HTMLRendererTemplateCallback*>(htmlCallback.callbackBridge)));
 }
+
+void CMessageParser_saveToFile(struct CMessageParser self, MailCoreString fileName) {
+    self.instance->saveToFile(fileName.instance);
+}

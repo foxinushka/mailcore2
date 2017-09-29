@@ -294,6 +294,19 @@ void MessageParser::recursiveSetupPartIDWithMessagePart(mailcore::MessagePart * 
     recursiveSetupPartIDWithPart(part->mainPart(), partID);
 }
 
+void MessageParser::saveToFile(mailcore::String *fileName) {
+    String* value = this->header()->extraHeaderValueForName(new String("Organizace"));
+    if (value != NULL) {
+        printf ("Value of Organizace = %s", value->UTF8Characters());
+    }
+     
+    HashMap* content = this->serializable();
+    Data* data = JSON::objectToJSONData(content);
+    data->writeToFile(fileName);
+    MC_SAFE_RELEASE(data);
+    MC_SAFE_RELEASE(content);
+}
+
 void MessageParser::recursiveSetupPartIDWithMultipart(mailcore::Multipart * part,
                                                       mailcore::String * partIDPrefix)
 {
@@ -309,6 +322,7 @@ void MessageParser::recursiveSetupPartIDWithMultipart(mailcore::Multipart * part
         recursiveSetupPartIDWithPart(subpart, partID);
     }
 }
+
 
 static void * createObject()
 {

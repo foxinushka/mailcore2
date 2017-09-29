@@ -38,6 +38,7 @@ namespace mailcore {
         
         virtual String * plainTextRendering();
         virtual String * plainTextBodyRendering(bool stripWhitespace);
+        virtual void saveToFile(String * fileName);
         
     public: // subclass behavior
         MessageParser(MessageParser * other);

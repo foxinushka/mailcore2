@@ -32,6 +32,7 @@ extern "C" {
     C_SYNTHESIZE_FUNC_DEFINITION(CMessageParser, MailCoreString, htmlRendering, struct CAbstractMessageRendererCallback)
     
     C_SYNTHESIZE_STATIC_FUNC_DEFINITION(CMessageParser, CMessageParser, init, CData)
+    C_SYNTHESIZE_FUNC_DEFINITION(CMessageParser, void, saveToFile, MailCoreString)
     
 #ifdef __cplusplus
 }
