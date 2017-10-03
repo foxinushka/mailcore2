@@ -23,6 +23,11 @@ subdirs = \
 	java java/native
 
 include $(CLEAR_VARS)
+LOCAL_MODULE    := iconv
+LOCAL_SRC_FILES := $(ICONV_PATH)/libs/$(TARGET_ARCH_ABI)/libiconv.a
+include $(PREBUILT_STATIC_LIBRARY)
+
+include $(CLEAR_VARS)
 LOCAL_MODULE    := etpan
 LOCAL_SRC_FILES := $(LIBETPAN_PATH)/libs/$(TARGET_ARCH_ABI)/libetpan.a
 include $(PREBUILT_STATIC_LIBRARY)
@@ -133,7 +138,7 @@ LOCAL_SRC_FILES := \
 
 LOCAL_CFLAGS := -DNOCRYPT -fblocks
 LOCAL_CPPFLAGS := -frtti
-LOCAL_STATIC_LIBRARIES := etpan sasl2 ssl crypto icu4c xml2 tidy ctemplate
+LOCAL_STATIC_LIBRARIES := etpan sasl2 ssl crypto iconv icu4c xml2 tidy ctemplate
 LOCAL_SHARED_LIBRARIES := dispatch
 include $(BUILD_STATIC_LIBRARY)
 
