@@ -5,10 +5,11 @@ package_name=mailcore2-android
 ctemplate_build_version=3
 cyrus_sasl_build_version=4
 icu4c_build_version=3
-libetpan_build_version=6
+libetpan_build_version=6.1
 libxml2_build_version=3
 tidy_html5_build_version=3
 openssl_build_version=3
+iconv_build_version=1
 
 
 if ! which ndk-build > /dev/null ; then
@@ -20,13 +21,34 @@ function download_dep {
     local name="$1"
     local version="$2"
 
-    if test ! -f "$name-$version.zip" ; then
-        if curl -f -O "http://d.etpan.org/mailcore2-deps/$name/$name-$version.zip" ; then
-            unzip "$name-$version.zip"
-        else
-            echo Could not download $name-$version.zip
-            exit 1
+    if test ! -d "$name-$version"; then 
+        if test ! -f "$name-$version.zip" ; then
+            if curl -f -O "http://d.etpan.org/mailcore2-deps/$name/$name-$version.zip" ; then
+                echo "Downloaded $name-$version.zip"
+            else
+                echo Could not download $name-$version.zip
+                exit 1
+            fi
         fi
+        unzip "$name-$version.zip"
+    fi
+}
+
+function download_dep_from_github {
+    local name="$1"
+    local version="$2"
+    local url="$3"
+
+    if test ! -d "$name-$version"; then
+        if test ! -f "$name-$version.zip" ; then
+            if curl -f -LO "$url/$name-$version.zip" ; then
+                echo "Downloaded $name-$version.zip"
+            else
+                echo Could not download $name-$version.zip
+                exit 1
+            fi
+        fi
+        unzip "$name-$version.zip"
     fi
 }
 
@@ -49,7 +71,8 @@ pushd "$base_dir"
     mkdir -p "$download_dir"
     pushd "$download_dir"
         download_dep "icu4c-android" $icu4c_build_version
-        download_dep "libetpan-android" $libetpan_build_version
+        download_dep_from_github "libetpan-android" $libetpan_build_version "https://github.com/yuryybk/libetpan/raw/master/build-android"
+        download_dep_from_github "iconv-android" $iconv_build_version "https://github.com/yuryybk/libetpan/raw/master/build-android/dependencies/iconv/"
         download_dep "libxml2-android" $libxml2_build_version
         download_dep "tidy-html5-android" $tidy_html5_build_version
         download_dep "openssl-android" $openssl_build_version
@@ -77,7 +100,8 @@ pushd "$base_dir"
         LIBXML2_PATH="$download_dir/libxml2-android-$libxml2_build_version" \
         TIDY_HTML5_PATH="$download_dir/tidy-html5-android-$tidy_html5_build_version" \
         OPENSSL_PATH="$download_dir/openssl-android-$openssl_build_version" \
-        CYRUS_SASL_PATH="$download_dir/cyrus-sasl-android-$cyrus_sasl_build_version"
+        CYRUS_SASL_PATH="$download_dir/cyrus-sasl-android-$cyrus_sasl_build_version" \
+        ICONV_PATH="$download_dir/iconv-android-$iconv_build_version"
 
     # Copy all libraries
     rsync -t -r "libs/armeabi-v7a" "$SWIFT_PM_EXTERNAL_LIBS"
