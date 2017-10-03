@@ -70,10 +70,8 @@ pushd "$base_dir"
     download_dir="$PWD/third-party"
     mkdir -p "$download_dir"
     pushd "$download_dir"
-        download_dep "icu4c-android" $icu4c_build_version
         download_dep_from_github "libetpan-android" $libetpan_build_version "https://github.com/yuryybk/libetpan/raw/master/build-android"
         download_dep_from_github "iconv-android" $iconv_build_version "https://github.com/yuryybk/libetpan/raw/master/build-android/dependencies/iconv/"
-        download_dep "libxml2-android" $libxml2_build_version
         download_dep "tidy-html5-android" $tidy_html5_build_version
         download_dep "openssl-android" $openssl_build_version
         download_dep "cyrus-sasl-android" $cyrus_sasl_build_version
