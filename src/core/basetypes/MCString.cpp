@@ -18,6 +18,12 @@
 #if !defined(_MSC_VER) && !defined(ANDROID) && !defined(__ANDROID__)
 #include <uuid/uuid.h>
 #endif
+
+//FIXME: SPA-58, libxml2 from toolchain should be configured with define
+#if defined(__ANDROID__)
+    #define LIBXML_HTML_ENABLED
+#endif
+
 #include <pthread.h>
 #include <libetpan/libetpan.h>
 #include <libxml/xmlmemory.h>
