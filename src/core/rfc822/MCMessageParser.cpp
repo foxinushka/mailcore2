@@ -295,11 +295,6 @@ void MessageParser::recursiveSetupPartIDWithMessagePart(mailcore::MessagePart * 
 }
 
 void MessageParser::saveToFile(mailcore::String *fileName) {
-    String* value = this->header()->extraHeaderValueForName(new String("Organizace"));
-    if (value != NULL) {
-        printf ("Value of Organizace = %s", value->UTF8Characters());
-    }
-     
     HashMap* content = this->serializable();
     Data* data = JSON::objectToJSONData(content);
     data->writeToFile(fileName);
