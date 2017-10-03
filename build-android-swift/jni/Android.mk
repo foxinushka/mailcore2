@@ -43,16 +43,6 @@ LOCAL_SRC_FILES := $(OPENSSL_PATH)/libs/$(TARGET_ARCH_ABI)/libssl.a
 include $(PREBUILT_STATIC_LIBRARY)
 
 include $(CLEAR_VARS)
-LOCAL_MODULE    := icu4c
-LOCAL_SRC_FILES := $(ICU4C_PATH)/libs/$(TARGET_ARCH_ABI)/libicu4c.a
-include $(PREBUILT_STATIC_LIBRARY)
-
-include $(CLEAR_VARS)
-LOCAL_MODULE    := xml2
-LOCAL_SRC_FILES := $(LIBXML2_PATH)/libs/$(TARGET_ARCH_ABI)/libxml2.a
-include $(PREBUILT_STATIC_LIBRARY)
-
-include $(CLEAR_VARS)
 LOCAL_MODULE    := tidy
 LOCAL_SRC_FILES := $(TIDY_HTML5_PATH)/libs/$(TARGET_ARCH_ABI)/libtidy.a
 include $(PREBUILT_STATIC_LIBRARY)
@@ -71,6 +61,26 @@ include $(CLEAR_VARS)
 LOCAL_MODULE    := dispatch
 LOCAL_EXPORT_C_INCLUDES := $(SWIFT_LIB)
 LOCAL_SRC_FILES := $(SWIFT_LIB)/android/libdispatch.so
+include $(PREBUILT_SHARED_LIBRARY)
+
+include $(CLEAR_VARS)
+LOCAL_MODULE    := scuuc
+LOCAL_SRC_FILES := $(SWIFT_LIB)/android/libscuuc.so
+include $(PREBUILT_SHARED_LIBRARY)
+
+include $(CLEAR_VARS)
+LOCAL_MODULE    := scui18n
+LOCAL_SRC_FILES := $(SWIFT_LIB)/android/libscui18n.so
+include $(PREBUILT_SHARED_LIBRARY)
+
+include $(CLEAR_VARS)
+LOCAL_MODULE    := scudata
+LOCAL_SRC_FILES := $(SWIFT_LIB)/android/libscudata.so
+include $(PREBUILT_SHARED_LIBRARY)
+
+include $(CLEAR_VARS)
+LOCAL_MODULE    := xml2
+LOCAL_SRC_FILES := $(SWIFT_LIB)/android/libxml2.so
 include $(PREBUILT_SHARED_LIBRARY)
 
 include $(CLEAR_VARS)
@@ -110,9 +120,8 @@ LOCAL_MODULE := MailCore
 LOCAL_C_INCLUDES += \
 	$(SWIFT_PM_EXTERNAL_INCLUDE) \
     $(CTEMPLATE_PATH)/include \
-    $(ICU4C_PATH)/include \
+	$(SWIFT_LIB) \
     $(LIBETPAN_PATH)/include \
-    $(LIBXML2_PATH)/include \
     $(TIDY_HTML5_PATH)/include \
     $(OPENSSL_PATH)/include \
 	$(addprefix $(src_dir)/, $(subdirs))
@@ -138,8 +147,8 @@ LOCAL_SRC_FILES := \
 
 LOCAL_CFLAGS := -DNOCRYPT -fblocks
 LOCAL_CPPFLAGS := -frtti
-LOCAL_STATIC_LIBRARIES := etpan sasl2 ssl crypto iconv icu4c xml2 tidy ctemplate
-LOCAL_SHARED_LIBRARIES := dispatch
+LOCAL_STATIC_LIBRARIES := etpan sasl2 ssl crypto iconv tidy ctemplate
+LOCAL_SHARED_LIBRARIES := dispatch scuuc scui18n scudata xml2
 include $(BUILD_STATIC_LIBRARY)
 
 include $(CLEAR_VARS)
