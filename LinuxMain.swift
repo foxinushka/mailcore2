@@ -7,15 +7,15 @@ import XCTest
 
 extension unittest {
   static var allTests = [
-    //("testMessageBuilder1", testMessageBuilder1),
-    //("testMessageBuilder2", testMessageBuilder2),
-    //("testMessageBuilder3", testMessageBuilder3),
-    //("testMessageParser", testMessageParser), // FAILED
-    ("testSummary", testSummary), // FAILED
-    //("testCharsetDetection", testCharsetDetection),
-    //("testMUTF7", testMUTF7),
-    //("testIMAP", testIMAP),
-    //("testSMTP", testSMTP),
+    ("testMessageBuilder1", testMessageBuilder1),
+    ("testMessageBuilder2", testMessageBuilder2),
+    ("testMessageBuilder3", testMessageBuilder3),
+    ("testMessageParser", testMessageParser),
+    ("testSummary", testSummary),
+    ("testCharsetDetection", testCharsetDetection),
+    ("testMUTF7", testMUTF7),
+    ("testIMAP", testIMAP),
+    ("testSMTP", testSMTP),
   ]
 }
 
