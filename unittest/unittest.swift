@@ -253,6 +253,9 @@ class unittest : XCTestCase {
                 if !equal {
                     print("Parsed Result: \(result)")
                     print("Expected Result: \(expectedResult)")
+                    let pathResult = path.path + ".compswift"
+                    print("Save result to: \(pathResult)")
+                    parser.saveToFile(fileName: pathResult )
                 }
                 XCTAssertTrue(equal, "file \(name)");
             }
