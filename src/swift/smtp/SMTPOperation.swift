@@ -1,6 +1,7 @@
 import Foundation
 import CMailCore
 
+@objcMembers
 public class MCOSMTPOperation: MCOOperation {
     
     public typealias CompletionBlock = (Error?) -> Void

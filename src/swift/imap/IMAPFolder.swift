@@ -1,6 +1,7 @@
 import Foundation
 import CMailCore
 
+@objcMembers
 public class MCOIMAPFolder: NSObject, Convertible {
     
     internal var nativeInstance:CIMAPFolder;

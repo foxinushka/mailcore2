@@ -2,6 +2,7 @@ import Foundation
 import CMailCore
 
 /** Used to construct an IMAP search query */
+@objcMembers
 public class MCOIMAPSearchExpression: NSObject {
 	
     private var nativeInstance:CIMAPSearchExpression;

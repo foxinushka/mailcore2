@@ -1,6 +1,7 @@
 import Foundation
 import CMailCore
 
+@objcMembers
 public final class MCOAddress : NSObject, Convertible, NSCoding {
     
     var nativeInstance:CAddress

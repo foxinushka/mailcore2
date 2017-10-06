@@ -1,6 +1,7 @@
 import Foundation
 import CMailCore
 
+@objcMembers
 public class MCOIMAPCheckAccountOperation : MCOIMAPOperation {
     
     public typealias CompletionBlock = (Error?) -> Void

@@ -9,6 +9,7 @@
 import Foundation
 import CMailCore
 
+@objcMembers
 public class MCOMailProvider: NSObject, Convertible {
     
     internal var nativeInstance: CMailProvider
