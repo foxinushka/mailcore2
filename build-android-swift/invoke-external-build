@@ -93,13 +93,11 @@ pushd "$base_dir"
     # build C/C++ to libcmailcore.so
     ndk-build -j "$@" \
         CTEMPLATE_PATH="$download_dir/ctemplate-android-$ctemplate_build_version" \
-        ICU4C_PATH="$download_dir/icu4c-android-$icu4c_build_version" \
         LIBETPAN_PATH="$download_dir/libetpan-android-$libetpan_build_version" \
-        LIBXML2_PATH="$download_dir/libxml2-android-$libxml2_build_version" \
-        TIDY_HTML5_PATH="$download_dir/tidy-html5-android-$tidy_html5_build_version" \
         OPENSSL_PATH="$download_dir/openssl-android-$openssl_build_version" \
         CYRUS_SASL_PATH="$download_dir/cyrus-sasl-android-$cyrus_sasl_build_version" \
-        ICONV_PATH="$download_dir/iconv-android-$iconv_build_version"
+        ICONV_PATH="$download_dir/iconv-android-$iconv_build_version" \
+        TIDY_HTML5_PATH_LIB="$download_dir/../libtidy"
 
     # Copy all libraries
     rsync -t -r "libs/armeabi-v7a" "$SWIFT_PM_EXTERNAL_LIBS"

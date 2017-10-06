@@ -42,10 +42,10 @@ LOCAL_MODULE    := ssl
 LOCAL_SRC_FILES := $(OPENSSL_PATH)/libs/$(TARGET_ARCH_ABI)/libssl.a
 include $(PREBUILT_STATIC_LIBRARY)
 
-include $(CLEAR_VARS)
-LOCAL_MODULE    := tidy
-LOCAL_SRC_FILES := $(TIDY_HTML5_PATH)/libs/$(TARGET_ARCH_ABI)/libtidy.a
-include $(PREBUILT_STATIC_LIBRARY)
+#include $(CLEAR_VARS)
+#LOCAL_MODULE    := tidy
+#LOCAL_SRC_FILES := $(TIDY_HTML5_PATH)/libs/$(TARGET_ARCH_ABI)/libtidy.a
+#include $(PREBUILT_STATIC_LIBRARY)
 
 include $(CLEAR_VARS)
 LOCAL_MODULE    := ctemplate
@@ -81,6 +81,11 @@ include $(PREBUILT_SHARED_LIBRARY)
 include $(CLEAR_VARS)
 LOCAL_MODULE    := xml2
 LOCAL_SRC_FILES := $(SWIFT_LIB)/android/libxml2.so
+include $(PREBUILT_SHARED_LIBRARY)
+
+include $(CLEAR_VARS)
+LOCAL_MODULE    := tidy
+LOCAL_SRC_FILES := $(TIDY_HTML5_PATH_LIB)/libs/armeabi-v7a/libtidy.so
 include $(PREBUILT_SHARED_LIBRARY)
 
 include $(CLEAR_VARS)
@@ -122,7 +127,7 @@ LOCAL_C_INCLUDES += \
     $(CTEMPLATE_PATH)/include \
 	$(SWIFT_LIB) \
     $(LIBETPAN_PATH)/include \
-    $(TIDY_HTML5_PATH)/include \
+    $(TIDY_HTML5_PATH_LIB)/include \
     $(OPENSSL_PATH)/include \
 	$(addprefix $(src_dir)/, $(subdirs))
 
@@ -147,8 +152,8 @@ LOCAL_SRC_FILES := \
 
 LOCAL_CFLAGS := -DNOCRYPT -fblocks
 LOCAL_CPPFLAGS := -frtti
-LOCAL_STATIC_LIBRARIES := etpan sasl2 ssl crypto iconv tidy ctemplate
-LOCAL_SHARED_LIBRARIES := dispatch scuuc scui18n scudata xml2
+LOCAL_STATIC_LIBRARIES := etpan sasl2 ssl crypto iconv ctemplate
+LOCAL_SHARED_LIBRARIES := dispatch scuuc scui18n scudata xml2 tidy
 include $(BUILD_STATIC_LIBRARY)
 
 include $(CLEAR_VARS)
