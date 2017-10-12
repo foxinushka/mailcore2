@@ -1380,8 +1380,6 @@ void String::appendBytes(const char * bytes, unsigned int length, const char * c
     // ICU uses "IMAP-mailbox-name" as charset name.
     if (strcasecmp(charset, "mutf-7") == 0) {
         charset = "IMAP-mailbox-name";
-    } else if (strcasecmp(charset, "us-ascii") == 0) {
-        charset = "ISO-8859-1";
     }
                
     err = U_ZERO_ERROR;
@@ -1417,6 +1415,8 @@ void String::appendBytes(const char * bytes, unsigned int length, const char * c
             }
         }
         appendCharactersLength(dest, destLength);
+    } else {
+        MCLog("Mailcore Error: Data and encoding are in inconsistent state, encoding = %s\n, error = %i", charset, err);
     }
     
     free(dest);
