@@ -1380,8 +1380,10 @@ void String::appendBytes(const char * bytes, unsigned int length, const char * c
     // ICU uses "IMAP-mailbox-name" as charset name.
     if (strcasecmp(charset, "mutf-7") == 0) {
         charset = "IMAP-mailbox-name";
+    } else if (strcasecmp(charset, "us-ascii") == 0) {
+        charset = "ISO-8859-1";
     }
-
+               
     err = U_ZERO_ERROR;
     UConverter * converter = ucnv_open(charset, &err); 
     if (converter == NULL) {
@@ -1394,20 +1396,30 @@ void String::appendBytes(const char * bytes, unsigned int length, const char * c
         bytes, length, &err);
     int32_t destCapacity = destLength + 1;
     UChar * dest = (UChar *) malloc(destCapacity * sizeof(* dest));
+    
+    err = U_ZERO_ERROR;
+    ucnv_setToUCallBack (converter,
+                         UCNV_TO_U_CALLBACK_STOP,
+                         NULL,
+                         NULL,
+                         NULL,
+                         &err);
+    
     err = U_ZERO_ERROR;
     destLength = ucnv_toUChars(converter, dest, destCapacity, bytes, length, &err);
     dest[destLength] = 0;
     
-    // Fix in case of bad conversion.
-    for(int32_t i = 0 ; i < destLength ; i ++) {
-        if (dest[i] == 0) {
-            dest[i] = ' ';
+    if (U_SUCCESS(err)) {
+        // Fix in case of bad conversion.
+        for(int32_t i = 0 ; i < destLength ; i ++) {
+            if (dest[i] == 0) {
+                dest[i] = ' ';
+            }
         }
+        appendCharactersLength(dest, destLength);
     }
     
-    appendCharactersLength(dest, destLength);
     free(dest);
-    
     ucnv_close(converter);
 #endif
 }
