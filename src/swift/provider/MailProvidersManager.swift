@@ -9,8 +9,7 @@
 import Foundation
 import CMailCore
 
-@objcMembers
-public class MCOMailProvidersManager: NSObject {
+public class MCOMailProvidersManager: NSObjectCompat {
     
     public static let sharedManager = MCOMailProvidersManager()
     

@@ -1,7 +1,7 @@
 import Foundation
 import CMailCore
 
-public class MCOAbstractMessage: NSObject, Convertible {
+public class MCOAbstractMessage: NSObjectCompat, Convertible {
 	
     private var nativeInstance:CAbstractMessage;
     

@@ -9,8 +9,7 @@
 import Foundation
 import CMailCore
 
-@objcMembers
-public class MCONetService: NSObject, Convertible {
+public class MCONetService: NSObjectCompat, Convertible {
     
     internal var nativeInstance: CNetService
     

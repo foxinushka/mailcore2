@@ -316,6 +316,8 @@
 		7F796F927EF5CDFB3BB43E38 /* MCIndexSet.h in Headers */ = {isa = PBXBuildFile; fileRef = C64BB22D16E5C1EE000DB34C /* MCIndexSet.h */; };
 		7FF10DB1E9A6A55DC8DF1FFF /* MCDateFormatter.h in Headers */ = {isa = PBXBuildFile; fileRef = C63CD67A16BDCDD400DB18F1 /* MCDateFormatter.h */; };
 		8019C3E16545C2DD0B0762FA /* MCIMAPMessagePart.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C64EA6C9169E847800778456 /* MCIMAPMessagePart.cpp */; };
+		8029D8C61F96408F00BF5BC4 /* NSObjectCompat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8029D8C51F96408900BF5BC4 /* NSObjectCompat.swift */; };
+		8029D8C71F96409000BF5BC4 /* NSObjectCompat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8029D8C51F96408900BF5BC4 /* NSObjectCompat.swift */; };
 		802A99231ECF83E500FFF0AB /* MailCore.h in Headers */ = {isa = PBXBuildFile; fileRef = 802A99221ECF838D00FFF0AB /* MailCore.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		802A99241ECF83E900FFF0AB /* MailCore.h in Headers */ = {isa = PBXBuildFile; fileRef = 802A99211ECF837800FFF0AB /* MailCore.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8044EF5EB5A7CBF984D536C8 /* MCIMAPNoopOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 84B639EB17F280F3003B5BA2 /* MCIMAPNoopOperation.cpp */; };
@@ -1938,6 +1940,7 @@
 		27780D3419CFA19500C77E44 /* libstdc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.dylib"; path = "Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.0.sdk/usr/lib/libstdc++.dylib"; sourceTree = DEVELOPER_DIR; };
 		4B3C1BDF17ABF4BB008BBF4C /* MCIMAPQuotaOperation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MCIMAPQuotaOperation.cpp; sourceTree = "<group>"; };
 		4B3C1BE017ABF4BC008BBF4C /* MCIMAPQuotaOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCIMAPQuotaOperation.h; sourceTree = "<group>"; };
+		8029D8C51F96408900BF5BC4 /* NSObjectCompat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NSObjectCompat.swift; path = swift/utils/NSObjectCompat.swift; sourceTree = "<group>"; };
 		802A99211ECF837800FFF0AB /* MailCore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MailCore.h; path = OSX/MailCore.h; sourceTree = "<group>"; };
 		802A99221ECF838D00FFF0AB /* MailCore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MailCore.h; path = iOS/MailCore.h; sourceTree = "<group>"; };
 		810DB78B1C68F4E200017B12 /* MCIMAPFetchContentToFileOperation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MCIMAPFetchContentToFileOperation.cpp; sourceTree = "<group>"; };
@@ -3187,6 +3190,7 @@
 				84E3DB331D997D32003B598F /* Operation.swift */,
 				843E58141F6927D900AE681B /* DispatchQueue+Mailcore.swift */,
 				843EA47B1F795A5400861123 /* LibetpanHelper.swift */,
+				8029D8C51F96408900BF5BC4 /* NSObjectCompat.swift */,
 			);
 			name = utils;
 			sourceTree = "<group>";
@@ -5067,6 +5071,7 @@
 				05B449A377A3B80C86BD140F /* MCObjectMac.mm in Sources */,
 				8AB02545973F92F1FFECDAE6 /* MCAutoreleasePoolMac.mm in Sources */,
 				404AB08B392A7DBF7E220FBF /* MCZipMac.mm in Sources */,
+				8029D8C71F96409000BF5BC4 /* NSObjectCompat.swift in Sources */,
 				73314F9F8391B02F4EA41A20 /* MCMailProvider.cpp in Sources */,
 				3BE174E097F4B40946B905CD /* MCMailProvidersManager.cpp in Sources */,
 				722BEC743188F66A40E621EE /* MCNetService.cpp in Sources */,
@@ -5736,6 +5741,7 @@
 				845FB8571F290CF000A29DA8 /* NetService.swift in Sources */,
 				621178ADBAA0EE724603D62B /* MCZipMac.mm in Sources */,
 				177AA97E353774F3A3AD1013 /* MCMailProvider.cpp in Sources */,
+				8029D8C61F96408F00BF5BC4 /* NSObjectCompat.swift in Sources */,
 				5BE2AE83FAB9CCCC11F9976A /* MCMailProvidersManager.cpp in Sources */,
 				05907892CA96447EAB5C53E7 /* MCNetService.cpp in Sources */,
 				43364FD8A53BC23C4522A2F1 /* MCIMAPFolderStatusOperation.cpp in Sources */,

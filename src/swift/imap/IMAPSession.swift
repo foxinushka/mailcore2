@@ -8,8 +8,7 @@ import CMailCore
  After calling a method that returns an operation you must call start: on the instance
  to begin the operation.
  */
-@objcMembers
-public class MCOIMAPSession: NSObject {
+public class MCOIMAPSession: NSObjectCompat {
 	
 	internal var session:CIMAPAsyncSession;
 
