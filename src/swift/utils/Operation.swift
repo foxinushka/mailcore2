@@ -2,7 +2,7 @@ import Foundation
 import Dispatch
 import CMailCore
 
-public class MCOOperation: NSObject {
+public class MCOOperation: NSObjectCompat {
     
     internal var nativeInstance: COperation!
     fileprivate var _started: Bool = false;

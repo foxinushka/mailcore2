@@ -50,5 +50,5 @@ let package = Package(
             exclude: files(in: "unittest", withExtension: ["mm", "cpp"])
         )
     ],
-    swiftLanguageVersions: [3]
+    swiftLanguageVersions: [4]
 )

@@ -2,8 +2,7 @@ import Foundation
 import Dispatch
 import CMailCore
 
-@objcMembers
-public class MCOSMTPSession: NSObject {
+public class MCOSMTPSession: NSObjectCompat {
     
     var session:CSMTPSession;
     
