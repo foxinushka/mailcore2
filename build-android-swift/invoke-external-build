@@ -96,7 +96,7 @@ pushd "$base_dir"
     popd
 
     # build C/C++ to libcmailcore.so
-    ndk-build -j "$@" \
+    ndk-build -j 4 "$@" \
         CTEMPLATE_PATH="$download_dir/ctemplate-android-$ctemplate_build_version" \
         LIBETPAN_PATH="$download_dir/libetpan-android-$libetpan_build_version" \
         TIDY_HTML5_PATH="$download_dir/swift-tidyhtml5-prebuilt" \
