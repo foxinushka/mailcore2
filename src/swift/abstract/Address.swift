@@ -123,9 +123,17 @@ public final class MCOAddress : NSObjectCompat, Convertible, NSCoding {
         }
         return 0;
     }
-    
+
+    public override func isEqual(_ object: Any?) -> Bool {
+        guard let other = object as? MCOAddress else {
+            return false
+        }
+
+        return self.displayName == other.displayName && self.mailbox == other.mailbox;
+    }
+
     public static func ==(lhs: MCOAddress, rhs: MCOAddress) -> Bool {
-        return lhs.displayName == rhs.displayName && lhs.mailbox == rhs.mailbox;
+        return lhs.isEqual(rhs)
     }
     
     public convenience init?(coder aDecoder: NSCoder) {
