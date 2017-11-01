@@ -36,7 +36,7 @@ let package = Package(
     targets: [
         .target(
             name: "MailCore",
-					  dependencies: ["CMailCore"],
+            dependencies: ["CMailCore"],
             path: "src/swift",
             exclude: files(in: "src/swift", withExtension: ["mm"])
         ),
@@ -44,7 +44,8 @@ let package = Package(
             name: "CMailCore",
             path: "build-android-swift/CMailCore"
         ),
-        .testTarget(name: "MailCoreTests", 
+        .testTarget(
+            name: "MailCoreTests", 
             dependencies: ["MailCore"],
             path: "unittest",
             exclude: files(in: "unittest", withExtension: ["mm", "cpp"])
