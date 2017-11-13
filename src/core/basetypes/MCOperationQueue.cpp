@@ -10,7 +10,9 @@
 #include "MCArray.h"
 #include "MCLog.h"
 #include "MCAutoreleasePool.h"
+#if defined(__ANDROID) || defined(ANDROID)
 #include "MCMainThreadAndroid.h"
+#endif
 #include "MCAssert.h"
 
 using namespace mailcore;
