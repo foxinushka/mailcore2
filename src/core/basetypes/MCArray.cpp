@@ -10,7 +10,9 @@
 #include "MCLog.h"
 #include "MCUtils.h"
 #include "MCIterator.h"
+#if defined(ANDROID) || defined(__ANDROID__)
 #include "MCAndroid.h"
+#endif
 
 using namespace mailcore;
 
