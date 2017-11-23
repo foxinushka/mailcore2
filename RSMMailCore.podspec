@@ -80,17 +80,6 @@ Pod::Spec.new do |s|
     ss.dependency "RSMMailCore/etpan"
     ss.dependency "RSMMailCore/ctemplate"
     ss.dependency "RSMMailCore/sasl2"
-
-    post_install do |installer|
-
-      appauth_targets = installer.project.targets.select { |target| target.name =~ /-AppAuth$/ }
-      appauth_targets.each do |target|
-        target.build_configurations.each do |config|
-          old_defines = config.build_settings['GCC_PREPROCESSOR_DEFINITIONS'] || []
-          config.build_settings['GCC_PREPROCESSOR_DEFINITIONS'] = old_defines + ['CLANG_WARN_DOCUMENTATION_COMMENTS=0'] + ['MACOSX_DEPLOYMENT_TARGET=10.10']
-      end
-    end
-
   end
 
   s.subspec 'etpan' do |ss| 
