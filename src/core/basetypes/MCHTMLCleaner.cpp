@@ -15,8 +15,8 @@
 typedef unsigned long ulong;
 #endif
 
-#include <tidy.h>
-#include <buffio.h>
+#include <tidy/tidy.h>
+#include <tidy/buffio.h>
 
 #include "MCUtils.h"
 #include "MCLog.h"
