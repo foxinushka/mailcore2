@@ -6,7 +6,6 @@ import CMailCore
  When the full content of a message has been fetched using POP or IMAP,
  you need to parse it.
  */
-@objcMembers
 public class MCOMessageParser : MCOAbstractMessage {
     
     internal var nativeInstance: CMessageParser;

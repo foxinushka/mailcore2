@@ -8,8 +8,7 @@ import CMailCore
 #endif
 
 /** similar to NSMutableIndexSet but supports int64_t.  MCRange has a location (uint64_t) and length (uint64_t). */
-@objcMembers
-public class MCOIndexSet: NSObject, NSCopying, NSCoding {
+public class MCOIndexSet: NSObjectCompat, NSCopying, NSCoding {
     
     internal var nativeInstance: CIndexSet;
     
