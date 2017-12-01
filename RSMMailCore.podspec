@@ -32,6 +32,9 @@ Pod::Spec.new do |s|
     scripts/get-ios.sh
     sed -i '' 's#<tidy.h>#<tidy/tidy.h>#g' ./src/core/basetypes/MCHTMLCleaner.cpp
     sed -i '' 's#<buffio.h>#<tidy/buffio.h>#g' ./src/core/basetypes/MCHTMLCleaner.cpp
+    mv src/core/zip/MiniZip/zip.h src/core/zip/MiniZip/rsmmczip.h
+    sed -i '' 's#"zip.h"#"rsmmczip.h"#g' src/core/zip/MCZip.cpp 
+    sed -i '' 's#"zip.h"#"rsmmczip.h"#g' src/core/zip/MiniZip/zip.c  
   CMD
   
   s.dependency 'RDlog4cocoa'
