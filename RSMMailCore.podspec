@@ -11,7 +11,7 @@ Pod::Spec.new do |s|
 
   s.author       = { "Viktor Gedzenko" => "fox@readdle.com" }
   s.source       = { :git => "https://github.com/foxinushka/mailcore2.git", :tag => "spark2"}
-  s.platforms    = { :ios => "9.0", :osx => "10.10" }  
+  s.platforms    = { :ios => "9.0", :osx => "10.11" }  
 
   s.framework  = "Foundation", "Security"
 
@@ -46,17 +46,18 @@ Pod::Spec.new do |s|
   s.header_dir = 'MailCore'
   s.libraries = "xml2", "iconv", "z", "resolv", "c++", "objc"
 
+  s.module_map = "build-mac/MailCore.modulemap"
+  
   s.subspec 'core' do |ss|
     ss.source_files = "src/c/**/*.{h,cpp}",
       "src/core/**/*.{h,cpp,c,mm}",
       "src/async/**/*.{h,cpp}",
       "src/objc/utils/MCOObjectWrapper.{mm,h}",
       "src/objc/utils/NSObject+MCO.h",
-      "src/swift/**/*.swift"
-      
-    ss.ios.source_files = "build-mac/iOS/MailCore.h"
-    ss.osx.source_files = "build-mac/OSX/MailCore.h"
-             
+      "src/swift/**/*.swift",
+      "src/MailCore.h",
+      "src/AbstractMessageRendererCallbackWrapper.h"
+                   
     ss.exclude_files = "src/core/zip/MiniZip/iowin32.{h,c}",  
       "src/core/zip/MiniZip/mini*",
       "src/core/zip/MiniZip/mz*",
@@ -67,15 +68,25 @@ Pod::Spec.new do |s|
       "src/core/rfc822/MCMessageParserMac.mm",
       "src/swift/utils/AndroidShim.swift"
     
-    ss.public_header_files = "src/c/**/*.h"
-    ss.ios.public_header_files = "build-mac/iOS/MailCore.h"
-    ss.osx.public_header_files = "build-mac/OSX/MailCore.h"
-    
-    ss.private_header_files = "src/c/abstract/CAbstractMessageRendererCallbackWrapper.h",
-      "src/c/CBase+Private.h",
-      "src/c/CCore.h"
+    ss.public_header_files = 
+      "src/MailCore.h",
+      "src/core/**/**/MC*.h",
+      "src/async/**/**/MC*.h",
+      "src/c/**/**/C*.h",
+      "src/c/basetypes/MailCoreString.h"
+
+    ss.private_header_files =       
+      "src/core/basetypes/MCJSONParser.h",
+      "src/core/basetypes/MCConnectionLoggerUtils.h",
+      "src/core/basetypes/MCLibetpan.h",
+      "src/core/basetypes/MCValuePrivate.h",
+      "src/core/security/MCCertificateUtils.h",
+      "src/core/zip/MCZipPrivate.h",
+      "src/c/CBase+Private.h"
+
     ss.preserve_paths = 
       "build-mac/CMailCore/**/*.{h,modulemap}",
+      "build-mac/MailCore.modulemap",
       "src/core/basetypes/include/unicode/*.h"
 
     ss.resources = "resources/providers.json"
