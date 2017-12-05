@@ -1,5 +1,5 @@
 import Foundation
-import CMailCore
+
 
 /**
  The class is used to get folder metadata (like UIDVALIDITY, UIDNEXT, etc).

@@ -1,6 +1,6 @@
 import Foundation
 import Dispatch
-import CMailCore
+
 
 /**
  This is the main IMAP class from which all operations are created

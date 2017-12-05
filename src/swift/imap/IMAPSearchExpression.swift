@@ -1,5 +1,5 @@
 import Foundation
-import CMailCore
+
 
 /** Used to construct an IMAP search query */
 public class MCOIMAPSearchExpression: NSObjectCompat {
