@@ -8,10 +8,10 @@
 
 #ifndef AbstractMessageRendererCallbackWrapper_h
 #define AbstractMessageRendererCallbackWrapper_h
-
+#ifdef __cplusplus
 class AbstractMessageRendererCallback : public mailcore::Object, public mailcore::HTMLRendererTemplateCallback, public mailcore::HTMLRendererIMAPCallback {
     
 }
 
-
+#endif
 #endif /* AbstractMessageRendererCallbackWrapper_h */

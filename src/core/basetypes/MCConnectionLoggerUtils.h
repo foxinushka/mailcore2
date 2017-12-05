@@ -11,12 +11,12 @@
 #define MAILCORE_MCCONNECTIONLOGGERUTILS_H
 
 #include <MailCore/MCConnectionLogger.h>
-
+#ifdef __cplusplus
 namespace mailcore {
     
     ConnectionLogType getConnectionType(int log_type);
     bool isBufferFromLogType(int log_type);
     
 }
-
+#endif
 #endif

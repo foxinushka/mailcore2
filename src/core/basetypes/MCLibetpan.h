@@ -12,7 +12,7 @@
 
 #include <time.h>
 #include <libetpan/libetpan.h>
-
+#ifdef __cplusplus
 namespace mailcore {
 
     time_t timestampFromDate(struct mailimf_date_time * date_time);
@@ -22,5 +22,5 @@ namespace mailcore {
     time_t mkgmtime(struct tm * tmp);
     
 }
-
+#endif
 #endif
