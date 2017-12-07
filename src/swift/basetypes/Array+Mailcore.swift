@@ -1,5 +1,5 @@
 import Foundation
-import CMailCore
+
 
 extension Array where Element: Convertible {
     

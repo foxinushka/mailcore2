@@ -1,6 +1,6 @@
 import Foundation
 import Dispatch
-import CMailCore
+
 
 public class MCOOperation: NSObjectCompat {
     

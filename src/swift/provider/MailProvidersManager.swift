@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import CMailCore
+
 
 public class MCOMailProvidersManager: NSObjectCompat {
     

@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "RSMMailCore"
-  s.version      = "2.0.beta.1"
+  s.version      = "2.0"
   s.summary      = "SparkCore is absolutely awesome sanctuary of all the messages related business logic of Spark"
   s.description  = <<-DESC
                     Amen
@@ -10,20 +10,22 @@ Pod::Spec.new do |s|
   s.license      = { :type => 'Copyright 2017 Readdle Inc.', :text => 'Copyright 2017 Readdle Inc.' }
 
   s.author       = { "Viktor Gedzenko" => "fox@readdle.com" }
-  s.source       = { :git => "https://github.com/foxinushka/mailcore2.git", :tag => "#{s.version}"}
-  s.platforms    = { :ios => "9.0", :osx => "10.10" }  
+  s.source       = { :git => "https://github.com/foxinushka/mailcore2.git", :tag => "spark2"}
+  s.platforms    = { :ios => "9.0", :osx => "10.11" }  
 
   s.framework  = "Foundation", "Security"
 
   s.ios.xcconfig = { "HEADER_SEARCH_PATHS" => "\"$(inherited)\" \"$(SDKROOT)/usr/include/libxml2\" \"$(PODS_TARGET_SRCROOT)/Externals/ctemplate-ios/include/\" \"$(PODS_TARGET_SRCROOT)/Externals/include/icu4c/include/\" \"$(PODS_TARGET_SRCROOT)/Externals/libetpan-ios/include/\" \"$(PODS_TARGET_SRCROOT)/Externals/libsasl-ios/include/\" \"$(SDKROOT)/usr/include/\" \"$(PODS_TARGET_SRCROOT)/src/core/basetypes/icu-ucsdet/include/\"",
     "SWIFT_INCLUDE_PATHS" => "\"$(PODS_TARGET_SRCROOT)/build-mac/CMailCore\" \"$(PODS_TARGET_SRCROOT)/Externals/libetpan-ios/include/\"",
-    "OTHER_CPLUSPLUSFLAGS" => "$(inherited) $(OTHER_CFLAGS) -DSWIFT"
+    "OTHER_CPLUSPLUSFLAGS" => "$(inherited) $(OTHER_CFLAGS) -DSWIFT",
+	"SWIFT_WHOLE_MODULE_OPTIMIZATION" => "YES"
   }
 
 
   s.osx.xcconfig = { "HEADER_SEARCH_PATHS" => "\"$(inherited)\" \"$(SDKROOT)/usr/include/libxml2\" \"$(PODS_TARGET_SRCROOT)/Externals/ctemplate-osx/include/\" \"$(PODS_TARGET_SRCROOT)/Externals/include/icu4c/include/\" \"$(PODS_TARGET_SRCROOT)/Externals/libetpan-osx/include/\" \"$(PODS_TARGET_SRCROOT)/src/core/basetypes/icu-ucsdet/include/\"",
     "SWIFT_INCLUDE_PATHS" => "\"$(PODS_TARGET_SRCROOT)/build-mac/CMailCore\" \"$(PODS_TARGET_SRCROOT)/Externals/libetpan-osx/include/\"",
-    "OTHER_CPLUSPLUSFLAGS" => "$(inherited) $(OTHER_CFLAGS) -DSWIFT"
+    "OTHER_CPLUSPLUSFLAGS" => "$(inherited) $(OTHER_CFLAGS) -DSWIFT",
+	"SWIFT_WHOLE_MODULE_OPTIMIZATION" => "YES"
   }
 
 
@@ -47,17 +49,18 @@ Pod::Spec.new do |s|
   s.header_dir = 'MailCore'
   s.libraries = "xml2", "iconv", "z", "resolv", "c++", "objc"
 
+  s.module_map = "build-mac/MailCore.modulemap"
+  
   s.subspec 'core' do |ss|
     ss.source_files = "src/c/**/*.{h,cpp}",
       "src/core/**/*.{h,cpp,c,mm}",
       "src/async/**/*.{h,cpp}",
       "src/objc/utils/MCOObjectWrapper.{mm,h}",
       "src/objc/utils/NSObject+MCO.h",
-      "src/swift/**/*.swift"
-      
-    ss.ios.source_files = "build-mac/iOS/MailCore.h"
-    ss.osx.source_files = "build-mac/OSX/MailCore.h"
-             
+      "src/swift/**/*.swift",
+      "src/MailCore.h",
+      "src/AbstractMessageRendererCallbackWrapper.h"
+                   
     ss.exclude_files = "src/core/zip/MiniZip/iowin32.{h,c}",  
       "src/core/zip/MiniZip/mini*",
       "src/core/zip/MiniZip/mz*",
@@ -68,15 +71,25 @@ Pod::Spec.new do |s|
       "src/core/rfc822/MCMessageParserMac.mm",
       "src/swift/utils/AndroidShim.swift"
     
-    ss.public_header_files = "src/c/**/*.h"
-    ss.ios.public_header_files = "build-mac/iOS/MailCore.h"
-    ss.osx.public_header_files = "build-mac/OSX/MailCore.h"
-    
-    ss.private_header_files = "src/c/abstract/CAbstractMessageRendererCallbackWrapper.h",
-      "src/c/CBase+Private.h",
-      "src/c/CCore.h"
+    ss.public_header_files = 
+      "src/MailCore.h",
+      "src/core/**/**/MC*.h",
+      "src/async/**/**/MC*.h",
+      "src/c/**/**/C*.h",
+      "src/c/basetypes/MailCoreString.h"
+
+    ss.private_header_files =       
+      "src/core/basetypes/MCJSONParser.h",
+      "src/core/basetypes/MCConnectionLoggerUtils.h",
+      "src/core/basetypes/MCLibetpan.h",
+      "src/core/basetypes/MCValuePrivate.h",
+      "src/core/security/MCCertificateUtils.h",
+      "src/core/zip/MCZipPrivate.h",
+      "src/c/CBase+Private.h"
+
     ss.preserve_paths = 
       "build-mac/CMailCore/**/*.{h,modulemap}",
+      "build-mac/MailCore.modulemap",
       "src/core/basetypes/include/unicode/*.h"
 
     ss.resources = "resources/providers.json"

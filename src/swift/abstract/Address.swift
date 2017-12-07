@@ -1,5 +1,5 @@
 import Foundation
-import CMailCore
+
 
 public final class MCOAddress : NSObjectCompat, Convertible, NSCoding {
     

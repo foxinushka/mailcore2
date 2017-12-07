@@ -1,5 +1,5 @@
 import Foundation
-import CMailCore
+
 
 public class MCOMessageBuilder : MCOAbstractMessage {
     

@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import CMailCore
+
 
 var typeHash: [Data: Convertible.Type] = [Data(cdata: Value_mailCoreTypeInfo())!: UInt32.self,
                                           Data(cdata: MailCoreString_mailCoreTypeInfo())!: String.self,

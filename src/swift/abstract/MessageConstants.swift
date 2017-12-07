@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import CMailCore
+
 
 public struct MCOIMAPMessagesRequestKind : OptionSet {
     
