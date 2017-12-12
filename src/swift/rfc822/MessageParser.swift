@@ -1,5 +1,5 @@
 import Foundation
-
+import CMailCore
 
 /**
  This class implements a parsed message.

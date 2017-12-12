@@ -1,5 +1,5 @@
 import Foundation
-
+import CMailCore
 
 internal protocol Convertible {
     func cast() -> CObject
