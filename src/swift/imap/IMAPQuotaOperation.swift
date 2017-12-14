@@ -39,7 +39,7 @@ public class MCOIMAPQuotaOperation : MCOIMAPBaseOperation {
             completionBlock!(nil, operation.usage(), operation.limit());
         }
         else {
-            completionBlock!(MailCoreError(code: errorCode), 0, 0);
+            completionBlock!(MailCoreError.error(code: errorCode), 0, 0);
         }
         completionBlock = nil;
     }

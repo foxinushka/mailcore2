@@ -39,7 +39,7 @@ public class MCOIMAPCheckAccountOperation : MCOIMAPOperation {
             completionBlock!(nil)
         }
         else {
-            var error = MailCoreError(code: errorCode).asNSError()
+            var error = MailCoreError.error(code: errorCode)
             if operation.loginResponse().instance != nil || operation.loginUnparsedResponseData().bytes != nil {
                 var userInfo = [String: Any]()
                 if let response = operation.loginResponse().string() {
@@ -49,7 +49,7 @@ public class MCOIMAPCheckAccountOperation : MCOIMAPOperation {
                 if data.instance != nil && data.bytes != nil {
                     userInfo["IMAPUnparsedResponseDataKey"] = Data(cdata: data)
                 }
-                error = MailCoreError(code: errorCode).asNSError(userInfo: userInfo)
+                error = MailCoreError.error(code: errorCode, userInfo: userInfo)
             }
             completionBlock!(error)
         }

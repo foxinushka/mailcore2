@@ -49,7 +49,7 @@ public class MCOIMAPSearchOperation : MCOIMAPBaseOperation {
             completionBlock!(nil, MCOIndexSet(operation.uids()));
         }
         else {
-            completionBlock!(MailCoreError(code: errorCode), nil);
+            completionBlock!(MailCoreError.error(code: errorCode), nil);
         }
         completionBlock = nil;
     }

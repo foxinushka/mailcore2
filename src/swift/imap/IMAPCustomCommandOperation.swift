@@ -39,7 +39,7 @@ public class MCOIMAPCustomCommandOperation : MCOIMAPBaseOperation {
             completionBlock!(operation.response().string(), nil)
         }
         else {
-            completionBlock!(nil, MailCoreError(code: errorCode))
+            completionBlock!(nil, MailCoreError.error(code: errorCode))
         }
         completionBlock = nil
     }

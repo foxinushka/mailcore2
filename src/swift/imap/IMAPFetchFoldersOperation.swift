@@ -39,7 +39,7 @@ public class MCOIMAPFetchFoldersOperation : MCOIMAPBaseOperation {
             completionBlock!(nil, Array<MCOIMAPFolder>(mailCoreArray: operation.folders()))
         }
         else {
-            completionBlock!(MailCoreError(code: errorCode), nil)
+            completionBlock!(MailCoreError.error(code: errorCode), nil)
         }
         completionBlock = nil
     }

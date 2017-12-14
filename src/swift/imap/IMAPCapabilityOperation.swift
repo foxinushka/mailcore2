@@ -39,7 +39,7 @@ public class MCOIMAPCapabilityOperation : MCOIMAPBaseOperation {
             completionBlock!(nil, MCOIndexSet(operation.capabilities()))
         }
         else {
-            completionBlock!(MailCoreError(code: errorCode), nil)
+            completionBlock!(MailCoreError.error(code: errorCode), nil)
         }
         completionBlock = nil
     }

@@ -1,29 +1,21 @@
 import Foundation
 import CMailCore
 
-//public let ErrorDomain = "MailCoreErrorDomain"
-//
-//public class MailCoreError : Error {
-//    
-//    public var errorCode: UInt32;
-//    public var errorMessage: String;
-//    public var userInfo: Dictionary<String, Any>?
-//    
-//    internal init(code: ErrorCode) {
-//        self.errorCode = code.rawValue;
-//        //Add localization
-//        self.errorMessage = "";
-//    }
-//
-//}
+public let MailCoreErrorDomain = "MailCoreErrorDomain"
 
-#if os(Android)
-    public let MailCoreErrorDomain = "MailCoreErrorDomain"
-#else
-    fileprivate let MailCoreErrorDomain = "MailCoreErrorDomain"
-#endif
+// Swift-only features: Global variables defined in Swift
+// Class for using from Objective-C [MailCoreErrors domain]
+public class MailCoreErrors: NSObjectCompat {
+    
+    public class func domain() -> String {
+        return MailCoreErrorDomain
+    }
+    
+}
 
-@objc public enum MailCoreError : Int, Error {
+// This enum is not Error because Enum with raw type cannot have cases with arguments (e.g. userInfo)
+@objc public enum MailCoreError : Int {
+    
     case errorNone // 0
     case errorConnection
     case errorTLSNotAvailable
@@ -72,12 +64,8 @@ import CMailCore
     case errorYahooSendMessageDailyLimitExceeded
     case errorOutlookLoginViaWebBrowser
     
-    internal init(code: ErrorCode) {
-        self.init(rawValue: Int(code.rawValue))!
-    }
-    
-    internal func asNSError(userInfo: [String: Any]? = nil) -> NSError {
-        return NSError(domain: "MailCoreErrorDomain", code: self.rawValue, userInfo: userInfo)
+    internal static func error(code: ErrorCode, userInfo: [String: Any]? = nil) -> NSError {
+        return NSError(domain: MailCoreErrorDomain, code: Int(code.rawValue), userInfo: userInfo)
     }
 
 }

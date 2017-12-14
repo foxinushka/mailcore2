@@ -46,7 +46,7 @@ public class MCOIMAPAppendMessageOperation : MCOIMAPBaseOperation {
             completionBlock!(nil, operation.createdUID());
         }
         else {
-            completionBlock!(MailCoreError(code: errorCode), 0);
+            completionBlock!(MailCoreError.error(code: errorCode), 0);
         }
         completionBlock = nil;
     }

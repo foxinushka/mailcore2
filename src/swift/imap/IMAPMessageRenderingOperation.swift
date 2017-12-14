@@ -39,7 +39,7 @@ public class MCOIMAPMessageRenderingOperation : MCOIMAPBaseOperation {
             completionBlock!(nil, operation.result().string())
         }
         else {
-            completionBlock!(MailCoreError(code: errorCode), nil)
+            completionBlock!(MailCoreError.error(code: errorCode), nil)
         }
         completionBlock = nil
     }

@@ -31,7 +31,7 @@ public class MCOIMAPOperation : MCOIMAPBaseOperation {
             completionBlock!(nil);
         }
         else {
-            completionBlock!(MailCoreError(code: errorCode));
+            completionBlock!(MailCoreError.error(code: errorCode));
         }
         completionBlock = nil;
     }

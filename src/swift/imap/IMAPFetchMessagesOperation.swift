@@ -40,7 +40,7 @@ public class MCOIMAPFetchMessagesOperation : MCOIMAPBaseOperation {
             completionBlock!(nil, Array<MCOIMAPMessage>(mailCoreArray: operation.messages()), MCOIndexSet(operation.vanishedMessages()));
         }
         else {
-            completionBlock!(MailCoreError(code: errorCode), nil, nil);
+            completionBlock!(MailCoreError.error(code: errorCode), nil, nil);
         }
         completionBlock = nil;
     }

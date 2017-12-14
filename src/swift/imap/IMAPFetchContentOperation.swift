@@ -40,7 +40,7 @@ public class MCOIMAPFetchContentOperation : MCOIMAPBaseOperation {
             completionBlock!(nil, Data.init(desctructiveCData: operation.data()));
         }
         else {
-            completionBlock!(MailCoreError(code: errorCode), nil);
+            completionBlock!(MailCoreError.error(code: errorCode), nil);
         }
         completionBlock = nil;
     }

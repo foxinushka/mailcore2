@@ -78,7 +78,7 @@ public class MCOMessageBuilder : MCOAbstractMessage {
     public func writeToFile(filename: String) throws -> Bool {
         let code = nativeInstance.writeToFile(filename.mailCoreString())
         if code != ErrorNone {
-            throw MailCoreError(code: code);
+            throw MailCoreError.error(code: code);
         }
         return true
     }

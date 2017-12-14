@@ -53,7 +53,7 @@ public class MCOIMAPFolderStatusOperation : MCOIMAPBaseOperation {
             completionBlock!(nil, createMCOObject(from: operation.status().toCObject()));
         }
         else {
-            completionBlock!(MailCoreError(code: errorCode), nil);
+            completionBlock!(MailCoreError.error(code: errorCode), nil);
         }
         completionBlock = nil;
     }

@@ -39,7 +39,7 @@ public class MCOIMAPCopyMessagesOperation : MCOIMAPBaseOperation {
             completionBlock!(nil, Dictionary<UInt32, UInt32>.cast(operation.uidMapping()));
         }
         else {
-            completionBlock!(MailCoreError(code: errorCode), nil);
+            completionBlock!(MailCoreError.error(code: errorCode), nil);
         }
         completionBlock = nil;
     }

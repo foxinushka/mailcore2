@@ -54,7 +54,7 @@ public class MCOIMAPFetchContentToFileOperation : MCOIMAPBaseOperation {
             completionBlock!(nil)
         }
         else {
-            completionBlock!(MailCoreError(code: errorCode))
+            completionBlock!(MailCoreError.error(code: errorCode))
         }
         completionBlock = nil
     }

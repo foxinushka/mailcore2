@@ -39,7 +39,7 @@ public class MCOSMTPOperation: MCOOperation {
             completionBlock!(nil);
         }
         else {
-            var error = MailCoreError(code: errorCode).asNSError()
+            var error = MailCoreError.error(code: errorCode)
             if operation.lastSMTPResponse.instance != nil || operation.lastSMTPResponseCode != 0 {
                 var userInfo = [String: Any]()
                 if let response = operation.lastSMTPResponse.string() {
@@ -48,7 +48,7 @@ public class MCOSMTPOperation: MCOOperation {
                 if operation.lastSMTPResponseCode != 0 {
                     userInfo["MCOSMTPResponseCodeKey"] = operation.lastSMTPResponseCode
                 }
-                error = MailCoreError(code: errorCode).asNSError(userInfo: userInfo)
+                error = MailCoreError.error(code: errorCode, userInfo: userInfo)
             }
             completionBlock!(error)
         }

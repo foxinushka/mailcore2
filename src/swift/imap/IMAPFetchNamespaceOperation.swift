@@ -39,7 +39,7 @@ public class MCOIMAPFetchNamespaceOperation : MCOIMAPBaseOperation {
             completionBlock!(nil, Dictionary<String, MCOIMAPNamespace>.cast(operation.namespaces()))
         }
         else {
-            completionBlock!(MailCoreError(code: errorCode), nil)
+            completionBlock!(MailCoreError.error(code: errorCode), nil)
         }
         completionBlock = nil
     }

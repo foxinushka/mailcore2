@@ -44,7 +44,7 @@ public class MCOIMAPFetchParsedContentOperation : MCOIMAPBaseOperation {
             }
         }
         else {
-            completionBlock!(MailCoreError(code: errorCode), nil)
+            completionBlock!(MailCoreError.error(code: errorCode), nil)
         }
         completionBlock = nil
     }
