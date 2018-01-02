@@ -502,8 +502,8 @@ public class MCOIMAPSession: NSObjectCompat {
      }];
      }];
      */
-    public func fetchMessagesByNumber(folder:String, type:MCOIMAPMessagesRequestKind, numbers:MCOIndexSet) -> MCOIMAPFetchMessagesOperation {
-        return MCOIMAPFetchMessagesOperation(operation: session.fetchMessagesByNumberOperation(folder.mailCoreString(), type.toCIMAPMessagesRequestKind(), numbers.cast()));
+    public func fetchMessagesByNumber(folder:String, kind:MCOIMAPMessagesRequestKind, numbers:MCOIndexSet) -> MCOIMAPFetchMessagesOperation {
+        return MCOIMAPFetchMessagesOperation(operation: session.fetchMessagesByNumberOperation(folder.mailCoreString(), kind.toCIMAPMessagesRequestKind(), numbers.cast()));
     }
 
     /**
@@ -528,8 +528,8 @@ public class MCOIMAPSession: NSObjectCompat {
      }];
      }];
      */
-    public func fetchMessagesOperation(folder:String, kind:MCOIMAPMessagesRequestKind, numbers:MCOIndexSet) -> MCOIMAPFetchMessagesOperation {
-        return MCOIMAPFetchMessagesOperation(operation: session.fetchMessagesByUIDOperation(folder.mailCoreString(), kind.toCIMAPMessagesRequestKind(), numbers.cast()));
+    public func fetchMessagesByUid(folder:String, kind:MCOIMAPMessagesRequestKind, uids:MCOIndexSet) -> MCOIMAPFetchMessagesOperation {
+        return MCOIMAPFetchMessagesOperation(operation: session.fetchMessagesByUIDOperation(folder.mailCoreString(), kind.toCIMAPMessagesRequestKind(), uids.cast()));
     }
 
     /**
