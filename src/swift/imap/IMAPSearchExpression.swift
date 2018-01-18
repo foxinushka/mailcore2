@@ -180,7 +180,7 @@ public class MCOIMAPSearchExpression: NSObjectCompat {
      MCOIMAPSearchExpression * expr = [MCOIMAPSearchExpression searchFlagged]
      **/
     public static func searchFlagged() -> MCOIMAPSearchExpression {
-        return MCOIMAPSearchExpression(CIMAPSearchExpression_searchUnread());
+        return MCOIMAPSearchExpression(CIMAPSearchExpression_searchFlagged());
     }
     
     /**
