@@ -22,6 +22,11 @@
 #include "MCHashMap.h"
 #include "MCLock.h"
 
+#if defined(ANDROID) || defined(__ANDROID__)
+// TODO: remove when swift toolchain updated to 15c
+#include <string>
+#endif
+
 using namespace mailcore;
 
 bool mailcore::zombieEnabled = 0;
@@ -104,7 +109,28 @@ String * Object::className()
 		result = result->substringFromIndex(6);
 	}
 #else
-    char * unmangled = abi::__cxa_demangle(typeid(* this).name(), NULL, NULL, &status);
+
+#if defined(ANDROID) || defined(__ANDROID__)
+    // workaround for android ndk 14b
+    // see: https://github.com/android-ndk/ndk/issues/355
+    // TODO: remove when swift toolchain updated to 15c
+    static const std::string prefix = "_Z";
+
+    const char* symbolName = typeid(* this).name();
+    const char* typeName;
+
+    if (prefix.compare(0, 2, symbolName) != 0) {
+        const std::string prefixed = prefix + symbolName;
+        typeName = prefixed.c_str();
+    }
+    else {
+        typeName = symbolName;
+    }
+#else
+    const char* typeName = typeid(* this).name();
+#endif
+
+    char * unmangled = abi::__cxa_demangle(typeName, NULL, NULL, &status);
     String * result = String::uniquedStringWithUTF8Characters(unmangled);
     free(unmangled);
 #endif
