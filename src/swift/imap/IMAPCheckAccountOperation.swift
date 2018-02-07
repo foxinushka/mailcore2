@@ -40,7 +40,7 @@ public class MCOIMAPCheckAccountOperation : MCOIMAPOperation {
         }
         else {
             var error = MailCoreError.error(code: errorCode)
-            if operation.loginResponse().instance != nil || operation.loginUnparsedResponseData().bytes != nil {
+            if operation.loginResponse().instance != nil || operation.loginUnparsedResponseData().instance != nil {
                 var userInfo = [String: Any]()
                 if let response = operation.loginResponse().string() {
                     userInfo["IMAPResponseKey"] = response
