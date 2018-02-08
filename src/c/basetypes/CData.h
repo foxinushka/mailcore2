@@ -30,7 +30,7 @@ extern "C" {
     
     C_SYNTHESIZE_STATIC_FUNC_DEFINITION(CData, CData, dataWithBytes, const char*, unsigned int)
 
-    CData               Value_mailCoreTypeInfo();
+    CData               Value_mailCoreTypeInfo(void);
     CData               getTypeNameFromObject(CObject obj);
     
 #ifdef __cplusplus

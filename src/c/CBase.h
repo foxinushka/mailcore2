@@ -47,7 +47,7 @@ int structName##_##retainCount(structName self) CF_SWIFT_NAME(structName.retainC
 #define C_SYNTHESIZE_COBJECT_CAST_DEFINITION(structName) \
 CObject structName##_##toCObject(structName self) CF_SWIFT_NAME(structName.toCObject(self:)); \
 structName structName##_##newWithCObject(CObject obj) CF_SWIFT_NAME(structName.init(cobject:)); \
-CData structName##_##mailCoreTypeInfo(); \
+CData structName##_##mailCoreTypeInfo(void); \
 CObject structName##_##copy(structName self) CF_SWIFT_NAME(structName.copy(self:)); \
 
 #define C_SYNTHESIZE_READONLY_PROPERTY_DEFINITION(structName, propertyType, getterName) \
@@ -79,7 +79,7 @@ returnType structName##_##funcName(struct structName self, arg1Type arg1, arg2Ty
 returnType structName##_##funcName(struct structName self, arg1Type arg1, arg2Type arg2, arg3Type arg3, argType4 arg4, argType5 arg5, argType6 arg6) CF_SWIFT_NAME(structName.funcName(self:_:_:_:_:_:_:)); \
 
 #define C_SYNTHESIZE_STATIC_FUNC_DEFINITION_0(structName, returnType, funcName) \
-returnType structName##_##funcName(); \
+returnType structName##_##funcName(void); \
 
 #define C_SYNTHESIZE_STATIC_FUNC_DEFINITION_1(structName, returnType, funcName, arg1Type) \
 returnType structName##_##funcName(arg1Type arg1) CF_SWIFT_NAME(structName.funcName(_:)); \

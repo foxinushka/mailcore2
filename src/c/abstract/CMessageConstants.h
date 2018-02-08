@@ -288,7 +288,7 @@ extern "C" {
     /**
      It's called when asynchronous operations stop/start running.
      */
-    typedef void (*OperationQueueRunningChangeBlock)();
+    typedef void (*OperationQueueRunningChangeBlock)(void);
     
     /**
      It's a network traffic logger.
