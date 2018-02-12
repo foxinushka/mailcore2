@@ -95,7 +95,6 @@ Pod::Spec.new do |s|
     ss.resources = "resources/providers.json"
     ss.dependency "RSMMailCore/etpan"
     ss.dependency "RSMMailCore/ctemplate"
-    ss.dependency "RSMMailCore/sasl2"
   end
 
   s.subspec 'etpan' do |ss| 
@@ -103,11 +102,13 @@ Pod::Spec.new do |s|
     ss.ios.private_header_files = "Externals/libetpan-ios/include/libetpan/*.h"
     ss.ios.source_files = "Externals/libetpan-ios/include/libetpan/*.h"
     ss.ios.preserve_paths = "Externals/libetpan-ios/include/libetpan/*.h"
+    ss.ios.dependency "RSMMailCore/sasl2"
 
     ss.osx.vendored_libraries = "Externals/libetpan-osx/lib/libetpan.a"
     ss.osx.private_header_files = "Externals/libetpan-osx/include/libetpan/*.h"
     ss.osx.source_files = "Externals/libetpan-osx/include/libetpan/*.h"
     ss.osx.preserve_paths = "Externals/libetpan-osx/include/libetpan/*.h"
+    ss.osx.libraries = "sasl2"
   end 
 
   s.subspec 'sasl2' do |ss| 
