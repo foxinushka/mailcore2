@@ -111,8 +111,6 @@ extension MCOAbstractMultipart {
         }
     }
 }
-#if os(Android)
-#else
 extension FileManager {
     
     @discardableResult
@@ -124,7 +122,6 @@ extension FileManager {
     }
     
 }
-#endif
 
 fileprivate let TEST_EMAIL = "comscams@gmail.com"
 fileprivate let TEST_PASSWORD = "l4 d3 e2 r1"
