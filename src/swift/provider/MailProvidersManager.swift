@@ -15,9 +15,16 @@ public class MCOMailProvidersManager: NSObjectCompat {
     
     private override init() {
         super.init()
-        if let filename = Bundle.init(for: MCOMailProvidersManager.self).path(forResource: "providers", ofType: "json") {
-            CMailProvidersManager_shared().registerProvidersWithFilename(filename.mailCoreString())
+
+        #if !os(Android)
+        if let filename = Bundle(for: MCOMailProvidersManager.self).path(forResource: "providers", ofType: "json") {
+            MCOMailProvidersManager.registerProviders(filename: filename)
         }
+        #endif
+    }
+
+    public static func registerProviders(filename: String) {
+        CMailProvidersManager_shared().registerProvidersWithFilename(filename.mailCoreString())
     }
     
     public func provider(forEmail: String) -> MCOMailProvider? {
