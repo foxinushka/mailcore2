@@ -319,7 +319,8 @@ static void performAfterDelay(void * info)
     
     free(data);
 }
-
+ 
+#ifndef __ANDROID__
 void Object::performMethodOnMainThread(Method method, void * context, bool waitUntilDone)
 {
     struct mainThreadCallData * data;
@@ -337,6 +338,7 @@ void Object::performMethodOnMainThread(Method method, void * context, bool waitU
         callOnMainThread(performOnMainThread, data);
     }
 }
+#endif
 
 #if defined(__APPLE__) || defined(__ANDROID__)
 void Object::performMethodOnDispatchQueue(Method method, void * context, void * targetDispatchQueue, bool waitUntilDone)

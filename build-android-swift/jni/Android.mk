@@ -19,8 +19,7 @@ subdirs = \
 	async/imap \
 	async/nntp \
 	async/pop \
-	async/smtp \
-	java java/native
+	async/smtp
 
 include $(CLEAR_VARS)
 LOCAL_MODULE    := iconv
@@ -84,7 +83,7 @@ LOCAL_SRC_FILES := $(TIDY_HTML5_PATH)/libs/$(TARGET_ARCH_ABI)/libtidy.so
 include $(PREBUILT_SHARED_LIBRARY)
 
 include $(CLEAR_VARS)
-core_excludes = MCWin32.cpp MCStringWin32.cpp MCMainThreadWin32.cpp MCMainThreadGTK.cpp
+core_excludes = MCWin32.cpp MCStringWin32.cpp MCMainThreadWin32.cpp MCMainThreadGTK.cpp MCMainThreadAndroid.cpp
 core_src_files := $(filter-out \
 	$(addprefix $(src_dir)/core/basetypes/, $(core_excludes)), \
 	$(wildcard $(src_dir)/core/basetypes/*.cpp) \
@@ -112,10 +111,6 @@ minizip_src_files := \
 	$(src_dir)/core/zip/MiniZip/unzip.c \
 	$(src_dir)/core/zip/MiniZip/zip.c
 
-jni_src_files := \
-	$(wildcard $(src_dir)/java/native/*.cpp) \
-	$(wildcard $(src_dir)/java/*.cpp)
-
 LOCAL_MODULE := MailCore
 LOCAL_C_INCLUDES += \
 	$(SWIFT_PM_EXTERNAL_INCLUDE) \
@@ -127,7 +122,6 @@ LOCAL_C_INCLUDES += \
 	$(addprefix $(src_dir)/, $(subdirs))
 
 LOCAL_SRC_FILES := \
-	$(jni_src_files) \
 	$(core_src_files) \
 	$(abstract_src_files) \
 	$(imap_src_files) \
