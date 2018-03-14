@@ -498,3 +498,22 @@ Object * Object::objectWithSerializable(HashMap * serializable)
     return obj->autorelease();
 }
 
+#ifdef __ANDROID__
+dispatch_queue_t mailcore::mainQueue = NULL;
+#endif
+
+dispatch_queue_t Object::getMainQueue()
+{
+    #ifdef __ANDROID__
+        dispatch_queue_t queue = mailcore::mainQueue;
+        // You should set mainQueue before using MailCore
+        assert(queue != NULL);
+        dispatch_retain(queue);
+        return queue;
+    #else
+        return dispatch_get_main_queue();
+    #endif
+
+}
+
+

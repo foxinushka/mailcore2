@@ -37,7 +37,7 @@ void NNTPOperation::setSession(NNTPAsyncSession * session)
         queue = session->dispatchQueue();
     }
     else {
-        queue = dispatch_get_main_queue();
+        queue = getMainQueue();
     }
     setCallbackDispatchQueue(queue);
 #endif

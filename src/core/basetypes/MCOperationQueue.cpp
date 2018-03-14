@@ -30,7 +30,7 @@ OperationQueue::OperationQueue()
     mQuitting = false;
     mCallback = NULL;
 #if defined(__APPLE__) || defined(__ANDROID__)
-    mDispatchQueue = dispatch_get_main_queue();
+    mDispatchQueue = getMainQueue();
 #endif
     _pendingCheckRunning = false;
 }
@@ -161,7 +161,7 @@ void OperationQueue::performOnCallbackThread(Operation * op, Method method, void
 #if defined(__APPLE__) || defined(__ANDROID__)
     dispatch_queue_t queue = op->callbackDispatchQueue();
     if (queue == NULL) {
-        queue = dispatch_get_main_queue();
+        queue = getMainQueue();
     }
     performMethodOnDispatchQueue(method, context, queue, waitUntilDone);
 #else

@@ -43,6 +43,11 @@ extern "C" {
 namespace mailcore {
     
     extern bool zombieEnabled;
+
+    #ifdef __ANDROID__
+    // Android main queue
+    extern dispatch_queue_t mainQueue;
+    #endif
     
     class String;
     class HashMap;
@@ -83,6 +88,11 @@ namespace mailcore {
         // serialization utils
         static void registerObjectConstructor(const char * className, void * (* objectConstructor)(void));
         static Object * objectWithSerializable(HashMap * serializable);
+
+        // Druk: in Android dispatch_get_main_queue() return dead queue that not drained
+        // That's why in Swift we create another queue that called `main` but it executes task NOT on Android main thread
+        // We store reference for that "main" queue in global variable mailcore::mainQueue
+        static dispatch_queue_t getMainQueue();
         
     public: // private
         

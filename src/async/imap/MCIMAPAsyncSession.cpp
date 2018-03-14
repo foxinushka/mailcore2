@@ -73,7 +73,7 @@ IMAPAsyncSession::IMAPAsyncSession()
     mClientIdentity = new IMAPIdentity();
     mOperationQueueCallback = NULL;
 #if defined(__APPLE__) || defined(__ANDROID__)
-    mDispatchQueue = dispatch_get_main_queue();
+    mDispatchQueue = getMainQueue();
 #endif
     mGmailUserDisplayName = NULL;
     mQueueRunning = false;

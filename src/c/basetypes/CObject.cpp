@@ -17,3 +17,9 @@ CObject CObject_new_WithUInt32(uint32_t value) {
 uint32_t CObject_castToUInt32(struct CObject self) {
     return (reinterpret_cast<mailcore::Value*>(self.instance))->unsignedIntValue();
 }
+
+#ifdef __ANDROID__
+void CObject_setMainQueue(dispatch_queue_t mainQueue) {
+    mailcore::mainQueue = mainQueue;
+}
+#endif

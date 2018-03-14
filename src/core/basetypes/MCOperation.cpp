@@ -9,7 +9,7 @@ Operation::Operation()
     mShouldRunWhenCancelled = false;
     pthread_mutex_init(&mLock, NULL);
 #if defined(__APPLE__) || defined(__ANDROID__)
-    mCallbackDispatchQueue = dispatch_get_main_queue();
+    mCallbackDispatchQueue = getMainQueue();
 #endif
 }
 
@@ -98,7 +98,7 @@ void Operation::performMethodOnCallbackThread(Method method, void * context, boo
 #if defined(__APPLE__) || defined(__ANDROID__)
     dispatch_queue_t queue = mCallbackDispatchQueue;
     if (queue == NULL) {
-        queue = dispatch_get_main_queue();
+        queue = getMainQueue();
     }
     performMethodOnDispatchQueue(method, context, queue, waitUntilDone);
 #else

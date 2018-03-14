@@ -64,6 +64,12 @@ public class MCOOperation: NSObjectCompat {
         let _ = Unmanaged<MCOOperation>.passRetained(self)
         nativeInstance.start();
     }
+
+#if os(Android)
+    public static func setMainQueue(_ mainQueue: DispatchQueue) {
+        CObject.setMainQueue(mainQueue.wrapped)
+    }
+#endif
 }
 
 //MARK: C Functions
