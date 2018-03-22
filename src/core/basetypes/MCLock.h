@@ -11,12 +11,12 @@
 
 #if __APPLE__
 
-#include <libkern/OSAtomic.h>
+#include <os/lock.h>
 
-#define MC_LOCK_TYPE OSSpinLock
-#define MC_LOCK_INITIAL_VALUE OS_SPINLOCK_INIT
-#define MC_LOCK(l) OSSpinLockLock(l)
-#define MC_UNLOCK(l) OSSpinLockUnlock(l)
+#define MC_LOCK_TYPE os_unfair_lock
+#define MC_LOCK_INITIAL_VALUE OS_UNFAIR_LOCK_INIT
+#define MC_LOCK(l) os_unfair_lock_lock(l)
+#define MC_UNLOCK(l) os_unfair_lock_unlock(l)
 
 #else
 

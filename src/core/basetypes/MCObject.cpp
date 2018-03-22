@@ -43,7 +43,7 @@ Object::~Object()
 void Object::init()
 {
 #if __APPLE__
-    mLock = OS_SPINLOCK_INIT;
+    mLock = OS_UNFAIR_LOCK_INIT;
 #else
     pthread_mutex_init(&mLock, NULL);
 #endif
