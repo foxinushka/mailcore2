@@ -35,7 +35,7 @@ extern "C" {
     
     C_SYNTHESIZE_COBJECT_CAST_DEFINITION(CIndexSet)
     
-    C_SYNTHESIZE_READONLY_PROPERTY_DEFINITION(CIndexSet, unsigned int, count)
+    C_SYNTHESIZE_READONLY_PROPERTY_DEFINITION(CIndexSet, uint64_t, count)
     
     C_SYNTHESIZE_FUNC_DEFINITION(CIndexSet, void, addIndex, uint64_t)
     C_SYNTHESIZE_FUNC_DEFINITION(CIndexSet, void, removeIndex, uint64_t)

@@ -70,12 +70,17 @@ IndexSet * IndexSet::indexSetWithIndex(uint64_t idx)
     return result;
 }
 
-unsigned int IndexSet::count()
+uint64_t IndexSet::count()
 {
-    unsigned int total = 0;
+    
+    uint64_t total = 0;
     for(unsigned int i = 0 ; i < mCount ; i ++) {
+        if (mRanges[i].length == UINT64_MAX) {
+            return UINT64_MAX;
+        }
         total += mRanges[i].length + 1;
     }
+    
     return total;
 }
 

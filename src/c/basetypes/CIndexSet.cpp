@@ -86,7 +86,7 @@ CIndexSet CIndexSet_new_WithIndex(uint64_t idx) {
 C_SYNTHESIZE_CONSTRUCTOR()
 C_SYNTHESIZE_COBJECT_CAST()
 
-unsigned int CIndexSet_count(struct CIndexSet self) {
+uint64_t CIndexSet_count(struct CIndexSet self) {
     return self.instance->count();
 }
 

@@ -28,7 +28,7 @@ namespace mailcore {
         static IndexSet * indexSetWithRange(Range range);
         static IndexSet * indexSetWithIndex(uint64_t idx);
         
-        virtual unsigned int count();
+        virtual uint64_t count();
         virtual void addIndex(uint64_t idx);
         virtual void removeIndex(uint64_t idx);
         virtual bool containsIndex(uint64_t idx);

@@ -51,7 +51,7 @@ public class MCOIndexSet: NSObjectCompat, NSCopying, NSCoding {
     }
     
     /** Returns the number of integers in that index set.*/
-    public func count() -> UInt32 {
+    public func count() -> UInt64 {
         return nativeInstance.count
     }
     
