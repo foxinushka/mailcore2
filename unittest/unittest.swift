@@ -142,6 +142,7 @@ class unittest : XCTestCase {
         
         #if os(Android)
         _mainPath = Bundle.main.bundleURL.appendingPathComponent("resources/data-android")
+        MCOOperation.setMainQueue(DispatchQueue.main)
         #else
         NSTimeZone.default = TimeZone.init(abbreviation: "PST")!
         _mainPath = Bundle.init(for: unittest.self).resourceURL!.appendingPathComponent("data")
