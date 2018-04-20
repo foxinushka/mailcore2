@@ -1397,7 +1397,7 @@ void String::appendBytes(const char * bytes, unsigned int length, const char * c
     
     err = U_ZERO_ERROR;
     ucnv_setToUCallBack (converter,
-                         UCNV_TO_U_CALLBACK_STOP,
+                         UCNV_TO_U_CALLBACK_SUBSTITUTE, // Ignore any ILLEGAL SEQUENCE or UNASSIGNED_SEQUENCE
                          NULL,
                          NULL,
                          NULL,

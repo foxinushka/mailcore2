@@ -155,6 +155,7 @@ class unittest : XCTestCase {
         _charsetDetectionPath = _mainPath.appendingPathComponent("charset-detection")
         _summaryDetectionPath = _mainPath.appendingPathComponent("summary/input")
         _summaryDetectionOutputPath = _mainPath.appendingPathComponent("summary/output")
+        
     }
     
     override func tearDown() {
@@ -296,17 +297,17 @@ class unittest : XCTestCase {
             if path.lastPathComponent.starts(with: ".") == true { // Hidden files
                 continue
             }
-
+            
             let data = try! Data(contentsOf: path, options: [])
             let parser = MCOMessageParser(data: data)
             parser.header.prepareForUnitTest()
             parser.mainPart()?.prepareForUnitTest()
             let str = parser.plainTextRendering()
-
+            
             var resultPath = _summaryDetectionOutputPath.appendingPathComponent(name)
             resultPath = resultPath.deletingPathExtension().appendingPathExtension("txt")
             let resultData = try! Data(contentsOf: resultPath, options: [])
-
+            
             XCTAssertEqual(String(data: resultData, encoding: .utf8), str)
         }
 
@@ -320,73 +321,4 @@ class unittest : XCTestCase {
         XCTAssertTrue(mutf7string.mUTF7DecodedString().string() == "~peter/mail/台北/日本語")
         XCTAssertTrue("~peter/mail/台北/日本語".mailCoreString().mUTF7EncodedString().isEqual(mutf7string))
     }
-    
-    func testIMAP(){
-        let queue = DispatchQueue.global()
-        let semaphore = DispatchSemaphore(value: 0)
-        
-        let session = MCOIMAPSession();
-        session.username = TEST_EMAIL
-        session.password = TEST_PASSWORD
-        session.hostname = "imap.gmail.com"
-        session.port = 993
-        session.connectionType = ConnectionType(rawValue: 1 << 2)
-        session.dispatchQueue = queue
-        
-        session.checkAccountOperation().start(completionBlock: { err in
-            if err != nil {
-                XCTFail(err!.localizedDescription)
-                semaphore.signal()
-            }
-            else {
-                session.fetchAllFoldersOperation().start(completionBlock: { err, folders in
-                    if err != nil {
-                        XCTFail(err!.localizedDescription)
-                    }
-                    else {
-                        print("folders \(folders!.map({ $0.path }))")
-                    }
-                    semaphore.signal()
-                })
-            }
-        })
-        semaphore.wait()
-    }
-    
-    func testSMTP() {
-        let queue = DispatchQueue.global()
-        let semaphore = DispatchSemaphore(value: 0)
-
-        let session = MCOSMTPSession()
-        session.username = TEST_EMAIL
-        session.password = TEST_PASSWORD
-        session.hostname = "smtp.gmail.com"
-        session.port = 465
-        session.connectionType = ConnectionType(rawValue: 1 << 2)
-        session.dispatchQueue = queue
-
-        session.loginOperation().start(completionBlock: { err in
-            if err != nil {
-                XCTFail(err!.localizedDescription)
-                semaphore.signal()
-            }
-            else {
-                session.sendOperationWithData(messageData: "Hello".data(using: .utf8)!,
-                                              from: MCOAddress(mailbox: TEST_EMAIL)!,
-                                              recipients: [MCOAddress(mailbox: TEST_EMAIL)!])
-                    .start(completionBlock: { err in
-                        if err != nil {
-                            XCTFail(err!.localizedDescription)
-                            semaphore.signal()
-                        }
-                        else {
-                            semaphore.signal()
-                        }
-                })
-            }
-        })
-
-        semaphore.wait()
-    }
-    
 }
