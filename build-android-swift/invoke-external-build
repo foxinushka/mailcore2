@@ -52,14 +52,20 @@ function clone_from_git {
     local name="$1"
     local url="$2"
 
-    if test ! -d "$name-$version"; then
+    if test ! -d "$name"; then
     	git clone $url
     fi
 }
 
+
+# Todo: compute this path on swift-android-buildtools side
+swift_pm_root=$(dirname $(dirname $SWIFT_PM_BUILD_DIR))
+build_dir="$swift_pm_root/external-build/mailcore2"
+mkdir -p $build_dir
+
 # Specify libs output
-# export NDK_OUT="$SWIFT_PM_EXTERNAL_LIBS"
-# export NDK_LIBS_OUT="$SWIFT_PM_EXTERNAL_LIBS"
+export NDK_OUT="$build_dir/obj"
+export NDK_LIBS_OUT="$build_dir/libs"
 
 base_dir="$(realpath $(dirname $0))"
 pushd "$base_dir"
@@ -72,7 +78,7 @@ pushd "$base_dir"
 
 
     # download dependencies
-    download_dir="$PWD/third-party"
+    download_dir="$build_dir/third-party"
     mkdir -p "$download_dir"
     pushd "$download_dir"
         download_dep_from_github "libetpan-android" $libetpan_build_version "https://github.com/yuryybk/libetpan/raw/master/build-android"
@@ -105,5 +111,5 @@ pushd "$base_dir"
         ICONV_PATH="$download_dir/iconv-android-$iconv_build_version"
 
     # Copy all libraries
-    rsync -t -r "libs/armeabi-v7a" "$SWIFT_PM_EXTERNAL_LIBS"
+    rsync -t -r "$NDK_LIBS_OUT/armeabi-v7a" "$SWIFT_PM_EXTERNAL_LIBS"
 popd
