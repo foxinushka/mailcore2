@@ -81,8 +81,8 @@ pushd "$base_dir"
     download_dir="$build_dir/third-party"
     mkdir -p "$download_dir"
     pushd "$download_dir"
-        download_dep_from_github "libetpan-android" $libetpan_build_version "https://github.com/yuryybk/libetpan/raw/master/build-android"
-        download_dep_from_github "iconv-android" $iconv_build_version "https://github.com/yuryybk/libetpan/raw/master/build-android/dependencies/iconv/"
+        download_dep_from_github "libetpan-android" $libetpan_build_version "https://github.com/readdle/libetpan-android-zip/raw/master/"
+        download_dep_from_github "iconv-android" $iconv_build_version "https://github.com/readdle/libetpan-android-zip/raw/master/"
         clone_from_git "swift-tidyhtml5-prebuilt" "https://git.readdle.com/android/swift-tidyhtml5-prebuilt"
         download_dep "openssl-android" $openssl_build_version
         download_dep "cyrus-sasl-android" $cyrus_sasl_build_version
