@@ -1,16 +1,16 @@
 Pod::Spec.new do |s|
   s.name         = "RSMMailCore"
-  s.version      = "2.0"
+  s.version      = "2.0.3"
   s.summary      = "SparkCore is absolutely awesome sanctuary of all the messages related business logic of Spark"
   s.description  = <<-DESC
                     Amen
                    DESC
 
-  s.homepage = 'https://git.readdle.com/spark/spark-core' 
+  s.homepage = 'https://github.com/foxinushka/mailcore2.git' 
   s.license      = { :type => 'Copyright 2017 Readdle Inc.', :text => 'Copyright 2017 Readdle Inc.' }
 
   s.author       = { "Viktor Gedzenko" => "fox@readdle.com" }
-  s.source       = { :git => "https://github.com/foxinushka/mailcore2.git", :tag => "spark2"}
+  s.source       = { :git => "https://github.com/foxinushka/mailcore2.git", :commit => "937163fa2ebccf874deafaf6713e636e7a71cc7a"}
   s.platforms    = { :ios => "9.0", :osx => "10.11" }  
 
   s.framework  = "Foundation", "Security"
@@ -47,7 +47,8 @@ Pod::Spec.new do |s|
   s.requires_arc = false
 
   s.header_dir = 'MailCore'
-  s.libraries = "xml2", "iconv", "z", "resolv", "c++", "objc"
+  s.ios.libraries = "xml2", "iconv", "z", "resolv", "c++", "objc"
+  s.osx.libraries = "xml2", "iconv", "z", "resolv", "c++", "objc", "sasl2"
 
   s.module_map = "build-mac/MailCore.modulemap"
   
@@ -95,7 +96,7 @@ Pod::Spec.new do |s|
     ss.resources = "resources/providers.json"
     ss.dependency "RSMMailCore/etpan"
     ss.dependency "RSMMailCore/ctemplate"
-    ss.dependency "RSMMailCore/sasl2"
+    ss.ios.dependency "RSMMailCore/sasl2"
   end
 
   s.subspec 'etpan' do |ss| 
