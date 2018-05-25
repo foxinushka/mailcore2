@@ -20,7 +20,7 @@ extension String : Convertible  {
     
     init(mailCoreObject str: CObject) {
         let mailCoreString = MailCoreString.init(cobject: str)
-        self = String(utf16CodeUnits: mailCoreString.unicodeCharacters, count: Int(mailCoreString.length))
+        self = mailCoreString.string() ?? "" // Maybe it should be failable constructor
     }
 }
 
