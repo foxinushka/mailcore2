@@ -8,13 +8,11 @@
 
 #include <string.h>
 #include <stdlib.h>
-#if DISABLE_ICU
-#include <unicode/ustring.h>
-#else
+
 #include <unicode/ustring.h>
 #include <unicode/ucnv.h>
 #include <unicode/utypes.h>
-#endif
+
 #if !defined(_MSC_VER) && !defined(ANDROID) && !defined(__ANDROID__)
 #include <uuid/uuid.h>
 #endif
@@ -1344,37 +1342,29 @@ void String::appendBytes(const char * bytes, unsigned int length, const char * c
     }
     
     bool converted = false;
-    int conversionCount = 0;
-    while (!converted) {
-        CFStringRef cfStr = CFStringCreateWithBytes(NULL, (const UInt8 *) bytes, (CFIndex) length, encoding, false);
-        if (cfStr != NULL) {
-            converted = true;
-            CFDataRef data = CFStringCreateExternalRepresentation(NULL, cfStr, kCFStringEncodingUTF16LE, '_');
-            if (data != NULL) {
-                UChar * fixedData = (UChar *) malloc(CFDataGetLength(data));
-                memcpy(fixedData, CFDataGetBytePtr(data), CFDataGetLength(data));
-                unsigned int length = (unsigned int) CFDataGetLength(data) / 2;
-                for(int32_t i = 0 ; i < length ; i ++) {
-                    if (fixedData[i] == 0) {
-                        fixedData[i] = ' ';
-                    }
+    CFStringRef cfStr = CFStringCreateWithBytes(NULL, (const UInt8 *) bytes, (CFIndex) length, encoding, false);
+    if (cfStr != NULL) {
+        converted = true;
+        CFDataRef data = CFStringCreateExternalRepresentation(NULL, cfStr, kCFStringEncodingUTF16LE, '_');
+        if (data != NULL) {
+            UChar * fixedData = (UChar *) malloc(CFDataGetLength(data));
+            memcpy(fixedData, CFDataGetBytePtr(data), CFDataGetLength(data));
+            unsigned int length = (unsigned int) CFDataGetLength(data) / 2;
+            for(int32_t i = 0 ; i < length ; i ++) {
+                if (fixedData[i] == 0) {
+                    fixedData[i] = ' ';
                 }
-                appendCharactersLength(fixedData, length);
-                free(fixedData);
-                CFRelease(data);
             }
-            CFRelease(cfStr);
+            appendCharactersLength(fixedData, length);
+            free(fixedData);
+            CFRelease(data);
         }
-        else {
-            length --;
-            conversionCount ++;
-            if (conversionCount > 10) {
-                // failed.
-                break;
-            }
-        }
+        CFRelease(cfStr);
     }
-#else
+    if (converted) {
+        return;
+    }
+#endif
     UErrorCode err;
 
     // ICU uses "IMAP-mailbox-name" as charset name.
@@ -1421,7 +1411,6 @@ void String::appendBytes(const char * bytes, unsigned int length, const char * c
     
     free(dest);
     ucnv_close(converter);
-#endif
 }
 
 String * String::extractedSubject()
