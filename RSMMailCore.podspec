@@ -47,8 +47,7 @@ Pod::Spec.new do |s|
   s.requires_arc = false
 
   s.header_dir = 'MailCore'
-  s.ios.libraries = "xml2", "iconv", "z", "resolv", "c++", "objc"
-  s.osx.libraries = "xml2", "iconv", "z", "resolv", "c++", "objc", "sasl2"
+  s.libraries = "xml2", "iconv", "z", "resolv", "c++", "objc"
 
   s.module_map = "build-mac/MailCore.modulemap"
   
@@ -96,7 +95,7 @@ Pod::Spec.new do |s|
     ss.resources = "resources/providers.json"
     ss.dependency "RSMMailCore/etpan"
     ss.dependency "RSMMailCore/ctemplate"
-    ss.ios.dependency "RSMMailCore/sasl2"
+    ss.dependency "RSMMailCore/sasl2"
   end
 
   s.subspec 'etpan' do |ss| 
@@ -112,10 +111,11 @@ Pod::Spec.new do |s|
   end 
 
   s.subspec 'sasl2' do |ss| 
-    ss.vendored_libraries = "Externals/libsasl-ios/lib/libsasl2.a"
-    ss.private_header_files = "Externals/libsasl-ios/include/sasl/*.h"
-    ss.source_files = "Externals/libsasl-ios/include/sasl/*.h"
-    ss.preserve_paths = "Externals/libsasl-ios/include/sasl/*.h"
+    ss.osx.libraries = "sasl2"
+    ss.ios.vendored_libraries = "Externals/libsasl-ios/lib/libsasl2.a"
+    ss.ios.private_header_files = "Externals/libsasl-ios/include/sasl/*.h"
+    ss.ios.source_files = "Externals/libsasl-ios/include/sasl/*.h"
+    ss.ios.preserve_paths = "Externals/libsasl-ios/include/sasl/*.h"
   end 
 
   s.subspec 'ctemplate' do |ss| 
