@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "RSMMailCore"
-  s.version      = "2.0.3"
+  s.version      = "2.0.9"
   s.summary      = "SparkCore is absolutely awesome sanctuary of all the messages related business logic of Spark"
   s.description  = <<-DESC
                     Amen
@@ -32,16 +32,16 @@ Pod::Spec.new do |s|
   s.prepare_command = <<-CMD
     scripts/get-mac.sh
     scripts/get-ios.sh
-    sed -i '' 's#<tidy.h>#<tidy/tidy.h>#g' ./src/core/basetypes/MCHTMLCleaner.cpp
-    sed -i '' 's#<buffio.h>#<tidy/buffio.h>#g' ./src/core/basetypes/MCHTMLCleaner.cpp
+    sed -i '' 's#<tidy/tidy.h>#<rdtidy/tidy.h>#g' ./src/core/basetypes/MCHTMLCleaner.cpp
+    sed -i '' 's#<tidy/buffio.h>#<rdtidy/buffio.h>#g' ./src/core/basetypes/MCHTMLCleaner.cpp
     mv src/core/zip/MiniZip/zip.h src/core/zip/MiniZip/rsmmczip.h
     sed -i '' 's#"zip.h"#"rsmmczip.h"#g' src/core/zip/MCZip.cpp 
     sed -i '' 's#"zip.h"#"rsmmczip.h"#g' src/core/zip/MiniZip/zip.c  
   CMD
   
   s.dependency 'RDlog4cocoa'
-  s.dependency 'RDTidyHtml5', '5.4.0-fix-a-tag'
-  s.dependency 'RDSQLite3/icu', '3.14.2-framework'
+  s.dependency 'RDTidyHtml5', '5.4.0.5'
+  s.dependency 'RDSQLite3/icu', '3.14.2-framework1'
 
   s.default_subspec = 'core' 
   s.requires_arc = false
