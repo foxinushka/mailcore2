@@ -436,6 +436,10 @@ static String * htmlForAbstractMessagePart(AbstractMessagePart * part, htmlRende
     if (context->pass == 0) {
         return NULL;
     }
+
+    if (!context->htmlCallback->shouldShowPart(part))
+        return MCSTR("");
+
     String * substring = htmlForAbstractPart(part->mainPart(), context);
     if (substring == NULL)
         return NULL;
