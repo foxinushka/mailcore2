@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "RSMMailCore"
-  s.version      = "2.0.9"
+  s.version      = "2.0.12"
   s.summary      = "SparkCore is absolutely awesome sanctuary of all the messages related business logic of Spark"
   s.description  = <<-DESC
                     Amen
