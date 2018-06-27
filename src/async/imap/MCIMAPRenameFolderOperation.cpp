@@ -35,7 +35,7 @@ String * IMAPRenameFolderOperation::otherName()
 
 void IMAPRenameFolderOperation::main()
 {
-    ErrorCode error;
+    ErrorCode error = ErrorNone;
     session()->session()->renameFolder(folder(), mOtherName, &error);
     setError(error);
 }

@@ -43,7 +43,7 @@ IMAPIdentity * IMAPIdentityOperation::serverIdentity()
 
 void IMAPIdentityOperation::main()
 {
-    ErrorCode error;
+    ErrorCode error = ErrorNone;
     mServerIdentity = session()->session()->identity(mClientIdentity, &error);
     MC_SAFE_RETAIN(mServerIdentity);
     setError(error);

@@ -4460,7 +4460,7 @@ bool IMAPSession::enableFeature(String * feature)
 void IMAPSession::enableFeatures()
 {
     if (isCompressionEnabled()) {
-        ErrorCode error;
+        ErrorCode error = ErrorNone;
         enableCompression(&error);
         if (error != ErrorNone) {
             MCLog("could not enable compression");

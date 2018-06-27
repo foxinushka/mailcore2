@@ -35,7 +35,7 @@ uint32_t IMAPQuotaOperation::usage()
 
 void IMAPQuotaOperation::main()
 {
-    ErrorCode error;
+    ErrorCode error = ErrorNone;
     session()->session()->loginIfNeeded(&error);
     if (error != ErrorNone) {
         setError(error);

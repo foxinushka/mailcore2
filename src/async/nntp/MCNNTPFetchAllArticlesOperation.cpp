@@ -42,7 +42,7 @@ IndexSet * NNTPFetchAllArticlesOperation::articles()
 
 void NNTPFetchAllArticlesOperation::main()
 {
-    ErrorCode error;
+    ErrorCode error = ErrorNone;
     mArticles = session()->session()->fetchAllArticles(mGroupName, &error);
     setError(error);
     MC_SAFE_RETAIN(mArticles);

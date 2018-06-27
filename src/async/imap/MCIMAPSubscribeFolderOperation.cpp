@@ -34,7 +34,7 @@ bool IMAPSubscribeFolderOperation::isUnsubscribeEnabled()
 
 void IMAPSubscribeFolderOperation::main()
 {
-    ErrorCode error;
+    ErrorCode error = ErrorNone;
     if (mUnsubscribeEnabled) {
         session()->session()->unsubscribeFolder(folder(), &error);
     }

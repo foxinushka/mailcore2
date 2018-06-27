@@ -23,7 +23,7 @@ POPNoopOperation::~POPNoopOperation()
 
 void POPNoopOperation::main()
 {
-    ErrorCode error;
+    ErrorCode error = ErrorNone;
     
     session()->session()->noop(&error);
     setError(error);

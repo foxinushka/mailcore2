@@ -47,7 +47,7 @@ String * NNTPPostOperation::messageFilepath()
 
 void NNTPPostOperation::main()
 {
-    ErrorCode error;
+    ErrorCode error = ErrorNone;
     if (mMessageFilepath != NULL) {
         session()->session()->postMessage(mMessageFilepath, this, &error);
     }

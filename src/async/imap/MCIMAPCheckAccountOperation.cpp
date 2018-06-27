@@ -27,7 +27,7 @@ IMAPCheckAccountOperation::~IMAPCheckAccountOperation()
 
 void IMAPCheckAccountOperation::main()
 {
-    ErrorCode error;
+    ErrorCode error = ErrorNone;
     session()->session()->loginIfNeeded(&error);
     if (error != ErrorNone) {
         MC_SAFE_REPLACE_COPY(String, mLoginResponse, session()->session()->loginResponse());

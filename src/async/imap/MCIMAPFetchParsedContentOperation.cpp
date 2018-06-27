@@ -63,7 +63,7 @@ MessageParser * IMAPFetchParsedContentOperation::parser()
 
 void IMAPFetchParsedContentOperation::main()
 {
-    ErrorCode error;
+    ErrorCode error = ErrorNone;
     Data * data;
     if (mUid != 0) {
         data = session()->session()->fetchMessageByUID(folder(), mUid, this, &error);

@@ -23,7 +23,7 @@ IMAPDeleteFolderOperation::~IMAPDeleteFolderOperation()
 
 void IMAPDeleteFolderOperation::main()
 {
-    ErrorCode error;
+    ErrorCode error = ErrorNone;
     session()->session()->deleteFolder(folder(), &error);
     setError(error);
 }

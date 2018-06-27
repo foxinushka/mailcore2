@@ -47,7 +47,7 @@ Address * SMTPCheckAccountOperation::to()
 
 void SMTPCheckAccountOperation::main()
 {
-    ErrorCode error;
+    ErrorCode error = ErrorNone;
     
     if (mTo) {
         session()->session()->checkAccount(mFrom, mTo, &error);

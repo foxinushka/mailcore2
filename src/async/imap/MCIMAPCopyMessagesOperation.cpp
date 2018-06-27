@@ -54,7 +54,7 @@ String * IMAPCopyMessagesOperation::destFolder()
 
 void IMAPCopyMessagesOperation::main()
 {
-    ErrorCode error;
+    ErrorCode error = ErrorNone;
     session()->session()->copyMessages(folder(), mUids, mDestFolder, &mUidMapping, &error);
     MC_SAFE_RETAIN(mUidMapping);
     setError(error);

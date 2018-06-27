@@ -81,7 +81,7 @@ Array * IMAPStoreFlagsOperation::customFlags()
 
 void IMAPStoreFlagsOperation::main()
 {
-    ErrorCode error;
+    ErrorCode error = ErrorNone;
     if (mUids != NULL) {
         session()->session()->storeFlagsAndCustomFlagsByUID(folder(), mUids, mKind, mFlags, mCustomFlags, &error);
     }

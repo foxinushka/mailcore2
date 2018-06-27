@@ -41,7 +41,7 @@ Data * POPFetchMessageOperation::data()
 
 void POPFetchMessageOperation::main()
 {
-    ErrorCode error;
+    ErrorCode error = ErrorNone;
     mData = session()->session()->fetchMessage(mMessageIndex, this, &error);
     MC_SAFE_RETAIN(mData);
     setError(error);

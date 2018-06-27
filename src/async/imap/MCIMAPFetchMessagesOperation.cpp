@@ -92,7 +92,7 @@ IndexSet * IMAPFetchMessagesOperation::vanishedMessages()
 
 void IMAPFetchMessagesOperation::main()
 {
-    ErrorCode error;
+    ErrorCode error = ErrorNone;
     if (mFetchByUidEnabled) {
         if (mModSequenceValue != 0) {
             IMAPSyncResult * syncResult;

@@ -23,7 +23,7 @@ IMAPExpungeOperation::~IMAPExpungeOperation()
 
 void IMAPExpungeOperation::main()
 {
-    ErrorCode error;
+    ErrorCode error = ErrorNone;
     session()->session()->expunge(folder(), &error);
     setError(error);
 }

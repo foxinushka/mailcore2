@@ -70,7 +70,7 @@ Array * IMAPStoreLabelsOperation::labels()
 
 void IMAPStoreLabelsOperation::main()
 {
-    ErrorCode error;
+    ErrorCode error = ErrorNone;
     if (mUids != NULL) {
         session()->session()->storeLabelsByUID(folder(), mUids, mKind, mLabels, &error);
     }

@@ -67,7 +67,7 @@ void IMAPIdleOperation::main()
         return;
     }
     
-    ErrorCode error;
+    ErrorCode error = ErrorNone;
     session()->session()->selectIfNeeded(folder(), &error);
     if (error != ErrorNone) {
         setError(error);

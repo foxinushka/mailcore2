@@ -39,7 +39,7 @@ Array * NNTPListNewsgroupsOperation::groups() {
 
 void NNTPListNewsgroupsOperation::main()
 {
-    ErrorCode error;
+    ErrorCode error = ErrorNone;
     
     if (mListsSuscribed) {
         mGroups = session()->session()->listDefaultNewsgroups(&error);

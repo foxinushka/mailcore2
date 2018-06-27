@@ -87,7 +87,7 @@ uint32_t IMAPAppendMessageOperation::createdUID()
 
 void IMAPAppendMessageOperation::main()
 {
-    ErrorCode error;
+    ErrorCode error = ErrorNone;
     if (mMessageFilepath != NULL) {
         session()->session()->appendMessageWithCustomFlagsAndDate(folder(), mMessageFilepath, mFlags, mCustomFlags, mDate, this, &mCreatedUID, &error);
     }

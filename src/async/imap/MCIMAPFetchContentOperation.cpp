@@ -75,7 +75,7 @@ Data * IMAPFetchContentOperation::data()
 
 void IMAPFetchContentOperation::main()
 {
-    ErrorCode error;
+    ErrorCode error = ErrorNone;
     if (mUid != 0) {
         if (mPartID != NULL) {
             mData = session()->session()->fetchMessageAttachmentByUID(folder(), mUid, mPartID, mEncoding, this, &error);

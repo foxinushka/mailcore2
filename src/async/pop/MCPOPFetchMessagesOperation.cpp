@@ -30,7 +30,7 @@ Array * POPFetchMessagesOperation::messages()
 
 void POPFetchMessagesOperation::main()
 {
-    ErrorCode error;
+    ErrorCode error = ErrorNone;
     mMessages = session()->session()->fetchMessages(&error);
     setError(error);
     MC_SAFE_RETAIN(mMessages);

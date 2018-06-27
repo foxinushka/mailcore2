@@ -71,7 +71,7 @@ Array * SMTPSendWithDataOperation::recipients()
 
 void SMTPSendWithDataOperation::main()
 {
-    ErrorCode error;
+    ErrorCode error = ErrorNone;
     if (mMessageFilepath != NULL) {
         session()->session()->sendMessage(mFrom, mRecipients, mMessageFilepath, this, &error);
     }

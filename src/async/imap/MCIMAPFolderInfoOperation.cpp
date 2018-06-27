@@ -31,7 +31,7 @@ IMAPFolderInfo * IMAPFolderInfoOperation::info()
 
 void IMAPFolderInfoOperation::main()
 {
-    ErrorCode error;
+    ErrorCode error = ErrorNone;
     
     session()->session()->loginIfNeeded(&error);
     if (error != ErrorNone) {

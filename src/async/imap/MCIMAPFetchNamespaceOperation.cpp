@@ -25,7 +25,7 @@ IMAPFetchNamespaceOperation::~IMAPFetchNamespaceOperation()
 
 void IMAPFetchNamespaceOperation::main()
 {
-    ErrorCode error;
+    ErrorCode error = ErrorNone;
     mNamespaces = session()->session()->fetchNamespace(&error);
     setError(error);
     MC_SAFE_RETAIN(mNamespaces);

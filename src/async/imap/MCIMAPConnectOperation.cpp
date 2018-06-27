@@ -15,7 +15,7 @@ using namespace mailcore;
 
 void IMAPConnectOperation::main()
 {
-    ErrorCode error;
+    ErrorCode error = ErrorNone;
     session()->session()->connectIfNeeded(&error);
     setError(error);
 }

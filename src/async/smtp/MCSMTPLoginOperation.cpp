@@ -23,7 +23,7 @@ SMTPLoginOperation::~SMTPLoginOperation()
 
 void SMTPLoginOperation::main()
 {
-    ErrorCode error;
+    ErrorCode error = ErrorNone;
     session()->session()->loginIfNeeded(&error);
     setError(error);
 }

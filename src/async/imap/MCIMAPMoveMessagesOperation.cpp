@@ -54,7 +54,7 @@ String * IMAPMoveMessagesOperation::destFolder()
 
 void IMAPMoveMessagesOperation::main()
 {
-    ErrorCode error;
+    ErrorCode error = ErrorNone;
     session()->session()->moveMessages(folder(), mUids, mDestFolder, &mUidMapping, &error);
     MC_SAFE_RETAIN(mUidMapping);
     setError(error);

@@ -23,7 +23,7 @@ IMAPCreateFolderOperation::~IMAPCreateFolderOperation()
 
 void IMAPCreateFolderOperation::main()
 {
-    ErrorCode error;
+    ErrorCode error = ErrorNone;
     session()->session()->createFolder(folder(), &error);
     setError(error);
 }

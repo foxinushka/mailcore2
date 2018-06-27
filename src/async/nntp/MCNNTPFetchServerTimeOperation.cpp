@@ -29,7 +29,7 @@ time_t NNTPFetchServerTimeOperation::time()
 
 void NNTPFetchServerTimeOperation::main()
 {
-    ErrorCode error;
+    ErrorCode error = ErrorNone;
     mTime = session()->session()->fetchServerDate(&error);
     setError(error);
 }

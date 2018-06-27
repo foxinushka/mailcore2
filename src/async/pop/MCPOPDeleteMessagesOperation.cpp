@@ -38,7 +38,7 @@ void POPDeleteMessagesOperation::main()
     if (mMessageIndexes == NULL)
         return;
     
-    ErrorCode error;
+    ErrorCode error = ErrorNone;
     mc_foreachindexset(index, mMessageIndexes) {
         session()->session()->deleteMessage((unsigned int) index, &error);
         if (error != ErrorNone) {

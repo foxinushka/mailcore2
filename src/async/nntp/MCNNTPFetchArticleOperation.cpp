@@ -61,7 +61,7 @@ Data * NNTPFetchArticleOperation::data()
 
 void NNTPFetchArticleOperation::main()
 {
-    ErrorCode error;
+    ErrorCode error = ErrorNone;
     if (mMessageID == NULL) {
         mData = session()->session()->fetchArticle(mGroupName, mMessageIndex, this, &error);
     } else {

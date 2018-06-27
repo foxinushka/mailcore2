@@ -23,7 +23,7 @@ NNTPDisconnectOperation::~NNTPDisconnectOperation()
 
 void NNTPDisconnectOperation::main()
 {
-    ErrorCode error;
+    ErrorCode error = ErrorNone;
     
     session()->session()->checkAccount(&error);
     setError(error);

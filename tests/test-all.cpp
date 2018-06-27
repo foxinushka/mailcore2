@@ -139,7 +139,7 @@ static void testMessageParser(mailcore::Data * data)
 static void testIMAP()
 {
     mailcore::IMAPSession * session;
-    mailcore::ErrorCode error;
+    mailcore::ErrorCode error = mailcore::ErrorNone;
     
     session = new mailcore::IMAPSession();
     session->setHostname(MCSTR("imap.gmail.com"));
@@ -163,7 +163,7 @@ static void testIMAPMove()
 {
     mailcore::IMAPSession * session;
     mailcore::HashMap *uidMapping;
-    mailcore::ErrorCode error;
+    mailcore::ErrorCode error = mailcore::ErrorNone;
     
     session = new mailcore::IMAPSession();
     session->setHostname(MCSTR("imap.mail.ru"));
@@ -184,7 +184,7 @@ static void testIMAPMove()
 static void testIMAPCapability()
 {
     mailcore::IMAPSession * session;
-    mailcore::ErrorCode error;
+    mailcore::ErrorCode error = mailcore::ErrorNone;
 
     session = new mailcore::IMAPSession();
     session->setHostname(MCSTR("imap.mail.ru"));
@@ -203,7 +203,7 @@ static void testIMAPCapability()
 static void testSMTP(mailcore::Data * data)
 {
     mailcore::SMTPSession * smtp;
-    mailcore::ErrorCode error;
+    mailcore::ErrorCode error = mailcore::ErrorNone;
     
     smtp = new mailcore::SMTPSession();
     
@@ -239,7 +239,7 @@ static void parseAddressesFromRfc822(mailcore::String * filename, mailcore::Arra
 static void testSendingMessageFromFileViaSMTP(mailcore::Data * data)
 {
     mailcore::SMTPSession * smtp;
-    mailcore::ErrorCode error;
+    mailcore::ErrorCode error = mailcore::ErrorNone;
 
     mailcore::String * filename = temporaryFilenameForTest();
     data->writeToFile(filename);
@@ -264,7 +264,7 @@ static void testSendingMessageFromFileViaSMTP(mailcore::Data * data)
 static void testPOP()
 {
     mailcore::POPSession * session;
-    mailcore::ErrorCode error;
+    mailcore::ErrorCode error = mailcore::ErrorNone;
     
     session = new mailcore::POPSession();
     session->setHostname(MCSTR("pop.gmail.com"));
@@ -282,7 +282,7 @@ static void testPOP()
 static void testNNTP()
 {
     mailcore::NNTPSession * session;
-    mailcore::ErrorCode error;
+    mailcore::ErrorCode error = mailcore::ErrorNone;
     
     session = new mailcore::NNTPSession();
     session->setHostname(MCSTR("news.gmane.org."));

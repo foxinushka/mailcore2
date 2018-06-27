@@ -23,7 +23,7 @@ NNTPCheckAccountOperation::~NNTPCheckAccountOperation()
 
 void NNTPCheckAccountOperation::main()
 {
-    ErrorCode error;
+    ErrorCode error = ErrorNone;
     
     session()->session()->checkAccount(&error);
     setError(error);

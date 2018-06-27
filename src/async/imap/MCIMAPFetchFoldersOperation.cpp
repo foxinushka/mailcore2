@@ -43,7 +43,7 @@ Array * IMAPFetchFoldersOperation::folders()
 
 void IMAPFetchFoldersOperation::main()
 {
-    ErrorCode error;
+    ErrorCode error = ErrorNone;
     if (mFetchSubscribedEnabled) {
         mFolders = session()->session()->fetchSubscribedFolders(&error);
     }

@@ -52,7 +52,7 @@ MessageHeader * NNTPFetchHeaderOperation::header()
 
 void NNTPFetchHeaderOperation::main()
 {
-    ErrorCode error;
+    ErrorCode error = ErrorNone;
     mHeader = session()->session()->fetchHeader(mGroupName, mMessageIndex, &error);
     if (mHeader != NULL) {
         mHeader->retain();
