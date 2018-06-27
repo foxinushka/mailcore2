@@ -57,11 +57,7 @@ function clone_from_git {
     fi
 }
 
-
-# Todo: compute this path on swift-android-buildtools side
-swift_pm_root=$(dirname $(dirname $SWIFT_PM_BUILD_DIR))
-build_dir="$swift_pm_root/external-build/mailcore2"
-mkdir -p $build_dir
+build_dir=$SWIFT_PM_EXTERNAL_BUILD_ROOT
 
 # Specify libs output
 export NDK_OUT="$build_dir/obj"
@@ -111,5 +107,11 @@ pushd "$base_dir"
         ICONV_PATH="$download_dir/iconv-android-$iconv_build_version"
 
     # Copy all libraries
-    rsync -t -r "$NDK_LIBS_OUT/armeabi-v7a" "$SWIFT_PM_EXTERNAL_LIBS"
+    if (( $NDK_DEBUG == 1 ))
+    then
+        rsync -t -r "$NDK_OUT/local/armeabi-v7a" "$SWIFT_PM_EXTERNAL_LIBS"
+    else
+        rsync -t -r "$NDK_LIBS_OUT/armeabi-v7a" "$SWIFT_PM_EXTERNAL_LIBS"
+    fi
+
 popd
