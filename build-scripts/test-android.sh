@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -e
+
 export TOOLCHAINS=swift
 
 # Force clean
