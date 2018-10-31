@@ -31,6 +31,7 @@ OperationQueue::OperationQueue()
     mCallback = NULL;
 #if defined(__APPLE__) || defined(__ANDROID__)
     mDispatchQueue = getMainQueue();
+    workQueue = dispatch_queue_create("com.readlle.mc_operation_queue.work_queue", NULL);
 #endif
     _pendingCheckRunning = false;
 }
@@ -41,6 +42,7 @@ OperationQueue::~OperationQueue()
     if (mDispatchQueue != NULL) {
         dispatch_release(mDispatchQueue);
     }
+    dispatch_release(workQueue);
 #endif
     MC_SAFE_RELEASE(mOperations);
     pthread_mutex_destroy(&mLock);
@@ -259,7 +261,11 @@ void OperationQueue::startThread()
     retain(); // (3)
     mQuitting = false;
     mStarted = true;
+#if defined(__APPLE__) || defined(__ANDROID__)
+    dispatch_async(workQueue, ^{ this->runOperationsOnThread(this); });
+#else
     pthread_create(&mThreadID, NULL, (void * (*)(void *)) OperationQueue::runOperationsOnThread, this);
+#endif
     mailsem_down(mStartSem);
 }
 

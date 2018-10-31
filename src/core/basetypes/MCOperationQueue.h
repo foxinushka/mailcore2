@@ -47,6 +47,7 @@ namespace mailcore {
         OperationQueueCallback * mCallback;
 #if defined(__APPLE__) || defined(__ANDROID__)
         dispatch_queue_t mDispatchQueue;
+        dispatch_queue_t workQueue;
 #endif
         bool _pendingCheckRunning;
         
