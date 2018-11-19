@@ -469,7 +469,7 @@ String * htmlForAbstractMultipartAlternative(AbstractMultipart * part, htmlRende
             // Exchange sends calendar invitation as alternative part. We need to extract it.
             calendar = subpart;
         }
-        else if (partContainsMimeType(subpart, MCSTR("application/pdf"))) {
+        else if (subpart->partType() == PartTypeSingle && singlePartContainsMimeType(subpart, MCSTR("application/pdf"))) {
             // Spark want's behavior when alternative pdf parts are shown as attachments.
             if (context->relatedAttachments != NULL) {
                 context->relatedAttachments->addObject(subpart);
