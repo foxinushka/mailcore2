@@ -726,6 +726,7 @@ void IMAPSession::connect(ErrorCode * pError)
         mHermesServer = (mWelcomeString->locationOfString(MCSTR("Hermes")) != -1);
         mQipServer = (mWelcomeString->locationOfString(MCSTR("QIP IMAP server")) != -1);
         mOutlookServer = (mHostname->locationOfString(MCSTR(".outlook.com")) != -1);
+        mIdeaImapServer = (mWelcomeString->locationOfString(MCSTR("IdeaImapServer")) != -1);
     }
     
     mState = STATE_CONNECTED;
@@ -4266,6 +4267,10 @@ void IMAPSession::applyCapabilities(IndexSet * capabilities)
     }
     if (capabilities->containsIndex(IMAPCapabilityCompressDeflate)) {
         mCompressionEnabled = true;
+    }
+    if (mIdeaImapServer) {
+        // IdeaImapServer may send badly encoded folders list which can't be parsed.
+        mXListEnabled = false;
     }
 }
 

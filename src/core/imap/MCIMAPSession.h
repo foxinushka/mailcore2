@@ -276,6 +276,7 @@ namespace mailcore {
         bool mHermesServer;
         bool mQipServer;
         bool mOutlookServer;
+        bool mIdeaImapServer;
         
         unsigned int mLastFetchedSequenceNumber;
         String * mCurrentFolder;
