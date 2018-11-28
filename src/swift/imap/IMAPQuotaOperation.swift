@@ -25,6 +25,7 @@ public class MCOIMAPQuotaOperation : MCOIMAPBaseOperation {
     }
     
     public override func cancel() {
+        completionBlock?(MailCoreError.error(code: ErrorCanceled), 0, 0)
         completionBlock = nil;
         super.cancel();
     }

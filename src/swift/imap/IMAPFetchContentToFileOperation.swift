@@ -40,6 +40,7 @@ public class MCOIMAPFetchContentToFileOperation : MCOIMAPBaseOperation {
     }
     
     public override func cancel() {
+        completionBlock?(MailCoreError.error(code: ErrorCanceled))
         completionBlock = nil
         super.cancel()
     }

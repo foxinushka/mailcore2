@@ -25,6 +25,7 @@ public class MCOIMAPIdleOperation : MCOIMAPBaseOperation {
     }
 
     public override func cancel() {
+        completionBlock?(MailCoreError.error(code: ErrorCanceled))
         self.completionBlock = nil;
         super.cancel();
     }
