@@ -35,6 +35,7 @@ public class MCOIMAPSearchOperation : MCOIMAPBaseOperation {
     }
     
     public override func cancel() {
+        completionBlock?(MailCoreError.error(code: ErrorCanceled), nil)
         completionBlock = nil;
         super.cancel();
     }

@@ -63,6 +63,7 @@ public class MailCoreErrors: NSObjectCompat {
     case errorYahooSendMessageSpamSuspected
     case errorYahooSendMessageDailyLimitExceeded
     case errorOutlookLoginViaWebBrowser
+    case errorCanceled
     
     internal static func error(code: ErrorCode, userInfo: [String: Any]? = nil) -> NSError {
         return NSError(domain: MailCoreErrorDomain, code: Int(code.rawValue), userInfo: userInfo)

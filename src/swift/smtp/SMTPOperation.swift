@@ -25,6 +25,7 @@ public class MCOSMTPOperation: MCOOperation {
     }
     
     public override func cancel() {
+        completionBlock?(MailCoreError.error(code: ErrorCanceled))
         self.completionBlock = nil;
         super.cancel()
     }

@@ -29,6 +29,9 @@ void IMAPFolderStatusOperation::main()
     ErrorCode error = ErrorNone;
     
     session()->session()->loginIfNeeded(&error);
+    if (this->isCancelled()) {
+        error = ErrorCanceled;
+    }
     if (error != ErrorNone) {
         setError(error);
         return;

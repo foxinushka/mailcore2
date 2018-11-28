@@ -259,6 +259,8 @@ extern "C" {
         ErrorYahooSendMessageSpamSuspected,
         ErrorYahooSendMessageDailyLimitExceeded,
         ErrorOutlookLoginViaWebBrowser,
+        ErrorTiscaliSimplePassword,
+        ErrorCanceled,
     }ErrorCode;
     
     typedef enum {
