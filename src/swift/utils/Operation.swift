@@ -5,7 +5,9 @@ import CMailCore
 public class MCOOperation: NSObjectCompat {
     
     internal var nativeInstance: COperation!
-    fileprivate var _started: Bool = false;
+    
+    private let startedPropertyLock = NSLock()
+    fileprivate var _started: Bool = false
     
     internal init(_ cOperation: COperation) {
         super.init()
@@ -29,7 +31,6 @@ public class MCOOperation: NSObjectCompat {
             nativeInstance.setCallbackDispatchQueue(newValue?.wrapped)
         }
     }
-
     
     /** Returns whether the operation is cancelled.*/
     public var isCancelled: Bool {
@@ -50,21 +51,35 @@ public class MCOOperation: NSObjectCompat {
     
     /** Cancel the operation.*/
     public func cancel() {
+        startedPropertyLock.lock()
         if (_started) {
             _started = false;
             // Unbalanced release
-            Unmanaged<MCOOperation>.passUnretained(self).release()
+            _ = Unmanaged<MCOOperation>.passUnretained(self).autorelease()
         }
+        startedPropertyLock.unlock()
         nativeInstance.cancel();
     }
     
-    internal func start(){
+    internal func start() {
+        startedPropertyLock.lock()
+        assert(_started == false)
         _started = true;
         // Unbalanced retain
         let _ = Unmanaged<MCOOperation>.passRetained(self)
+        startedPropertyLock.unlock()
         nativeInstance.start();
     }
-
+    
+    fileprivate func releaseOnComplete() {
+        startedPropertyLock.lock()
+        if _started {
+            _started = false
+            // Unbalanced release
+            Unmanaged<MCOOperation>.passUnretained(self).release()
+        }
+        startedPropertyLock.unlock()
+    }
 #if os(Android)
     public static func setMainQueue(_ mainQueue: DispatchQueue) {
         CObject.setMainQueue(mainQueue.wrapped)
@@ -76,8 +91,6 @@ public class MCOOperation: NSObjectCompat {
 public func operationCompletedCallback(ref: UnsafeRawPointer?) {
     let unmanagedSelf = Unmanaged<MCOOperation>.fromOpaque(ref!)
     let selfRef = unmanagedSelf.takeUnretainedValue()
-    selfRef._started = false
     selfRef.operationCompleted()
-    // Unbalanced release
-    unmanagedSelf.release()
+    selfRef.releaseOnComplete()
 }
