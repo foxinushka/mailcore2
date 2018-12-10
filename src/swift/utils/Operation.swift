@@ -51,14 +51,18 @@ public class MCOOperation: NSObjectCompat {
     
     /** Cancel the operation.*/
     public func cancel() {
+        let shouldRelease: Bool
+
         startedPropertyLock.lock()
-        if (_started) {
-            _started = false;
-            // Unbalanced release
-            _ = Unmanaged<MCOOperation>.passUnretained(self).autorelease()
-        }
+        shouldRelease = _started
+        _started = false
         startedPropertyLock.unlock()
+
         nativeInstance.cancel();
+        if shouldRelease {
+            // Unbalanced release
+            Unmanaged<MCOOperation>.passUnretained(self).release()
+        }
     }
     
     internal func start() {
