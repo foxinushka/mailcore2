@@ -46,23 +46,16 @@ public class MCOOperation: NSObjectCompat {
     /** This methods is called on the main thread when the asynchronous operation is finished.
      Needs to be overriden by subclasses.*/
     public func operationCompleted() {
-    
+        
     }
     
     /** Cancel the operation.*/
     public func cancel() {
-        let shouldRelease: Bool
-
-        startedPropertyLock.lock()
-        shouldRelease = _started
-        _started = false
-        startedPropertyLock.unlock()
-
+        // cancel first, because MCOperationQueue.cpp check isCancelled() before call completion
+        // which will call operationCompletedCallback, which causes to access to deallocated object
         nativeInstance.cancel();
-        if shouldRelease {
-            // Unbalanced release
-            Unmanaged<MCOOperation>.passUnretained(self).release()
-        }
+        
+        releaseOnComplete()
     }
     
     internal func start() {
@@ -84,6 +77,7 @@ public class MCOOperation: NSObjectCompat {
         }
         startedPropertyLock.unlock()
     }
+    
 #if os(Android)
     public static func setMainQueue(_ mainQueue: DispatchQueue) {
         CObject.setMainQueue(mainQueue.wrapped)
