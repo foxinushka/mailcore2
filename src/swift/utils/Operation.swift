@@ -93,7 +93,12 @@ public class MCOOperation: NSObjectCompat {
 
 //MARK: C Functions
 public func operationCompletedCallback(ref: UnsafeRawPointer?) {
-    let unmanagedSelf = Unmanaged<MCOOperation>.fromOpaque(ref!)
+    guard let ref = ref else {
+        assert(false)
+        return
+    }
+    
+    let unmanagedSelf = Unmanaged<MCOOperation>.fromOpaque(ref)
     let selfRef = unmanagedSelf.takeUnretainedValue()
     selfRef.operationCompleted()
     selfRef.releaseOnComplete()
