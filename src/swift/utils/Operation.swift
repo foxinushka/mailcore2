@@ -6,14 +6,10 @@ public class MCOOperation: NSObjectCompat {
     
     internal var nativeInstance: COperation!
     
-    private let startedPropertyLock = NSLock()
-    fileprivate var _started: Bool = false
-    
     internal init(_ cOperation: COperation) {
         super.init()
-        self.nativeInstance = cOperation
-        self.nativeInstance.retain()
-        self.nativeInstance = cOperation.setCompletionBlock(operationCompletedCallback, Unmanaged.passUnretained(self).toOpaque())
+        nativeInstance = cOperation.setCompletionBlock(operationCompletedCallback, Unmanaged.passUnretained(self).toOpaque())
+        nativeInstance.retain()
     }
     
     deinit {
@@ -55,27 +51,16 @@ public class MCOOperation: NSObjectCompat {
         // which will call operationCompletedCallback, which causes to access to deallocated object
         nativeInstance.cancel();
         
-        releaseOnComplete()
+        _ = tryFinish(self)
     }
     
     internal func start() {
-        startedPropertyLock.lock()
-        assert(_started == false)
-        _started = true;
-        // Unbalanced retain
-        let _ = Unmanaged<MCOOperation>.passRetained(self)
-        startedPropertyLock.unlock()
-        nativeInstance.start();
-    }
-    
-    fileprivate func releaseOnComplete() {
-        startedPropertyLock.lock()
-        if _started {
-            _started = false
-            // Unbalanced release
-            Unmanaged<MCOOperation>.passUnretained(self).release()
+        guard tryStart(self) else {
+            assert(false)
+            return
         }
-        startedPropertyLock.unlock()
+        
+        nativeInstance.start();
     }
     
 #if os(Android)
@@ -85,15 +70,79 @@ public class MCOOperation: NSObjectCompat {
 #endif
 }
 
-//MARK: C Functions
+// MARK: - C Functions
+
 public func operationCompletedCallback(ref: UnsafeRawPointer?) {
     guard let ref = ref else {
         assert(false)
         return
     }
     
-    let unmanagedSelf = Unmanaged<MCOOperation>.fromOpaque(ref)
-    let selfRef = unmanagedSelf.takeUnretainedValue()
-    selfRef.operationCompleted()
-    selfRef.releaseOnComplete()
+    guard let operation = tryFinish(ref) else {
+        return
+    }
+    
+    operation.operationCompleted()
+}
+
+// MARK: - Scheduled logic helpers
+
+private var scheduled = Set<UnsafeRawPointer>()
+private var scheduledLock = NSLock()
+
+private func tryStart(_ op: MCOOperation) -> Bool {
+    let unmanaged = Unmanaged.passUnretained(op)
+    let pointer = unmanaged.toOpaque()
+    
+    scheduledLock.lock()
+    defer {
+        scheduledLock.unlock()
+    }
+    
+    if scheduled.contains(pointer) {
+        return false
+    }
+    
+    scheduled.insert(pointer)
+    _ = unmanaged.retain()
+    
+    return true
+}
+
+private func tryFinish(_ op: MCOOperation) -> Bool {
+    let unmanaged = Unmanaged.passUnretained(op)
+    let pointer = unmanaged.toOpaque()
+    
+    scheduledLock.lock()
+    defer {
+        scheduledLock.unlock()
+    }
+    
+    guard scheduled.contains(pointer) else {
+        return false
+    }
+    
+    scheduled.remove(pointer)
+    _ = unmanaged.release()
+    
+    return true
+}
+
+private func tryFinish(_ pointer: UnsafeRawPointer) -> MCOOperation? {
+    scheduledLock.lock()
+    defer {
+        scheduledLock.unlock()
+    }
+    
+    guard scheduled.contains(pointer) else {
+        return nil
+    }
+    
+    let unmanaged = Unmanaged<MCOOperation>.fromOpaque(pointer)
+    let operation = unmanaged.takeUnretainedValue()
+    
+    scheduled.remove(pointer)
+    unmanaged.release()
+    
+    return operation
 }
