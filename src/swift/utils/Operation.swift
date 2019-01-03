@@ -8,11 +8,13 @@ public class MCOOperation: NSObjectCompat {
     
     internal init(_ cOperation: COperation) {
         super.init()
-        nativeInstance = cOperation.setCompletionBlock(operationCompletedCallback, Unmanaged.passUnretained(self).toOpaque())
+        nativeInstance = cOperation
         nativeInstance.retain()
+        nativeInstance = nativeInstance.setCompletionBlock(operationCompletedCallback, Unmanaged.passUnretained(self).toOpaque())
     }
     
     deinit {
+        nativeInstance = nativeInstance.clearCompletionBlock()
         nativeInstance.release()
     }
     
@@ -88,7 +90,7 @@ public func operationCompletedCallback(ref: UnsafeRawPointer?) {
 // MARK: - Scheduled logic helpers
 
 private var scheduled = Set<UnsafeRawPointer>()
-private var scheduledLock = NSLock()
+private let scheduledLock = NSLock()
 
 private func tryStart(_ op: MCOOperation) -> Bool {
     let unmanaged = Unmanaged.passUnretained(op)
@@ -139,6 +141,7 @@ private func tryFinish(_ pointer: UnsafeRawPointer) -> MCOOperation? {
     }
     
     let unmanaged = Unmanaged<MCOOperation>.fromOpaque(pointer)
+    
     let operation = unmanaged.takeUnretainedValue()
     
     scheduled.remove(pointer)
