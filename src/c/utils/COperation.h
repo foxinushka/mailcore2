@@ -36,10 +36,11 @@ extern "C" {
     // TODO: should be property, but swift doesn;t recognize dispatch_queue_t <--> DispatchQueue bridging
     C_SYNTHESIZE_FUNC_DEFINITION(COperation, dispatch_queue_t, callbackDispatchQueue)
     C_SYNTHESIZE_FUNC_DEFINITION(COperation, void, setCallbackDispatchQueue, dispatch_queue_t)
-
+    
     C_SYNTHESIZE_PROPERTY_DEFINITION(COperation, bool, shouldRunWhenCancelled, setShouldRunWhenCancelled)
     
     C_SYNTHESIZE_FUNC_DEFINITION(COperation, COperation, setCompletionBlock, COperationCompletionBlock, const void*)
+    C_SYNTHESIZE_FUNC_DEFINITION(COperation, COperation, clearCompletionBlock)
     
     C_SYNTHESIZE_FUNC_DEFINITION(COperation, bool, isCancelled)
     C_SYNTHESIZE_FUNC_DEFINITION(COperation, void, cancel)

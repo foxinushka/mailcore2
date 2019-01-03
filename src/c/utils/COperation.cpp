@@ -33,21 +33,52 @@ COperation COperation_new(mailcore::Operation *operationRef) {
 }
 
 struct COperation COperation_setCompletionBlock(COperation self, COperationCompletionBlock block, const void* userInfo) {
+    COperation_clearCompletionBlock(self);
     self._callback = new COperationCompletionCallback(block, userInfo);
     self.instance->setCallback(self._callback);
     return self;
 }
 
+struct COperation COperation_clearCompletionBlock(COperation self) {
+    COperationCompletionCallback *callback = self._callback;
+    mailcore::Operation *instance = self.instance;
+    
+    if (callback == NULL) {
+        return self;
+    }
+    
+    self._callback = NULL;
+    
+    dispatch_queue_t callbackQueue = self.instance->callbackDispatchQueue();
+    
+    if (callbackQueue == NULL) {
+        MCAssert(0);
+        instance->setCallback(NULL);
+        callback->release();
+    }
+    else {
+        // clear and release callback on callback queue
+        // to be in sync with "callback() == NULL" checks in other places of Mailcore
+        
+        instance->retain();
+        
+        dispatch_async(callbackQueue, ^{
+            instance->setCallback(NULL);
+            instance->release();
+            callback->release();
+        });
+    }
+    
+    return self;
+}
+
+
 C_SYNTHESIZE_FUNC_WITH_SCALAR(bool, isCancelled)
 C_SYNTHESIZE_FUNC_WITH_VOID(cancel)
 C_SYNTHESIZE_FUNC_WITH_VOID(start)
 
-
 void COperation_release(COperation self) {
     self.instance->release();
-    if (self._callback != NULL) {
-        self._callback->release();
-    }
 }
 
 void COperation_retain(COperation self) {
