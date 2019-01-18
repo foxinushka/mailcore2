@@ -79,7 +79,7 @@ include $(PREBUILT_SHARED_LIBRARY)
 
 include $(CLEAR_VARS)
 LOCAL_MODULE    := tidy
-LOCAL_SRC_FILES := $(TIDY_HTML5_PATH)/libs/$(TARGET_ARCH_ABI)/libtidy.so
+LOCAL_SRC_FILES := $(SWIFT_PM_EXTERNAL_LIBS)/$(TARGET_ARCH_ABI)/libtidy.so
 include $(PREBUILT_SHARED_LIBRARY)
 
 include $(CLEAR_VARS)
@@ -117,7 +117,7 @@ LOCAL_C_INCLUDES += \
     $(CTEMPLATE_PATH)/include \
 	$(SWIFT_LIB) \
     $(LIBETPAN_PATH)/include \
-    $(TIDY_HTML5_PATH)/include \
+    $(SWIFT_PM_EXTERNAL_INCLUDE) \
     $(OPENSSL_PATH)/include \
 	$(addprefix $(src_dir)/, $(subdirs))
 
