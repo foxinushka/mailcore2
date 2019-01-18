@@ -48,15 +48,6 @@ function download_dep_from_github {
     fi
 }
 
-function clone_from_git {
-    local name="$1"
-    local url="$2"
-
-    if test ! -d "$name"; then
-    	git clone $url
-    fi
-}
-
 build_dir=$SWIFT_PM_EXTERNAL_BUILD_ROOT
 
 # Specify libs output
@@ -79,7 +70,6 @@ pushd "$base_dir"
     pushd "$download_dir"
         download_dep_from_github "libetpan-android" $libetpan_build_version "https://github.com/readdle/libetpan-android-zip/raw/master/"
         download_dep_from_github "iconv-android" $iconv_build_version "https://github.com/readdle/libetpan-android-zip/raw/master/"
-        clone_from_git "swift-tidyhtml5-prebuilt" "https://git.readdle.com/android/swift-tidyhtml5-prebuilt"
         download_dep "openssl-android" $openssl_build_version
         download_dep "cyrus-sasl-android" $cyrus_sasl_build_version
 
@@ -101,7 +91,8 @@ pushd "$base_dir"
     ndk-build -j 4 "$@" \
         CTEMPLATE_PATH="$download_dir/ctemplate-android-$ctemplate_build_version" \
         LIBETPAN_PATH="$download_dir/libetpan-android-$libetpan_build_version" \
-        TIDY_HTML5_PATH="$download_dir/swift-tidyhtml5-prebuilt" \
+        SWIFT_PM_EXTERNAL_LIBS=$SWIFT_PM_EXTERNAL_LIBS \
+        SWIFT_PM_EXTERNAL_INCLUDE=$SWIFT_PM_EXTERNAL_INCLUDE \
         OPENSSL_PATH="$download_dir/openssl-android-$openssl_build_version" \
         CYRUS_SASL_PATH="$download_dir/cyrus-sasl-android-$cyrus_sasl_build_version" \
         ICONV_PATH="$download_dir/iconv-android-$iconv_build_version"
