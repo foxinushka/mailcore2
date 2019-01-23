@@ -414,7 +414,7 @@ void Object::cancelDelayedPerformMethodOnDispatchQueue(Method method, void * con
 void Object::performMethodAfterDelay(Method method, void * context, double delay)
 {
 #if defined(__APPLE__) || defined(__ANDROID__)
-    performMethodOnDispatchQueueAfterDelay(method, context, dispatch_get_main_queue(), delay);
+    performMethodOnDispatchQueueAfterDelay(method, context, Object::getMainQueue(), delay);
 #else
     initDelayedPerform();
     
@@ -432,7 +432,7 @@ void Object::performMethodAfterDelay(Method method, void * context, double delay
 void Object::cancelDelayedPerformMethod(Method method, void * context)
 {
 #if defined(__APPLE__) || defined(__ANDROID__)
-    cancelDelayedPerformMethodOnDispatchQueue(method, context, dispatch_get_main_queue());
+    cancelDelayedPerformMethodOnDispatchQueue(method, context, Object::getMainQueue());
 #else
     initDelayedPerform();
     
