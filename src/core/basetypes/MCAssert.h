@@ -8,7 +8,13 @@
 
 #ifdef __cplusplus
 extern "C" {
-#endif	
+#endif
+    
+    typedef void (*MSAssertHandler)(const char * filename, unsigned int line, const char * condString);
+    
+    MAILCORE_EXPORT
+    void setMCAssertHandler(MSAssertHandler handler) CLANG_ANALYZER_NORETURN;
+    
     MAILCORE_EXPORT
 	void MCAssertInternal(const char * filename, unsigned int line, int cond, const char * condString) CLANG_ANALYZER_NORETURN;
 #ifdef __cplusplus
