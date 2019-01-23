@@ -3,10 +3,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-static MSAssertHandler assertHadnler = NULL;
+static MSAssertHandler assertHandler = NULL;
 
 void setMCAssertHandler(MSAssertHandler handler) {
-    assertHadnler = handler;
+    assertHandler = handler;
 }
 
 void MCAssertInternal(const char * filename, unsigned int line, int cond, const char * condString)
@@ -15,8 +15,8 @@ void MCAssertInternal(const char * filename, unsigned int line, int cond, const 
         return;
     }
     
-    if (assertHadnler != NULL) {
-        assertHadnler(filename, line, condString);
+    if (assertHandler != NULL) {
+        assertHandler(filename, line, condString);
     }
     else {
         fprintf(stderr, "%s:%u: assert %s\n", filename, line, condString);
