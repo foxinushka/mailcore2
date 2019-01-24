@@ -1,4 +1,5 @@
 #include <MailCore/MCCore.h>
+#include <MailCore/MCAssert.h>
 #include "CObject.h"
 #include "CBase+Private.h"
 #include "CDictionary.h"
@@ -23,3 +24,7 @@ void CObject_setMainQueue(dispatch_queue_t mainQueue) {
     mailcore::mainQueue = mainQueue;
 }
 #endif
+
+void CObject_setMCAssertHandler(MCAssertHandler handler) {
+    setMCAssertHandler(handler);
+}

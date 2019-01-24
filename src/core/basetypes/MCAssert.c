@@ -3,9 +3,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-static MSAssertHandler assertHandler = NULL;
+static MCAssertHandler assertHandler = NULL;
 
-void setMCAssertHandler(MSAssertHandler handler) {
+void setMCAssertHandler(MCAssertHandler handler) {
     assertHandler = handler;
 }
 
