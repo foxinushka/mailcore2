@@ -32,7 +32,7 @@ let package = Package(
         ),
     ],
     dependencies: [
-        .package(url: "https://github.com/readdle/tidy-html5.git", .exact("5.4.21"))
+        .package(url: "https://github.com/readdle/tidy-html5.git", .upToNextMajor(from: "5.4.21"))
     ],
     targets: [
         .target(
