@@ -31,7 +31,7 @@ OperationQueue::OperationQueue()
     mCallback = NULL;
 #if defined(__APPLE__) || defined(__ANDROID__)
     mDispatchQueue = getMainQueue();
-    workQueue = dispatch_queue_create("com.readlle.mc_operation_queue.work_queue", DISPATCH_QUEUE_CONCURRENT);
+    workQueue = dispatch_queue_create("com.readlle.mc_operation_queue.work_queue", NULL);
 #endif
     _pendingCheckRunning = false;
 }
