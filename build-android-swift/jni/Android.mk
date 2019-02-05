@@ -174,7 +174,9 @@ LOCAL_SRC_FILES  := \
 	$(utils_src_files)
 
 LOCAL_LDLIBS := -lz -llog
-LOCAL_CFLAGS := -fblocks -DSWIFT
+LOCAL_CFLAGS := -fblocks -DSWIFT -fsanitize=address -fno-omit-frame-pointer
 LOCAL_CPPFLAGS := -frtti
+LOCAL_LDFLAGS   := -fsanitize=address
+LOCAL_ARM_MODE := arm
 LOCAL_STATIC_LIBRARIES := MailCore
 include $(BUILD_SHARED_LIBRARY)
