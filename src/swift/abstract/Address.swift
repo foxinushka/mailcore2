@@ -111,17 +111,17 @@ public final class MCOAddress : NSObjectCompat, Convertible, NSCoding {
         return nativeInstance.nonEncodedRFC822String.string()
     }
     
-    public override var hashValue: Int {
-        if displayName != nil && mailbox != nil {
-            return displayName!.hashValue ^ mailbox!.hashValue;
+    override public var hash: Int {
+        if let displayName = displayName, let mailbox = mailbox {
+            return displayName.hashValue ^ mailbox.hashValue
         }
-        if displayName != nil {
-            return displayName!.hashValue;
+        if let displayName = displayName {
+            return displayName.hashValue
         }
-        if mailbox != nil {
-            return mailbox!.hashValue;
+        if let mailbox = mailbox {
+            return mailbox.hashValue
         }
-        return 0;
+        return 0
     }
 
     public override func isEqual(_ object: Any?) -> Bool {
