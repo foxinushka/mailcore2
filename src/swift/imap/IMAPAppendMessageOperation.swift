@@ -4,22 +4,22 @@ import CMailCore
 public class MCOIMAPAppendMessageOperation : MCOIMAPBaseOperation {
     
     public typealias CompletionBlock = (Error?, UInt32) -> Void
-	
-	internal var operation: CIMAPAppendMessageOperation
+    
+    internal var operation: CIMAPAppendMessageOperation
     private var completionBlock : CompletionBlock?
     public var progressBlock : MCOOperationProgressBlock?
-
-	internal init(operation:CIMAPAppendMessageOperation) {
+    
+    internal init(operation:CIMAPAppendMessageOperation) {
         self.operation = operation
         self.operation.retain()
         super.init(baseOperation: CIMAPBaseOperation.init(cobject: operation.toCObject()))
-	}
-
-	deinit {
+    }
+    
+    deinit {
         self.operation.release()
         progressBlock = nil
         completionBlock = nil
-	}
+    }
     
     public var date: time_t {
         get { return self.operation.date }
