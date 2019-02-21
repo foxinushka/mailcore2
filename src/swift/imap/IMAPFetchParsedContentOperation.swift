@@ -16,7 +16,7 @@ public class MCOIMAPFetchParsedContentOperation : MCOIMAPBaseOperation {
     
     deinit {
         self.operation.release()
-        completionBlock = nil;
+        completionBlock = nil
     }
     
     public func start(completionBlock: CompletionBlock?) {
@@ -31,23 +31,23 @@ public class MCOIMAPFetchParsedContentOperation : MCOIMAPBaseOperation {
     }
     
     public override func operationCompleted() {
-        if (completionBlock == nil) {
+        guard let completionBlock = self.completionBlock else {
             return
         }
         
         let errorCode = error()
         if errorCode == ErrorNone {
             if let parser: MCOMessageParser = createMCOObject(from: operation.parser().toCObject()) {
-                completionBlock!(nil, parser)
+                completionBlock(nil, parser)
             }
             else {
-                completionBlock!(nil, nil)
+                completionBlock(nil, nil)
             }
         }
         else {
-            completionBlock!(MailCoreError.error(code: errorCode), nil)
+            completionBlock(MailCoreError.error(code: errorCode), nil)
         }
-        completionBlock = nil
+        self.completionBlock = nil
     }
     
 }

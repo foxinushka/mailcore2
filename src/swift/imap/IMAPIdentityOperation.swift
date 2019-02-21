@@ -31,17 +31,17 @@ public class MCOIMAPIdentityOperation : MCOIMAPBaseOperation {
     }
     
     public override func operationCompleted() {
-        if (completionBlock == nil) {
+        guard let completionBlock = self.completionBlock else {
             return
         }
         
         let errorCode = error()
         if errorCode == ErrorNone {
-            completionBlock!(nil, MCOIMAPIdentity.init(mailCoreObject: operation.serverIdentity().toCObject()))
+            completionBlock(nil, MCOIMAPIdentity.init(mailCoreObject: operation.serverIdentity().toCObject()))
         }
         else {
-            completionBlock!(MailCoreError.error(code: errorCode), nil)
+            completionBlock(MailCoreError.error(code: errorCode), nil)
         }
-        completionBlock = nil
+        self.completionBlock = nil
     }
 }

@@ -5,11 +5,11 @@ public class MCOIMAPIdleOperation : MCOIMAPBaseOperation {
     
     public typealias CompletionBlock = (Error?) -> Void
     
-    internal var idleOperation: CIMAPIdleOperation;
-    private var completionBlock: CompletionBlock?;
+    internal var idleOperation: CIMAPIdleOperation
+    private var completionBlock: CompletionBlock?
     
     internal init(idleOperation: CIMAPIdleOperation) {
-        self.idleOperation = idleOperation;
+        self.idleOperation = idleOperation
         self.idleOperation.retain()
         super.init(baseOperation: CIMAPBaseOperation.init(cobject: idleOperation.toCObject()))
     }
@@ -20,29 +20,29 @@ public class MCOIMAPIdleOperation : MCOIMAPBaseOperation {
     }
 
     public func start(completionBlock: CompletionBlock?) {
-        self.completionBlock = completionBlock;
-        start();
+        self.completionBlock = completionBlock
+        start()
     }
 
     public override func cancel() {
         completionBlock?(MailCoreError.error(code: ErrorCanceled))
-        self.completionBlock = nil;
-        super.cancel();
+        self.completionBlock = nil
+        super.cancel()
     }
     
     public override func operationCompleted() {
-        if (completionBlock == nil) {
-            return;
+        guard let completionBlock = self.completionBlock else {
+            return
         }
 
-        let errorCode = error();
+        let errorCode = error()
         if errorCode == ErrorNone {
-            completionBlock!(nil);
+            completionBlock(nil)
         }
         else {
-            completionBlock!(MailCoreError.error(code: errorCode));
+            completionBlock(MailCoreError.error(code: errorCode))
         }
-        completionBlock = nil;
+        self.completionBlock = nil
     }
 
     public func interruptIdle() {

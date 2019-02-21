@@ -16,7 +16,7 @@ public class MCOIMAPFetchContentToFileOperation : MCOIMAPBaseOperation {
     
     deinit {
         self.operation.release()
-        completionBlock = nil;
+        completionBlock = nil
     }
     
     public var isLoadingByChunksEnabled : Bool {
@@ -46,18 +46,18 @@ public class MCOIMAPFetchContentToFileOperation : MCOIMAPBaseOperation {
     }
     
     public override func operationCompleted() {
-        if (completionBlock == nil) {
+        guard let completionBlock = self.completionBlock else {
             return
         }
         
         let errorCode = error()
         if errorCode == ErrorNone {
-            completionBlock!(nil)
+            completionBlock(nil)
         }
         else {
-            completionBlock!(MailCoreError.error(code: errorCode))
+            completionBlock(MailCoreError.error(code: errorCode))
         }
-        completionBlock = nil
+        self.completionBlock = nil
     }
     
 }

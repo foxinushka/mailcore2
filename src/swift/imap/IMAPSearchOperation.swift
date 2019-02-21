@@ -5,8 +5,8 @@ public class MCOIMAPSearchOperation : MCOIMAPBaseOperation {
     
     public typealias CompletionBlock = (Error?, MCOIndexSet?) -> Void
 	
-    private var operation: CIMAPSearchOperation;
-    private var completionBlock : CompletionBlock?;
+    private var operation: CIMAPSearchOperation
+    private var completionBlock : CompletionBlock?
     
     internal init(operation:CIMAPSearchOperation) {
         self.operation = operation
@@ -16,7 +16,7 @@ public class MCOIMAPSearchOperation : MCOIMAPBaseOperation {
 
 	deinit {
         self.operation.release()
-        completionBlock = nil;
+        completionBlock = nil
 	}
     
     /**
@@ -30,28 +30,28 @@ public class MCOIMAPSearchOperation : MCOIMAPBaseOperation {
      error code available in MCOConstants.h, `searchResult` will be nil
      */
     public func start(completionBlock: CompletionBlock?) {
-        self.completionBlock = completionBlock;
-        start();
+        self.completionBlock = completionBlock
+        start()
     }
     
     public override func cancel() {
         completionBlock?(MailCoreError.error(code: ErrorCanceled), nil)
-        completionBlock = nil;
-        super.cancel();
+        completionBlock = nil
+        super.cancel()
     }
     
     public override func operationCompleted() {
-        if (completionBlock == nil) {
-            return;
+        guard let completionBlock = self.completionBlock else {
+            return
         }
         
-        let errorCode = error();
+        let errorCode = error()
         if errorCode == ErrorNone {
-            completionBlock!(nil, MCOIndexSet(operation.uids()));
+            completionBlock(nil, MCOIndexSet(operation.uids()))
         }
         else {
-            completionBlock!(MailCoreError.error(code: errorCode), nil);
+            completionBlock(MailCoreError.error(code: errorCode), nil)
         }
-        completionBlock = nil;
+        self.completionBlock = nil
     }
 }

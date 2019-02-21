@@ -9,8 +9,8 @@ public class MCOIMAPFolderStatusOperation : MCOIMAPBaseOperation {
     
     public typealias CompletionBlock = (Error?, MCOIMAPFolderStatus?) -> Void
     
-    private var operation: CIMAPFolderStatusOperation;
-    private var completionBlock : CompletionBlock?;
+    private var operation: CIMAPFolderStatusOperation
+    private var completionBlock : CompletionBlock?
     
     internal init(operation:CIMAPFolderStatusOperation) {
         self.operation = operation
@@ -34,28 +34,28 @@ public class MCOIMAPFolderStatusOperation : MCOIMAPBaseOperation {
      error code available in `MCOConstants.h`, `status` will be nil
      */
     public func start(completionBlock: CompletionBlock?) {
-        self.completionBlock = completionBlock;
-        start();
+        self.completionBlock = completionBlock
+        start()
     }
     
     public override func cancel() {
         completionBlock?(MailCoreError.error(code: ErrorCanceled), nil)
-        completionBlock = nil;
-        super.cancel();
+        completionBlock = nil
+        super.cancel()
     }
     
     public override func operationCompleted() {
-        if (completionBlock == nil) {
-            return;
+        guard let completionBlock = self.completionBlock else {
+            return
         }
         
-        let errorCode = error();
+        let errorCode = error()
         if errorCode == ErrorNone {
-            completionBlock!(nil, createMCOObject(from: operation.status().toCObject()));
+            completionBlock(nil, createMCOObject(from: operation.status().toCObject()))
         }
         else {
-            completionBlock!(MailCoreError.error(code: errorCode), nil);
+            completionBlock(MailCoreError.error(code: errorCode), nil)
         }
-        completionBlock = nil;
+        self.completionBlock = nil
     }
 }

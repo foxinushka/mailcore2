@@ -31,13 +31,13 @@ public class MCOIMAPCheckAccountOperation : MCOIMAPOperation {
     }
     
     public override func operationCompleted() {
-        if (completionBlock == nil) {
+        guard let completionBlock = self.completionBlock else {
             return
         }
         
         let errorCode = error()
         if errorCode == ErrorNone {
-            completionBlock!(nil)
+            completionBlock(nil)
         }
         else {
             var error = MailCoreError.error(code: errorCode)
@@ -52,9 +52,9 @@ public class MCOIMAPCheckAccountOperation : MCOIMAPOperation {
                 }
                 error = MailCoreError.error(code: errorCode, userInfo: userInfo)
             }
-            completionBlock!(error)
+            completionBlock(error)
         }
-        completionBlock = nil
+        self.completionBlock = nil
     }
     
 }

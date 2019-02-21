@@ -5,14 +5,14 @@ public class MCOSMTPOperation: MCOOperation {
     
     public typealias CompletionBlock = (Error?) -> Void
     
-    internal var operation: CSMTPOperation;
-    public var session: MCOSMTPSession?;
-    private var completionBlock: CompletionBlock?;
+    internal var operation: CSMTPOperation
+    public var session: MCOSMTPSession?
+    private var completionBlock: CompletionBlock?
     
     internal init(operation: CSMTPOperation) {
-        self.operation = operation;
+        self.operation = operation
         self.operation.retain()
-        super.init(operation.cOperation);
+        super.init(operation.cOperation)
     }
     
     deinit {
@@ -20,24 +20,24 @@ public class MCOSMTPOperation: MCOOperation {
     }
     
     public func start(completionBlock: CompletionBlock?) {
-        self.completionBlock = completionBlock;
-        start();
+        self.completionBlock = completionBlock
+        start()
     }
     
     public override func cancel() {
         completionBlock?(MailCoreError.error(code: ErrorCanceled))
-        self.completionBlock = nil;
+        self.completionBlock = nil
         super.cancel()
     }
     
     override public func operationCompleted() {
-        if (completionBlock == nil) {
-            return;
+        guard let completionBlock = self.completionBlock else {
+            return
         }
         
-        let errorCode = operation.error;
+        let errorCode = operation.error
         if errorCode == ErrorNone {
-            completionBlock!(nil);
+            completionBlock(nil)
         }
         else {
             var error = MailCoreError.error(code: errorCode)
@@ -51,9 +51,9 @@ public class MCOSMTPOperation: MCOOperation {
                 }
                 error = MailCoreError.error(code: errorCode, userInfo: userInfo)
             }
-            completionBlock!(error)
+            completionBlock(error)
         }
-        completionBlock = nil;
+        self.completionBlock = nil
     }
 
     

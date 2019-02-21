@@ -31,17 +31,17 @@ public class MCOIMAPFetchNamespaceOperation : MCOIMAPBaseOperation {
     }
     
     public override func operationCompleted() {
-        if (completionBlock == nil) {
+        guard let completionBlock = self.completionBlock else {
             return
         }
         
         let errorCode = error()
         if errorCode == ErrorNone {
-            completionBlock!(nil, Dictionary<String, MCOIMAPNamespace>.cast(operation.namespaces()))
+            completionBlock(nil, Dictionary<String, MCOIMAPNamespace>.cast(operation.namespaces()))
         }
         else {
-            completionBlock!(MailCoreError.error(code: errorCode), nil)
+            completionBlock(MailCoreError.error(code: errorCode), nil)
         }
-        completionBlock = nil
+        self.completionBlock = nil
     }
 }
