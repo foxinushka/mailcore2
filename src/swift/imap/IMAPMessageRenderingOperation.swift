@@ -16,7 +16,7 @@ public class MCOIMAPMessageRenderingOperation : MCOIMAPBaseOperation {
     
     deinit {
         self.operation.release()
-        completionBlock = nil;
+        completionBlock = nil
     }
     
     public func start(completionBlock: CompletionBlock?) {
@@ -31,18 +31,18 @@ public class MCOIMAPMessageRenderingOperation : MCOIMAPBaseOperation {
     }
     
     public override func operationCompleted() {
-        if (completionBlock == nil) {
+        guard let completionBlock = self.completionBlock else {
             return
         }
         
         let errorCode = error()
         if errorCode == ErrorNone {
-            completionBlock!(nil, operation.result().string())
+            completionBlock(nil, operation.result().string())
         }
         else {
-            completionBlock!(MailCoreError.error(code: errorCode), nil)
+            completionBlock(MailCoreError.error(code: errorCode), nil)
         }
-        completionBlock = nil
+        self.completionBlock = nil
     }
     
 }

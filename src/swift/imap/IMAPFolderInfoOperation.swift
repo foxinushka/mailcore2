@@ -9,8 +9,8 @@ public class MCOIMAPFolderInfoOperation : MCOIMAPBaseOperation {
     
     public typealias CompletionBlock = (Error?, MCOIMAPFolderInfo?) -> Void
 	
-	private var operation: CIMAPFolderInfoOperation;
-    private var completionBlock : CompletionBlock?;
+	private var operation: CIMAPFolderInfoOperation
+    private var completionBlock : CompletionBlock?
 
 	internal init(operation:CIMAPFolderInfoOperation) {
  		self.operation = operation
@@ -20,7 +20,7 @@ public class MCOIMAPFolderInfoOperation : MCOIMAPBaseOperation {
 
     deinit {
         self.operation.release()
-        completionBlock = nil;
+        completionBlock = nil
     }
     
     /**
@@ -34,28 +34,28 @@ public class MCOIMAPFolderInfoOperation : MCOIMAPBaseOperation {
      error code available in `MCOConstants.h`, `info` will be nil
      */
     public func start(completionBlock: CompletionBlock?) {
-        self.completionBlock = completionBlock;
-        start();
+        self.completionBlock = completionBlock
+        start()
     }
     
     public override func cancel() {
         completionBlock?(MailCoreError.error(code: ErrorCanceled), nil)
-        completionBlock = nil;
-        super.cancel();
+        completionBlock = nil
+        super.cancel()
     }
     
     public override func operationCompleted() {
-        if (completionBlock == nil) {
-            return;
+        guard let completionBlock = self.completionBlock else {
+            return
         }
         
         let errorCode = error();
         if errorCode == ErrorNone {
-            completionBlock!(nil, createMCOObject(from: operation.info().toCObject()));
+            completionBlock(nil, createMCOObject(from: operation.info().toCObject()))
         }
         else {
-            completionBlock!(MailCoreError.error(code: errorCode), nil);
+            completionBlock(MailCoreError.error(code: errorCode), nil)
         }
-        completionBlock = nil;
+        self.completionBlock = nil
     }
 }

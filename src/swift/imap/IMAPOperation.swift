@@ -5,36 +5,36 @@ public class MCOIMAPOperation : MCOIMAPBaseOperation {
     
     public typealias CompletionBlock = (Error?) -> Void
     
-    private var completionBlock: CompletionBlock?;
+    private var completionBlock: CompletionBlock?
 	
 	internal init(operation:CIMAPBaseOperation) {
-        super.init(baseOperation: operation);
+        super.init(baseOperation: operation)
 	}
     
     public func start(completionBlock: CompletionBlock?) {
-        self.completionBlock = completionBlock;
-        start();
+        self.completionBlock = completionBlock
+        start()
     }
     
     public override func cancel() {
         completionBlock?(MailCoreError.error(code: ErrorCanceled))
-        self.completionBlock = nil;
-        super.cancel();
+        self.completionBlock = nil
+        super.cancel()
     }
     
     public override func operationCompleted() {
-        if (completionBlock == nil) {
-            return;
+        guard let completionBlock = self.completionBlock else {
+            return
         }
         
-        let errorCode = error();
+        let errorCode = error()
         if errorCode == ErrorNone {
-            completionBlock!(nil);
+            completionBlock(nil)
         }
         else {
-            completionBlock!(MailCoreError.error(code: errorCode));
+            completionBlock(MailCoreError.error(code: errorCode))
         }
-        completionBlock = nil;
+        self.completionBlock = nil
     }
 
 }

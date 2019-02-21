@@ -31,18 +31,18 @@ public class MCOIMAPCustomCommandOperation : MCOIMAPBaseOperation {
     }
     
     public override func operationCompleted() {
-        if (completionBlock == nil) {
+        guard let completionBlock = self.completionBlock else {
             return
         }
         
         let errorCode = error()
         if errorCode == ErrorNone {
-            completionBlock!(operation.response().string(), nil)
+            completionBlock(operation.response().string(), nil)
         }
         else {
-            completionBlock!(nil, MailCoreError.error(code: errorCode))
+            completionBlock(nil, MailCoreError.error(code: errorCode))
         }
-        completionBlock = nil
+        self.completionBlock = nil
     }
     
 }

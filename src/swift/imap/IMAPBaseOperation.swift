@@ -7,16 +7,16 @@ public class MCOIMAPBaseOperation : MCOOperation {
     public typealias MCOOperationItemProgressBlock = (UInt32) -> Void
     
     internal var baseOperation: CIMAPBaseOperation;
-    public var session: MCOIMAPSession?;
+    public var session: MCOIMAPSession?
     
     internal init(baseOperation: CIMAPBaseOperation) {
-        self.baseOperation = baseOperation;
+        self.baseOperation = baseOperation
         self.baseOperation.retain()
-        super.init(baseOperation.cOperation);
+        super.init(baseOperation.cOperation)
         self.baseOperation.cOperation = super.nativeInstance
         self.baseOperation = self.baseOperation.setProgressBlocks(itemProgressCallback,
                                                                   bodyProgressCallback,
-                                                                  Unmanaged.passUnretained(self).toOpaque());
+                                                                  Unmanaged.passUnretained(self).toOpaque())
     }
     
     deinit {
