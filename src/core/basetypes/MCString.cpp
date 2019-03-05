@@ -1149,7 +1149,12 @@ String * String::stringByDecodingMIMEHeaderValue(const char * phrase)
     }
 
     if (!hasEncoding) {
-        return Data::dataWithBytes(phrase, (unsigned int) strlen(phrase))->stringWithDetectedCharset();
+        if (strcasecmp(phrase, "us-ascii") == 0) {
+            return Data::dataWithBytes("utf-8", (unsigned int) strlen("utf-8"))->stringWithDetectedCharset();
+        }
+        else {
+            return Data::dataWithBytes(phrase, (unsigned int) strlen(phrase))->stringWithDetectedCharset();
+        }
     }
 
     cur_token = 0;
