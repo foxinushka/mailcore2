@@ -37,5 +37,6 @@
 #include <MailCore/CMessageParser.h>
 
 #include <MailCore/CIMAPFetchFoldersOperation.h>
+#include <MailCore/CAutoreleasePool.h>
 
 #endif /* CCore_Bridging_Header_h */
