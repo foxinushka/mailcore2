@@ -25,6 +25,14 @@ void CObject_setMainQueue(dispatch_queue_t mainQueue) {
 }
 #endif
 
-void CObject_setMCAssertHandler(MCAssertHandler handler) {
+void CObject_setMCAssertHandler(MCLogger handler) {
     setMCAssertHandler(handler);
+}
+
+void CObject_setLogger(MCLogger logger) {
+    setMCLogger(logger);
+}
+
+void CObject_setLoggerEnabled(bool enable) {
+    MCLogEnabled = enable;
 }
