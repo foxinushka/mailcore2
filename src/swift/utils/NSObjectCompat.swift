@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import CMailCore
 
 #if swift(>=4) && !os(Android)
     @objc(mco_NSObjectCompat)
@@ -15,3 +16,11 @@ import Foundation
 #else
     public class NSObjectCompat: NSObject {}
 #endif
+
+public func mailCoreAutoreleasePool<Result>(invoking body: () throws -> Result) rethrows -> Result {
+    let autoreleasePool = CAutoreleasePool_init()
+    defer {
+        autoreleasePool.release()
+    }
+    return try body()
+}

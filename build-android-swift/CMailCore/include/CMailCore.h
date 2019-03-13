@@ -73,4 +73,5 @@ extern time_t MailCoreTimestampFromIMAPDate(struct mailimap_date_time * imap_dat
 #include "COperation.h"
 #include "CSMTPOperation.h"
 #include "CSMTPSession.h"
+#include "CAutoreleasePool.h"
 #include "MailCoreString.h"

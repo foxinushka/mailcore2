@@ -24,6 +24,12 @@ extern "C" {
                        unsigned int line,
                        int dumpStack,
                        const char * format, ...) __printflike(5, 6);
+    
+    typedef void (*MCLogger)(const char * filename, unsigned int line, const char * message);
+    
+    MAILCORE_EXPORT
+    void setMCLogger(MCLogger logger) CLANG_ANALYZER_NORETURN;
+    
 #ifdef __cplusplus
 }
 #endif

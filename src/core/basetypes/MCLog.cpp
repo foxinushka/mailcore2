@@ -16,6 +16,8 @@
 #include <execinfo.h>
 #endif
 
+#include <stdlib.h>
+
 #if defined(ANDROID) || defined(__ANDROID__)
 #include <android/log.h>
 #endif
@@ -26,6 +28,12 @@ int MCLogEnabled = 0;
 INITIALIZE(Log)
 {
     sPid = getpid();
+}
+
+static MCLogger externalLogger = NULL;
+
+void setMCLogger(MCLogger logger) {
+    externalLogger = logger;
 }
 
 static void logInternalv(FILE * file,
@@ -63,6 +71,14 @@ static void logInternalv(FILE * file,
     struct timeval tv;
     struct tm tm_value;
     pthread_t thread_id = pthread_self();
+    
+    if (externalLogger != NULL) {
+        char * message;
+        vasprintf(&message, format, argp);
+        externalLogger(filename, line, message);
+        free(message);
+        return;
+    }
 
 #if defined(ANDROID) || defined(__ANDROID__)
     __android_log_vprint(ANDROID_LOG_INFO, filename, format, argp);
