@@ -32,8 +32,16 @@ public class MCONetService: NSObjectCompat, Convertible {
     }
     
     public var hostname : String? {
-        set { nativeInstance.hostname = newValue?.mailCoreString() ?? MailCoreString() }
-        get { return nativeInstance.hostname.string() }
+        set {
+            mailCoreAutoreleasePool {
+                nativeInstance.hostname = newValue?.mailCoreString() ?? MailCoreString()
+            }
+        }
+        get {
+            return mailCoreAutoreleasePool {
+                nativeInstance.hostname.string()
+            }
+        }
     }
     
     public var connectionType : ConnectionType {
@@ -42,7 +50,9 @@ public class MCONetService: NSObjectCompat, Convertible {
     }
     
     public func hostname(email: String) -> String? {
-        return nativeInstance.normalizedHostnameWithEmail(email.mailCoreString()).string()
+        return mailCoreAutoreleasePool {
+            return nativeInstance.normalizedHostnameWithEmail(email.mailCoreString()).string()
+        }
     }
     
 }

@@ -34,24 +34,26 @@ public class MCOSMTPOperation: MCOOperation {
         guard let completionBlock = self.completionBlock else {
             return
         }
-        
-        let errorCode = operation.error
-        if errorCode == ErrorNone {
-            completionBlock(nil)
-        }
-        else {
-            var error = MailCoreError.error(code: errorCode)
-            if operation.lastSMTPResponse.instance != nil || operation.lastSMTPResponseCode != 0 {
-                var userInfo = [String: Any]()
-                if let response = operation.lastSMTPResponse.string() {
-                    userInfo["MCOSMTPResponseKey"] = response
-                }
-                if operation.lastSMTPResponseCode != 0 {
-                    userInfo["MCOSMTPResponseCodeKey"] = operation.lastSMTPResponseCode
-                }
-                error = MailCoreError.error(code: errorCode, userInfo: userInfo)
+
+        mailCoreAutoreleasePool {
+            let errorCode = operation.error
+            if errorCode == ErrorNone {
+                completionBlock(nil)
             }
-            completionBlock(error)
+            else {
+                var error = MailCoreError.error(code: errorCode)
+                if operation.lastSMTPResponse.instance != nil || operation.lastSMTPResponseCode != 0 {
+                    var userInfo = [String: Any]()
+                    if let response = operation.lastSMTPResponse.string() {
+                        userInfo["MCOSMTPResponseKey"] = response
+                    }
+                    if operation.lastSMTPResponseCode != 0 {
+                        userInfo["MCOSMTPResponseCodeKey"] = operation.lastSMTPResponseCode
+                    }
+                    error = MailCoreError.error(code: errorCode, userInfo: userInfo)
+                }
+                completionBlock(error)
+            }
         }
         self.completionBlock = nil
     }

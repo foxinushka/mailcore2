@@ -78,7 +78,7 @@ void Object::release()
     }
     if (mCounter < 0) {
         MCLog("release too much %p %s", this, MCUTF8(className()));
-        MCAssert(0);
+        //MCAssert(0);
     }
     MC_UNLOCK(&mLock);
 
