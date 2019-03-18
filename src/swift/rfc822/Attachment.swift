@@ -49,10 +49,11 @@ public class MCOAttachment : MCOAbstractPart {
     
     /** Returns a file attachment with the given data and filename.*/
     public convenience init( data: Data, filename: String) {
-        let attachment = mailCoreAutoreleasePool {
-            CAttachment.attachmentWithData(filename.mailCoreString(), data.mailCoreData()).toCObject()
+        let autoreleasePool = CAutoreleasePool_init()
+        defer {
+            autoreleasePool.release()
         }
-        self.init(mailCoreObject: attachment)
+        self.init(mailCoreObject: CAttachment.attachmentWithData(filename.mailCoreString(), data.mailCoreData()).toCObject())
     }
     
     /** Returns a part with an HTML content.*/
