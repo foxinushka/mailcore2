@@ -261,7 +261,7 @@ static bool isHintCharsetValid(String * hintCharset)
                 break;
             if (validCharset == NULL)
                 break;
-            knownCharset->addObject(String::stringWithUTF8Characters(validCharset));
+            knownCharset->addObject(String::stringWithUTF8Characters(validCharset)->lowercaseString());
         }
         uenum_close(iterator);
         ucsdet_close(detector);
@@ -319,9 +319,7 @@ static bool isHintCharsetValid(String * hintCharset)
             return true;
         }
         
-        // If it's among the known charset, we want to try to detect it
-        // to validate that it's the correct charset.
-        if (!knownCharset->containsObject(hintCharset)) {
+        if (knownCharset->containsObject(hintCharset)) {
             return true;
         }
     }
