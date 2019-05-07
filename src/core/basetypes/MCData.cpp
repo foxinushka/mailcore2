@@ -335,16 +335,15 @@ String * Data::stringWithDetectedCharset(String * hintCharset, bool isHTML)
     if (hintCharset != NULL) {
         hintCharset = normalizeCharset(hintCharset);
     }
-    if (isHintCharsetValid(hintCharset)) {
-        charset = hintCharset;
+    if (!isHintCharsetValid(hintCharset)) {
+        hintCharset = NULL;
+    }
+
+    if (hintCharset == NULL) {
+        charset = charsetWithFilteredHTML(isHTML);
     }
     else {
-        if (hintCharset == NULL) {
-            charset = charsetWithFilteredHTML(isHTML);
-        }
-        else {
-            charset = charsetWithFilteredHTML(isHTML, hintCharset);
-        }
+        charset = charsetWithFilteredHTML(isHTML, hintCharset);
     }
     
     if (charset == NULL) {
