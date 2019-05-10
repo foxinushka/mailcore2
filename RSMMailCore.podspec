@@ -40,8 +40,8 @@ Pod::Spec.new do |s|
   CMD
   
   s.dependency 'RDlog4cocoa'
-  s.dependency 'RDTidyHtml5', '5.4.0.5'
-  s.dependency 'RDSQLite3/icu', '3.14.2-framework1'
+  s.dependency 'RDTidyHtml5'
+  s.dependency 'RDSQLite3/icu'
 
   s.default_subspec = 'core' 
   s.requires_arc = false
