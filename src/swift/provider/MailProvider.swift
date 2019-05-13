@@ -27,15 +27,21 @@ public class MCOMailProvider: NSObjectCompat, Convertible {
     }
     
     public var imapServices: [MCONetService]? {
-        return Array<MCONetService>(mailCoreArray: self.nativeInstance.imapServices)
+        return mailCoreAutoreleasePool {
+            return Array<MCONetService>(mailCoreArray: self.nativeInstance.imapServices)
+        }
     }
     
     public var smtpServices: [MCONetService]? {
-        return Array<MCONetService>(mailCoreArray: self.nativeInstance.smtpServices)
+        return mailCoreAutoreleasePool {
+            return Array<MCONetService>(mailCoreArray: self.nativeInstance.smtpServices)
+        }
     }
     
     public var identifier: String? {
-        return self.nativeInstance.identifier.string()
+        return mailCoreAutoreleasePool {
+            return self.nativeInstance.identifier.string()
+        }
     }
 
     

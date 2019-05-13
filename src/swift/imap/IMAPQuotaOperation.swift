@@ -34,13 +34,15 @@ public class MCOIMAPQuotaOperation : MCOIMAPBaseOperation {
         guard let completionBlock = self.completionBlock else {
             return
         }
-        
-        let errorCode = error()
-        if errorCode == ErrorNone {
-            completionBlock(nil, operation.usage(), operation.limit())
-        }
-        else {
-            completionBlock(MailCoreError.error(code: errorCode), 0, 0)
+
+        mailCoreAutoreleasePool {
+            let errorCode = error()
+            if errorCode == ErrorNone {
+                completionBlock(nil, operation.usage(), operation.limit())
+            }
+            else {
+                completionBlock(MailCoreError.error(code: errorCode), 0, 0)
+            }
         }
         self.completionBlock = nil
     }

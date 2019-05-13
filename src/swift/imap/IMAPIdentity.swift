@@ -24,40 +24,72 @@ public class MCOIMAPIdentity: Convertible {
     
     /** Vendor of the IMAP client */
     public var vendor: String? {
-        get { return nativeInstance.vendor.string() }
-        set { nativeInstance.vendor = newValue?.mailCoreString() ?? MailCoreString() }
+        get {
+            return mailCoreAutoreleasePool {
+                nativeInstance.vendor.string()
+            }
+        }
+        set {
+            mailCoreAutoreleasePool {
+                nativeInstance.vendor = newValue?.mailCoreString() ?? MailCoreString()
+            }
+        }
     }
     
     /** Name of the IMAP client */
     public var name: String? {
-        get { return nativeInstance.name.string() }
-        set { nativeInstance.name = newValue?.mailCoreString() ?? MailCoreString() }
+        get {
+            return mailCoreAutoreleasePool {
+                nativeInstance.name.string()
+            }
+        }
+        set {
+            mailCoreAutoreleasePool {
+                nativeInstance.name = newValue?.mailCoreString() ?? MailCoreString()
+            }
+        }
     }
     
     /** Version of the IMAP client */
     public var version: String? {
-        get { return nativeInstance.version.string() }
-        set { nativeInstance.version = newValue?.mailCoreString() ?? MailCoreString() }
+        get {
+            return mailCoreAutoreleasePool {
+                nativeInstance.version.string()
+            }
+        }
+        set {
+            mailCoreAutoreleasePool {
+                nativeInstance.version = newValue?.mailCoreString() ?? MailCoreString()
+            }
+        }
     }
     
     /** All fields names of the identity of the client */
     public func allInfoKeys() -> [String]? {
-        return Array<String>(mailCoreArray: nativeInstance.allInfoKeys())
+        return mailCoreAutoreleasePool {
+            return Array<String>(mailCoreArray: nativeInstance.allInfoKeys())
+        }
     }
     
     /** Set a custom field in the identity */
     public func infoForKey(_ key: String) -> String? {
-        return nativeInstance.infoForKey(key.mailCoreString()).string()
+        return mailCoreAutoreleasePool {
+            return nativeInstance.infoForKey(key.mailCoreString()).string()
+        }
     }
     
     /** Retrieve a custom field in the identity */
     public func setInfo(_ value: String, forKey key: String) {
-        nativeInstance.setInfoForKey(value.mailCoreString(), key.mailCoreString())
+        mailCoreAutoreleasePool {
+            nativeInstance.setInfoForKey(value.mailCoreString(), key.mailCoreString())
+        }
     }
     
     /** Remove all info keys including vendor, name and version */
     public func removeAllInfos() {
-        nativeInstance.removeAllInfos()
+        mailCoreAutoreleasePool {
+            nativeInstance.removeAllInfos()
+        }
     }
     
 }

@@ -35,12 +35,14 @@ public class MCOIMAPIdleOperation : MCOIMAPBaseOperation {
             return
         }
 
-        let errorCode = error()
-        if errorCode == ErrorNone {
-            completionBlock(nil)
-        }
-        else {
-            completionBlock(MailCoreError.error(code: errorCode))
+        mailCoreAutoreleasePool {
+            let errorCode = error()
+            if errorCode == ErrorNone {
+                completionBlock(nil)
+            }
+            else {
+                completionBlock(MailCoreError.error(code: errorCode))
+            }
         }
         self.completionBlock = nil
     }

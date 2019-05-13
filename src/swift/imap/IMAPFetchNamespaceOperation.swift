@@ -34,13 +34,15 @@ public class MCOIMAPFetchNamespaceOperation : MCOIMAPBaseOperation {
         guard let completionBlock = self.completionBlock else {
             return
         }
-        
-        let errorCode = error()
-        if errorCode == ErrorNone {
-            completionBlock(nil, Dictionary<String, MCOIMAPNamespace>.cast(operation.namespaces()))
-        }
-        else {
-            completionBlock(MailCoreError.error(code: errorCode), nil)
+
+        mailCoreAutoreleasePool {
+            let errorCode = error()
+            if errorCode == ErrorNone {
+                completionBlock(nil, Dictionary<String, MCOIMAPNamespace>.cast(operation.namespaces()))
+            }
+            else {
+                completionBlock(MailCoreError.error(code: errorCode), nil)
+            }
         }
         self.completionBlock = nil
     }

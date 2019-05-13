@@ -259,7 +259,11 @@ void OperationQueue::startThread()
     retain(); // (3)
     mQuitting = false;
     mStarted = true;
-    pthread_create(&mThreadID, NULL, (void * (*)(void *)) OperationQueue::runOperationsOnThread, this);
+    pthread_attr_t attr;
+    pthread_attr_init(&attr);
+    pthread_attr_setdetachstate(&attr, PTHREAD_CREATE_DETACHED);
+    pthread_create(&mThreadID, &attr, (void * (*)(void *)) OperationQueue::runOperationsOnThread, this);
+    pthread_attr_destroy(&attr);
     mailsem_down(mStartSem);
 }
 

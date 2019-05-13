@@ -49,20 +49,23 @@ public class MCOOperation: NSObjectCompat {
     
     /** Cancel the operation.*/
     public func cancel() {
-        // cancel first, because MCOperationQueue.cpp check isCancelled() before call completion
-        // which will call operationCompletedCallback, which causes to access to deallocated object
-        nativeInstance.cancel();
-        
+        mailCoreAutoreleasePool {
+            // cancel first, because MCOperationQueue.cpp check isCancelled() before call completion
+            // which will call operationCompletedCallback, which causes to access to deallocated object
+            nativeInstance.cancel();
+        }
         _ = tryFinish(self)
     }
     
     internal func start() {
-        guard tryStart(self) else {
-            assert(false)
-            return
+        mailCoreAutoreleasePool {
+            guard tryStart(self) else {
+                assert(false)
+                return
+            }
+
+            nativeInstance.start();
         }
-        
-        nativeInstance.start();
     }
     
 #if os(Android)

@@ -22,8 +22,16 @@ public class MCOIMAPAppendMessageOperation : MCOIMAPBaseOperation {
     }
     
     public var date: time_t {
-        get { return self.operation.date }
-        set { self.operation.date = newValue }
+        get {
+            return mailCoreAutoreleasePool {
+                return self.operation.date
+            }
+        }
+        set {
+            return mailCoreAutoreleasePool {
+                self.operation.date = newValue
+            }
+        }
     }
     
     public func start(completionBlock: CompletionBlock?) {
@@ -41,13 +49,15 @@ public class MCOIMAPAppendMessageOperation : MCOIMAPBaseOperation {
         guard let completionBlock = self.completionBlock else {
             return
         }
-        
-        let errorCode = error()
-        if errorCode == ErrorNone {
-            completionBlock(nil, operation.createdUID())
-        }
-        else {
-            completionBlock(MailCoreError.error(code: errorCode), 0)
+
+        mailCoreAutoreleasePool {
+            let errorCode = error()
+            if errorCode == ErrorNone {
+                completionBlock(nil, operation.createdUID())
+            }
+            else {
+                completionBlock(MailCoreError.error(code: errorCode), 0)
+            }
         }
         self.completionBlock = nil
     }
