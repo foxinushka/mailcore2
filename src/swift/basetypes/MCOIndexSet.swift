@@ -20,13 +20,12 @@ public class MCOIndexSet: NSObjectCompat, NSCopying, NSCoding {
         self.nativeInstance = CIndexSet_init();
     }
     
-    init?(_ indexSet: CIndexSet, autoreleasePool: CAutoreleasePool? = nil) {
+    init?(_ indexSet: CIndexSet) {
         guard  indexSet.instance != nil else {
             return nil
         }
         self.nativeInstance = indexSet;
         self.nativeInstance.retain()
-        autoreleasePool?.release()
     }
     
     public convenience init(foundationIndexSet: IndexSet) {
@@ -44,13 +43,19 @@ public class MCOIndexSet: NSObjectCompat, NSCopying, NSCoding {
     /** Creates an index set that contains a range of integers.*/
     public convenience init(range: MailCoreRange) {
         let autoreleasePool = CAutoreleasePool_init()
-        self.init(CIndexSet(range: range), autoreleasePool: autoreleasePool)!
+        defer {
+            autoreleasePool.release()
+        }
+        self.init(CIndexSet(range: range))!
     }
     
     /** Creates an index set with a single integer.*/
     public convenience init(index: UInt64) {
         let autoreleasePool = CAutoreleasePool_init()
-        self.init(CIndexSet(idx: index), autoreleasePool: autoreleasePool)!
+        defer {
+            autoreleasePool.release()
+        }
+        self.init(CIndexSet(idx: index))!
     }
     
     /** Returns the number of integers in that index set.*/

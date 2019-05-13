@@ -10,10 +10,7 @@ public final class MCOAddress : NSObjectCompat, Convertible, NSCoding {
         super.init()
     }
     
-    private init?(address:CAddress, autoreleasePool: CAutoreleasePool? = nil) {
-        defer {
-            autoreleasePool?.release()
-        }
+    private init?(address:CAddress) {
         guard address.instance != nil else {
             return nil
         }
@@ -43,11 +40,14 @@ public final class MCOAddress : NSObjectCompat, Convertible, NSCoding {
      Example: [MCOAddress addressWithDisplayName:@"DINH Viêt Hoà" mailbox:@"hoa@etpan.org"] */
     public convenience init?(displayName: String?, mailbox: String) {
         let autoreleasePool = CAutoreleasePool_init()
+        defer {
+            autoreleasePool.release()
+        }
         let addrss = CAddress.addressWithDisplayName(displayName?.mailCoreString() ?? MailCoreString(), mailbox.mailCoreString())
         guard addrss.instance != nil else {
             return nil
         }
-        self.init(address: addrss, autoreleasePool: autoreleasePool)
+        self.init(address: addrss)
     }
     
     /** Creates an address with only a mailbox.
@@ -55,8 +55,11 @@ public final class MCOAddress : NSObjectCompat, Convertible, NSCoding {
      Example: [MCOAddress addressWithMailbox:@"hoa@etpan.org"]*/
     public convenience init?(mailbox: String) {
         let autoreleasePool = CAutoreleasePool_init()
+        defer {
+            autoreleasePool.release()
+        }
         let addrss = CAddress.addressWithMailbox(mailbox.mailCoreString())
-        self.init(address: addrss, autoreleasePool: autoreleasePool)
+        self.init(address: addrss)
     }
 
     /** Creates an address with a RFC822 string.
@@ -64,8 +67,11 @@ public final class MCOAddress : NSObjectCompat, Convertible, NSCoding {
      Example: [MCOAddress addressWithRFC822String:@"DINH Vi=C3=AAt Ho=C3=A0 <hoa@etpan.org>"]*/
     public convenience init?(RFC822String: String) {
         let autoreleasePool = CAutoreleasePool_init()
+        defer {
+            autoreleasePool.release()
+        }
         let addrss = CAddress.addressWithRFC822String(RFC822String.mailCoreString())
-        self.init(address: addrss, autoreleasePool: autoreleasePool)
+        self.init(address: addrss)
     }
 
     /** Creates an address with a non-MIME-encoded RFC822 string.
@@ -73,8 +79,11 @@ public final class MCOAddress : NSObjectCompat, Convertible, NSCoding {
      Example: [MCOAddress addressWithNonEncodedRFC822String:@"DINH Viêt Hoà <hoa@etpan.org>"]*/
     public convenience init?(nonEncodedRFC822String: String) {
         let autoreleasePool = CAutoreleasePool_init()
+        defer {
+            autoreleasePool.release()
+        }
         let addrss = CAddress.addressWithNonEncodedRFC822String(nonEncodedRFC822String.mailCoreString())
-        self.init(address: addrss, autoreleasePool: autoreleasePool)
+        self.init(address: addrss)
     }
 
     /**
