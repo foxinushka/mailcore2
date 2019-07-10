@@ -17,6 +17,9 @@ $IcuVersion = 64
 $IcuPath = "C:\Library\icu-$IcuVersion\usr"
 $LibXml2Path = "C:\Library\libxml2-development\usr"
 
+$TidyDependencyDir = "TidyHTML5"
+$TidyDependencyPath = "$DependenciesPath\$TidyDependencyDir"
+
 $Dependencies = @(
     @{ Name = "CTemplate"; WebUrl = "http://d.etpan.org/mailcore2-deps/ctemplate-win32/ctemplate-win32-1.zip"; Directory = "CTemplate"; }
     @{ Name = "LibEtPan"; WebUrl = "http://d.etpan.org/mailcore2-deps/libetpan-win32/libetpan-win32-2.zip"; Directory = "LibEtPan"; }
@@ -25,7 +28,7 @@ $Dependencies = @(
     @{ Name = "OpenSSL"; WebUrl = "http://d.etpan.org/mailcore2-deps/misc-win32/openssl-1.0.1j-vs2013.zip"; Directory = "OpenSSL"; }
     @{ Name = "pthreads"; WebUrl = "http://d.etpan.org/mailcore2-deps/misc-win32/pthreads-w32-2-9-1-release.zip"; Directory = "pthreads"; }
 
-    @{ Name = "Tidy HTML5"; GitUrl = "git@github.com:readdle/tidy-html5.git"; GitTag = "5.4.24"; Directory = "TidyHTML5"; }
+    @{ Name = "Tidy HTML5"; GitUrl = "git@github.com:readdle/tidy-html5.git"; GitTag = "5.4.24"; Directory = $TidyDependencyDir; }
 )
 
 Push-Task -Name "CMailcore" -ScriptBlock {
@@ -48,8 +51,17 @@ Push-Task -Name "CMailcore" -ScriptBlock {
         }
 
         Push-Task -Name "Build Tidy HTML5" -ScriptBlock {
+            $CMakeArgs =
+                "-G Ninja",
+                "-DCMAKE_BUILD_TYPE=RelWithDebInfo",
+                "-DCMAKE_INSTALL_PREFIX=$TidyDependencyPath",
+                "-DCMAKE_C_COMPILER=cl.exe",
+                "-DCMAKE_CXX_COMPILER=cl.exe",
+                "-DBUILD_SHARED_LIB=OFF" -join " "
 
+            Invoke-CMakeTasks -WorkingDir $TidyDependencyPath -CMakeArgs $CMakeArgs
         }
+
     }
     finally {
         Push-Task -Name "Shutdown" -ScriptBlock {
