@@ -37,7 +37,6 @@ Pod::Spec.new do |s|
     sed -i '' 's#"zip.h"#"rsmmczip.h"#g' src/core/zip/MiniZip/zip.c  
   CMD
   
-  s.dependency 'RDlog4cocoa'
   s.dependency 'RDTidyHtml5'
   s.dependency 'RDSQLite3/icu', '3.14.2-framework2'
 
