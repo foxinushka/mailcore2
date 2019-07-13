@@ -1,4 +1,5 @@
 #include "MCWin32.h"
+#include <io.h>
 
 FILE * mailcore::win32_fopen(const char * filename, const char * mode)
 {
@@ -209,5 +210,48 @@ char * mailcore::win32_mkdtemp(char *path)
             }
         }
     }
+}
+
+void * mailcore::win32_mmap(void * start, size_t length, int prot, int flags, int fd, off_t offset) {
+	struct stat st;
+	size_t len;
+	if (!fstat(fd, &st)) {
+		len = (size_t)st.st_size;
+	} 
+	else {
+		fprintf(stderr,"mmap: could not determine filesize");
+		return MAP_FAILED;
+	}
+
+	if ((length + offset) > len) {
+		length = len - offset;
+	}
+
+	if (!(flags & MAP_PRIVATE)) {
+		fprintf(stderr, "Invalid usage of mmap when built with USE_WIN32_MMAP");
+		return MAP_FAILED;
+	}
+
+	HANDLE hmap = CreateFileMapping((HANDLE)_get_osfhandle(fd), 0, PAGE_WRITECOPY, 0, 0, 0);
+
+	if (!hmap) {
+		return MAP_FAILED;
+	}
+
+	uint64_t o = offset;
+	uint32_t l = o & 0xFFFFFFFF;
+	uint32_t h = (o >> 32) & 0xFFFFFFFF;
+
+	void * temp = MapViewOfFileEx(hmap, FILE_MAP_COPY, h, l, length, start);
+
+	if (!CloseHandle(hmap)) {
+		fprintf(stderr, "unable to close file mapping handle\n");
+	}
+
+	return temp ? temp : MAP_FAILED;
+}
+
+int mailcore::win32_munmap(void * start, size_t length) {
+	return !UnmapViewOfFile(start);
 }
 
