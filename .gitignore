@@ -23,6 +23,7 @@ DerivedData
 *.hmap
 *.xcuserstate
 *.xccheckout
+build-mac/mailcore2.xcodeproj/project.xcworkspace/xcshareddata
 
 #CocoaPods
 Pods
@@ -33,7 +34,6 @@ Podfile.lock
 *.opensdf
 *.suo
 Externals
-build-mac/mailcore2.xcodeproj/project.xcworkspace/xcshareddata
 build-windows/include
 build-windows/_headers_depends
 build-windows/mailcore2/Debug
@@ -48,6 +48,8 @@ build-windows/mailcore2/test/Release
 build-windows/mailcore2/test/x64/Release
 build-windows/mailcore2/test/Debug
 build-windows/mailcore2/test/x64/Debug
+build-windows/mailcore2/.vs
+build-windows/mailcore2/mailcore2/mailcore2.vcxproj.user
 cocoapods-build
 *.aar
 */bin
