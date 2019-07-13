@@ -505,6 +505,7 @@ Object * Object::objectWithSerializable(HashMap * serializable)
 dispatch_queue_t mailcore::mainQueue = NULL;
 #endif
 
+#if defined(__APPLE__) || defined(__ANDROID__)
 dispatch_queue_t Object::getMainQueue()
 {
     #ifdef __ANDROID__
@@ -518,5 +519,5 @@ dispatch_queue_t Object::getMainQueue()
     #endif
 
 }
-
+#endif
 

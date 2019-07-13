@@ -2378,7 +2378,7 @@ Array * String::componentsSeparatedByString(String * separator)
     p = mUnicodeChars;
     while (1) {
         UChar * location;
-#if 0
+#if _MSC_VER
         location = u_strstr(p, separator->unicodeCharacters());
         if (location == NULL) {
             break;
