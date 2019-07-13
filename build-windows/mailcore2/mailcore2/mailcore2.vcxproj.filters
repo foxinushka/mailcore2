@@ -561,6 +561,9 @@
     <ClInclude Include="..\..\..\src\async\imap\MCIMAPFolderInfo.h">
       <Filter>Source Files\async\imap</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\src\async\imap\MCIMAPCustomCommandOperation.h">
+      <Filter>Source Files\async\imap</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\src\core\abstract\MCAbstractMessage.cpp">
@@ -960,6 +963,9 @@
       <Filter>Source Files\core\abstract</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\async\imap\MCIMAPFolderInfo.cpp">
+      <Filter>Source Files\async\imap</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\async\imap\MCIMAPCustomCommandOperation.cpp">
       <Filter>Source Files\async\imap</Filter>
     </ClCompile>
   </ItemGroup>

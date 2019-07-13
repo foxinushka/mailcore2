@@ -103,6 +103,8 @@ src\async\imap\MCIMAPCapabilityOperation.h
 src\async\imap\MCIMAPQuotaOperation.h
 src\async\imap\MCIMAPOperationCallback.h
 src\async\imap\MCIMAPMessageRenderingOperation.h
+src\async\imap\MCIMAPCustomCommandOperation.h
+src\async\imap\MCIMAPCheckAccountOperation.h
 src\async\pop\MCAsyncPOP.h
 src\async\pop\MCPOPAsyncSession.h
 src\async\pop\MCPOPOperation.h
