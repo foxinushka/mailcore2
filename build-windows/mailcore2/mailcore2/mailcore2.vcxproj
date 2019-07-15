@@ -157,8 +157,10 @@
     <ClInclude Include="..\..\..\src\core\pop\MCPOPMessageInfo.h" />
     <ClInclude Include="..\..\..\src\core\pop\MCPOPProgressCallback.h" />
     <ClInclude Include="..\..\..\src\core\pop\MCPOPSession.h" />
+    <ClInclude Include="..\..\..\src\core\provider\MCAccountValidator.h" />
     <ClInclude Include="..\..\..\src\core\provider\MCMailProvider.h" />
     <ClInclude Include="..\..\..\src\core\provider\MCMailProvidersManager.h" />
+    <ClInclude Include="..\..\..\src\core\provider\MCMXRecordResolverOperation.h" />
     <ClInclude Include="..\..\..\src\core\provider\MCNetService.h" />
     <ClInclude Include="..\..\..\src\core\provider\MCProvider.h" />
     <ClInclude Include="..\..\..\src\core\renderer\MCAddressDisplay.h" />
@@ -299,8 +301,10 @@
     <ClCompile Include="..\..\..\src\core\nntp\MCNNTPSession.cpp" />
     <ClCompile Include="..\..\..\src\core\pop\MCPOPMessageInfo.cpp" />
     <ClCompile Include="..\..\..\src\core\pop\MCPOPSession.cpp" />
+    <ClCompile Include="..\..\..\src\core\provider\MCAccountValidator.cpp" />
     <ClCompile Include="..\..\..\src\core\provider\MCMailProvider.cpp" />
     <ClCompile Include="..\..\..\src\core\provider\MCMailProvidersManager.cpp" />
+    <ClCompile Include="..\..\..\src\core\provider\MCMXRecordResolverOperation.cpp" />
     <ClCompile Include="..\..\..\src\core\provider\MCNetService.cpp" />
     <ClCompile Include="..\..\..\src\core\renderer\MCAddressDisplay.cpp" />
     <ClCompile Include="..\..\..\src\core\renderer\MCDateFormatter.cpp" />
@@ -448,7 +452,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>MAILCORE_DLL;ZLIB_DLL;_CRT_SECURE_NO_WARNINGS;_SILENCE_STDEXT_HASH_DEPRECATION_WARNINGS;TIDY_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);$(MSBuildThisFileDirectory);..\..\..\Externals\include;..\..\..\src\core\basetypes;..\..\..\src\core\zip;..\..\..\src\core\zip\minizip;..\..\..\src\core\renderer;..\..\..\src\core/rfc822;..\..\..\src\core/imap;..\..\..\src\core\abstract;..\..\..\src\core\security;..\..\..\src\core\imap;..\..\..\src\core\pop;..\..\..\src\core\nntp;..\..\..\src\core\smtp</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);$(MSBuildThisFileDirectory);..\..\..\Externals\include;..\..\..\src\core\basetypes;..\..\..\src\core\zip;..\..\..\src\core\zip\minizip;..\..\..\src\core\renderer;..\..\..\src\core/rfc822;..\..\..\src\core/imap;..\..\..\src\core\abstract;..\..\..\src\core\security;..\..\..\src\core\imap;..\..\..\src\core\pop;..\..\..\src\core\nntp;..\..\..\src\core\smtp;..\..\..\src\async\imap;..\..\..\src\async\smtp;..\..\..\src\async\pop</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
