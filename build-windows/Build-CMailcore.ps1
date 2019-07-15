@@ -137,6 +137,12 @@ Push-Task -Name "CMailcore" -ScriptBlock {
             Copy-Item "$ProjectRoot\build-windows\vs2019\pthread\pthread.h" -Destination "$ExternalsPath\include" -Force -ErrorAction Stop
         }
 
+        Push-Task -Name "Generate Public Headers" -ScriptBlock {
+            Invoke-InDirectory "$ProjectRoot\build-windows" {
+                Invoke-Shell "build_headers.bat"
+            }
+        }
+
         Push-Task -Name "MSBuild" -ScriptBlock {
             MSBuild "$ProjectRoot\build-windows\mailcore2\mailcore2.sln" /t:mailcore2 /p:Configuration="Release" /p:Platform="x64"
         }
