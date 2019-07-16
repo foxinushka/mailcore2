@@ -10,7 +10,7 @@ set(abstract_files
   core/abstract/MCErrorMessage.cpp
 )
 
-IF(APPLE)
+if(APPLE)
   set(basetypes_files_apple
     core/basetypes/MCAutoreleasePoolMac.mm
     core/basetypes/MCMainThreadMac.mm
@@ -27,7 +27,17 @@ IF(APPLE)
     "${CMAKE_CURRENT_SOURCE_DIR}/core/basetypes/icu-ucsdet"
     "${CMAKE_CURRENT_SOURCE_DIR}/core/basetypes/icu-ucsdet/include"
   )
-ENDIF()
+elseif(WIN32)
+  set(basetypes_files_win32
+    core/basetypes/MCMainThreadWin32.cpp
+    core/basetypes/MCStringWin32.cpp
+    core/basetypes/MCWin32.cpp
+  )
+
+  set(zip_files_win32
+    core/zip/MiniZip/iowin32.c
+  )
+endif()
 
 IF(${CMAKE_SYSTEM_NAME} MATCHES "Linux")
   set(basetypes_files_linux
@@ -65,6 +75,7 @@ set(basetypes_files
   core/basetypes/ConvertUTF.c
   ${basetypes_files_apple}
   ${basetypes_files_linux}
+  ${basetypes_files_win32}
 )
 
 IF(APPLE)
@@ -156,6 +167,7 @@ set(zip_files
   core/zip/MiniZip/unzip.c
   core/zip/MiniZip/zip.c
   ${zip_files_apple}
+  ${zip_files_win32}
 )
 
 set(security_files
