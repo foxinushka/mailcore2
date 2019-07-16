@@ -45,16 +45,23 @@ include_directories(
   ${GLIB2_INCLUDE_DIRS}
 )
 
-add_library(MailCore
+if(WIN32)
+  set(MAILCORE2_LIB_TARGET mailcore2)
+else()
+  set(MAILCORE2_LIB_TARGET MailCore)
+endif()
+
+add_library(${MAILCORE2_LIB_TARGET}
   ${core_files}
   ${async_files}
   ${objc_files}
 )
 
+
 if(WIN32)
-  target_compile_options(MailCore PRIVATE /GS- /Oy /Gw /Gy)
-  target_link_options(MailCore PRIVATE /INCREMENTAL:NO)
-  target_link_libraries(MailCore
+  target_compile_options(${MAILCORE2_LIB_TARGET} PRIVATE /GS- /Oy /Gw /Gy)
+  target_link_options(${MAILCORE2_LIB_TARGET} PRIVATE /INCREMENTAL:NO)
+  target_link_libraries(${MAILCORE2_LIB_TARGET}
                         PRIVATE
                           ${PTHREAD_LIBRARY}
                           ${LIBETPAN_LIBRARY}
@@ -68,4 +75,17 @@ if(WIN32)
                           ws2_32
                           Crypt32
   )
+
+  install(DIRECTORY
+            "${CMAKE_CURRENT_BINARY_DIR}/include/MailCore"
+          DESTINATION
+            include
+          FILES_MATCHING PATTERN "*.h"
+  )
+
+  install(TARGETS ${MAILCORE2_LIB_TARGET}
+          RUNTIME DESTINATION bin
+          ARCHIVE DESTINATION lib
+  )
+
 endif()
