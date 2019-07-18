@@ -1,8 +1,10 @@
 cmake_minimum_required (VERSION 3.13)
-project (mailcore2) 
+project (mailcore2
+		LANGUAGES 
+		C CXX) 
 
 if(APPLE)
-  set(CMAKE_CXX__FLAGS "-std=c++11 -stdlib=libc++")
+  set(CMAKE_CXX_FLAGS "-std=c++11 -stdlib=libc++")
   set(CMAKE_EXE_LINKER_FLAGS "-lc++ -stdlib=libc++")
   
   set(additional_lib_searchpath
@@ -34,6 +36,7 @@ elseif(${CMAKE_SYSTEM_NAME} MATCHES "Linux")
   set(icu_libraries icudata icui18n icuio icule iculx icutest icutu icuuc)
   set(linux_libraries ${icu_libraries} pthread uuid)
 elseif(WIN32)
+  set(CMAKE_CXX_STANDARD 11)
   set(BUILD_SHARED_LIBS ON)
   add_definitions(
     -DMAILCORE_DLL
