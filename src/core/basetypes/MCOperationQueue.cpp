@@ -33,7 +33,7 @@ OperationQueue::OperationQueue()
     mWaitingFinishedSem = mailsem_new();
     mQuitting = false;
     mCallback = NULL;
-#if defined(__APPLE__) || defined(__ANDROID__)
+#if MC_HAS_GCD
     mDispatchQueue = getMainQueue();
 #endif
     _pendingCheckRunning = false;
@@ -41,7 +41,7 @@ OperationQueue::OperationQueue()
 
 OperationQueue::~OperationQueue()
 {
-#if defined(__APPLE__) || defined(__ANDROID__)
+#if MC_HAS_GCD
     if (mDispatchQueue != NULL) {
         dispatch_release(mDispatchQueue);
     }
@@ -109,7 +109,7 @@ void OperationQueue::runOperations()
             mailsem_up(mStopSem);
             
             retain(); // (2)
-#if defined(__APPLE__) || defined(__ANDROID__)
+#if MC_HAS_GCD
             performMethodOnDispatchQueue((Object::Method) &OperationQueue::stoppedOnMainThread, NULL, mDispatchQueue, true);
 #else
             performMethodOnMainThread((Object::Method) &OperationQueue::stoppedOnMainThread, NULL, true);
@@ -145,7 +145,7 @@ void OperationQueue::runOperations()
         if (needsCheckRunning) {
             retain(); // (1)
             //MCLog("check running %p", this);
-#if defined(__APPLE__) || defined(__ANDROID__)
+#if MC_HAS_GCD
             performMethodOnDispatchQueue((Object::Method) &OperationQueue::checkRunningOnMainThread, this, mDispatchQueue);
 #else
             performMethodOnMainThread((Object::Method) &OperationQueue::checkRunningOnMainThread, this);
@@ -162,7 +162,7 @@ void OperationQueue::runOperations()
 
 void OperationQueue::performOnCallbackThread(Operation * op, Method method, void * context, bool waitUntilDone)
 {
-#if defined(__APPLE__) || defined(__ANDROID__)
+#if MC_HAS_GCD
     dispatch_queue_t queue = op->callbackDispatchQueue();
     if (queue == NULL) {
         queue = getMainQueue();
@@ -194,7 +194,7 @@ void OperationQueue::checkRunningOnMainThread(void * context)
 {
     retain(); // (4)
     if (_pendingCheckRunning) {
-#if defined(__APPLE__) || defined(__ANDROID__)
+#if MC_HAS_GCD
         cancelDelayedPerformMethodOnDispatchQueue((Object::Method) &OperationQueue::checkRunningAfterDelay, NULL, mDispatchQueue);
 #else
         cancelDelayedPerformMethod((Object::Method) &OperationQueue::checkRunningAfterDelay, NULL);
@@ -203,7 +203,7 @@ void OperationQueue::checkRunningOnMainThread(void * context)
     }
     _pendingCheckRunning = true;
     
-#if defined(__APPLE__) || defined(__ANDROID__)
+#if MC_HAS_GCD
     performMethodOnDispatchQueueAfterDelay((Object::Method) &OperationQueue::checkRunningAfterDelay, NULL, mDispatchQueue, 1);
 #else
     performMethodAfterDelay((Object::Method) &OperationQueue::checkRunningAfterDelay, NULL, 1);
@@ -315,7 +315,7 @@ void OperationQueue::waitUntilAllOperationsAreFinished()
 }
 #endif
 
-#if defined(__APPLE__) || defined(__ANDROID__)
+#if MC_HAS_GCD
 void OperationQueue::setDispatchQueue(dispatch_queue_t dispatchQueue)
 {
     if (mDispatchQueue != NULL) {

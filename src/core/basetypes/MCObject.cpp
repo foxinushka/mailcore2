@@ -9,6 +9,8 @@
 #include <string.h>
 #if __APPLE__
 #include <Block.h>
+#elif defined(_MSC_VER)
+#include <Block/Block.h>
 #endif
 
 #include "MCAutoreleasePool.h"
@@ -219,7 +221,7 @@ static void removeFromPerformHash(Object * obj, Object::Method method, void * co
     chashdatum key;
     struct mainThreadCallKeyData keyData;
     Object * queueIdentifier = NULL;
-#if defined(__APPLE__) || defined(__ANDROID__)
+#if MC_HAS_GCD
     if (targetDispatchQueue != NULL) {
         queueIdentifier = (Object *) dispatch_queue_get_specific((dispatch_queue_t) targetDispatchQueue, "MCDispatchQueueID");
     }
@@ -250,7 +252,7 @@ static void addToPerformHash(Object * obj, Object::Method method, void * context
     chashdatum value;
     struct mainThreadCallKeyData keyData;
     Object * queueIdentifier = NULL;
-#if defined(__APPLE__) || defined(__ANDROID__)
+#if MC_HAS_GCD
     if (targetDispatchQueue == NULL) {
         queueIdentifier = NULL;
     }
@@ -284,7 +286,7 @@ static void * getFromPerformHash(Object * obj, Object::Method method, void * con
     int r;
     
     Object * queueIdentifier = NULL;
-#if defined(__APPLE__) || defined(__ANDROID__)
+#if MC_HAS_GCD
     if (targetDispatchQueue != NULL) {
         queueIdentifier = (Object *) dispatch_queue_get_specific((dispatch_queue_t) targetDispatchQueue, "MCDispatchQueueID");
         if (queueIdentifier == NULL)
@@ -343,7 +345,7 @@ static void performAfterDelay(void * info)
     free(data);
 }
  
-#ifndef __ANDROID__
+#if !defined(__ANDROID__)
 void Object::performMethodOnMainThread(Method method, void * context, bool waitUntilDone)
 {
     struct mainThreadCallData * data;
@@ -363,7 +365,7 @@ void Object::performMethodOnMainThread(Method method, void * context, bool waitU
 }
 #endif
 
-#if defined(__APPLE__) || defined(__ANDROID__)
+#if MC_HAS_GCD
 void Object::performMethodOnDispatchQueue(Method method, void * context, void * targetDispatchQueue, bool waitUntilDone)
 {
     if (waitUntilDone) {
@@ -433,7 +435,7 @@ void Object::cancelDelayedPerformMethodOnDispatchQueue(Method method, void * con
 
 void Object::performMethodAfterDelay(Method method, void * context, double delay)
 {
-#if defined(__APPLE__) || defined(__ANDROID__)
+#if MC_HAS_GCD
     performMethodOnDispatchQueueAfterDelay(method, context, Object::getMainQueue(), delay);
 #else
     initDelayedPerform();
@@ -451,7 +453,7 @@ void Object::performMethodAfterDelay(Method method, void * context, double delay
 
 void Object::cancelDelayedPerformMethod(Method method, void * context)
 {
-#if defined(__APPLE__) || defined(__ANDROID__)
+#if MC_HAS_GCD
     cancelDelayedPerformMethodOnDispatchQueue(method, context, Object::getMainQueue());
 #else
     initDelayedPerform();
@@ -535,14 +537,14 @@ Object * Object::objectWithSerializable(HashMap * serializable)
     return obj->autorelease();
 }
 
-#ifdef __ANDROID__
+#if defined(__ANDROID__)
 dispatch_queue_t mailcore::mainQueue = NULL;
 #endif
 
-#if defined(__APPLE__) || defined(__ANDROID__)
+#if MC_HAS_GCD
 dispatch_queue_t Object::getMainQueue()
 {
-    #ifdef __ANDROID__
+    #if defined(__ANDROID__)
         dispatch_queue_t queue = mailcore::mainQueue;
         // You should set mainQueue before using MailCore
         assert(queue != NULL);

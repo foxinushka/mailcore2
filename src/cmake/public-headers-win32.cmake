@@ -18,6 +18,7 @@ core/basetypes/MCConnectionLogger.h
 core/basetypes/MCData.h
 core/basetypes/MCDataDecoderUtils.h
 core/basetypes/MCDataStreamDecoder.h
+core/basetypes/MCDefines.h
 core/basetypes/MCHash.h
 core/basetypes/MCHashMap.h
 core/basetypes/MCHTMLCleaner.h

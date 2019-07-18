@@ -27,7 +27,7 @@ namespace mailcore {
         virtual void setCallback(OperationQueueCallback * callback);
         virtual OperationQueueCallback * callback();
         
-#if defined(__APPLE__) || defined(__ANDROID__)
+#if MC_HAS_GCD
         virtual void setDispatchQueue(dispatch_queue_t dispatchQueue);
         virtual dispatch_queue_t dispatchQueue();
 #endif
@@ -46,7 +46,7 @@ namespace mailcore {
         struct mailsem * mWaitingFinishedSem;
         bool mQuitting;
         OperationQueueCallback * mCallback;
-#if defined(__APPLE__) || defined(__ANDROID__)
+#if MC_HAS_GCD
         dispatch_queue_t mDispatchQueue;
 #endif
         bool _pendingCheckRunning;

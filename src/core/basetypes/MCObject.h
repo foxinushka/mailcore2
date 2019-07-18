@@ -2,7 +2,9 @@
 
 #define MAILCORE_MCOBJECT_H
 
-#if defined(__APPLE__) || defined(__ANDROID__)
+#include <MailCore/MCDefines.h>
+
+#if MC_HAS_GCD
 #include <dispatch/dispatch.h>
 #endif
 
@@ -15,7 +17,7 @@
 #include <pthread.h>
 #endif
 
-#if __ANDROID__
+#if defined(__ANDROID__)
 #if __cplusplus
 extern "C" {
 #endif
@@ -47,7 +49,7 @@ namespace mailcore {
     
     extern bool zombieEnabled;
 
-    #ifdef __ANDROID__
+    #if defined(__ANDROID__)
     // Android main queue
     extern dispatch_queue_t mainQueue;
     #endif
@@ -77,11 +79,11 @@ namespace mailcore {
         
         typedef void (Object::*Method) (void *);
         virtual void performMethod(Method method, void * context);
-#ifndef __ANDROID__
+#if !defined(__ANDROID__)
         virtual void performMethodOnMainThread(Method method, void * context, bool waitUntilDone = false);
 #endif
         virtual void performMethodAfterDelay(Method method, void * context, double delay);
-#if defined(__APPLE__) || defined(__ANDROID__)
+#if MC_HAS_GCD
         virtual void performMethodOnDispatchQueue(Method method, void * context, void * targetDispatchQueue, bool waitUntilDone = false);
         virtual void performMethodOnDispatchQueueAfterDelay(Method method, void * context, void * targetDispatchQueue, double delay);
         virtual void cancelDelayedPerformMethodOnDispatchQueue(Method method, void * context, void * targetDispatchQueue);
@@ -92,7 +94,7 @@ namespace mailcore {
         static void registerObjectConstructor(const char * className, void * (* objectConstructor)(void));
         static Object * objectWithSerializable(HashMap * serializable);
 
-#if defined(__APPLE__) || defined(__ANDROID__)
+#if MC_HAS_GCD
         // Druk: in Android dispatch_get_main_queue() return dead queue that not drained
         // That's why in Swift we create another queue that called `main` but it executes task NOT on Android main thread
         // We store reference for that "main" queue in global variable mailcore::mainQueue

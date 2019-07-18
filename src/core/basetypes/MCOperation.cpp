@@ -10,14 +10,14 @@ Operation::Operation()
 
 	MCB_LOCK_INIT(&mLock);
 
-#if defined(__APPLE__) || defined(__ANDROID__)
+#if MC_HAS_GCD
     mCallbackDispatchQueue = getMainQueue();
 #endif
 }
 
 Operation::~Operation()
 {
-#if defined(__APPLE__) || defined(__ANDROID__)
+#if MC_HAS_GCD
     if (mCallbackDispatchQueue != NULL) {
         dispatch_release(mCallbackDispatchQueue);
     }
@@ -78,7 +78,7 @@ void Operation::start()
 {
 }
 
-#if defined(__APPLE__) || defined(__ANDROID__)
+#if MC_HAS_GCD
 void Operation::setCallbackDispatchQueue(dispatch_queue_t callbackDispatchQueue)
 {
     if (mCallbackDispatchQueue != NULL) {
@@ -98,7 +98,7 @@ dispatch_queue_t Operation::callbackDispatchQueue()
 
 void Operation::performMethodOnCallbackThread(Method method, void * context, bool waitUntilDone)
 {
-#if defined(__APPLE__) || defined(__ANDROID__)
+#if MC_HAS_GCD
     dispatch_queue_t queue = mCallbackDispatchQueue;
     if (queue == NULL) {
         queue = getMainQueue();

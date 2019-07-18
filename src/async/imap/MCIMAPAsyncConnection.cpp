@@ -112,7 +112,7 @@ IMAPAsyncConnection::IMAPAsyncConnection()
 
 IMAPAsyncConnection::~IMAPAsyncConnection()
 {
-#if defined(__APPLE__) || defined(__ANDROID__)
+#if MC_HAS_GCD
     cancelDelayedPerformMethodOnDispatchQueue((Object::Method) &IMAPAsyncConnection::tryAutomaticDisconnectAfterDelay, NULL, dispatchQueue());
 #else
     cancelDelayedPerformMethod((Object::Method) &IMAPAsyncConnection::tryAutomaticDisconnectAfterDelay, NULL);
@@ -280,7 +280,7 @@ void IMAPAsyncConnection::cancelAllOperations()
 void IMAPAsyncConnection::runOperation(IMAPOperation * operation)
 {
     if (mScheduledAutomaticDisconnect) {
-#if defined(__APPLE__) || defined(__ANDROID__)
+#if MC_HAS_GCD
         cancelDelayedPerformMethodOnDispatchQueue((Object::Method) &IMAPAsyncConnection::tryAutomaticDisconnectAfterDelay, NULL, dispatchQueue());
 #else
         cancelDelayedPerformMethod((Object::Method) &IMAPAsyncConnection::tryAutomaticDisconnectAfterDelay, NULL);
@@ -300,7 +300,7 @@ void IMAPAsyncConnection::tryAutomaticDisconnect()
 
     bool scheduledAutomaticDisconnect = mScheduledAutomaticDisconnect;
     if (scheduledAutomaticDisconnect) {
-#if defined(__APPLE__) || defined(__ANDROID__)
+#if MC_HAS_GCD
         cancelDelayedPerformMethodOnDispatchQueue((Object::Method) &IMAPAsyncConnection::tryAutomaticDisconnectAfterDelay, NULL, dispatchQueue());
 #else
         cancelDelayedPerformMethod((Object::Method) &IMAPAsyncConnection::tryAutomaticDisconnectAfterDelay, NULL);
@@ -309,7 +309,7 @@ void IMAPAsyncConnection::tryAutomaticDisconnect()
 
     mOwner->retain();
     mScheduledAutomaticDisconnect = true;
-#if defined(__APPLE__) || defined(__ANDROID__)
+#if MC_HAS_GCD
     performMethodOnDispatchQueueAfterDelay((Object::Method) &IMAPAsyncConnection::tryAutomaticDisconnectAfterDelay, NULL, dispatchQueue(), 30);
 #else
     performMethodAfterDelay((Object::Method) &IMAPAsyncConnection::tryAutomaticDisconnectAfterDelay, NULL, 30);
@@ -416,7 +416,7 @@ void IMAPAsyncConnection::setQueueRunning(bool running)
     mQueueRunning = running;
 }
 
-#if defined(__APPLE__) || defined(__ANDROID__)
+#if MC_HAS_GCD
 void IMAPAsyncConnection::setDispatchQueue(dispatch_queue_t dispatchQueue)
 {
     mQueue->setDispatchQueue(dispatchQueue);

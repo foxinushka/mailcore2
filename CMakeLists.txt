@@ -243,6 +243,37 @@ else()
 
     include_directories(${OPENSSL_INCLUDE_DIR})
 
+
+    # detect dispatch
+
+    find_path(DISPATCH_INCLUDE_DIR
+      NAMES dispatch/dispatch.h
+      HINTS ENV PATH
+      PATHS ${additional_includes}
+    )
+    find_library(DISPATCH_LIBRARY
+      NAMES dispatch
+      PATHS ${additional_lib_searchpath}
+    )
+	find_library(DISPATCH_BLOCKS_LIBRARY
+      NAMES BlocksRuntime
+      PATHS ${additional_lib_searchpath}
+    )
+
+    if(NOT DISPATCH_INCLUDE_DIR OR NOT DISPATCH_LIBRARY)
+      message(FATAL_ERROR "ERROR: Could not find dispatch")
+    else()
+      message(STATUS "Found dispatch")
+    endif()
+
+	if(NOT DISPATCH_BLOCKS_LIBRARY)
+      message(FATAL_ERROR "ERROR: Could not find blocks runtime")
+    else()
+      message(STATUS "Found blocks runtime")
+    endif()
+
+    include_directories(${DISPATCH_INCLUDE_DIR})
+    
   else()
 
 

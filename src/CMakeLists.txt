@@ -59,7 +59,7 @@ add_library(${MAILCORE2_LIB_TARGET}
 
 
 if(WIN32)
-  target_compile_options(${MAILCORE2_LIB_TARGET} PRIVATE /GS- /Oy /Gw /Gy)
+  target_compile_options(${MAILCORE2_LIB_TARGET} PRIVATE /GS- /Oy /Gw /Gy -fblocks)
   target_link_options(${MAILCORE2_LIB_TARGET} PRIVATE /INCREMENTAL:NO)
   target_link_libraries(${MAILCORE2_LIB_TARGET}
                         PRIVATE
@@ -71,6 +71,8 @@ if(WIN32)
                           ${ZLIB_LIBRARY}
                           ${ICU4C_UC_LIBRARY}
                           ${ICU4C_IN_LIBRARY}
+                          ${DISPATCH_LIBRARY}
+						  ${DISPATCH_BLOCKS_LIBRARY}
                           ws2_32
                           Crypt32
   )

@@ -314,7 +314,7 @@ void NNTPAsyncSession::logConnection(ConnectionLogType logType, Data * buffer)
     MCB_UNLOCK(&mConnectionLoggerLock);
 }
 
-#if defined(__APPLE__) || defined(__ANDROID__)
+#if MC_HAS_GCD
 void NNTPAsyncSession::setDispatchQueue(dispatch_queue_t dispatchQueue)
 {
     mQueue->setDispatchQueue(dispatchQueue);
