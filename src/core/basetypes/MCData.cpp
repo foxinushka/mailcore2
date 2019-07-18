@@ -10,7 +10,7 @@
 #ifndef _MSC_VER
 #include <sys/mman.h>
 #endif
-#include <pthread.h>
+
 #if USE_UCHARDET
 #include <uchardet/uchardet.h>
 #else

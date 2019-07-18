@@ -280,13 +280,13 @@ namespace mailcore {
         
         unsigned int mLastFetchedSequenceNumber;
         String * mCurrentFolder;
-        pthread_mutex_t mIdleLock;
+		MCB_LOCK_TYPE mIdleLock;
         int mState;
         mailimap * mImap;
         IMAPProgressCallback * mProgressCallback;
         unsigned int mProgressItemsCount;
         ConnectionLogger * mConnectionLogger;
-        pthread_mutex_t mConnectionLoggerLock;
+		MCB_LOCK_TYPE mConnectionLoggerLock;
         bool mAutomaticConfigurationEnabled;
         bool mAutomaticConfigurationDone;
         bool mShouldDisconnect;

@@ -68,7 +68,7 @@ SMTPAsyncSession::SMTPAsyncSession()
     mQueueCallback = new SMTPOperationQueueCallback(this);
     mQueue->setCallback(mQueueCallback);
     mConnectionLogger = NULL;
-    pthread_mutex_init(&mConnectionLoggerLock, NULL);
+    MCB_LOCK_INIT(&mConnectionLoggerLock);
     mInternalLogger = new SMTPConnectionLogger(this);
     mSession->setConnectionLogger(mInternalLogger);
     mOperationQueueCallback = NULL;
@@ -77,7 +77,7 @@ SMTPAsyncSession::SMTPAsyncSession()
 SMTPAsyncSession::~SMTPAsyncSession()
 {
     MC_SAFE_RELEASE(mInternalLogger);
-    pthread_mutex_destroy(&mConnectionLoggerLock);
+    MCB_LOCK_DESTROY(&mConnectionLoggerLock);
     cancelDelayedPerformMethod((Object::Method) &SMTPAsyncSession::tryAutomaticDisconnectAfterDelay, NULL);
     MC_SAFE_RELEASE(mQueueCallback);
     MC_SAFE_RELEASE(mQueue);
@@ -284,9 +284,9 @@ SMTPOperation * SMTPAsyncSession::disconnectOperation()
 
 void SMTPAsyncSession::setConnectionLogger(ConnectionLogger * logger)
 {
-    pthread_mutex_lock(&mConnectionLoggerLock);
+    MCB_LOCK(&mConnectionLoggerLock);
     mConnectionLogger = logger;
-    pthread_mutex_unlock(&mConnectionLoggerLock);
+    MCB_UNLOCK(&mConnectionLoggerLock);
     if (logger != NULL) {
         mSession->setConnectionLogger(mInternalLogger);
     }
@@ -299,20 +299,20 @@ ConnectionLogger * SMTPAsyncSession::connectionLogger()
 {
     ConnectionLogger * result;
     
-    pthread_mutex_lock(&mConnectionLoggerLock);
+    MCB_LOCK(&mConnectionLoggerLock);
     result = mConnectionLogger;
-    pthread_mutex_unlock(&mConnectionLoggerLock);
+    MCB_UNLOCK(&mConnectionLoggerLock);
     
     return result;
 }
 
 void SMTPAsyncSession::logConnection(ConnectionLogType logType, Data * buffer)
 {
-    pthread_mutex_lock(&mConnectionLoggerLock);
+    MCB_LOCK(&mConnectionLoggerLock);
     if (mConnectionLogger != NULL) {
         mConnectionLogger->log(this, logType, buffer);
     }
-    pthread_mutex_unlock(&mConnectionLoggerLock);
+    MCB_UNLOCK(&mConnectionLoggerLock);
 }
 
 #if defined(__APPLE__) || defined(__ANDROID__)

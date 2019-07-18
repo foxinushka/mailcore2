@@ -3,6 +3,7 @@ src\core\MCCore.h
 src\core\abstract\MCAbstract.h
 src\core\abstract\MCAbstractMessage.h
 src\core\basetypes\MCBaseTypes.h
+src\core\basetypes\MCBasicLock.h
 src\core\basetypes\MCAutoreleasePool.h
 src\core\basetypes\MCObject.h
 src\core\basetypes\MCUtils.h

@@ -3,7 +3,10 @@
 #define MAILCORE_MCAUTORELEASEPOOL_H
 
 #include <MailCore/MCObject.h>
+
+#ifndef _MSC_VER
 #include <pthread.h>
+#endif
 
 #ifdef __cplusplus
 
@@ -23,7 +26,14 @@ namespace mailcore {
         
     private:
         static void init();
-        static pthread_key_t autoreleasePoolStackKey;
+
+#if _MSC_VER
+		static DWORD autoreleasePoolStackKey;
+		static BOOL CALLBACK initAutoreleasePoolStackKeyCallback(PINIT_ONCE InitOnce, PVOID Parameter, PVOID * lpContext);
+#else
+		static pthread_key_t autoreleasePoolStackKey;
+#endif
+        
         carray * mPoolObjects;
         static carray * createAutoreleasePoolStackIfNeeded();
         static void destroyAutoreleasePoolStack(void *);

@@ -102,6 +102,7 @@
     <ClInclude Include="..\..\..\src\core\basetypes\MCAutoreleasePool.h" />
     <ClInclude Include="..\..\..\src\core\basetypes\MCBase64.h" />
     <ClInclude Include="..\..\..\src\core\basetypes\MCBaseTypes.h" />
+    <ClInclude Include="..\..\..\src\core\basetypes\MCBasicLock.h" />
     <ClInclude Include="..\..\..\src\core\basetypes\MCConnectionLogger.h" />
     <ClInclude Include="..\..\..\src\core\basetypes\MCConnectionLoggerUtils.h" />
     <ClInclude Include="..\..\..\src\core\basetypes\MCData.h" />
@@ -118,6 +119,7 @@
     <ClInclude Include="..\..\..\src\core\basetypes\MCJSONParser.h" />
     <ClInclude Include="..\..\..\src\core\basetypes\MCLibetpan.h" />
     <ClInclude Include="..\..\..\src\core\basetypes\MCLibetpanTypes.h" />
+    <ClInclude Include="..\..\..\src\core\basetypes\MCLock.h" />
     <ClInclude Include="..\..\..\src\core\basetypes\MCLog.h" />
     <ClInclude Include="..\..\..\src\core\basetypes\MCMainThread.h" />
     <ClInclude Include="..\..\..\src\core\basetypes\MCMD5.h" />
@@ -414,13 +416,13 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>MAILCORE_DLL;ZLIB_DLL;_WINDLL;_CRT_SECURE_NO_WARNINGS;_SILENCE_STDEXT_HASH_DEPRECATION_WARNINGS;TIDY_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);$(MSBuildThisFileDirectory);..\..\..\Externals\include;..\..\..\src\core\basetypes;..\..\..\src\core\zip;..\..\..\src\core\zip\minizip;..\..\..\src\core\renderer;..\..\..\src\core/rfc822;..\..\..\src\core/imap;..\..\..\src\core\abstract;..\..\..\src\core\security;..\..\..\src\core\imap;..\..\..\src\core\pop;..\..\..\src\core\nntp;..\..\..\src\core\smtp;..\..\..\src\async\imap;..\..\..\src\async\smtp;..\..\..\src\async\pop</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);..\..\..\Externals\include;..\..\..\src\core\basetypes;..\..\..\src\core\zip;..\..\..\src\core\zip\minizip;..\..\..\src\core\renderer;..\..\..\src\core\rfc822;..\..\..\src\core\imap;..\..\..\src\core\abstract;..\..\..\src\core\security;..\..\..\src\core\pop;..\..\..\src\core\nntp;..\..\..\src\core\smtp;..\..\..\src\async\imap;..\..\..\src\async\smtp;..\..\..\src\async\pop</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>Crypt32.lib;rdtidys.lib;libxml2s.lib;ssleay32MD.lib;libeay32MD.lib;zlib.lib;Ws2_32.lib;libctemplate.lib;libetpan.lib;pthreadVC2.lib;icudt64.lib;icuuc64.lib;icuin64.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>C:\Library\libxml2-development\usr\lib;..\..\..\Externals\lib64;..\..\..\Externals\lib\x64</AdditionalLibraryDirectories>
+      <AdditionalDependencies>Crypt32.lib;rdtidys.lib;libxml2s.lib;libeay32MD.lib;zlib.lib;Ws2_32.lib;libctemplate.lib;libetpan.lib;icudt64.lib;icuuc64.lib;icuin64.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\Library\icu-64\usr\lib;C:\Library\libxml2-development\usr\lib;..\..\..\Externals\lib64;..\..\..\Externals\lib\x64</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -452,14 +454,14 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>MAILCORE_DLL;ZLIB_DLL;_CRT_SECURE_NO_WARNINGS;_SILENCE_STDEXT_HASH_DEPRECATION_WARNINGS;TIDY_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);$(MSBuildThisFileDirectory);..\..\..\Externals\include;..\..\..\src\core\basetypes;..\..\..\src\core\zip;..\..\..\src\core\zip\minizip;..\..\..\src\core\renderer;..\..\..\src\core/rfc822;..\..\..\src\core/imap;..\..\..\src\core\abstract;..\..\..\src\core\security;..\..\..\src\core\imap;..\..\..\src\core\pop;..\..\..\src\core\nntp;..\..\..\src\core\smtp;..\..\..\src\async\imap;..\..\..\src\async\smtp;..\..\..\src\async\pop</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);..\..\..\Externals\include;..\..\..\src\core\basetypes;..\..\..\src\core\zip;..\..\..\src\core\zip\minizip;..\..\..\src\core\renderer;..\..\..\src\core\rfc822;..\..\..\src\core\imap;..\..\..\src\core\abstract;..\..\..\src\core\security;..\..\..\src\core\pop;..\..\..\src\core\nntp;..\..\..\src\core\smtp;..\..\..\src\async\imap;..\..\..\src\async\smtp;..\..\..\src\async\pop</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>Crypt32.lib;rdtidys.lib;libxml2s.lib;libeay32MD.lib;zlib.lib;Ws2_32.lib;libctemplate.lib;libetpan.lib;pthreadVC2.lib;icudt64.lib;icuuc64.lib;icuin64.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>Crypt32.lib;rdtidys.lib;libxml2s.lib;libeay32MD.lib;zlib.lib;Ws2_32.lib;libctemplate.lib;libetpan.lib;icudt64.lib;icuuc64.lib;icuin64.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>C:\Library\icu-64\usr\lib;C:\Library\libxml2-development\usr\lib;..\..\..\Externals\lib64;..\..\..\Externals\lib\x64</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>

@@ -13,6 +13,7 @@ core/basetypes/MCArray.h
 core/basetypes/MCAssert.h
 core/basetypes/MCAutoreleasePool.h
 core/basetypes/MCBaseTypes.h
+core/basetypes/MCBasicLock.h
 core/basetypes/MCConnectionLogger.h
 core/basetypes/MCData.h
 core/basetypes/MCDataDecoderUtils.h

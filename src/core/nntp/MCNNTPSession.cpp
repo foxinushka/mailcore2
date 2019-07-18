@@ -49,7 +49,7 @@ void NNTPSession::init()
     mProgressCallback = NULL;
     mState = STATE_DISCONNECTED;
     mConnectionLogger = NULL;
-    pthread_mutex_init(&mConnectionLoggerLock, NULL);
+    MCB_LOCK_INIT(&mConnectionLoggerLock);
 }
 
 NNTPSession::NNTPSession()
@@ -59,7 +59,7 @@ NNTPSession::NNTPSession()
 
 NNTPSession::~NNTPSession()
 {
-    pthread_mutex_destroy(&mConnectionLoggerLock);
+    MCB_LOCK_DESTROY(&mConnectionLoggerLock);
     MC_SAFE_RELEASE(mHostname);
     MC_SAFE_RELEASE(mUsername);
     MC_SAFE_RELEASE(mPassword);
@@ -1021,12 +1021,12 @@ void NNTPSession::selectGroup(String * folder, ErrorCode * pError)
 
 void NNTPSession::lockConnectionLogger()
 {
-    pthread_mutex_lock(&mConnectionLoggerLock);
+    MCB_LOCK(&mConnectionLoggerLock);
 }
 
 void NNTPSession::unlockConnectionLogger()
 {
-    pthread_mutex_unlock(&mConnectionLoggerLock);
+    MCB_UNLOCK(&mConnectionLoggerLock);
 }
 
 void NNTPSession::setConnectionLogger(ConnectionLogger * logger)

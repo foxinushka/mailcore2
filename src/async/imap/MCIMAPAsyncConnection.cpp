@@ -103,7 +103,7 @@ IMAPAsyncConnection::IMAPAsyncConnection()
     mQueue->setCallback(mQueueCallback);
     mOwner = NULL;
     mConnectionLogger = NULL;
-    pthread_mutex_init(&mConnectionLoggerLock, NULL);
+    MCB_LOCK_INIT(&mConnectionLoggerLock);
     mInternalLogger = new IMAPConnectionLogger(this);
     mAutomaticConfigurationEnabled = true;
     mQueueRunning = false;
@@ -117,7 +117,7 @@ IMAPAsyncConnection::~IMAPAsyncConnection()
 #else
     cancelDelayedPerformMethod((Object::Method) &IMAPAsyncConnection::tryAutomaticDisconnectAfterDelay, NULL);
 #endif
-    pthread_mutex_destroy(&mConnectionLoggerLock);
+    MCB_LOCK_DESTROY(&mConnectionLoggerLock);
     MC_SAFE_RELEASE(mInternalLogger);
     MC_SAFE_RELEASE(mQueueCallback);
     MC_SAFE_RELEASE(mLastFolder);
@@ -364,9 +364,9 @@ IMAPAsyncSession * IMAPAsyncConnection::owner()
 
 void IMAPAsyncConnection::setConnectionLogger(ConnectionLogger * logger)
 {
-    pthread_mutex_lock(&mConnectionLoggerLock);
+    MCB_LOCK(&mConnectionLoggerLock);
     mConnectionLogger = logger;
-    pthread_mutex_unlock(&mConnectionLoggerLock);
+    MCB_UNLOCK(&mConnectionLoggerLock);
     if (logger != NULL) {
         mSession->setConnectionLogger(mInternalLogger);
     }
@@ -379,20 +379,20 @@ ConnectionLogger * IMAPAsyncConnection::connectionLogger()
 {
     ConnectionLogger * result;
 
-    pthread_mutex_lock(&mConnectionLoggerLock);
+    MCB_LOCK(&mConnectionLoggerLock);
     result = mConnectionLogger;
-    pthread_mutex_unlock(&mConnectionLoggerLock);
+    MCB_UNLOCK(&mConnectionLoggerLock);
 
     return result;
 }
 
 void IMAPAsyncConnection::logConnection(ConnectionLogType logType, Data * buffer)
 {
-    pthread_mutex_lock(&mConnectionLoggerLock);
+    MCB_LOCK(&mConnectionLoggerLock);
     if (mConnectionLogger != NULL) {
         mConnectionLogger->log(this, logType, buffer);
     }
-    pthread_mutex_unlock(&mConnectionLoggerLock);
+    MCB_UNLOCK(&mConnectionLoggerLock);
 }
 
 void IMAPAsyncConnection::setAutomaticConfigurationEnabled(bool enabled)

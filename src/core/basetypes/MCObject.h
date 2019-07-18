@@ -2,14 +2,17 @@
 
 #define MAILCORE_MCOBJECT_H
 
-#include <pthread.h>
-
 #if defined(__APPLE__) || defined(__ANDROID__)
 #include <dispatch/dispatch.h>
 #endif
 
-#if __APPLE__
+#ifdef _MSC_VER
+#define WIN32_LEAN_AND_MEAN
+#include <windows.h>
+#elif __APPLE__
 #include <os/lock.h>
+#else
+#include <pthread.h>
 #endif
 
 #if __ANDROID__
@@ -99,7 +102,11 @@ namespace mailcore {
     public: // private
         
     private:
-#if __APPLE__
+#ifdef _MSC_VER
+		SRWLOCK mLock;
+		static BOOL CALLBACK initObjectConstructorsCallback(PINIT_ONCE InitOnce, PVOID Parameter, PVOID * lpContext);
+
+#elif __APPLE__
         os_unfair_lock mLock;
 #else
         pthread_mutex_t mLock;

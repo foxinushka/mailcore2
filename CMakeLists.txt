@@ -221,26 +221,6 @@ else()
   if(WIN32)
 
 
-    # detect pthread
-
-    find_path(PTHREAD_INCLUDE_DIR
-      NAMES pthread.h
-      PATHS ${additional_includes}
-    )
-    find_library(PTHREAD_LIBRARY
-      NAMES pthreadVC2
-      PATHS ${additional_lib_searchpath}
-    )
-
-    if(NOT PTHREAD_INCLUDE_DIR OR NOT PTHREAD_LIBRARY)
-      message(FATAL_ERROR "ERROR: Could not find pthread")
-    else()
-      message(STATUS "Found pthread")
-    endif()
-
-    include_directories(${PTHREAD_INCLUDE_DIR})
-
-
     # detect OpenSSL
 
     find_path(OPENSSL_INCLUDE_DIR

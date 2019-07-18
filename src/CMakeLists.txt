@@ -63,7 +63,6 @@ if(WIN32)
   target_link_options(${MAILCORE2_LIB_TARGET} PRIVATE /INCREMENTAL:NO)
   target_link_libraries(${MAILCORE2_LIB_TARGET}
                         PRIVATE
-                          ${PTHREAD_LIBRARY}
                           ${LIBETPAN_LIBRARY}
                           ${CTEMPLATE_LIBRARY}
                           ${TIDY_LIBRARY}

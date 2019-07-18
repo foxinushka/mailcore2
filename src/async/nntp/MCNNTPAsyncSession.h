@@ -85,7 +85,7 @@ namespace mailcore {
         OperationQueue * mQueue;
         NNTPOperationQueueCallback * mQueueCallback;
         ConnectionLogger * mConnectionLogger;
-        pthread_mutex_t mConnectionLoggerLock;
+        MCB_LOCK_TYPE mConnectionLoggerLock;
         NNTPConnectionLogger * mInternalLogger;
         OperationQueueCallback * mOperationQueueCallback;
         

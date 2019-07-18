@@ -42,7 +42,9 @@ Object::~Object()
 
 void Object::init()
 {
-#if __APPLE__
+#ifdef _MSC_VER
+	mLock = SRWLOCK_INIT;
+#elif __APPLE__
     mLock = OS_UNFAIR_LOCK_INIT;
 #else
     pthread_mutex_init(&mLock, NULL);
@@ -101,7 +103,6 @@ Object * Object::autorelease()
 
 String * Object::className()
 {
-    int status;
 #ifdef _MSC_VER
     String * result = String::uniquedStringWithUTF8Characters(typeid(*this).name());
 	// typeid(*this).name() will return "class mailcore::Object". Therefore, we'll strip the prefix "class " from it.
@@ -109,6 +110,7 @@ String * Object::className()
 		result = result->substringFromIndex(6);
 	}
 #else
+	int status;
 
     #if defined(ANDROID) || defined(__ANDROID__)
         // workaround for android ndk 14b
@@ -173,18 +175,36 @@ struct mainThreadCallData {
     void * caller;
 };
 
-static pthread_once_t delayedPerformOnce = PTHREAD_ONCE_INIT;
 static chash * delayedPerformHash = NULL;
-static pthread_mutex_t delayedPerformLock = PTHREAD_MUTEX_INITIALIZER;
+static MC_LOCK_TYPE delayedPerformLock = MC_LOCK_INITIAL_VALUE;
 
 static void reallyInitDelayedPerform()
 {
     delayedPerformHash = chash_new(CHASH_DEFAULTSIZE, CHASH_COPYKEY);
 }
 
+#ifdef _MSC_VER
+
+static INIT_ONCE delayedPerformOnce = INIT_ONCE_STATIC_INIT;
+
+BOOL CALLBACK reallyInitDelayedPerformCallback(PINIT_ONCE InitOnce, PVOID Parameter, PVOID * lpContext) {
+	reallyInitDelayedPerform();
+	return TRUE;
+}
+
+#else
+
+static pthread_once_t delayedPerformOnce = PTHREAD_ONCE_INIT;
+
+#endif
+
 static void initDelayedPerform()
 {
+#ifdef _MSC_VER
+	InitOnceExecuteOnce(&delayedPerformOnce, reallyInitDelayedPerformCallback, NULL, NULL);
+#else
     pthread_once(&delayedPerformOnce, reallyInitDelayedPerform);
+#endif
 }
 
 struct mainThreadCallKeyData {
@@ -212,9 +232,9 @@ static void removeFromPerformHash(Object * obj, Object::Method method, void * co
     key.data = &keyData;
     key.len = sizeof(keyData);
 
-    pthread_mutex_lock(&delayedPerformLock);
+    MC_LOCK(&delayedPerformLock);
     chash_delete(delayedPerformHash, (chashdatum *) &key, NULL);
-    pthread_mutex_unlock(&delayedPerformLock);
+    MC_UNLOCK(&delayedPerformLock);
 }
 
 static void queueIdentifierDestructor(void * identifier)
@@ -251,9 +271,9 @@ static void addToPerformHash(Object * obj, Object::Method method, void * context
     key.len = sizeof(keyData);
     value.data = performValue;
     value.len = 0;
-    pthread_mutex_lock(&delayedPerformLock);
+    MC_LOCK(&delayedPerformLock);
     chash_set(delayedPerformHash, &key, &value, NULL);
-    pthread_mutex_unlock(&delayedPerformLock);
+    MC_UNLOCK(&delayedPerformLock);
 }
 
 static void * getFromPerformHash(Object * obj, Object::Method method, void * context, void * targetDispatchQueue)
@@ -279,9 +299,9 @@ static void * getFromPerformHash(Object * obj, Object::Method method, void * con
     key.data = &keyData;
     key.len = sizeof(keyData);
     
-    pthread_mutex_lock(&delayedPerformLock);
+    MC_LOCK(&delayedPerformLock);
     r = chash_get(delayedPerformHash, &key, &value);
-    pthread_mutex_unlock(&delayedPerformLock);
+    MC_UNLOCK(&delayedPerformLock);
     if (r < 0)
         return NULL;
     
@@ -458,6 +478,15 @@ void Object::importSerializable(HashMap * serializable)
     MCAssert(0);
 }
 
+#ifdef _MSC_VER
+
+BOOL CALLBACK Object::initObjectConstructorsCallback(PINIT_ONCE InitOnce, PVOID Parameter, PVOID * lpContext) {
+	initObjectConstructors();
+	return TRUE;
+}
+
+#endif
+
 static chash * constructors = NULL;
 
 void Object::initObjectConstructors()
@@ -467,9 +496,14 @@ void Object::initObjectConstructors()
 
 void Object::registerObjectConstructor(const char * className, void * (* objectConstructor)(void))
 {
+#ifdef _MSC_VER
+	INIT_ONCE once = INIT_ONCE_STATIC_INIT;
+	InitOnceExecuteOnce(&once, initObjectConstructorsCallback, NULL, NULL);
+#else
     static pthread_once_t once = PTHREAD_ONCE_INIT;
-    pthread_once(&once, initObjectConstructors);
-    
+	pthread_once(&once, initObjectConstructors);
+#endif
+
     chashdatum key;
     chashdatum value;
     key.data = (void *) className;

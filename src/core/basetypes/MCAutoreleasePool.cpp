@@ -8,12 +8,28 @@
 
 using namespace mailcore;
 
+#ifdef _MSC_VER
+DWORD AutoreleasePool::autoreleasePoolStackKey;
+
+BOOL CALLBACK AutoreleasePool::initAutoreleasePoolStackKeyCallback(PINIT_ONCE InitOnce, PVOID Parameter, PVOID * lpContext) {
+	initAutoreleasePoolStackKey();
+	return TRUE;
+}
+
+#else
 pthread_key_t AutoreleasePool::autoreleasePoolStackKey;
+#endif
+
 
 void AutoreleasePool::init()
 {
-    static pthread_once_t once = PTHREAD_ONCE_INIT;
-    pthread_once(&once, initAutoreleasePoolStackKey);
+#ifdef _MSC_VER
+	static INIT_ONCE once = INIT_ONCE_STATIC_INIT;
+	InitOnceExecuteOnce(&once, initAutoreleasePoolStackKeyCallback, NULL, NULL);
+#else
+	static pthread_once_t once = PTHREAD_ONCE_INIT;
+	pthread_once(&once, initAutoreleasePoolStackKey);
+#endif
 }
 
 AutoreleasePool::AutoreleasePool()
@@ -49,14 +65,21 @@ AutoreleasePool::~AutoreleasePool()
 carray * AutoreleasePool::createAutoreleasePoolStackIfNeeded()
 {
     init();
-    carray * stack = (carray *) pthread_getspecific(autoreleasePoolStackKey);
+#ifdef _MSC_VER
+    carray * stack = (carray *) TlsGetValue(autoreleasePoolStackKey);
+#else
+	carray * stack = (carray *) pthread_getspecific(autoreleasePoolStackKey);
+#endif
     if (stack != NULL) {
         return stack;
     }
     
     stack = carray_new(4);
+#ifdef _MSC_VER
+	TlsSetValue(autoreleasePoolStackKey, stack);
+#else
     pthread_setspecific(autoreleasePoolStackKey, stack);
-    
+#endif
     return stack;
 }
 
@@ -71,7 +94,11 @@ void AutoreleasePool::destroyAutoreleasePoolStack(void * value)
 
 void AutoreleasePool::initAutoreleasePoolStackKey()
 {
+#ifdef _MSC_VER
+	autoreleasePoolStackKey = TlsAlloc();
+#else
     pthread_key_create(&autoreleasePoolStackKey, destroyAutoreleasePoolStack);
+#endif
 }
 
 AutoreleasePool * AutoreleasePool::currentAutoreleasePool()

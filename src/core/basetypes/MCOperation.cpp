@@ -7,7 +7,9 @@ Operation::Operation()
     mCallback = NULL;
     mCancelled = false;
     mShouldRunWhenCancelled = false;
-    pthread_mutex_init(&mLock, NULL);
+
+	MCB_LOCK_INIT(&mLock);
+
 #if defined(__APPLE__) || defined(__ANDROID__)
     mCallbackDispatchQueue = getMainQueue();
 #endif
@@ -20,7 +22,8 @@ Operation::~Operation()
         dispatch_release(mCallbackDispatchQueue);
     }
 #endif
-    pthread_mutex_destroy(&mLock);
+
+    MCB_LOCK_DESTROY(&mLock);
 }
 
 void Operation::setCallback(OperationCallback * callback)
@@ -35,16 +38,16 @@ OperationCallback * Operation::callback()
 
 void Operation::cancel()
 {
-    pthread_mutex_lock(&mLock);
+	MCB_LOCK(&mLock);
     mCancelled = true;
-    pthread_mutex_unlock(&mLock);
+	MCB_UNLOCK(&mLock);
 }
 
 bool Operation::isCancelled()
 {
-    pthread_mutex_lock(&mLock);
+	MCB_LOCK(&mLock);
     bool value = mCancelled;
-    pthread_mutex_unlock(&mLock);
+	MCB_UNLOCK(&mLock);
     
     return value;
 }

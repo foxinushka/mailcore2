@@ -18,6 +18,7 @@ core/basetypes/MCOperationQueueCallback.h
 core/basetypes/MCDefines.h
 core/abstract/MCMessageConstants.h
 core/basetypes/MCArray.h
+core/basetypes/MCBasicLock.h
 core/basetypes/MCHashMap.h
 core/basetypes/MCJSON.h
 core/basetypes/MCMD5.h

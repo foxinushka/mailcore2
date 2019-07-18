@@ -570,6 +570,12 @@
     <ClInclude Include="..\..\..\src\core\provider\MCMXRecordResolverOperation.h">
       <Filter>Source Files\core\provider</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\src\core\basetypes\MCLock.h">
+      <Filter>Source Files\core\basetypes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\core\basetypes\MCBasicLock.h">
+      <Filter>Source Files\core\basetypes</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\src\core\abstract\MCAbstractMessage.cpp">

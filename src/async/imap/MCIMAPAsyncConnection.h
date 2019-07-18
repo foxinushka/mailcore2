@@ -100,7 +100,7 @@ namespace mailcore {
         IMAPAsyncSession * mOwner;
         ConnectionLogger * mConnectionLogger;
         IMAPConnectionLogger * mInternalLogger;
-        pthread_mutex_t mConnectionLoggerLock;
+        MCB_LOCK_TYPE mConnectionLoggerLock;
         bool mAutomaticConfigurationEnabled;
         bool mQueueRunning;
         bool mScheduledAutomaticDisconnect;

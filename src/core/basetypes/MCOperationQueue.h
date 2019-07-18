@@ -2,8 +2,7 @@
 
 #define MAILCORE_MCOPERATIONQUEUE_H
 
-#include <pthread.h>
-#include <semaphore.h>
+#include <MailCore/MCBasicLock.h>
 #include <MailCore/MCObject.h>
 #include <MailCore/MCLibetpanTypes.h>
 
@@ -35,12 +34,14 @@ namespace mailcore {
         
     private:
         Array * mOperations;
-        pthread_t mThreadID;
+#ifndef _MSC_VER
+		pthread_t mThreadID;
+#endif
         bool mStarted;
         struct mailsem * mOperationSem;
         struct mailsem * mStartSem;
         struct mailsem * mStopSem;
-        pthread_mutex_t mLock;
+		MCB_LOCK_TYPE mLock;
         bool mWaiting;
         struct mailsem * mWaitingFinishedSem;
         bool mQuitting;
