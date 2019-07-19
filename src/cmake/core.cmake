@@ -175,12 +175,13 @@ set(security_files
 )
 
 set(core_files
+  ${abstract_files}
   ${basetypes_files}
   ${icu_ucsdet_files}
-  ${abstract_files}
   ${imap_files}
-  ${pop_files}
   ${nntp_files}
+  ${pop_files}
+  ${provider_files}
   ${renderer_files}
   ${rfc822_files}
   ${security_files}
