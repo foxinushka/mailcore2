@@ -1,12 +1,8 @@
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
-set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
-if(WIN32)
-  include(public-headers-win32)
-else()
-  include(public-headers)
-endif()
+list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 
+include(public-headers)
 include(core)
 include(async)
 include(objc)
