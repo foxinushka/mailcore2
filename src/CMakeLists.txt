@@ -6,7 +6,6 @@ include(public-headers)
 include(core)
 include(async)
 include(objc)
-include(c)
 include(LibFindMacros)
 
 IF(APPLE)
@@ -97,6 +96,9 @@ if(WIN32)
 
   # CMailCore
 
+  include(cmailcore-public-headers)
+  include(c)
+
   add_library(CMailCore ${c_files})
 
   target_compile_options(CMailCore PRIVATE /GS- /Oy /Gw /Gy /GR -fblocks)
@@ -119,14 +121,18 @@ if(WIN32)
   # Install
 
   install(DIRECTORY
-            ${MAILCORE2_PUBLIC_HEADERS_DIR}
+            "${MAILCORE2_PUBLIC_HEADERS_DIR}/MailCore"
           DESTINATION
             include
   )
 
-  install(TARGETS ${MAILCORE2_LIB_TARGET} CMailCore
+  install(TARGETS 
+            ${MAILCORE2_LIB_TARGET}
+            CMailCore
           RUNTIME DESTINATION bin
           ARCHIVE DESTINATION lib
   )
+
+  install(FILES ${CMAILCORE_HEADERS} DESTINATION include/CMailCore)
 
 endif()
