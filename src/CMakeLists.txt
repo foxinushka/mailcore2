@@ -6,6 +6,7 @@ include(public-headers)
 include(core)
 include(async)
 include(objc)
+include(c)
 include(LibFindMacros)
 
 IF(APPLE)
@@ -25,18 +26,16 @@ SET_SOURCE_FILES_PROPERTIES(
   PROPERTIES LANGUAGE C
 )
 
+set(MAILCORE2_PUBLIC_HEADERS_DIR "${CMAKE_CURRENT_BINARY_DIR}/include")
+
 file(COPY
   ${public_headers}
 
   DESTINATION
-  "${CMAKE_CURRENT_BINARY_DIR}/include/MailCore"
+  "${MAILCORE2_PUBLIC_HEADERS_DIR}/MailCore"
 )
 
 include_directories(
-  "${CMAKE_CURRENT_BINARY_DIR}/include"
-  ${async_includes}
-  ${core_includes}
-  ${objc_includes}
   ${additional_includes}
   ${GLIB2_INCLUDE_DIRS}
 )
@@ -53,10 +52,32 @@ add_library(${MAILCORE2_LIB_TARGET}
   ${objc_files}
 )
 
+target_include_directories(${MAILCORE2_LIB_TARGET}
+                          PUBLIC
+                            ${MAILCORE2_PUBLIC_HEADERS_DIR}
+                          PRIVATE 
+                            ${async_includes}
+                            ${core_includes}
+                            ${objc_includes}
+)
 
 if(WIN32)
-  target_compile_options(${MAILCORE2_LIB_TARGET} PRIVATE /GS- /Oy /Gw /Gy -fblocks)
+  
+  # mailcore2
+
+  target_compile_options(${MAILCORE2_LIB_TARGET} PRIVATE /GS- /Oy /Gw /Gy /GR -fblocks)
   target_link_options(${MAILCORE2_LIB_TARGET} PRIVATE /INCREMENTAL:NO)
+  target_compile_definitions(${MAILCORE2_LIB_TARGET}
+                            PRIVATE
+                              MAILCORE_DLL
+                              TIDY_STATIC
+                              ZLIB_DLL
+                              _WINDLL
+                              _CRT_SECURE_NO_WARNINGS
+                              _SILENCE_STDEXT_HASH_DEPRECATION_WARNINGS
+                              _UNICODE
+                              UNICODE)
+  
   target_link_libraries(${MAILCORE2_LIB_TARGET}
                         PRIVATE
                           ${LIBETPAN_LIBRARY}
@@ -68,19 +89,42 @@ if(WIN32)
                           ${ICU4C_UC_LIBRARY}
                           ${ICU4C_IN_LIBRARY}
                           ${DISPATCH_LIBRARY}
-						  ${DISPATCH_BLOCKS_LIBRARY}
+						              ${DISPATCH_BLOCKS_LIBRARY}
                           ws2_32
                           Crypt32
   )
 
-  install(DIRECTORY
-            "${CMAKE_CURRENT_BINARY_DIR}/include/MailCore"
-          DESTINATION
-            include
-          FILES_MATCHING PATTERN "*.h"
+
+  # CMailCore
+
+  add_library(CMailCore ${c_files})
+
+  target_compile_options(CMailCore PRIVATE /GS- /Oy /Gw /Gy /GR -fblocks)
+  target_link_options(CMailCore PRIVATE /INCREMENTAL:NO)
+  target_compile_definitions(CMailCore
+                            PRIVATE
+                              _UNICODE
+                              UNICODE
+                              SWIFT
+  )
+  target_include_directories(CMailCore PRIVATE ${c_includes})
+
+  target_link_libraries(CMailCore 
+                        PRIVATE 
+                          ${MAILCORE2_LIB_TARGET}
+                          ${DISPATCH_LIBRARY}
+                          ${DISPATCH_BLOCKS_LIBRARY}
   )
 
-  install(TARGETS ${MAILCORE2_LIB_TARGET}
+  # Install
+
+  install(DIRECTORY
+            ${MAILCORE2_PUBLIC_HEADERS_DIR}
+          DESTINATION
+            include
+  )
+
+  install(TARGETS ${MAILCORE2_LIB_TARGET} CMailCore
           RUNTIME DESTINATION bin
           ARCHIVE DESTINATION lib
   )

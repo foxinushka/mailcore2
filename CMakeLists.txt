@@ -38,16 +38,6 @@ elseif(${CMAKE_SYSTEM_NAME} MATCHES "Linux")
 elseif(WIN32)
   set(CMAKE_CXX_STANDARD 11)
   set(BUILD_SHARED_LIBS ON)
-  add_definitions(
-    -DMAILCORE_DLL
-    -DTIDY_STATIC
-    -DZLIB_DLL
-    -D_WINDLL
-    -D_CRT_SECURE_NO_WARNINGS
-    -D_SILENCE_STDEXT_HASH_DEPRECATION_WARNINGS
-    -D_UNICODE
-    -DUNICODE
-  )
   set(additional_includes
     "${CMAKE_CURRENT_SOURCE_DIR}/Externals/include"
   )
