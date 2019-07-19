@@ -19,20 +19,20 @@ extern "C" {
 #endif
     
     C_SYNTHESIZE_STRUCT_DEFINITION(CMessageParser, mailcore::MessageParser)
-    C_SYNTHESIZE_COBJECT_CAST_DEFINITION(CMessageParser)
+    CMAILCORE_EXPORT C_SYNTHESIZE_COBJECT_CAST_DEFINITION(CMessageParser)
     
-    C_SYNTHESIZE_FUNC_DEFINITION(CMessageParser, CAbstractPart, mainPart)
-    C_SYNTHESIZE_FUNC_DEFINITION(CMessageParser, CData, data)
-    C_SYNTHESIZE_FUNC_DEFINITION(CMessageParser, MailCoreString, htmlBodyRendering)
-    C_SYNTHESIZE_FUNC_DEFINITION(CMessageParser, MailCoreString, plainTextRendering)
-    C_SYNTHESIZE_FUNC_DEFINITION(CMessageParser, MailCoreString, plainTextBodyRenderingAndStripWhitespace, bool)
+    CMAILCORE_EXPORT C_SYNTHESIZE_FUNC_DEFINITION(CMessageParser, CAbstractPart, mainPart)
+    CMAILCORE_EXPORT C_SYNTHESIZE_FUNC_DEFINITION(CMessageParser, CData, data)
+    CMAILCORE_EXPORT C_SYNTHESIZE_FUNC_DEFINITION(CMessageParser, MailCoreString, htmlBodyRendering)
+    CMAILCORE_EXPORT C_SYNTHESIZE_FUNC_DEFINITION(CMessageParser, MailCoreString, plainTextRendering)
+    CMAILCORE_EXPORT C_SYNTHESIZE_FUNC_DEFINITION(CMessageParser, MailCoreString, plainTextBodyRenderingAndStripWhitespace, bool)
     
-    C_SYNTHESIZE_FUNC_DEFINITION(CMessageParser, CDictionary, serializable)
+    CMAILCORE_EXPORT C_SYNTHESIZE_FUNC_DEFINITION(CMessageParser, CDictionary, serializable)
     
-    C_SYNTHESIZE_FUNC_DEFINITION(CMessageParser, MailCoreString, htmlRendering, struct CAbstractMessageRendererCallback)
+    CMAILCORE_EXPORT C_SYNTHESIZE_FUNC_DEFINITION(CMessageParser, MailCoreString, htmlRendering, struct CAbstractMessageRendererCallback)
     
-    C_SYNTHESIZE_STATIC_FUNC_DEFINITION(CMessageParser, CMessageParser, init, CData)
-    C_SYNTHESIZE_FUNC_DEFINITION(CMessageParser, void, saveToFile, MailCoreString)
+    CMAILCORE_EXPORT C_SYNTHESIZE_STATIC_FUNC_DEFINITION(CMessageParser, CMessageParser, init, CData)
+    CMAILCORE_EXPORT C_SYNTHESIZE_FUNC_DEFINITION(CMessageParser, void, saveToFile, MailCoreString)
     
 #ifdef __cplusplus
 }

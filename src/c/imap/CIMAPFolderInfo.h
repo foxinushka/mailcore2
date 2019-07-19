@@ -18,14 +18,14 @@ extern "C" {
     
     C_SYNTHESIZE_STRUCT_DEFINITION(CIMAPFolderInfo, mailcore::IMAPFolderInfo)
     
-    C_SYNTHESIZE_COBJECT_CAST_DEFINITION(CIMAPFolderInfo)
+    CMAILCORE_EXPORT C_SYNTHESIZE_COBJECT_CAST_DEFINITION(CIMAPFolderInfo)
     
-    C_SYNTHESIZE_PROPERTY_DEFINITION(CIMAPFolderInfo, uint32_t, uidNext, setUidNext)
-    C_SYNTHESIZE_PROPERTY_DEFINITION(CIMAPFolderInfo, uint32_t, uidValidity, setUidValidity)
-    C_SYNTHESIZE_PROPERTY_DEFINITION(CIMAPFolderInfo, uint64_t, modSequenceValue, setModSequenceValue)
-    C_SYNTHESIZE_PROPERTY_DEFINITION(CIMAPFolderInfo, int, messageCount, setMessageCount)
-    C_SYNTHESIZE_PROPERTY_DEFINITION(CIMAPFolderInfo, uint32_t, firstUnseenUid, setFirstUnseenUid)
-    C_SYNTHESIZE_PROPERTY_DEFINITION(CIMAPFolderInfo, bool, allowsNewPermanentFlags, setAllowsNewPermanentFlags)
+    CMAILCORE_EXPORT C_SYNTHESIZE_PROPERTY_DEFINITION(CIMAPFolderInfo, uint32_t, uidNext, setUidNext)
+    CMAILCORE_EXPORT C_SYNTHESIZE_PROPERTY_DEFINITION(CIMAPFolderInfo, uint32_t, uidValidity, setUidValidity)
+    CMAILCORE_EXPORT C_SYNTHESIZE_PROPERTY_DEFINITION(CIMAPFolderInfo, uint64_t, modSequenceValue, setModSequenceValue)
+    CMAILCORE_EXPORT C_SYNTHESIZE_PROPERTY_DEFINITION(CIMAPFolderInfo, int, messageCount, setMessageCount)
+    CMAILCORE_EXPORT C_SYNTHESIZE_PROPERTY_DEFINITION(CIMAPFolderInfo, uint32_t, firstUnseenUid, setFirstUnseenUid)
+    CMAILCORE_EXPORT C_SYNTHESIZE_PROPERTY_DEFINITION(CIMAPFolderInfo, bool, allowsNewPermanentFlags, setAllowsNewPermanentFlags)
     
 #ifdef __cplusplus
 }

@@ -19,8 +19,8 @@ extern "C" {
     
     C_SYNTHESIZE_STRUCT_DEFINITION(CAbstractMultipart, mailcore::AbstractMultipart)
     
-    C_SYNTHESIZE_COBJECT_CAST_DEFINITION(CAbstractMultipart)
-    C_SYNTHESIZE_PROPERTY_DEFINITION(CAbstractMultipart, CArray, parts, setParts)
+	CMAILCORE_EXPORT C_SYNTHESIZE_COBJECT_CAST_DEFINITION(CAbstractMultipart)
+	CMAILCORE_EXPORT C_SYNTHESIZE_PROPERTY_DEFINITION(CAbstractMultipart, CArray, parts, setParts)
     
 #ifdef __cplusplus
 }

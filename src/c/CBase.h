@@ -21,6 +21,16 @@ typedef __CHAR16_TYPE__ UChar;
 typedef uint16_t UChar;
 #endif
 
+#ifdef _MSC_VER
+#	ifdef CMAILCORE_DLL
+#		define CMAILCORE_EXPORT __declspec(dllexport)
+#	else
+#		define CMAILCORE_EXPORT __declspec(dllimport)
+#   endif
+#else
+#	define CMAILCORE_EXPORT
+#endif
+
 #if __has_attribute(swift_name)
 # define CF_SWIFT_NAME(_name) __attribute__((swift_name(#_name)))
 #else

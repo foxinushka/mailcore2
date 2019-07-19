@@ -18,14 +18,14 @@ extern "C" {
     
     C_SYNTHESIZE_STRUCT_DEFINITION(CIMAPFolderStatus, mailcore::IMAPFolderStatus)
     
-    C_SYNTHESIZE_COBJECT_CAST_DEFINITION(CIMAPFolderStatus)
+    CMAILCORE_EXPORT C_SYNTHESIZE_COBJECT_CAST_DEFINITION(CIMAPFolderStatus)
     
-    C_SYNTHESIZE_PROPERTY_DEFINITION(CIMAPFolderStatus, uint32_t, uidNext, setUidNext)
-    C_SYNTHESIZE_PROPERTY_DEFINITION(CIMAPFolderStatus, uint32_t, uidValidity, setUidValidity)
-    C_SYNTHESIZE_PROPERTY_DEFINITION(CIMAPFolderStatus, uint32_t, recentCount, setRecentCount)
-    C_SYNTHESIZE_PROPERTY_DEFINITION(CIMAPFolderStatus, uint32_t, unseenCount, setUnseenCount)
-    C_SYNTHESIZE_PROPERTY_DEFINITION(CIMAPFolderStatus, uint32_t, messageCount, setMessageCount)
-    C_SYNTHESIZE_PROPERTY_DEFINITION(CIMAPFolderStatus, uint64_t, highestModSeqValue, setHighestModSeqValue)
+    CMAILCORE_EXPORT C_SYNTHESIZE_PROPERTY_DEFINITION(CIMAPFolderStatus, uint32_t, uidNext, setUidNext)
+    CMAILCORE_EXPORT C_SYNTHESIZE_PROPERTY_DEFINITION(CIMAPFolderStatus, uint32_t, uidValidity, setUidValidity)
+    CMAILCORE_EXPORT C_SYNTHESIZE_PROPERTY_DEFINITION(CIMAPFolderStatus, uint32_t, recentCount, setRecentCount)
+    CMAILCORE_EXPORT C_SYNTHESIZE_PROPERTY_DEFINITION(CIMAPFolderStatus, uint32_t, unseenCount, setUnseenCount)
+    CMAILCORE_EXPORT C_SYNTHESIZE_PROPERTY_DEFINITION(CIMAPFolderStatus, uint32_t, messageCount, setMessageCount)
+    CMAILCORE_EXPORT C_SYNTHESIZE_PROPERTY_DEFINITION(CIMAPFolderStatus, uint64_t, highestModSeqValue, setHighestModSeqValue)
     
 #ifdef __cplusplus
 }

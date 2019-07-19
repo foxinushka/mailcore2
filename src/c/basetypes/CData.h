@@ -19,19 +19,19 @@ extern "C" {
     typedef void (*CBytesDeallocator)(char * bytes, unsigned int length);
     
     C_SYNTHESIZE_STRUCT_DEFINITION(CData, mailcore::Data)
-    C_SYNTHESIZE_COBJECT_CAST_DEFINITION(CData)
+	CMAILCORE_EXPORT C_SYNTHESIZE_COBJECT_CAST_DEFINITION(CData)
     
-    C_SYNTHESIZE_READONLY_PROPERTY_DEFINITION(CData, const char*, bytes)
-    C_SYNTHESIZE_READONLY_PROPERTY_DEFINITION(CData, unsigned int, length)
-    C_SYNTHESIZE_READONLY_PROPERTY_DEFINITION(CData, bool, externallyAllocatedMemory)
-    C_SYNTHESIZE_READONLY_PROPERTY_DEFINITION(CData, CBytesDeallocator, bytesDeallocator)
+	CMAILCORE_EXPORT C_SYNTHESIZE_READONLY_PROPERTY_DEFINITION(CData, const char*, bytes)
+	CMAILCORE_EXPORT C_SYNTHESIZE_READONLY_PROPERTY_DEFINITION(CData, unsigned int, length)
+	CMAILCORE_EXPORT C_SYNTHESIZE_READONLY_PROPERTY_DEFINITION(CData, bool, externallyAllocatedMemory)
+	CMAILCORE_EXPORT C_SYNTHESIZE_READONLY_PROPERTY_DEFINITION(CData, CBytesDeallocator, bytesDeallocator)
     
-    C_SYNTHESIZE_FUNC_DEFINITION(CData, void, destructiveDataClear)
+	CMAILCORE_EXPORT C_SYNTHESIZE_FUNC_DEFINITION(CData, void, destructiveDataClear)
     
-    C_SYNTHESIZE_STATIC_FUNC_DEFINITION(CData, CData, dataWithBytes, const char*, unsigned int)
+	CMAILCORE_EXPORT C_SYNTHESIZE_STATIC_FUNC_DEFINITION(CData, CData, dataWithBytes, const char*, unsigned int)
 
-    CData               Value_mailCoreTypeInfo(void);
-    CData               getTypeNameFromObject(CObject obj);
+	CMAILCORE_EXPORT CData Value_mailCoreTypeInfo(void);
+	CMAILCORE_EXPORT CData getTypeNameFromObject(CObject obj);
     
 #ifdef __cplusplus
 }

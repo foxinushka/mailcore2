@@ -14,8 +14,8 @@ extern "C" {
 #endif
     
     C_SYNTHESIZE_STRUCT_DEFINITION(CIMAPFetchNamespaceOperation, mailcore::IMAPFetchNamespaceOperation)
-    C_SYNTHESIZE_COBJECT_CAST_DEFINITION(CIMAPFetchNamespaceOperation)
-    C_SYNTHESIZE_FUNC_DEFINITION(CIMAPFetchNamespaceOperation, CDictionary, namespaces)
+    CMAILCORE_EXPORT C_SYNTHESIZE_COBJECT_CAST_DEFINITION(CIMAPFetchNamespaceOperation)
+    CMAILCORE_EXPORT C_SYNTHESIZE_FUNC_DEFINITION(CIMAPFetchNamespaceOperation, CDictionary, namespaces)
     
 #ifdef __cplusplus
 }

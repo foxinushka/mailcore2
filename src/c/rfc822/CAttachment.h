@@ -16,17 +16,17 @@ extern "C" {
     
     C_SYNTHESIZE_STRUCT_DEFINITION(CAttachment, mailcore::Attachment)
     
-    C_SYNTHESIZE_COBJECT_CAST_DEFINITION(CAttachment)
+    CMAILCORE_EXPORT C_SYNTHESIZE_COBJECT_CAST_DEFINITION(CAttachment)
     
-    C_SYNTHESIZE_PROPERTY_DEFINITION(CAttachment, CData, data, setData)
-    C_SYNTHESIZE_READONLY_PROPERTY_DEFINITION(CAttachment, MailCoreString, decodedString)
+    CMAILCORE_EXPORT C_SYNTHESIZE_PROPERTY_DEFINITION(CAttachment, CData, data, setData)
+    CMAILCORE_EXPORT C_SYNTHESIZE_READONLY_PROPERTY_DEFINITION(CAttachment, MailCoreString, decodedString)
     
-    C_SYNTHESIZE_STATIC_FUNC_DEFINITION(CAttachment, MailCoreString, mimeTypeForFilename, MailCoreString)
-    C_SYNTHESIZE_STATIC_FUNC_DEFINITION(CAttachment, CAttachment, attachmentWithContentsOfFile, MailCoreString)
-    C_SYNTHESIZE_STATIC_FUNC_DEFINITION(CAttachment, CAttachment, attachmentWithData, MailCoreString, CData)
-    C_SYNTHESIZE_STATIC_FUNC_DEFINITION(CAttachment, CAttachment, attachmentWithHTMLString, MailCoreString)
-    C_SYNTHESIZE_STATIC_FUNC_DEFINITION(CAttachment, CAttachment, attachmentWithRFC822Message, CData)
-    C_SYNTHESIZE_STATIC_FUNC_DEFINITION(CAttachment, CAttachment, attachmentWithText, MailCoreString)
+    CMAILCORE_EXPORT C_SYNTHESIZE_STATIC_FUNC_DEFINITION(CAttachment, MailCoreString, mimeTypeForFilename, MailCoreString)
+    CMAILCORE_EXPORT C_SYNTHESIZE_STATIC_FUNC_DEFINITION(CAttachment, CAttachment, attachmentWithContentsOfFile, MailCoreString)
+    CMAILCORE_EXPORT C_SYNTHESIZE_STATIC_FUNC_DEFINITION(CAttachment, CAttachment, attachmentWithData, MailCoreString, CData)
+    CMAILCORE_EXPORT C_SYNTHESIZE_STATIC_FUNC_DEFINITION(CAttachment, CAttachment, attachmentWithHTMLString, MailCoreString)
+    CMAILCORE_EXPORT C_SYNTHESIZE_STATIC_FUNC_DEFINITION(CAttachment, CAttachment, attachmentWithRFC822Message, CData)
+    CMAILCORE_EXPORT C_SYNTHESIZE_STATIC_FUNC_DEFINITION(CAttachment, CAttachment, attachmentWithText, MailCoreString)
     
 #ifdef __cplusplus
 }

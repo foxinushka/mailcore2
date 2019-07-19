@@ -14,11 +14,11 @@ extern "C" {
 #endif
     
     C_SYNTHESIZE_STRUCT_DEFINITION(CIMAPFetchContentToFileOperation, mailcore::IMAPFetchContentToFileOperation)
-    C_SYNTHESIZE_COBJECT_CAST_DEFINITION(CIMAPFetchContentToFileOperation)
+    CMAILCORE_EXPORT C_SYNTHESIZE_COBJECT_CAST_DEFINITION(CIMAPFetchContentToFileOperation)
     
-    C_SYNTHESIZE_PROPERTY_DEFINITION(CIMAPFetchContentToFileOperation, bool, isLoadingByChunksEnabled, setLoadingByChunksEnabled)
-    C_SYNTHESIZE_PROPERTY_DEFINITION(CIMAPFetchContentToFileOperation, uint32_t, chunksSize, setChunksSize)
-    C_SYNTHESIZE_PROPERTY_DEFINITION(CIMAPFetchContentToFileOperation, uint32_t, estimatedSize, setEstimatedSize)
+    CMAILCORE_EXPORT C_SYNTHESIZE_PROPERTY_DEFINITION(CIMAPFetchContentToFileOperation, bool, isLoadingByChunksEnabled, setLoadingByChunksEnabled)
+    CMAILCORE_EXPORT C_SYNTHESIZE_PROPERTY_DEFINITION(CIMAPFetchContentToFileOperation, uint32_t, chunksSize, setChunksSize)
+    CMAILCORE_EXPORT C_SYNTHESIZE_PROPERTY_DEFINITION(CIMAPFetchContentToFileOperation, uint32_t, estimatedSize, setEstimatedSize)
     
 #ifdef __cplusplus
 }

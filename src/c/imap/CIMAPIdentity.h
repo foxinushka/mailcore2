@@ -19,18 +19,18 @@ extern "C" {
     
     C_SYNTHESIZE_STRUCT_DEFINITION(CIMAPIdentity, mailcore::IMAPIdentity)
     
-    C_SYNTHESIZE_COBJECT_CAST_DEFINITION(CIMAPIdentity)
+    CMAILCORE_EXPORT C_SYNTHESIZE_COBJECT_CAST_DEFINITION(CIMAPIdentity)
     
-    C_SYNTHESIZE_PROPERTY_DEFINITION(CIMAPIdentity, MailCoreString, vendor, setVendor)
-    C_SYNTHESIZE_PROPERTY_DEFINITION(CIMAPIdentity, MailCoreString, name, setName)
-    C_SYNTHESIZE_PROPERTY_DEFINITION(CIMAPIdentity, MailCoreString, version, setVersion)
+    CMAILCORE_EXPORT C_SYNTHESIZE_PROPERTY_DEFINITION(CIMAPIdentity, MailCoreString, vendor, setVendor)
+    CMAILCORE_EXPORT C_SYNTHESIZE_PROPERTY_DEFINITION(CIMAPIdentity, MailCoreString, name, setName)
+    CMAILCORE_EXPORT C_SYNTHESIZE_PROPERTY_DEFINITION(CIMAPIdentity, MailCoreString, version, setVersion)
 
-    C_SYNTHESIZE_FUNC_DEFINITION(CIMAPIdentity, CArray, allInfoKeys)
-    C_SYNTHESIZE_FUNC_DEFINITION(CIMAPIdentity, MailCoreString, infoForKey, MailCoreString)
-    C_SYNTHESIZE_FUNC_DEFINITION(CIMAPIdentity, void, setInfoForKey, MailCoreString, MailCoreString)
-    C_SYNTHESIZE_FUNC_DEFINITION(CIMAPIdentity, void, removeAllInfos)
+    CMAILCORE_EXPORT C_SYNTHESIZE_FUNC_DEFINITION(CIMAPIdentity, CArray, allInfoKeys)
+    CMAILCORE_EXPORT C_SYNTHESIZE_FUNC_DEFINITION(CIMAPIdentity, MailCoreString, infoForKey, MailCoreString)
+    CMAILCORE_EXPORT C_SYNTHESIZE_FUNC_DEFINITION(CIMAPIdentity, void, setInfoForKey, MailCoreString, MailCoreString)
+    CMAILCORE_EXPORT C_SYNTHESIZE_FUNC_DEFINITION(CIMAPIdentity, void, removeAllInfos)
     
-    C_SYNTHESIZE_STATIC_FUNC_DEFINITION(CIMAPIdentity, CIMAPIdentity, init)
+    CMAILCORE_EXPORT C_SYNTHESIZE_STATIC_FUNC_DEFINITION(CIMAPIdentity, CIMAPIdentity, init)
     
 #ifdef __cplusplus
 }

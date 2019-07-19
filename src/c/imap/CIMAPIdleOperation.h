@@ -15,8 +15,8 @@ extern "C" {
 #endif
     
     C_SYNTHESIZE_STRUCT_DEFINITION(CIMAPIdleOperation, mailcore::IMAPIdleOperation)
-    C_SYNTHESIZE_COBJECT_CAST_DEFINITION(CIMAPIdleOperation)
-    C_SYNTHESIZE_FUNC_DEFINITION(CIMAPIdleOperation, void, interruptIdle)
+    CMAILCORE_EXPORT C_SYNTHESIZE_COBJECT_CAST_DEFINITION(CIMAPIdleOperation)
+    CMAILCORE_EXPORT C_SYNTHESIZE_FUNC_DEFINITION(CIMAPIdleOperation, void, interruptIdle)
     
 #ifdef __cplusplus
 }

@@ -15,18 +15,18 @@ extern "C" {
 #endif
     
     C_SYNTHESIZE_STRUCT_DEFINITION(CIMAPNamespace, mailcore::IMAPNamespace)
-    C_SYNTHESIZE_COBJECT_CAST_DEFINITION(CIMAPNamespace)
+    CMAILCORE_EXPORT C_SYNTHESIZE_COBJECT_CAST_DEFINITION(CIMAPNamespace)
     
-    C_SYNTHESIZE_FUNC_DEFINITION(CIMAPNamespace, MailCoreString, mainPrefix)
-    C_SYNTHESIZE_FUNC_DEFINITION(CIMAPNamespace, char, mainDelimiter)
-    C_SYNTHESIZE_FUNC_DEFINITION(CIMAPNamespace, CArray, prefixes)
-    C_SYNTHESIZE_FUNC_DEFINITION(CIMAPNamespace, MailCoreString, pathForComponents, CArray)
-    C_SYNTHESIZE_FUNC_DEFINITION(CIMAPNamespace, MailCoreString, pathForComponentsAndPrefix, CArray, MailCoreString)
-    C_SYNTHESIZE_FUNC_DEFINITION(CIMAPNamespace, CArray, componentsFromPath, MailCoreString)
-    C_SYNTHESIZE_FUNC_DEFINITION(CIMAPNamespace, bool, containsFolderPath, MailCoreString)
+    CMAILCORE_EXPORT C_SYNTHESIZE_FUNC_DEFINITION(CIMAPNamespace, MailCoreString, mainPrefix)
+    CMAILCORE_EXPORT C_SYNTHESIZE_FUNC_DEFINITION(CIMAPNamespace, char, mainDelimiter)
+    CMAILCORE_EXPORT C_SYNTHESIZE_FUNC_DEFINITION(CIMAPNamespace, CArray, prefixes)
+    CMAILCORE_EXPORT C_SYNTHESIZE_FUNC_DEFINITION(CIMAPNamespace, MailCoreString, pathForComponents, CArray)
+    CMAILCORE_EXPORT C_SYNTHESIZE_FUNC_DEFINITION(CIMAPNamespace, MailCoreString, pathForComponentsAndPrefix, CArray, MailCoreString)
+    CMAILCORE_EXPORT C_SYNTHESIZE_FUNC_DEFINITION(CIMAPNamespace, CArray, componentsFromPath, MailCoreString)
+    CMAILCORE_EXPORT C_SYNTHESIZE_FUNC_DEFINITION(CIMAPNamespace, bool, containsFolderPath, MailCoreString)
     
     
-    C_SYNTHESIZE_STATIC_FUNC_DEFINITION(CIMAPNamespace, CIMAPNamespace, namespaceWithPrefix, MailCoreString, char)
+    CMAILCORE_EXPORT C_SYNTHESIZE_STATIC_FUNC_DEFINITION(CIMAPNamespace, CIMAPNamespace, namespaceWithPrefix, MailCoreString, char)
 
 #ifdef __cplusplus
 }

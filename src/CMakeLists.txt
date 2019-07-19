@@ -105,6 +105,7 @@ if(WIN32)
   target_link_options(CMailCore PRIVATE /INCREMENTAL:NO)
   target_compile_definitions(CMailCore
                             PRIVATE
+                              CMAILCORE_DLL
                               _UNICODE
                               UNICODE
                               SWIFT

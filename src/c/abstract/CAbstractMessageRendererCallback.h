@@ -47,7 +47,7 @@ extern "C" {
     };
     typedef struct CAbstractMessageRendererCallback CAbstractMessageRendererCallback;
     
-    CAbstractMessageRendererCallback    CAbstractMessageRendererCallback_new(CanPreviewPartBlock canPreviewPartBlock,
+	CMAILCORE_EXPORT CAbstractMessageRendererCallback CAbstractMessageRendererCallback_new(CanPreviewPartBlock canPreviewPartBlock,
                                                                          ShouldShowPartBlock shouldShowPartBlock,
                                                                          TemplateValuesForHeaderBlock templateValuesForHeaderBlock,
                                                                          TemplateValuesForPartBlock templateValuesForPartBlock,
@@ -65,13 +65,13 @@ extern "C" {
                                                                          PrefetchAttachmentIMAPPartBlock prefetchAttachmentIMAPPartBlock,
                                                                          PrefetchImageIMAPPartBlock prefetchImageIMAPPartBlock,
                                                                          const void* userInfo)
-                                        CF_SWIFT_NAME(CAbstractMessageRendererCallback.init(canPreviewPartBlock:shouldShowPartBlock:templateValuesForHeaderBlock:templateValuesForPartBlock:templateForMainHeaderBlock:templateForImageBlock:templateForAttachmentBlock:templateForMessageBlock:templateForEmbeddedMessageBlock:templateForEmbeddedMessageHeaderBlock:templateForAttachmentSeparatorBlock:cleanHTMLForPartBlock:filterHTMLForPartBlock:filterHTMLForMessageBlock:dataForIMAPPartBlock:prefetchAttachmentIMAPPartBlock:prefetchImageIMAPPartBlock:userInfo:));
+                                CF_SWIFT_NAME(CAbstractMessageRendererCallback.init(canPreviewPartBlock:shouldShowPartBlock:templateValuesForHeaderBlock:templateValuesForPartBlock:templateForMainHeaderBlock:templateForImageBlock:templateForAttachmentBlock:templateForMessageBlock:templateForEmbeddedMessageBlock:templateForEmbeddedMessageHeaderBlock:templateForAttachmentSeparatorBlock:cleanHTMLForPartBlock:filterHTMLForPartBlock:filterHTMLForMessageBlock:dataForIMAPPartBlock:prefetchAttachmentIMAPPartBlock:prefetchImageIMAPPartBlock:userInfo:));
     
-    void    CAbstractMessageRendererCallback_retain(CAbstractMessageRendererCallback self)
-    CF_SWIFT_NAME(CAbstractMessageRendererCallback.retain(self:));
+	CMAILCORE_EXPORT void       CAbstractMessageRendererCallback_retain(CAbstractMessageRendererCallback self)
+                                CF_SWIFT_NAME(CAbstractMessageRendererCallback.retain(self:));
     
-    void    CAbstractMessageRendererCallback_release(CAbstractMessageRendererCallback self)
-            CF_SWIFT_NAME(CAbstractMessageRendererCallback.release(self:));
+	CMAILCORE_EXPORT void       CAbstractMessageRendererCallback_release(CAbstractMessageRendererCallback self)
+                                CF_SWIFT_NAME(CAbstractMessageRendererCallback.release(self:));
     
 #ifdef __cplusplus
 }

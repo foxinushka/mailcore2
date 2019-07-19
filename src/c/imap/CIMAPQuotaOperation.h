@@ -13,10 +13,10 @@ extern "C" {
 #endif
     
     C_SYNTHESIZE_STRUCT_DEFINITION(CIMAPQuotaOperation, mailcore::IMAPQuotaOperation)
-    C_SYNTHESIZE_COBJECT_CAST_DEFINITION(CIMAPQuotaOperation)
+    CMAILCORE_EXPORT C_SYNTHESIZE_COBJECT_CAST_DEFINITION(CIMAPQuotaOperation)
     
-    C_SYNTHESIZE_FUNC_DEFINITION(CIMAPQuotaOperation, uint32_t, usage)
-    C_SYNTHESIZE_FUNC_DEFINITION(CIMAPQuotaOperation, uint32_t, limit)
+    CMAILCORE_EXPORT C_SYNTHESIZE_FUNC_DEFINITION(CIMAPQuotaOperation, uint32_t, usage)
+    CMAILCORE_EXPORT C_SYNTHESIZE_FUNC_DEFINITION(CIMAPQuotaOperation, uint32_t, limit)
     
 #ifdef __cplusplus
 }

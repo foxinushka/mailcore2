@@ -14,8 +14,8 @@ extern "C" {
 #endif
     
     C_SYNTHESIZE_STRUCT_DEFINITION(CIMAPFetchContentOperation, mailcore::IMAPFetchContentOperation)
-    C_SYNTHESIZE_COBJECT_CAST_DEFINITION(CIMAPFetchContentOperation)
-    C_SYNTHESIZE_FUNC_DEFINITION(CIMAPFetchContentOperation, CData, data)
+    CMAILCORE_EXPORT C_SYNTHESIZE_COBJECT_CAST_DEFINITION(CIMAPFetchContentOperation)
+    CMAILCORE_EXPORT C_SYNTHESIZE_FUNC_DEFINITION(CIMAPFetchContentOperation, CData, data)
 
 #ifdef __cplusplus
 }

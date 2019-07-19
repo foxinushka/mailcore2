@@ -14,8 +14,8 @@ extern "C" {
 #endif
     
     C_SYNTHESIZE_STRUCT_DEFINITION(CIMAPCopyMessagesOperation, mailcore::IMAPCopyMessagesOperation)
-    C_SYNTHESIZE_COBJECT_CAST_DEFINITION(CIMAPCopyMessagesOperation)
-    C_SYNTHESIZE_FUNC_DEFINITION(CIMAPCopyMessagesOperation, CDictionary, uidMapping)
+    CMAILCORE_EXPORT C_SYNTHESIZE_COBJECT_CAST_DEFINITION(CIMAPCopyMessagesOperation)
+    CMAILCORE_EXPORT C_SYNTHESIZE_FUNC_DEFINITION(CIMAPCopyMessagesOperation, CDictionary, uidMapping)
 
 #ifdef __cplusplus
 }
