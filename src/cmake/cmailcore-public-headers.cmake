@@ -91,3 +91,7 @@ set(CMAILCORE_HEADERS
 	${CMAILCORE_SMTP_HEADERS}
 	${CMAILCORE_UTILS_HEADERS}
 )
+
+set(CMAILCORE_MODULEMAP
+	../build-android-swift/CMailCore/include/module.modulemap
+)

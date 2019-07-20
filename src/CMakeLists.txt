@@ -135,5 +135,6 @@ if(WIN32)
   )
 
   install(FILES ${CMAILCORE_HEADERS} DESTINATION include/CMailCore)
+  install(FILES ${CMAILCORE_MODULEMAP} DESTINATION include/CMailCore)
 
 endif()
