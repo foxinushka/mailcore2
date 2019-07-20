@@ -12,7 +12,7 @@ Import-Module RDDependency
 
 $ProjectRoot = "$(Resolve-Path ""$PSScriptRoot\..\"")"
 $DependenciesPath = "$ProjectRoot\.build\Dependencies"
-$InstallPath = "$ProjectRoot\.build\CMailcore"
+$InstallPath = "$ProjectRoot\.build\install"
 
 $IcuVersion = 64
 $IcuPath = "C:\Library\icu-$IcuVersion\usr"
@@ -26,8 +26,6 @@ $TidyDependencyDir = "TidyHTML5"
 $TidyDependencyPath = "$DependenciesPath\$TidyDependencyDir"
 $ZlibDependencyDir = "zlib"
 $ZlibDependencyPath = "$DependenciesPath\$ZlibDependencyDir\zlib-win32-1"
-$PthreadDependencyDir = "pthread"
-$PthreadDependencyPath = "$DependenciesPath\$PthreadDependencyDir\Pre-built.2"
 $SaslDependencyDir = "SASL"
 $SaslDependencyPath = "$DependenciesPath\$SaslDependencyDir\cyrus-sasl-win32-2"
 $OpenSslDependencyDir = "OpenSSL"
@@ -38,8 +36,7 @@ $Dependencies = @(
     @{ Name = "Cyrus SASL"; WebUrl = "http://d.etpan.org/mailcore2-deps/cyrus-sasl-win32/cyrus-sasl-win32-2.zip"; Directory = $SaslDependencyDir; }
     @{ Name = "zlib"; WebUrl = "http://d.etpan.org/mailcore2-deps/zlib-win32/zlib-win32-1.zip"; Directory = $ZlibDependencyDir; }
     @{ Name = "OpenSSL"; WebUrl = "http://d.etpan.org/mailcore2-deps/misc-win32/openssl-1.0.1j-vs2013.zip"; Directory = $OpenSslDependencyDir; }
-    @{ Name = "pthread"; WebUrl = "http://d.etpan.org/mailcore2-deps/misc-win32/pthreads-w32-2-9-1-release.zip"; Directory = $PthreadDependencyDir; }
-
+    
     @{ Name = "LibEtPan"; GitUrl = "git@github.com:dinhviethoa/libetpan.git"; GitTag = "1.9.3"; Directory = $LibEtPanDependencyDir; }
     @{ Name = "Tidy HTML5"; GitUrl = "git@github.com:readdle/tidy-html5.git"; GitTag = "5.4.24"; Directory = $TidyDependencyDir; }
 )
@@ -93,7 +90,6 @@ Push-Task -Name "CMailcore" -ScriptBlock {
             Copy-Item -Path "$SaslDependencyPath\lib64" -Destination $ExternalsPath -Recurse -Force -ErrorAction Stop
             Copy-Item -Path "$OpenSslDependencyPath\include" -Destination $ExternalsPath -Recurse -Force -ErrorAction Stop
             Copy-Item -Path "$OpenSslDependencyPath\lib64" -Destination $ExternalsPath -Recurse -Force -ErrorAction Stop
-            # Copy-Item -Path "$OpenSslDependencyPath\ssl" -Destination "$ExternalsPath\ssl" -Recurse -Force -ErrorAction Stop
         }
 
         Push-Task -Name "Build LibEtPan" -ScriptBlock {
@@ -125,27 +121,32 @@ Push-Task -Name "CMailcore" -ScriptBlock {
             Copy-Item -Path "$OpenSslDependencyPath\include" -Destination $ExternalsPath -Recurse -Force -ErrorAction Stop
             Copy-Item -Path "$OpenSslDependencyPath\lib64\ssleay32MD.lib" -Destination "$ExternalsPath\lib64" -Force -ErrorAction Stop
             Copy-Item -Path "$OpenSslDependencyPath\lib64\libeay32MD.lib" -Destination "$ExternalsPath\lib64" -Force -ErrorAction Stop
-            Copy-Item -Path "$PthreadDependencyPath\include" -Destination $ExternalsPath -Recurse -Force -ErrorAction Stop
-            Copy-Item -Path "$PthreadDependencyPath\lib\x64\pthreadVC2.lib" -Destination "$ExternalsPath\lib64" -Force -ErrorAction Stop
-
+            
             Copy-Item -Path "$LibEtPanDependencyPath\build-windows\include" -Destination $ExternalsPath -Recurse -Force -ErrorAction Stop
             Copy-Item -Path "$LibEtPanDependencyPath\build-windows\x64\Release\libetpan.lib" -Destination "$ExternalsPath\lib64" -Force -ErrorAction Stop
             Copy-Item -Path "$LibEtPanDependencyPath\build-windows\x64\Release\libetpan.pdb" -Destination "$ExternalsPath\lib64" -Force -ErrorAction Stop
             Copy-Item -Path "$TidyDependencyPath\include" -Destination "$ExternalsPath\include\tidy" -Recurse -Force -ErrorAction Stop
             Copy-Item -Path "$TidyDependencyPath\lib\rdtidys.lib" -Destination "$ExternalsPath\lib64" -Force -ErrorAction Stop
-
-            Copy-Item "$ProjectRoot\build-windows\vs2019\pthread\pthread.h" -Destination "$ExternalsPath\include" -Force -ErrorAction Stop
         }
 
-        Push-Task -Name "Generate Public Headers" -ScriptBlock {
-            Invoke-InDirectory "$ProjectRoot\build-windows" {
-                Invoke-Shell "build_headers.bat"
-            }
+        Push-Task -Name "Build mailcore2/CMailCore" -ScriptBlock {
+            $CMakeArgs =
+                "-G Ninja",
+                $ProjectRoot,
+                "-DCMAKE_BUILD_TYPE=RelWithDebInfo",
+                "-DCMAKE_INSTALL_PREFIX=$InstallPath",
+                "-DCMAKE_C_COMPILER=clang-cl.exe",
+                "-DCMAKE_CXX_COMPILER=clang-cl.exe",
+                "-DICU4C_INCLUDE_DIR=C:\Library\icu-64\usr\include",
+                "-DICU4C_UC_LIBRARY=C:\Library\icu-64\usr\lib\icuuc64.lib",
+                "-DICU4C_IN_LIBRARY=C:\Library\icu-64\usr\lib\icuin64.lib",
+                "-DDISPATCH_INCLUDE_DIR=C:\Library\Developer\Platforms\Windows.platform\Developer\SDKs\Windows.sdk\usr\lib\swift",
+                "-DDISPATCH_LIBRARY=C:\Library\Developer\Platforms\Windows.platform\Developer\SDKs\Windows.sdk\usr\lib\swift\windows\dispatch.lib",
+                "-DDISPATCH_BLOCKS_LIBRARY=C:\Library\Developer\Platforms\Windows.platform\Developer\SDKs\Windows.sdk\usr\lib\swift\windows\BlocksRuntime.lib" -join " "
+
+            Invoke-CMakeTasks -WorkingDir "$ProjectRoot\.build\mailcore" -CMakeArgs $CMakeArgs
         }
 
-        Push-Task -Name "MSBuild" -ScriptBlock {
-            MSBuild "$ProjectRoot\build-windows\mailcore2\mailcore2.sln" /t:mailcore2 /p:Configuration="Release" /p:Platform="x64"
-        }
     }
     finally {
         Push-Task -Name "Shutdown" -ScriptBlock {
