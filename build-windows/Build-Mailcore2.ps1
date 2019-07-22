@@ -41,7 +41,7 @@ $Dependencies = @(
     @{ Name = "Tidy HTML5"; GitUrl = "git@github.com:readdle/tidy-html5.git"; GitTag = "5.4.24"; Directory = $TidyDependencyDir; }
 )
 
-Push-Task -Name "CMailcore" -ScriptBlock {
+Push-Task -Name "mailcore2" -ScriptBlock {
     Push-Task -Name "Initialize" -ScriptBlock {
         Write-TaskLog "Working in $ProjectRoot"
         Push-Location -Path $ProjectRoot
@@ -144,7 +144,7 @@ Push-Task -Name "CMailcore" -ScriptBlock {
                 "-DDISPATCH_LIBRARY=C:\Library\Developer\Platforms\Windows.platform\Developer\SDKs\Windows.sdk\usr\lib\swift\windows\dispatch.lib",
                 "-DDISPATCH_BLOCKS_LIBRARY=C:\Library\Developer\Platforms\Windows.platform\Developer\SDKs\Windows.sdk\usr\lib\swift\windows\BlocksRuntime.lib" -join " "
 
-            Invoke-CMakeTasks -WorkingDir "$ProjectRoot\.build\mailcore" -CMakeArgs $CMakeArgs
+            Invoke-CMakeTasks -WorkingDir "$ProjectRoot\.build\mailcore2" -CMakeArgs $CMakeArgs
         }
 
     }
