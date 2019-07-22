@@ -25,11 +25,11 @@ extern "C" {
     typedef struct Range Range;
     
     extern Range RangeEmpty;
-    Range RangeMake(uint64_t location, uint64_t length);
-    Range RangeIntersection(Range range1, Range range2);
-    bool RangeHasIntersection(Range range1, Range range2);
-    uint64_t RangeLeftBound(Range range);
-    uint64_t RangeRightBound(Range range);
+    CMAILCORE_EXPORT Range RangeMake(uint64_t location, uint64_t length);
+    CMAILCORE_EXPORT Range RangeIntersection(Range range1, Range range2);
+    CMAILCORE_EXPORT bool RangeHasIntersection(Range range1, Range range2);
+    CMAILCORE_EXPORT uint64_t RangeLeftBound(Range range);
+    CMAILCORE_EXPORT uint64_t RangeRightBound(Range range);
     
     C_SYNTHESIZE_STRUCT_DEFINITION(CIndexSet, mailcore::IndexSet)
     

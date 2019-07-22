@@ -35,7 +35,7 @@ extern "C" {
     
 #ifdef __cplusplus
 }
-CData getTypeNameFromObject(const std::type_info * info);
+CMAILCORE_EXPORT CData getTypeNameFromObject(const std::type_info * info);
 #endif
 
 #endif

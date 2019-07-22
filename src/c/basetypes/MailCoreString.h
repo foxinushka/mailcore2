@@ -15,23 +15,25 @@ namespace  mailcore {
 extern "C" {
 #endif
     
-    C_SYNTHESIZE_STRUCT_DEFINITION(MailCoreString, mailcore::String)
-    
-    C_SYNTHESIZE_COBJECT_CAST_DEFINITION(MailCoreString)
-    
-    C_SYNTHESIZE_STATIC_FUNC_DEFINITION(MailCoreString, MailCoreString, stringWithCharacters, const char*, unsigned int)
+	C_SYNTHESIZE_STRUCT_DEFINITION(MailCoreString, mailcore::String)
 
-    C_SYNTHESIZE_READONLY_PROPERTY_DEFINITION(MailCoreString, const UChar*, unicodeCharacters)
-    C_SYNTHESIZE_READONLY_PROPERTY_DEFINITION(MailCoreString, unsigned int, length)
-    
-    C_SYNTHESIZE_FUNC_DEFINITION(MailCoreString, MailCoreString, mUTF7DecodedString)
-    C_SYNTHESIZE_FUNC_DEFINITION(MailCoreString, MailCoreString, mUTF7EncodedString)
-    
-    C_SYNTHESIZE_FUNC_DEFINITION(MailCoreString, bool, isEqual, MailCoreString)
-    
-    C_SYNTHESIZE_FUNC_DEFINITION(CData, MailCoreString, stringWithDetectedCharset, MailCoreString)
-    C_SYNTHESIZE_FUNC_DEFINITION(CData, MailCoreString, charsetWithFilteredHTML, bool)
-    
+	C_SYNTHESIZE_COBJECT_CAST_DEFINITION(MailCoreString)
+
+	C_SYNTHESIZE_STATIC_FUNC_DEFINITION(MailCoreString, MailCoreString, stringWithCharacters, const char*, unsigned int)
+
+	C_SYNTHESIZE_READONLY_PROPERTY_DEFINITION(MailCoreString, const UChar*, unicodeCharacters)
+	C_SYNTHESIZE_READONLY_PROPERTY_DEFINITION(MailCoreString, unsigned int, length)
+
+	C_SYNTHESIZE_FUNC_DEFINITION(MailCoreString, MailCoreString, mUTF7DecodedString)
+	C_SYNTHESIZE_FUNC_DEFINITION(MailCoreString, MailCoreString, mUTF7EncodedString)
+
+	C_SYNTHESIZE_FUNC_DEFINITION(MailCoreString, bool, isEqual, MailCoreString)
+
+	C_SYNTHESIZE_FUNC_DEFINITION(CData, MailCoreString, stringWithDetectedCharset, MailCoreString)
+	C_SYNTHESIZE_FUNC_DEFINITION(CData, MailCoreString, charsetWithFilteredHTML, bool)
+
+	CMAILCORE_EXPORT time_t MailCoreTimestampFromDate(struct mailimf_date_time* date_time);
+	CMAILCORE_EXPORT time_t MailCoreTimestampFromIMAPDate(struct mailimap_date_time* imap_date);
 #ifdef __cplusplus
 }
 #endif
