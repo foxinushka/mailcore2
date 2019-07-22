@@ -15,14 +15,16 @@ $DependenciesPath = "$ProjectRoot\.build\Dependencies"
 $IntermediatesPath = "$ProjectRoot\.build\$ModuleName\Intermediates"
 $ProductsPath = "$ProjectRoot\.build\$ModuleName"
 
-$LibEtPanDependencyPath = "$DependenciesPath\"
+$IcuVersion = 64
+$IcuPath = "C:\Library\icu-$IcuVersion\usr"
 
 $SwiftIncludePaths = 
-    "$ProjectRoot\build-windows\CMailCore\include",
-    "$DependenciesPath\"
+    "$ProjectRoot\.build\install\include\CMailCore"
 
-$HeaderSearchPaths = @()
-    
+$HeaderSearchPaths = 
+    "$ProjectRoot\Externals\include",
+    "$IcuPath\include"
+
 $LibrarySearchPaths = @()
 
 $Configuration = @{
