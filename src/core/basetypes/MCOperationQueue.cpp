@@ -155,6 +155,10 @@ void OperationQueue::runOperations()
         pool->release();
     }
     MCLog("cleanup thread %p", this);
+#if defined(_MSC_VER)
+	AutoreleasePool::destroyAutoreleasePoolStack();
+#endif
+
 //#if defined(__ANDROID) || defined(ANDROID)
 //    androidUnsetupThread();
 //#endif

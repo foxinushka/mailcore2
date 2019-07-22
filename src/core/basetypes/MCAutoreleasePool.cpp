@@ -83,6 +83,13 @@ carray * AutoreleasePool::createAutoreleasePoolStackIfNeeded()
     return stack;
 }
 
+#ifdef _MSC_VER
+void AutoreleasePool::destroyAutoreleasePoolStack() {
+	void * stack = createAutoreleasePoolStackIfNeeded();
+	destroyAutoreleasePoolStack(stack);
+}
+#endif
+
 void AutoreleasePool::destroyAutoreleasePoolStack(void * value)
 {
     carray * stack = (carray *) value;

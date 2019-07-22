@@ -21,13 +21,17 @@ namespace mailcore {
         
         static void autorelease(Object * obj);
         
+#ifdef _MSC_VER
+		static void destroyAutoreleasePoolStack();
+#endif
+
     public: // subclass behavior
         virtual String * description();
         
     private:
         static void init();
 
-#if _MSC_VER
+#ifdef _MSC_VER
 		static DWORD autoreleasePoolStackKey;
 		static BOOL CALLBACK initAutoreleasePoolStackKeyCallback(PINIT_ONCE InitOnce, PVOID Parameter, PVOID * lpContext);
 #else
