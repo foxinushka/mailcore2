@@ -326,24 +326,6 @@ static void performOnMainThread(void * info)
     
     free(data);
 }
-
-static void performAfterDelay(void * info)
-{
-    struct mainThreadCallData * data;
-    void * context;
-    Object * obj;
-    Object::Method method;
-    
-    data = (struct mainThreadCallData *) info;
-    obj = data->obj;
-    context = data->context;
-    method = data->method;
-    
-    removeFromPerformHash(obj, method, context, NULL);
-    (obj->*method)(context);
-    
-    free(data);
-}
  
 #if !defined(__ANDROID__)
 void Object::performMethodOnMainThread(Method method, void * context, bool waitUntilDone)
