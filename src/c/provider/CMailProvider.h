@@ -17,11 +17,11 @@ extern "C" {
 #endif
     
     C_SYNTHESIZE_STRUCT_DEFINITION(CMailProvider, mailcore::MailProvider)    
-    CMAILCORE_EXPORT C_SYNTHESIZE_COBJECT_CAST_DEFINITION(CMailProvider)
+    C_SYNTHESIZE_COBJECT_CAST_DEFINITION(CMailProvider)
     
-    CMAILCORE_EXPORT C_SYNTHESIZE_READONLY_PROPERTY_DEFINITION(CMailProvider, CArray, imapServices)
-    CMAILCORE_EXPORT C_SYNTHESIZE_READONLY_PROPERTY_DEFINITION(CMailProvider, CArray, smtpServices)
-    CMAILCORE_EXPORT C_SYNTHESIZE_READONLY_PROPERTY_DEFINITION(CMailProvider, MailCoreString, identifier)
+    C_SYNTHESIZE_READONLY_PROPERTY_DEFINITION(CMailProvider, CArray, imapServices)
+    C_SYNTHESIZE_READONLY_PROPERTY_DEFINITION(CMailProvider, CArray, smtpServices)
+    C_SYNTHESIZE_READONLY_PROPERTY_DEFINITION(CMailProvider, MailCoreString, identifier)
     
 #ifdef __cplusplus
 }

@@ -31,20 +31,20 @@ extern "C" {
 #endif
     } COperation;
     
-    CMAILCORE_EXPORT C_SYNTHESIZE_COBJECT_CAST_DEFINITION(COperation)
+    C_SYNTHESIZE_COBJECT_CAST_DEFINITION(COperation)
     
     // TODO: should be property, but swift doesn;t recognize dispatch_queue_t <--> DispatchQueue bridging
-    CMAILCORE_EXPORT C_SYNTHESIZE_FUNC_DEFINITION(COperation, dispatch_queue_t, callbackDispatchQueue)
-    CMAILCORE_EXPORT C_SYNTHESIZE_FUNC_DEFINITION(COperation, void, setCallbackDispatchQueue, dispatch_queue_t)
+    C_SYNTHESIZE_FUNC_DEFINITION(COperation, dispatch_queue_t, callbackDispatchQueue)
+    C_SYNTHESIZE_FUNC_DEFINITION(COperation, void, setCallbackDispatchQueue, dispatch_queue_t)
     
-    CMAILCORE_EXPORT C_SYNTHESIZE_PROPERTY_DEFINITION(COperation, bool, shouldRunWhenCancelled, setShouldRunWhenCancelled)
+    C_SYNTHESIZE_PROPERTY_DEFINITION(COperation, bool, shouldRunWhenCancelled, setShouldRunWhenCancelled)
     
-    CMAILCORE_EXPORT C_SYNTHESIZE_FUNC_DEFINITION(COperation, COperation, setCompletionBlock, COperationCompletionBlock, const void*)
-    CMAILCORE_EXPORT C_SYNTHESIZE_FUNC_DEFINITION(COperation, COperation, clearCompletionBlock)
+    C_SYNTHESIZE_FUNC_DEFINITION(COperation, COperation, setCompletionBlock, COperationCompletionBlock, const void*)
+    C_SYNTHESIZE_FUNC_DEFINITION(COperation, COperation, clearCompletionBlock)
     
-    CMAILCORE_EXPORT C_SYNTHESIZE_FUNC_DEFINITION(COperation, bool, isCancelled)
-    CMAILCORE_EXPORT C_SYNTHESIZE_FUNC_DEFINITION(COperation, void, cancel)
-    CMAILCORE_EXPORT C_SYNTHESIZE_FUNC_DEFINITION(COperation, void, start)
+    C_SYNTHESIZE_FUNC_DEFINITION(COperation, bool, isCancelled)
+    C_SYNTHESIZE_FUNC_DEFINITION(COperation, void, cancel)
+    C_SYNTHESIZE_FUNC_DEFINITION(COperation, void, start)
     
     CMAILCORE_EXPORT void   COperation_retain(COperation self)
                             CF_SWIFT_NAME(COperation.retain(self:));

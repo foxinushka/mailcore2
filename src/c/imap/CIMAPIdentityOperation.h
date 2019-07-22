@@ -14,8 +14,8 @@ extern "C" {
 #endif
     
     C_SYNTHESIZE_STRUCT_DEFINITION(CIMAPIdentityOperation, mailcore::IMAPIdentityOperation)
-    CMAILCORE_EXPORT C_SYNTHESIZE_COBJECT_CAST_DEFINITION(CIMAPIdentityOperation)
-    CMAILCORE_EXPORT C_SYNTHESIZE_FUNC_DEFINITION(CIMAPIdentityOperation, CIMAPIdentity, serverIdentity)
+    C_SYNTHESIZE_COBJECT_CAST_DEFINITION(CIMAPIdentityOperation)
+    C_SYNTHESIZE_FUNC_DEFINITION(CIMAPIdentityOperation, CIMAPIdentity, serverIdentity)
     
 #ifdef __cplusplus
 }

@@ -15,8 +15,8 @@ extern "C" {
 #endif
     
     C_SYNTHESIZE_STRUCT_DEFINITION(CIMAPCustomCommandOperation, mailcore::IMAPCustomCommandOperation)
-    CMAILCORE_EXPORT C_SYNTHESIZE_COBJECT_CAST_DEFINITION(CIMAPCustomCommandOperation)
-    CMAILCORE_EXPORT C_SYNTHESIZE_FUNC_DEFINITION(CIMAPCustomCommandOperation, MailCoreString, response)
+    C_SYNTHESIZE_COBJECT_CAST_DEFINITION(CIMAPCustomCommandOperation)
+    C_SYNTHESIZE_FUNC_DEFINITION(CIMAPCustomCommandOperation, MailCoreString, response)
     
 #ifdef __cplusplus
 }

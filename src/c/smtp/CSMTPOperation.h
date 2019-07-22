@@ -33,13 +33,13 @@ extern "C" {
     };
     typedef struct CSMTPOperation CSMTPOperation;
     
-    CMAILCORE_EXPORT C_SYNTHESIZE_COBJECT_CAST_DEFINITION(CSMTPOperation)
+    C_SYNTHESIZE_COBJECT_CAST_DEFINITION(CSMTPOperation)
     
-    CMAILCORE_EXPORT C_SYNTHESIZE_READONLY_PROPERTY_DEFINITION(CSMTPOperation, ErrorCode, error)
-    CMAILCORE_EXPORT C_SYNTHESIZE_READONLY_PROPERTY_DEFINITION(CSMTPOperation, MailCoreString, lastSMTPResponse)
-    CMAILCORE_EXPORT C_SYNTHESIZE_READONLY_PROPERTY_DEFINITION(CSMTPOperation, int, lastSMTPResponseCode)
+    C_SYNTHESIZE_READONLY_PROPERTY_DEFINITION(CSMTPOperation, ErrorCode, error)
+    C_SYNTHESIZE_READONLY_PROPERTY_DEFINITION(CSMTPOperation, MailCoreString, lastSMTPResponse)
+    C_SYNTHESIZE_READONLY_PROPERTY_DEFINITION(CSMTPOperation, int, lastSMTPResponseCode)
     
-    CMAILCORE_EXPORT C_SYNTHESIZE_FUNC_DEFINITION(CSMTPOperation, CSMTPOperation, setProgressBlocks, CProgressBlock, const void*)
+    C_SYNTHESIZE_FUNC_DEFINITION(CSMTPOperation, CSMTPOperation, setProgressBlocks, CProgressBlock, const void*)
     
     CMAILCORE_EXPORT void       CSMTPOperation_retain(CSMTPOperation operation)
                                 CF_SWIFT_NAME(CSMTPOperation.retain(self:));

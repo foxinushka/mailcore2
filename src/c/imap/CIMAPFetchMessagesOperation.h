@@ -15,12 +15,12 @@ extern "C" {
 #endif
     
     C_SYNTHESIZE_STRUCT_DEFINITION(CIMAPFetchMessagesOperation, mailcore::IMAPFetchMessagesOperation)
-    CMAILCORE_EXPORT C_SYNTHESIZE_COBJECT_CAST_DEFINITION(CIMAPFetchMessagesOperation)
+    C_SYNTHESIZE_COBJECT_CAST_DEFINITION(CIMAPFetchMessagesOperation)
     
-    CMAILCORE_EXPORT C_SYNTHESIZE_PROPERTY_DEFINITION(CIMAPFetchMessagesOperation, CArray, extraHeaders, setExtraHeaders)
+    C_SYNTHESIZE_PROPERTY_DEFINITION(CIMAPFetchMessagesOperation, CArray, extraHeaders, setExtraHeaders)
     
-    CMAILCORE_EXPORT C_SYNTHESIZE_FUNC_DEFINITION(CIMAPFetchMessagesOperation, CArray, messages)
-    CMAILCORE_EXPORT C_SYNTHESIZE_FUNC_DEFINITION(CIMAPFetchMessagesOperation, CIndexSet, vanishedMessages)
+    C_SYNTHESIZE_FUNC_DEFINITION(CIMAPFetchMessagesOperation, CArray, messages)
+    C_SYNTHESIZE_FUNC_DEFINITION(CIMAPFetchMessagesOperation, CIndexSet, vanishedMessages)
 
 #ifdef __cplusplus
 }

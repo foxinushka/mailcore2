@@ -20,33 +20,33 @@ extern "C" {
 #endif
     
     C_SYNTHESIZE_STRUCT_DEFINITION(CMessageBuilder, mailcore::MessageBuilder)
-    CMAILCORE_EXPORT C_SYNTHESIZE_COBJECT_CAST_DEFINITION(CMessageBuilder)
+    C_SYNTHESIZE_COBJECT_CAST_DEFINITION(CMessageBuilder)
     
-    CMAILCORE_EXPORT C_SYNTHESIZE_PROPERTY_DEFINITION(CMessageBuilder, MailCoreString, htmlBody, setHTMLBody)
-    CMAILCORE_EXPORT C_SYNTHESIZE_PROPERTY_DEFINITION(CMessageBuilder, MailCoreString, textBody, setTextBody)
-    CMAILCORE_EXPORT C_SYNTHESIZE_PROPERTY_DEFINITION(CMessageBuilder, CArray, attachments, setAttachments)
-    CMAILCORE_EXPORT C_SYNTHESIZE_PROPERTY_DEFINITION(CMessageBuilder, CArray, relatedAttachments, setRelatedAttachments)
-    CMAILCORE_EXPORT C_SYNTHESIZE_PROPERTY_DEFINITION(CMessageBuilder, MailCoreString, boundaryPrefix, setBoundaryPrefix)
+    C_SYNTHESIZE_PROPERTY_DEFINITION(CMessageBuilder, MailCoreString, htmlBody, setHTMLBody)
+    C_SYNTHESIZE_PROPERTY_DEFINITION(CMessageBuilder, MailCoreString, textBody, setTextBody)
+    C_SYNTHESIZE_PROPERTY_DEFINITION(CMessageBuilder, CArray, attachments, setAttachments)
+    C_SYNTHESIZE_PROPERTY_DEFINITION(CMessageBuilder, CArray, relatedAttachments, setRelatedAttachments)
+    C_SYNTHESIZE_PROPERTY_DEFINITION(CMessageBuilder, MailCoreString, boundaryPrefix, setBoundaryPrefix)
     
-    CMAILCORE_EXPORT C_SYNTHESIZE_FUNC_DEFINITION(CMessageBuilder, void, addAttachment, CAttachment)
-    CMAILCORE_EXPORT C_SYNTHESIZE_FUNC_DEFINITION(CMessageBuilder, void, addRelatedAttachment, CAttachment)
+    C_SYNTHESIZE_FUNC_DEFINITION(CMessageBuilder, void, addAttachment, CAttachment)
+    C_SYNTHESIZE_FUNC_DEFINITION(CMessageBuilder, void, addRelatedAttachment, CAttachment)
     
-    CMAILCORE_EXPORT C_SYNTHESIZE_FUNC_DEFINITION(CMessageBuilder, CData, data)
-    CMAILCORE_EXPORT C_SYNTHESIZE_FUNC_DEFINITION(CMessageBuilder, CData, dataForEncryption)
+    C_SYNTHESIZE_FUNC_DEFINITION(CMessageBuilder, CData, data)
+    C_SYNTHESIZE_FUNC_DEFINITION(CMessageBuilder, CData, dataForEncryption)
     
-    CMAILCORE_EXPORT C_SYNTHESIZE_FUNC_DEFINITION(CMessageBuilder, ErrorCode, writeToFile, MailCoreString)
+    C_SYNTHESIZE_FUNC_DEFINITION(CMessageBuilder, ErrorCode, writeToFile, MailCoreString)
     
-    CMAILCORE_EXPORT C_SYNTHESIZE_FUNC_DEFINITION(CMessageBuilder, CData, openPGPSignedMessageDataWithSignatureData, CData)
-    CMAILCORE_EXPORT C_SYNTHESIZE_FUNC_DEFINITION(CMessageBuilder, CData, openPGPEncryptedMessageDataWithEncryptedData, CData)
+    C_SYNTHESIZE_FUNC_DEFINITION(CMessageBuilder, CData, openPGPSignedMessageDataWithSignatureData, CData)
+    C_SYNTHESIZE_FUNC_DEFINITION(CMessageBuilder, CData, openPGPEncryptedMessageDataWithEncryptedData, CData)
     
-    CMAILCORE_EXPORT C_SYNTHESIZE_FUNC_DEFINITION(CMessageBuilder, MailCoreString, htmlBodyRendering)
-    CMAILCORE_EXPORT C_SYNTHESIZE_FUNC_DEFINITION(CMessageBuilder, MailCoreString, plainTextRendering)
+    C_SYNTHESIZE_FUNC_DEFINITION(CMessageBuilder, MailCoreString, htmlBodyRendering)
+    C_SYNTHESIZE_FUNC_DEFINITION(CMessageBuilder, MailCoreString, plainTextRendering)
     
-    CMAILCORE_EXPORT C_SYNTHESIZE_FUNC_DEFINITION(CMessageBuilder, MailCoreString, plainTextBodyRenderingAndStripWhitespace, bool)
+    C_SYNTHESIZE_FUNC_DEFINITION(CMessageBuilder, MailCoreString, plainTextBodyRenderingAndStripWhitespace, bool)
     
-    CMAILCORE_EXPORT C_SYNTHESIZE_FUNC_DEFINITION(CMessageBuilder, void, setBoundaries, CArray)
+    C_SYNTHESIZE_FUNC_DEFINITION(CMessageBuilder, void, setBoundaries, CArray)
     
-    CMAILCORE_EXPORT C_SYNTHESIZE_STATIC_FUNC_DEFINITION(CMessageBuilder, CMessageBuilder, init)
+    C_SYNTHESIZE_STATIC_FUNC_DEFINITION(CMessageBuilder, CMessageBuilder, init)
     
 #ifdef __cplusplus
 }

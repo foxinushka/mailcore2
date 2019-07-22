@@ -14,8 +14,8 @@ extern "C" {
 #endif
     
     C_SYNTHESIZE_STRUCT_DEFINITION(CIMAPCapabilityOperation, mailcore::IMAPCapabilityOperation)
-    CMAILCORE_EXPORT C_SYNTHESIZE_COBJECT_CAST_DEFINITION(CIMAPCapabilityOperation)
-    CMAILCORE_EXPORT C_SYNTHESIZE_FUNC_DEFINITION(CIMAPCapabilityOperation, CIndexSet, capabilities)
+    C_SYNTHESIZE_COBJECT_CAST_DEFINITION(CIMAPCapabilityOperation)
+    C_SYNTHESIZE_FUNC_DEFINITION(CIMAPCapabilityOperation, CIndexSet, capabilities)
     
 #ifdef __cplusplus
 }

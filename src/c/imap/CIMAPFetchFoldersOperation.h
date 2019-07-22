@@ -22,8 +22,8 @@ extern "C" {
 #endif
     
     C_SYNTHESIZE_STRUCT_DEFINITION(CIMAPFetchFoldersOperation, mailcore::IMAPFetchFoldersOperation)
-    CMAILCORE_EXPORT C_SYNTHESIZE_COBJECT_CAST_DEFINITION(CIMAPFetchFoldersOperation)
-    CMAILCORE_EXPORT C_SYNTHESIZE_FUNC_DEFINITION(CIMAPFetchFoldersOperation, CArray, folders)
+    C_SYNTHESIZE_COBJECT_CAST_DEFINITION(CIMAPFetchFoldersOperation)
+    C_SYNTHESIZE_FUNC_DEFINITION(CIMAPFetchFoldersOperation, CArray, folders)
     
 #ifdef __cplusplus
 }

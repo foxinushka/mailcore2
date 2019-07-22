@@ -23,12 +23,12 @@ extern "C" {
 #endif
     } CMailProvidersManager;
     
-    CMAILCORE_EXPORT C_SYNTHESIZE_STATIC_FUNC_DEFINITION(CMailProvidersManager, CMailProvidersManager, shared)
+    C_SYNTHESIZE_STATIC_FUNC_DEFINITION(CMailProvidersManager, CMailProvidersManager, shared)
     
-    CMAILCORE_EXPORT C_SYNTHESIZE_FUNC_DEFINITION(CMailProvidersManager, CMailProvider, providerForEmail, MailCoreString)
-    CMAILCORE_EXPORT C_SYNTHESIZE_FUNC_DEFINITION(CMailProvidersManager, CMailProvider, providerForMX, MailCoreString)
-    CMAILCORE_EXPORT C_SYNTHESIZE_FUNC_DEFINITION(CMailProvidersManager, CMailProvider, providerForIdentifier, MailCoreString)
-    CMAILCORE_EXPORT C_SYNTHESIZE_FUNC_DEFINITION(CMailProvidersManager, void, registerProvidersWithFilename, MailCoreString)
+    C_SYNTHESIZE_FUNC_DEFINITION(CMailProvidersManager, CMailProvider, providerForEmail, MailCoreString)
+    C_SYNTHESIZE_FUNC_DEFINITION(CMailProvidersManager, CMailProvider, providerForMX, MailCoreString)
+    C_SYNTHESIZE_FUNC_DEFINITION(CMailProvidersManager, CMailProvider, providerForIdentifier, MailCoreString)
+    C_SYNTHESIZE_FUNC_DEFINITION(CMailProvidersManager, void, registerProvidersWithFilename, MailCoreString)
     
 #ifdef __cplusplus
 }

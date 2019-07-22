@@ -15,9 +15,9 @@ extern "C" {
 #endif
     
     C_SYNTHESIZE_STRUCT_DEFINITION(CIMAPFolderInfoOperation, mailcore::IMAPFolderInfoOperation)
-    CMAILCORE_EXPORT C_SYNTHESIZE_COBJECT_CAST_DEFINITION(CIMAPFolderInfoOperation)
+    C_SYNTHESIZE_COBJECT_CAST_DEFINITION(CIMAPFolderInfoOperation)
     
-    CMAILCORE_EXPORT C_SYNTHESIZE_FUNC_DEFINITION(CIMAPFolderInfoOperation, CIMAPFolderInfo, info)
+    C_SYNTHESIZE_FUNC_DEFINITION(CIMAPFolderInfoOperation, CIMAPFolderInfo, info)
 
 #ifdef __cplusplus
 }

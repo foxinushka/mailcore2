@@ -27,8 +27,8 @@ extern "C" {
 #endif
     
     C_SYNTHESIZE_STRUCT_DEFINITION(CMultipart, mailcore::Multipart)
-    CMAILCORE_EXPORT C_SYNTHESIZE_COBJECT_CAST_DEFINITION(CMultipart)
-    CMAILCORE_EXPORT C_SYNTHESIZE_PROPERTY_DEFINITION(CMultipart, MailCoreString, partID, setPartID)
+    C_SYNTHESIZE_COBJECT_CAST_DEFINITION(CMultipart)
+    C_SYNTHESIZE_PROPERTY_DEFINITION(CMultipart, MailCoreString, partID, setPartID)
     
 #ifdef __cplusplus
 }

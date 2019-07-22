@@ -21,7 +21,7 @@ extern "C" {
 #endif
     
     C_SYNTHESIZE_STRUCT_DEFINITION(CAutoreleasePool, mailcore::AutoreleasePool)
-    CMAILCORE_EXPORT C_SYNTHESIZE_STATIC_FUNC_DEFINITION(CAutoreleasePool, CAutoreleasePool, init)
+    C_SYNTHESIZE_STATIC_FUNC_DEFINITION(CAutoreleasePool, CAutoreleasePool, init)
 
     
 #ifdef __cplusplus

@@ -16,14 +16,14 @@ extern "C" {
     
     C_SYNTHESIZE_STRUCT_DEFINITION(CIMAPNamespaceItem, mailcore::IMAPNamespaceItem)
     
-    CMAILCORE_EXPORT C_SYNTHESIZE_COBJECT_CAST_DEFINITION(CIMAPNamespaceItem)
+    C_SYNTHESIZE_COBJECT_CAST_DEFINITION(CIMAPNamespaceItem)
     
-    CMAILCORE_EXPORT C_SYNTHESIZE_PROPERTY_DEFINITION(CIMAPNamespaceItem, MailCoreString, prefix, setPrefix)
-    CMAILCORE_EXPORT C_SYNTHESIZE_PROPERTY_DEFINITION(CIMAPNamespaceItem, char, delimiter, setDelimiter)
+    C_SYNTHESIZE_PROPERTY_DEFINITION(CIMAPNamespaceItem, MailCoreString, prefix, setPrefix)
+    C_SYNTHESIZE_PROPERTY_DEFINITION(CIMAPNamespaceItem, char, delimiter, setDelimiter)
     
-    CMAILCORE_EXPORT C_SYNTHESIZE_FUNC_DEFINITION(CIMAPNamespaceItem, MailCoreString, pathForComponents, CArray)
-    CMAILCORE_EXPORT C_SYNTHESIZE_FUNC_DEFINITION(CIMAPNamespaceItem, CArray, componentsForPath, MailCoreString)
-    CMAILCORE_EXPORT C_SYNTHESIZE_FUNC_DEFINITION(CIMAPNamespaceItem, bool, containsFolder, MailCoreString)
+    C_SYNTHESIZE_FUNC_DEFINITION(CIMAPNamespaceItem, MailCoreString, pathForComponents, CArray)
+    C_SYNTHESIZE_FUNC_DEFINITION(CIMAPNamespaceItem, CArray, componentsForPath, MailCoreString)
+    C_SYNTHESIZE_FUNC_DEFINITION(CIMAPNamespaceItem, bool, containsFolder, MailCoreString)
 
     
 #ifdef __cplusplus

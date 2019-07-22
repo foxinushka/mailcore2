@@ -16,9 +16,9 @@ extern "C" {
     
     C_SYNTHESIZE_STRUCT_DEFINITION(CIMAPAppendMessageOperation, mailcore::IMAPAppendMessageOperation)
     
-    CMAILCORE_EXPORT C_SYNTHESIZE_COBJECT_CAST_DEFINITION(CIMAPAppendMessageOperation)
-    CMAILCORE_EXPORT C_SYNTHESIZE_PROPERTY_DEFINITION(CIMAPAppendMessageOperation, time_t, date, setDate)
-    CMAILCORE_EXPORT C_SYNTHESIZE_FUNC_DEFINITION(CIMAPAppendMessageOperation, uint32_t, createdUID)
+    C_SYNTHESIZE_COBJECT_CAST_DEFINITION(CIMAPAppendMessageOperation)
+    C_SYNTHESIZE_PROPERTY_DEFINITION(CIMAPAppendMessageOperation, time_t, date, setDate)
+    C_SYNTHESIZE_FUNC_DEFINITION(CIMAPAppendMessageOperation, uint32_t, createdUID)
 
 #ifdef __cplusplus
 }

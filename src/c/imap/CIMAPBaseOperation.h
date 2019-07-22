@@ -32,10 +32,10 @@ extern "C" {
     };
     typedef struct CIMAPBaseOperation CIMAPBaseOperation;
     
-    CMAILCORE_EXPORT C_SYNTHESIZE_COBJECT_CAST_DEFINITION(CIMAPBaseOperation)
+    C_SYNTHESIZE_COBJECT_CAST_DEFINITION(CIMAPBaseOperation)
     
-    CMAILCORE_EXPORT C_SYNTHESIZE_FUNC_DEFINITION(CIMAPBaseOperation, ErrorCode, error)
-    CMAILCORE_EXPORT C_SYNTHESIZE_FUNC_DEFINITION(CIMAPBaseOperation, CIMAPBaseOperation, setProgressBlocks, CIMAPProgressBlock, CIMAPProgressBlock, const void*)
+    C_SYNTHESIZE_FUNC_DEFINITION(CIMAPBaseOperation, ErrorCode, error)
+    C_SYNTHESIZE_FUNC_DEFINITION(CIMAPBaseOperation, CIMAPBaseOperation, setProgressBlocks, CIMAPProgressBlock, CIMAPProgressBlock, const void*)
     
     CMAILCORE_EXPORT void       CIMAPBaseOperation_retain(CIMAPBaseOperation operation)
                                 CF_SWIFT_NAME(CIMAPBaseOperation.retain(self:));

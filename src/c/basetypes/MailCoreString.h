@@ -17,20 +17,20 @@ extern "C" {
     
     C_SYNTHESIZE_STRUCT_DEFINITION(MailCoreString, mailcore::String)
     
-    CMAILCORE_EXPORT C_SYNTHESIZE_COBJECT_CAST_DEFINITION(MailCoreString)
+    C_SYNTHESIZE_COBJECT_CAST_DEFINITION(MailCoreString)
     
-    CMAILCORE_EXPORT C_SYNTHESIZE_STATIC_FUNC_DEFINITION(MailCoreString, MailCoreString, stringWithCharacters, const char*, unsigned int)
+    C_SYNTHESIZE_STATIC_FUNC_DEFINITION(MailCoreString, MailCoreString, stringWithCharacters, const char*, unsigned int)
 
-    CMAILCORE_EXPORT C_SYNTHESIZE_READONLY_PROPERTY_DEFINITION(MailCoreString, const UChar*, unicodeCharacters)
-    CMAILCORE_EXPORT C_SYNTHESIZE_READONLY_PROPERTY_DEFINITION(MailCoreString, unsigned int, length)
+    C_SYNTHESIZE_READONLY_PROPERTY_DEFINITION(MailCoreString, const UChar*, unicodeCharacters)
+    C_SYNTHESIZE_READONLY_PROPERTY_DEFINITION(MailCoreString, unsigned int, length)
     
-    CMAILCORE_EXPORT C_SYNTHESIZE_FUNC_DEFINITION(MailCoreString, MailCoreString, mUTF7DecodedString)
-    CMAILCORE_EXPORT C_SYNTHESIZE_FUNC_DEFINITION(MailCoreString, MailCoreString, mUTF7EncodedString)
+    C_SYNTHESIZE_FUNC_DEFINITION(MailCoreString, MailCoreString, mUTF7DecodedString)
+    C_SYNTHESIZE_FUNC_DEFINITION(MailCoreString, MailCoreString, mUTF7EncodedString)
     
-    CMAILCORE_EXPORT C_SYNTHESIZE_FUNC_DEFINITION(MailCoreString, bool, isEqual, MailCoreString)
+    C_SYNTHESIZE_FUNC_DEFINITION(MailCoreString, bool, isEqual, MailCoreString)
     
-    CMAILCORE_EXPORT C_SYNTHESIZE_FUNC_DEFINITION(CData, MailCoreString, stringWithDetectedCharset, MailCoreString)
-    CMAILCORE_EXPORT C_SYNTHESIZE_FUNC_DEFINITION(CData, MailCoreString, charsetWithFilteredHTML, bool)
+    C_SYNTHESIZE_FUNC_DEFINITION(CData, MailCoreString, stringWithDetectedCharset, MailCoreString)
+    C_SYNTHESIZE_FUNC_DEFINITION(CData, MailCoreString, charsetWithFilteredHTML, bool)
     
 #ifdef __cplusplus
 }

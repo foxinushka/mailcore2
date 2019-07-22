@@ -15,8 +15,8 @@ extern "C" {
 #endif
     
     C_SYNTHESIZE_STRUCT_DEFINITION(CIMAPSearchOperation, mailcore::IMAPSearchOperation)
-    CMAILCORE_EXPORT C_SYNTHESIZE_COBJECT_CAST_DEFINITION(CIMAPSearchOperation)
-    CMAILCORE_EXPORT C_SYNTHESIZE_FUNC_DEFINITION(CIMAPSearchOperation, CIndexSet, uids)
+    C_SYNTHESIZE_COBJECT_CAST_DEFINITION(CIMAPSearchOperation)
+    C_SYNTHESIZE_FUNC_DEFINITION(CIMAPSearchOperation, CIndexSet, uids)
     
 #ifdef __cplusplus
 }
