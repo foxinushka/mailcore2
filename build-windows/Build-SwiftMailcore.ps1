@@ -11,21 +11,23 @@ $ProjectRoot = "$(Resolve-Path ""$PSScriptRoot\..\"")"
 $SourceFiles = Get-ChildItem -Path "$ProjectRoot\src\swift\*.swift" -Recurse -File 
 
 $ModuleName = "MailCore"
-$DependenciesPath = "$ProjectRoot\.build\Dependencies"
 $IntermediatesPath = "$ProjectRoot\.build\$ModuleName\Intermediates"
 $ProductsPath = "$ProjectRoot\.build\$ModuleName"
+$InstallPath = "$ProjectRoot\.build\install"
 
 $IcuVersion = 64
 $IcuPath = "C:\Library\icu-$IcuVersion\usr"
 
 $SwiftIncludePaths = 
-    "$ProjectRoot\.build\install\include\CMailCore"
+    "$ProjectRoot\.build\install\include"
 
 $HeaderSearchPaths = 
     "$ProjectRoot\Externals\include",
     "$IcuPath\include"
 
-$LibrarySearchPaths = @()
+$LibrarySearchPaths = 
+    "$ProjectRoot\Externals\lib64",
+    "$ProjectRoot\.build\install\lib"
 
 $Configuration = @{
     ToolchainPath = "C:\Library\Developer\Toolchains\unknown-Asserts-development.xctoolchain"
@@ -48,7 +50,7 @@ $Configuration = @{
 
     SourceFiles = $SourceFiles
 
-    Libraries = @()
+    Libraries = "libetpan"
     OtherCFlags = @()
     # OtherSwiftFlags = "-DDEBUG"
 }
@@ -58,5 +60,15 @@ Push-Task -Name $ModuleName -ScriptBlock {
         Invoke-VsDevCmd -Version "2019"
     }
 
-    Invoke-BuildModuleTarget -Configuration $Script:Configuration    
+    & .\Build-Mailcore2.ps1
+
+    Invoke-BuildModuleTarget -Configuration $Script:Configuration
+
+    Push-Task -Name "Install" -ScriptBlock {
+        Copy-Item -Path "$ProductsPath\MailCore.lib" -Destination "$InstallPath\lib" -Force -ErrorAction Stop
+        Copy-Item -Path "$ProductsPath\MailCore.exp" -Destination "$InstallPath\lib" -Force -ErrorAction Stop
+        Copy-Item -Path "$ProductsPath\MailCore.swiftmodule" -Destination "$InstallPath\lib" -Force -ErrorAction Stop
+        Copy-Item -Path "$ProductsPath\MailCore.dll" -Destination "$InstallPath\bin" -Force -ErrorAction Stop
+    }
+ 
 }
