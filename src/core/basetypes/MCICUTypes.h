@@ -12,13 +12,7 @@
 
 #ifdef _MSC_VER
 
-#include <unicode/uvernum.h>
-
-#if U_ICU_VERSION_MAJOR_NUM <= 58
-typedef wchar_t UChar;
-#else
-typedef char16_t UChar;
-#endif /* U_ICU_VERSION_MAJOR_NUM */
+#include <unicode/uchar.h>
 
 #elif defined(__CHAR16_TYPE__)
 typedef __CHAR16_TYPE__ UChar;
