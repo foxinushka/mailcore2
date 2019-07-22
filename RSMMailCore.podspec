@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "RSMMailCore"
-  s.version      = "2.0.35"
+  s.version      = "2.0.37"
   s.summary      = "SparkCore is absolutely awesome sanctuary of all the messages related business logic of Spark"
   s.description  = <<-DESC
                     Amen
@@ -10,7 +10,7 @@ Pod::Spec.new do |s|
   s.license      = { :type => 'Copyright 2017 Readdle Inc.', :text => 'Copyright 2017 Readdle Inc.' }
 
   s.author       = { "Viktor Gedzenko" => "fox@readdle.com" }
-  s.source       = { :git => "https://github.com/foxinushka/mailcore2.git", :commit => "0bda3a55fbdba7d194d55758e5b7ee750ed4ab3d"}
+  s.source       = { :git => "https://github.com/foxinushka/mailcore2.git", :commit => "f6e845884e0cbe397d6bc5451e1ff140bc0e735a"}
   s.platforms    = { :ios => "9.0", :osx => "10.11" }  
 
   s.framework  = "Foundation", "Security"
@@ -37,7 +37,6 @@ Pod::Spec.new do |s|
     sed -i '' 's#"zip.h"#"rsmmczip.h"#g' src/core/zip/MiniZip/zip.c  
   CMD
   
-  s.dependency 'RDlog4cocoa'
   s.dependency 'RDTidyHtml5'
   s.dependency 'RDSQLite3/icu', '3.14.2-framework2'
 
