@@ -27,7 +27,7 @@ $IcuVersion = 64
 $IcuPath = "C:\Library\icu-$IcuVersion\usr"
 
 $SwiftIncludePaths = 
-    "$ProjectRoot\.build\install\include"
+    "$InstallPath\include"
 
 $HeaderSearchPaths = 
     "$ProjectRoot\Externals\include",
@@ -35,7 +35,7 @@ $HeaderSearchPaths =
 
 $LibrarySearchPaths = 
     "$ProjectRoot\Externals\lib64",
-    "$ProjectRoot\.build\install\lib"
+    "$InstallPath\lib"
 
 $Configuration = @{
     ToolchainPath = "C:\Library\Developer\Toolchains\unknown-Asserts-development.xctoolchain"
