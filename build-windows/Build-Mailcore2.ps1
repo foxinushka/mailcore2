@@ -1,3 +1,9 @@
+Param(
+    [string]$DependenciesPath,
+    [string]$InstallPath,
+    [switch]$Install = $false
+)
+
 if (-Not (Get-Module -Name RDTask)) {
     $RDModulePath = "$PSScriptRoot\psbuild"
     if (-Not (Test-Path -Path $RDModulePath)) { 
@@ -11,8 +17,12 @@ Import-Module RDBuildMSVC
 Import-Module RDDependency
 
 $ProjectRoot = "$(Resolve-Path ""$PSScriptRoot\..\"")"
-$DependenciesPath = "$ProjectRoot\.build\Dependencies"
-$InstallPath = "$ProjectRoot\.build\install"
+if (-Not $DependenciesPath) {
+    $DependenciesPath = "$ProjectRoot\.build\Dependencies"
+}
+if (-Not $InstallPath) {
+    $InstallPath = "$ProjectRoot\.build\install"
+}
 
 $IcuVersion = 64
 $IcuPath = "C:\Library\icu-$IcuVersion\usr"
@@ -144,7 +154,7 @@ Push-Task -Name "mailcore2" -ScriptBlock {
                 "-DDISPATCH_LIBRARY=C:\Library\Developer\Platforms\Windows.platform\Developer\SDKs\Windows.sdk\usr\lib\swift\windows\dispatch.lib",
                 "-DDISPATCH_BLOCKS_LIBRARY=C:\Library\Developer\Platforms\Windows.platform\Developer\SDKs\Windows.sdk\usr\lib\swift\windows\BlocksRuntime.lib" -join " "
 
-            Invoke-CMakeTasks -WorkingDir "$ProjectRoot\.build\mailcore2" -CMakeArgs $CMakeArgs
+            Invoke-CMakeTasks -WorkingDir "$ProjectRoot\.build\mailcore2" -CMakeArgs $CMakeArgs -NoInstall:$(-not $Install)
         }
 
     }
