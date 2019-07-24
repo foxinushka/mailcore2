@@ -68,7 +68,7 @@ Push-Task -Name $ModuleName -ScriptBlock {
         Invoke-VsDevCmd -Version "2019"
     }
 
-    & .\Build-Mailcore2.ps1 -InstallPath $InstallPath -DependenciesPath $DependenciesPath -Install
+    & $PSScriptRoot\Build-Mailcore2.ps1 -InstallPath $InstallPath -DependenciesPath $DependenciesPath -Install
 
     Invoke-BuildModuleTarget -Configuration $Script:Configuration
 
