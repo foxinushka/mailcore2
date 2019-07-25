@@ -48,7 +48,7 @@ $Dependencies = @(
     @{ Name = "OpenSSL"; WebUrl = "http://d.etpan.org/mailcore2-deps/misc-win32/openssl-1.0.1j-vs2013.zip"; Directory = $OpenSslDependencyDir; }
     
     @{ Name = "LibEtPan"; GitUrl = "git@github.com:dinhviethoa/libetpan.git"; GitTag = "1.9.3"; Directory = $LibEtPanDependencyDir; }
-    @{ Name = "Tidy HTML5"; GitUrl = "git@github.com:readdle/tidy-html5.git"; GitTag = "5.4.24"; Directory = $TidyDependencyDir; }
+    @{ Name = "Tidy HTML5"; GitUrl = "git@github.com:readdle/tidy-html5.git"; GitBranch = "feature/windows"; Directory = $TidyDependencyDir; }
 )
 
 Push-Task -Name "mailcore2" -ScriptBlock {
@@ -77,7 +77,7 @@ Push-Task -Name "mailcore2" -ScriptBlock {
                 "-DCMAKE_INSTALL_PREFIX=$TidyDependencyPath",
                 "-DCMAKE_C_COMPILER=cl.exe",
                 "-DCMAKE_CXX_COMPILER=cl.exe",
-                "-DBUILD_SHARED_LIB=OFF" -join " "
+                "-DCMAKE_EXE_LINKER_FLAGS_INIT=/INCREMENTAL:NO" -join " "
 
             Invoke-CMakeTasks -WorkingDir $TidyDependencyPath -CMakeArgs $CMakeArgs
         }
@@ -116,27 +116,28 @@ Push-Task -Name "mailcore2" -ScriptBlock {
                 New-Item -Path "$ExternalsPath\lib64" -ItemType Directory -ErrorAction Stop
             }
 
-            Copy-Item -Path "$ZlibDependencyPath\include" -Destination $ExternalsPath -Recurse -Force -ErrorAction Stop
-            Copy-Item -Path "$ZlibDependencyPath\lib64" -Destination $ExternalsPath -Exclude "*.dll" -Recurse -Force -ErrorAction Stop
-            Copy-Item -Path "$SaslDependencyPath\include" -Destination $ExternalsPath -Recurse -Force -ErrorAction Stop
-            Copy-Item -Path "$SaslDependencyPath\lib64" -Destination $ExternalsPath -Exclude "*.dll" -Recurse -Force -ErrorAction Stop
-            Copy-Item -Path "$OpenSslDependencyPath\include" -Destination $ExternalsPath -Recurse -Force -ErrorAction Stop
-            Copy-Item -Path "$OpenSslDependencyPath\lib64" -Destination $ExternalsPath -Recurse -Force -ErrorAction Stop
-            Copy-Item -Path "$CTemplateDependencyPath\include" -Destination $ExternalsPath -Recurse -Force -ErrorAction Stop
-            Copy-Item -Path "$CTemplateDependencyPath\lib64" -Destination $ExternalsPath -Exclude "*.dll" -Recurse -Force -ErrorAction Stop
-            Copy-Item -Path "$SaslDependencyPath\include" -Destination $ExternalsPath -Recurse -Force -ErrorAction Stop
-            Copy-Item -Path "$SaslDependencyPath\lib64" -Destination $ExternalsPath -Exclude "*.dll" -Recurse -Force -ErrorAction Stop
-            Copy-Item -Path "$ZlibDependencyPath\include" -Destination $ExternalsPath -Recurse -Force -ErrorAction Stop
-            Copy-Item -Path "$ZlibDependencyPath\lib64" -Destination $ExternalsPath -Exclude "*.dll" -Recurse -Force -ErrorAction Stop
-            Copy-Item -Path "$OpenSslDependencyPath\include" -Destination $ExternalsPath -Recurse -Force -ErrorAction Stop
-            Copy-Item -Path "$OpenSslDependencyPath\lib64\ssleay32MD.lib" -Destination "$ExternalsPath\lib64" -Force -ErrorAction Stop
-            Copy-Item -Path "$OpenSslDependencyPath\lib64\libeay32MD.lib" -Destination "$ExternalsPath\lib64" -Force -ErrorAction Stop
+            Copy-Item -Path "$ZlibDependencyPath\include" -Destination $ExternalsPath -Recurse -Force -ErrorAction Stop -PassThru | Write-Host
+            Copy-Item -Path "$ZlibDependencyPath\lib64" -Destination $ExternalsPath -Exclude "*.dll" -Recurse -Force -ErrorAction Stop -PassThru | Write-Host
+            Copy-Item -Path "$SaslDependencyPath\include" -Destination $ExternalsPath -Recurse -Force -ErrorAction Stop -PassThru | Write-Host
+            Copy-Item -Path "$SaslDependencyPath\lib64" -Destination $ExternalsPath -Exclude "*.dll" -Recurse -Force -ErrorAction Stop -PassThru | Write-Host
+            Copy-Item -Path "$OpenSslDependencyPath\include" -Destination $ExternalsPath -Recurse -Force -ErrorAction Stop -PassThru | Write-Host
+            Copy-Item -Path "$OpenSslDependencyPath\lib64" -Destination $ExternalsPath -Recurse -Force -ErrorAction Stop -PassThru | Write-Host
+            Copy-Item -Path "$CTemplateDependencyPath\include" -Destination $ExternalsPath -Recurse -Force -ErrorAction Stop -PassThru | Write-Host
+            Copy-Item -Path "$CTemplateDependencyPath\lib64" -Destination $ExternalsPath -Exclude "*.dll" -Recurse -Force -ErrorAction Stop -PassThru | Write-Host
+            Copy-Item -Path "$SaslDependencyPath\include" -Destination $ExternalsPath -Recurse -Force -ErrorAction Stop -PassThru | Write-Host
+            Copy-Item -Path "$SaslDependencyPath\lib64" -Destination $ExternalsPath -Exclude "*.dll" -Recurse -Force -ErrorAction Stop -PassThru | Write-Host
+            Copy-Item -Path "$ZlibDependencyPath\include" -Destination $ExternalsPath -Recurse -Force -ErrorAction Stop -PassThru | Write-Host
+            Copy-Item -Path "$ZlibDependencyPath\lib64" -Destination $ExternalsPath -Exclude "*.dll" -Recurse -Force -ErrorAction Stop -PassThru | Write-Host
+            Copy-Item -Path "$OpenSslDependencyPath\include" -Destination $ExternalsPath -Recurse -Force -ErrorAction Stop -PassThru | Write-Host
+            Copy-Item -Path "$OpenSslDependencyPath\lib64\ssleay32MD.lib" -Destination "$ExternalsPath\lib64" -Force -ErrorAction Stop -PassThru | Write-Host
+            Copy-Item -Path "$OpenSslDependencyPath\lib64\libeay32MD.lib" -Destination "$ExternalsPath\lib64" -Force -ErrorAction Stop -PassThru | Write-Host
             
-            Copy-Item -Path "$LibEtPanDependencyPath\build-windows\include" -Destination $ExternalsPath -Recurse -Force -ErrorAction Stop
-            Copy-Item -Path "$LibEtPanDependencyPath\build-windows\x64\Release\libetpan.lib" -Destination "$ExternalsPath\lib64" -Force -ErrorAction Stop
-            Copy-Item -Path "$LibEtPanDependencyPath\build-windows\x64\Release\libetpan.pdb" -Destination "$ExternalsPath\lib64" -Force -ErrorAction Stop
-            Copy-Item -Path "$TidyDependencyPath\include" -Destination "$ExternalsPath\include\tidy" -Recurse -Force -ErrorAction Stop
-            Copy-Item -Path "$TidyDependencyPath\lib\rdtidys.lib" -Destination "$ExternalsPath\lib64" -Force -ErrorAction Stop
+            Copy-Item -Path "$LibEtPanDependencyPath\build-windows\include" -Destination $ExternalsPath -Recurse -Force -ErrorAction Stop -PassThru | Write-Host
+            Copy-Item -Path "$LibEtPanDependencyPath\build-windows\x64\Release\libetpan.lib" -Destination "$ExternalsPath\lib64" -Force -ErrorAction Stop -PassThru | Write-Host
+            Copy-Item -Path "$LibEtPanDependencyPath\build-windows\x64\Release\libetpan.pdb" -Destination "$ExternalsPath\lib64" -Force -ErrorAction Stop -PassThru | Write-Host
+            Copy-Item -Path "$TidyDependencyPath\include" -Destination "$ExternalsPath\include\tidy" -Recurse -Force -ErrorAction Stop -PassThru | Write-Host
+            Copy-Item -Path "$TidyDependencyPath\rdtidy.lib" -Destination "$ExternalsPath\lib64" -Force -ErrorAction Stop -PassThru | Write-Host
+            Copy-Item -Path "$TidyDependencyPath\rdtidy.exp" -Destination "$ExternalsPath\lib64" -Force -ErrorAction Stop -PassThru | Write-Host
         }
 
         Push-Task -Name "Build mailcore2/CMailCore" -ScriptBlock {

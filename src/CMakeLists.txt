@@ -69,7 +69,6 @@ if(WIN32)
   target_compile_definitions(${MAILCORE2_LIB_TARGET}
                             PRIVATE
                               MAILCORE_DLL
-                              TIDY_STATIC
                               ZLIB_DLL
                               _WINDLL
                               _CRT_SECURE_NO_WARNINGS
@@ -88,7 +87,7 @@ if(WIN32)
                           ${ICU4C_UC_LIBRARY}
                           ${ICU4C_IN_LIBRARY}
                           ${DISPATCH_LIBRARY}
-						              ${DISPATCH_BLOCKS_LIBRARY}
+                          ${DISPATCH_BLOCKS_LIBRARY}
                           ws2_32
                           Crypt32
   )

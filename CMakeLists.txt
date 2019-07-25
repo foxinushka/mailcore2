@@ -153,7 +153,7 @@ else()
     PATHS ${additional_includes}
   )
   find_library(TIDY_LIBRARY
-    NAMES tidy rdtidys
+    NAMES tidy rdtidy
     PATHS ${additional_lib_searchpath}
   )
 
