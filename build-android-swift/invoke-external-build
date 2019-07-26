@@ -75,7 +75,7 @@ pushd "$base_dir"
 
         # Build ctemplate-android from source
         if test ! -d "$download_dir/ctemplate-android-$ctemplate_build_version" ; then
-            git clone --depth 1 --branch master https://github.com/andriydruk/ctemplate.git
+            git clone --depth 1 --branch master https://github.com/readdle/ctemplate.git
             pushd "ctemplate/build-android"
                 sh build.sh
                 cp -R "ctemplate-android-$ctemplate_build_version" "$download_dir/"
@@ -100,9 +100,9 @@ pushd "$base_dir"
     # Copy all libraries
     if (( $NDK_DEBUG == 1 ))
     then
-        rsync -t -r "$NDK_OUT/local/armeabi-v7a" "$SWIFT_PM_EXTERNAL_LIBS"
+        rsync -t -r "$NDK_OUT/local/arm64-v8a" "$SWIFT_PM_EXTERNAL_LIBS"
     else
-        rsync -t -r "$NDK_LIBS_OUT/armeabi-v7a" "$SWIFT_PM_EXTERNAL_LIBS"
+        rsync -t -r "$NDK_LIBS_OUT/arm64-v8a" "$SWIFT_PM_EXTERNAL_LIBS"
     fi
 
 popd

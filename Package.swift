@@ -1,4 +1,4 @@
-// swift-tools-version:4.0
+// swift-tools-version:5.0
 // The swift-tools-version declares the minimum version of Swift required to build this package.
 
 import PackageDescription
@@ -32,7 +32,7 @@ let package = Package(
         ),
     ],
     dependencies: [
-        .package(url: "https://github.com/readdle/tidy-html5.git", .upToNextMajor(from: "5.4.21"))
+        .package(url: "https://github.com/readdle/tidy-html5.git", .branch("android-swift-5"))
     ],
     targets: [
         .target(
@@ -52,5 +52,6 @@ let package = Package(
             exclude: files(in: "unittest", withExtension: ["mm", "cpp"])
         )
     ],
-    swiftLanguageVersions: [4]
+    swiftLanguageVersions: [.v5],
+    cxxLanguageStandard: .cxx11
 )

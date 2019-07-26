@@ -54,27 +54,33 @@ include $(PREBUILT_STATIC_LIBRARY)
 include $(CLEAR_VARS)
 LOCAL_MODULE    := dispatch
 LOCAL_EXPORT_C_INCLUDES := $(SWIFT_LIB)
-LOCAL_SRC_FILES := $(SWIFT_LIB)/android/libdispatch.so
+LOCAL_SRC_FILES := $(SWIFT_LIB)/android/aarch64/libdispatch.so
+include $(PREBUILT_SHARED_LIBRARY)
+
+include $(CLEAR_VARS)
+LOCAL_MODULE    := blocksRuntime
+LOCAL_EXPORT_C_INCLUDES := $(SWIFT_LIB)
+LOCAL_SRC_FILES := $(SWIFT_LIB)/android/aarch64/libBlocksRuntime.so
 include $(PREBUILT_SHARED_LIBRARY)
 
 include $(CLEAR_VARS)
 LOCAL_MODULE    := scuuc
-LOCAL_SRC_FILES := $(SWIFT_LIB)/android/libscuuc.so
+LOCAL_SRC_FILES := $(SWIFT_LIB)/android/aarch64/libicuucswift.so
 include $(PREBUILT_SHARED_LIBRARY)
 
 include $(CLEAR_VARS)
 LOCAL_MODULE    := scui18n
-LOCAL_SRC_FILES := $(SWIFT_LIB)/android/libscui18n.so
+LOCAL_SRC_FILES := $(SWIFT_LIB)/android/aarch64/libicui18nswift.so
 include $(PREBUILT_SHARED_LIBRARY)
 
 include $(CLEAR_VARS)
 LOCAL_MODULE    := scudata
-LOCAL_SRC_FILES := $(SWIFT_LIB)/android/libscudata.so
+LOCAL_SRC_FILES := $(SWIFT_LIB)/android/aarch64/libicudataswift.so
 include $(PREBUILT_SHARED_LIBRARY)
 
 include $(CLEAR_VARS)
 LOCAL_MODULE    := xml2
-LOCAL_SRC_FILES := $(SWIFT_LIB)/android/libxml2.so
+LOCAL_SRC_FILES := $(SWIFT_LIB)/android/aarch64/libxml2.so
 include $(PREBUILT_SHARED_LIBRARY)
 
 include $(CLEAR_VARS)
@@ -142,7 +148,7 @@ LOCAL_SRC_FILES := \
 LOCAL_CFLAGS := -DNOCRYPT -fblocks
 LOCAL_CPPFLAGS := -frtti
 LOCAL_STATIC_LIBRARIES := etpan sasl2 ssl crypto iconv ctemplate
-LOCAL_SHARED_LIBRARIES := dispatch scuuc scui18n scudata xml2 tidy
+LOCAL_SHARED_LIBRARIES := dispatch scuuc scui18n scudata xml2 tidy blocksRuntime
 include $(BUILD_STATIC_LIBRARY)
 
 include $(CLEAR_VARS)
@@ -177,4 +183,5 @@ LOCAL_LDLIBS := -lz -llog
 LOCAL_CFLAGS := -fblocks -DSWIFT
 LOCAL_CPPFLAGS := -frtti
 LOCAL_STATIC_LIBRARIES := MailCore
+LOCAL_SHARED_LIBRARIES := blocksRuntime
 include $(BUILD_SHARED_LIBRARY)
