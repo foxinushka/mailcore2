@@ -38,7 +38,7 @@
 typedef wchar_t UChar;
 #elif defined(__CHAR16_TYPE__)
 	#if defined(__cplusplus)
-	typedef __CHAR16_TYPE__ UChar;
+	typedef char16_t UChar;
 	#else
 	typedef uint16_t UChar;
 	#endif
