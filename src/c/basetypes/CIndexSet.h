@@ -24,7 +24,7 @@ extern "C" {
     };
     typedef struct Range Range;
     
-    extern Range RangeEmpty;
+    CMAILCORE_EXPORT extern Range RangeEmpty;
     CMAILCORE_EXPORT Range RangeMake(uint64_t location, uint64_t length);
     CMAILCORE_EXPORT Range RangeIntersection(Range range1, Range range2);
     CMAILCORE_EXPORT bool RangeHasIntersection(Range range1, Range range2);
