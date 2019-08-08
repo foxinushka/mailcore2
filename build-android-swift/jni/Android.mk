@@ -21,6 +21,19 @@ subdirs = \
 	async/pop \
 	async/smtp
 
+ifeq ($(TARGET_ARCH_ABI),armeabi-v7a)
+  ARCH_FOLDER := armv7
+endif
+ifeq ($(TARGET_ARCH_ABI),arm64-v8a)
+  ARCH_FOLDER := aarch64
+endif
+ifeq ($(TARGET_ARCH_ABI),x86)
+  ARCH_FOLDER := i686
+endif
+ifeq ($(TARGET_ARCH_ABI),x86_64)
+  ARCH_FOLDER := x86_64
+endif	
+
 include $(CLEAR_VARS)
 LOCAL_MODULE    := iconv
 LOCAL_SRC_FILES := $(ICONV_PATH)/libs/$(TARGET_ARCH_ABI)/libiconv.a
@@ -54,33 +67,33 @@ include $(PREBUILT_STATIC_LIBRARY)
 include $(CLEAR_VARS)
 LOCAL_MODULE    := dispatch
 LOCAL_EXPORT_C_INCLUDES := $(SWIFT_LIB)
-LOCAL_SRC_FILES := $(SWIFT_LIB)/android/aarch64/libdispatch.so
+LOCAL_SRC_FILES := $(SWIFT_LIB)/android/$(ARCH_FOLDER)/libdispatch.so
 include $(PREBUILT_SHARED_LIBRARY)
 
 include $(CLEAR_VARS)
 LOCAL_MODULE    := blocksRuntime
 LOCAL_EXPORT_C_INCLUDES := $(SWIFT_LIB)
-LOCAL_SRC_FILES := $(SWIFT_LIB)/android/aarch64/libBlocksRuntime.so
+LOCAL_SRC_FILES := $(SWIFT_LIB)/android/$(ARCH_FOLDER)/libBlocksRuntime.so
 include $(PREBUILT_SHARED_LIBRARY)
 
 include $(CLEAR_VARS)
 LOCAL_MODULE    := scuuc
-LOCAL_SRC_FILES := $(SWIFT_LIB)/android/aarch64/libicuucswift.so
+LOCAL_SRC_FILES := $(SWIFT_LIB)/android/$(ARCH_FOLDER)/libicuucswift.so
 include $(PREBUILT_SHARED_LIBRARY)
 
 include $(CLEAR_VARS)
 LOCAL_MODULE    := scui18n
-LOCAL_SRC_FILES := $(SWIFT_LIB)/android/aarch64/libicui18nswift.so
+LOCAL_SRC_FILES := $(SWIFT_LIB)/android/$(ARCH_FOLDER)/libicui18nswift.so
 include $(PREBUILT_SHARED_LIBRARY)
 
 include $(CLEAR_VARS)
 LOCAL_MODULE    := scudata
-LOCAL_SRC_FILES := $(SWIFT_LIB)/android/aarch64/libicudataswift.so
+LOCAL_SRC_FILES := $(SWIFT_LIB)/android/$(ARCH_FOLDER)/libicudataswift.so
 include $(PREBUILT_SHARED_LIBRARY)
 
 include $(CLEAR_VARS)
 LOCAL_MODULE    := xml2
-LOCAL_SRC_FILES := $(SWIFT_LIB)/android/aarch64/libxml2.so
+LOCAL_SRC_FILES := $(SWIFT_LIB)/android/$(ARCH_FOLDER)/libxml2.so
 include $(PREBUILT_SHARED_LIBRARY)
 
 include $(CLEAR_VARS)
@@ -180,7 +193,7 @@ LOCAL_SRC_FILES  := \
 	$(utils_src_files)
 
 LOCAL_LDLIBS := -lz -llog
-LOCAL_CFLAGS := -fblocks -DSWIFT
+LOCAL_CFLAGS := -fblocks
 LOCAL_CPPFLAGS := -frtti
 LOCAL_STATIC_LIBRARIES := MailCore
 LOCAL_SHARED_LIBRARIES := blocksRuntime

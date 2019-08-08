@@ -122,7 +122,7 @@ AbstractPart * MessageParser::mainPart()
 Data * MessageParser::data()
 {
 #if __APPLE__
-#ifndef SWIFT
+#ifdef LEGACY_OBJC_RUNTIME
     if (mNSData != NULL) {
         return dataFromNSData();
     }

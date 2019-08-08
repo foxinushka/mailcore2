@@ -37,10 +37,10 @@
 #ifdef _MSC_VER
 typedef wchar_t UChar;
 #elif defined(__CHAR16_TYPE__)
-	#if defined(__cplusplus)
+	#if defined(ANDROID)
 	typedef char16_t UChar;
 	#else
-	typedef uint16_t UChar;
+	typedef __CHAR16_TYPE__ UChar;
 	#endif
 #else
 typedef uint16_t UChar;
