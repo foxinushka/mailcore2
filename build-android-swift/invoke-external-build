@@ -1,4 +1,5 @@
 #!/bin/bash
+set -ex
 
 build_version=4
 package_name=mailcore2-android
@@ -46,7 +47,6 @@ pushd "$base_dir"
             git clone --depth 1 --branch master https://github.com/readdle/ctemplate.git
             pushd "ctemplate/build-android"
                 ./build.sh
-                echo "!!!    PHASE 5: COPY DIR   !!!"
                 cp -R "ctemplate-android-$ctemplate_build_version" "$download_dir/"
             popd
         fi
@@ -78,8 +78,7 @@ pushd "$base_dir"
         ICONV_PATH="$download_dir/iconv-android-$iconv_build_version"
 
     # Copy all libraries
-    # archs="armeabi-v7a arm64-v8a x86 x86_64"
-    archs="armeabi-v7a arm64-v8a"
+    archs="armeabi-v7a arm64-v8a x86 x86_64"
     for arch in $archs ; do
         TARGET_ARCH_ABI=$arch
         if (( $NDK_DEBUG == 1 ))
