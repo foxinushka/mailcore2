@@ -9,9 +9,15 @@ extension String : Convertible  {
             // instead of nil
             return MailCoreString()
         }
-        return uchars.withUnsafeBytes({ (bytes: UnsafePointer<Int8>) -> MailCoreString in
+        
+        return uchars.withUnsafeBytes { bytes -> MailCoreString in
+            guard let bytes: UnsafePointer<Int8> = Data.unwrapUnsafeBytes(bytes) else {
+                assert(false)
+                return MailCoreString()
+            }
+            
             return MailCoreString.stringWithCharacters(bytes, UInt32(uchars.count / 2))
-        })
+        }
     }
     
     func cast() -> CObject {

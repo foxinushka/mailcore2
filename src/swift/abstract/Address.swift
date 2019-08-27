@@ -198,11 +198,11 @@ public final class MCOAddress : NSObjectCompat, Convertible, NSCoding {
 
 public extension Array where Element: MCOAddress {
     
-    public func mco_RFC822StringForAddresses() -> String? {
+    func mco_RFC822StringForAddresses() -> String? {
         return CAddress.RFC822StringForAddresses(self.mailCoreArray()).string()
     }
     
-    public func mco_nonEncodedRFC822StringForAddresses() -> String? {
+    func mco_nonEncodedRFC822StringForAddresses() -> String? {
         return CAddress.nonEncodedRFC822StringForAddresses(self.mailCoreArray()).string()
     }
 
