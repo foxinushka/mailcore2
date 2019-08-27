@@ -2,7 +2,7 @@
 
 set -e
 
-export TOOLCHAINS=swift
+unset TOOLCHAINS
 
 # Force clean
 rm -rf .build Package.resolved test.log

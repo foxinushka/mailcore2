@@ -55,9 +55,13 @@ static const char * localizedDescriptionTable[] = {
 
 String * mailcore::errorMessageWithErrorCode(ErrorCode errorCode)
 {
+    #if defined(ANDROID)
+    // In Android ErrorCode unsigned, no sense in next check
+    #else
     if (errorCode < 0) {
         return NULL;
     }
+    #endif
     if (errorCode >= sizeof(localizedDescriptionTable) / sizeof(localizedDescriptionTable[0])) {
         return NULL;
     }
