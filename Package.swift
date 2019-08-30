@@ -32,7 +32,7 @@ let package = Package(
         ),
     ],
     dependencies: [
-        .package(url: "https://github.com/readdle/tidy-html5.git", .branch("android-swift-5"))
+        .package(url: "https://github.com/readdle/tidy-html5.git", .upToNextMinor(from: "5.4.25"))
     ],
     targets: [
         .target(
