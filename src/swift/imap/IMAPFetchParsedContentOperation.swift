@@ -34,18 +34,20 @@ public class MCOIMAPFetchParsedContentOperation : MCOIMAPBaseOperation {
         guard let completionBlock = self.completionBlock else {
             return
         }
-        
-        let errorCode = error()
-        if errorCode == ErrorNone {
-            if let parser: MCOMessageParser = createMCOObject(from: operation.parser().toCObject()) {
-                completionBlock(nil, parser)
+
+        mailCoreAutoreleasePool {
+            let errorCode = error()
+            if errorCode == ErrorNone {
+                if let parser: MCOMessageParser = createMCOObject(from: operation.parser().toCObject()) {
+                    completionBlock(nil, parser)
+                }
+                else {
+                    completionBlock(nil, nil)
+                }
             }
             else {
-                completionBlock(nil, nil)
+                completionBlock(MailCoreError.error(code: errorCode), nil)
             }
-        }
-        else {
-            completionBlock(MailCoreError.error(code: errorCode), nil)
         }
         self.completionBlock = nil
     }

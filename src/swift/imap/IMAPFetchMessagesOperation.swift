@@ -35,13 +35,15 @@ public class MCOIMAPFetchMessagesOperation : MCOIMAPBaseOperation {
         guard let completionBlock = self.completionBlock else {
             return
         }
-        
-        let errorCode = error()
-        if errorCode == ErrorNone {
-            completionBlock(nil, Array<MCOIMAPMessage>(mailCoreArray: operation.messages()), MCOIndexSet(operation.vanishedMessages()))
-        }
-        else {
-            completionBlock(MailCoreError.error(code: errorCode), nil, nil)
+
+        mailCoreAutoreleasePool {
+            let errorCode = error()
+            if errorCode == ErrorNone {
+                completionBlock(nil, Array<MCOIMAPMessage>(mailCoreArray: operation.messages()), MCOIndexSet(operation.vanishedMessages()))
+            }
+            else {
+                completionBlock(MailCoreError.error(code: errorCode), nil, nil)
+            }
         }
         self.completionBlock = nil
     }
@@ -51,8 +53,16 @@ public class MCOIMAPFetchMessagesOperation : MCOIMAPBaseOperation {
     }
     
     public var extraHeaders: Array<String>? {
-        get { return Array<String>(mailCoreArray: operation.extraHeaders) }
-        set { operation.extraHeaders = newValue?.mailCoreArray() ?? CArray() }
+        get {
+            return mailCoreAutoreleasePool {
+                Array<String>(mailCoreArray: operation.extraHeaders)
+            }
+        }
+        set {
+            mailCoreAutoreleasePool {
+                operation.extraHeaders = newValue?.mailCoreArray() ?? CArray()
+            }
+        }
     }
     
 }

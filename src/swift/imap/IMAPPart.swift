@@ -22,8 +22,16 @@ public class MCOIMAPPart : MCOAbstractPart, NSCoding {
     
     /** A part identifier is of the form 1.2.1*/
     public var partID: String? {
-        get { return nativeInstance.partID.string() }
-        set { nativeInstance.partID = newValue?.mailCoreString() ?? MailCoreString() }
+        get {
+            return mailCoreAutoreleasePool {
+                nativeInstance.partID.string()
+            }
+        }
+        set {
+            mailCoreAutoreleasePool {
+                nativeInstance.partID = newValue?.mailCoreString() ?? MailCoreString()
+            }
+        }
     }
     
     /** The size of the single part in bytes */
@@ -43,7 +51,9 @@ public class MCOIMAPPart : MCOAbstractPart, NSCoding {
      For example, for a part that's encoded with base64, it will return actual_size * 3/4.
      */
     public func decodedSize() -> UInt32 {
-        return nativeInstance.decodedSize();
+        return mailCoreAutoreleasePool {
+            return nativeInstance.decodedSize();
+        }
     }
     
     public convenience required init?(coder aDecoder: NSCoder) {

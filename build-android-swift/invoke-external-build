@@ -1,4 +1,5 @@
 #!/bin/bash
+set -ex
 
 build_version=4
 package_name=mailcore2-android
@@ -13,71 +14,39 @@ if ! which ndk-build > /dev/null ; then
   exit 1
 fi
 
-function download_dep {
-    local name="$1"
-    local version="$2"
-
-    if test ! -d "$name-$version"; then 
-        if test ! -f "$name-$version.zip" ; then
-            if curl -f -O "http://d.etpan.org/mailcore2-deps/$name/$name-$version.zip" ; then
-                echo "Downloaded $name-$version.zip"
-            else
-                echo Could not download $name-$version.zip
-                exit 1
-            fi
-        fi
-        unzip "$name-$version.zip"
-    fi
-}
-
-function download_dep_from_github {
-    local name="$1"
-    local version="$2"
-    local url="$3"
-
-    if test ! -d "$name-$version"; then
-        if test ! -f "$name-$version.zip" ; then
-            if curl -f -LO "$url/$name-$version.zip" ; then
-                echo "Downloaded $name-$version.zip"
-            else
-                echo Could not download $name-$version.zip
-                exit 1
-            fi
-        fi
-        unzip "$name-$version.zip"
-    fi
-}
-
 build_dir=$SWIFT_PM_EXTERNAL_BUILD_ROOT
-
-# Specify libs output
-export NDK_OUT="$build_dir/obj"
-export NDK_LIBS_OUT="$build_dir/libs"
 
 base_dir="$(realpath $(dirname $0))"
 pushd "$base_dir"
-    # collect public headers
-    mkdir -p "cmake-build"
-    pushd "cmake-build"
-        cmake -D ANDROID=1 ../..
-        rsync -t -r "src/include/MailCore" "$SWIFT_PM_EXTERNAL_INCLUDE"
-    popd
-
 
     # download dependencies
     download_dir="$build_dir/third-party"
     mkdir -p "$download_dir"
     pushd "$download_dir"
-        download_dep_from_github "libetpan-android" $libetpan_build_version "https://github.com/readdle/libetpan-android-zip/raw/master/"
-        download_dep_from_github "iconv-android" $iconv_build_version "https://github.com/readdle/libetpan-android-zip/raw/master/"
-        download_dep "openssl-android" $openssl_build_version
-        download_dep "cyrus-sasl-android" $cyrus_sasl_build_version
+
+        # Build libetpan-android from source
+        if test ! -d "$download_dir/libetpan-android-$libetpan_build_version" ; then
+            git clone --depth 1 --branch master git@github.com:readdle/libetpan.git
+            pushd "libetpan/build-android"
+                ./build.sh
+
+                cp "libetpan-android-$libetpan_build_version.zip" "$download_dir/"
+                cp "dependencies/cyrus-sasl/cyrus-sasl-android-$cyrus_sasl_build_version.zip" "$download_dir/"
+                cp "dependencies/iconv/iconv-android-$iconv_build_version.zip" "$download_dir/"
+                cp "dependencies/openssl/openssl-android-$openssl_build_version.zip" "$download_dir/"
+            popd
+
+            unzip "libetpan-android-$libetpan_build_version.zip"
+            unzip "cyrus-sasl-android-$cyrus_sasl_build_version.zip"
+            unzip "iconv-android-$iconv_build_version.zip"
+            unzip "openssl-android-$openssl_build_version.zip"
+        fi
 
         # Build ctemplate-android from source
         if test ! -d "$download_dir/ctemplate-android-$ctemplate_build_version" ; then
-            git clone --depth 1 --branch master https://github.com/andriydruk/ctemplate.git
+            git clone --depth 1 --branch master https://github.com/readdle/ctemplate.git
             pushd "ctemplate/build-android"
-                sh build.sh
+                ./build.sh
                 cp -R "ctemplate-android-$ctemplate_build_version" "$download_dir/"
             popd
         fi
@@ -85,6 +54,17 @@ pushd "$base_dir"
         # Copy libetpan headers
         rsync -t -r "libetpan-android-$libetpan_build_version/include/libetpan" "$SWIFT_PM_EXTERNAL_INCLUDE"
 
+    popd
+
+    # Specify libs output
+    export NDK_OUT="$build_dir/obj"
+    export NDK_LIBS_OUT="$build_dir/libs"
+
+    # collect public headers
+    mkdir -p "cmake-build"
+    pushd "cmake-build"
+        cmake -D ANDROID=1 ../..
+        rsync -t -r "src/include/MailCore" "$SWIFT_PM_EXTERNAL_INCLUDE"
     popd
 
     # build C/C++ to libcmailcore.so
@@ -98,11 +78,15 @@ pushd "$base_dir"
         ICONV_PATH="$download_dir/iconv-android-$iconv_build_version"
 
     # Copy all libraries
-    if (( $NDK_DEBUG == 1 ))
-    then
-        rsync -t -r "$NDK_OUT/local/armeabi-v7a" "$SWIFT_PM_EXTERNAL_LIBS"
-    else
-        rsync -t -r "$NDK_LIBS_OUT/armeabi-v7a" "$SWIFT_PM_EXTERNAL_LIBS"
-    fi
+    archs="armeabi-v7a arm64-v8a x86 x86_64"
+    for arch in $archs ; do
+        TARGET_ARCH_ABI=$arch
+        if (( $NDK_DEBUG == 1 ))
+        then
+        rsync -t -r "$NDK_OUT/local/$TARGET_ARCH_ABI" "$SWIFT_PM_EXTERNAL_LIBS"
+        else
+        rsync -t -r "$NDK_LIBS_OUT/$TARGET_ARCH_ABI" "$SWIFT_PM_EXTERNAL_LIBS"
+        fi
+    done
 
 popd

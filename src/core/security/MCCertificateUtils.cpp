@@ -138,7 +138,7 @@ err:
 	CertCloseStore(systemStore, 0);
 #elif defined(ANDROID) || defined(__ANDROID__)
     dir = opendir("/system/etc/security/cacerts");
-    while (ent = readdir(dir)) {
+    while ((ent = readdir(dir))) {
         if (ent->d_name[0] == '.') {
             continue;
         }

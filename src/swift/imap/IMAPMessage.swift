@@ -59,8 +59,16 @@ public final class MCOIMAPMessage : MCOAbstractMessage, NSCoding {
     
     /** Flag keywords of the message, mostly custom flags */
     public var customFlags: Array<String>? {
-        get { return Array<String>(mailCoreArray: nativeInstance.customFlags) }
-        set { nativeInstance.customFlags = newValue?.mailCoreArray() ?? CArray() }
+        get {
+            return mailCoreAutoreleasePool {
+                Array<String>(mailCoreArray: nativeInstance.customFlags)
+            }
+        }
+        set {
+            mailCoreAutoreleasePool {
+                nativeInstance.customFlags = newValue?.mailCoreArray() ?? CArray()
+            }
+        }
     }
     
     /** It's the last modification sequence value of the message synced from the server. See RFC4551 */
@@ -71,14 +79,30 @@ public final class MCOIMAPMessage : MCOAbstractMessage, NSCoding {
     
     /** Main MIME part of the message */
     public var mainPart: MCOAbstractPart? {
-        get { return createMCOObject(from: nativeInstance.mainPart.toCObject()) }
-        set { nativeInstance.mainPart = newValue?._CAbstractPart() ?? CAbstractPart() }
+        get {
+            return mailCoreAutoreleasePool {
+                createMCOObject(from: nativeInstance.mainPart.toCObject())
+            }
+        }
+        set {
+            mailCoreAutoreleasePool {
+                nativeInstance.mainPart = newValue?._CAbstractPart() ?? CAbstractPart()
+            }
+        }
     }
     
     /** All Gmail labels of the message */
     public var gmailLabels: Array<String>? {
-        get { return Array<String>(mailCoreArray: nativeInstance.gmailLabels) }
-        set { nativeInstance.gmailLabels = newValue?.mailCoreArray() ?? CArray() }
+        get {
+            return mailCoreAutoreleasePool {
+                Array<String>(mailCoreArray: nativeInstance.gmailLabels)
+            }
+        }
+        set {
+            mailCoreAutoreleasePool {
+                nativeInstance.gmailLabels = newValue?.mailCoreArray() ?? CArray()
+            }
+        }
     }
     
     /** Gmail message ID of the message */
@@ -98,7 +122,9 @@ public final class MCOIMAPMessage : MCOAbstractMessage, NSCoding {
      @param partID A part identifier looks like 1.2.1
      */
     public func partForPartID(partID: String) -> MCOAbstractPart? {
-        return createMCOObject(from: nativeInstance.partForPartID(partID.mailCoreString()).toCObject())
+        return mailCoreAutoreleasePool {
+            return createMCOObject(from: nativeInstance.partForPartID(partID.mailCoreString()).toCObject())
+        }
     }
     
     /**
@@ -108,28 +134,34 @@ public final class MCOIMAPMessage : MCOAbstractMessage, NSCoding {
      so that the complete HTML rendering can take place.
      */
     public func htmlRendering(folder: String, delegate: MCOHTMLRendererIMAPDelegate & MCOHTMLRendererDelegate) -> String? {
-        let rendererCallback: MCOAbstractMessageRendererCallback = MCOAbstractMessageRendererCallback(message: self);
-        rendererCallback.setHtmlRenderDelegate(delegate: delegate)
-        rendererCallback.setHtmlRenderImapDelegate(delegate: delegate)
-        let result = self.nativeInstance.htmlRendering(folder.mailCoreString(), rendererCallback.cast()).string()
-        return result
+        return mailCoreAutoreleasePool {
+            let rendererCallback: MCOAbstractMessageRendererCallback = MCOAbstractMessageRendererCallback(message: self);
+            rendererCallback.setHtmlRenderDelegate(delegate: delegate)
+            rendererCallback.setHtmlRenderImapDelegate(delegate: delegate)
+            let result = self.nativeInstance.htmlRendering(folder.mailCoreString(), rendererCallback.cast()).string()
+            return result
+        }
     }
     
     
     /** All attachments in the message. */
     public func attachments() -> Array<MCOIMAPPart>? {
-        guard let attachments = super.attachments() else {
-            return nil
+        return mailCoreAutoreleasePool {
+            guard let attachments = super.attachments() else {
+                return nil
+            }
+            return Array<MCOIMAPPart>(mailCoreArray: attachments.mailCoreArray());
         }
-        return Array<MCOIMAPPart>(mailCoreArray: attachments.mailCoreArray());
     }
     
     /** All image attachments included inline in the message through cid: URLs. */
     public func htmlInlineAttachments() -> Array<MCOIMAPPart>? {
-        guard let htmlInlineAttachments = super.htmlInlineAttachments() else {
-            return nil
+        return mailCoreAutoreleasePool {
+            guard let htmlInlineAttachments = super.htmlInlineAttachments() else {
+                return nil
+            }
+            return Array<MCOIMAPPart>(mailCoreArray: htmlInlineAttachments.mailCoreArray());
         }
-        return Array<MCOIMAPPart>(mailCoreArray: htmlInlineAttachments.mailCoreArray());
     }
     
     public convenience init?(coder aDecoder: NSCoder) {

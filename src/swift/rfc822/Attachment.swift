@@ -6,8 +6,16 @@ public class MCOAttachment : MCOAbstractPart {
     internal var nativeInstance: CAttachment;
     
     public var data: Data? {
-        get { return Data(cdata: self.nativeInstance.data) }
-        set { nativeInstance.data = newValue?.mailCoreData() ?? CData() }
+        get {
+            return mailCoreAutoreleasePool {
+                Data(cdata: self.nativeInstance.data)
+            }
+        }
+        set {
+            mailCoreAutoreleasePool {
+                nativeInstance.data = newValue?.mailCoreData() ?? CData()
+            }
+        }
     }
     
     required public init(mailCoreObject obj: CObject) {
@@ -27,32 +35,46 @@ public class MCOAttachment : MCOAbstractPart {
     
     /** Returns a MIME type for a filename.*/
     public static func mimeTypeForFilename(filename: String) -> String? {
-        return CAttachment.mimeTypeForFilename(filename.mailCoreString()).string()
+        return mailCoreAutoreleasePool {
+            return CAttachment.mimeTypeForFilename(filename.mailCoreString()).string()
+        }
     }
     
     /** Returns a file attachment with the content of the given file.*/
     public static func attachmentWithContentsOfFile(filename: String) -> MCOAttachment? {
-        return createMCOObject(from: CAttachment.attachmentWithContentsOfFile(filename.mailCoreString()).toCObject())
+        return mailCoreAutoreleasePool {
+            return createMCOObject(from: CAttachment.attachmentWithContentsOfFile(filename.mailCoreString()).toCObject())
+        }
     }
     
     /** Returns a file attachment with the given data and filename.*/
     public convenience init( data: Data, filename: String) {
+        let autoreleasePool = CAutoreleasePool_init()
+        defer {
+            autoreleasePool.release()
+        }
         self.init(mailCoreObject: CAttachment.attachmentWithData(filename.mailCoreString(), data.mailCoreData()).toCObject())
     }
     
     /** Returns a part with an HTML content.*/
     public static func attachmentWithHTMLString(htmlString: String) -> MCOAttachment? {
-        return createMCOObject(from: CAttachment.attachmentWithHTMLString(htmlString.mailCoreString()).toCObject())
+        return mailCoreAutoreleasePool {
+            return createMCOObject(from: CAttachment.attachmentWithHTMLString(htmlString.mailCoreString()).toCObject())
+        }
     }
     
     /** Returns a part with a RFC 822 messsage attachment.*/
     public static func attachmentWithRFC822Message(messageData: Data) -> MCOAttachment? {
-        return createMCOObject(from: CAttachment.attachmentWithRFC822Message(messageData.mailCoreData()).toCObject())
+        return mailCoreAutoreleasePool {
+            return createMCOObject(from: CAttachment.attachmentWithRFC822Message(messageData.mailCoreData()).toCObject())
+        }
     }
     
     /** Returns a part with an plain text content.*/
     public static func attachmentWithText(text: String) -> MCOAttachment? {
-        return createMCOObject(from: CAttachment.attachmentWithText(text.mailCoreString()).toCObject())
+        return mailCoreAutoreleasePool {
+            return createMCOObject(from: CAttachment.attachmentWithText(text.mailCoreString()).toCObject())
+        }
     }
     
 }

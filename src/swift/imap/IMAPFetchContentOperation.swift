@@ -35,13 +35,15 @@ public class MCOIMAPFetchContentOperation : MCOIMAPBaseOperation {
         guard let completionBlock = self.completionBlock else {
             return
         }
-        
-        let errorCode = error();
-        if errorCode == ErrorNone {
-            completionBlock(nil, Data.init(desctructiveCData: operation.data()));
-        }
-        else {
-            completionBlock(MailCoreError.error(code: errorCode), nil);
+
+        mailCoreAutoreleasePool {
+            let errorCode = error();
+            if errorCode == ErrorNone {
+                completionBlock(nil, Data.init(desctructiveCData: operation.data()));
+            }
+            else {
+                completionBlock(MailCoreError.error(code: errorCode), nil);
+            }
         }
         self.completionBlock = nil
     }

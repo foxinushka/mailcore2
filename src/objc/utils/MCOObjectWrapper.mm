@@ -19,7 +19,7 @@
     mailcore::Object * mObject;
 }
 
-#ifndef SWIFT
+#ifdef LEGACY_OBJC_RUNTIME
 + (void) load
 {    
     MCORegisterClass([NSValue class], &typeid(mailcore::Value));

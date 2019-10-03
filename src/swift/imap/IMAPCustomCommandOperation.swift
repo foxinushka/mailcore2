@@ -34,13 +34,15 @@ public class MCOIMAPCustomCommandOperation : MCOIMAPBaseOperation {
         guard let completionBlock = self.completionBlock else {
             return
         }
-        
-        let errorCode = error()
-        if errorCode == ErrorNone {
-            completionBlock(operation.response().string(), nil)
-        }
-        else {
-            completionBlock(nil, MailCoreError.error(code: errorCode))
+
+        mailCoreAutoreleasePool {
+            let errorCode = error()
+            if errorCode == ErrorNone {
+                completionBlock(operation.response().string(), nil)
+            }
+            else {
+                completionBlock(nil, MailCoreError.error(code: errorCode))
+            }
         }
         self.completionBlock = nil
     }

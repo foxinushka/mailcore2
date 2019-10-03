@@ -147,6 +147,16 @@ unsigned int Data::length()
     return mLength;
 }
 
+bool Data::externallyAllocatedMemory()
+{
+    return mExternallyAllocatedMemory;
+}
+
+BytesDeallocator Data::bytesDeallocator()
+{
+    return mBytesDeallocator;
+}
+
 void Data::increaseCapacity(unsigned int length)
 {
     allocate(mLength + length);

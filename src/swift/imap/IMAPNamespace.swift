@@ -31,17 +31,23 @@ public class MCOIMAPNamespace : Convertible {
     
     /** Returns the prefix of the main item of this namespace. */
     public func mainPrefix() -> String? {
-        return nativeInstance.mainPrefix().string()
+        return mailCoreAutoreleasePool {
+            return nativeInstance.mainPrefix().string()
+        }
     }
     
     /** Returns the path delimiter of the main item of this namespace */
     public func mainDelimiter() -> CChar {
-        return nativeInstance.mainDelimiter();
+        return mailCoreAutoreleasePool {
+            return nativeInstance.mainDelimiter();
+        }
     }
     
     /** Returns the list of prefixes of this namespace. */
     public func prefixes() -> Array<String>? {
-        return Array<String>(mailCoreArray: nativeInstance.prefixes());
+        return mailCoreAutoreleasePool {
+            return Array<String>(mailCoreArray: nativeInstance.prefixes());
+        }
     }
     
     /**
@@ -49,7 +55,9 @@ public class MCOIMAPNamespace : Convertible {
      of the main item of the namespace.
      */
     public func path(components: Array<String>) -> String? {
-        return nativeInstance.pathForComponents(components.mailCoreArray()).string()
+        return mailCoreAutoreleasePool {
+            return nativeInstance.pathForComponents(components.mailCoreArray()).string()
+        }
     }
     
     /**
@@ -57,16 +65,22 @@ public class MCOIMAPNamespace : Convertible {
      It will use the best item matching the prefix to compute the path.
      */
     public func path(components: Array<String>, prefix: String) -> String? {
-        return nativeInstance.pathForComponentsAndPrefix(components.mailCoreArray(), prefix.mailCoreString()).string()
+        return mailCoreAutoreleasePool {
+            return nativeInstance.pathForComponentsAndPrefix(components.mailCoreArray(), prefix.mailCoreString()).string()
+        }
     }
     
     /** Returns the components given a folder path. */
     public func componentsFromPath(path: String) -> Array<String>? {
-        return Array<String>(mailCoreArray: nativeInstance.componentsFromPath(path.mailCoreString()))
+        return mailCoreAutoreleasePool {
+            return Array<String>(mailCoreArray: nativeInstance.componentsFromPath(path.mailCoreString()))
+        }
     }
     
     /** Returns YES if the namespace contains the given folder path. */
     public func containsFolderPath(path: String) -> Bool {
-        return nativeInstance.containsFolderPath(path.mailCoreString())
+        return mailCoreAutoreleasePool {
+            return nativeInstance.containsFolderPath(path.mailCoreString())
+        }
     }
 }

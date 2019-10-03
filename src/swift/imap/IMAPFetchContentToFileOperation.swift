@@ -49,13 +49,15 @@ public class MCOIMAPFetchContentToFileOperation : MCOIMAPBaseOperation {
         guard let completionBlock = self.completionBlock else {
             return
         }
-        
-        let errorCode = error()
-        if errorCode == ErrorNone {
-            completionBlock(nil)
-        }
-        else {
-            completionBlock(MailCoreError.error(code: errorCode))
+
+        mailCoreAutoreleasePool {
+            let errorCode = error()
+            if errorCode == ErrorNone {
+                completionBlock(nil)
+            }
+            else {
+                completionBlock(MailCoreError.error(code: errorCode))
+            }
         }
         self.completionBlock = nil
     }
