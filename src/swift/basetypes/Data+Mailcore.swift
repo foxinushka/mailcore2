@@ -16,7 +16,12 @@ extension Data {
     }
     
     public func mailCoreData() -> CData {
-        return self.withUnsafeBytes{(bytes: UnsafePointer<Int8>)-> CData in
+        return self.withUnsafeBytes { bytes -> CData in
+            guard let bytes: UnsafePointer<Int8> = Data.unwrapUnsafeBytes(bytes) else {
+                assert(false)
+                return CData()
+            }
+            
             return CData.dataWithBytes(bytes, UInt32(self.count))
         }
     }
@@ -54,3 +59,13 @@ extension NSData {
 }
     
 #endif
+
+extension Data {
+    public static func unwrapUnsafeBytes<T>(_ ptr: UnsafeRawBufferPointer) -> UnsafePointer<T>? {
+        return ptr.bindMemory(to: T.self).baseAddress
+    }
+    
+    public static func unwrapUnsafeMutableBytes<T>(_ ptr: UnsafeMutableRawBufferPointer) -> UnsafeMutablePointer<T>? {
+        return ptr.bindMemory(to: T.self).baseAddress
+    }
+}

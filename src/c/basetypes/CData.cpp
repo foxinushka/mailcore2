@@ -22,11 +22,11 @@ C_SYNTHESIZE_FUNC_WITH_SCALAR(unsigned int, length)
 C_SYNTHESIZE_FUNC_WITH_VOID(destructiveDataClear)
 
 bool CData_externallyAllocatedMemory(CData self) {
-    return self.instance->mExternallyAllocatedMemory;
+    return self.instance->externallyAllocatedMemory();
 }
 
 CBytesDeallocator CData_bytesDeallocator(CData self) {
-    return self.instance->mBytesDeallocator;
+    return self.instance->bytesDeallocator();
 }
 
 CData Value_mailCoreTypeInfo() {

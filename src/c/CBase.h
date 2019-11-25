@@ -10,7 +10,11 @@
 #include <unicode/uchar.h>
 
 #elif defined(__CHAR16_TYPE__)
-typedef __CHAR16_TYPE__ UChar;
+	#if defined(ANDROID)
+	typedef char16_t UChar;
+	#else
+	typedef __CHAR16_TYPE__ UChar;
+	#endif
 #else
 typedef uint16_t UChar;
 #endif

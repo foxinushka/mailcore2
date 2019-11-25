@@ -197,7 +197,7 @@ public class MCOIndexSet: NSObjectCompat, NSCopying, NSCoding {
 
 public extension IndexSet {
 
-    public func mcoIndexSet() -> MCOIndexSet {
+    func mcoIndexSet() -> MCOIndexSet {
         return MCOIndexSet(foundationIndexSet: self)
     }
 }

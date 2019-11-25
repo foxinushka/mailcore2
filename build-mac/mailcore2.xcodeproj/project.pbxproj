@@ -4671,6 +4671,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 			);
 			mainGroup = C64EA52C169E772200778456;
@@ -5818,10 +5819,7 @@
 				INSTALL_PATH = "@executable_path/../Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				OTHER_CPLUSPLUSFLAGS = (
-					"$(OTHER_CFLAGS)",
-					"-DSWIFT",
-				);
+				OTHER_CPLUSPLUSFLAGS = "$(OTHER_CFLAGS)";
 				OTHER_LDFLAGS = (
 					"-lctemplate-ios",
 					"-letpan-ios",
@@ -5863,10 +5861,7 @@
 				INSTALL_PATH = "@executable_path/../Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				OTHER_CPLUSPLUSFLAGS = (
-					"$(OTHER_CFLAGS)",
-					"-DSWIFT",
-				);
+				OTHER_CPLUSPLUSFLAGS = "$(OTHER_CFLAGS)";
 				OTHER_LDFLAGS = (
 					"-lctemplate-ios",
 					"-letpan-ios",
@@ -6172,6 +6167,7 @@
 				EXECUTABLE_PREFIX = lib;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				OTHER_CFLAGS = "-DLEGACY_OBJC_RUNTIME";
 				PRODUCT_NAME = MailCore;
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
@@ -6186,6 +6182,7 @@
 				EXECUTABLE_PREFIX = lib;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				OTHER_CFLAGS = "-DLEGACY_OBJC_RUNTIME";
 				PRODUCT_NAME = MailCore;
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
@@ -6363,6 +6360,7 @@
 				EXECUTABLE_PREFIX = lib;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				ONLY_ACTIVE_ARCH = NO;
+				OTHER_CFLAGS = "-DLEGACY_OBJC_RUNTIME";
 				PRODUCT_NAME = "MailCore-ios";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -6378,6 +6376,7 @@
 				EXECUTABLE_PREFIX = lib;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				ONLY_ACTIVE_ARCH = NO;
+				OTHER_CFLAGS = "-DLEGACY_OBJC_RUNTIME";
 				PRODUCT_NAME = "MailCore-ios";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -6404,10 +6403,7 @@
 				INSTALL_PATH = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				OTHER_CFLAGS = "";
-				OTHER_CPLUSPLUSFLAGS = (
-					"$(OTHER_CFLAGS)",
-					"-DSWIFT",
-				);
+				OTHER_CPLUSPLUSFLAGS = "$(OTHER_CFLAGS)";
 				OTHER_LDFLAGS = (
 					"-lctemplate",
 					"-letpan",
@@ -6451,10 +6447,7 @@
 				INSTALL_PATH = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				OTHER_CFLAGS = "";
-				OTHER_CPLUSPLUSFLAGS = (
-					"$(OTHER_CFLAGS)",
-					"-DSWIFT",
-				);
+				OTHER_CPLUSPLUSFLAGS = "$(OTHER_CFLAGS)";
 				OTHER_LDFLAGS = (
 					"-lctemplate",
 					"-letpan",
