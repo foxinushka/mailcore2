@@ -133,6 +133,9 @@ Push-Task -Name "mailcore2" -ScriptBlock {
             Copy-Item -Path "$TidyDependencyPath\include" -Destination "$ExternalsPath\include\tidy" -Recurse -Force -ErrorAction Stop -PassThru | Write-Host
             Copy-Item -Path "$TidyDependencyPath\rdtidy.lib" -Destination "$ExternalsPath\lib64" -Force -ErrorAction Stop -PassThru | Write-Host
             Copy-Item -Path "$TidyDependencyPath\rdtidy.exp" -Destination "$ExternalsPath\lib64" -Force -ErrorAction Stop -PassThru | Write-Host
+
+            Copy-Item -Path "$ProjectRoot\build-windows\vs2019\ctemplate\include\template_cache.h" -Destination "$ExternalsPath\include\ctemplate" -Force -ErrorAction Stop | Write-Host
+            Copy-Item -Path "$ProjectRoot\build-windows\vs2019\ctemplate\include\template_string.h" -Destination "$ExternalsPath\include\ctemplate" -Force -ErrorAction Stop | Write-Host
         }
 
         Push-Task -Name "Build mailcore2/CMailCore" -ScriptBlock {
