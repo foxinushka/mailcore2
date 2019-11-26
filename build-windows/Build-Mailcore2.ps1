@@ -143,6 +143,8 @@ Push-Task -Name "mailcore2" -ScriptBlock {
                 "-DCMAKE_INSTALL_PREFIX=$InstallPath",
                 "-DCMAKE_C_COMPILER=clang-cl.exe",
                 "-DCMAKE_CXX_COMPILER=clang-cl.exe",
+                "-DLIBXML_INCLUDE_DIR=C:\Library\libxml2-development\usr\include",
+                "-DLIBXML_LIBRARY=C:\Library\libxml2-development\usr\lib\libxml2s.lib",
                 "-DICU4C_INCLUDE_DIR=C:\Library\icu-64\usr\include",
                 "-DICU4C_UC_LIBRARY=C:\Library\icu-64\usr\lib\icuuc64.lib",
                 "-DICU4C_IN_LIBRARY=C:\Library\icu-64\usr\lib\icuin64.lib",
