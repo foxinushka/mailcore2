@@ -4,13 +4,7 @@ Param(
     [switch]$Install = $false
 )
 
-if (-Not (Get-Module -Name RDTask)) {
-    $RDModulePath = "$PSScriptRoot\psbuild"
-    if (-Not (Test-Path -Path $RDModulePath)) { 
-        git clone --depth 1 git@bitbucket.org:readdle/psbuild.git $RDModulePath
-    }
-    $Env:PSModulePath += ";$RDModulePath"
-}
+.\Resolve-PSBuild.ps1
 
 Import-Module RDBuildCMake
 Import-Module RDBuildMSVC
