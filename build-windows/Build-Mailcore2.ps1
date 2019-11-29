@@ -71,9 +71,7 @@ Push-Task -Name "mailcore2" -ScriptBlock {
                 "-DCMAKE_BUILD_TYPE=RelWithDebInfo",
                 "-DCMAKE_INSTALL_PREFIX=$TidyDependencyPath",
                 "-DCMAKE_C_COMPILER=cl.exe",
-                "-DCMAKE_CXX_COMPILER=cl.exe",
-                "-DCMAKE_EXE_LINKER_FLAGS_INIT=/INCREMENTAL:NO",
-                "-DCMAKE_SHARED_LINKER_FLAGS_INIT=/INCREMENTAL:NO" -join " "
+                "-DCMAKE_CXX_COMPILER=cl.exe" -join " "
 
             Invoke-CMakeTasks -WorkingDir $TidyDependencyPath -CMakeArgs $CMakeArgs
         }
