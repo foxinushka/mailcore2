@@ -60,6 +60,9 @@ $Configuration = @{
 Push-Task -Name $ModuleName -ScriptBlock {
     Push-Task -Name "Initialize" -ScriptBlock {
         Invoke-VsDevCmd -Version "2019"
+
+        Initialize-SDK
+        Initialize-Toolchain
     }
 
     & $PSScriptRoot\Build-Mailcore2.ps1 -InstallPath $InstallPath -DependenciesPath $DependenciesPath -Install

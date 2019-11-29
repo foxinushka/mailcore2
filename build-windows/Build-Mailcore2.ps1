@@ -18,9 +18,6 @@ if (-Not $InstallPath) {
     $InstallPath = "$ProjectRoot\.build\install"
 }
 
-$ToolchainPath = "C:\Library\Developer\Toolchains\unknown-Asserts-development.xctoolchain"
-$SDKPath = "C:\Library\Developer\Platforms\Windows.platform\Developer\SDKs\Windows.sdk"
-    
 $IcuVersion = 64
 $IcuPath = "C:\Library\icu-$IcuVersion\usr"
 $LibXml2Path = "C:\Library\libxml2-development\usr"
@@ -63,9 +60,8 @@ Push-Task -Name "mailcore2" -ScriptBlock {
 
             Write-TaskLog "Configuring VS environment"
             Invoke-VsDevCmd -Version "2019"
+            Initialize-Toolchain
 
-            Add-PathPrefix "$ToolchainPath\usr\bin", "$SDKPath\usr\bin"
-            
             Test-VCModules
         }
 
