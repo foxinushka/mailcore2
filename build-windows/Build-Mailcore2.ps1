@@ -118,11 +118,6 @@ Push-Task -Name "mailcore2" -ScriptBlock {
             Copy-Item -Path "$OpenSslDependencyPath\lib64" -Destination $ExternalsPath -Recurse -Force -ErrorAction Stop -PassThru | Write-Host
             Copy-Item -Path "$CTemplateDependencyPath\include" -Destination $ExternalsPath -Recurse -Force -ErrorAction Stop -PassThru | Write-Host
             Copy-Item -Path "$CTemplateDependencyPath\lib64" -Destination $ExternalsPath -Exclude "*.dll" -Recurse -Force -ErrorAction Stop -PassThru | Write-Host
-            Copy-Item -Path "$SaslDependencyPath\include" -Destination $ExternalsPath -Recurse -Force -ErrorAction Stop -PassThru | Write-Host
-            Copy-Item -Path "$SaslDependencyPath\lib64" -Destination $ExternalsPath -Exclude "*.dll" -Recurse -Force -ErrorAction Stop -PassThru | Write-Host
-            Copy-Item -Path "$ZlibDependencyPath\include" -Destination $ExternalsPath -Recurse -Force -ErrorAction Stop -PassThru | Write-Host
-            Copy-Item -Path "$ZlibDependencyPath\lib64" -Destination $ExternalsPath -Exclude "*.dll" -Recurse -Force -ErrorAction Stop -PassThru | Write-Host
-            Copy-Item -Path "$OpenSslDependencyPath\include" -Destination $ExternalsPath -Recurse -Force -ErrorAction Stop -PassThru | Write-Host
             Copy-Item -Path "$OpenSslDependencyPath\lib64\ssleay32MD.lib" -Destination "$ExternalsPath\lib64" -Force -ErrorAction Stop -PassThru | Write-Host
             Copy-Item -Path "$OpenSslDependencyPath\lib64\libeay32MD.lib" -Destination "$ExternalsPath\lib64" -Force -ErrorAction Stop -PassThru | Write-Host
             
@@ -135,6 +130,15 @@ Push-Task -Name "mailcore2" -ScriptBlock {
 
             Copy-Item -Path "$ProjectRoot\build-windows\vs2019\ctemplate\include\template_cache.h" -Destination "$ExternalsPath\include\ctemplate" -Force -ErrorAction Stop | Write-Host
             Copy-Item -Path "$ProjectRoot\build-windows\vs2019\ctemplate\include\template_string.h" -Destination "$ExternalsPath\include\ctemplate" -Force -ErrorAction Stop | Write-Host
+        }
+
+        Push-Task -Name "Install CMailcore Dependencies" -ScriptBlock {
+            Install-File "$OpenSslDependencyPath\bin64\ssleay32MD.dll" -Destination "$InstallPath\bin"
+            Install-File "$OpenSslDependencyPath\bin64\libeay32MD.dll" -Destination "$InstallPath\bin"
+            Install-File "$CTemplateDependencyPath\lib64\libctemplate.dll" -Destination "$InstallPath\bin"
+            Install-File "$SaslDependencyPath\lib64\libsasl2.dll" -Destination "$InstallPath\bin"
+            Install-File "$PSScriptRoot\dlls\msvcp120.dll" -Destination "$InstallPath\bin"
+            Install-File "$PSScriptRoot\dlls\msvcr120.dll" -Destination "$InstallPath\bin"
         }
 
         Push-Task -Name "Build mailcore2/CMailCore" -ScriptBlock {
@@ -156,7 +160,6 @@ Push-Task -Name "mailcore2" -ScriptBlock {
 
             Invoke-CMakeTasks -WorkingDir "$ProjectRoot\.build\mailcore2" -CMakeArgs $CMakeArgs -NoInstall:$(-not $Install)
         }
-
     }
     finally {
         Push-Task -Name "Shutdown" -ScriptBlock {
