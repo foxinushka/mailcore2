@@ -18,6 +18,10 @@ if (-Not $InstallPath) {
     $InstallPath = "$ProjectRoot\.build\install"
 }
 
+$BinDir = "$InstallPath\bin"
+$IncludeDir = "$InstallPath\include"
+$LibDir = "$InstallPath\lib"
+
 $IcuVersion = 64
 $IcuPath = "C:\Library\icu-$IcuVersion\usr"
 $LibXml2Path = "C:\Library\libxml2-development\usr"
@@ -132,13 +136,37 @@ Push-Task -Name "mailcore2" -ScriptBlock {
             Copy-Item -Path "$ProjectRoot\build-windows\vs2019\ctemplate\include\template_string.h" -Destination "$ExternalsPath\include\ctemplate" -Force -ErrorAction Stop | Write-Host
         }
 
-        Push-Task -Name "Install CMailcore Dependencies" -ScriptBlock {
-            Install-File "$OpenSslDependencyPath\bin64\ssleay32MD.dll" -Destination "$InstallPath\bin"
-            Install-File "$OpenSslDependencyPath\bin64\libeay32MD.dll" -Destination "$InstallPath\bin"
-            Install-File "$CTemplateDependencyPath\lib64\libctemplate.dll" -Destination "$InstallPath\bin"
-            Install-File "$SaslDependencyPath\lib64\libsasl2.dll" -Destination "$InstallPath\bin"
-            Install-File "$PSScriptRoot\dlls\msvcp120.dll" -Destination "$InstallPath\bin"
-            Install-File "$PSScriptRoot\dlls\msvcr120.dll" -Destination "$InstallPath\bin"
+        if ($Install) {
+            Push-Task -Name "Install CMailcore Dependencies" -ScriptBlock {
+                Install-File "$OpenSslDependencyPath\bin64\ssleay32MD.dll" -Destination $BinDir
+                Install-File "$OpenSslDependencyPath\bin64\libeay32MD.dll" -Destination $BinDir
+
+                Install-File "$CTemplateDependencyPath\lib64\libctemplate.dll" -Destination $BinDir
+
+                Install-File "$SaslDependencyPath\lib64\libsasl2.dll" -Destination $BinDir
+
+                Install-File "$PSScriptRoot\dlls\msvcp120.dll" -Destination $BinDir
+                Install-File "$PSScriptRoot\dlls\msvcr120.dll" -Destination $BinDir
+
+                Install-File "$ZlibDependencyPath\lib64\zlib.dll" -Destination $BinDir
+                Install-File "$ZlibDependencyPath\include\zlib.h" -Destination $IncludeDir
+                Install-File "$ZlibDependencyPath\include\zconf.h" -Destination $IncludeDir
+                Install-File "$ZlibDependencyPath\lib64\zlib.lib" -Destination $LibDir
+                Install-File "$ZlibDependencyPath\lib64\zlib.exp" -Destination $LibDir
+                Install-File "$TidyDependencyPath\bin\rdtidy.dll" -Destination $BinDir
+
+                Install-File "$TidyDependencyPath\include\buffio.h" -Destination "$IncludeDir\tidy"
+                Install-File "$TidyDependencyPath\include\platform.h" -Destination "$IncludeDir\tidy"
+                Install-File "$TidyDependencyPath\include\tidy.h" -Destination "$IncludeDir\tidy"
+                Install-File "$TidyDependencyPath\include\tidybuffio.h" -Destination "$IncludeDir\tidy"
+                Install-File "$TidyDependencyPath\include\tidyenum.h" -Destination "$IncludeDir\tidy"
+                Install-File "$TidyDependencyPath\include\tidyplatform.h" -Destination "$IncludeDir\tidy"
+                Install-File "$TidyDependencyPath\rdtidy.exp" -Destination $LibDir
+                Install-File "$TidyDependencyPath\lib\rdtidy.lib" -Destination $LibDir
+                
+                Install-Directory "$LibEtPanDependencyPath\build-windows\include\libetpan" -Destination "$IncludeDir\libetpan"
+                Install-File "$LibEtPanDependencyPath\build-windows\x64\Release\libetpan.dll" -Destination $BinDir
+            }
         }
 
         Push-Task -Name "Build mailcore2/CMailCore" -ScriptBlock {
