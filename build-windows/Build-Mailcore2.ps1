@@ -145,8 +145,8 @@ Push-Task -Name "mailcore2" -ScriptBlock {
 
                 Install-File "$SaslDependencyPath\lib64\libsasl2.dll" -Destination $BinDir
 
-                Install-File "$PSScriptRoot\dlls\msvcp120.dll" -Destination $BinDir
-                Install-File "$PSScriptRoot\dlls\msvcr120.dll" -Destination $BinDir
+                Install-File "$PSScriptRoot\bin\msvcp120.dll" -Destination $BinDir
+                Install-File "$PSScriptRoot\bin\msvcr120.dll" -Destination $BinDir
 
                 Install-File "$ZlibDependencyPath\lib64\zlib.dll" -Destination $BinDir
                 Install-File "$ZlibDependencyPath\include\zlib.h" -Destination $IncludeDir
