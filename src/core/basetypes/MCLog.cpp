@@ -10,8 +10,9 @@
 #include <time.h>
 #include <unistd.h>
 #include <sys/time.h>
-#endif
 #include <pthread.h>
+#endif
+
 #if __APPLE__
 #include <execinfo.h>
 #endif
@@ -70,7 +71,6 @@ static void logInternalv(FILE * file,
     
     struct timeval tv;
     struct tm tm_value;
-    pthread_t thread_id = pthread_self();
     
     if (externalLogger != NULL) {
         char * message;
@@ -98,13 +98,18 @@ static void logInternalv(FILE * file,
     }
     else {
         unsigned long threadValue;
+#ifdef _WIN32
+		threadValue = GetCurrentThreadId();
+#else
+		pthread_t thread_id = pthread_self();
 #ifdef _MACH_PORT_T
         threadValue = pthread_mach_thread_np(thread_id);
-#elif _MSC_VER
-        threadValue = (unsigned long) thread_id.p;
 #else
         threadValue = (unsigned long) thread_id;
 #endif
+
+#endif /* _WIN32 */
+
         fprintf(file, "[%i:%lx] %s:%u: ", sPid, threadValue, filename, line);
     }
     vfprintf(file, format, argp);

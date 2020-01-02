@@ -46,14 +46,14 @@ extern "C" {
     C_SYNTHESIZE_FUNC_DEFINITION(COperation, void, cancel)
     C_SYNTHESIZE_FUNC_DEFINITION(COperation, void, start)
     
-    void                COperation_retain(COperation self)
-                        CF_SWIFT_NAME(COperation.retain(self:));
+    CMAILCORE_EXPORT void   COperation_retain(COperation self)
+                            CF_SWIFT_NAME(COperation.retain(self:));
     
-    void                COperation_release(COperation self)
-                        CF_SWIFT_NAME(COperation.release(self:));
+    CMAILCORE_EXPORT void   COperation_release(COperation self)
+                            CF_SWIFT_NAME(COperation.release(self:));
     
-    int                 COperation_retainCount(COperation self)
-                        CF_SWIFT_NAME(COperation.retainCount(self:));;
+    CMAILCORE_EXPORT int    COperation_retainCount(COperation self)
+                            CF_SWIFT_NAME(COperation.retainCount(self:));;
 
 #ifdef __cplusplus
 }

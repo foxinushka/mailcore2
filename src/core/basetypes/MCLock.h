@@ -9,7 +9,17 @@
 #ifndef mailcore2_MCLock_h
 #define mailcore2_MCLock_h
 
-#if __APPLE__
+#ifdef _MSC_VER
+
+#define WIN32_LEAN_AND_MEAN
+#include <windows.h>
+
+#define MC_LOCK_TYPE SRWLOCK
+#define MC_LOCK_INITIAL_VALUE SRWLOCK_INIT
+#define MC_LOCK(l) AcquireSRWLockExclusive(l)
+#define MC_UNLOCK(l) ReleaseSRWLockExclusive(l)
+
+#elif __APPLE__
 
 #include <os/lock.h>
 

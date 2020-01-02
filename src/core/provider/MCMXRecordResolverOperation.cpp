@@ -8,7 +8,7 @@
 
 #include "MCMXRecordResolverOperation.h"
 
-#if !defined(ANDROID) && !defined(__ANDROID__)
+#if !defined(ANDROID) && !defined(__ANDROID__) && !defined(_WIN32)
 #include <arpa/inet.h>
 #include <resolv.h>
 #endif
@@ -45,7 +45,7 @@ Array * MXRecordResolverOperation::mxRecords()
 void MXRecordResolverOperation::main()
 {
     mMXRecords = new Array();
-#if !defined(ANDROID) && !defined(__ANDROID__)
+#if !defined(ANDROID) && !defined(__ANDROID__) && !defined(_WIN32)
     unsigned char response[NS_PACKETSZ];
     ns_msg handle;
     ns_rr rr;

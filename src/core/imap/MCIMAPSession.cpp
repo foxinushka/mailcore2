@@ -109,8 +109,8 @@ INITIALIZE(IMAPSEssion)
 
 #define MAX_IDLE_DELAY (28 * 60)
 
-#define LOCK() pthread_mutex_lock(&mIdleLock)
-#define UNLOCK() pthread_mutex_unlock(&mIdleLock)
+#define LOCK() MCB_LOCK(&mIdleLock)
+#define UNLOCK() MCB_UNLOCK(&mIdleLock)
 
 static struct mailimap_flag_list * flags_to_lep(MessageFlag value)
 {
@@ -401,13 +401,13 @@ void IMAPSession::init()
     mOutlookServer = false;
     mLastFetchedSequenceNumber = 0;
     mCurrentFolder = NULL;
-    pthread_mutex_init(&mIdleLock, NULL);
+    MCB_LOCK_INIT(&mIdleLock);
     mState = STATE_DISCONNECTED;
     mImap = NULL;
     mProgressCallback = NULL;
     mProgressItemsCount = 0;
     mConnectionLogger = NULL;
-    pthread_mutex_init(&mConnectionLoggerLock, NULL);
+	MCB_LOCK_INIT(&mConnectionLoggerLock);
     mAutomaticConfigurationEnabled = true;
     mAutomaticConfigurationDone = false;
     mShouldDisconnect = false;
@@ -435,8 +435,8 @@ IMAPSession::~IMAPSession()
     MC_SAFE_RELEASE(mWelcomeString);
     MC_SAFE_RELEASE(mDefaultNamespace);
     MC_SAFE_RELEASE(mCurrentFolder);
-    pthread_mutex_destroy(&mIdleLock);
-    pthread_mutex_destroy(&mConnectionLoggerLock);
+    MCB_LOCK_DESTROY(&mIdleLock);
+    MCB_LOCK_DESTROY(&mConnectionLoggerLock);
 }
 
 void IMAPSession::setHostname(String * hostname)
@@ -4346,12 +4346,12 @@ ConnectionLogger * IMAPSession::connectionLogger()
 
 void IMAPSession::lockConnectionLogger()
 {
-    pthread_mutex_lock(&mConnectionLoggerLock);
+    MCB_LOCK(&mConnectionLoggerLock);
 }
 
 void IMAPSession::unlockConnectionLogger()
 {
-    pthread_mutex_unlock(&mConnectionLoggerLock);
+    MCB_UNLOCK(&mConnectionLoggerLock);
 }
 
 ConnectionLogger * IMAPSession::connectionLoggerNoLock()

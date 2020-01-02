@@ -135,9 +135,9 @@ extern "C" {
     C_SYNTHESIZE_FUNC_DEFINITION(CIMAPAsyncSession, CIMAPIdentityOperation, identityOperationWithClientIdentity, CIMAPIdentity)
 
 
-    CIMAPAsyncSession                   CIMAPAsyncSession_new(CConnectionLogger logger, CConnectionLoggerRelease releaseLoggerBlock);
+    CMAILCORE_EXPORT CIMAPAsyncSession  CIMAPAsyncSession_new(CConnectionLogger logger, CConnectionLoggerRelease releaseLoggerBlock);
 
-    void                                CIMAPAsyncSession_release(CIMAPAsyncSession self)
+    CMAILCORE_EXPORT void               CIMAPAsyncSession_release(CIMAPAsyncSession self)
                                         CF_SWIFT_NAME(CIMAPAsyncSession.release(self:));
 
 #ifdef __cplusplus

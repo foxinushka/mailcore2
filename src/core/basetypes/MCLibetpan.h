@@ -12,14 +12,16 @@
 
 #include <time.h>
 #include <libetpan/libetpan.h>
+#include <MailCore/MCUtils.h>
+
 #ifdef __cplusplus
 namespace mailcore {
 
-    time_t timestampFromDate(struct mailimf_date_time * date_time);
-    time_t timestampFromIMAPDate(struct mailimap_date_time * date_time);
-    struct mailimf_date_time * dateFromTimestamp(time_t timeval);
-    struct mailimap_date_time * imapDateFromTimestamp(time_t timeval);
-    time_t mkgmtime(struct tm * tmp);
+	MAILCORE_EXPORT time_t timestampFromDate(struct mailimf_date_time * date_time);
+	MAILCORE_EXPORT time_t timestampFromIMAPDate(struct mailimap_date_time * date_time);
+	MAILCORE_EXPORT struct mailimf_date_time * dateFromTimestamp(time_t timeval);
+	MAILCORE_EXPORT struct mailimap_date_time * imapDateFromTimestamp(time_t timeval);
+	MAILCORE_EXPORT time_t mkgmtime(struct tm * tmp);
     
 }
 #endif

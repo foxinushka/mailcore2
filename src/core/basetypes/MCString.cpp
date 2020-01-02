@@ -22,7 +22,6 @@
     #define LIBXML_HTML_ENABLED
 #endif
 
-#include <pthread.h>
 #include <libetpan/libetpan.h>
 #include <libxml/xmlmemory.h>
 #include <libxml/HTMLparser.h>
@@ -51,6 +50,7 @@
 #define PATH_SEPARATOR_CHAR '\\'
 #define PATH_SEPARATOR_STRING "\\"
 #else
+#include <pthread.h>
 #define PATH_SEPARATOR_CHAR '/'
 #define PATH_SEPARATOR_STRING "/"
 #endif
@@ -2378,7 +2378,7 @@ Array * String::componentsSeparatedByString(String * separator)
     p = mUnicodeChars;
     while (1) {
         UChar * location;
-#if 0
+#if _MSC_VER
         location = u_strstr(p, separator->unicodeCharacters());
         if (location == NULL) {
             break;
@@ -2511,18 +2511,36 @@ static void initUniquedStringHash()
     uniquedStringHash = chash_new(CHASH_DEFAULTSIZE, CHASH_COPYKEY);
 }
 
+#ifdef _MSC_VER
+
+BOOL CALLBACK initUniquedStringHashCallback(PINIT_ONCE InitOnce, PVOID Parameter, PVOID * lpContext) {
+	initUniquedStringHash();
+	return TRUE;
+}
+
+#endif
+
 String * String::uniquedStringWithUTF8Characters(const char * UTF8Characters)
 {
     chashdatum key;
     chashdatum value;
+#ifdef _MSC_VER
+	static INIT_ONCE once = INIT_ONCE_STATIC_INIT;
+#else
     static pthread_once_t once = PTHREAD_ONCE_INIT;
+#endif
     int r;
     
     if (UTF8Characters == NULL) {
         return NULL;
     }
 
-    pthread_once(&once, initUniquedStringHash);
+#ifdef _MSC_VER
+	InitOnceExecuteOnce(&once, initUniquedStringHashCallback, NULL, NULL);
+#else
+	pthread_once(&once, initUniquedStringHash);
+#endif
+
     key.data = (void *) UTF8Characters;
     key.len = (unsigned int) strlen(UTF8Characters);
     MC_LOCK(&lock);

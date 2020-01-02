@@ -15,13 +15,17 @@
 #endif
 #include "MCAssert.h"
 
+#ifdef _MSC_VER
+#include <process.h>
+#endif
+
 using namespace mailcore;
 
 OperationQueue::OperationQueue()
 {
     mOperations = new Array();
     mStarted = false;
-    pthread_mutex_init(&mLock, NULL);
+	MCB_LOCK_INIT(&mLock);
     mWaiting = false;
     mOperationSem = mailsem_new();
     mStartSem = mailsem_new();
@@ -29,7 +33,7 @@ OperationQueue::OperationQueue()
     mWaitingFinishedSem = mailsem_new();
     mQuitting = false;
     mCallback = NULL;
-#if defined(__APPLE__) || defined(__ANDROID__)
+#if MC_HAS_GCD
     mDispatchQueue = getMainQueue();
 #endif
     _pendingCheckRunning = false;
@@ -37,13 +41,13 @@ OperationQueue::OperationQueue()
 
 OperationQueue::~OperationQueue()
 {
-#if defined(__APPLE__) || defined(__ANDROID__)
+#if MC_HAS_GCD
     if (mDispatchQueue != NULL) {
         dispatch_release(mDispatchQueue);
     }
 #endif
     MC_SAFE_RELEASE(mOperations);
-    pthread_mutex_destroy(&mLock);
+    MCB_LOCK_DESTROY(&mLock);
     mailsem_free(mOperationSem);
     mailsem_free(mStartSem);
     mailsem_free(mStopSem);
@@ -52,21 +56,21 @@ OperationQueue::~OperationQueue()
 
 void OperationQueue::addOperation(Operation * op)
 {
-    pthread_mutex_lock(&mLock);
+	MCB_LOCK(&mLock);
     mOperations->addObject(op);
-    pthread_mutex_unlock(&mLock);
+	MCB_UNLOCK(&mLock);
     mailsem_up(mOperationSem);
     startThread();
 }
 
 void OperationQueue::cancelAllOperations()
 {
-    pthread_mutex_lock(&mLock);
+	MCB_LOCK(&mLock);
     for (unsigned int i = 0 ; i < mOperations->count() ; i ++) {
         Operation * op = (Operation *) mOperations->objectAtIndex(i);
         op->cancel();
     }
-    pthread_mutex_unlock(&mLock);
+	MCB_UNLOCK(&mLock);
 }
 
 void OperationQueue::runOperationsOnThread(OperationQueue * queue)
@@ -92,12 +96,12 @@ void OperationQueue::runOperations()
         
         mailsem_down(mOperationSem);
         
-        pthread_mutex_lock(&mLock);
+		MCB_LOCK(&mLock);
         if (mOperations->count() > 0) {
             op = (Operation *) mOperations->objectAtIndex(0);
         }
         quitting = mQuitting;
-        pthread_mutex_unlock(&mLock);
+        MCB_UNLOCK(&mLock);
 
         //MCLog("quitting %i %p", mQuitting, op);
         if ((op == NULL) && quitting) {
@@ -105,7 +109,7 @@ void OperationQueue::runOperations()
             mailsem_up(mStopSem);
             
             retain(); // (2)
-#if defined(__APPLE__) || defined(__ANDROID__)
+#if MC_HAS_GCD
             performMethodOnDispatchQueue((Object::Method) &OperationQueue::stoppedOnMainThread, NULL, mDispatchQueue, true);
 #else
             performMethodOnMainThread((Object::Method) &OperationQueue::stoppedOnMainThread, NULL, true);
@@ -124,7 +128,7 @@ void OperationQueue::runOperations()
         
         op->retain()->autorelease();
         
-        pthread_mutex_lock(&mLock);
+		MCB_LOCK(&mLock);
         mOperations->removeObjectAtIndex(0);
         if (mOperations->count() == 0) {
             if (mWaiting) {
@@ -132,7 +136,7 @@ void OperationQueue::runOperations()
             }
             needsCheckRunning = true;
         }
-        pthread_mutex_unlock(&mLock);
+		MCB_UNLOCK(&mLock);
         
         if (!op->isCancelled()) {
             performOnCallbackThread(op, (Object::Method) &OperationQueue::callbackOnMainThread, op, true);
@@ -141,7 +145,7 @@ void OperationQueue::runOperations()
         if (needsCheckRunning) {
             retain(); // (1)
             //MCLog("check running %p", this);
-#if defined(__APPLE__) || defined(__ANDROID__)
+#if MC_HAS_GCD
             performMethodOnDispatchQueue((Object::Method) &OperationQueue::checkRunningOnMainThread, this, mDispatchQueue);
 #else
             performMethodOnMainThread((Object::Method) &OperationQueue::checkRunningOnMainThread, this);
@@ -151,6 +155,10 @@ void OperationQueue::runOperations()
         pool->release();
     }
     MCLog("cleanup thread %p", this);
+#if defined(_MSC_VER)
+	AutoreleasePool::destroyAutoreleasePoolStack();
+#endif
+
 //#if defined(__ANDROID) || defined(ANDROID)
 //    androidUnsetupThread();
 //#endif
@@ -158,7 +166,7 @@ void OperationQueue::runOperations()
 
 void OperationQueue::performOnCallbackThread(Operation * op, Method method, void * context, bool waitUntilDone)
 {
-#if defined(__APPLE__) || defined(__ANDROID__)
+#if MC_HAS_GCD
     dispatch_queue_t queue = op->callbackDispatchQueue();
     if (queue == NULL) {
         queue = getMainQueue();
@@ -190,7 +198,7 @@ void OperationQueue::checkRunningOnMainThread(void * context)
 {
     retain(); // (4)
     if (_pendingCheckRunning) {
-#if defined(__APPLE__) || defined(__ANDROID__)
+#if MC_HAS_GCD
         cancelDelayedPerformMethodOnDispatchQueue((Object::Method) &OperationQueue::checkRunningAfterDelay, NULL, mDispatchQueue);
 #else
         cancelDelayedPerformMethod((Object::Method) &OperationQueue::checkRunningAfterDelay, NULL);
@@ -199,7 +207,7 @@ void OperationQueue::checkRunningOnMainThread(void * context)
     }
     _pendingCheckRunning = true;
     
-#if defined(__APPLE__) || defined(__ANDROID__)
+#if MC_HAS_GCD
     performMethodOnDispatchQueueAfterDelay((Object::Method) &OperationQueue::checkRunningAfterDelay, NULL, mDispatchQueue, 1);
 #else
     performMethodAfterDelay((Object::Method) &OperationQueue::checkRunningAfterDelay, NULL, 1);
@@ -211,7 +219,7 @@ void OperationQueue::checkRunningOnMainThread(void * context)
 void OperationQueue::checkRunningAfterDelay(void * context)
 {
     _pendingCheckRunning = false;
-    pthread_mutex_lock(&mLock);
+	MCB_LOCK(&mLock);
     if (!mQuitting) {
         if (mOperations->count() == 0) {
             MCLog("trying to quit %p", this);
@@ -219,7 +227,7 @@ void OperationQueue::checkRunningAfterDelay(void * context)
             mQuitting = true;
         }
     }
-    pthread_mutex_unlock(&mLock);
+	MCB_UNLOCK(&mLock);
     
     // Number of operations can't be changed because it runs on main thread.
     // And addOperation() should also be called from main thread.
@@ -259,11 +267,15 @@ void OperationQueue::startThread()
     retain(); // (3)
     mQuitting = false;
     mStarted = true;
+#ifdef _MSC_VER
+	_beginthread(reinterpret_cast<_beginthread_proc_type>(OperationQueue::runOperationsOnThread), 0, this);
+#else
     pthread_attr_t attr;
     pthread_attr_init(&attr);
     pthread_attr_setdetachstate(&attr, PTHREAD_CREATE_DETACHED);
     pthread_create(&mThreadID, &attr, (void * (*)(void *)) OperationQueue::runOperationsOnThread, this);
     pthread_attr_destroy(&attr);
+#endif
     mailsem_down(mStartSem);
 }
 
@@ -271,9 +283,9 @@ unsigned int OperationQueue::count()
 {
     unsigned int count;
     
-    pthread_mutex_lock(&mLock);
+	MCB_LOCK(&mLock);
     count = mOperations->count();
-    pthread_mutex_unlock(&mLock);
+	MCB_UNLOCK(&mLock);
     
     return count;
 }
@@ -307,7 +319,7 @@ void OperationQueue::waitUntilAllOperationsAreFinished()
 }
 #endif
 
-#if defined(__APPLE__) || defined(__ANDROID__)
+#if MC_HAS_GCD
 void OperationQueue::setDispatchQueue(dispatch_queue_t dispatchQueue)
 {
     if (mDispatchQueue != NULL) {

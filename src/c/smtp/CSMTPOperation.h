@@ -41,10 +41,10 @@ extern "C" {
     
     C_SYNTHESIZE_FUNC_DEFINITION(CSMTPOperation, CSMTPOperation, setProgressBlocks, CProgressBlock, const void*)
     
-    void                        CSMTPOperation_retain(CSMTPOperation operation)
+    CMAILCORE_EXPORT void       CSMTPOperation_retain(CSMTPOperation operation)
                                 CF_SWIFT_NAME(CSMTPOperation.retain(self:));
     
-    void                        CSMTPOperation_release(CSMTPOperation operation)
+    CMAILCORE_EXPORT void       CSMTPOperation_release(CSMTPOperation operation)
                                 CF_SWIFT_NAME(CSMTPOperation.release(self:));
     
 #ifdef __cplusplus

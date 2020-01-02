@@ -2,17 +2,22 @@
 
 #define MAILCORE_MCOBJECT_H
 
-#include <pthread.h>
+#include <MailCore/MCDefines.h>
 
-#if defined(__APPLE__) || defined(__ANDROID__)
+#if MC_HAS_GCD
 #include <dispatch/dispatch.h>
 #endif
 
-#if __APPLE__
+#ifdef _MSC_VER
+#define WIN32_LEAN_AND_MEAN
+#include <windows.h>
+#elif __APPLE__
 #include <os/lock.h>
+#else
+#include <pthread.h>
 #endif
 
-#if __ANDROID__
+#if defined(__ANDROID__)
 #if __cplusplus
 extern "C" {
 #endif
@@ -44,7 +49,7 @@ namespace mailcore {
     
     extern bool zombieEnabled;
 
-    #ifdef __ANDROID__
+    #if defined(__ANDROID__)
     // Android main queue
     extern dispatch_queue_t mainQueue;
     #endif
@@ -74,11 +79,11 @@ namespace mailcore {
         
         typedef void (Object::*Method) (void *);
         virtual void performMethod(Method method, void * context);
-#ifndef __ANDROID__
+#if !defined(__ANDROID__)
         virtual void performMethodOnMainThread(Method method, void * context, bool waitUntilDone = false);
 #endif
         virtual void performMethodAfterDelay(Method method, void * context, double delay);
-#if defined(__APPLE__) || defined(__ANDROID__)
+#if MC_HAS_GCD
         virtual void performMethodOnDispatchQueue(Method method, void * context, void * targetDispatchQueue, bool waitUntilDone = false);
         virtual void performMethodOnDispatchQueueAfterDelay(Method method, void * context, void * targetDispatchQueue, double delay);
         virtual void cancelDelayedPerformMethodOnDispatchQueue(Method method, void * context, void * targetDispatchQueue);
@@ -89,15 +94,21 @@ namespace mailcore {
         static void registerObjectConstructor(const char * className, void * (* objectConstructor)(void));
         static Object * objectWithSerializable(HashMap * serializable);
 
+#if MC_HAS_GCD
         // Druk: in Android dispatch_get_main_queue() return dead queue that not drained
         // That's why in Swift we create another queue that called `main` but it executes task NOT on Android main thread
         // We store reference for that "main" queue in global variable mailcore::mainQueue
         static dispatch_queue_t getMainQueue();
-        
+#endif
+
     public: // private
         
     private:
-#if __APPLE__
+#ifdef _MSC_VER
+		SRWLOCK mLock;
+		static BOOL CALLBACK initObjectConstructorsCallback(PINIT_ONCE InitOnce, PVOID Parameter, PVOID * lpContext);
+
+#elif __APPLE__
         os_unfair_lock mLock;
 #else
         pthread_mutex_t mLock;

@@ -14,7 +14,7 @@ public class MailCoreErrors: NSObjectCompat {
 }
 
 // This enum is not Error because Enum with raw type cannot have cases with arguments (e.g. userInfo)
-@objc public enum MailCoreError : Int {
+@objc public enum MailCoreError : IntEnum {
     
     case errorNone // 0
     case errorConnection

@@ -112,7 +112,7 @@ namespace mailcore {
         bool mPopEnabled;
         bool mSmtpEnabled;
 
-        pthread_mutex_t mConnectionLoggerLock;
+        MCB_LOCK_TYPE mConnectionLoggerLock;
         ConnectionLogger * mConnectionLogger;
 
         void init();

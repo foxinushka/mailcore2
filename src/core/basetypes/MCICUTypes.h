@@ -35,7 +35,9 @@
  */
 
 #ifdef _MSC_VER
-typedef wchar_t UChar;
+
+#include <unicode/uchar.h>
+
 #elif defined(__CHAR16_TYPE__)
 	#if defined(ANDROID)
 	typedef char16_t UChar;
@@ -44,6 +46,7 @@ typedef wchar_t UChar;
 	#endif
 #else
 typedef uint16_t UChar;
-#endif
+#endif /* _MSC_VER */
 
-#endif
+#endif /* MAILCORE_MCICUTYPES_H */
+
