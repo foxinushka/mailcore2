@@ -190,6 +190,24 @@ static int tmcomp(struct tm * atmp, struct tm * btmp)
 
 time_t mailcore::mkgmtime(struct tm * tmp)
 {
+#if _MSC_VER
+    tm original_tm;
+    memcpy_s(&original_tm, sizeof(original_tm), tmp, sizeof(original_tm));
+    
+    time_t lenient_result = _mkgmtime(tmp);
+
+    // _mkgmtime normalizes provided structure,
+    // but mailcore2 implementation is not lenient.
+    // Wrong values should be considered as error.
+    if (original_tm.tm_year != tmp->tm_year ||
+            original_tm.tm_yday != tmp->tm_yday ||
+            original_tm.tm_hour != tmp->tm_hour ||
+            original_tm.tm_min != tmp->tm_min) {
+        return INVALID_TIMESTAMP;
+    }
+
+    return lenient_result;
+#else
     int            dir;
     int            bits;
     int            saved_seconds;
@@ -230,4 +248,5 @@ time_t mailcore::mkgmtime(struct tm * tmp)
     }
     t += saved_seconds;
     return t;
+#endif
 }
