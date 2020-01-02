@@ -4,8 +4,6 @@ Param(
     [switch]$Install = $false
 )
 
-.\Resolve-PSBuild.ps1
-
 Import-Module RDBuildCMake
 Import-Module RDBuildMSVC
 Import-Module RDDependency

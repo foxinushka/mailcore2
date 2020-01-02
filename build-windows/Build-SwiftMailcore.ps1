@@ -4,8 +4,6 @@ Param(
     [switch]$Install = $false
 )
 
-.\Resolve-PSBuild.ps1
-
 $ProjectRoot = "$(Resolve-Path ""$PSScriptRoot\..\"")"
 
 $SourceFiles = Get-ChildItem -Path "$ProjectRoot\src\swift\*.swift" -Recurse -File 
