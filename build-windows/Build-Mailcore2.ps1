@@ -25,7 +25,7 @@ $IcuPath = "C:\Library\icu-$IcuVersion\usr"
 $LibXml2Path = "C:\Library\libxml2-development\usr"
 
 $CTemplateDependencyDir = "CTemplate"
-$CTemplateDependencyPath = "$DependenciesPath\$CTemplateDependencyDir\ctemplate-win32-1"
+$CTemplateDependencyPath = "$DependenciesPath\$CTemplateDependencyDir"
 $LibEtPanDependencyDir = "LibEtPan"
 $LibEtPanDependencyPath = "$DependenciesPath\$LibEtPanDependencyDir"
 $TidyDependencyDir = "TidyHTML5"
@@ -38,11 +38,11 @@ $OpenSslDependencyDir = "OpenSSL"
 $OpenSslDependencyPath = "$DependenciesPath\$OpenSslDependencyDir\openssl-1.0.1j-vs2013"
 
 $Dependencies = @(
-    @{ Name = "CTemplate"; WebUrl = "http://d.etpan.org/mailcore2-deps/ctemplate-win32/ctemplate-win32-1.zip"; Directory = $CTemplateDependencyDir; }
     @{ Name = "Cyrus SASL"; WebUrl = "http://d.etpan.org/mailcore2-deps/cyrus-sasl-win32/cyrus-sasl-win32-2.zip"; Directory = $SaslDependencyDir; }
     @{ Name = "zlib"; WebUrl = "http://d.etpan.org/mailcore2-deps/zlib-win32/zlib-win32-1.zip"; Directory = $ZlibDependencyDir; }
     @{ Name = "OpenSSL"; WebUrl = "http://d.etpan.org/mailcore2-deps/misc-win32/openssl-1.0.1j-vs2013.zip"; Directory = $OpenSslDependencyDir; }
     
+    @{ Name = "CTemplate"; GitUrl = "git@github.com:readdle/ctemplate.git"; GitBranch = "master"; Directory = $CTemplateDependencyDir; }
     @{ Name = "LibEtPan"; GitUrl = "git@github.com:dinhviethoa/libetpan.git"; GitTag = "1.9.3"; Directory = $LibEtPanDependencyDir; }
     @{ Name = "Tidy HTML5"; GitUrl = "git@github.com:readdle/tidy-html5.git"; GitBranch = "feature/windows"; Directory = $TidyDependencyDir; }
 )
@@ -102,6 +102,10 @@ Push-Task -Name "mailcore2" -ScriptBlock {
             MSBuild "$LibEtPanDependencyPath\build-windows\libetpan.sln" /t:libetpan /p:Configuration="Release" /p:Platform="x64"
         }
 
+        Push-Task -Name "Build CTemplate" -ScriptBlock {
+            MSBuild "$CTemplateDependencyPath\ctemplate.sln" /t:libctemplate /p:Configuration="Release" /p:Platform="x64"
+        }
+
         Push-Task -Name "Setup CMailcore Dependencies" -ScriptBlock {
             $ExternalsPath = "$ProjectRoot\Externals"
             if (-Not (Test-Path "$ExternalsPath\include")) {
@@ -118,8 +122,8 @@ Push-Task -Name "mailcore2" -ScriptBlock {
             Copy-Item -Path "$SaslDependencyPath\lib64" -Destination $ExternalsPath -Exclude "*.dll" -Recurse -Force -ErrorAction Stop -PassThru | Write-Host
             Copy-Item -Path "$OpenSslDependencyPath\include" -Destination $ExternalsPath -Recurse -Force -ErrorAction Stop -PassThru | Write-Host
             Copy-Item -Path "$OpenSslDependencyPath\lib64" -Destination $ExternalsPath -Recurse -Force -ErrorAction Stop -PassThru | Write-Host
-            Copy-Item -Path "$CTemplateDependencyPath\include" -Destination $ExternalsPath -Recurse -Force -ErrorAction Stop -PassThru | Write-Host
-            Copy-Item -Path "$CTemplateDependencyPath\lib64" -Destination $ExternalsPath -Exclude "*.dll" -Recurse -Force -ErrorAction Stop -PassThru | Write-Host
+            Copy-Item -Path "$CTemplateDependencyPath\src\windows\include\ctemplate" -Destination "$ExternalsPath\include" -Recurse -Force -ErrorAction Stop -PassThru | Write-Host
+            Copy-Item -Path "$CTemplateDependencyPath\x64\Release\*" -Destination "$ExternalsPath\lib64" -Exclude "*.dll" -Recurse -Force -ErrorAction Stop -PassThru | Write-Host
             Copy-Item -Path "$OpenSslDependencyPath\lib64\ssleay32MD.lib" -Destination "$ExternalsPath\lib64" -Force -ErrorAction Stop -PassThru | Write-Host
             Copy-Item -Path "$OpenSslDependencyPath\lib64\libeay32MD.lib" -Destination "$ExternalsPath\lib64" -Force -ErrorAction Stop -PassThru | Write-Host
             
@@ -139,7 +143,7 @@ Push-Task -Name "mailcore2" -ScriptBlock {
                 Install-File "$OpenSslDependencyPath\bin64\ssleay32MD.dll" -Destination $BinDir
                 Install-File "$OpenSslDependencyPath\bin64\libeay32MD.dll" -Destination $BinDir
 
-                Install-File "$CTemplateDependencyPath\lib64\libctemplate.dll" -Destination $BinDir
+                Install-File "$CTemplateDependencyPath\x64\Release\libctemplate.dll" -Destination $BinDir
 
                 Install-File "$SaslDependencyPath\lib64\libsasl2.dll" -Destination $BinDir
 
