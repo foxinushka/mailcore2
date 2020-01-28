@@ -31,16 +31,19 @@ public class MCOIMAPOperation : MCOIMAPBaseOperation {
             cancelLock.unlock()
             return
         }
+        
         self.completionBlock = nil
         cancelLock.unlock()
-        let errorCode = error()
-        if errorCode == ErrorNone {
-            completionBlock(nil)
-        }
-        else {
-            completionBlock(MailCoreError.error(code: errorCode))
-        }
         
+        mailCoreAutoreleasePool {
+            let errorCode = error()
+            if errorCode == ErrorNone {
+                completionBlock(nil)
+            }
+            else {
+                completionBlock(MailCoreError.error(code: errorCode))
+            }
+        }
     }
-    
+
 }

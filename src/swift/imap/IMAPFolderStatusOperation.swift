@@ -48,13 +48,15 @@ public class MCOIMAPFolderStatusOperation : MCOIMAPBaseOperation {
         guard let completionBlock = self.completionBlock else {
             return
         }
-        
-        let errorCode = error()
-        if errorCode == ErrorNone {
-            completionBlock(nil, createMCOObject(from: operation.status().toCObject()))
-        }
-        else {
-            completionBlock(MailCoreError.error(code: errorCode), nil)
+
+        mailCoreAutoreleasePool {
+            let errorCode = error()
+            if errorCode == ErrorNone {
+                completionBlock(nil, createMCOObject(from: operation.status().toCObject()))
+            }
+            else {
+                completionBlock(MailCoreError.error(code: errorCode), nil)
+            }
         }
         self.completionBlock = nil
     }

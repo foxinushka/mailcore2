@@ -21,15 +21,31 @@ public class MCOAbstractMessagePart : MCOAbstractPart {
     
     // Returns the header of the embedded message.
     public var header : MCOMessageHeader? {
-        set { nativeInstance.header = newValue?.nativeInstance ?? CMessageHeader() }
-        get { return createMCOObject(from: nativeInstance.header.toCObject()) }
+        set {
+            mailCoreAutoreleasePool {
+                nativeInstance.header = newValue?.nativeInstance ?? CMessageHeader()
+            }
+        }
+        get {
+            return mailCoreAutoreleasePool {
+                createMCOObject(from: nativeInstance.header.toCObject())
+            }
+        }
     }
     
     // Returns the main part of the embedded message. It can be MCOAbstractPart, MCOAbstractMultipart
     // or a MCOAbstractMessagePart.
     public var mainPart : MCOAbstractPart? {
-        set { nativeInstance.mainPart = newValue?._CAbstractPart() ?? CAbstractPart() }
-        get { return createMCOObject(from: nativeInstance.mainPart.toCObject()) }
+        set {
+            mailCoreAutoreleasePool {
+                nativeInstance.mainPart = newValue?._CAbstractPart() ?? CAbstractPart()
+            }
+        }
+        get {
+            return mailCoreAutoreleasePool {
+                createMCOObject(from: nativeInstance.mainPart.toCObject())
+            }
+        }
     }
 
 }

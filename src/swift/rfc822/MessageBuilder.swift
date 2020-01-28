@@ -26,61 +26,111 @@ public class MCOMessageBuilder : MCOAbstractMessage {
     
     /** Main HTML content of the message.*/
     public var htmlBody: String? {
-        get { return nativeInstance.htmlBody.string() }
-        set { nativeInstance.htmlBody = newValue?.mailCoreString() ?? MailCoreString() }
+        get {
+            return mailCoreAutoreleasePool {
+                nativeInstance.htmlBody.string()
+            }
+        }
+        set {
+            mailCoreAutoreleasePool {
+                nativeInstance.htmlBody = newValue?.mailCoreString() ?? MailCoreString()
+            }
+        }
     }
     
     /** Plain text content of the message.*/
     public var textBody: String? {
-        get { return nativeInstance.textBody.string() }
-        set { nativeInstance.textBody = newValue?.mailCoreString() ?? MailCoreString() }
+        get {
+            return mailCoreAutoreleasePool {
+                nativeInstance.textBody.string()
+            }
+        }
+        set {
+            mailCoreAutoreleasePool {
+                nativeInstance.textBody = newValue?.mailCoreString() ?? MailCoreString()
+            }
+        }
     }
     
     /** List of file attachments.*/
     public var attachments: Array<MCOAttachment>? {
-        get { return Array<MCOAttachment>(mailCoreArray: nativeInstance.attachments); }
-        set { nativeInstance.attachments = newValue?.mailCoreArray() ?? CArray() }
+        get {
+            return mailCoreAutoreleasePool {
+                Array<MCOAttachment>(mailCoreArray: nativeInstance.attachments);
+            }
+        }
+        set {
+            mailCoreAutoreleasePool {
+                nativeInstance.attachments = newValue?.mailCoreArray() ?? CArray()
+            }
+        }
     }
     
     /** List of related file attachments (included as cid: link in the HTML part).*/
     public var relatedAttachments: Array<MCOAttachment>? {
-        get { return Array<MCOAttachment>(mailCoreArray: nativeInstance.relatedAttachments) }
-        set { nativeInstance.relatedAttachments = newValue?.mailCoreArray() ?? CArray() }
+        get {
+            return mailCoreAutoreleasePool {
+                Array<MCOAttachment>(mailCoreArray: nativeInstance.relatedAttachments)
+            }
+        }
+        set {
+            mailCoreAutoreleasePool {
+                nativeInstance.relatedAttachments = newValue?.mailCoreArray() ?? CArray()
+            }
+        }
     }
     
     /** Prefix for the boundary identifier. Default value is nil.*/
     public var boundaryPrefix: String? {
-        get { return nativeInstance.boundaryPrefix.string() }
-        set { nativeInstance.boundaryPrefix = newValue?.mailCoreString() ?? MailCoreString() }
+        get {
+            return mailCoreAutoreleasePool {
+                nativeInstance.boundaryPrefix.string()
+            }
+        }
+        set {
+            mailCoreAutoreleasePool {
+                nativeInstance.boundaryPrefix = newValue?.mailCoreString() ?? MailCoreString()
+            }
+        }
     }
     
     /** Add an attachment.*/
     public func addAttachment(attachment: MCOAttachment) {
-        nativeInstance.addAttachment(attachment.nativeInstance);
+        mailCoreAutoreleasePool {
+            nativeInstance.addAttachment(attachment.nativeInstance);
+        }
     }
     
     /** Add a related attachment.*/
     public func addRelatedAttachment(attachment: MCOAttachment) {
-        nativeInstance.addRelatedAttachment(attachment.nativeInstance);
+        mailCoreAutoreleasePool {
+            nativeInstance.addRelatedAttachment(attachment.nativeInstance);
+        }
     }
     
     /** RFC 822 formatted message.*/
     public func data() -> Data? {
-        return Data(cdata: nativeInstance.data());
+        return mailCoreAutoreleasePool {
+            return Data(cdata: nativeInstance.data());
+        }
     }
     
     /** RFC 822 formatted message for encryption.*/
     public func dataForEncryption() -> Data? {
-        return Data(cdata: nativeInstance.dataForEncryption());
+        return mailCoreAutoreleasePool {
+            return Data(cdata: nativeInstance.dataForEncryption());
+        }
     }
     
     /** Store RFC 822 formatted message to file. */
     public func writeToFile(filename: String) throws -> Bool {
-        let code = nativeInstance.writeToFile(filename.mailCoreString())
-        if code != ErrorNone {
-            throw MailCoreError.error(code: code);
+        return try mailCoreAutoreleasePool {
+            let code = nativeInstance.writeToFile(filename.mailCoreString())
+            if code != ErrorNone {
+                throw MailCoreError.error(code: code);
+            }
+            return true
         }
-        return true
     }
     
     /**
@@ -90,7 +140,9 @@ public class MCOMessageBuilder : MCOAbstractMessage {
      You could use http://www.netpgp.com to generate it.
      */
     public func openPGPSignedMessageDataWithSignatureData(signature: Data) -> Data? {
-        return Data(cdata: nativeInstance.openPGPSignedMessageDataWithSignatureData(signature.mailCoreData()))
+        return mailCoreAutoreleasePool {
+            return Data(cdata: nativeInstance.openPGPSignedMessageDataWithSignatureData(signature.mailCoreData()))
+        }
     }
     
     /**
@@ -99,7 +151,9 @@ public class MCOMessageBuilder : MCOAbstractMessage {
      You could use http://www.netpgp.com to generate it.
      */
     public func openPGPEncryptedMessageDataWithEncryptedData(encryptedData: Data) -> Data? {
-        return Data(cdata: nativeInstance.openPGPEncryptedMessageDataWithEncryptedData(encryptedData.mailCoreData()))
+        return mailCoreAutoreleasePool {
+            return Data(cdata: nativeInstance.openPGPEncryptedMessageDataWithEncryptedData(encryptedData.mailCoreData()))
+        }
     }
     
     /** HTML rendering of the message to be displayed in a web view. The delegate can be nil.*/
@@ -107,29 +161,39 @@ public class MCOMessageBuilder : MCOAbstractMessage {
     
     /** HTML rendering of the body of the message to be displayed in a web view.*/
     public func htmlBodyRendering() -> String? {
-        return nativeInstance.htmlBodyRendering().string()
+        return mailCoreAutoreleasePool {
+            return nativeInstance.htmlBodyRendering().string()
+        }
     }
     
     /** Text rendering of the message.*/
     public func plainTextRendering() -> String? {
-        return nativeInstance.plainTextRendering().string()
+        return mailCoreAutoreleasePool {
+            return nativeInstance.plainTextRendering().string()
+        }
     }
     
     /** Text rendering of the body of the message. All end of line will be removed and white spaces cleaned up.
      This method can be used to generate the summary of the message.*/
     public func plainTextBodyRendering() -> String? {
-        return nativeInstance.plainTextBodyRenderingAndStripWhitespace(true).string()
+        return mailCoreAutoreleasePool {
+            return nativeInstance.plainTextBodyRenderingAndStripWhitespace(true).string()
+        }
     }
     
     /** Text rendering of the body of the message. All end of line will be removed and white spaces cleaned up if requested.
      This method can be used to generate the summary of the message.*/
     public func plainTextBodyRenderingAndStripWhitespace(stripWhitespace: Bool) -> String? {
-        return nativeInstance.plainTextBodyRenderingAndStripWhitespace(stripWhitespace).string()
+        return mailCoreAutoreleasePool {
+            return nativeInstance.plainTextBodyRenderingAndStripWhitespace(stripWhitespace).string()
+        }
     }
     
     /** Method for testing purpose **/
     internal func setBoundaries(_ boundaries: [String]) {
-        nativeInstance.setBoundaries(boundaries.mailCoreArray())
+        mailCoreAutoreleasePool {
+            nativeInstance.setBoundaries(boundaries.mailCoreArray())
+        }
     }
 
 }

@@ -19,10 +19,10 @@ extern "C" {
     
     C_SYNTHESIZE_STRUCT_DEFINITION(CAbstractMessagePart, mailcore::AbstractMessagePart)
     
-    C_SYNTHESIZE_COBJECT_CAST_DEFINITION(CAbstractMessagePart)
+	C_SYNTHESIZE_COBJECT_CAST_DEFINITION(CAbstractMessagePart)
     
-    C_SYNTHESIZE_PROPERTY_DEFINITION(CAbstractMessagePart, CMessageHeader, header, setHeader)
-    C_SYNTHESIZE_PROPERTY_DEFINITION(CAbstractMessagePart, CAbstractPart, mainPart, setMainPart)
+	C_SYNTHESIZE_PROPERTY_DEFINITION(CAbstractMessagePart, CMessageHeader, header, setHeader)
+	C_SYNTHESIZE_PROPERTY_DEFINITION(CAbstractMessagePart, CAbstractPart, mainPart, setMainPart)
     
 #ifdef __cplusplus
 }

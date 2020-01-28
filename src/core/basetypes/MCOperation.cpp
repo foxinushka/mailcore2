@@ -7,20 +7,23 @@ Operation::Operation()
     mCallback = NULL;
     mCancelled = false;
     mShouldRunWhenCancelled = false;
-    pthread_mutex_init(&mLock, NULL);
-#if defined(__APPLE__) || defined(__ANDROID__)
+
+	MCB_LOCK_INIT(&mLock);
+
+#if MC_HAS_GCD
     mCallbackDispatchQueue = getMainQueue();
 #endif
 }
 
 Operation::~Operation()
 {
-#if defined(__APPLE__) || defined(__ANDROID__)
+#if MC_HAS_GCD
     if (mCallbackDispatchQueue != NULL) {
         dispatch_release(mCallbackDispatchQueue);
     }
 #endif
-    pthread_mutex_destroy(&mLock);
+
+    MCB_LOCK_DESTROY(&mLock);
 }
 
 void Operation::setCallback(OperationCallback * callback)
@@ -35,16 +38,16 @@ OperationCallback * Operation::callback()
 
 void Operation::cancel()
 {
-    pthread_mutex_lock(&mLock);
+	MCB_LOCK(&mLock);
     mCancelled = true;
-    pthread_mutex_unlock(&mLock);
+	MCB_UNLOCK(&mLock);
 }
 
 bool Operation::isCancelled()
 {
-    pthread_mutex_lock(&mLock);
+	MCB_LOCK(&mLock);
     bool value = mCancelled;
-    pthread_mutex_unlock(&mLock);
+	MCB_UNLOCK(&mLock);
     
     return value;
 }
@@ -75,7 +78,7 @@ void Operation::start()
 {
 }
 
-#if defined(__APPLE__) || defined(__ANDROID__)
+#if MC_HAS_GCD
 void Operation::setCallbackDispatchQueue(dispatch_queue_t callbackDispatchQueue)
 {
     if (mCallbackDispatchQueue != NULL) {
@@ -95,7 +98,7 @@ dispatch_queue_t Operation::callbackDispatchQueue()
 
 void Operation::performMethodOnCallbackThread(Method method, void * context, bool waitUntilDone)
 {
-#if defined(__APPLE__) || defined(__ANDROID__)
+#if MC_HAS_GCD
     dispatch_queue_t queue = mCallbackDispatchQueue;
     if (queue == NULL) {
         queue = getMainQueue();

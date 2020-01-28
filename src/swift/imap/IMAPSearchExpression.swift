@@ -26,7 +26,9 @@ public class MCOIMAPSearchExpression: NSObjectCompat {
      MCOIMAPSearchExpression * expr = [MCOIMAPSearchExpression searchAll]
      */
     public static func searchAll() -> MCOIMAPSearchExpression {
-        return MCOIMAPSearchExpression(CIMAPSearchExpression_searchAll());
+        return mailCoreAutoreleasePool {
+            return MCOIMAPSearchExpression(CIMAPSearchExpression_searchAll());
+        }
     }
     
     /**
@@ -37,7 +39,9 @@ public class MCOIMAPSearchExpression: NSObjectCompat {
      MCOIMAPSearchExpression * expr = [MCOIMAPSearchExpression searchFrom:@"laura@etpan.org"]
      */
     public static func searchFrom(_ value: String) -> MCOIMAPSearchExpression {
-        return MCOIMAPSearchExpression(CIMAPSearchExpression.searchFrom(value.mailCoreString()))
+        return mailCoreAutoreleasePool {
+            return MCOIMAPSearchExpression(CIMAPSearchExpression.searchFrom(value.mailCoreString()))
+        }
     }
     
     /**
@@ -48,7 +52,9 @@ public class MCOIMAPSearchExpression: NSObjectCompat {
      MCOIMAPSearchExpression * expr = [MCOIMAPSearchExpression searchRecipient:@"ngan@etpan.org"]
      **/
     public static func searchRecipient(_ value: String) -> MCOIMAPSearchExpression {
-        return MCOIMAPSearchExpression(CIMAPSearchExpression.searchRecipient(value.mailCoreString()))
+        return mailCoreAutoreleasePool {
+            return MCOIMAPSearchExpression(CIMAPSearchExpression.searchRecipient(value.mailCoreString()))
+        }
     }
     
     /**
@@ -59,7 +65,9 @@ public class MCOIMAPSearchExpression: NSObjectCompat {
      MCOIMAPSearchExpression * expr = [MCOIMAPSearchExpression searchTo:@"ngan@etpan.org"]
      **/
     public static func searchTo(_ value: String) -> MCOIMAPSearchExpression {
-        return MCOIMAPSearchExpression(CIMAPSearchExpression.searchTo(value.mailCoreString()))
+        return mailCoreAutoreleasePool {
+            return MCOIMAPSearchExpression(CIMAPSearchExpression.searchTo(value.mailCoreString()))
+        }
     }
     
     /**
@@ -70,7 +78,9 @@ public class MCOIMAPSearchExpression: NSObjectCompat {
      MCOIMAPSearchExpression * expr = [MCOIMAPSearchExpression searchCc:@"ngan@etpan.org"]
      **/
     public static func searchCc(_ value: String) -> MCOIMAPSearchExpression {
-        return MCOIMAPSearchExpression(CIMAPSearchExpression.searchCc(value.mailCoreString()))
+        return mailCoreAutoreleasePool {
+            return MCOIMAPSearchExpression(CIMAPSearchExpression.searchCc(value.mailCoreString()))
+        }
     }
     
     /**
@@ -81,7 +91,9 @@ public class MCOIMAPSearchExpression: NSObjectCompat {
      MCOIMAPSearchExpression * expr = [MCOIMAPSearchExpression searchBcc:@"ngan@etpan.org"]
      **/
     public static func searchBcc(_ value: String) -> MCOIMAPSearchExpression {
-        return MCOIMAPSearchExpression(CIMAPSearchExpression.searchBcc(value.mailCoreString()))
+        return mailCoreAutoreleasePool {
+            return MCOIMAPSearchExpression(CIMAPSearchExpression.searchBcc(value.mailCoreString()))
+        }
     }
     
     /*
@@ -92,7 +104,9 @@ public class MCOIMAPSearchExpression: NSObjectCompat {
      MCOIMAPSearchExpression * expr = [MCOIMAPSearchExpression searchSubject:@"airline"]
      **/
     public static func searchSubject(_ value: String) -> MCOIMAPSearchExpression {
-        return MCOIMAPSearchExpression(CIMAPSearchExpression.searchSubject(value.mailCoreString()))
+        return mailCoreAutoreleasePool {
+            return MCOIMAPSearchExpression(CIMAPSearchExpression.searchSubject(value.mailCoreString()))
+        }
     }
     
     /**
@@ -103,7 +117,9 @@ public class MCOIMAPSearchExpression: NSObjectCompat {
      MCOIMAPSearchExpression * expr = [MCOIMAPSearchExpression searchContent:@"meeting"]
      */
     public static func searchContent(_ value: String) -> MCOIMAPSearchExpression {
-        return MCOIMAPSearchExpression(CIMAPSearchExpression.searchContent(value.mailCoreString()))
+        return mailCoreAutoreleasePool {
+            return MCOIMAPSearchExpression(CIMAPSearchExpression.searchContent(value.mailCoreString()))
+        }
     }
     
     /**
@@ -114,7 +130,9 @@ public class MCOIMAPSearchExpression: NSObjectCompat {
      MCOIMAPSearchExpression * expr = [MCOIMAPSearchExpression searchBody:@"building"]
      */
     public static func searchBody(_ value: String) -> MCOIMAPSearchExpression {
-        return MCOIMAPSearchExpression(CIMAPSearchExpression.searchBody(value.mailCoreString()))
+        return mailCoreAutoreleasePool {
+            return MCOIMAPSearchExpression(CIMAPSearchExpression.searchBody(value.mailCoreString()))
+        }
     }
     
     /**
@@ -125,7 +143,9 @@ public class MCOIMAPSearchExpression: NSObjectCompat {
      MCOIMAPSearchExpression * expr = [MCOIMAPSearchExpression searchUids:uids]
      **/
     public static func searchUIDs(_ uids: MCOIndexSet) -> MCOIMAPSearchExpression {
-        return MCOIMAPSearchExpression(CIMAPSearchExpression.searchUIDs(uids.cast()));
+        return mailCoreAutoreleasePool {
+            return MCOIMAPSearchExpression(CIMAPSearchExpression.searchUIDs(uids.cast()));
+        }
     }
     
     /**
@@ -136,7 +156,9 @@ public class MCOIMAPSearchExpression: NSObjectCompat {
      MCOIMAPSearchExpression * expr = [MCOIMAPSearchExpression searchNumbers:numbers]
      **/
     public static func searchNumbers(_ numbers: MCOIndexSet) -> MCOIMAPSearchExpression {
-        return MCOIMAPSearchExpression(CIMAPSearchExpression.searchNumbers(numbers.cast()));
+        return mailCoreAutoreleasePool {
+            return MCOIMAPSearchExpression(CIMAPSearchExpression.searchNumbers(numbers.cast()));
+        }
     }
     
     /**
@@ -147,7 +169,9 @@ public class MCOIMAPSearchExpression: NSObjectCompat {
      MCOIMAPSearchExpression * expr = [MCOIMAPSearchExpression searchHeader:@"List-Id" value:@"shoes"]
      **/
     public static func searchHeader(_ header: String, value: String) -> MCOIMAPSearchExpression {
-        return MCOIMAPSearchExpression(CIMAPSearchExpression.searchHeader(header.mailCoreString(), value.mailCoreString()))
+        return mailCoreAutoreleasePool {
+            return MCOIMAPSearchExpression(CIMAPSearchExpression.searchHeader(header.mailCoreString(), value.mailCoreString()))
+        }
     }
     
     /**
@@ -158,7 +182,9 @@ public class MCOIMAPSearchExpression: NSObjectCompat {
      MCOIMAPSearchExpression * expr = [MCOIMAPSearchExpression searchRead]
      **/
     public static func searchRead() -> MCOIMAPSearchExpression {
-        return MCOIMAPSearchExpression(CIMAPSearchExpression_searchRead());
+        return mailCoreAutoreleasePool {
+            return MCOIMAPSearchExpression(CIMAPSearchExpression_searchRead());
+        }
     }
     
     /**
@@ -169,7 +195,9 @@ public class MCOIMAPSearchExpression: NSObjectCompat {
      MCOIMAPSearchExpression * expr = [MCOIMAPSearchExpression searchUnread]
      **/
     public static func searchUnread() -> MCOIMAPSearchExpression {
-        return MCOIMAPSearchExpression(CIMAPSearchExpression_searchUnread());
+        return mailCoreAutoreleasePool {
+            return MCOIMAPSearchExpression(CIMAPSearchExpression_searchUnread());
+        }
     }
     
     /**
@@ -180,7 +208,9 @@ public class MCOIMAPSearchExpression: NSObjectCompat {
      MCOIMAPSearchExpression * expr = [MCOIMAPSearchExpression searchFlagged]
      **/
     public static func searchFlagged() -> MCOIMAPSearchExpression {
-        return MCOIMAPSearchExpression(CIMAPSearchExpression_searchFlagged());
+        return mailCoreAutoreleasePool {
+            return MCOIMAPSearchExpression(CIMAPSearchExpression_searchFlagged());
+        }
     }
     
     /**
@@ -191,7 +221,9 @@ public class MCOIMAPSearchExpression: NSObjectCompat {
      MCOIMAPSearchExpression * expr = [MCOIMAPSearchExpression searchUnflagged]
      **/
     public static func searchUnflagged() -> MCOIMAPSearchExpression {
-        return MCOIMAPSearchExpression(CIMAPSearchExpression_searchUnflagged());
+        return mailCoreAutoreleasePool {
+            return MCOIMAPSearchExpression(CIMAPSearchExpression_searchUnflagged());
+        }
     }
     
     /**
@@ -202,7 +234,9 @@ public class MCOIMAPSearchExpression: NSObjectCompat {
      MCOIMAPSearchExpression * expr = [MCOIMAPSearchExpression searchAnswered]
      **/
     public static func searchAnswered() -> MCOIMAPSearchExpression {
-        return MCOIMAPSearchExpression(CIMAPSearchExpression_searchAnswered());
+        return mailCoreAutoreleasePool {
+            return MCOIMAPSearchExpression(CIMAPSearchExpression_searchAnswered());
+        }
     }
     
     /**
@@ -213,7 +247,9 @@ public class MCOIMAPSearchExpression: NSObjectCompat {
      MCOIMAPSearchExpression * expr = [MCOIMAPSearchExpression searchUnanswered]
      **/
     public static func searchUnanswered() -> MCOIMAPSearchExpression {
-        return MCOIMAPSearchExpression(CIMAPSearchExpression_searchUnanswered());
+        return mailCoreAutoreleasePool {
+            return MCOIMAPSearchExpression(CIMAPSearchExpression_searchUnanswered());
+        }
     }
     
     /**
@@ -224,7 +260,9 @@ public class MCOIMAPSearchExpression: NSObjectCompat {
      MCOIMAPSearchExpression * expr = [MCOIMAPSearchExpression searchDraft]
      **/
     public static func searchDraft() -> MCOIMAPSearchExpression {
-        return MCOIMAPSearchExpression(CIMAPSearchExpression_searchDraft());
+        return mailCoreAutoreleasePool {
+            return MCOIMAPSearchExpression(CIMAPSearchExpression_searchDraft());
+        }
     }
     
     /**
@@ -235,7 +273,9 @@ public class MCOIMAPSearchExpression: NSObjectCompat {
      MCOIMAPSearchExpression * expr = [MCOIMAPSearchExpression searchUndraft]
      **/
     public static func searchUndraft() -> MCOIMAPSearchExpression {
-        return MCOIMAPSearchExpression(CIMAPSearchExpression_searchUndraft());
+        return mailCoreAutoreleasePool {
+            return MCOIMAPSearchExpression(CIMAPSearchExpression_searchUndraft());
+        }
     }
     
     /**
@@ -246,7 +286,9 @@ public class MCOIMAPSearchExpression: NSObjectCompat {
      MCOIMAPSearchExpression * expr = [MCOIMAPSearchExpression searchDeleted]
      **/
     public static func searchDeleted() -> MCOIMAPSearchExpression {
-        return MCOIMAPSearchExpression(CIMAPSearchExpression_searchDeleted());
+        return mailCoreAutoreleasePool {
+            return MCOIMAPSearchExpression(CIMAPSearchExpression_searchDeleted());
+        }
     }
     
     /**
@@ -257,7 +299,9 @@ public class MCOIMAPSearchExpression: NSObjectCompat {
      MCOIMAPSearchExpression * expr = [MCOIMAPSearchExpression searchSpam]
      **/
     static func searchSpam() -> MCOIMAPSearchExpression {
-        return MCOIMAPSearchExpression(CIMAPSearchExpression_searchSpam());
+        return mailCoreAutoreleasePool {
+            return MCOIMAPSearchExpression(CIMAPSearchExpression_searchSpam());
+        }
     }
     
     /**
@@ -269,7 +313,9 @@ public class MCOIMAPSearchExpression: NSObjectCompat {
      MCOIMAPSearchExpression * expr = [MCOIMAPSearchExpression searchBeforeDate:yesterday]
      **/
     public static func searchBeforeDate(_ date: Date) -> MCOIMAPSearchExpression {
-        return MCOIMAPSearchExpression(CIMAPSearchExpression.searchBeforeDate(time_t(date.timeIntervalSince1970)));
+        return mailCoreAutoreleasePool {
+            return MCOIMAPSearchExpression(CIMAPSearchExpression.searchBeforeDate(time_t(date.timeIntervalSince1970)));
+        }
     }
     
     /**
@@ -281,7 +327,9 @@ public class MCOIMAPSearchExpression: NSObjectCompat {
      MCOIMAPSearchExpression * expr = [MCOIMAPSearchExpression searchOnDate:now]
      **/
     public static func searchOnDate(_ date: Date) -> MCOIMAPSearchExpression {
-        return MCOIMAPSearchExpression(CIMAPSearchExpression.searchOnDate(time_t(date.timeIntervalSince1970)));
+        return mailCoreAutoreleasePool {
+            return MCOIMAPSearchExpression(CIMAPSearchExpression.searchOnDate(time_t(date.timeIntervalSince1970)));
+        }
     }
     
     /**
@@ -293,7 +341,9 @@ public class MCOIMAPSearchExpression: NSObjectCompat {
      MCOIMAPSearchExpression * expr = [MCOIMAPSearchExpression searchSinceDate:now]
      **/
     public static func searchSinceDate(_ date: Date) -> MCOIMAPSearchExpression {
-        return MCOIMAPSearchExpression(CIMAPSearchExpression.searchSinceDate(time_t(date.timeIntervalSince1970)));
+        return mailCoreAutoreleasePool {
+            return MCOIMAPSearchExpression(CIMAPSearchExpression.searchSinceDate(time_t(date.timeIntervalSince1970)));
+        }
     }
     
     /**
@@ -305,7 +355,9 @@ public class MCOIMAPSearchExpression: NSObjectCompat {
      MCOIMAPSearchExpression * expr = [MCOIMAPSearchExpression searchBeforeReceivedDate:yesterday]
      **/
     public static func searchBeforeReceivedDate(_ date: Date) -> MCOIMAPSearchExpression {
-        return MCOIMAPSearchExpression(CIMAPSearchExpression.searchBeforeReceivedDate(time_t(date.timeIntervalSince1970)));
+        return mailCoreAutoreleasePool {
+            return MCOIMAPSearchExpression(CIMAPSearchExpression.searchBeforeReceivedDate(time_t(date.timeIntervalSince1970)));
+        }
     }
     
     /**
@@ -317,7 +369,9 @@ public class MCOIMAPSearchExpression: NSObjectCompat {
      MCOIMAPSearchExpression * expr = [MCOIMAPSearchExpression searchOnReceivedDate:now]
      **/
     public static func searchOnReceivedDate(_ date: Date) -> MCOIMAPSearchExpression {
-        return MCOIMAPSearchExpression(CIMAPSearchExpression.searchOnReceivedDate(time_t(date.timeIntervalSince1970)));
+        return mailCoreAutoreleasePool {
+            return MCOIMAPSearchExpression(CIMAPSearchExpression.searchOnReceivedDate(time_t(date.timeIntervalSince1970)));
+        }
     }
     
     /**
@@ -329,7 +383,9 @@ public class MCOIMAPSearchExpression: NSObjectCompat {
      MCOIMAPSearchExpression * expr = [MCOIMAPSearchExpression searchSinceReceivedDate:yesterday]
      **/
     public static func searchSinceReceivedDate(_ date: Date) -> MCOIMAPSearchExpression {
-        return MCOIMAPSearchExpression(CIMAPSearchExpression.searchSinceReceivedDate(time_t(date.timeIntervalSince1970)));
+        return mailCoreAutoreleasePool {
+            return MCOIMAPSearchExpression(CIMAPSearchExpression.searchSinceReceivedDate(time_t(date.timeIntervalSince1970)));
+        }
     }
     
     /**
@@ -341,7 +397,9 @@ public class MCOIMAPSearchExpression: NSObjectCompat {
      MCOIMAPSearchExpression * expr = [MCOIMAPSearchExpression searchSizeLargerThan:minSize]
      **/
     public static func searchSizeLargerThan(_ size: UInt32) -> MCOIMAPSearchExpression {
-        return MCOIMAPSearchExpression(CIMAPSearchExpression.searchSizeLargerThan(size));
+        return mailCoreAutoreleasePool {
+            return MCOIMAPSearchExpression(CIMAPSearchExpression.searchSizeLargerThan(size));
+        }
     }
     
     /**
@@ -353,7 +411,9 @@ public class MCOIMAPSearchExpression: NSObjectCompat {
      MCOIMAPSearchExpression * expr = [MCOIMAPSearchExpression searchSizeSmallerThan:maxSize]
      **/
     public static func searchSizeSmallerThan(_ size: UInt32) -> MCOIMAPSearchExpression {
-        return MCOIMAPSearchExpression(CIMAPSearchExpression.searchSizeSmallerThan(size));
+        return mailCoreAutoreleasePool {
+            return MCOIMAPSearchExpression(CIMAPSearchExpression.searchSizeSmallerThan(size));
+        }
     }
     
     /**
@@ -364,7 +424,9 @@ public class MCOIMAPSearchExpression: NSObjectCompat {
      MCOIMAPSearchExpression * expr = [MCOIMAPSearchExpression searchGmailThreadID:aThreadID]
      */
     public static func searchGmailThreadID(_ size: UInt64) -> MCOIMAPSearchExpression {
-        return MCOIMAPSearchExpression(CIMAPSearchExpression.searchGmailThreadID(size));
+        return mailCoreAutoreleasePool {
+            return MCOIMAPSearchExpression(CIMAPSearchExpression.searchGmailThreadID(size));
+        }
     }
     
     
@@ -376,7 +438,9 @@ public class MCOIMAPSearchExpression: NSObjectCompat {
      MCOIMAPSearchExpression * expr = [MCOIMAPSearchExpression searchGmailMessageID:aMessageID]
      */
     public static func searchGmailMessageID(_ size: UInt64) -> MCOIMAPSearchExpression {
-        return MCOIMAPSearchExpression(CIMAPSearchExpression.searchGmailMessageID(size));
+        return mailCoreAutoreleasePool {
+            return MCOIMAPSearchExpression(CIMAPSearchExpression.searchGmailMessageID(size));
+        }
     }
     
     /**
@@ -388,7 +452,9 @@ public class MCOIMAPSearchExpression: NSObjectCompat {
      MCOIMAPSearchExpression * expr = [MCOIMAPSearchExpression searchGmailRaw:@"from:bill has:attachment filename:cal meeting schedule"]
      */
     public static func searchGmailRaw(_ expr: String) -> MCOIMAPSearchExpression {
-        return MCOIMAPSearchExpression(CIMAPSearchExpression.searchGmailRaw(expr.mailCoreString()))
+        return mailCoreAutoreleasePool {
+            return MCOIMAPSearchExpression(CIMAPSearchExpression.searchGmailRaw(expr.mailCoreString()))
+        }
     }
     
     
@@ -403,7 +469,9 @@ public class MCOIMAPSearchExpression: NSObjectCompat {
      **/
     
     public static func searchAnd(_ expression: MCOIMAPSearchExpression, other: MCOIMAPSearchExpression) -> MCOIMAPSearchExpression {
-        return MCOIMAPSearchExpression(CIMAPSearchExpression.searchAnd(expression.nativeInstance, other.nativeInstance));
+        return mailCoreAutoreleasePool {
+            return MCOIMAPSearchExpression(CIMAPSearchExpression.searchAnd(expression.nativeInstance, other.nativeInstance));
+        }
     }
     /**
      Creates a search expression that's a conjunction of two search expressions.
@@ -415,7 +483,9 @@ public class MCOIMAPSearchExpression: NSObjectCompat {
      MCOIMAPSearchExpression * expr = [MCOIMAPSearchExpression searchOr:exprFrom exprOtherFrom] -> ImapSearchExpression {
      */
     public static func searchOr(_ expression: MCOIMAPSearchExpression, other: MCOIMAPSearchExpression) -> MCOIMAPSearchExpression {
-        return MCOIMAPSearchExpression(CIMAPSearchExpression.searchOr(expression.nativeInstance, other.nativeInstance));
+        return mailCoreAutoreleasePool {
+            return MCOIMAPSearchExpression(CIMAPSearchExpression.searchOr(expression.nativeInstance, other.nativeInstance));
+        }
     }
     
     /**
@@ -429,7 +499,9 @@ public class MCOIMAPSearchExpression: NSObjectCompat {
      
      */
     public static func searchNot(_ expression: MCOIMAPSearchExpression) -> MCOIMAPSearchExpression {
-        return MCOIMAPSearchExpression(CIMAPSearchExpression.searchNot(expression.nativeInstance));
+        return mailCoreAutoreleasePool {
+            return MCOIMAPSearchExpression(CIMAPSearchExpression.searchNot(expression.nativeInstance));
+        }
     }
     
     

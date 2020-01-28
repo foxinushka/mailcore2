@@ -9,6 +9,8 @@
 #include <string.h>
 #if __APPLE__
 #include <Block.h>
+#elif defined(_MSC_VER)
+#include <Block/Block.h>
 #endif
 
 #include "MCAutoreleasePool.h"
@@ -42,7 +44,9 @@ Object::~Object()
 
 void Object::init()
 {
-#if __APPLE__
+#ifdef _MSC_VER
+	mLock = SRWLOCK_INIT;
+#elif __APPLE__
     mLock = OS_UNFAIR_LOCK_INIT;
 #else
     pthread_mutex_init(&mLock, NULL);
@@ -78,7 +82,7 @@ void Object::release()
     }
     if (mCounter < 0) {
         MCLog("release too much %p %s", this, MCUTF8(className()));
-        MCAssert(0);
+        //MCAssert(0);
     }
     MC_UNLOCK(&mLock);
 
@@ -101,7 +105,6 @@ Object * Object::autorelease()
 
 String * Object::className()
 {
-    int status;
 #ifdef _MSC_VER
     String * result = String::uniquedStringWithUTF8Characters(typeid(*this).name());
 	// typeid(*this).name() will return "class mailcore::Object". Therefore, we'll strip the prefix "class " from it.
@@ -109,6 +112,7 @@ String * Object::className()
 		result = result->substringFromIndex(6);
 	}
 #else
+	int status;
 
     #if defined(ANDROID) || defined(__ANDROID__)
         // workaround for android ndk 14b
@@ -173,18 +177,36 @@ struct mainThreadCallData {
     void * caller;
 };
 
-static pthread_once_t delayedPerformOnce = PTHREAD_ONCE_INIT;
 static chash * delayedPerformHash = NULL;
-static pthread_mutex_t delayedPerformLock = PTHREAD_MUTEX_INITIALIZER;
+static MC_LOCK_TYPE delayedPerformLock = MC_LOCK_INITIAL_VALUE;
 
 static void reallyInitDelayedPerform()
 {
     delayedPerformHash = chash_new(CHASH_DEFAULTSIZE, CHASH_COPYKEY);
 }
 
+#ifdef _MSC_VER
+
+static INIT_ONCE delayedPerformOnce = INIT_ONCE_STATIC_INIT;
+
+BOOL CALLBACK reallyInitDelayedPerformCallback(PINIT_ONCE InitOnce, PVOID Parameter, PVOID * lpContext) {
+	reallyInitDelayedPerform();
+	return TRUE;
+}
+
+#else
+
+static pthread_once_t delayedPerformOnce = PTHREAD_ONCE_INIT;
+
+#endif
+
 static void initDelayedPerform()
 {
+#ifdef _MSC_VER
+	InitOnceExecuteOnce(&delayedPerformOnce, reallyInitDelayedPerformCallback, NULL, NULL);
+#else
     pthread_once(&delayedPerformOnce, reallyInitDelayedPerform);
+#endif
 }
 
 struct mainThreadCallKeyData {
@@ -199,7 +221,7 @@ static void removeFromPerformHash(Object * obj, Object::Method method, void * co
     chashdatum key;
     struct mainThreadCallKeyData keyData;
     Object * queueIdentifier = NULL;
-#if defined(__APPLE__) || defined(__ANDROID__)
+#if MC_HAS_GCD
     if (targetDispatchQueue != NULL) {
         queueIdentifier = (Object *) dispatch_queue_get_specific((dispatch_queue_t) targetDispatchQueue, "MCDispatchQueueID");
     }
@@ -212,9 +234,9 @@ static void removeFromPerformHash(Object * obj, Object::Method method, void * co
     key.data = &keyData;
     key.len = sizeof(keyData);
 
-    pthread_mutex_lock(&delayedPerformLock);
+    MC_LOCK(&delayedPerformLock);
     chash_delete(delayedPerformHash, (chashdatum *) &key, NULL);
-    pthread_mutex_unlock(&delayedPerformLock);
+    MC_UNLOCK(&delayedPerformLock);
 }
 
 static void queueIdentifierDestructor(void * identifier)
@@ -230,7 +252,7 @@ static void addToPerformHash(Object * obj, Object::Method method, void * context
     chashdatum value;
     struct mainThreadCallKeyData keyData;
     Object * queueIdentifier = NULL;
-#if defined(__APPLE__) || defined(__ANDROID__)
+#if MC_HAS_GCD
     if (targetDispatchQueue == NULL) {
         queueIdentifier = NULL;
     }
@@ -251,9 +273,9 @@ static void addToPerformHash(Object * obj, Object::Method method, void * context
     key.len = sizeof(keyData);
     value.data = performValue;
     value.len = 0;
-    pthread_mutex_lock(&delayedPerformLock);
+    MC_LOCK(&delayedPerformLock);
     chash_set(delayedPerformHash, &key, &value, NULL);
-    pthread_mutex_unlock(&delayedPerformLock);
+    MC_UNLOCK(&delayedPerformLock);
 }
 
 static void * getFromPerformHash(Object * obj, Object::Method method, void * context, void * targetDispatchQueue)
@@ -264,7 +286,7 @@ static void * getFromPerformHash(Object * obj, Object::Method method, void * con
     int r;
     
     Object * queueIdentifier = NULL;
-#if defined(__APPLE__) || defined(__ANDROID__)
+#if MC_HAS_GCD
     if (targetDispatchQueue != NULL) {
         queueIdentifier = (Object *) dispatch_queue_get_specific((dispatch_queue_t) targetDispatchQueue, "MCDispatchQueueID");
         if (queueIdentifier == NULL)
@@ -279,9 +301,9 @@ static void * getFromPerformHash(Object * obj, Object::Method method, void * con
     key.data = &keyData;
     key.len = sizeof(keyData);
     
-    pthread_mutex_lock(&delayedPerformLock);
+    MC_LOCK(&delayedPerformLock);
     r = chash_get(delayedPerformHash, &key, &value);
-    pthread_mutex_unlock(&delayedPerformLock);
+    MC_UNLOCK(&delayedPerformLock);
     if (r < 0)
         return NULL;
     
@@ -304,26 +326,8 @@ static void performOnMainThread(void * info)
     
     free(data);
 }
-
-static void performAfterDelay(void * info)
-{
-    struct mainThreadCallData * data;
-    void * context;
-    Object * obj;
-    Object::Method method;
-    
-    data = (struct mainThreadCallData *) info;
-    obj = data->obj;
-    context = data->context;
-    method = data->method;
-    
-    removeFromPerformHash(obj, method, context, NULL);
-    (obj->*method)(context);
-    
-    free(data);
-}
  
-#ifndef __ANDROID__
+#if !defined(__ANDROID__)
 void Object::performMethodOnMainThread(Method method, void * context, bool waitUntilDone)
 {
     struct mainThreadCallData * data;
@@ -343,7 +347,7 @@ void Object::performMethodOnMainThread(Method method, void * context, bool waitU
 }
 #endif
 
-#if defined(__APPLE__) || defined(__ANDROID__)
+#if MC_HAS_GCD
 void Object::performMethodOnDispatchQueue(Method method, void * context, void * targetDispatchQueue, bool waitUntilDone)
 {
     if (waitUntilDone) {
@@ -413,7 +417,7 @@ void Object::cancelDelayedPerformMethodOnDispatchQueue(Method method, void * con
 
 void Object::performMethodAfterDelay(Method method, void * context, double delay)
 {
-#if defined(__APPLE__) || defined(__ANDROID__)
+#if MC_HAS_GCD
     performMethodOnDispatchQueueAfterDelay(method, context, Object::getMainQueue(), delay);
 #else
     initDelayedPerform();
@@ -431,7 +435,7 @@ void Object::performMethodAfterDelay(Method method, void * context, double delay
 
 void Object::cancelDelayedPerformMethod(Method method, void * context)
 {
-#if defined(__APPLE__) || defined(__ANDROID__)
+#if MC_HAS_GCD
     cancelDelayedPerformMethodOnDispatchQueue(method, context, Object::getMainQueue());
 #else
     initDelayedPerform();
@@ -458,6 +462,15 @@ void Object::importSerializable(HashMap * serializable)
     MCAssert(0);
 }
 
+#ifdef _MSC_VER
+
+BOOL CALLBACK Object::initObjectConstructorsCallback(PINIT_ONCE InitOnce, PVOID Parameter, PVOID * lpContext) {
+	initObjectConstructors();
+	return TRUE;
+}
+
+#endif
+
 static chash * constructors = NULL;
 
 void Object::initObjectConstructors()
@@ -467,9 +480,14 @@ void Object::initObjectConstructors()
 
 void Object::registerObjectConstructor(const char * className, void * (* objectConstructor)(void))
 {
+#ifdef _MSC_VER
+	INIT_ONCE once = INIT_ONCE_STATIC_INIT;
+	InitOnceExecuteOnce(&once, initObjectConstructorsCallback, NULL, NULL);
+#else
     static pthread_once_t once = PTHREAD_ONCE_INIT;
-    pthread_once(&once, initObjectConstructors);
-    
+	pthread_once(&once, initObjectConstructors);
+#endif
+
     chashdatum key;
     chashdatum value;
     key.data = (void *) className;
@@ -501,13 +519,14 @@ Object * Object::objectWithSerializable(HashMap * serializable)
     return obj->autorelease();
 }
 
-#ifdef __ANDROID__
+#if defined(__ANDROID__)
 dispatch_queue_t mailcore::mainQueue = NULL;
 #endif
 
+#if MC_HAS_GCD
 dispatch_queue_t Object::getMainQueue()
 {
-    #ifdef __ANDROID__
+    #if defined(__ANDROID__)
         dispatch_queue_t queue = mailcore::mainQueue;
         // You should set mainQueue before using MailCore
         assert(queue != NULL);
@@ -518,5 +537,5 @@ dispatch_queue_t Object::getMainQueue()
     #endif
 
 }
-
+#endif
 

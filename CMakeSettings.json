@@ -1,0 +1,53 @@
+﻿{
+  "configurations": [
+    {
+      "name": "x64-Release",
+      "generator": "Ninja",
+      "configurationType": "RelWithDebInfo",
+      "buildRoot": "${projectDir}\\.build\\mailcore2",
+      "installRoot": "${projectDir}\\.build\\install",
+      "cmakeCommandArgs": "",
+      "buildCommandArgs": "-v",
+      "ctestCommandArgs": "",
+      "inheritEnvironments": [ "clang_cl_x64" ],
+      "variables": [
+        {
+          "name": "DISPATCH_INCLUDE_DIR",
+          "value": "C:/Library/Developer/Platforms/Windows.platform/Developer/SDKs/Windows.sdk/usr/lib/swift",
+          "type": "PATH"
+        },
+        {
+          "name": "ICU4C_UC_LIBRARY",
+          "value": "C:/Library/icu-64/usr/lib/icuuc64.lib",
+          "type": "FILEPATH"
+        },
+        {
+          "name": "ICU4C_IN_LIBRARY",
+          "value": "C:/Library/icu-64/usr/lib/icuin64.lib",
+          "type": "FILEPATH"
+        },
+        {
+          "name": "CMAKE_C_COMPILER",
+          "value": "clang-cl.exe",
+          "type": "FILEPATH"
+        },
+        {
+          "name": "CMAKE_CXX_COMPILER",
+          "value": "clang-cl.exe",
+          "type": "FILEPATH"
+        },
+        {
+          "name": "DISPATCH_LIBRARY",
+          "value": "C:/Library/Developer/Platforms/Windows.platform/Developer/SDKs/Windows.sdk/usr/lib/swift/windows/dispatch.lib",
+          "type": "FILEPATH"
+        },
+        {
+          "name": "DISPATCH_BLOCKS_LIBRARY",
+          "value": "C:/Library/Developer/Platforms/Windows.platform/Developer/SDKs/Windows.sdk/usr/lib/swift/windows/BlocksRuntime.lib",
+          "type": "FILEPATH"
+        }
+      ],
+      "intelliSenseMode": "windows-clang-x64"
+    }
+  ]
+}

@@ -1,7 +1,7 @@
 import Foundation
 import CMailCore
 
-#if os(Android)
+#if os(Android) || os(Windows)
     public typealias MailCoreRange = CMailCore.Range
 #else
     public typealias MailCoreRange = MailCore.Range
@@ -42,12 +42,20 @@ public class MCOIndexSet: NSObjectCompat, NSCopying, NSCoding {
     
     /** Creates an index set that contains a range of integers.*/
     public convenience init(range: MailCoreRange) {
-        self.init(CIndexSet(range: range))!;
+        let autoreleasePool = CAutoreleasePool_init()
+        defer {
+            autoreleasePool.release()
+        }
+        self.init(CIndexSet(range: range))!
     }
     
     /** Creates an index set with a single integer.*/
     public convenience init(index: UInt64) {
-        self.init(CIndexSet(idx: index))!;
+        let autoreleasePool = CAutoreleasePool_init()
+        defer {
+            autoreleasePool.release()
+        }
+        self.init(CIndexSet(idx: index))!
     }
     
     /** Returns the number of integers in that index set.*/
@@ -57,56 +65,76 @@ public class MCOIndexSet: NSObjectCompat, NSCopying, NSCoding {
     
     /** Adds an integer to the index set.*/
     public func add(_ index: UInt64) {
-        nativeInstance.addIndex(index);
+        mailCoreAutoreleasePool {
+            nativeInstance.addIndex(index);
+        }
     }
     
     /** Removes an integer from the index set.*/
     public func remove(_ index: UInt64) {
-        nativeInstance.removeIndex(index);
+        mailCoreAutoreleasePool {
+            nativeInstance.removeIndex(index);
+        }
     }
     
     /** Returns YES if the index set contains the given integer.*/
     public func contains(_ index: UInt64) -> Bool {
-        return nativeInstance.containsIndex(index);
+        return mailCoreAutoreleasePool {
+            return nativeInstance.containsIndex(index);
+        }
     }
     
     /** Adds a range of integers to the index set.*/
     public func add(range: MailCoreRange) {
-        nativeInstance.addRange(range);
+        mailCoreAutoreleasePool {
+            nativeInstance.addRange(range);
+        }
     }
     
     /** Removes a range of integers from the index set.*/
     public func remove(range: MailCoreRange) {
-        nativeInstance.removeRange(range);
+        mailCoreAutoreleasePool {
+            nativeInstance.removeRange(range);
+        }
     }
     
     /** Removes all integers that are not in the given range.*/
     public func intersects(range: MailCoreRange) {
-        nativeInstance.intersectsRange(range);
+        mailCoreAutoreleasePool {
+            nativeInstance.intersectsRange(range);
+        }
     }
     
     /** Adds all indexes from an other index set to the index set.*/
     public func add(indexSet: MCOIndexSet) {
-        nativeInstance.addIndexSet(indexSet.nativeInstance);
+        mailCoreAutoreleasePool {
+            nativeInstance.addIndexSet(indexSet.nativeInstance);
+        }
     }
     
     /** Remove all indexes from an other index set from the index set.*/
     public func remove(indexSet: MCOIndexSet) {
-        nativeInstance.removeIndexSet(indexSet.nativeInstance);
+        mailCoreAutoreleasePool {
+            nativeInstance.removeIndexSet(indexSet.nativeInstance);
+        }
     }
     
     /** Removes all integers that are not in the given index set.*/
     public func intersects(indexSet: MCOIndexSet) {
-        nativeInstance.intersectsIndexSet(indexSet.nativeInstance);
+        mailCoreAutoreleasePool {
+            nativeInstance.intersectsIndexSet(indexSet.nativeInstance);
+        }
     }
     
     /** Returns all the ranges of ths index set.*/
     public func allRanges() -> Array<MailCoreRange> {
-        var array  = Array<MailCoreRange>();
-        for index in 0 ..< self.rangesCount() {
-            array.append(nativeInstance.range(index));
+        return mailCoreAutoreleasePool {
+            var array = Array<MailCoreRange>();
+            for index in 0..<self.rangesCount() {
+                array.append(nativeInstance.range(index));
+            }
+            return array;
         }
-        return array;
     }
     
     /** Returns the number of ranges in this index set.*/
@@ -142,10 +170,12 @@ public class MCOIndexSet: NSObjectCompat, NSCopying, NSCoding {
     }
     
     public func copyIndexSet() -> MCOIndexSet {
-        let nativeIndexSet = CIndexSet(cobject: self.nativeInstance.copy())
-        let mcoIndexSet =  MCOIndexSet(nativeIndexSet)!
-        nativeIndexSet.release()
-        return mcoIndexSet
+        return mailCoreAutoreleasePool {
+            let nativeIndexSet = CIndexSet(cobject: self.nativeInstance.copy())
+            let mcoIndexSet =  MCOIndexSet(nativeIndexSet)!
+            nativeIndexSet.release()
+            return mcoIndexSet
+        }
     }
     
     public convenience required init?(coder aDecoder: NSCoder) {
@@ -167,7 +197,7 @@ public class MCOIndexSet: NSObjectCompat, NSCopying, NSCoding {
 
 public extension IndexSet {
 
-    public func mcoIndexSet() -> MCOIndexSet {
+    func mcoIndexSet() -> MCOIndexSet {
         return MCOIndexSet(foundationIndexSet: self)
     }
 }

@@ -39,6 +39,10 @@ public final class MCOAddress : NSObjectCompat, Convertible, NSCoding {
      
      Example: [MCOAddress addressWithDisplayName:@"DINH Viêt Hoà" mailbox:@"hoa@etpan.org"] */
     public convenience init?(displayName: String?, mailbox: String) {
+        let autoreleasePool = CAutoreleasePool_init()
+        defer {
+            autoreleasePool.release()
+        }
         let addrss = CAddress.addressWithDisplayName(displayName?.mailCoreString() ?? MailCoreString(), mailbox.mailCoreString())
         guard addrss.instance != nil else {
             return nil
@@ -50,21 +54,36 @@ public final class MCOAddress : NSObjectCompat, Convertible, NSCoding {
      
      Example: [MCOAddress addressWithMailbox:@"hoa@etpan.org"]*/
     public convenience init?(mailbox: String) {
-        self.init(address: CAddress.addressWithMailbox(mailbox.mailCoreString()))
+        let autoreleasePool = CAutoreleasePool_init()
+        defer {
+            autoreleasePool.release()
+        }
+        let addrss = CAddress.addressWithMailbox(mailbox.mailCoreString())
+        self.init(address: addrss)
     }
 
     /** Creates an address with a RFC822 string.
      
      Example: [MCOAddress addressWithRFC822String:@"DINH Vi=C3=AAt Ho=C3=A0 <hoa@etpan.org>"]*/
     public convenience init?(RFC822String: String) {
-        self.init(address: CAddress.addressWithRFC822String(RFC822String.mailCoreString()))
+        let autoreleasePool = CAutoreleasePool_init()
+        defer {
+            autoreleasePool.release()
+        }
+        let addrss = CAddress.addressWithRFC822String(RFC822String.mailCoreString())
+        self.init(address: addrss)
     }
 
     /** Creates an address with a non-MIME-encoded RFC822 string.
      
      Example: [MCOAddress addressWithNonEncodedRFC822String:@"DINH Viêt Hoà <hoa@etpan.org>"]*/
     public convenience init?(nonEncodedRFC822String: String) {
-        self.init(address: CAddress.addressWithNonEncodedRFC822String(nonEncodedRFC822String.mailCoreString()))
+        let autoreleasePool = CAutoreleasePool_init()
+        defer {
+            autoreleasePool.release()
+        }
+        let addrss = CAddress.addressWithNonEncodedRFC822String(nonEncodedRFC822String.mailCoreString())
+        self.init(address: addrss)
     }
 
     /**
@@ -73,7 +92,9 @@ public final class MCOAddress : NSObjectCompat, Convertible, NSCoding {
      
      For example: @[ @"DINH Vi=C3=AAt Ho=C3=A0 <hoa@etpan.org>" ]*/
     public static func addressesWithRFC822String(string: String) -> Array<MCOAddress>? {
-        return Array<MCOAddress>(mailCoreArray: CAddress.addressesWithRFC822String(string.mailCoreString()))
+        return mailCoreAutoreleasePool {
+            return Array<MCOAddress>(mailCoreArray: CAddress.addressesWithRFC822String(string.mailCoreString()))
+        }
     }
 
     /**
@@ -82,33 +103,55 @@ public final class MCOAddress : NSObjectCompat, Convertible, NSCoding {
      
      For example: @[ "DINH Viêt Hoà <hoa@etpan.org>" ]*/
     public static func addressesWithNonEncodedRFC822String(string: String) -> Array<MCOAddress>? {
-        return Array<MCOAddress>(mailCoreArray: CAddress.addressesWithNonEncodedRFC822String(string.mailCoreString()))
+        return mailCoreAutoreleasePool {
+            return Array<MCOAddress>(mailCoreArray: CAddress.addressesWithNonEncodedRFC822String(string.mailCoreString()))
+        }
     }
     
     /** Returns the display name of the address.*/
     public var displayName : String? {
-        set { self.nativeInstance.displayName = newValue?.mailCoreString() ?? MailCoreString() }
-        get { return self.nativeInstance.displayName.string() }
+        set {
+            mailCoreAutoreleasePool {
+                self.nativeInstance.displayName = newValue?.mailCoreString() ?? MailCoreString()
+            }
+        }
+        get {
+            return mailCoreAutoreleasePool {
+                self.nativeInstance.displayName.string()
+            }
+        }
     }
     
     /** Returns the mailbox of the address.*/
     public var mailbox : String! {
-        set { self.nativeInstance.mailbox = newValue.mailCoreString() }
-        get { return self.nativeInstance.mailbox.string() }
+        set {
+            mailCoreAutoreleasePool {
+                self.nativeInstance.mailbox = newValue.mailCoreString()
+            }
+        }
+        get {
+            return mailCoreAutoreleasePool {
+                self.nativeInstance.mailbox.string()
+            }
+        }
     }
     
     /** Returns the RFC822 encoding of the address.
      
      For example: "DINH Vi=C3=AAt Ho=C3=A0 <hoa@etpan.org>"*/
     public func RFC822String() -> String? {
-        return nativeInstance.RFC822String.string()
+        return mailCoreAutoreleasePool {
+            return nativeInstance.RFC822String.string()
+        }
     }
     
     /** Returns the non-MIME-encoded RFC822 encoding of the address.
      
      For example: "DINH Viêt Hoà <hoa@etpan.org>"*/
     public func nonEncodedRFC822String() -> String? {
-        return nativeInstance.nonEncodedRFC822String.string()
+        return mailCoreAutoreleasePool {
+            return nativeInstance.nonEncodedRFC822String.string()
+        }
     }
     
     override public var hash: Int {
@@ -155,11 +198,11 @@ public final class MCOAddress : NSObjectCompat, Convertible, NSCoding {
 
 public extension Array where Element: MCOAddress {
     
-    public func mco_RFC822StringForAddresses() -> String? {
+    func mco_RFC822StringForAddresses() -> String? {
         return CAddress.RFC822StringForAddresses(self.mailCoreArray()).string()
     }
     
-    public func mco_nonEncodedRFC822StringForAddresses() -> String? {
+    func mco_nonEncodedRFC822StringForAddresses() -> String? {
         return CAddress.nonEncodedRFC822StringForAddresses(self.mailCoreArray()).string()
     }
 

@@ -101,11 +101,11 @@ namespace mailcore {
         String * mLastSMTPResponse;
         int mLastLibetpanError;
         int mLastSMTPResponseCode;
-        pthread_mutex_t mCancelLock;
-        pthread_mutex_t mCanCancelLock;
+        MCB_LOCK_TYPE mCancelLock;
+        MCB_LOCK_TYPE mCanCancelLock;
         
         ConnectionLogger * mConnectionLogger;
-        pthread_mutex_t mConnectionLoggerLock;
+        MCB_LOCK_TYPE mConnectionLoggerLock;
 
         bool mOutlookServer;
 

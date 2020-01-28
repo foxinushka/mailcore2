@@ -10,11 +10,14 @@
 #include <time.h>
 #include <unistd.h>
 #include <sys/time.h>
-#endif
 #include <pthread.h>
+#endif
+
 #if __APPLE__
 #include <execinfo.h>
 #endif
+
+#include <stdlib.h>
 
 #if defined(ANDROID) || defined(__ANDROID__)
 #include <android/log.h>
@@ -26,6 +29,12 @@ int MCLogEnabled = 0;
 INITIALIZE(Log)
 {
     sPid = getpid();
+}
+
+static MCLogger externalLogger = NULL;
+
+void setMCLogger(MCLogger logger) {
+    externalLogger = logger;
 }
 
 static void logInternalv(FILE * file,
@@ -62,7 +71,14 @@ static void logInternalv(FILE * file,
     
     struct timeval tv;
     struct tm tm_value;
-    pthread_t thread_id = pthread_self();
+    
+    if (externalLogger != NULL) {
+        char * message;
+        vasprintf(&message, format, argp);
+        externalLogger(filename, line, message);
+        free(message);
+        return;
+    }
 
 #if defined(ANDROID) || defined(__ANDROID__)
     __android_log_vprint(ANDROID_LOG_INFO, filename, format, argp);
@@ -82,13 +98,18 @@ static void logInternalv(FILE * file,
     }
     else {
         unsigned long threadValue;
+#ifdef _WIN32
+		threadValue = GetCurrentThreadId();
+#else
+		pthread_t thread_id = pthread_self();
 #ifdef _MACH_PORT_T
         threadValue = pthread_mach_thread_np(thread_id);
-#elif _MSC_VER
-        threadValue = (unsigned long) thread_id.p;
 #else
         threadValue = (unsigned long) thread_id;
 #endif
+
+#endif /* _WIN32 */
+
         fprintf(file, "[%i:%lx] %s:%u: ", sPid, threadValue, filename, line);
     }
     vfprintf(file, format, argp);

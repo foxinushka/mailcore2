@@ -34,13 +34,15 @@ public class MCOIMAPIdentityOperation : MCOIMAPBaseOperation {
         guard let completionBlock = self.completionBlock else {
             return
         }
-        
-        let errorCode = error()
-        if errorCode == ErrorNone {
-            completionBlock(nil, MCOIMAPIdentity.init(mailCoreObject: operation.serverIdentity().toCObject()))
-        }
-        else {
-            completionBlock(MailCoreError.error(code: errorCode), nil)
+
+        mailCoreAutoreleasePool {
+            let errorCode = error()
+            if errorCode == ErrorNone {
+                completionBlock(nil, MCOIMAPIdentity.init(mailCoreObject: operation.serverIdentity().toCObject()))
+            }
+            else {
+                completionBlock(MailCoreError.error(code: errorCode), nil)
+            }
         }
         self.completionBlock = nil
     }

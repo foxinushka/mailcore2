@@ -21,11 +21,11 @@ enum {
     STATE_LOGGEDIN,
 };
 
-#define CANCEL_LOCK() pthread_mutex_lock(&mCancelLock)
-#define CANCEL_UNLOCK() pthread_mutex_unlock(&mCancelLock)
+#define CANCEL_LOCK() MCB_LOCK(&mCancelLock)
+#define CANCEL_UNLOCK() MCB_UNLOCK(&mCancelLock)
 
-#define CAN_CANCEL_LOCK() pthread_mutex_lock(&mCanCancelLock)
-#define CAN_CANCEL_UNLOCK() pthread_mutex_unlock(&mCanCancelLock)
+#define CAN_CANCEL_LOCK() MCB_LOCK(&mCanCancelLock)
+#define CAN_CANCEL_UNLOCK() MCB_UNLOCK(&mCanCancelLock)
 
 void SMTPSession::init()
 {
@@ -50,9 +50,9 @@ void SMTPSession::init()
     mLastLibetpanError = 0;
     mLastSMTPResponseCode = 0;
     mConnectionLogger = NULL;
-    pthread_mutex_init(&mConnectionLoggerLock, NULL);
-    pthread_mutex_init(&mCancelLock, NULL);
-    pthread_mutex_init(&mCanCancelLock, NULL);
+    MCB_LOCK_INIT(&mConnectionLoggerLock);
+	MCB_LOCK_INIT(&mCancelLock);
+	MCB_LOCK_INIT(&mCanCancelLock);
 
     mOutlookServer = false;
 }
@@ -64,9 +64,9 @@ SMTPSession::SMTPSession()
 
 SMTPSession::~SMTPSession()
 {
-    pthread_mutex_destroy(&mConnectionLoggerLock);
-    pthread_mutex_destroy(&mCancelLock);
-    pthread_mutex_destroy(&mCanCancelLock);
+    MCB_LOCK_DESTROY(&mConnectionLoggerLock);
+    MCB_LOCK_DESTROY(&mCancelLock);
+    MCB_LOCK_DESTROY(&mCanCancelLock);
     MC_SAFE_RELEASE(mLastSMTPResponse);
     MC_SAFE_RELEASE(mHostname);
     MC_SAFE_RELEASE(mUsername);
@@ -302,6 +302,7 @@ void SMTPSession::connect(ErrorCode * pError)
             r = mailsmtp_socket_connect(mSmtp, MCUTF8(hostname()), port());
             saveLastResponse();
             if (r != MAILSMTP_NO_ERROR) {
+                MCLog("#SMTP: StartTLS mailsmtp_socket_connect %d", r);
                 * pError = ErrorConnection;
                 goto close;
             }
@@ -314,10 +315,12 @@ void SMTPSession::connect(ErrorCode * pError)
             }
             saveLastResponse();
             if (r == MAILSMTP_ERROR_STREAM) {
+                MCLog("#SMTP: StartTLS mailsmtp_init %d useHeloIPEnabled %d", r, useHeloIPEnabled());
                 * pError = ErrorConnection;
                 goto close;
             }
             else if (r != MAILSMTP_NO_ERROR) {
+                MCLog("#SMTP: StartTLS mailsmtp_init %d useHeloIPEnabled %d", r, useHeloIPEnabled());
                 * pError = ErrorConnection;
                 goto close;
             }
@@ -343,10 +346,12 @@ void SMTPSession::connect(ErrorCode * pError)
             }
             saveLastResponse();
             if (r == MAILSMTP_ERROR_STREAM) {
+                MCLog("#SMTP: StartTLS mailsmtp_init after starttls %d useHeloIPEnabled %d", r, useHeloIPEnabled());
                 * pError = ErrorConnection;
                 goto close;
             }
             else if (r != MAILSMTP_NO_ERROR) {
+                MCLog("#SMTP: StartTLS mailsmtp_init after starttls %d useHeloIPEnabled %d", r, useHeloIPEnabled());
                 * pError = ErrorConnection;
                 goto close;
             }
@@ -357,6 +362,7 @@ void SMTPSession::connect(ErrorCode * pError)
             r = mailsmtp_ssl_connect(mSmtp, MCUTF8(mHostname), port());
             saveLastResponse();
             if (r != MAILSMTP_NO_ERROR) {
+                MCLog("#SMTP: TLS mailsmtp_ssl_connect %d", r);
                 * pError = ErrorConnection;
                 goto close;
             }
@@ -373,10 +379,12 @@ void SMTPSession::connect(ErrorCode * pError)
             }
             saveLastResponse();
             if (r == MAILSMTP_ERROR_STREAM) {
+                MCLog("#SMTP: TLS mailsmtp_init %d useHeloIPEnabled %d", r, useHeloIPEnabled());
                 * pError = ErrorConnection;
                 goto close;
             }
             else if (r != MAILSMTP_NO_ERROR) {
+                MCLog("#SMTP: TLS mailsmtp_init %d useHeloIPEnabled %d", r, useHeloIPEnabled());
                 * pError = ErrorConnection;
                 goto close;
             }
@@ -387,6 +395,7 @@ void SMTPSession::connect(ErrorCode * pError)
             r = mailsmtp_socket_connect(mSmtp, MCUTF8(hostname()), port());
             saveLastResponse();
             if (r != MAILSMTP_NO_ERROR) {
+                MCLog("#SMTP: default mailsmtp_socket_connect %d", r);
                 * pError = ErrorConnection;
                 goto close;
             }
@@ -399,10 +408,12 @@ void SMTPSession::connect(ErrorCode * pError)
             }
             saveLastResponse();
             if (r == MAILSMTP_ERROR_STREAM) {
+                MCLog("#SMTP: default mailsmtp_init %d seHeloIPEnabled %d", r, useHeloIPEnabled());
                 * pError = ErrorConnection;
                 goto close;
             }
             else if (r != MAILSMTP_NO_ERROR) {
+                MCLog("#SMTP: default mailsmtp_init %d seHeloIPEnabled %d", r, useHeloIPEnabled());
                 * pError = ErrorConnection;
                 goto close;
             }
@@ -625,6 +636,7 @@ void SMTPSession::login(ErrorCode * pError)
     }
     saveLastResponse();
     if (r == MAILSMTP_ERROR_STREAM) {
+        MCLog("#SMTP: login failed %d", r);
         * pError = ErrorConnection;
         mShouldDisconnect = true;
         return;
@@ -654,6 +666,7 @@ void SMTPSession::checkAccount(Address * from, ErrorCode * pError)
     r = mailsmtp_mail(mSmtp, MCUTF8(from->mailbox()));
     saveLastResponse();
     if (r == MAILSMTP_ERROR_STREAM) {
+        MCLog("#SMTP: mailsmtp_mail failed %d", r);
         * pError = ErrorConnection;
         mShouldDisconnect = true;
         return;
@@ -666,6 +679,7 @@ void SMTPSession::checkAccount(Address * from, ErrorCode * pError)
     r = mailsmtp_rcpt(mSmtp, "email@invalid.com");
     saveLastResponse();
     if (r == MAILSMTP_ERROR_STREAM) {
+        MCLog("#SMTP: mailsmtp_rcpt failed %d", r);
         * pError = ErrorConnection;
         mShouldDisconnect = true;
         return;
@@ -689,6 +703,7 @@ void SMTPSession::checkAccount(Address * from, Address * to, ErrorCode * pError)
     r = mailsmtp_mail(mSmtp, MCUTF8(from->mailbox()));
     saveLastResponse();
     if (r == MAILSMTP_ERROR_STREAM) {
+        MCLog("#SMTP: mailsmtp_mail failed %d", r);
         * pError = ErrorConnection;
         mShouldDisconnect = true;
         return;
@@ -701,6 +716,7 @@ void SMTPSession::checkAccount(Address * from, Address * to, ErrorCode * pError)
     r = mailsmtp_rcpt(mSmtp, MCUTF8(to->mailbox()));
     saveLastResponse();
     if (r == MAILSMTP_ERROR_STREAM) {
+        MCLog("#SMTP: mailsmtp_rcpt failed %d", r);
         * pError = ErrorConnection;
         mShouldDisconnect = true;
         return;
@@ -797,6 +813,7 @@ void SMTPSession::internalSendMessage(Address * from, Array * recipients, Data *
     saveLastResponse();
 
     if ((r == MAILSMTP_ERROR_STREAM) || (r == MAILSMTP_ERROR_CONNECTION_REFUSED)) {
+        MCLog("#SMTP: mailesmtp_send failed %d", r);
         * pError = ErrorConnection;
         mShouldDisconnect = true;
         goto err;
@@ -989,6 +1006,7 @@ void SMTPSession::noop(ErrorCode * pError)
         r = mailsmtp_noop(mSmtp);
         saveLastResponse();
         if (r == MAILSMTP_ERROR_STREAM) {
+            MCLog("#SMTP: mailsmtp_noop failed %d", r);
             * pError = ErrorConnection;
         }
     }
@@ -1016,12 +1034,12 @@ bool SMTPSession::isDisconnected()
 
 void SMTPSession::lockConnectionLogger()
 {
-    pthread_mutex_lock(&mConnectionLoggerLock);
+    MCB_LOCK(&mConnectionLoggerLock);
 }
 
 void SMTPSession::unlockConnectionLogger()
 {
-    pthread_mutex_unlock(&mConnectionLoggerLock);
+    MCB_UNLOCK(&mConnectionLoggerLock);
 }
 
 void SMTPSession::setConnectionLogger(ConnectionLogger * logger)

@@ -68,3 +68,5 @@
 #include <MailCore/CMailProvidersManager.h>
 #include <MailCore/CMailProvider.h>
 #include <MailCore/CNetService.h>
+
+#include <MailCore/CAutoreleasePool.h>

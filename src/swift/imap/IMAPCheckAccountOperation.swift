@@ -34,25 +34,27 @@ public class MCOIMAPCheckAccountOperation : MCOIMAPOperation {
         guard let completionBlock = self.completionBlock else {
             return
         }
-        
-        let errorCode = error()
-        if errorCode == ErrorNone {
-            completionBlock(nil)
-        }
-        else {
-            var error = MailCoreError.error(code: errorCode)
-            if operation.loginResponse().instance != nil || operation.loginUnparsedResponseData().instance != nil {
-                var userInfo = [String: Any]()
-                if let response = operation.loginResponse().string() {
-                    userInfo["IMAPResponseKey"] = response
-                }
-                let data = operation.loginUnparsedResponseData()
-                if data.instance != nil && data.bytes != nil {
-                    userInfo["IMAPUnparsedResponseDataKey"] = Data(cdata: data)
-                }
-                error = MailCoreError.error(code: errorCode, userInfo: userInfo)
+
+        mailCoreAutoreleasePool {
+            let errorCode = error()
+            if errorCode == ErrorNone {
+                completionBlock(nil)
             }
-            completionBlock(error)
+            else {
+                var error = MailCoreError.error(code: errorCode)
+                if operation.loginResponse().instance != nil || operation.loginUnparsedResponseData().instance != nil {
+                    var userInfo = [String: Any]()
+                    if let response = operation.loginResponse().string() {
+                        userInfo["IMAPResponseKey"] = response
+                    }
+                    let data = operation.loginUnparsedResponseData()
+                    if data.instance != nil && data.bytes != nil {
+                        userInfo["IMAPUnparsedResponseDataKey"] = Data(cdata: data)
+                    }
+                    error = MailCoreError.error(code: errorCode, userInfo: userInfo)
+                }
+                completionBlock(error)
+            }
         }
         self.completionBlock = nil
     }

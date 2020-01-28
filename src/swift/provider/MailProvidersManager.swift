@@ -16,7 +16,7 @@ public class MCOMailProvidersManager: NSObjectCompat {
     private override init() {
         super.init()
 
-        #if !os(Android)
+        #if !os(Android) && !os(Windows)
         if let filename = Bundle(for: MCOMailProvidersManager.self).path(forResource: "providers", ofType: "json") {
             MCOMailProvidersManager.registerProviders(filename: filename)
         }
@@ -24,18 +24,26 @@ public class MCOMailProvidersManager: NSObjectCompat {
     }
 
     public static func registerProviders(filename: String) {
-        CMailProvidersManager_shared().registerProvidersWithFilename(filename.mailCoreString())
+        mailCoreAutoreleasePool {
+            CMailProvidersManager_shared().registerProvidersWithFilename(filename.mailCoreString())
+        }
     }
     
     public func provider(forEmail: String) -> MCOMailProvider? {
-        return createMCOObject(from: CMailProvidersManager_shared().providerForEmail(forEmail.mailCoreString()).toCObject())
+        return mailCoreAutoreleasePool {
+            createMCOObject(from: CMailProvidersManager_shared().providerForEmail(forEmail.mailCoreString()).toCObject())
+        }
     }
     
     public func provider(forMX: String) -> MCOMailProvider? {
-        return createMCOObject(from: CMailProvidersManager_shared().providerForMX(forMX.mailCoreString()).toCObject())
+        return mailCoreAutoreleasePool {
+            createMCOObject(from: CMailProvidersManager_shared().providerForMX(forMX.mailCoreString()).toCObject())
+        }
     }
     
     public func provider(forIdentifier: String) -> MCOMailProvider? {
-        return createMCOObject(from: CMailProvidersManager_shared().providerForIdentifier(forIdentifier.mailCoreString()).toCObject())
+        return mailCoreAutoreleasePool {
+            createMCOObject(from: CMailProvidersManager_shared().providerForIdentifier(forIdentifier.mailCoreString()).toCObject())
+        }
     }
 }

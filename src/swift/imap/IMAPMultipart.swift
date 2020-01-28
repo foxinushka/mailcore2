@@ -21,8 +21,16 @@ public class MCOIMAPMultipart : MCOAbstractMultipart, NSCoding {
     
     /** A part identifier is of the form 1.2.1*/
     public var partID: String? {
-        get { return nativeInstance.partID.string() }
-        set { nativeInstance.partID = newValue?.mailCoreString() ?? MailCoreString() }
+        get {
+            return mailCoreAutoreleasePool {
+                nativeInstance.partID.string()
+            }
+        }
+        set {
+            mailCoreAutoreleasePool {
+                nativeInstance.partID = newValue?.mailCoreString() ?? MailCoreString()
+            }
+        }
     }
     
     public convenience required init?(coder aDecoder: NSCoder) {

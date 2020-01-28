@@ -42,8 +42,17 @@
 #define random mailcore::win32_random
 #define getpid mailcore::win32_getpid
 #define mkdtemp mailcore::win32_mkdtemp
+#define mmap mailcore::win32_mmap
+#define munmap mailcore::win32_munmap
 
 #define S_ISDIR(m) ((m & _S_IFDIR) != 0)
+
+#define PROT_READ	1
+#define PROT_WRITE	2
+#define MAP_FAILED	((void*)-1)
+
+#define MAP_SHARED	0x01
+#define MAP_PRIVATE	0x02
 
 #ifndef pid_t
 typedef int pid_t;
@@ -67,6 +76,9 @@ namespace mailcore {
     pid_t win32_getpid(void);
     
     char * win32_mkdtemp(char *name_template);
+
+	void * win32_mmap(void * start, size_t length, int prot, int flags, int fd, off_t offset);
+	int win32_munmap(void * start, size_t length);
 }
 #endif
 

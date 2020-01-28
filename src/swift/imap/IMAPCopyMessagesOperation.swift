@@ -34,13 +34,15 @@ public class MCOIMAPCopyMessagesOperation : MCOIMAPBaseOperation {
         guard let completionBlock = self.completionBlock else {
             return
         }
-        
-        let errorCode = error();
-        if errorCode == ErrorNone {
-            completionBlock(nil, Dictionary<UInt32, UInt32>.cast(operation.uidMapping()))
-        }
-        else {
-            completionBlock(MailCoreError.error(code: errorCode), nil)
+
+        mailCoreAutoreleasePool {
+            let errorCode = error();
+            if errorCode == ErrorNone {
+                completionBlock(nil, Dictionary<UInt32, UInt32>.cast(operation.uidMapping()))
+            }
+            else {
+                completionBlock(MailCoreError.error(code: errorCode), nil)
+            }
         }
         self.completionBlock = nil;
     }

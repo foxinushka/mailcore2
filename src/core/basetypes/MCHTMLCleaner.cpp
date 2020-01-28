@@ -11,12 +11,18 @@
 #include "MCString.h"
 #include "MCData.h"
 
-#if defined(ANDROID) || defined(__ANDROID__)
+#if defined(ANDROID)
 typedef unsigned long ulong;
 #endif
 
 #include <tidy/tidy.h>
+
+#if defined(ANDROID)
+// Druk: in Andorid we use modern Tidy (buffio.h -> tidybuffio.h)
+#include <tidy/tidybuffio.h>
+#else
 #include <tidy/buffio.h>
+#endif
 
 #include "MCUtils.h"
 #include "MCLog.h"

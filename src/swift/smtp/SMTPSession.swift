@@ -17,8 +17,16 @@ public class MCOSMTPSession: NSObjectCompat {
     
     /** This is the hostname of the SMTP server to connect to. */
     public var hostname : String? {
-        get { return self.session.hostname.string() }
-        set { self.session.hostname = newValue?.mailCoreString() ?? MailCoreString() }
+        get {
+            return mailCoreAutoreleasePool {
+                self.session.hostname.string()
+            }
+        }
+        set {
+            mailCoreAutoreleasePool {
+                self.session.hostname = newValue?.mailCoreString() ?? MailCoreString()
+            }
+        }
     }
     
     /** This is the port of the SMTP server to connect to. */
@@ -29,20 +37,44 @@ public class MCOSMTPSession: NSObjectCompat {
     
     /** This is the username of the account. */
     public var username : String? {
-        get { return self.session.username.string() }
-        set { self.session.username = newValue?.mailCoreString() ?? MailCoreString() }
+        get {
+            return mailCoreAutoreleasePool {
+                self.session.username.string()
+            }
+        }
+        set {
+            mailCoreAutoreleasePool {
+                self.session.username = newValue?.mailCoreString() ?? MailCoreString()
+            }
+        }
     }
     
     /** This is the password of the account. */
     public var password : String? {
-        get { return self.session.password.string() }
-        set { self.session.password = newValue?.mailCoreString() ?? MailCoreString() }
+        get {
+            return mailCoreAutoreleasePool {
+                self.session.password.string()
+            }
+        }
+        set {
+            mailCoreAutoreleasePool {
+                self.session.password = newValue?.mailCoreString() ?? MailCoreString()
+            }
+        }
     }
     
     /** This is the OAuth2 token. */
     public var OAuth2Token : String? {
-        get { return self.session.OAuth2Token.string() }
-        set { self.session.OAuth2Token = newValue?.mailCoreString() ?? MailCoreString() }
+        get {
+            return mailCoreAutoreleasePool {
+                self.session.OAuth2Token.string()
+            }
+        }
+        set {
+            mailCoreAutoreleasePool {
+                self.session.OAuth2Token = newValue?.mailCoreString() ?? MailCoreString()
+            }
+        }
     }
     
     /**
@@ -122,7 +154,11 @@ public class MCOSMTPSession: NSObjectCompat {
      The value will be YES when asynchronous operations are running, else it will return NO.
      */
     public var isOperationQueueRunning : Bool {
-        get { return self.session.isOperationQueueRunning }
+        get {
+            return mailCoreAutoreleasePool {
+                return self.session.isOperationQueueRunning
+            }
+        }
     }
     
     /**
@@ -147,7 +183,9 @@ public class MCOSMTPSession: NSObjectCompat {
      */
     //- (void) cancelAllOperations;
     public func cancelAllOperations() {
-        self.session.cancelAllOperations();
+        mailCoreAutoreleasePool {
+            self.session.cancelAllOperations();
+        }
     }
     
     /** @name MCOOperations */
@@ -161,7 +199,9 @@ public class MCOSMTPSession: NSObjectCompat {
      }];
      */
     public func loginOperation() -> MCOSMTPOperation{
-        return MCOSMTPOperation(operation: self.session.loginOperation());
+        return mailCoreAutoreleasePool {
+            return MCOSMTPOperation(operation: self.session.loginOperation());
+        }
     }
     
     /**
@@ -177,7 +217,9 @@ public class MCOSMTPSession: NSObjectCompat {
      }];
      */
     public func sendOperationWithData(messageData: Data) -> MCOSMTPSendOperation{
-        return MCOSMTPSendOperation(operation: self.session.sendMessageOperation(messageData.mailCoreData()))
+        return mailCoreAutoreleasePool {
+            return MCOSMTPSendOperation(operation: self.session.sendMessageOperation(messageData.mailCoreData()))
+        }
     }
     
     /**
@@ -195,7 +237,9 @@ public class MCOSMTPSession: NSObjectCompat {
      }];
      */
     public func sendOperationWithData(messageData: Data, from: MCOAddress, recipients: Array<MCOAddress>) -> MCOSMTPSendOperation {
-        return MCOSMTPSendOperation(operation: self.session.sendOperationWithDataAndFromAndRecipients(messageData.mailCoreData(), from.nativeInstance, recipients.mailCoreArray()));
+        return mailCoreAutoreleasePool {
+            return MCOSMTPSendOperation(operation: self.session.sendOperationWithDataAndFromAndRecipients(messageData.mailCoreData(), from.nativeInstance, recipients.mailCoreArray()));
+        }
     }
     
     
@@ -213,7 +257,9 @@ public class MCOSMTPSession: NSObjectCompat {
      }];
      */
     public func sendOperationWithContentsOfFile(path: String, from: MCOAddress, recipients: Array<MCOAddress>) -> MCOSMTPSendOperation {
-        return MCOSMTPSendOperation(operation: self.session.sendOperationWithContentsOfFile(path.mailCoreString(), from.nativeInstance, recipients.mailCoreArray()))
+        return mailCoreAutoreleasePool {
+            return MCOSMTPSendOperation(operation: self.session.sendOperationWithContentsOfFile(path.mailCoreString(), from.nativeInstance, recipients.mailCoreArray()))
+        }
     }
 
     
@@ -226,11 +272,15 @@ public class MCOSMTPSession: NSObjectCompat {
      }];
      */
     public func checkAccountOperation(from: MCOAddress) -> MCOSMTPOperation {
-        return MCOSMTPOperation(operation: self.session.checkAccountOperation(from.nativeInstance));
+        return mailCoreAutoreleasePool {
+            return MCOSMTPOperation(operation: self.session.checkAccountOperation(from.nativeInstance));
+        }
     }
     
     public func checkAccountOperation(from: MCOAddress, to: MCOAddress) -> MCOSMTPOperation {
-        return MCOSMTPOperation(operation: self.session.checkAccountOperationWithFromAndTo(from.nativeInstance, to.nativeInstance));
+        return mailCoreAutoreleasePool {
+            return MCOSMTPOperation(operation: self.session.checkAccountOperationWithFromAndTo(from.nativeInstance, to.nativeInstance));
+        }
     }
     
     /**
@@ -242,7 +292,9 @@ public class MCOSMTPSession: NSObjectCompat {
      }];
      */
     public func noopOperation(from: MCOAddress) -> MCOSMTPOperation {
-        return MCOSMTPOperation(operation: self.session.noopOperation());
+        return mailCoreAutoreleasePool {
+            return MCOSMTPOperation(operation: self.session.noopOperation());
+        }
     }
 
 }

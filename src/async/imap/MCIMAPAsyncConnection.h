@@ -83,7 +83,7 @@ namespace mailcore {
         virtual void setConnectionLogger(ConnectionLogger * logger);
         virtual ConnectionLogger * connectionLogger();
         
-#if defined(__APPLE__) || defined(__ANDROID__)
+#if MC_HAS_GCD
         virtual void setDispatchQueue(dispatch_queue_t dispatchQueue);
         virtual dispatch_queue_t dispatchQueue();
 #endif
@@ -100,7 +100,7 @@ namespace mailcore {
         IMAPAsyncSession * mOwner;
         ConnectionLogger * mConnectionLogger;
         IMAPConnectionLogger * mInternalLogger;
-        pthread_mutex_t mConnectionLoggerLock;
+        MCB_LOCK_TYPE mConnectionLoggerLock;
         bool mAutomaticConfigurationEnabled;
         bool mQueueRunning;
         bool mScheduledAutomaticDisconnect;

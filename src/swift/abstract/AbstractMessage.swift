@@ -20,18 +20,30 @@ public class MCOAbstractMessage: NSObjectCompat, Convertible {
     
     /** Header of the message. */
     public var header : MCOMessageHeader! {
-        set { nativeInstance.header =  newValue?.nativeInstance ?? CMessageHeader() }
-        get { return createMCOObject(from: nativeInstance.header.toCObject()) }
+        set {
+            mailCoreAutoreleasePool {
+                nativeInstance.header =  newValue?.nativeInstance ?? CMessageHeader()
+            }
+        }
+        get {
+            return mailCoreAutoreleasePool {
+                createMCOObject(from: nativeInstance.header.toCObject())
+            }
+        }
     }
     
     /** Returns the part with the given Content-ID.*/
     public func partForContentID(contentID: String) -> MCOAbstractPart? {
-        return createMCOObject(from: nativeInstance.partForContentID(contentID.mailCoreString()).toCObject())
+        return mailCoreAutoreleasePool {
+            return createMCOObject(from: nativeInstance.partForContentID(contentID.mailCoreString()).toCObject())
+        }
     }
     
     /** Returns the part with the given unique identifier.*/
     public func partForUniqueID(uniqueID: String) -> MCOAbstractPart? {
-        return createMCOObject(from: nativeInstance.partForUniqueID(uniqueID.mailCoreString()).toCObject())
+        return mailCoreAutoreleasePool {
+            return createMCOObject(from: nativeInstance.partForUniqueID(uniqueID.mailCoreString()).toCObject())
+        }
     }
     
     /** All attachments in the message.
@@ -39,7 +51,9 @@ public class MCOAbstractMessage: NSObjectCompat, Convertible {
      It will return an array of MCOAttachment for MCOMessageParser.
      It will return an array of MCOAttachment for MCOMessageBuilder. */
     public func attachments() -> Array<MCOAbstractPart>? {
-        return Array<MCOAbstractPart>(mailCoreArray: nativeInstance.attachments());
+        return mailCoreAutoreleasePool {
+            return Array<MCOAbstractPart>(mailCoreArray: nativeInstance.attachments());
+        }
     }
     
     /** All image attachments included inline in the message through cid: URLs.
@@ -47,7 +61,9 @@ public class MCOAbstractMessage: NSObjectCompat, Convertible {
      It will return an array of MCOAttachment for MCOMessageParser.
      It will return an array of MCOAttachment for MCOMessageBuilder. */
     public func htmlInlineAttachments() -> Array<MCOAbstractPart>? {
-        return Array<MCOAbstractPart>(mailCoreArray: nativeInstance.htmlInlineAttachments());
+        return mailCoreAutoreleasePool {
+            return Array<MCOAbstractPart>(mailCoreArray: nativeInstance.htmlInlineAttachments());
+        }
     }
     
     /**
@@ -55,6 +71,8 @@ public class MCOAbstractMessage: NSObjectCompat, Convertible {
      This does not include inline images and attachments, but only the text content
      */
     public func requiredPartsForRendering() -> Array<MCOAbstractPart>? {
-        return Array<MCOAbstractPart>(mailCoreArray: nativeInstance.requiredPartsForRendering());
+        return mailCoreAutoreleasePool {
+            return Array<MCOAbstractPart>(mailCoreArray: nativeInstance.requiredPartsForRendering());
+        }
     }
 }

@@ -68,7 +68,7 @@ void AccountValidator::init()
     mSmtpEnabled = false;
 
     mConnectionLogger = NULL;
-    pthread_mutex_init(&mConnectionLoggerLock, NULL);
+    MCB_LOCK_INIT(&mConnectionLoggerLock);
 }
 
 AccountValidator::AccountValidator()
@@ -78,7 +78,7 @@ AccountValidator::AccountValidator()
 
 AccountValidator::~AccountValidator()
 {
-    pthread_mutex_destroy(&mConnectionLoggerLock);
+    MCB_LOCK_DESTROY(&mConnectionLoggerLock);
     MC_SAFE_RELEASE(mImapLoginResponse);
     MC_SAFE_RELEASE(mEmail);
     MC_SAFE_RELEASE(mUsername);
@@ -581,27 +581,27 @@ String * AccountValidator::imapLoginResponse()
 
 void AccountValidator::setConnectionLogger(ConnectionLogger * logger)
 {
-    pthread_mutex_lock(&mConnectionLoggerLock);
+    MCB_LOCK(&mConnectionLoggerLock);
     mConnectionLogger = logger;
-    pthread_mutex_unlock(&mConnectionLoggerLock);
+    MCB_UNLOCK(&mConnectionLoggerLock);
 }
 
 ConnectionLogger * AccountValidator::connectionLogger()
 {
     ConnectionLogger * result;
 
-    pthread_mutex_lock(&mConnectionLoggerLock);
+    MCB_LOCK(&mConnectionLoggerLock);
     result = mConnectionLogger;
-    pthread_mutex_unlock(&mConnectionLoggerLock);
+    MCB_UNLOCK(&mConnectionLoggerLock);
 
     return result;
 }
 
 void AccountValidator::log(void * sender, ConnectionLogType logType, Data * buffer)
 {
-    pthread_mutex_lock(&mConnectionLoggerLock);
+    MCB_LOCK(&mConnectionLoggerLock);
     if (mConnectionLogger != NULL) {
         mConnectionLogger->log(this, logType, buffer);
     }
-    pthread_mutex_unlock(&mConnectionLoggerLock);
+    MCB_UNLOCK(&mConnectionLoggerLock);
 }

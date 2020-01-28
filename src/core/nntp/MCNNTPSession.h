@@ -82,7 +82,7 @@ namespace mailcore {
         int mState;
         
         ConnectionLogger * mConnectionLogger;
-        pthread_mutex_t mConnectionLoggerLock;
+        MCB_LOCK_TYPE mConnectionLoggerLock;
 
         void init();
         Data * dataWithFilteredBcc(Data * data);

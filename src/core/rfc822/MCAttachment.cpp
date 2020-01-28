@@ -96,13 +96,13 @@ String * Attachment::mimeTypeForFilename(String * filename)
         return NULL;
     }
     static HashMap * mimeTypes = NULL;
-    static pthread_mutex_t lock = PTHREAD_MUTEX_INITIALIZER;
-    pthread_mutex_lock(&lock);
+    static MCB_LOCK_TYPE lock = MCB_LOCK_INITIAL_VALUE;
+    MCB_LOCK(&lock);
     if (mimeTypes == NULL) {
         mimeTypes = readMimeTypesFile(MCSTR("/etc/apache2/mime.types"));
         mimeTypes->retain();
     }
-    pthread_mutex_unlock(&lock);
+    MCB_UNLOCK(&lock);
     
     String * ext;
     String * result;

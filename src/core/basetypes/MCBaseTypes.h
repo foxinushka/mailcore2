@@ -9,6 +9,7 @@
 #include <MailCore/MCData.h>
 #include <MailCore/MCArray.h>
 #include <MailCore/MCHashMap.h>
+#include <MailCore/MCBasicLock.h>
 #include <MailCore/MCJSON.h>
 #include <MailCore/MCMD5.h>
 #include <MailCore/MCNull.h>

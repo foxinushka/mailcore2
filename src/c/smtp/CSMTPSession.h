@@ -62,10 +62,10 @@ extern "C" {
     C_SYNTHESIZE_FUNC_DEFINITION(CSMTPSession, CSMTPOperation, noopOperation)
 
     
-    CSMTPSession        CSMTPSession_new(CConnectionLogger logger, CConnectionLoggerRelease releaseLoggerBlock);
+    CMAILCORE_EXPORT CSMTPSession   CSMTPSession_new(CConnectionLogger logger, CConnectionLoggerRelease releaseLoggerBlock);
 
-    void                CSMTPSession_release(CSMTPSession self)
-                        CF_SWIFT_NAME(CSMTPSession.release(self:));
+    CMAILCORE_EXPORT void           CSMTPSession_release(CSMTPSession self)
+                                    CF_SWIFT_NAME(CSMTPSession.release(self:));
     
 #ifdef __cplusplus
 }

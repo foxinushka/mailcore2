@@ -3,6 +3,7 @@
 #define MAILCORE_MCASSERT_H
 
 #include <MailCore/MCUtils.h>
+#include <MailCore/MCLog.h>
 
 #define MCAssert(cond) MCAssertInternal(__FILE__, __LINE__, cond, #cond)
 
@@ -10,10 +11,8 @@
 extern "C" {
 #endif
     
-    typedef void (*MCAssertHandler)(const char * filename, unsigned int line, const char * condString);
-    
     MAILCORE_EXPORT
-    void setMCAssertHandler(MCAssertHandler handler) CLANG_ANALYZER_NORETURN;
+    void setMCAssertHandler(MCLogger handler) CLANG_ANALYZER_NORETURN;
     
     MAILCORE_EXPORT
 	void MCAssertInternal(const char * filename, unsigned int line, int cond, const char * condString) CLANG_ANALYZER_NORETURN;

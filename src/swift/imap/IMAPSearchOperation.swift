@@ -44,13 +44,15 @@ public class MCOIMAPSearchOperation : MCOIMAPBaseOperation {
         guard let completionBlock = self.completionBlock else {
             return
         }
-        
-        let errorCode = error()
-        if errorCode == ErrorNone {
-            completionBlock(nil, MCOIndexSet(operation.uids()))
-        }
-        else {
-            completionBlock(MailCoreError.error(code: errorCode), nil)
+
+        mailCoreAutoreleasePool {
+            let errorCode = error()
+            if errorCode == ErrorNone {
+                completionBlock(nil, MCOIndexSet(operation.uids()))
+            }
+            else {
+                completionBlock(MailCoreError.error(code: errorCode), nil)
+            }
         }
         self.completionBlock = nil
     }

@@ -2,8 +2,7 @@
 
 #define MAILCORE_MCOPERATIONQUEUE_H
 
-#include <pthread.h>
-#include <semaphore.h>
+#include <MailCore/MCBasicLock.h>
 #include <MailCore/MCObject.h>
 #include <MailCore/MCLibetpanTypes.h>
 
@@ -28,24 +27,26 @@ namespace mailcore {
         virtual void setCallback(OperationQueueCallback * callback);
         virtual OperationQueueCallback * callback();
         
-#if defined(__APPLE__) || defined(__ANDROID__)
+#if MC_HAS_GCD
         virtual void setDispatchQueue(dispatch_queue_t dispatchQueue);
         virtual dispatch_queue_t dispatchQueue();
 #endif
         
     private:
         Array * mOperations;
-        pthread_t mThreadID;
+#ifndef _MSC_VER
+		pthread_t mThreadID;
+#endif
         bool mStarted;
         struct mailsem * mOperationSem;
         struct mailsem * mStartSem;
         struct mailsem * mStopSem;
-        pthread_mutex_t mLock;
+		MCB_LOCK_TYPE mLock;
         bool mWaiting;
         struct mailsem * mWaitingFinishedSem;
         bool mQuitting;
         OperationQueueCallback * mCallback;
-#if defined(__APPLE__) || defined(__ANDROID__)
+#if MC_HAS_GCD
         dispatch_queue_t mDispatchQueue;
 #endif
         bool _pendingCheckRunning;

@@ -20,8 +20,16 @@ public class MCOIMAPFolder: NSObjectCompat, Convertible {
 
     /** The folder's path, like for example INBOX.Archive */
     public var path: String? {
-        get { return nativeInstance.path.string() }
-        set { nativeInstance.path = newValue?.mailCoreString() ?? MailCoreString() }
+        get {
+            return mailCoreAutoreleasePool {
+                nativeInstance.path.string()
+            }
+        }
+        set {
+            mailCoreAutoreleasePool {
+                nativeInstance.path = newValue?.mailCoreString() ?? MailCoreString()
+            }
+        }
     }
 
     /** It's the delimiter for each component of the path. Commonly . or / */
