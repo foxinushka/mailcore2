@@ -7,13 +7,15 @@
 
 #include <libetpan/libetpan.h>
 
+#include "CBase.h"
+
 extern int mailimap_hack_date_time_parse(char * str,
                                              struct mailimap_date_time ** result,
                                              size_t progr_rate,
                                              progress_function * progr_fun);
 
-extern time_t MailCoreTimestampFromDate(struct mailimf_date_time * date_time);
-extern time_t MailCoreTimestampFromIMAPDate(struct mailimap_date_time * imap_date);
+extern CMAILCORE_EXPORT time_t MailCoreTimestampFromDate(struct mailimf_date_time * date_time);
+extern CMAILCORE_EXPORT time_t MailCoreTimestampFromIMAPDate(struct mailimap_date_time * imap_date);
 
 #include "CAbstractMessage.h"
 #include "CAbstractMessagePart.h"
@@ -24,7 +26,6 @@ extern time_t MailCoreTimestampFromIMAPDate(struct mailimap_date_time * imap_dat
 #include "CAddress.h"
 #include "CArray.h"
 #include "CAttachment.h"
-#include "CBase.h"
 #include "CData.h"
 #include "CDictionary.h"
 #include "CIMAPAppendMessageOperation.h"

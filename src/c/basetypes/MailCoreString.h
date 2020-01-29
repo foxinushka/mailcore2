@@ -32,8 +32,6 @@ extern "C" {
 	C_SYNTHESIZE_FUNC_DEFINITION(CData, MailCoreString, stringWithDetectedCharset, MailCoreString)
 	C_SYNTHESIZE_FUNC_DEFINITION(CData, MailCoreString, charsetWithFilteredHTML, bool)
 
-	CMAILCORE_EXPORT time_t MailCoreTimestampFromDate(struct mailimf_date_time* date_time);
-	CMAILCORE_EXPORT time_t MailCoreTimestampFromIMAPDate(struct mailimap_date_time* imap_date);
 #ifdef __cplusplus
 }
 #endif

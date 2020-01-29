@@ -38,11 +38,11 @@ MailCoreString CData_charsetWithFilteredHTML(struct CData self, bool filterHTML)
 
 extern "C" {
 
-    time_t MailCoreTimestampFromDate(struct mailimf_date_time * date_time) {
+    CMAILCORE_EXPORT time_t MailCoreTimestampFromDate(struct mailimf_date_time * date_time) {
         return mailcore::timestampFromDate(date_time);
     }
     
-    time_t MailCoreTimestampFromIMAPDate(struct mailimap_date_time * imap_date) {
+    CMAILCORE_EXPORT time_t MailCoreTimestampFromIMAPDate(struct mailimap_date_time * imap_date) {
         return mailcore::timestampFromIMAPDate(imap_date);
     }
     
