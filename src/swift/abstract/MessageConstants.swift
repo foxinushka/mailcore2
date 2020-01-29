@@ -17,7 +17,7 @@ public struct MCOIMAPMessagesRequestKind : OptionSet {
         self.rawValue = rawValue
     }
     
-    public static let uid               = MCOIMAPMessagesRequestKind(rawValue: 0) // This is the default and it's always fetched
+    public static let uid               = MCOIMAPMessagesRequestKind([]) // This is the default and it's always fetched
     public static let flags             = MCOIMAPMessagesRequestKind(rawValue: 1 << 0)
     public static let headers           = MCOIMAPMessagesRequestKind(rawValue: 1 << 1)
     public static let `structure`       = MCOIMAPMessagesRequestKind(rawValue: 1 << 2)
@@ -76,7 +76,7 @@ public struct MCOAuthType : OptionSet {
         self.rawValue = Int(cAuthType.rawValue)
     }
     
-    public static let SASLNone          = MCOAuthType(rawValue: 0)
+    public static let SASLNone          = MCOAuthType([])
     public static let SASLCRAMMD5       = MCOAuthType(rawValue: 1 << 0)
     public static let SASLPlain         = MCOAuthType(rawValue: 1 << 1)
     public static let SASLGSSAPI        = MCOAuthType(rawValue: 1 << 2)
