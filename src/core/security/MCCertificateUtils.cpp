@@ -23,6 +23,7 @@
 #include <dirent.h>
 #endif
 
+#include "MCLock.h"
 #include "MCLog.h"
 
 bool mailcore::checkCertificate(mailstream * stream, String * hostname)
@@ -57,24 +58,24 @@ bool mailcore::checkCertificate(mailstream * stream, String * hostname)
         CFRelease(cert);
     }
     
-    static pthread_mutex_t lock = PTHREAD_MUTEX_INITIALIZER;
+    static MC_LOCK_TYPE lock = MC_LOCK_INITIAL_VALUE;
     
     // The below API calls are not thread safe. We're making sure not to call the concurrently.
-    pthread_mutex_lock(&lock);
+    MC_LOCK(&lock);
     
     status = SecTrustCreateWithCertificates(certificates, policy, &trust);
     if (status != noErr) {
-        pthread_mutex_unlock(&lock);
+        MC_UNLOCK(&lock);
         goto free_certs;
     }
     
     status = SecTrustEvaluate(trust, &trustResult);
     if (status != noErr) {
-        pthread_mutex_unlock(&lock);
+        MC_UNLOCK(&lock);
         goto free_certs;
     }
     
-    pthread_mutex_unlock(&lock);
+    MC_UNLOCK(&lock);
     
     switch (trustResult) {
         case kSecTrustResultUnspecified:
