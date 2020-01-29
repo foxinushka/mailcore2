@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "RSMMailCore"
-  s.version      = "2.0.37"
+  s.version      = "2.1.2"
   s.summary      = "SparkCore is absolutely awesome sanctuary of all the messages related business logic of Spark"
   s.description  = <<-DESC
                     Amen
@@ -10,20 +10,20 @@ Pod::Spec.new do |s|
   s.license      = { :type => 'Copyright 2017 Readdle Inc.', :text => 'Copyright 2017 Readdle Inc.' }
 
   s.author       = { "Viktor Gedzenko" => "fox@readdle.com" }
-  s.source       = { :git => "https://github.com/foxinushka/mailcore2.git", :commit => "f6e845884e0cbe397d6bc5451e1ff140bc0e735a"}
+  s.source       = { :git => "https://github.com/foxinushka/mailcore2.git"}
   s.platforms    = { :ios => "9.0", :osx => "10.11" }  
 
   s.framework  = "Foundation", "Security"
 
   s.ios.xcconfig = { "HEADER_SEARCH_PATHS" => "\"$(inherited)\" \"$(SDKROOT)/usr/include/libxml2\" \"$(PODS_TARGET_SRCROOT)/Externals/ctemplate-ios/include/\" \"$(PODS_TARGET_SRCROOT)/Externals/include/icu4c/include/\" \"$(PODS_TARGET_SRCROOT)/Externals/libetpan-ios/include/\" \"$(PODS_TARGET_SRCROOT)/Externals/libsasl-ios/include/\" \"$(SDKROOT)/usr/include/\" \"$(PODS_TARGET_SRCROOT)/src/core/basetypes/icu-ucsdet/include/\"",
     "SWIFT_INCLUDE_PATHS" => "\"$(PODS_TARGET_SRCROOT)/build-mac/CMailCore\" \"$(PODS_TARGET_SRCROOT)/Externals/libetpan-ios/include/\"",
-    "OTHER_CPLUSPLUSFLAGS" => "$(inherited) $(OTHER_CFLAGS)"
+    "OTHER_CPLUSPLUSFLAGS" => "$(inherited) $(OTHER_CFLAGS) -DSWIFT"
   }
 
 
   s.osx.xcconfig = { "HEADER_SEARCH_PATHS" => "\"$(inherited)\" \"$(SDKROOT)/usr/include/libxml2\" \"$(PODS_TARGET_SRCROOT)/Externals/ctemplate-osx/include/\" \"$(PODS_TARGET_SRCROOT)/Externals/include/icu4c/include/\" \"$(PODS_TARGET_SRCROOT)/Externals/libetpan-osx/include/\" \"$(PODS_TARGET_SRCROOT)/src/core/basetypes/icu-ucsdet/include/\"",
     "SWIFT_INCLUDE_PATHS" => "\"$(PODS_TARGET_SRCROOT)/build-mac/CMailCore\" \"$(PODS_TARGET_SRCROOT)/Externals/libetpan-osx/include/\"",
-    "OTHER_CPLUSPLUSFLAGS" => "$(inherited) $(OTHER_CFLAGS)"
+    "OTHER_CPLUSPLUSFLAGS" => "$(inherited) $(OTHER_CFLAGS) -DSWIFT"
   }
 
 
@@ -38,7 +38,7 @@ Pod::Spec.new do |s|
   CMD
   
   s.dependency 'RDTidyHtml5'
-  s.dependency 'RDSQLite3/icu', '3.14.2-framework2'
+  s.dependency 'RDSQLite3/icu', '3.28.0'
 
   s.default_subspec = 'core' 
   s.requires_arc = false
