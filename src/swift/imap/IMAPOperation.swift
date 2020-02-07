@@ -19,9 +19,14 @@ public class MCOIMAPOperation : MCOIMAPBaseOperation {
     
     public override func cancel() {
         cancelLock.lock()
-        completionBlock?(MailCoreError.error(code: ErrorCanceled))
+        let completionBlock = self.completionBlock
         self.completionBlock = nil
         cancelLock.unlock()
+
+        if let completionBlock = completionBlock {
+            completionBlock(MailCoreError.error(code: ErrorCanceled))
+        }
+
         super.cancel()
     }
     
