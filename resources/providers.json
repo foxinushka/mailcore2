@@ -593,30 +593,15 @@
             "imap": [
                 {
                     "port": 993,
-                    "hostname": "mail.messagingengine.com",
+                    "hostname": "imap.fastmail.com",
                     "ssl": true
-                },
-                {
-                    "port": 143,
-                    "hostname": "mail.messagingengine.com",
-                    "starttls": true
                 }
             ],
             "smtp": [
                 {
-                    "port": 587,
-                    "hostname": "mail.messagingengine.com",
-                    "starttls": true
-                },
-                {
                     "port": 465,
-                    "hostname": "mail.messagingengine.com",
+                    "hostname": "smtp.fastmail.com",
                     "ssl": true
-                },
-                {
-                    "port": 25,
-                    "hostname - 2": "mail.messagingengine.com",
-                    "starttls": true
                 }
             ]
         },
@@ -970,12 +955,12 @@
             ],
             "smtp": [
                 {
-                    "port": 25,
+                    "port": 587,
                     "hostname": "smtp-mail.outlook.com",
                     "starttls": true
                 },
                 {
-                    "port": 587,
+                    "port": 25,
                     "hostname": "smtp-mail.outlook.com",
                     "starttls": true
                 }
@@ -1037,7 +1022,7 @@
             "drafts": "Drafts",
             "allmail": "Archive",
             "spam": "Junk",
-            "sentmail": "Sent Messages",
+            "sentmail": "Sent",
             "trash": "Deleted"
         }
     },

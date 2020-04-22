@@ -2,8 +2,8 @@
 
 #define MAILCORE_MCOPERATION_H
 
-#include <pthread.h>
 #include <MailCore/MCObject.h>
+#include <MailCore/MCBasicLock.h>
 
 #ifdef __cplusplus
 
@@ -32,7 +32,7 @@ namespace mailcore {
         
         virtual void start();
         
-#if defined(__APPLE__) || defined(__ANDROID__)
+#if MC_HAS_GCD
         virtual void setCallbackDispatchQueue(dispatch_queue_t callbackDispatchQueue);
         virtual dispatch_queue_t callbackDispatchQueue();
 #endif
@@ -45,8 +45,8 @@ namespace mailcore {
         OperationCallback * mCallback;
         bool mCancelled;
         bool mShouldRunWhenCancelled;
-        pthread_mutex_t mLock;
-#if defined(__APPLE__) || defined(__ANDROID__)
+		MCB_LOCK_TYPE mLock;
+#if MC_HAS_GCD
         dispatch_queue_t mCallbackDispatchQueue;
 #endif
         

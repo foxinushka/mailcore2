@@ -1,7 +1,7 @@
 import Foundation
 import CMailCore
 
-#if os(Android)
+#if os(Android) || os(Windows)
     public typealias MailCoreRange = CMailCore.Range
 #else
     public typealias MailCoreRange = MailCore.Range

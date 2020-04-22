@@ -210,7 +210,14 @@ time_t mailcore::mkgmtime(struct tm * tmp)
      ** If time_t is signed, then 0 is the median value,
      ** if time_t is unsigned, then 1 << bits is median.
      */
-    if(bits > 40) bits = 40;
+    
+#if _MSC_VER
+    const int max_bits = 34;
+#else
+    const int max_bits = 40;
+#endif
+    
+    if (bits > max_bits) bits = max_bits;
     t = (t < 0) ? 0 : ((time_t) 1 << bits);
     for ( ; ; ) {
         gmtime_r(&t, &mytm);

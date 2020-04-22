@@ -2,6 +2,12 @@
 
 #define MCDEFINES_H_
 
+#if defined(__APPLE__) || defined(__ANDROID__) || defined(_MSC_VER)
+#define MC_HAS_GCD 1
+#else
+#define MC_HAS_GCD 0
+#endif
+
 #ifdef _MSC_VER
 
 #pragma section(".CRT$XCU",read)

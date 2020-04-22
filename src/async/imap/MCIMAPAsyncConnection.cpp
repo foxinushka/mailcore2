@@ -57,14 +57,18 @@ namespace mailcore {
 
         virtual void queueStartRunning() {
             mConnection->setQueueRunning(true);
-            mConnection->owner()->operationRunningStateChanged();
+            if (mConnection->owner()) {
+                mConnection->owner()->operationRunningStateChanged();
+            }
             mConnection->queueStartRunning();
         }
 
         virtual void queueStoppedRunning() {
             mConnection->setQueueRunning(false);
             mConnection->tryAutomaticDisconnect();
-            mConnection->owner()->operationRunningStateChanged();
+            if (mConnection->owner()) {
+                mConnection->owner()->operationRunningStateChanged();
+            }
             mConnection->queueStoppedRunning();
         }
 
@@ -103,7 +107,7 @@ IMAPAsyncConnection::IMAPAsyncConnection()
     mQueue->setCallback(mQueueCallback);
     mOwner = NULL;
     mConnectionLogger = NULL;
-    pthread_mutex_init(&mConnectionLoggerLock, NULL);
+    MCB_LOCK_INIT(&mConnectionLoggerLock);
     mInternalLogger = new IMAPConnectionLogger(this);
     mAutomaticConfigurationEnabled = true;
     mQueueRunning = false;
@@ -112,12 +116,12 @@ IMAPAsyncConnection::IMAPAsyncConnection()
 
 IMAPAsyncConnection::~IMAPAsyncConnection()
 {
-#if defined(__APPLE__) || defined(__ANDROID__)
+#if MC_HAS_GCD
     cancelDelayedPerformMethodOnDispatchQueue((Object::Method) &IMAPAsyncConnection::tryAutomaticDisconnectAfterDelay, NULL, dispatchQueue());
 #else
     cancelDelayedPerformMethod((Object::Method) &IMAPAsyncConnection::tryAutomaticDisconnectAfterDelay, NULL);
 #endif
-    pthread_mutex_destroy(&mConnectionLoggerLock);
+    MCB_LOCK_DESTROY(&mConnectionLoggerLock);
     MC_SAFE_RELEASE(mInternalLogger);
     MC_SAFE_RELEASE(mQueueCallback);
     MC_SAFE_RELEASE(mLastFolder);
@@ -280,7 +284,7 @@ void IMAPAsyncConnection::cancelAllOperations()
 void IMAPAsyncConnection::runOperation(IMAPOperation * operation)
 {
     if (mScheduledAutomaticDisconnect) {
-#if defined(__APPLE__) || defined(__ANDROID__)
+#if MC_HAS_GCD
         cancelDelayedPerformMethodOnDispatchQueue((Object::Method) &IMAPAsyncConnection::tryAutomaticDisconnectAfterDelay, NULL, dispatchQueue());
 #else
         cancelDelayedPerformMethod((Object::Method) &IMAPAsyncConnection::tryAutomaticDisconnectAfterDelay, NULL);
@@ -300,7 +304,7 @@ void IMAPAsyncConnection::tryAutomaticDisconnect()
 
     bool scheduledAutomaticDisconnect = mScheduledAutomaticDisconnect;
     if (scheduledAutomaticDisconnect) {
-#if defined(__APPLE__) || defined(__ANDROID__)
+#if MC_HAS_GCD
         cancelDelayedPerformMethodOnDispatchQueue((Object::Method) &IMAPAsyncConnection::tryAutomaticDisconnectAfterDelay, NULL, dispatchQueue());
 #else
         cancelDelayedPerformMethod((Object::Method) &IMAPAsyncConnection::tryAutomaticDisconnectAfterDelay, NULL);
@@ -309,7 +313,7 @@ void IMAPAsyncConnection::tryAutomaticDisconnect()
 
     mOwner->retain();
     mScheduledAutomaticDisconnect = true;
-#if defined(__APPLE__) || defined(__ANDROID__)
+#if MC_HAS_GCD
     performMethodOnDispatchQueueAfterDelay((Object::Method) &IMAPAsyncConnection::tryAutomaticDisconnectAfterDelay, NULL, dispatchQueue(), 30);
 #else
     performMethodAfterDelay((Object::Method) &IMAPAsyncConnection::tryAutomaticDisconnectAfterDelay, NULL, 30);
@@ -364,9 +368,9 @@ IMAPAsyncSession * IMAPAsyncConnection::owner()
 
 void IMAPAsyncConnection::setConnectionLogger(ConnectionLogger * logger)
 {
-    pthread_mutex_lock(&mConnectionLoggerLock);
+    MCB_LOCK(&mConnectionLoggerLock);
     mConnectionLogger = logger;
-    pthread_mutex_unlock(&mConnectionLoggerLock);
+    MCB_UNLOCK(&mConnectionLoggerLock);
     if (logger != NULL) {
         mSession->setConnectionLogger(mInternalLogger);
     }
@@ -379,20 +383,20 @@ ConnectionLogger * IMAPAsyncConnection::connectionLogger()
 {
     ConnectionLogger * result;
 
-    pthread_mutex_lock(&mConnectionLoggerLock);
+    MCB_LOCK(&mConnectionLoggerLock);
     result = mConnectionLogger;
-    pthread_mutex_unlock(&mConnectionLoggerLock);
+    MCB_UNLOCK(&mConnectionLoggerLock);
 
     return result;
 }
 
 void IMAPAsyncConnection::logConnection(ConnectionLogType logType, Data * buffer)
 {
-    pthread_mutex_lock(&mConnectionLoggerLock);
+    MCB_LOCK(&mConnectionLoggerLock);
     if (mConnectionLogger != NULL) {
         mConnectionLogger->log(this, logType, buffer);
     }
-    pthread_mutex_unlock(&mConnectionLoggerLock);
+    MCB_UNLOCK(&mConnectionLoggerLock);
 }
 
 void IMAPAsyncConnection::setAutomaticConfigurationEnabled(bool enabled)
@@ -416,7 +420,7 @@ void IMAPAsyncConnection::setQueueRunning(bool running)
     mQueueRunning = running;
 }
 
-#if defined(__APPLE__) || defined(__ANDROID__)
+#if MC_HAS_GCD
 void IMAPAsyncConnection::setDispatchQueue(dispatch_queue_t dispatchQueue)
 {
     mQueue->setDispatchQueue(dispatchQueue);

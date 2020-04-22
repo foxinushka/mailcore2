@@ -5,11 +5,12 @@ public class MCOIMAPOperation : MCOIMAPBaseOperation {
     
     public typealias CompletionBlock = (Error?) -> Void
     
+    private let cancelLock = NSLock()
     private var completionBlock: CompletionBlock?
-	
-	internal init(operation:CIMAPBaseOperation) {
+    
+    internal init(operation:CIMAPBaseOperation) {
         super.init(baseOperation: operation)
-	}
+    }
     
     public func start(completionBlock: CompletionBlock?) {
         self.completionBlock = completionBlock
@@ -17,16 +18,28 @@ public class MCOIMAPOperation : MCOIMAPBaseOperation {
     }
     
     public override func cancel() {
-        completionBlock?(MailCoreError.error(code: ErrorCanceled))
+        cancelLock.lock()
+        let completionBlock = self.completionBlock
         self.completionBlock = nil
+        cancelLock.unlock()
+
+        if let completionBlock = completionBlock {
+            completionBlock(MailCoreError.error(code: ErrorCanceled))
+        }
+
         super.cancel()
     }
     
     public override func operationCompleted() {
+        cancelLock.lock()
         guard let completionBlock = self.completionBlock else {
+            cancelLock.unlock()
             return
         }
-
+        
+        self.completionBlock = nil
+        cancelLock.unlock()
+        
         mailCoreAutoreleasePool {
             let errorCode = error()
             if errorCode == ErrorNone {
@@ -36,7 +49,6 @@ public class MCOIMAPOperation : MCOIMAPBaseOperation {
                 completionBlock(MailCoreError.error(code: errorCode))
             }
         }
-        self.completionBlock = nil
     }
 
 }

@@ -17,7 +17,7 @@ public struct MCOIMAPMessagesRequestKind : OptionSet {
         self.rawValue = rawValue
     }
     
-    public static let uid               = MCOIMAPMessagesRequestKind(rawValue: 0) // This is the default and it's always fetched
+    public static let uid               = MCOIMAPMessagesRequestKind([]) // This is the default and it's always fetched
     public static let flags             = MCOIMAPMessagesRequestKind(rawValue: 1 << 0)
     public static let headers           = MCOIMAPMessagesRequestKind(rawValue: 1 << 1)
     public static let `structure`       = MCOIMAPMessagesRequestKind(rawValue: 1 << 2)
@@ -31,7 +31,7 @@ public struct MCOIMAPMessagesRequestKind : OptionSet {
     public static let size              = MCOIMAPMessagesRequestKind(rawValue: 1 << 10)
     
     internal func toCIMAPMessagesRequestKind() -> CIMAPMessagesRequestKind {
-        return CIMAPMessagesRequestKind(rawValue: UInt32(self.rawValue))
+        return CIMAPMessagesRequestKind(rawValue: CEnumInt(self.rawValue))
     }
 }
 
@@ -60,7 +60,7 @@ public struct MCOMessageFlag : OptionSet {
     public static let maskAll: MCOMessageFlag = [.seen, .answered, .flagged, .deleted, .draft, .mdnSent, .forwarded, .submitPending, .submitted]
     
     internal func toCMessageFlag() -> CMessageFlag {
-        return CMessageFlag(rawValue: UInt32(self.rawValue))
+        return CMessageFlag(rawValue: CEnumInt(self.rawValue))
     }
 }
 
@@ -76,7 +76,7 @@ public struct MCOAuthType : OptionSet {
         self.rawValue = Int(cAuthType.rawValue)
     }
     
-    public static let SASLNone          = MCOAuthType(rawValue: 0)
+    public static let SASLNone          = MCOAuthType([])
     public static let SASLCRAMMD5       = MCOAuthType(rawValue: 1 << 0)
     public static let SASLPlain         = MCOAuthType(rawValue: 1 << 1)
     public static let SASLGSSAPI        = MCOAuthType(rawValue: 1 << 2)
@@ -89,7 +89,7 @@ public struct MCOAuthType : OptionSet {
     public static let XOAuth2Outlook    = MCOAuthType(rawValue: 1 << 9)
     
     internal func toCAuthType() -> CAuthType {
-        return CAuthType(rawValue: UInt32(self.rawValue))
+        return CAuthType(rawValue: CEnumInt(self.rawValue))
     }
 }
 
@@ -125,6 +125,6 @@ public struct MCOIMAPFolderFlag : OptionSet {
     public static let typeMask: MCOIMAPFolderFlag  = [.inbox, .sentMail, .starred, .allMail, .trash, .drafts, .spam, .important, .archive]
     
     internal func toCIMAPFolderFlag() -> CIMAPFolderFlag {
-        return CIMAPFolderFlag(rawValue: UInt32(self.rawValue))
+        return CIMAPFolderFlag(rawValue: CEnumInt(self.rawValue))
     }
 }

@@ -36,7 +36,7 @@ void POPSession::init()
     mProgressCallback = NULL;
     mState = STATE_DISCONNECTED;
     mConnectionLogger = NULL;
-    pthread_mutex_init(&mConnectionLoggerLock, NULL);
+    MCB_LOCK_INIT(&mConnectionLoggerLock);
 }
 
 POPSession::POPSession()
@@ -46,7 +46,7 @@ POPSession::POPSession()
 
 POPSession::~POPSession()
 {
-    pthread_mutex_destroy(&mConnectionLoggerLock);
+    MCB_LOCK_DESTROY(&mConnectionLoggerLock);
     MC_SAFE_RELEASE(mHostname);
     MC_SAFE_RELEASE(mUsername);
     MC_SAFE_RELEASE(mPassword);
@@ -600,12 +600,12 @@ void POPSession::noop(ErrorCode * pError)
 
 void POPSession::lockConnectionLogger()
 {
-    pthread_mutex_lock(&mConnectionLoggerLock);
+    MCB_LOCK(&mConnectionLoggerLock);
 }
 
 void POPSession::unlockConnectionLogger()
 {
-    pthread_mutex_unlock(&mConnectionLoggerLock);
+    MCB_UNLOCK(&mConnectionLoggerLock);
 }
 
 void POPSession::setConnectionLogger(ConnectionLogger * logger)

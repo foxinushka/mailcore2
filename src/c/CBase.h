@@ -6,7 +6,9 @@
 
 //TODO: fix ICUBasetypes
 #ifdef _MSC_VER
-typedef wchar_t UChar;
+
+#include <unicode/uchar.h>
+
 #elif defined(__CHAR16_TYPE__)
 	#if defined(ANDROID)
 	typedef char16_t UChar;
@@ -15,6 +17,16 @@ typedef wchar_t UChar;
 	#endif
 #else
 typedef uint16_t UChar;
+#endif
+
+#ifdef _MSC_VER
+#	ifdef CMAILCORE_DLL
+#		define CMAILCORE_EXPORT __declspec(dllexport)
+#	else
+#		define CMAILCORE_EXPORT __declspec(dllimport)
+#   endif
+#else
+#	define CMAILCORE_EXPORT
 #endif
 
 #if __has_attribute(swift_name)
@@ -31,10 +43,10 @@ typedef uint16_t UChar;
 typedef struct structName { \
 nativeType* instance; \
 } structName; \
-structName structName##_##new(nativeType *obj); \
-void structName##_##retain(structName self); \
-void structName##_##release(structName self); \
-int structName##_##retainCount(structName self); \
+CMAILCORE_EXPORT structName structName##_##new(nativeType *obj); \
+CMAILCORE_EXPORT void structName##_##retain(structName self); \
+CMAILCORE_EXPORT void structName##_##release(structName self); \
+CMAILCORE_EXPORT int structName##_##retainCount(structName self); \
 
 #else
 
@@ -42,60 +54,60 @@ int structName##_##retainCount(structName self); \
 typedef struct structName { \
 void* instance; \
 } structName; \
-void structName##_##retain(structName self) CF_SWIFT_NAME(structName.retain(self:)); \
-void structName##_##release(structName self) CF_SWIFT_NAME(structName.release(self:)); \
-int structName##_##retainCount(structName self) CF_SWIFT_NAME(structName.retainCount(self:)); \
+CMAILCORE_EXPORT void structName##_##retain(structName self) CF_SWIFT_NAME(structName.retain(self:)); \
+CMAILCORE_EXPORT void structName##_##release(structName self) CF_SWIFT_NAME(structName.release(self:)); \
+CMAILCORE_EXPORT int structName##_##retainCount(structName self) CF_SWIFT_NAME(structName.retainCount(self:)); \
 
 #endif
 
 #define C_SYNTHESIZE_COBJECT_CAST_DEFINITION(structName) \
-CObject structName##_##toCObject(structName self) CF_SWIFT_NAME(structName.toCObject(self:)); \
-structName structName##_##newWithCObject(CObject obj) CF_SWIFT_NAME(structName.init(cobject:)); \
-CData structName##_##mailCoreTypeInfo(void); \
-CObject structName##_##copy(structName self) CF_SWIFT_NAME(structName.copy(self:)); \
+CMAILCORE_EXPORT CObject structName##_##toCObject(structName self) CF_SWIFT_NAME(structName.toCObject(self:)); \
+CMAILCORE_EXPORT structName structName##_##newWithCObject(CObject obj) CF_SWIFT_NAME(structName.init(cobject:)); \
+CMAILCORE_EXPORT CData structName##_##mailCoreTypeInfo(void); \
+CMAILCORE_EXPORT CObject structName##_##copy(structName self) CF_SWIFT_NAME(structName.copy(self:)); \
 
 #define C_SYNTHESIZE_READONLY_PROPERTY_DEFINITION(structName, propertyType, getterName) \
-propertyType structName##_##getterName(struct structName self) CF_SWIFT_NAME(getter:structName.getterName(self:)); \
+CMAILCORE_EXPORT propertyType structName##_##getterName(struct structName self) CF_SWIFT_NAME(getter:structName.getterName(self:)); \
 
 #define C_SYNTHESIZE_PROPERTY_DEFINITION(structName, propertyType, getterName, setterName) \
-propertyType structName##_##getterName(struct structName self) CF_SWIFT_NAME(getter:structName.getterName(self:)); \
-void structName##_##setterName(struct structName self, propertyType port) CF_SWIFT_NAME(setter:structName.getterName(self:newValue:)); \
+CMAILCORE_EXPORT propertyType structName##_##getterName(struct structName self) CF_SWIFT_NAME(getter:structName.getterName(self:)); \
+CMAILCORE_EXPORT void structName##_##setterName(struct structName self, propertyType port) CF_SWIFT_NAME(setter:structName.getterName(self:newValue:)); \
 
 #define C_SYNTHESIZE_FUNC_DEFINITION_0(structName, returnType, funcName) \
-returnType structName##_##funcName(struct structName self) CF_SWIFT_NAME(structName.funcName(self:)); \
+CMAILCORE_EXPORT returnType structName##_##funcName(struct structName self) CF_SWIFT_NAME(structName.funcName(self:)); \
 
 #define C_SYNTHESIZE_FUNC_DEFINITION_1(structName, returnType, funcName, arg1Type) \
-returnType structName##_##funcName(struct structName self, arg1Type arg1) CF_SWIFT_NAME(structName.funcName(self:_:)); \
+CMAILCORE_EXPORT returnType structName##_##funcName(struct structName self, arg1Type arg1) CF_SWIFT_NAME(structName.funcName(self:_:)); \
 
 #define C_SYNTHESIZE_FUNC_DEFINITION_2(structName, returnType, funcName, arg1Type, arg2Type) \
-returnType structName##_##funcName(struct structName self, arg1Type arg1, arg2Type arg2) CF_SWIFT_NAME(structName.funcName(self:_:_:)); \
+CMAILCORE_EXPORT returnType structName##_##funcName(struct structName self, arg1Type arg1, arg2Type arg2) CF_SWIFT_NAME(structName.funcName(self:_:_:)); \
 
 #define C_SYNTHESIZE_FUNC_DEFINITION_3(structName, returnType, funcName, arg1Type, arg2Type, arg3Type) \
-returnType structName##_##funcName(struct structName self, arg1Type arg1, arg2Type arg2, arg3Type arg3) CF_SWIFT_NAME(structName.funcName(self:_:_:_:)); \
+CMAILCORE_EXPORT returnType structName##_##funcName(struct structName self, arg1Type arg1, arg2Type arg2, arg3Type arg3) CF_SWIFT_NAME(structName.funcName(self:_:_:_:)); \
 
 #define C_SYNTHESIZE_FUNC_DEFINITION_4(structName, returnType, funcName, arg1Type, arg2Type, arg3Type, argType4) \
-returnType structName##_##funcName(struct structName self, arg1Type arg1, arg2Type arg2, arg3Type arg3, argType4 arg4) CF_SWIFT_NAME(structName.funcName(self:_:_:_:_:)); \
+CMAILCORE_EXPORT returnType structName##_##funcName(struct structName self, arg1Type arg1, arg2Type arg2, arg3Type arg3, argType4 arg4) CF_SWIFT_NAME(structName.funcName(self:_:_:_:_:)); \
 
 #define C_SYNTHESIZE_FUNC_DEFINITION_5(structName, returnType, funcName, arg1Type, arg2Type, arg3Type, argType4, argType5) \
-returnType structName##_##funcName(struct structName self, arg1Type arg1, arg2Type arg2, arg3Type arg3, argType4 arg4, argType5 arg5) CF_SWIFT_NAME(structName.funcName(self:_:_:_:_:_:)); \
+CMAILCORE_EXPORT returnType structName##_##funcName(struct structName self, arg1Type arg1, arg2Type arg2, arg3Type arg3, argType4 arg4, argType5 arg5) CF_SWIFT_NAME(structName.funcName(self:_:_:_:_:_:)); \
 
 #define C_SYNTHESIZE_FUNC_DEFINITION_6(structName, returnType, funcName, arg1Type, arg2Type, arg3Type, argType4, argType5, argType6) \
-returnType structName##_##funcName(struct structName self, arg1Type arg1, arg2Type arg2, arg3Type arg3, argType4 arg4, argType5 arg5, argType6 arg6) CF_SWIFT_NAME(structName.funcName(self:_:_:_:_:_:_:)); \
+CMAILCORE_EXPORT returnType structName##_##funcName(struct structName self, arg1Type arg1, arg2Type arg2, arg3Type arg3, argType4 arg4, argType5 arg5, argType6 arg6) CF_SWIFT_NAME(structName.funcName(self:_:_:_:_:_:_:)); \
 
 #define C_SYNTHESIZE_STATIC_FUNC_DEFINITION_0(structName, returnType, funcName) \
-returnType structName##_##funcName(void); \
+CMAILCORE_EXPORT returnType structName##_##funcName(void); \
 
 #define C_SYNTHESIZE_STATIC_FUNC_DEFINITION_1(structName, returnType, funcName, arg1Type) \
-returnType structName##_##funcName(arg1Type arg1) CF_SWIFT_NAME(structName.funcName(_:)); \
+CMAILCORE_EXPORT returnType structName##_##funcName(arg1Type arg1) CF_SWIFT_NAME(structName.funcName(_:)); \
 
 #define C_SYNTHESIZE_STATIC_FUNC_DEFINITION_2(structName, returnType, funcName, arg1Type, arg2Type) \
-returnType structName##_##funcName(arg1Type arg1, arg2Type arg2) CF_SWIFT_NAME(structName.funcName(_:_:)); \
+CMAILCORE_EXPORT returnType structName##_##funcName(arg1Type arg1, arg2Type arg2) CF_SWIFT_NAME(structName.funcName(_:_:)); \
 
 #define C_SYNTHESIZE_STATIC_FUNC_DEFINITION_3(structName, returnType, funcName, arg1Type, arg2Type, arg3Type) \
-returnType structName##_##funcName(arg1Type arg1, arg2Type arg2, arg3Type arg3) CF_SWIFT_NAME(structName.funcName(_:_:_:)); \
+CMAILCORE_EXPORT returnType structName##_##funcName(arg1Type arg1, arg2Type arg2, arg3Type arg3) CF_SWIFT_NAME(structName.funcName(_:_:_:)); \
 
 #define C_SYNTHESIZE_STATIC_FUNC_DEFINITION_4(structName, returnType, funcName, arg1Type, arg2Type, arg3Type, arg4Type) \
-returnType structName##_##funcName(arg1Type arg1, arg2Type arg2, arg3Type arg3, arg4Type arg4) CF_SWIFT_NAME(structName.funcName(_:_:_:_:)); \
+CMAILCORE_EXPORT returnType structName##_##funcName(arg1Type arg1, arg2Type arg2, arg3Type arg3, arg4Type arg4) CF_SWIFT_NAME(structName.funcName(_:_:_:_:)); \
 
 #define C_SYNTHESIZE_FUNC_DEFINITION(structName, returnType, funcName,...) __GET_MACRO(_U, ##__VA_ARGS__,C_SYNTHESIZE_FUNC_DEFINITION_6,C_SYNTHESIZE_FUNC_DEFINITION_5,C_SYNTHESIZE_FUNC_DEFINITION_4,C_SYNTHESIZE_FUNC_DEFINITION_3,C_SYNTHESIZE_FUNC_DEFINITION_2,C_SYNTHESIZE_FUNC_DEFINITION_1,C_SYNTHESIZE_FUNC_DEFINITION_0)(structName, returnType, funcName, ##__VA_ARGS__)
 

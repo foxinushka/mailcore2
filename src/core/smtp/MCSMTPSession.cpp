@@ -21,11 +21,11 @@ enum {
     STATE_LOGGEDIN,
 };
 
-#define CANCEL_LOCK() pthread_mutex_lock(&mCancelLock)
-#define CANCEL_UNLOCK() pthread_mutex_unlock(&mCancelLock)
+#define CANCEL_LOCK() MCB_LOCK(&mCancelLock)
+#define CANCEL_UNLOCK() MCB_UNLOCK(&mCancelLock)
 
-#define CAN_CANCEL_LOCK() pthread_mutex_lock(&mCanCancelLock)
-#define CAN_CANCEL_UNLOCK() pthread_mutex_unlock(&mCanCancelLock)
+#define CAN_CANCEL_LOCK() MCB_LOCK(&mCanCancelLock)
+#define CAN_CANCEL_UNLOCK() MCB_UNLOCK(&mCanCancelLock)
 
 void SMTPSession::init()
 {
@@ -50,9 +50,9 @@ void SMTPSession::init()
     mLastLibetpanError = 0;
     mLastSMTPResponseCode = 0;
     mConnectionLogger = NULL;
-    pthread_mutex_init(&mConnectionLoggerLock, NULL);
-    pthread_mutex_init(&mCancelLock, NULL);
-    pthread_mutex_init(&mCanCancelLock, NULL);
+    MCB_LOCK_INIT(&mConnectionLoggerLock);
+	MCB_LOCK_INIT(&mCancelLock);
+	MCB_LOCK_INIT(&mCanCancelLock);
 
     mOutlookServer = false;
 }
@@ -64,9 +64,9 @@ SMTPSession::SMTPSession()
 
 SMTPSession::~SMTPSession()
 {
-    pthread_mutex_destroy(&mConnectionLoggerLock);
-    pthread_mutex_destroy(&mCancelLock);
-    pthread_mutex_destroy(&mCanCancelLock);
+    MCB_LOCK_DESTROY(&mConnectionLoggerLock);
+    MCB_LOCK_DESTROY(&mCancelLock);
+    MCB_LOCK_DESTROY(&mCanCancelLock);
     MC_SAFE_RELEASE(mLastSMTPResponse);
     MC_SAFE_RELEASE(mHostname);
     MC_SAFE_RELEASE(mUsername);
@@ -1034,12 +1034,12 @@ bool SMTPSession::isDisconnected()
 
 void SMTPSession::lockConnectionLogger()
 {
-    pthread_mutex_lock(&mConnectionLoggerLock);
+    MCB_LOCK(&mConnectionLoggerLock);
 }
 
 void SMTPSession::unlockConnectionLogger()
 {
-    pthread_mutex_unlock(&mConnectionLoggerLock);
+    MCB_UNLOCK(&mConnectionLoggerLock);
 }
 
 void SMTPSession::setConnectionLogger(ConnectionLogger * logger)

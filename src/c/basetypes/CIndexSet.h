@@ -24,18 +24,18 @@ extern "C" {
     };
     typedef struct Range Range;
     
-    extern Range RangeEmpty;
-    Range RangeMake(uint64_t location, uint64_t length);
-    Range RangeIntersection(Range range1, Range range2);
-    bool RangeHasIntersection(Range range1, Range range2);
-    uint64_t RangeLeftBound(Range range);
-    uint64_t RangeRightBound(Range range);
+    CMAILCORE_EXPORT extern Range RangeEmpty;
+    CMAILCORE_EXPORT Range RangeMake(uint64_t location, uint64_t length);
+    CMAILCORE_EXPORT Range RangeIntersection(Range range1, Range range2);
+    CMAILCORE_EXPORT bool RangeHasIntersection(Range range1, Range range2);
+    CMAILCORE_EXPORT uint64_t RangeLeftBound(Range range);
+    CMAILCORE_EXPORT uint64_t RangeRightBound(Range range);
     
     C_SYNTHESIZE_STRUCT_DEFINITION(CIndexSet, mailcore::IndexSet)
     
-    C_SYNTHESIZE_COBJECT_CAST_DEFINITION(CIndexSet)
+	C_SYNTHESIZE_COBJECT_CAST_DEFINITION(CIndexSet)
     
-    C_SYNTHESIZE_READONLY_PROPERTY_DEFINITION(CIndexSet, uint64_t, count)
+	C_SYNTHESIZE_READONLY_PROPERTY_DEFINITION(CIndexSet, uint64_t, count)
     
     C_SYNTHESIZE_FUNC_DEFINITION(CIndexSet, void, addIndex, uint64_t)
     C_SYNTHESIZE_FUNC_DEFINITION(CIndexSet, void, removeIndex, uint64_t)
@@ -51,11 +51,11 @@ extern "C" {
     
     C_SYNTHESIZE_STATIC_FUNC_DEFINITION(CIndexSet, CIndexSet, init)
     
-    CIndexSet       CIndexSet_new_WithRange(Range range)
-                    CF_SWIFT_NAME(CIndexSet.init(range:));
+    CMAILCORE_EXPORT CIndexSet CIndexSet_new_WithRange(Range range)
+    CF_SWIFT_NAME(CIndexSet.init(range:));
     
-    CIndexSet       CIndexSet_new_WithIndex(uint64_t idx)
-                    CF_SWIFT_NAME(CIndexSet.init(idx:));
+    CMAILCORE_EXPORT CIndexSet CIndexSet_new_WithIndex(uint64_t idx)
+    CF_SWIFT_NAME(CIndexSet.init(idx:));
 
 #ifdef __cplusplus
 }

@@ -72,7 +72,7 @@ IMAPAsyncSession::IMAPAsyncSession()
     mServerIdentity = new IMAPIdentity();
     mClientIdentity = new IMAPIdentity();
     mOperationQueueCallback = NULL;
-#if defined(__APPLE__) || defined(__ANDROID__)
+#if MC_HAS_GCD
     mDispatchQueue = getMainQueue();
 #endif
     mGmailUserDisplayName = NULL;
@@ -82,7 +82,7 @@ IMAPAsyncSession::IMAPAsyncSession()
 
 IMAPAsyncSession::~IMAPAsyncSession()
 {
-#if defined(__APPLE__) || defined(__ANDROID__)
+#if MC_HAS_GCD
     if (mDispatchQueue != NULL) {
         dispatch_release(mDispatchQueue);
     }
@@ -272,7 +272,7 @@ IMAPAsyncConnection * IMAPAsyncSession::session()
     session->setVoIPEnabled(mVoIPEnabled);
     session->setDefaultNamespace(mDefaultNamespace);
     session->setClientIdentity(mClientIdentity);
-#if defined(__APPLE__) || defined(__ANDROID__)
+#if MC_HAS_GCD
     session->setDispatchQueue(mDispatchQueue);
 #endif
 #if 0 // should be implemented properly
@@ -924,7 +924,7 @@ void IMAPAsyncSession::operationRunningStateChanged()
     }
 }
 
-#if defined(__APPLE__) || defined(__ANDROID__)
+#if MC_HAS_GCD
 void IMAPAsyncSession::setDispatchQueue(dispatch_queue_t dispatchQueue)
 {
     if (mDispatchQueue != NULL) {

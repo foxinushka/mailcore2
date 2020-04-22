@@ -33,7 +33,7 @@ namespace mailcore {
         uint32_t mLastKnownUid;
         bool mSetupSuccess;
         bool mInterrupted;
-        pthread_mutex_t mLock;
+        MCB_LOCK_TYPE mLock;
         void prepare(void * data);
         void unprepare(void * data);
         bool isInterrupted();

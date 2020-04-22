@@ -37,7 +37,7 @@ IMAPOperation::~IMAPOperation()
 void IMAPOperation::setSession(IMAPAsyncConnection * session)
 {
     MC_SAFE_REPLACE_RETAIN(IMAPAsyncConnection, mSession, session);
-#if defined(__APPLE__) || defined(__ANDROID__)
+#if MC_HAS_GCD
     dispatch_queue_t queue;
     if (session != NULL) {
         queue = session->dispatchQueue();
@@ -178,8 +178,15 @@ void IMAPOperation::beforeMain()
 
 void IMAPOperation::afterMain()
 {
+    retain();
+    performMethodOnMainThread((Object::Method) &IMAPOperation::afterMainOnMainThread, NULL);
+}
+
+void IMAPOperation::afterMainOnMainThread()
+{
     if (mSession->session()->isAutomaticConfigurationDone()) {
         mSession->owner()->automaticConfigurationDone(mSession->session());
         mSession->session()->resetAutomaticConfigurationDone();
     }
+    release();
 }

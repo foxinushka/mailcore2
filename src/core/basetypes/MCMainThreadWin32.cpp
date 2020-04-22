@@ -10,7 +10,6 @@
 #include "MCMainThread.h"
 
 #include <stdlib.h>
-#include <pthread.h>
 #include <libetpan/libetpan.h>
 
 #include "MCDefines.h"

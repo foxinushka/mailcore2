@@ -9,7 +9,7 @@
 import Foundation
 import Dispatch
 
-#if os(Android)
+#if os(Android) || os(Windows)
     import CDispatch
     
     typealias CDispatchQueue = dispatch_queue_t
@@ -28,7 +28,7 @@ import Dispatch
 extension DispatchQueue {
     
     class func queueFromWrapped(_ cdispatch: CDispatchQueue) -> DispatchQueue {
-        #if os(Android)
+        #if os(Android) || os(Windows)
             return unsafeBitCast(_DispatchQueue(queue: cdispatch), to: DispatchQueue.self)
         #else
             return cdispatch
@@ -36,7 +36,7 @@ extension DispatchQueue {
     }
     
     var wrapped: CDispatchQueue {
-        #if os(Android)
+        #if os(Android) || os(Windows)
             return unsafeBitCast(self, to: _DispatchQueue.self).__wrapped
         #else
             return self

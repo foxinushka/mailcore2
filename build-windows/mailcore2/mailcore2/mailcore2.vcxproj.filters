@@ -561,6 +561,21 @@
     <ClInclude Include="..\..\..\src\async\imap\MCIMAPFolderInfo.h">
       <Filter>Source Files\async\imap</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\src\async\imap\MCIMAPCustomCommandOperation.h">
+      <Filter>Source Files\async\imap</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\core\provider\MCAccountValidator.h">
+      <Filter>Source Files\core\provider</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\core\provider\MCMXRecordResolverOperation.h">
+      <Filter>Source Files\core\provider</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\core\basetypes\MCLock.h">
+      <Filter>Source Files\core\basetypes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\core\basetypes\MCBasicLock.h">
+      <Filter>Source Files\core\basetypes</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\src\core\abstract\MCAbstractMessage.cpp">
@@ -961,6 +976,15 @@
     </ClCompile>
     <ClCompile Include="..\..\..\src\async\imap\MCIMAPFolderInfo.cpp">
       <Filter>Source Files\async\imap</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\async\imap\MCIMAPCustomCommandOperation.cpp">
+      <Filter>Source Files\async\imap</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\core\provider\MCAccountValidator.cpp">
+      <Filter>Source Files\core\provider</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\core\provider\MCMXRecordResolverOperation.cpp">
+      <Filter>Source Files\core\provider</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

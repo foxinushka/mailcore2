@@ -16,7 +16,7 @@ public class MCOMailProvidersManager: NSObjectCompat {
     private override init() {
         super.init()
 
-        #if !os(Android)
+        #if !os(Android) && !os(Windows)
         if let filename = Bundle(for: MCOMailProvidersManager.self).path(forResource: "providers", ofType: "json") {
             MCOMailProvidersManager.registerProviders(filename: filename)
         }
