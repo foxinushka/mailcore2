@@ -25,6 +25,7 @@
 #include "MCLock.h"
 
 #if defined(ANDROID) || defined(__ANDROID__)
+#include "MCMainThreadAndroid.h"
 // TODO: remove when swift toolchain updated to 15c
 #include <string>
 #endif

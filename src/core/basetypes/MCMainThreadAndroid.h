@@ -9,8 +9,8 @@
 namespace mailcore {
     extern void androidSetupThread(void);
     extern void androidUnsetupThread(void);
-    extern void mailcore::callOnMainThreadAndWait(void (* function)(void *), void * context);
-    extern void mailcore::callOnMainThread(void (* function)(void *), void * context);
+    extern void callOnMainThreadAndWait(void (* function)(void *), void * context);
+    extern void callOnMainThread(void (* function)(void *), void * context);
 }
 #endif
 
