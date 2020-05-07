@@ -9,7 +9,7 @@
 #define MCB_LOCK_TYPE SRWLOCK
 #define MCB_LOCK_INITIAL_VALUE SRWLOCK_INIT
 #define MCB_LOCK_INIT(l) InitializeSRWLock(l)
-#define MCB_LOCK_DESTROY(l)
+#define MCB_LOCK_DESTROY(l) ReleaseSRWLockExclusive(l)
 #define MCB_LOCK(l) AcquireSRWLockExclusive(l)
 #define MCB_UNLOCK(l) ReleaseSRWLockExclusive(l)
 
