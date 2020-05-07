@@ -43,7 +43,7 @@ Object::~Object()
 #ifndef __APPLE__
 #ifdef _MSC_VER
     MCB_LOCK_DESTROY(mLock);
-#elif
+#else
     pthread_mutex_destroy(&mLock);
 #endif
 #endif
