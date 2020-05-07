@@ -330,7 +330,6 @@ static void performOnMainThread(void * info)
     free(data);
 }
  
-#if !defined(__ANDROID__)
 void Object::performMethodOnMainThread(Method method, void * context, bool waitUntilDone)
 {
     struct mainThreadCallData * data;
@@ -348,7 +347,6 @@ void Object::performMethodOnMainThread(Method method, void * context, bool waitU
         callOnMainThread(performOnMainThread, data);
     }
 }
-#endif
 
 #if MC_HAS_GCD
 void Object::performMethodOnDispatchQueue(Method method, void * context, void * targetDispatchQueue, bool waitUntilDone)
