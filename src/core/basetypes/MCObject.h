@@ -79,9 +79,7 @@ namespace mailcore {
         
         typedef void (Object::*Method) (void *);
         virtual void performMethod(Method method, void * context);
-#if !defined(__ANDROID__)
         virtual void performMethodOnMainThread(Method method, void * context, bool waitUntilDone = false);
-#endif
         virtual void performMethodAfterDelay(Method method, void * context, double delay);
 #if MC_HAS_GCD
         virtual void performMethodOnDispatchQueue(Method method, void * context, void * targetDispatchQueue, bool waitUntilDone = false);
