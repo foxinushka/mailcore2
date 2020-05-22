@@ -38,7 +38,7 @@ Pod::Spec.new do |s|
   CMD
   
   s.dependency 'RDTidyHtml5'
-  s.dependency 'RDSQLite3/icu', '3.28.0'
+  s.dependency 'RDSQLite3/icu', '3.28.2'
 
   s.default_subspec = 'core' 
   s.requires_arc = false
