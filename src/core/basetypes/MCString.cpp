@@ -1339,6 +1339,9 @@ void String::appendBytes(const char * bytes, unsigned int length, const char * c
         if (encoding == kCFStringEncodingGB_2312_80) {
             encoding = kCFStringEncodingGB_18030_2000;
         }
+        if (encoding == kCFStringEncodingEUC_KR) {
+            encoding = kCFStringEncodingDOSKorean;
+        }
         CFRelease(encodingName);
     }
     if (encoding == kCFStringEncodingUTF8) {

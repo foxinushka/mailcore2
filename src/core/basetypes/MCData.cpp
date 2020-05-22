@@ -227,7 +227,7 @@ static String * normalizeCharset(String * charset)
         charset = MCSTR("iso-2022-jp-2");
     }
     else if (charset->caseInsensitiveCompare(MCSTR("ks_c_5601-1987")) == 0) {
-        charset = MCSTR("euckr");
+        charset = MCSTR("EUC-KR");
     }
     else if ((charset->caseInsensitiveCompare(MCSTR("iso-8859-8-i")) == 0) ||
     (charset->caseInsensitiveCompare(MCSTR("iso-8859-8-e")) == 0)) {
