@@ -43,7 +43,7 @@ Object::~Object()
 #ifdef _MSC_VER
 #elif __APPLE__
 #else
-    pthread_mutex_init(&mLock, NULL);
+    pthread_mutex_destroy(&mLock);
 #endif
 }
 
