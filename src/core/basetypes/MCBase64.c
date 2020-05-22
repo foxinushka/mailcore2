@@ -114,6 +114,10 @@ char * MCDecodeBase64(const char * in, int len, int * p_outlen)
 }
 
 char * MCDecodeBase64ByLines(const char * in, int len, int * p_outlen) {
+    if (len < 4) {
+        return NULL;
+    }
+
     char * output, * out;
     int c1, c2, c3, c4;
     const char * end = in + len;
