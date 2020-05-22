@@ -580,6 +580,16 @@ Data * Data::dataWithContentsOfFile(String * filename)
 
 Data * Data::decodedDataUsingEncoding(Encoding encoding)
 {
+    if (encoding == EncodingBase64) {
+        int decoded_length;
+        const char *bytes = MCDecodeBase64ByLines(mBytes, mLength, &decoded_length);
+        if (bytes) {
+            Data * data = Data::data();
+            data->takeBytesOwnership((char *)bytes, decoded_length, NULL);
+            return data;
+        }
+        return NULL;
+    }
     Data * unused = NULL;
     return MCDecodeData(this, encoding, false, &unused);
 }
