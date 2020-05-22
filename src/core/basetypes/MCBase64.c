@@ -117,7 +117,7 @@ char * MCDecodeBase64ByLines(const char * in, int len, int * p_outlen) {
     char * output, * out;
     int c1, c2, c3, c4;
     const char * end = in + len;
-    const char * end_of_last_line;
+    char * end_of_last_line;
 
     output = malloc((len * 3 / 4) + 1);
     if (output == NULL)
