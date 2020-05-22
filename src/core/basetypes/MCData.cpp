@@ -488,6 +488,10 @@ String * Data::charsetWithFilteredHTML(bool filterHTML, String * hintCharset)
         ucsdet_setText(detector, data->bytes(), data->length(), &err);
         ucsdet_enableInputFilter(detector, filterHTML);
         matches = ucsdet_detectAll(detector,  &matchesCount, &err);
+        if (matches == NULL) {
+            ucsdet_close(detector);
+            return hintCharset;
+        }
     }
 
     if (result == NULL) {
