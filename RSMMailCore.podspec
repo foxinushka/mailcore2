@@ -1,16 +1,16 @@
 Pod::Spec.new do |s|
   s.name         = "RSMMailCore"
-  s.version      = "2.1.2"
+  s.version      = "2.1.5.2"
   s.summary      = "SparkCore is absolutely awesome sanctuary of all the messages related business logic of Spark"
   s.description  = <<-DESC
                     Amen
                    DESC
 
-  s.homepage = 'https://github.com/foxinushka/mailcore2.git' 
+  s.homepage = 'https://github.com/readdle/mailcore2' 
   s.license      = { :type => 'Copyright 2017 Readdle Inc.', :text => 'Copyright 2017 Readdle Inc.' }
 
   s.author       = { "Viktor Gedzenko" => "fox@readdle.com" }
-  s.source       = { :git => "https://github.com/foxinushka/mailcore2.git"}
+  s.source       = { :git => "git@github.com:readdle/mailcore2.git", :commit => ""}
   s.platforms    = { :ios => "9.0", :osx => "10.11" }  
 
   s.framework  = "Foundation", "Security"
@@ -38,7 +38,7 @@ Pod::Spec.new do |s|
   CMD
   
   s.dependency 'RDTidyHtml5'
-  s.dependency 'RDSQLite3/icu', '3.28.2'
+  s.dependency 'RDSQLite3', '3.28.2'
 
   s.default_subspec = 'core' 
   s.requires_arc = false
