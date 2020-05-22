@@ -273,7 +273,7 @@ static bool isHintCharsetValid(String * hintCharset)
                 break;
             if (validCharset == NULL)
                 break;
-            knownCharset->addObject(String::stringWithUTF8Characters(validCharset));
+            knownCharset->addObject(String::stringWithUTF8Characters(validCharset)->lowercaseString());
         }
         uenum_close(iterator);
         ucsdet_close(detector);
@@ -331,9 +331,7 @@ static bool isHintCharsetValid(String * hintCharset)
             return true;
         }
         
-        // If it's among the known charset, we want to try to detect it
-        // to validate that it's the correct charset.
-        if (!knownCharset->containsObject(hintCharset)) {
+        if (knownCharset->containsObject(hintCharset)) {
             return true;
         }
     }
@@ -349,16 +347,15 @@ String * Data::stringWithDetectedCharset(String * hintCharset, bool isHTML)
     if (hintCharset != NULL) {
         hintCharset = normalizeCharset(hintCharset);
     }
-    if (isHintCharsetValid(hintCharset)) {
-        charset = hintCharset;
+    if (!isHintCharsetValid(hintCharset)) {
+        hintCharset = NULL;
+    }
+
+    if (hintCharset == NULL) {
+        charset = charsetWithFilteredHTML(isHTML);
     }
     else {
-        if (hintCharset == NULL) {
-            charset = charsetWithFilteredHTML(isHTML);
-        }
-        else {
-            charset = charsetWithFilteredHTML(isHTML, hintCharset);
-        }
+        charset = charsetWithFilteredHTML(isHTML, hintCharset);
     }
     
     if (charset == NULL) {
@@ -482,11 +479,21 @@ String * Data::charsetWithFilteredHTML(bool filterHTML, String * hintCharset)
             break;
         }
     }
-    
+
+    if (filterHTML && result == NULL) {
+        String * flatten;
+        flatten = String::stringWithData(this, hintCharset->UTF8Characters());
+        flatten = flatten->flattenHTMLAndShowBlockquoteAndLink(false, false);
+        Data * data = flatten->dataUsingEncoding(hintCharset->UTF8Characters());
+        ucsdet_setText(detector, data->bytes(), data->length(), &err);
+        ucsdet_enableInputFilter(detector, filterHTML);
+        matches = ucsdet_detectAll(detector,  &matchesCount, &err);
+    }
+
     if (result == NULL) {
         int32_t maxConfidence;
         
-        maxConfidence = 49;
+        maxConfidence = 20;
         
         for(int32_t i = 0 ; i < matchesCount ; i ++) {
             const char * cName;
