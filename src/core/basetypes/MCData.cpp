@@ -235,7 +235,7 @@ static String * normalizeCharset(String * charset)
     }
     else if ((charset->caseInsensitiveCompare(MCSTR("GB2312")) == 0) ||
     (charset->caseInsensitiveCompare(MCSTR("GB_2312-80")) == 0)) {
-        charset = MCSTR("GBK");
+        charset = MCSTR("GB18030");
     }
     
     return charset->lowercaseString();
@@ -330,7 +330,7 @@ static bool isHintCharsetValid(String * hintCharset)
         else if (hintCharset->isEqual(MCSTR("windows-1256"))) {
             return true;
         }
-        
+
         if (knownCharset->containsObject(hintCharset)) {
             return true;
         }
@@ -495,9 +495,9 @@ String * Data::charsetWithFilteredHTML(bool filterHTML, String * hintCharset)
     }
 
     if (result == NULL) {
+        const int32_t barrier = 43;
         int32_t maxConfidence;
-        
-        maxConfidence = 20;
+        maxConfidence = barrier;
         
         for(int32_t i = 0 ; i < matchesCount ; i ++) {
             const char * cName;
@@ -507,6 +507,11 @@ String * Data::charsetWithFilteredHTML(bool filterHTML, String * hintCharset)
             cName = ucsdet_getName(matches[i], &err);
             confidence = ucsdet_getConfidence(matches[i], &err);
             name = String::stringWithUTF8Characters(cName);
+            name = name->lowercaseString();
+            if ((confidence >= barrier) && name->isEqual(hintCharset)) {
+                result = name;
+                break;
+            }
             if (confidence > maxConfidence) {
                 result = name;
                 maxConfidence = confidence;
