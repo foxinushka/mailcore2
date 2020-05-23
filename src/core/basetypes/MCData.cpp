@@ -330,6 +330,9 @@ static bool isHintCharsetValid(String * hintCharset)
         else if (hintCharset->isEqual(MCSTR("windows-1256"))) {
             return true;
         }
+        else if (hintCharset->isEqual(MCSTR("windows-874"))) {
+            return true;
+        }
 
         if (knownCharset->containsObject(hintCharset)) {
             return true;
@@ -509,10 +512,15 @@ String * Data::charsetWithFilteredHTML(bool filterHTML, String * hintCharset)
             name = String::stringWithUTF8Characters(cName);
             name = name->lowercaseString();
             if ((confidence >= barrier) && name->isEqual(hintCharset)) {
-                result = name;
+                result = hintCharset;
                 break;
             }
             if (confidence > maxConfidence) {
+                if (hintCharset->isEqual(MCSTR("windows-874")) &&
+                    name->isEqual(MCSTR("euc-kr"))) {
+                    result = hintCharset;
+                    break;
+                }
                 result = name;
                 maxConfidence = confidence;
             }
