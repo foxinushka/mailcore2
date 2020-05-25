@@ -526,6 +526,11 @@ String * Data::charsetWithFilteredHTML(bool filterHTML, String * hintCharset)
                     result = hintCharset;
                     break;
                 }
+                if (hintCharset->isEqual(MCSTR("windows-1251")) &&
+                    name->isEqual(MCSTR("iso-8859-1"))) {
+                    result = hintCharset;
+                    break;
+                }
                 maxConfidence = confidence;
                 result = name;
             }
