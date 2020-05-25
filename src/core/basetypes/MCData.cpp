@@ -344,29 +344,32 @@ static bool isHintCharsetValid(String * hintCharset)
 
 String * Data::stringWithDetectedCharset(String * hintCharset, bool isHTML)
 {
+    // Do character set detection only if:
+    //  - hintCharset is NULL
+    //  - hintCharset is invalid (unknown)
+    //  - result string can't be created with hintCharset
+
     String * result;
     String * charset;
-    
+
     if (hintCharset != NULL) {
         hintCharset = normalizeCharset(hintCharset);
     }
-    if (!isHintCharsetValid(hintCharset)) {
+    if (hintCharset != NULL && !isHintCharsetValid(hintCharset)) {
         hintCharset = NULL;
     }
 
-    if (hintCharset == NULL) {
+    charset = hintCharset;
+
+    if (charset == NULL) {
         charset = charsetWithFilteredHTML(isHTML);
     }
-    else {
-        charset = charsetWithFilteredHTML(isHTML, hintCharset);
-    }
-    
     if (charset == NULL) {
         charset = MCSTR(MCDATA_DEFAULT_CHARSET);
     }
-    
+
     charset = normalizeCharset(charset);
-    
+
     // Remove whitespace at the end of the string to fix conversion.
     if (charset->isEqual(MCSTR("iso-2022-jp-2"))) {
         Data * data = this;
@@ -382,6 +385,14 @@ String * Data::stringWithDetectedCharset(String * hintCharset, bool isHTML)
     }
 
     result = stringWithCharset(charset->UTF8Characters());
+    if (result == NULL && hintCharset != NULL) {
+        charset = charsetWithFilteredHTML(isHTML, hintCharset);
+        if (charset != NULL) {
+            charset = normalizeCharset(charset);
+            result = stringWithCharset(charset->UTF8Characters());
+        }
+    }
+
     if (result == NULL) {
         result = stringWithCharset("iso-8859-1");
     }
@@ -483,20 +494,6 @@ String * Data::charsetWithFilteredHTML(bool filterHTML, String * hintCharset)
         }
     }
 
-    if (filterHTML && result == NULL) {
-        String * flatten;
-        flatten = String::stringWithData(this, hintCharset->UTF8Characters());
-        flatten = flatten->flattenHTMLAndShowBlockquoteAndLink(false, false);
-        Data * data = flatten->dataUsingEncoding(hintCharset->UTF8Characters());
-        ucsdet_setText(detector, data->bytes(), data->length(), &err);
-        ucsdet_enableInputFilter(detector, filterHTML);
-        matches = ucsdet_detectAll(detector,  &matchesCount, &err);
-        if (matches == NULL) {
-            ucsdet_close(detector);
-            return hintCharset;
-        }
-    }
-
     if (result == NULL) {
         const int32_t barrier = 43;
         int32_t maxConfidence;
@@ -514,15 +511,6 @@ String * Data::charsetWithFilteredHTML(bool filterHTML, String * hintCharset)
             if ((confidence >= barrier) && name->isEqual(hintCharset)) {
                 result = hintCharset;
                 break;
-            }
-            if (confidence > maxConfidence) {
-                if (hintCharset->isEqual(MCSTR("windows-874")) &&
-                    name->isEqual(MCSTR("euc-kr"))) {
-                    result = hintCharset;
-                    break;
-                }
-                result = name;
-                maxConfidence = confidence;
             }
         }
     }
