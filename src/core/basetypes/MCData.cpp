@@ -516,6 +516,11 @@ String * Data::charsetWithFilteredHTML(bool filterHTML, String * hintCharset)
                 break;
             }
             if (confidence > maxConfidence) {
+                if (hintCharset->isEqual(MCSTR("windows-874")) &&
+                    name->isEqual(MCSTR("euc-kr"))) {
+                    result = hintCharset;
+                    break;
+                }
                 maxConfidence = confidence;
                 result = name;
             }
