@@ -344,11 +344,6 @@ static bool isHintCharsetValid(String * hintCharset)
 
 String * Data::stringWithDetectedCharset(String * hintCharset, bool isHTML)
 {
-    // Do character set detection only if:
-    //  - hintCharset is NULL
-    //  - hintCharset is invalid (unknown)
-    //  - result string can't be created with hintCharset
-
     String * result;
     String * charset;
 
