@@ -521,6 +521,11 @@ String * Data::charsetWithFilteredHTML(bool filterHTML, String * hintCharset)
                     result = hintCharset;
                     break;
                 }
+                if (hintCharset->isEqual(MCSTR("gb18030")) &&
+                    name->isEqual(MCSTR("big5"))) {
+                    result = hintCharset;
+                    break;
+                }
                 maxConfidence = confidence;
                 result = name;
             }
