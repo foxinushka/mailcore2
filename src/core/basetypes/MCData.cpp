@@ -364,6 +364,9 @@ String * Data::stringWithDetectedCharset(String * hintCharset, bool isHTML)
     if (charset == NULL) {
         charset = charsetWithFilteredHTML(isHTML);
     }
+    else {
+        charset = charsetWithFilteredHTML(isHTML, charset);
+    }
     if (charset == NULL) {
         charset = MCSTR(MCDATA_DEFAULT_CHARSET);
     }
@@ -511,6 +514,10 @@ String * Data::charsetWithFilteredHTML(bool filterHTML, String * hintCharset)
             if ((confidence >= barrier) && name->isEqual(hintCharset)) {
                 result = hintCharset;
                 break;
+            }
+            if (confidence > maxConfidence) {
+                maxConfidence = confidence;
+                result = name;
             }
         }
     }
