@@ -237,6 +237,9 @@ static String * normalizeCharset(String * charset)
     (charset->caseInsensitiveCompare(MCSTR("GB_2312-80")) == 0)) {
         charset = MCSTR("GB18030");
     }
+    else if (charset->caseInsensitiveCompare(MCSTR("koi8_r")) == 0) {
+        charset = MCSTR("KOI8-R");
+    }
     
     return charset->lowercaseString();
 }
