@@ -40,7 +40,9 @@ Object::Object()
 
 Object::~Object()
 {
-#ifndef __APPLE__
+#ifdef _MSC_VER
+#elif __APPLE__
+#else
     pthread_mutex_destroy(&mLock);
 #endif
 }

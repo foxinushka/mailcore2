@@ -227,7 +227,7 @@ static String * normalizeCharset(String * charset)
         charset = MCSTR("iso-2022-jp-2");
     }
     else if (charset->caseInsensitiveCompare(MCSTR("ks_c_5601-1987")) == 0) {
-        charset = MCSTR("euckr");
+        charset = MCSTR("EUC-KR");
     }
     else if ((charset->caseInsensitiveCompare(MCSTR("iso-8859-8-i")) == 0) ||
     (charset->caseInsensitiveCompare(MCSTR("iso-8859-8-e")) == 0)) {
@@ -235,7 +235,10 @@ static String * normalizeCharset(String * charset)
     }
     else if ((charset->caseInsensitiveCompare(MCSTR("GB2312")) == 0) ||
     (charset->caseInsensitiveCompare(MCSTR("GB_2312-80")) == 0)) {
-        charset = MCSTR("GBK");
+        charset = MCSTR("GB18030");
+    }
+    else if (charset->caseInsensitiveCompare(MCSTR("koi8_r")) == 0) {
+        charset = MCSTR("KOI8-R");
     }
     
     return charset->lowercaseString();
@@ -273,7 +276,7 @@ static bool isHintCharsetValid(String * hintCharset)
                 break;
             if (validCharset == NULL)
                 break;
-            knownCharset->addObject(String::stringWithUTF8Characters(validCharset));
+            knownCharset->addObject(String::stringWithUTF8Characters(validCharset)->lowercaseString());
         }
         uenum_close(iterator);
         ucsdet_close(detector);
@@ -330,10 +333,11 @@ static bool isHintCharsetValid(String * hintCharset)
         else if (hintCharset->isEqual(MCSTR("windows-1256"))) {
             return true;
         }
-        
-        // If it's among the known charset, we want to try to detect it
-        // to validate that it's the correct charset.
-        if (!knownCharset->containsObject(hintCharset)) {
+        else if (hintCharset->isEqual(MCSTR("windows-874"))) {
+            return true;
+        }
+
+        if (knownCharset->containsObject(hintCharset)) {
             return true;
         }
     }
@@ -345,28 +349,28 @@ String * Data::stringWithDetectedCharset(String * hintCharset, bool isHTML)
 {
     String * result;
     String * charset;
-    
+
     if (hintCharset != NULL) {
         hintCharset = normalizeCharset(hintCharset);
     }
-    if (isHintCharsetValid(hintCharset)) {
-        charset = hintCharset;
+    if (hintCharset != NULL && !isHintCharsetValid(hintCharset)) {
+        hintCharset = NULL;
+    }
+
+    charset = hintCharset;
+
+    if (charset == NULL) {
+        charset = charsetWithFilteredHTML(isHTML);
     }
     else {
-        if (hintCharset == NULL) {
-            charset = charsetWithFilteredHTML(isHTML);
-        }
-        else {
-            charset = charsetWithFilteredHTML(isHTML, hintCharset);
-        }
+        charset = charsetWithFilteredHTML(isHTML, charset);
     }
-    
     if (charset == NULL) {
         charset = MCSTR(MCDATA_DEFAULT_CHARSET);
     }
-    
+
     charset = normalizeCharset(charset);
-    
+
     // Remove whitespace at the end of the string to fix conversion.
     if (charset->isEqual(MCSTR("iso-2022-jp-2"))) {
         Data * data = this;
@@ -382,6 +386,14 @@ String * Data::stringWithDetectedCharset(String * hintCharset, bool isHTML)
     }
 
     result = stringWithCharset(charset->UTF8Characters());
+    if (result == NULL && hintCharset != NULL) {
+        charset = charsetWithFilteredHTML(isHTML, hintCharset);
+        if (charset != NULL) {
+            charset = normalizeCharset(charset);
+            result = stringWithCharset(charset->UTF8Characters());
+        }
+    }
+
     if (result == NULL) {
         result = stringWithCharset("iso-8859-1");
     }
@@ -482,11 +494,11 @@ String * Data::charsetWithFilteredHTML(bool filterHTML, String * hintCharset)
             break;
         }
     }
-    
+
     if (result == NULL) {
+        const int32_t barrier = 43;
         int32_t maxConfidence;
-        
-        maxConfidence = 49;
+        maxConfidence = barrier;
         
         for(int32_t i = 0 ; i < matchesCount ; i ++) {
             const char * cName;
@@ -496,9 +508,29 @@ String * Data::charsetWithFilteredHTML(bool filterHTML, String * hintCharset)
             cName = ucsdet_getName(matches[i], &err);
             confidence = ucsdet_getConfidence(matches[i], &err);
             name = String::stringWithUTF8Characters(cName);
+            name = name->lowercaseString();
+            if ((confidence >= barrier) && name->isEqual(hintCharset)) {
+                result = hintCharset;
+                break;
+            }
             if (confidence > maxConfidence) {
-                result = name;
+                if (hintCharset->isEqual(MCSTR("windows-874")) &&
+                    name->isEqual(MCSTR("euc-kr"))) {
+                    result = hintCharset;
+                    break;
+                }
+                if (hintCharset->isEqual(MCSTR("gb18030")) &&
+                    name->isEqual(MCSTR("big5"))) {
+                    result = hintCharset;
+                    break;
+                }
+                if (hintCharset->isEqual(MCSTR("windows-1251")) &&
+                    name->isEqual(MCSTR("iso-8859-1"))) {
+                    result = hintCharset;
+                    break;
+                }
                 maxConfidence = confidence;
+                result = name;
             }
         }
     }
@@ -580,6 +612,16 @@ Data * Data::dataWithContentsOfFile(String * filename)
 
 Data * Data::decodedDataUsingEncoding(Encoding encoding)
 {
+    if (encoding == EncodingBase64) {
+        int decoded_length;
+        const char *bytes = MCDecodeBase64ByLines(mBytes, mLength, &decoded_length);
+        if (bytes) {
+            Data * data = Data::data();
+            data->takeBytesOwnership((char *)bytes, decoded_length, NULL);
+            return data;
+        }
+        return NULL;
+    }
     Data * unused = NULL;
     return MCDecodeData(this, encoding, false, &unused);
 }
