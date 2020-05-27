@@ -333,6 +333,9 @@ static bool isHintCharsetValid(String * hintCharset)
         else if (hintCharset->isEqual(MCSTR("windows-1256"))) {
             return true;
         }
+        else if (hintCharset->isEqual(MCSTR("windows-1252"))) {
+            return true;
+        }
         else if (hintCharset->isEqual(MCSTR("windows-874"))) {
             return true;
         }
@@ -525,6 +528,11 @@ String * Data::charsetWithFilteredHTML(bool filterHTML, String * hintCharset)
                     break;
                 }
                 if (hintCharset->isEqual(MCSTR("windows-1251")) &&
+                    name->isEqual(MCSTR("iso-8859-1"))) {
+                    result = hintCharset;
+                    break;
+                }
+                if (hintCharset->isEqual(MCSTR("windows-1252")) &&
                     name->isEqual(MCSTR("iso-8859-1"))) {
                     result = hintCharset;
                     break;
