@@ -182,7 +182,7 @@ void IMAPOperation::afterMain()
     performMethodOnMainThread((Object::Method) &IMAPOperation::afterMainOnMainThread, NULL);
 }
 
-void IMAPOperation::afterMainOnMainThread(void * ctx)
+void IMAPOperation::afterMainOnMainThread()
 {
     if (mSession->session()->isAutomaticConfigurationDone()) {
         mSession->owner()->automaticConfigurationDone(mSession->session());
