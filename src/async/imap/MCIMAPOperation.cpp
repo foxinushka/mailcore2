@@ -179,11 +179,7 @@ void IMAPOperation::beforeMain()
 void IMAPOperation::afterMain()
 {
     retain();
-#if defined(__ANDROID__)
     performMethodOnCallbackThread((Object::Method) &IMAPOperation::afterMainOnMainThread, NULL, false);
-#else
-    performMethodOnMainThread((Object::Method) &IMAPOperation::afterMainOnMainThread, NULL);
-#endif
 }
 
 void IMAPOperation::afterMainOnMainThread(void * ctx)
