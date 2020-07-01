@@ -332,7 +332,10 @@ static String * htmlForAbstractSinglePart(AbstractPart * part, htmlRendererConte
                 if (data == NULL) {
                     // It may be NULL when mailcore::MessageParser::attachments() is invoked when
                     // when mailcore::MessageParser has been serialized/unserialized.
-                    data = context->rfc822DataCallback->dataForRFC822Part(context->folder, (Attachment *) part);
+                    HTMLRendererRFC822Callback * rfc822DataCallback = context->rfc822DataCallback;
+                    if (rfc822DataCallback != NULL) {
+                        data = rfc822DataCallback->dataForRFC822Part(context->folder, (Attachment *) part);
+                    }
                 }
                 MCAssert(data != NULL);
             }
@@ -356,7 +359,10 @@ static String * htmlForAbstractSinglePart(AbstractPart * part, htmlRendererConte
                 if (data == NULL) {
                     // It may be NULL when mailcore::MessageParser::attachments() is invoked when
                     // when mailcore::MessageParser has been serialized/unserialized.
-                    data = context->rfc822DataCallback->dataForRFC822Part(context->folder, (Attachment *) part);
+                    HTMLRendererRFC822Callback * rfc822DataCallback = context->rfc822DataCallback;
+                    if (rfc822DataCallback != NULL) {
+                        data = rfc822DataCallback->dataForRFC822Part(context->folder, (Attachment *) part);
+                    }
                 }
             }
             if (data == NULL)
