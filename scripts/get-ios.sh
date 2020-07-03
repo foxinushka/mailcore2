@@ -6,13 +6,22 @@ popd > /dev/null
 
 . "$scriptpath/include.sh/build-dep.sh"
 
-deps="ctemplate-ios libetpan-ios tidy-html5-ios"
+deps="ctemplate-ios tidy-html5-ios"
 for dep in $deps ; do
   name="$dep"
   get_prebuilt_dep
 done
 
+#Currently there is no prebuild version of release we need. So we will compile it
+deps="libetpan-ios"
+for dep in $deps ; do
+  name="$dep"
+  . "build-libetpan-ios.sh"
+done
+
+deps="ctemplate-ios libetpan-ios tidy-html5-ios"
 deps+=" libsasl-ios"
+
 if test "x$CONFIGURATION_BUILD_DIR" != x ; then
   mkdir -p "$CONFIGURATION_BUILD_DIR"
   cd "$scriptpath/../Externals"

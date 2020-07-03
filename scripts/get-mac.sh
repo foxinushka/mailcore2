@@ -1,4 +1,5 @@
 #!/bin/sh
+set -x
 
 pushd "`dirname "$0"`" > /dev/null
 scriptpath="`pwd`"
@@ -6,11 +7,20 @@ popd > /dev/null
 
 . "$scriptpath/include.sh/build-dep.sh"
 
-deps="ctemplate-osx libetpan-osx"
+deps="ctemplate-osx"
 for dep in $deps ; do
   name="$dep"
   get_prebuilt_dep
 done
+
+#Currently there is no prebuild version of release we need. So we will compile it
+deps="libetpan-osx"
+for dep in $deps ; do
+  name="$dep"
+  . "build-libetpan-osx.sh"
+done
+
+deps="ctemplate-osx libetpan-osx" #restoring original dependencies list
 
 if test "x$CONFIGURATION_BUILD_DIR" != x ; then
   mkdir -p "$CONFIGURATION_BUILD_DIR"
