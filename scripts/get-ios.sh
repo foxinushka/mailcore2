@@ -19,7 +19,7 @@ for dep in $deps ; do
   . "build-libetpan-ios.sh"
 done
 
-deps="ctemplate-ios libetpan-ios tidy-html5-ios"
+deps="ctemplate-ios libetpan-ios tidy-html5-ios" #restoring original dependencies list
 deps+=" libsasl-ios"
 
 if test "x$CONFIGURATION_BUILD_DIR" != x ; then
