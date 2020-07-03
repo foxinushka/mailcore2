@@ -17,7 +17,7 @@ done
 deps="libetpan-osx"
 for dep in $deps ; do
   name="$dep"
-  . "$scriptpath/build-libetpan-osx.sh"
+  sh "$scriptpath/build-libetpan-osx.sh"
 done
 
 deps="ctemplate-osx libetpan-osx" #restoring original dependencies list

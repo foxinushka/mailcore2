@@ -16,7 +16,7 @@ done
 deps="libetpan-ios"
 for dep in $deps ; do
   name="$dep"
-  . "$scriptpath/build-libetpan-ios.sh"
+  sh "$scriptpath/build-libetpan-ios.sh"
 done
 
 deps="ctemplate-ios libetpan-ios tidy-html5-ios" #restoring original dependencies list
