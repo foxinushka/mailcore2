@@ -7,17 +7,17 @@ popd > /dev/null
 
 . "$scriptpath/include.sh/build-dep.sh"
 
-deps="ctemplate-osx"
-for dep in $deps ; do
-  name="$dep"
-  get_prebuilt_dep
-done
-
 #Currently there is no prebuild version of release we need. So we will compile it
 deps="libetpan-osx"
 for dep in $deps ; do
   name="$dep"
   sh "$scriptpath/build-libetpan-osx.sh"
+done
+
+deps="ctemplate-osx"
+for dep in $deps ; do
+  name="$dep"
+  get_prebuilt_dep
 done
 
 deps="ctemplate-osx libetpan-osx" #restoring original dependencies list
