@@ -15,7 +15,7 @@ if (-Not $InstallPath) {
     $InstallPath = "$ProjectRoot\.build\install"
 }
 
-$IcuVersion = 64
+$IcuVersion = 67
 $IcuPath = "C:\Library\icu-$IcuVersion\usr"
 
 $SwiftIncludePaths = 
