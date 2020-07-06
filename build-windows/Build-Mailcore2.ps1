@@ -20,7 +20,7 @@ $BinDir = "$InstallPath\bin"
 $IncludeDir = "$InstallPath\include"
 $LibDir = "$InstallPath\lib"
 
-$IcuVersion = 64
+$IcuVersion = 67
 $IcuPath = "C:\Library\icu-$IcuVersion\usr"
 $LibXml2Path = "C:\Library\libxml2-development\usr"
 
@@ -181,9 +181,9 @@ Push-Task -Name "mailcore2" -ScriptBlock {
                 "-DCMAKE_CXX_COMPILER=clang-cl.exe",
                 "-DLIBXML_INCLUDE_DIR=C:\Library\libxml2-development\usr\include",
                 "-DLIBXML_LIBRARY=C:\Library\libxml2-development\usr\lib\libxml2s.lib",
-                "-DICU4C_INCLUDE_DIR=C:\Library\icu-64\usr\include",
-                "-DICU4C_UC_LIBRARY=C:\Library\icu-64\usr\lib\icuuc64.lib",
-                "-DICU4C_IN_LIBRARY=C:\Library\icu-64\usr\lib\icuin64.lib",
+                "-DICU4C_INCLUDE_DIR=$IcuPath\include",
+                "-DICU4C_UC_LIBRARY=$IcuPath\lib\icuuc$IcuVersion.lib",
+                "-DICU4C_IN_LIBRARY=$IcuPath\lib\icuin$IcuVersion.lib",
                 "-DDISPATCH_INCLUDE_DIR=C:\Library\Developer\Platforms\Windows.platform\Developer\SDKs\Windows.sdk\usr\lib\swift",
                 "-DDISPATCH_LIBRARY=C:\Library\Developer\Platforms\Windows.platform\Developer\SDKs\Windows.sdk\usr\lib\swift\windows\dispatch.lib",
                 "-DDISPATCH_BLOCKS_LIBRARY=C:\Library\Developer\Platforms\Windows.platform\Developer\SDKs\Windows.sdk\usr\lib\swift\windows\BlocksRuntime.lib" -join " "
