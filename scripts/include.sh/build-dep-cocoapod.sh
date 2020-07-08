@@ -1,4 +1,5 @@
 #!/bin/sh
+set -x
 
 build_git_ios()
 {
