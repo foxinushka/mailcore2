@@ -140,32 +140,41 @@ char * MCDecodeBase64ByLines(const char * in, int len, int * p_outlen) {
         }
 
         c1 = in[0];
+        in++;
+
         c2 = 0;
         c3 = 0;
         c4 = 0;
 
         while (in < end) {
-            in++;
-            if (in[0] == 0x0a || in[0] == 0x0d) continue;
+            if (in[0] == 0x0a || in[0] == 0x0d) {
+                in++;
+                continue;
+            }
             c2 = in[0];
+            in++;
             break;
         }
 
         while (in < end) {
-            in++;
-            if (in[0] == 0x0a || in[0] == 0x0d) continue;
+            if (in[0] == 0x0a || in[0] == 0x0d) {
+                in++;
+                continue;
+            }
             c3 = in[0];
+            in++;
             break;
         }
 
         while (in < end) {
-            in++;
-            if (in[0] == 0x0a || in[0] == 0x0d) continue;
+            if (in[0] == 0x0a || in[0] == 0x0d) {
+                in++;
+                continue;
+            }
             c4 = in[0];
+            in++;
             break;
         }
-
-        in++;
 
         if (CHAR64(c1) == -1 || CHAR64(c2) == -1) {
             output = end_of_last_line;
