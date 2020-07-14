@@ -140,23 +140,65 @@ char * MCDecodeBase64ByLines(const char * in, int len, int * p_outlen) {
         }
 
         c1 = in[0];
-        c2 = in[1];
-        c3 = in[2];
-        c4 = in[3];
-        if (CHAR64(c1) == -1 || CHAR64(c2) == -1 ||
-            (c3 != '=' && CHAR64(c3) == -1) ||
-            (c4 != '=' && CHAR64(c4) == -1)) {
+        in++;
+
+        c2 = 0;
+        c3 = 0;
+        c4 = 0;
+
+        while (in < end) {
+            if (in[0] == 0x0a || in[0] == 0x0d) {
+                in++;
+                continue;
+            }
+            c2 = in[0];
+            in++;
+            break;
+        }
+
+        while (in < end) {
+            if (in[0] == 0x0a || in[0] == 0x0d) {
+                in++;
+                continue;
+            }
+            c3 = in[0];
+            in++;
+            break;
+        }
+
+        while (in < end) {
+            if (in[0] == 0x0a || in[0] == 0x0d) {
+                in++;
+                continue;
+            }
+            c4 = in[0];
+            in++;
+            break;
+        }
+
+        if (CHAR64(c1) == -1 || CHAR64(c2) == -1) {
             output = end_of_last_line;
             break;
         }
 
-        in += 4;
+        if (c3 > 0) {
+            if (c3 != '=' && CHAR64(c3) == -1) {
+                output = end_of_last_line;
+                break;
+            }
+
+            if (c4 > 0 && c4 != '=' && CHAR64(c4) == -1) {
+                output = end_of_last_line;
+                break;
+            }
+        }
+
         *output++ = (CHAR64(c1) << 2) | (CHAR64(c2) >> 4);
 
-        if (c3 != '=') {
+        if (c3 != 0 && c3 != '=') {
             *output++ = ((CHAR64(c2) << 4) & 0xf0) | (CHAR64(c3) >> 2);
 
-            if (c4 != '=') {
+            if (c4 != 0 && c4 != '=') {
                 *output++ = ((CHAR64(c3) << 6) & 0xc0) | CHAR64(c4);
             }
         }
