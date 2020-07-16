@@ -1,4 +1,5 @@
 #!/bin/sh
+set -x
 
 pushd "`dirname "$0"`" > /dev/null
 scriptpath="`pwd`"

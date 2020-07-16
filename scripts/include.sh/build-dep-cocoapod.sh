@@ -1,4 +1,5 @@
 #!/bin/sh
+set -x
 
 build_git_ios()
 {
@@ -248,7 +249,7 @@ build_git_osx()
 
 get_prebuilt_dep()
 {
-  url="https://d.etpan.org/mailcore2-deps"
+  url="https://prebuild.readdle.com/mailcore2-deps"
 
   if test "x$name" = x ; then
     return
