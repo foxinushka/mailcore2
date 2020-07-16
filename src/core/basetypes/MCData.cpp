@@ -254,6 +254,14 @@ String * Data::stringWithCharset(const char * charset)
     return (String *) result->autorelease();
 }
 
+static bool isHintWindowsCharset(String * hintCharset)
+{
+    return hintCharset->hasPrefix(MCSTR("windows-")) ||
+           hintCharset->hasPrefix(MCSTR("cp12")) ||
+           hintCharset->hasPrefix(MCSTR("ms-")) ||
+           hintCharset->isEqual(MCSTR("winbaltrim"));
+}
+
 static bool isHintCharsetValid(String * hintCharset)
 {
     static MC_LOCK_TYPE lock = MC_LOCK_INITIAL_VALUE;
@@ -330,10 +338,7 @@ static bool isHintCharsetValid(String * hintCharset)
         else if (hintCharset->isEqual(MCSTR("euc-kr"))) {
             return true;
         }
-        else if (hintCharset->isEqual(MCSTR("windows-1256"))) {
-            return true;
-        }
-        else if (hintCharset->isEqual(MCSTR("windows-1252"))) {
+        else if (isHintWindowsCharset(hintCharset)) {
             return true;
         }
         else if (hintCharset->isEqual(MCSTR("windows-874"))) {
@@ -527,12 +532,7 @@ String * Data::charsetWithFilteredHTML(bool filterHTML, String * hintCharset)
                     result = hintCharset;
                     break;
                 }
-                if (hintCharset->isEqual(MCSTR("windows-1251")) &&
-                    name->isEqual(MCSTR("iso-8859-1"))) {
-                    result = hintCharset;
-                    break;
-                }
-                if (hintCharset->isEqual(MCSTR("windows-1252")) &&
+                if (isHintWindowsCharset(hintCharset) &&
                     name->isEqual(MCSTR("iso-8859-1"))) {
                     result = hintCharset;
                     break;
