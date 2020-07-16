@@ -256,7 +256,7 @@ String * Data::stringWithCharset(const char * charset)
 
 static bool isHintWindowsCharset(String * hintCharset)
 {
-    return hintCharset->hasPrefix(MCSTR("windows-")) ||
+    return hintCharset->hasPrefix(MCSTR("windows-12")) ||
            hintCharset->hasPrefix(MCSTR("cp12")) ||
            hintCharset->hasPrefix(MCSTR("ms-")) ||
            hintCharset->isEqual(MCSTR("winbaltrim"));
