@@ -72,6 +72,7 @@ Push-Task -Name "mailcore2" -ScriptBlock {
                 "-G Ninja",
                 "-DCMAKE_BUILD_TYPE=RelWithDebInfo",
                 "-DCMAKE_INSTALL_PREFIX=$TidyDependencyPath",
+                "-DCMAKE_PDB_OUTPUT_DIRECTORY=$TidyDependencyPath\bin",
                 "-DCMAKE_C_COMPILER=cl.exe",
                 "-DCMAKE_CXX_COMPILER=cl.exe" -join " "
 
@@ -99,11 +100,11 @@ Push-Task -Name "mailcore2" -ScriptBlock {
         }
 
         Push-Task -Name "Build LibEtPan" -ScriptBlock {
-            MSBuild "$LibEtPanDependencyPath\build-windows\libetpan.sln" /t:libetpan /p:Configuration="Release" /p:Platform="x64"
+            MSBuild "$LibEtPanDependencyPath\build-windows\libetpan.sln" /t:libetpan /p:Configuration="Release" /p:Platform="x64" /p:DebugSymbols=true /p:DebugType=pdbonly
         }
 
         Push-Task -Name "Build CTemplate" -ScriptBlock {
-            MSBuild "$CTemplateDependencyPath\ctemplate.sln" /t:libctemplate /p:Configuration="Release" /p:Platform="x64"
+            MSBuild "$CTemplateDependencyPath\ctemplate.sln" /t:libctemplate /p:Configuration="Release" /p:Platform="x64" /p:DebugSymbols=true /p:DebugType=pdbonly
         }
 
         Push-Task -Name "Setup CMailcore Dependencies" -ScriptBlock {
@@ -124,12 +125,8 @@ Push-Task -Name "mailcore2" -ScriptBlock {
             Copy-Item -Path "$OpenSslDependencyPath\lib64" -Destination $ExternalsPath -Recurse -Force -ErrorAction Stop -PassThru | Write-Host
             Copy-Item -Path "$CTemplateDependencyPath\src\windows\include\ctemplate" -Destination "$ExternalsPath\include" -Recurse -Force -ErrorAction Stop -PassThru | Write-Host
             Copy-Item -Path "$CTemplateDependencyPath\x64\Release\*" -Destination "$ExternalsPath\lib64" -Exclude "*.dll" -Recurse -Force -ErrorAction Stop -PassThru | Write-Host
-            Copy-Item -Path "$OpenSslDependencyPath\lib64\ssleay32MD.lib" -Destination "$ExternalsPath\lib64" -Force -ErrorAction Stop -PassThru | Write-Host
-            Copy-Item -Path "$OpenSslDependencyPath\lib64\libeay32MD.lib" -Destination "$ExternalsPath\lib64" -Force -ErrorAction Stop -PassThru | Write-Host
-            
             Copy-Item -Path "$LibEtPanDependencyPath\build-windows\include" -Destination $ExternalsPath -Recurse -Force -ErrorAction Stop -PassThru | Write-Host
-            Copy-Item -Path "$LibEtPanDependencyPath\build-windows\x64\Release\libetpan.lib" -Destination "$ExternalsPath\lib64" -Force -ErrorAction Stop -PassThru | Write-Host
-            Copy-Item -Path "$LibEtPanDependencyPath\build-windows\x64\Release\libetpan.pdb" -Destination "$ExternalsPath\lib64" -Force -ErrorAction Stop -PassThru | Write-Host
+            Copy-Item -Path "$LibEtPanDependencyPath\build-windows\x64\Release\*" -Destination "$ExternalsPath\lib64" -Exclude "*.dll" -Recurse -Force -ErrorAction Stop -PassThru | Write-Host
             Copy-Item -Path "$TidyDependencyPath\include" -Destination "$ExternalsPath\include\tidy" -Recurse -Force -ErrorAction Stop -PassThru | Write-Host
             Copy-Item -Path "$TidyDependencyPath\rdtidy.lib" -Destination "$ExternalsPath\lib64" -Force -ErrorAction Stop -PassThru | Write-Host
             Copy-Item -Path "$TidyDependencyPath\rdtidy.exp" -Destination "$ExternalsPath\lib64" -Force -ErrorAction Stop -PassThru | Write-Host
@@ -141,22 +138,28 @@ Push-Task -Name "mailcore2" -ScriptBlock {
         if ($Install) {
             Push-Task -Name "Install CMailcore Dependencies" -ScriptBlock {
                 Install-File "$OpenSslDependencyPath\bin64\ssleay32MD.dll" -Destination $BinDir
+                Install-File "$OpenSslDependencyPath\bin64\ssleay32MD.pdb" -Destination $BinDir
                 Install-File "$OpenSslDependencyPath\bin64\libeay32MD.dll" -Destination $BinDir
+                Install-File "$OpenSslDependencyPath\bin64\libeay32MD.pdb" -Destination $BinDir
 
                 Install-File "$CTemplateDependencyPath\x64\Release\libctemplate.dll" -Destination $BinDir
+                Install-File "$CTemplateDependencyPath\x64\Release\libctemplate.pdb" -Destination $BinDir
 
                 Install-File "$SaslDependencyPath\lib64\libsasl2.dll" -Destination $BinDir
+                Install-File "$SaslDependencyPath\lib64\libsasl2.pdb" -Destination $BinDir
 
                 Install-File "$PSScriptRoot\bin\msvcp120.dll" -Destination $BinDir
                 Install-File "$PSScriptRoot\bin\msvcr120.dll" -Destination $BinDir
 
                 Install-File "$ZlibDependencyPath\lib64\zlib.dll" -Destination $BinDir
+                Install-File "$ZlibDependencyPath\lib64\zlib.pdb" -Destination $BinDir
                 Install-File "$ZlibDependencyPath\include\zlib.h" -Destination $IncludeDir
                 Install-File "$ZlibDependencyPath\include\zconf.h" -Destination $IncludeDir
                 Install-File "$ZlibDependencyPath\lib64\zlib.lib" -Destination $LibDir
                 Install-File "$ZlibDependencyPath\lib64\zlib.exp" -Destination $LibDir
-                Install-File "$TidyDependencyPath\bin\rdtidy.dll" -Destination $BinDir
 
+                Install-File "$TidyDependencyPath\bin\rdtidy.dll" -Destination $BinDir
+                Install-File "$TidyDependencyPath\bin\rdtidy.pdb" -Destination $BinDir
                 Install-File "$TidyDependencyPath\include\buffio.h" -Destination "$IncludeDir\tidy"
                 Install-File "$TidyDependencyPath\include\platform.h" -Destination "$IncludeDir\tidy"
                 Install-File "$TidyDependencyPath\include\tidy.h" -Destination "$IncludeDir\tidy"
@@ -168,6 +171,7 @@ Push-Task -Name "mailcore2" -ScriptBlock {
                 
                 Install-Directory "$LibEtPanDependencyPath\build-windows\include\libetpan" -Destination "$IncludeDir\libetpan"
                 Install-File "$LibEtPanDependencyPath\build-windows\x64\Release\libetpan.dll" -Destination $BinDir
+                Install-File "$LibEtPanDependencyPath\build-windows\x64\Release\libetpan.pdb" -Destination $BinDir
             }
         }
 
@@ -177,6 +181,7 @@ Push-Task -Name "mailcore2" -ScriptBlock {
                 $ProjectRoot,
                 "-DCMAKE_BUILD_TYPE=RelWithDebInfo",
                 "-DCMAKE_INSTALL_PREFIX=$InstallPath",
+                "-DCMAKE_PDB_OUTPUT_DIRECTORY=$InstallPath\bin",
                 "-DCMAKE_C_COMPILER=clang-cl.exe",
                 "-DCMAKE_CXX_COMPILER=clang-cl.exe",
                 "-DLIBXML_INCLUDE_DIR=C:\Library\libxml2-development\usr\include",
