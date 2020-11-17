@@ -3,7 +3,7 @@ set -ex
 
 build_version=4
 package_name=mailcore2-android
-ctemplate_build_version=3
+ctemplate_build_version=2.2.3-readdle.1 # tag in https://github.com/readdle/ctemplate 
 cyrus_sasl_build_version=4
 libetpan_build_version=7
 openssl_build_version=3
@@ -44,9 +44,10 @@ pushd "$base_dir"
 
         # Build ctemplate-android from source
         if test ! -d "$download_dir/ctemplate-android-$ctemplate_build_version" ; then
-            git clone --depth 1 --branch master https://github.com/readdle/ctemplate.git
+            git clone --depth 1 --branch $ctemplate_build_version https://github.com/readdle/ctemplate.git
             pushd "ctemplate/build-android"
                 ./build.sh
+                mv "ctemplate-android-3" "ctemplate-android-$ctemplate_build_version" # Fix Legacy versioning
                 cp -R "ctemplate-android-$ctemplate_build_version" "$download_dir/"
             popd
         fi
