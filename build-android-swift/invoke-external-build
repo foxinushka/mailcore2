@@ -3,8 +3,8 @@ set -ex
 
 build_version=4
 package_name=mailcore2-android
-ctemplate_build_version=2.2.3-readdle.1 # tag in https://github.com/readdle/ctemplate
-libetpan_build_version=1.9.3-readdle.1 # tag in https://github.com/readdle/libetpan
+ctemplate_build_version=2.2.3-readdle.2 # tag in https://github.com/readdle/ctemplate
+libetpan_build_version=1.9.3-readdle.2 # tag in https://github.com/readdle/libetpan
 cyrus_sasl_build_version=2.1.27 # source code hardcoded in https://github.com/readdle/libetpan/tree/master/build-mac/dependencies/packages
 iconv_build_version=1.15 # version hardcoded in https://github.com/readdle/libetpan/blob/master/build-android/dependencies/iconv/build.sh
 openssl_build_version=swift-toolchain # OpenSSL from swift toolchain
@@ -26,39 +26,22 @@ pushd "$base_dir"
 
         # Build libetpan-android from source
         if test ! -d "$download_dir/libetpan-android-$libetpan_build_version" ; then
-            git clone --depth 1 --branch $libetpan_build_version git@github.com:readdle/libetpan.git
-            pushd "libetpan/build-android"
+            git clone --depth 1 --branch $libetpan_build_version git@github.com:readdle/libetpan.git "libetpan-$libetpan_build_version"
+            pushd "libetpan-$libetpan_build_version/build-android"
                 ./build.sh
-
-                mv "libetpan-android-7.zip" "libetpan-android-$libetpan_build_version.zip" # Fix Legacy versioning
-                mv "dependencies/cyrus-sasl/cyrus-sasl-android-4.zip" "dependencies/cyrus-sasl/cyrus-sasl-android-$cyrus_sasl_build_version.zip" # Fix Legacy versioning
-                mv "dependencies/iconv/iconv-android-1.zip" "dependencies/iconv/iconv-android-$iconv_build_version.zip" # Fix Legacy versioning
-                mv "dependencies/openssl/openssl-android-3.zip" "dependencies/openssl/openssl-android-$openssl_build_version.zip" # Fix Legacy versioning
-
-                cp "libetpan-android-$libetpan_build_version.zip" "$download_dir/"
-                cp "dependencies/cyrus-sasl/cyrus-sasl-android-$cyrus_sasl_build_version.zip" "$download_dir/"
-                cp "dependencies/iconv/iconv-android-$iconv_build_version.zip" "$download_dir/"
-                cp "dependencies/openssl/openssl-android-$openssl_build_version.zip" "$download_dir/"
+                cp -R "libetpan-android/." "$download_dir/libetpan-android-$libetpan_build_version"
+                cp -R "dependencies/cyrus-sasl/cyrus-sasl-android-$cyrus_sasl_build_version" "$download_dir/"
+                cp -R "dependencies/iconv/iconv-android-$iconv_build_version" "$download_dir/"
+                cp -R "dependencies/openssl/openssl-android-$openssl_build_version" "$download_dir/"
             popd
-
-            unzip "libetpan-android-$libetpan_build_version.zip"
-            unzip "cyrus-sasl-android-$cyrus_sasl_build_version.zip"
-            unzip "iconv-android-$iconv_build_version.zip"
-            unzip "openssl-android-$openssl_build_version.zip"
-
-            mv "libetpan-android-7" "libetpan-android-$libetpan_build_version" # Fix Legacy versioning
-            mv "cyrus-sasl-android-4" "cyrus-sasl-android-$cyrus_sasl_build_version" # Fix Legacy versioning
-            mv "iconv-android-1" "iconv-android-$iconv_build_version" # Fix Legacy versioning
-            mv "openssl-android-3" "openssl-android-$openssl_build_version" # Fix Legacy versioning
         fi
 
         # Build ctemplate-android from source
         if test ! -d "$download_dir/ctemplate-android-$ctemplate_build_version" ; then
-            git clone --depth 1 --branch $ctemplate_build_version https://github.com/readdle/ctemplate.git
-            pushd "ctemplate/build-android"
+            git clone --depth 1 --branch $ctemplate_build_version https://github.com/readdle/ctemplate.git "ctemplate-$ctemplate_build_version"
+            pushd "ctemplate-$ctemplate_build_version/build-android"
                 ./build.sh
-                mv "ctemplate-android-3" "ctemplate-android-$ctemplate_build_version" # Fix Legacy versioning
-                cp -R "ctemplate-android-$ctemplate_build_version" "$download_dir/"
+                cp -R "ctemplate-android/." "$download_dir/ctemplate-android-$ctemplate_build_version"
             popd
         fi
 
