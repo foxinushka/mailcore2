@@ -3,11 +3,11 @@ set -ex
 
 build_version=4
 package_name=mailcore2-android
-ctemplate_build_version=3
-cyrus_sasl_build_version=4
-libetpan_build_version=7
-openssl_build_version=3
-iconv_build_version=1
+ctemplate_build_version=2.2.3-readdle.2 # tag in https://github.com/readdle/ctemplate
+libetpan_build_version=1.9.3-readdle.2 # tag in https://github.com/readdle/libetpan
+cyrus_sasl_build_version=2.1.27 # source code hardcoded in https://github.com/readdle/libetpan/tree/master/build-mac/dependencies/packages
+iconv_build_version=1.15 # version hardcoded in https://github.com/readdle/libetpan/blob/master/build-android/dependencies/iconv/build.sh
+openssl_build_version=swift-toolchain # OpenSSL from swift toolchain
 
 if ! which ndk-build > /dev/null ; then
   echo Android NDK should be installed and ndk-build in PATH
@@ -26,28 +26,22 @@ pushd "$base_dir"
 
         # Build libetpan-android from source
         if test ! -d "$download_dir/libetpan-android-$libetpan_build_version" ; then
-            git clone --depth 1 --branch master git@github.com:readdle/libetpan.git
-            pushd "libetpan/build-android"
+            git clone --depth 1 --branch $libetpan_build_version git@github.com:readdle/libetpan.git "libetpan-$libetpan_build_version"
+            pushd "libetpan-$libetpan_build_version/build-android"
                 ./build.sh
-
-                cp "libetpan-android-$libetpan_build_version.zip" "$download_dir/"
-                cp "dependencies/cyrus-sasl/cyrus-sasl-android-$cyrus_sasl_build_version.zip" "$download_dir/"
-                cp "dependencies/iconv/iconv-android-$iconv_build_version.zip" "$download_dir/"
-                cp "dependencies/openssl/openssl-android-$openssl_build_version.zip" "$download_dir/"
+                cp -R "libetpan-android/." "$download_dir/libetpan-android-$libetpan_build_version"
+                cp -R "dependencies/cyrus-sasl/cyrus-sasl-android-$cyrus_sasl_build_version" "$download_dir/"
+                cp -R "dependencies/iconv/iconv-android-$iconv_build_version" "$download_dir/"
+                cp -R "dependencies/openssl/openssl-android-$openssl_build_version" "$download_dir/"
             popd
-
-            unzip "libetpan-android-$libetpan_build_version.zip"
-            unzip "cyrus-sasl-android-$cyrus_sasl_build_version.zip"
-            unzip "iconv-android-$iconv_build_version.zip"
-            unzip "openssl-android-$openssl_build_version.zip"
         fi
 
         # Build ctemplate-android from source
         if test ! -d "$download_dir/ctemplate-android-$ctemplate_build_version" ; then
-            git clone --depth 1 --branch master https://github.com/readdle/ctemplate.git
-            pushd "ctemplate/build-android"
+            git clone --depth 1 --branch $ctemplate_build_version https://github.com/readdle/ctemplate.git "ctemplate-$ctemplate_build_version"
+            pushd "ctemplate-$ctemplate_build_version/build-android"
                 ./build.sh
-                cp -R "ctemplate-android-$ctemplate_build_version" "$download_dir/"
+                cp -R "ctemplate-android/." "$download_dir/ctemplate-android-$ctemplate_build_version"
             popd
         fi
 
