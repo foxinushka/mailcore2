@@ -44,7 +44,7 @@ $Dependencies = @(
     
     @{ Name = "CTemplate"; GitUrl = "git@github.com:readdle/ctemplate.git"; GitBranch = "master"; Directory = $CTemplateDependencyDir; }
     @{ Name = "LibEtPan"; GitUrl = "git@github.com:dinhviethoa/libetpan.git"; GitRevision = "298460a2adaabd2f28f417a0f106cb3b68d27df9"; Directory = $LibEtPanDependencyDir; }
-    @{ Name = "Tidy HTML5"; GitUrl = "git@github.com:readdle/tidy-html5.git"; GitBranch = "feature/windows"; Directory = $TidyDependencyDir; }
+    @{ Name = "Tidy HTML5"; GitUrl = "git@github.com:readdle/tidy-html5.git"; GitBranch = "spark2"; Directory = $TidyDependencyDir; }
 )
 
 Push-Task -Name "mailcore2" -ScriptBlock {
