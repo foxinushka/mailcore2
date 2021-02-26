@@ -82,7 +82,7 @@ if(WIN32)
                           ${CTEMPLATE_LIBRARY}
                           ${TIDY_LIBRARY}
                           ${LIBXML_LIBRARY}
-                          ${OPENSSL_EAY_LIBRARY}
+                          ${OPENSSL_CRYPTO_LIBRARY}
                           ${ZLIB_LIBRARY}
                           ${ICU4C_UC_LIBRARY}
                           ${ICU4C_IN_LIBRARY}

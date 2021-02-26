@@ -359,6 +359,10 @@ static IndexSet * indexSetFromSet(struct mailimap_set * imap_set)
     return indexSet;
 }
 
+static void setMailStreamSSLContextServerName(mailstream_ssl_context * ssl_context, void * data) {
+	mailstream_ssl_set_server_name(ssl_context, static_cast<char*>(data));
+}
+
 void IMAPSession::init()
 {
     mHostname = NULL;
@@ -673,7 +677,7 @@ void IMAPSession::connect(ErrorCode * pError)
         break;
 
         case ConnectionTypeTLS:
-        r = mailimap_ssl_connect_voip(mImap, MCUTF8(mHostname), mPort, isVoIPEnabled());
+        r = mailimap_ssl_connect_voip_with_callback(mImap, MCUTF8(mHostname), mPort, isVoIPEnabled(), setMailStreamSSLContextServerName, const_cast<void*>(static_cast<const void*>(MCUTF8(mHostname))));
         MCLog("ssl connect %s %u %u", MCUTF8(mHostname), mPort, r);
         if (hasError(r)) {
             MCLog("connect error %i", r);

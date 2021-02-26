@@ -221,12 +221,12 @@ else()
       NAMES openssl/opensslv.h
       PATHS ${additional_includes}
     )
-    find_library(OPENSSL_EAY_LIBRARY
-      NAMES libeay32MD
+    find_library(OPENSSL_CRYPTO_LIBRARY
+      NAMES libcrypto
       PATHS ${additional_lib_searchpath}
     )
 
-    if(NOT OPENSSL_INCLUDE_DIR OR NOT OPENSSL_EAY_LIBRARY)
+    if(NOT OPENSSL_INCLUDE_DIR OR NOT OPENSSL_CRYPTO_LIBRARY)
       message(FATAL_ERROR "ERROR: Could not find OpenSSL")
     else()
       message(STATUS "Found OpenSSL")
