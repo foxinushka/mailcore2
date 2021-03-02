@@ -155,8 +155,8 @@ Push-Task -Name "mailcore2" -ScriptBlock {
                 Install-File "$CTemplateDependencyPath\x64\Release\libctemplate.dll" -Destination $BinDir
                 Install-File "$CTemplateDependencyPath\x64\Release\libctemplate.pdb" -Destination $BinDir
 
-                Install-File "$SaslDependencyPath\lib\sasl2.dll" -Destination $BinDir
-                Install-File "$SaslDependencyPath\lib\sasl2.pdb" -Destination $BinDir
+                Install-File "$SaslDependencyPath\bin\sasl2.dll" -Destination $BinDir
+                Install-File "$SaslDependencyPath\bin\sasl2.pdb" -Destination $BinDir
 
                 Install-File "$PSScriptRoot\bin\msvcp120.dll" -Destination $BinDir
                 Install-File "$PSScriptRoot\bin\msvcr120.dll" -Destination $BinDir
