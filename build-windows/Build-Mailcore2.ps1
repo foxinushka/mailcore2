@@ -32,15 +32,21 @@ $TidyDependencyDir = "TidyHTML5"
 $TidyDependencyPath = "$DependenciesPath\$TidyDependencyDir"
 $ZlibDependencyDir = "zlib"
 $ZlibDependencyPath = "$DependenciesPath\$ZlibDependencyDir\zlib-win32-1"
+$SaslDependencySourceUrl = "https://spark-prebuilt-binaries.s3.amazonaws.com/sasl.zip"
 $SaslDependencyDir = "SASL"
-$SaslDependencyPath = "$DependenciesPath\$SaslDependencyDir\cyrus-sasl-win32-2"
+$SaslDependencyPath = "$DependenciesPath\$SaslDependencyDir\cyrus-sasl-win32"
+$OpenSslDependencySourceUrl = "https://spark-prebuilt-binaries.s3.amazonaws.com/openssl.zip"
 $OpenSslDependencyDir = "OpenSSL"
-$OpenSslDependencyPath = "$DependenciesPath\$OpenSslDependencyDir\openssl-1.0.1j-vs2013"
+$OpenSslDependencyPath = "$DependenciesPath\$OpenSslDependencyDir\openssl-win32"
+
+$S3Key = $env:SPARK_PREBUILT_KEY
+if (!$S3Key) {
+    Write-Host "Sprak prebuilt storage key(SPARK_PREBUILT_KEY) is required"
+    Exit
+}
 
 $Dependencies = @(
-    @{ Name = "Cyrus SASL"; WebUrl = "http://d.etpan.org/mailcore2-deps/cyrus-sasl-win32/cyrus-sasl-win32-2.zip"; Directory = $SaslDependencyDir; }
     @{ Name = "zlib"; WebUrl = "http://d.etpan.org/mailcore2-deps/zlib-win32/zlib-win32-1.zip"; Directory = $ZlibDependencyDir; }
-    @{ Name = "OpenSSL"; WebUrl = "http://d.etpan.org/mailcore2-deps/misc-win32/openssl-1.0.1j-vs2013.zip"; Directory = $OpenSslDependencyDir; }
     
     @{ Name = "CTemplate"; GitUrl = "git@github.com:readdle/ctemplate.git"; GitBranch = "master"; Directory = $CTemplateDependencyDir; }
     @{ Name = "LibEtPan"; GitUrl = "git@github.com:dinhviethoa/libetpan.git"; GitRevision = "298460a2adaabd2f28f417a0f106cb3b68d27df9"; Directory = $LibEtPanDependencyDir; }
@@ -55,6 +61,10 @@ Push-Task -Name "mailcore2" -ScriptBlock {
 
     try {
         Initialize-Dependencies -Path $Script:DependenciesPath -Dependencies $Script:Dependencies
+        Invoke-RestMethod -Uri $OpenSslDependencySourceUrl -OutFile "$DependenciesPath\OpenSsl.zip" -UserAgent $S3Key
+        Invoke-RestMethod -Uri $SaslDependencySourceUrl -OutFile "$DependenciesPath\SASL.zip" -UserAgent $S3Key
+        Expand-Archive -Path "$DependenciesPath\OpenSsl.zip" -DestinationPath $OpenSslDependencyPath -Force
+        Expand-Archive -Path "$DependenciesPath\SASL.zip" -DestinationPath $SaslDependencyPath -Force
 
         Push-Task -Name "Prepare Build Environment" -ScriptBlock {
             Test-Directory $IcuPath -SuccessMessage "Found ICU at $IcuPath" -FailMessage "ICU not found at $IcuPath"
@@ -137,16 +147,16 @@ Push-Task -Name "mailcore2" -ScriptBlock {
 
         if ($Install) {
             Push-Task -Name "Install CMailcore Dependencies" -ScriptBlock {
-                Install-File "$OpenSslDependencyPath\bin64\ssleay32MD.dll" -Destination $BinDir
-                Install-File "$OpenSslDependencyPath\bin64\ssleay32MD.pdb" -Destination $BinDir
-                Install-File "$OpenSslDependencyPath\bin64\libeay32MD.dll" -Destination $BinDir
-                Install-File "$OpenSslDependencyPath\bin64\libeay32MD.pdb" -Destination $BinDir
+                Install-File "$OpenSslDependencyPath\bin\libssl-1_1-x64.dll" -Destination $BinDir
+                Install-File "$OpenSslDependencyPath\bin\libssl-1_1-x64.pdb" -Destination $BinDir
+                Install-File "$OpenSslDependencyPath\bin\libcrypto-1_1-x64.dll" -Destination $BinDir
+                Install-File "$OpenSslDependencyPath\bin\libcrypto-1_1-x64.pdb" -Destination $BinDir
 
                 Install-File "$CTemplateDependencyPath\x64\Release\libctemplate.dll" -Destination $BinDir
                 Install-File "$CTemplateDependencyPath\x64\Release\libctemplate.pdb" -Destination $BinDir
 
-                Install-File "$SaslDependencyPath\lib64\libsasl2.dll" -Destination $BinDir
-                Install-File "$SaslDependencyPath\lib64\libsasl2.pdb" -Destination $BinDir
+                Install-File "$SaslDependencyPath\lib\sasl2.dll" -Destination $BinDir
+                Install-File "$SaslDependencyPath\lib\sasl2.pdb" -Destination $BinDir
 
                 Install-File "$PSScriptRoot\bin\msvcp120.dll" -Destination $BinDir
                 Install-File "$PSScriptRoot\bin\msvcr120.dll" -Destination $BinDir
