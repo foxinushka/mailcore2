@@ -61,12 +61,17 @@ Pod::Spec.new do |s|
     ss.exclude_files = "src/core/zip/MiniZip/iowin32.{h,c}",  
       "src/core/zip/MiniZip/mini*",
       "src/core/zip/MiniZip/mz*",
+      "src/core/zip/**/*.*",
       "src/core/basetypes/**/*Win32*.cpp",
       "src/core/basetypes/**/*Android*",
       "src/core/basetypes/**/*GTK*",
       "src/core/basetypes/MCDataMac.mm",
       "src/core/rfc822/MCMessageParserMac.mm",
       "src/swift/utils/AndroidShim.swift"
+
+      ss.preserve_paths = [
+        "src/core/zip/**/*.*"
+      ]
     
     ss.public_header_files = 
       "src/MailCore.h",
