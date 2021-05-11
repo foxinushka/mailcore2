@@ -12,6 +12,7 @@ name="ctemplate-ios"
 xcode_target="ctemplate-ios"
 xcode_project="ctemplate.xcodeproj"
 library="libctemplate-ios.a"
+xcframework="libctemplate-ios.xcframework"
 embedded_deps=""
 
 build_git_ios
