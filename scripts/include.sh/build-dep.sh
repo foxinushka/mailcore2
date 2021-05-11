@@ -65,7 +65,6 @@ build_git_ios()
   fi
   git checkout -q $rev
   echo building $name $version - $rev
-  # read -n 1 -r -s -p $'Press enter to continue...\n'
 
   BITCODE_FLAGS="-fembed-bitcode"
   if test "x$NOBITCODE" != x ; then
