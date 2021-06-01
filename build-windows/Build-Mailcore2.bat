@@ -1,3 +1,3 @@
 @echo off
-powershell -ExecutionPolicy Bypass .\Build-Mailcore2.ps1
+powershell -ExecutionPolicy Bypass .\Build-Mailcore2.ps1 %*
 pause
