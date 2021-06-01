@@ -191,7 +191,7 @@ Push-Task -Name "mailcore2" -ScriptBlock {
                 $ProjectRoot,
                 "-DCMAKE_BUILD_TYPE=RelWithDebInfo",
                 "-DCMAKE_INSTALL_PREFIX=$InstallPath",
-                "-DCMAKE_PDB_OUTPUT_DIRECTORY=$InstallPath\bin",
+                $(if ($Install) { "-DCMAKE_PDB_OUTPUT_DIRECTORY=$InstallPath\bin"} else { "" }),
                 "-DCMAKE_C_COMPILER=clang-cl.exe",
                 "-DCMAKE_CXX_COMPILER=clang-cl.exe",
                 "-DLIBXML_INCLUDE_DIR=C:\Library\libxml2-development\usr\include",
