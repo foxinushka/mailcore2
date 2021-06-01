@@ -41,8 +41,7 @@ $OpenSslDependencyPath = "$DependenciesPath\$OpenSslDependencyDir\openssl-win32"
 
 $S3Key = $env:SPARK_PREBUILT_KEY
 if (!$S3Key) {
-    Write-Host "Sprak prebuilt storage key(SPARK_PREBUILT_KEY) is required"
-    Exit
+    throw "Spark prebuilt storage key(SPARK_PREBUILT_KEY) is required"
 }
 
 $Dependencies = @(
