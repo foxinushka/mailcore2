@@ -204,6 +204,16 @@ Push-Task -Name "mailcore2" -ScriptBlock {
 
             Invoke-CMakeTasks -WorkingDir "$ProjectRoot\.build\mailcore2" -CMakeArgs $CMakeArgs -NoInstall:$(-not $Install)
         }
+
+        if ($Install) {
+            Push-Task -Name "Collect Git Revision Data" -ScriptBlock {
+                New-Item -Path "$InstallPath\etc" -ItemType Directory -ErrorAction Ignore
+                git -C "$CTemplateDependencyPath" rev-parse HEAD > "$InstallPath\etc\ctemplate-git-rev"
+                git -C "$LibEtPanDependencyPath" rev-parse HEAD > "$InstallPath\etc\libetpan-git-rev"
+                git -C "$TidyDependencyPath" rev-parse HEAD > "$InstallPath\etc\tidy-html5-git-rev"
+                git rev-parse HEAD > "$InstallPath\etc\mailcore2-git-rev"
+            }
+        }
     }
     finally {
         Push-Task -Name "Shutdown" -ScriptBlock {
