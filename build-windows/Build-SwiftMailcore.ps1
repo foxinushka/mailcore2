@@ -1,7 +1,8 @@
 Param(
     [string]$DependenciesPath,
     [string]$InstallPath,
-    [switch]$Install = $false
+    [switch]$Install = $false,
+    [switch]$BuildMailcore2 = $false
 )
 
 $ProjectRoot = "$(Resolve-Path ""$PSScriptRoot\..\"")"
@@ -63,7 +64,12 @@ Push-Task -Name $ModuleName -ScriptBlock {
         Initialize-Toolchain
     }
 
-    & $PSScriptRoot\Build-Mailcore2.ps1 -InstallPath $InstallPath -DependenciesPath $DependenciesPath -Install
+    if ($BuildMailcore2) {
+        & $PSScriptRoot\Build-Mailcore2.ps1 -InstallPath $InstallPath -DependenciesPath $DependenciesPath -Install
+    }
+    else {
+        & $PSScriptRoot\Get-Mailcore2.ps1 -InstallPath $InstallPath
+    }
 
     Invoke-BuildModuleTarget -Configuration $Script:Configuration
 

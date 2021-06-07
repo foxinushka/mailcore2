@@ -41,15 +41,14 @@ $OpenSslDependencyPath = "$DependenciesPath\$OpenSslDependencyDir\openssl-win32"
 
 $S3Key = $env:SPARK_PREBUILT_KEY
 if (!$S3Key) {
-    Write-Host "Sprak prebuilt storage key(SPARK_PREBUILT_KEY) is required"
-    Exit
+    throw "Spark prebuilt storage key(SPARK_PREBUILT_KEY) is required"
 }
 
 $Dependencies = @(
     @{ Name = "zlib"; WebUrl = "http://d.etpan.org/mailcore2-deps/zlib-win32/zlib-win32-1.zip"; Directory = $ZlibDependencyDir; }
     
     @{ Name = "CTemplate"; GitUrl = "git@github.com:readdle/ctemplate.git"; GitBranch = "master"; Directory = $CTemplateDependencyDir; }
-    @{ Name = "LibEtPan"; GitUrl = "git@github.com:dinhviethoa/libetpan.git"; GitRevision = "298460a2adaabd2f28f417a0f106cb3b68d27df9"; Directory = $LibEtPanDependencyDir; }
+    @{ Name = "LibEtPan"; GitUrl = "git@github.com:readdle/libetpan.git"; GitRevision = "280a11f4250d67c1c6f74210ae9b1dfe4fadd248"; Directory = $LibEtPanDependencyDir; }
     @{ Name = "Tidy HTML5"; GitUrl = "git@github.com:readdle/tidy-html5.git"; GitBranch = "spark2"; Directory = $TidyDependencyDir; }
 )
 
@@ -191,7 +190,7 @@ Push-Task -Name "mailcore2" -ScriptBlock {
                 $ProjectRoot,
                 "-DCMAKE_BUILD_TYPE=RelWithDebInfo",
                 "-DCMAKE_INSTALL_PREFIX=$InstallPath",
-                "-DCMAKE_PDB_OUTPUT_DIRECTORY=$InstallPath\bin",
+                $(if ($Install) { "-DCMAKE_PDB_OUTPUT_DIRECTORY=$InstallPath\bin"} else { "" }),
                 "-DCMAKE_C_COMPILER=clang-cl.exe",
                 "-DCMAKE_CXX_COMPILER=clang-cl.exe",
                 "-DLIBXML_INCLUDE_DIR=C:\Library\libxml2-development\usr\include",
@@ -204,6 +203,16 @@ Push-Task -Name "mailcore2" -ScriptBlock {
                 "-DDISPATCH_BLOCKS_LIBRARY=C:\Library\Developer\Platforms\Windows.platform\Developer\SDKs\Windows.sdk\usr\lib\swift\windows\BlocksRuntime.lib" -join " "
 
             Invoke-CMakeTasks -WorkingDir "$ProjectRoot\.build\mailcore2" -CMakeArgs $CMakeArgs -NoInstall:$(-not $Install)
+        }
+
+        if ($Install) {
+            Push-Task -Name "Collect Git Revision Data" -ScriptBlock {
+                New-Item -Path "$InstallPath\etc" -ItemType Directory -ErrorAction Ignore
+                git -C "$CTemplateDependencyPath" rev-parse HEAD > "$InstallPath\etc\ctemplate-git-rev"
+                git -C "$LibEtPanDependencyPath" rev-parse HEAD > "$InstallPath\etc\libetpan-git-rev"
+                git -C "$TidyDependencyPath" rev-parse HEAD > "$InstallPath\etc\tidy-html5-git-rev"
+                git rev-parse HEAD > "$InstallPath\etc\mailcore2-git-rev"
+            }
         }
     }
     finally {
