@@ -181,6 +181,8 @@ Push-Task -Name "mailcore2" -ScriptBlock {
                 Install-Directory "$LibEtPanDependencyPath\build-windows\include\libetpan" -Destination "$IncludeDir\libetpan"
                 Install-File "$LibEtPanDependencyPath\build-windows\x64\Release\libetpan.dll" -Destination $BinDir
                 Install-File "$LibEtPanDependencyPath\build-windows\x64\Release\libetpan.pdb" -Destination $BinDir
+                Install-File "$LibEtPanDependencyPath\build-windows\x64\Release\libetpan.exp" -Destination $LibDir
+                Install-File "$LibEtPanDependencyPath\build-windows\x64\Release\libetpan.lib" -Destination $LibDir
             }
         }
 
